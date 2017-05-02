@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+    <class name="toolman.order.model.OrderVO" table="ord" >
+        
+        <id name="o_id" column="o_id">
+            <generator class="identity"/>
+        </id>
+        
+
+        <property name="b_name" column="b_name" />
+        <property name="m_id" column="m_id" />
+        <property name="c_id" column="c_id" />
+        <property name="o_bdate" column="o_bdate" />
+        <property name="o_edate" column="o_edate" />
+        <property name="o_des" column="o_des" />
+        <property name="req_exp" column="req_exp" />
+        <property name="h_type" column="h_type" />
+        <property name="o_location" column="o_location" />
+        <property name="s_name" column="s_name" />
+        <property name="m_onote" column="m_onote" />
+        <property name="c_onote" column="c_onote" />
+        <property name="sa_onote" column="sa_onote" />
+        <property name="m_rating" column="m_rating" />                
+        <property name="c_rating" column="c_rating" />
+        <property name="ca_des" column="ca_des" />
+		<property name="ma_des" column="ma_des" />
+		     
+
+		<set name="opros" table="opro" lazy="false" cascade="all"  inverse="true"  order-by="o_proid asc">			
+			<key>
+				<column name="o_proid" />
+			</key>
+			<one-to-many class="toolman.opro.model.OproVO" />
+		</set>
+
+<!--         <many-to-one name="m_id" class="toolman.mdata.model.MdataVO" lazy="false"> -->
+<!--             <column name="m_id" /> -->
+<!--         </many-to-one> -->
+        
+<!--         <many-to-one name="c_id" class="toolman.cdata.model.CdataVO" lazy="false"> -->
+<!--             <column name="c_id" /> -->
+<!--         </many-to-one> -->
+    </class>
+</hibernate-mapping>
+
