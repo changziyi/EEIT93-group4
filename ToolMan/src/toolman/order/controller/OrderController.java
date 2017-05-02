@@ -5,9 +5,11 @@ import java.sql.Date;
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
@@ -22,7 +24,10 @@ import org.json.simple.JSONValue;
 
 import toolman.building.model.BuildingVO;
 import toolman.mdata.model.MdataVO;
+import toolman.mpro.model.MProDAO;
 import toolman.mpro.model.MProVO;
+import toolman.opro.model.OproDAO;
+import toolman.opro.model.OproVO;
 import toolman.order.model.OrderService;
 import toolman.order.model.OrderVO;
 
@@ -76,8 +81,20 @@ public class OrderController extends HttpServlet {
 			String b_name ="如意棒裝潢";
 			Integer m_id = 1001;
 			String c_id = "Micky";
-			MProVO mproVO = new MProVO();
-			Integer m_proid = mproVO.getM_proid(10000);
+			
+			MProDAO mprodao = new MProDAO();
+			List<MProVO> mproVOlist = mprodao.getByMid(m_id);
+			OproDAO oprodao = new OproDAO();
+			OproVO oproVO = new OproVO();
+			List<OproVO> oproVOlist = new ArrayList<OproVO>();
+			for(MProVO mproVO : mproVOlist){
+			String mpro = mproVO.getM_pro();
+			Integer mproid = mproVO.getM_proid();
+			oproVO.setM_proid(mproid);
+			oproVO.setO_pro(mpro);
+			oproVOlist.add(oproVO);
+			}
+			oprodao.insertOpro(oproVOlist);
 			
 			Calendar calobj = Calendar.getInstance();
 			Timestamp o_bdate = new Timestamp(calobj.getTimeInMillis());//automatically filled in
