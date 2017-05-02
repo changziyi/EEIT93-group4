@@ -16,8 +16,6 @@ import org.hibernate.Session;
 import hibernate.util.HibernateUtil;
 import toolman.order.model.OrderVO;
 import toolman.work.model.WorkVO;
-import toolman.workim.model.WorkimDAO;
-import toolman.workim.model.WorkimVO;
 
 public class OproDAO implements OproDAO_Interface {
 
