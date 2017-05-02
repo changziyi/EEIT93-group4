@@ -71,8 +71,8 @@
 		<div>
 		<label>未回應請求失效時間</label>
 			<input type="radio" name="req_exp" value="5000" checked="checked">5秒測試用
-			<input type="radio" name="req_exp" value="15000" checked="checked">15秒測試用
-			<input type="radio" name="req_exp" value="2400000" checked="checked">2小時
+			<input type="radio" name="req_exp" value="15000" >15秒測試用
+			<input type="radio" name="req_exp" value="2400000" >2小時
 			<input type="radio" name="req_exp" value="86400000">1天
 			<input type="radio" name="req_exp" value="172800000">2天
 			<input type="radio" name="req_exp" value="604800000">一周
@@ -90,9 +90,9 @@
 		</div>
 		<div>
 			<label>施工地址</label><!-- 	ok -->
-			<input type="text" id="o_city" name="o_city" value="請輸入縣市名"/>
-			<input type="text" id="o_district" name="o_district" value="請輸入地區名"/>
-			<input type="text" id="o_addr"name="o_addr" value="請輸入施工地址"/>
+			<input type="text" id="o_city" name="o_city" value="台北市"/>
+			<input type="text" id="o_district" name="o_district" value="內湖區"/>
+			<input type="text" id="o_addr"name="o_addr" value="內湖路三段60巷12弄10號"/>
 		</div>
 		
 		<div id='map'></div>

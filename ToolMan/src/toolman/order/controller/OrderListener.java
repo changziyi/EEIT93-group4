@@ -1,47 +1,47 @@
 package toolman.order.controller;
-
-import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
-
-import javax.servlet.ServletContextEvent;
-import javax.servlet.ServletContextListener;
-import javax.servlet.annotation.WebListener;
-
-import toolman.order.model.OrderDAO;
-import toolman.order.model.OrderService;
-import toolman.order.model.OrderVO;
-
-/**
- * Application Lifecycle Listener implementation class OrderListener
- *
- */
-@WebListener
-public class OrderListener implements ServletContextListener{
-	private  java.util.Timer  timer  =  null;  
-
-    public OrderListener() {
-
-    }
-
-    public void contextInitialized(ServletContextEvent event)  { 
-          
-    	 Timer timer = null;
-    	 OrderService orderService = new OrderService();
-	        timer = new Timer();
-	        timer.schedule(new TimerTask(){
-	            public void run(){//inner class
-	            	orderService.deleteExpiredOrder();
-	            }
-	        }, 0, 1000l*5); // execute the task every 5 seconds for test
-    }// execute the task every 2 hours
-         
-   
-    public void contextDestroyed(ServletContextEvent event)  { 
-    	if(timer!=null) timer.cancel();      
-	       event.getServletContext().log("定时器销毁");     
-    	}
-   
-  }
-	
-
+//
+//import java.util.List;
+//import java.util.Timer;
+//import java.util.TimerTask;
+//
+//import javax.servlet.ServletContextEvent;
+//import javax.servlet.ServletContextListener;
+//import javax.servlet.annotation.WebListener;
+//
+//import toolman.order.model.OrderDAO;
+//import toolman.order.model.OrderService;
+//import toolman.order.model.OrderVO;
+//
+///**
+// * Application Lifecycle Listener implementation class OrderListener
+// *
+// */
+//@WebListener
+//public class OrderListener implements ServletContextListener{
+//	private  java.util.Timer  timer  =  null;  
+//
+//    public OrderListener() {
+//
+//    }
+//
+//    public void contextInitialized(ServletContextEvent event)  { 
+//          
+//    	 Timer timer = null;
+///   	 OrderService orderService = new OrderService();
+//	        timer = new Timer();
+//	        timer.schedule(new TimerTask(){
+//	            public void run(){//inner class
+//	            	orderService.deleteExpiredOrder();
+//	            }
+//	        }, 0, 1000l*5); // execute the task every 5 seconds for test
+//    }// execute the task every 2 hours
+//         
+//   
+//    public void contextDestroyed(ServletContextEvent event)  { 
+////    	if(timer!=null) timer.cancel();      
+////	       event.getServletContext().log("定时器销毁");     
+//    	}
+//   
+//  }
+//	
+//

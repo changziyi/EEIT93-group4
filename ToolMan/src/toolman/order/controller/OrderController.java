@@ -61,13 +61,15 @@ public class OrderController extends HttpServlet {
 //		String o_location = request.getParameter("o_location");
 //		String o_note = request.getParameter("o_note");
 //		System.out.println(action+","+o_des+","+req_exp+","+h_type+","+o_location+","+o_note );
-	
-		String action = request.getParameter("action");
+		System.out.println(request.getParameter("req_exp"));
 		
+		String action = request.getParameter("action");
+		HttpSession session = request.getSession();
+		if("insert".equals(action)){
 		OrderVO orderVO = null;
 		//new Order and Insert Order
 			Map<String,String> errormsg = new HashMap<String,String>();//error message
-			HttpSession session = request.getSession();
+			
 			
 			
 			//open while merge with mdata servlet
@@ -145,10 +147,11 @@ public class OrderController extends HttpServlet {
 				orderVO.setO_location(o_location);
 				orderVO.setS_name("o_notresponded");
 				orderVO.setO_tdate(o_tdate);
+				session.setAttribute("orderVO", orderVO);
 				
 				//when error exits, return to the previous page
-			if("insert".equals(action)){
-				if(!errormsg.isEmpty()){
+			
+				if(!errormsg.isEmpty()){					
 					RequestDispatcher rd = request.getRequestDispatcher("NewOrder.jsp");
 					rd.forward(request, response);
 				}
@@ -160,16 +163,16 @@ public class OrderController extends HttpServlet {
 			
 			// order confirmed and insert the data
 			if("confirmorder".equals(action)){
-
+				OrderVO orderVO2 = (OrderVO) session.getAttribute("orderVO");
 				OrderService orderservice = new OrderService();
-				orderservice.insert(orderVO);
-				
-			}else if("alterorder".equals(action)){
-				
-				RequestDispatcher rd = request.getRequestDispatcher("NewOrder.jsp");
-				rd.forward(request, response);
-
-			}else{
+				orderservice.insert(orderVO2);
+			}
+//			else if("alterorder".equals(action)){
+//				
+//				RequestDispatcher rd = request.getRequestDispatcher("NewOrder.jsp");
+//				rd.forward(request, response);
+//			}
+			else{
 				request.setAttribute("alertmsg", "訂單尚未確認，是否離開此頁面");
 				RequestDispatcher rd = request.getRequestDispatcher("NewOrder.jsp");
 				rd.forward(request, response);
