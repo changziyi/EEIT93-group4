@@ -71,8 +71,8 @@
 		<div>
 		<label>未回應請求失效時間</label>
 			<input type="radio" name="req_exp" value="5000" checked="checked">5秒測試用
-			<input type="radio" name="req_exp" value="15000" checked="checked">15秒測試用
-			<input type="radio" name="req_exp" value="2400000" checked="checked">2小時
+			<input type="radio" name="req_exp" value="15000" >15秒測試用
+			<input type="radio" name="req_exp" value="2400000" >2小時
 			<input type="radio" name="req_exp" value="86400000">1天
 			<input type="radio" name="req_exp" value="172800000">2天
 			<input type="radio" name="req_exp" value="604800000">一周
@@ -90,9 +90,9 @@
 		</div>
 		<div>
 			<label>施工地址</label><!-- 	ok -->
-			<input type="text" id="o_city" name="o_city" value="請輸入縣市名"/>
-			<input type="text" id="o_district" name="o_district" value="請輸入地區名"/>
-			<input type="text" id="o_addr"name="o_addr" value="請輸入施工地址"/>
+			<input type="text" id="o_city" name="o_city" value="台北市"/>
+			<input type="text" id="o_district" name="o_district" value="內湖區"/>
+			<input type="text" id="o_addr"name="o_addr" value=""/>
 		</div>
 		
 		<div id='map'></div>
@@ -109,53 +109,53 @@
 	</form>
 
 	<script>
-// 	var coordinate=null;
-// 	var googlecoordinate=null;
-// 	var o_location=null;
-// 	$( function() {
-// 	    $( "#datepicker" ).datepicker();
-// 	    googlecoordinate = 'https://maps.googleapis.com/maps/api/geocode/json?'
-// 	    $('#o_addr').on('blur',getCoordinate);	
+	var coordinate=null;
+	var googlecoordinate=null;
+	var o_location=null;
+	$( function() {
+	    $( "#datepicker" ).datepicker();
+	    googlecoordinate = 'https://maps.googleapis.com/maps/api/geocode/json?'
+	    $('#o_addr').on('blur',getCoordinate);	
 	    
 	 
-// 	});
+	});
 	    
 
-// 	function getCoordinate(){
-// 		var a1 = $('#o_city').val();
-// 		var a2 = $('#o_district').val();
-// 		var a3 = $('#o_addr').val();
-// 		o_location =a1+a2+a3;
-// 		$.getJSON(googlecoordinate,{'address':o_location},function(data){
-// 			for(var i=0;i<data.results.length;i++) {
-// 		        var location = data.results[i].geometry.location;
-// 		        alert(location);
-// 		        }
-// 		//data 就是server端回傳的結果
-// 		coordinate = location;
-// 		initMap();
-// 			});
-// // 		
+	function getCoordinate(){
+		var a1 = $('#o_city').val();
+		var a2 = $('#o_district').val();
+		var a3 = $('#o_addr').val();
+		o_location =a1+a2+a3;
+		$.getJSON(googlecoordinate,{'address':o_location},function(data){
+			for(var i=0;i<data.results.length;i++) {
+		        var location = data.results[i].geometry.location;
+		        alert(location);
+		        }
+		//data 就是server端回傳的結果
+		coordinate = location;
+		initMap();
+			});
+// 		
 				
-// 	}
-// 	 function initMap() {
-// 		 var uluru =null;
-// 	        if(coordinate==null){ 
-// 	        	uluru={ "lat" : 25.0339639, "lng" : 121.5644722}
-// 	        }
-// 	        else{
-// 	        	uluru = coordinate;
-// 	        }           
+	}
+	 function initMap() {
+		 var uluru =null;
+	        if(coordinate==null){ 
+	        	uluru={ "lat" : 25.0339639, "lng" : 121.5644722}
+	        }
+	        else{
+	        	uluru = coordinate;
+	        }           
 	            
-// 	        var map = new google.maps.Map(document.getElementById('map'), {
-// 	          zoom: 15,
-// 	          center: uluru
-// 	        });
-// 	        var marker = new google.maps.Marker({
-// 	          position: uluru,
-// 	          map: map
-// 	        });
-// 	      }	
+	        var map = new google.maps.Map(document.getElementById('map'), {
+	          zoom: 15,
+	          center: uluru
+	        });
+	        var marker = new google.maps.Marker({
+	          position: uluru,
+	          map: map
+	        });
+	      }	
 		
 	</script>
  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAj-PEjC_YSdYGHEvhIKnyojxufjKYy6OE&callback=initMap"

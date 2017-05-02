@@ -37,6 +37,7 @@
 		<mapping resource="toolman/building/model/building.hbm.xml" />
 		
 
+
 	</session-factory>
 	
 </hibernate-configuration>
