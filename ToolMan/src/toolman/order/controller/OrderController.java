@@ -22,6 +22,7 @@ import org.json.simple.JSONValue;
 
 import toolman.building.model.BuildingVO;
 import toolman.mdata.model.MdataVO;
+import toolman.mpro.model.MProVO;
 import toolman.order.model.OrderService;
 import toolman.order.model.OrderVO;
 
@@ -72,10 +73,11 @@ public class OrderController extends HttpServlet {
 			//String c_id = cdataVO.getC_id(); //automatically filled in
 			if("insert".equals(action)){
 			Timestamp o_tdate = new Timestamp(System.currentTimeMillis());
-			String b_name ="bad company";
-			Integer m_id = 1000;
+			String b_name ="如意棒裝潢";
+			Integer m_id = 1001;
 			String c_id = "Micky";
-			
+			MProVO mproVO = new MProVO();
+			Integer m_proid = mproVO.getM_proid(10000);
 			
 			Calendar calobj = Calendar.getInstance();
 			Timestamp o_bdate = new Timestamp(calobj.getTimeInMillis());//automatically filled in

@@ -31,6 +31,9 @@
 				    <input type="submit" value="確認訂單">
 
 				</FORM>
+				<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/toolman.order/OrderController.do">
+				<input type="hidden" name="action"value="alterorder">
+				    <input type="submit" value="修改訂單">
 			</div>
 </body>
 </html>
