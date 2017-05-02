@@ -28,6 +28,7 @@
         <property name="c_rating" column="c_rating" />
         <property name="ca_des" column="ca_des" />
 		<property name="ma_des" column="ma_des" />
+		<property name="o_tdate" column="o_tdate" />
 		     
 
 		<set name="opros" table="opro" lazy="false" cascade="all"  inverse="true"  order-by="o_proid asc">			

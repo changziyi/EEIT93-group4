@@ -26,9 +26,10 @@
 				</table>
 			</div>
 			<div>
-				<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/OrderController.do">
+				<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/toolman.order/OrderController.do">
+				<input type="hidden" name="action"value="confirmorder">
 				    <input type="submit" value="確認訂單">
-				    <input type="hidden" name="action"value="confirmorder">
+
 				</FORM>
 			</div>
 </body>

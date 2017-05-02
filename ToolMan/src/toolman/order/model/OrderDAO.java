@@ -23,58 +23,9 @@ import toolman.work.model.WorkVO;
 
 public class OrderDAO implements OrderDAO_Interface {
 	
-	String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
-	String url = "jdbc:sqlserver://localhost:1433;DatabaseName=ToolMan";
-	String userid = "sa";
-	String passwd = "sa123456";
-	
-	private static final String INSERT_ORDER =
-		      "INSERT INTO ord "
-		     + "(b_name,m_id,c_id,o_bdate,o_des,req_exp,h_type,o_location,s_name"
-		     + ") VALUES (?,?,?,?,?,?,?,?,?)";
-	private static final String GET_ALL_ORDER =
-		      "SELECT * FROM ord ";
-
-	private static final String GET_ORDER_BY_DATE =
-		      "SELECT * FROM ord WHERE o_bdate BETWEEN ? AND ?";
-
-	private static final String GET_ORDER_BY_M =
-		      "SELECT * FROM ord WHERE m_id=?";
-
-	private static final String GET_ALL_ORDER_BY_M_AND_DATE =
-		      "SELECT * FROM ord WHERE m_id=? AND o_bdate BETWEEN ? AND ?";
-	
-	private static final String GET_ORDER_BY_C =
-		      "SELECT * FROM ord WHERE c_id=?";
-
-	private static final String GET_ORDER_BY_C_AND_DATE =
-		      "SELECT * FROM ord WHERE c_id=? AND o_bdate BETWEEN ? AND ?";
-
-	private static final String GET_ORDER_BY_M_AND_SNAME =
-		      "SELECT * FROM ord WHERE m_id=? AND s_name=?";
-					
-	private static final String GET_ORDER_BY_C_AND_SNAME =
-		      "SELECT * FROM ord WHERE c_id=? AND s_name=?";
-
-	private static final String GET_ORDER_BY_M_AND_DATE_AND_SNAME =
-		      "SELECT * FROM ord WHERE m_id=? AND o_bdate BETWEEN ? AND ? AND s_name=? ";
-					
-	private static final String GET_ORDER_BY_C_AND_DATE_AND_SNAME =
-		      "SELECT * FROM ord WHERE c_id=? AND o_bdate BETWEEN ? AND ? AND s_name=? ";				
-	
-	private static final String DELETE_BY_ID =
-		      "DELETE FROM ord where o_id = ?";
-	private static final String UPDATE_ORDER=
-		      "UPDATE ord "
-		    	      + "SET,o_edate=?,s_name=?,m_onote=?,c_onote=?,sa_onote=?,m_rating=?,c_rating=?,ca_des=?,ma_des=?"
-		    	      + ") WHERE　o_id=? ";
-
-
-
 	@Override
 	public void insert(OrderVO orderVO) {
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();		
 		try {
 			session.beginTransaction();
 			session.saveOrUpdate(orderVO);
