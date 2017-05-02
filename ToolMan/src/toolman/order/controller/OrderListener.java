@@ -31,6 +31,7 @@ public class OrderListener implements ServletContextListener{
 	        timer.schedule(new TimerTask(){
 	            public void run(){//inner class
 	            	orderService.deleteExpiredOrder();
+	            	orderService.updateOrderSnameToFishedById();
 	            }
 	        }, 0, 1000l*5); // execute the task every 5 seconds for test
     }// execute the task every 2 hours

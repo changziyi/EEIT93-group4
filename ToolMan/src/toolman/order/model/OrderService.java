@@ -65,9 +65,26 @@ public class OrderService {
     public void updateOrder(OrderVO orderVO){
     	dao.updateOrder(orderVO);
     }
+    
+    public void updateOrderSnameToFishedById(){
+	    	dao = new OrderDAO();
+			List<OrderVO> orders = dao.getAllOrder();
+			for(OrderVO orderVO2 : orders) {
+	        dao = new OrderDAO();  
+	    	dao.updateOrderSnameToFishedById(orderVO2.getO_id());
+		 }
+    }
+    public void updateOrderSnameToUnfinishedReviewById(){
+    	dao = new OrderDAO();
+		List<OrderVO> orders = dao.getAllOrder();
+		for(OrderVO orderVO2 : orders) {
+			if((orderVO2.getM_rating()==null&orderVO2.getC_rating()!=null)||(orderVO2.getM_rating()!=null&orderVO2.getC_rating()==null)){
+		        dao = new OrderDAO();  
+		    	dao.updateOrderSnameToUnfinishedReviewById(orderVO2.getO_id());
+		    	}
+	 }
+}
     public void deleteExpiredOrder(){
-
-       
 
             //examine all orders and delete expired orders
     		dao = new OrderDAO();

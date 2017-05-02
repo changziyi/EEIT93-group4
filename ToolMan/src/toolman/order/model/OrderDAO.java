@@ -176,7 +176,42 @@ public class OrderDAO implements OrderDAO_Interface {
 		}
 		return count;
 	}
+	
+	@Override
+	public void updateOrderSnameToUnfinishedReviewById(Integer o_id) {
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		Integer count = 0;
+		
+		try {
+			session.beginTransaction();				
+			Query query = session.createQuery("Update OrderVO set s_name='o_unfinishedreview' where o_id=?");
+			query.setParameter(0,o_id);
+			query.executeUpdate();
+			session.getTransaction().commit();
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}	
+	}
+	
+	@Override
+	public void updateOrderSnameToFishedById(Integer o_id) {
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		Integer count = 0;
+		
+		try {
+			session.beginTransaction();				
+			Query query = session.createQuery("Update OrderVO set s_name='o_finished' where o_id=?");
+			query.setParameter(0,o_id);
+			query.executeUpdate();
+			session.getTransaction().commit();
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}	
+	}
 
+	
 	@Override
 	public void updateSnameAsDeletedById(Integer o_id) {
 
@@ -410,6 +445,11 @@ public class OrderDAO implements OrderDAO_Interface {
 			 orderVO.setO_id(3001);
 			 orderdao.updateOrder(orderVO);
 		}
+
+
+
+
+
 
 
 

@@ -20,6 +20,8 @@ public interface OrderDAO_Interface {
     public List<OrderVO>  getAllOrderByCAndDateAndSname(String c_id,Timestamp o_bdate1, Timestamp o_bdate2,String s_name);        
     public Integer deleteById(Integer o_id);
     public void updateSnameAsDeletedById(Integer o_id);
+    public void updateOrderSnameToFishedById(Integer o_id);
+    public void updateOrderSnameToUnfinishedReviewById(Integer o_id);
     public void updateOrder(OrderVO orderVO);
 
 
