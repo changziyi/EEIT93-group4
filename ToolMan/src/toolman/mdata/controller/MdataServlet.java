@@ -100,7 +100,7 @@ public class MdataServlet extends HttpServlet {
 
 			if (!errorMsgs.isEmpty()) {
 				request.setAttribute("mdataVO", mdataVO);
-				RequestDispatcher failureView = request.getRequestDispatcher("/master/OpenStore.jsp");
+				RequestDispatcher failureView = request.getRequestDispatcher("/master/OpenStoreInfo.jsp");
 				failureView.forward(request, response);
 				return;
 			}
@@ -119,9 +119,10 @@ public class MdataServlet extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		Integer img = new Integer(request.getParameter("image"));
+		String image = request.getParameter("image");
+		Integer img = new Integer(image);
 		response.setContentType("image/jpeg");
-
+		
 		ServletOutputStream out = response.getOutputStream();
 		MdataService mdataSvc = new MdataService();
 		MdataVO mdataVO = mdataSvc.findByPrimaryKey(img);

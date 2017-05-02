@@ -6,10 +6,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <style>
-	.changeImg{
-		width:200px;
-		padding:10px;
-	}
+.changeImg {
+	width: 200px;
+	padding: 10px;
+}
 </style>
 </head>
 <body>
@@ -36,26 +36,30 @@
 	<div id='div1'></div>
 
 
-	<script src="${pageContext.servletContext.contextPath}/js/jquery-3.2.1.min.js"></script>
+	<script
+		src="${pageContext.servletContext.contextPath}/js/jquery-3.2.1.min.js"></script>
 	<script>
 		var btn = $('#buttonUpload');
 		var upload = $('input[type="file"]');
 		var myDiv = $('#div1');
 
-		upload.on('change', function(event) {
-
-			if (event.target.files.length > 3) {
-				alert("超過限制");
-				upload.val(null);
-			}
-
-			for (var i = 0; i < event.target.files.length; i++) {
-				$('<img />').attr('id', 'img' + i).appendTo(myDiv);
-			}
-
-		});
-
 		$(function() {
+
+			upload.on('change', function(event) {
+
+				if (event.target.files.length > 3) {
+					alert("限制為3張圖片，請重新選擇");
+					upload.val(null);
+				}
+
+				for (var i = 0; i < event.target.files.length; i++) {
+					$('<img />').attr('id', 'img' + i).appendTo(myDiv);
+				}
+
+				preview(this);
+
+			});
+
 			function preview(input) {
 
 				if (input.files && input.files[0]) {
@@ -67,8 +71,10 @@
 						});
 					}
 					reader.readAsDataURL(input.files[0]);
+				} else {
+					$('#img0').remove();
 				}
-				
+
 				if (input.files && input.files[1]) {
 					var reader = new FileReader();
 					reader.onload = function(e) {
@@ -78,8 +84,10 @@
 						});
 					}
 					reader.readAsDataURL(input.files[1]);
+				} else {
+					$('#img1').remove();
 				}
-				
+
 				if (input.files && input.files[2]) {
 					var reader = new FileReader();
 					reader.onload = function(e) {
@@ -89,47 +97,45 @@
 						});
 					}
 					reader.readAsDataURL(input.files[2]);
+				} else {
+					$('#img2').remove();
 				}
-				
 			}
+			
+			
+			btn.click(function() {
 
-			upload.on('change', function(event) {
-				preview(this);
+				var others = $('form').serializeArray();
+				var photos = $('input[type="file"]')[0].files;
+
+				var formData = new FormData();
+
+				$.each(others, function(index, input) {
+					formData.append(input.name, input.value);
+					console.log('name: ' + input.name);
+					console.log('value: ' + input.value);
+				});
+
+				for (var i = 0; i < photos.length; i++) {
+					formData.append('file' + i, photos[i]);
+					console.log(photos[i]);
+				}
+
+				$.ajax({
+					url : 'TestFormData',
+					data : formData,
+					cache : false,
+					contentType : false,
+					processData : false,
+					type : 'POST',
+//	 				success : function(reutrnData) {
+//	 					alert(reutrnData);
+//	 				}
+				});
 			});
-
+			
 		});
 
-		btn.click(function() {
-
-			var others = $('form').serializeArray();
-			var photos = $('input[type="file"]')[0].files;
-
-			var formData = new FormData();
-
-			$.each(others, function(index, input) {
-				formData.append(input.name, input.value);
-				console.log('name: ' + input.name);
-				console.log('value: ' + input.value);
-			});
-
-			for (var i = 0; i < photos.length; i++) {
-				formData.append('file' + i, photos[i]);
-				console.log(photos[i]);
-			}
-
-			$.ajax({
-				url : 'TestFormData',
-				data : formData,
-				cache : false,
-				contentType : false,
-				processData : false,
-				type : 'POST',
-				success : function(reutrnData) {
-					alert(reutrnData);
-				}
-			});
-
-		});
 	</script>
 </body>
 </html>
