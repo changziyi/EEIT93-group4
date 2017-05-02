@@ -32,9 +32,28 @@
 		<servlet-name>CadataServlet</servlet-name>
 		<servlet-class>com.Cadata.controller.CadataServlet</servlet-class>
 	</servlet>
+<<<<<<< HEAD
 <!-- 	<servlet-mapping> -->
 <!-- 		<servlet-name>CadataServlet</servlet-name> -->
 <!-- 		<url-pattern>/cdata/Cdata.do</url-pattern> -->
 <!-- 	</servlet-mapping> -->
 
+=======
+	<servlet-mapping>
+		<servlet-name>CadataServlet</servlet-name>
+		<url-pattern>/cdata/Cdata.do</url-pattern>
+	</servlet-mapping>
+
+
+ <servlet>
+    <servlet-name>OrderServlet</servlet-name>
+    <servlet-class>toolman.order.controller.OrderController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>OrderServlet</servlet-name>
+    <url-pattern>/order/order.do</url-pattern>
+  </servlet-mapping>
+  
+  
+>>>>>>> branch 'master' of https://github.com/changziyi/EEIT93group4.git
 </web-app>
