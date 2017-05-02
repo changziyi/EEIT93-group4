@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="toolman.discussion.model.DiscussionVO" table="discussion" >
+        
+		<id name="d_id" column="d_id">
+			<generator class="identity"/>
+		</id>
+        
+        <property name="d_date" column="d_date" />
+        <property name="d_des" column="d_des" />
+        <property name="d_reply" column="d_reply" />
+        <property name="c_id" column="c_id" />
+        
+        <many-to-one name="mdataVO" class="toolman.mdata.model.MdataVO" cascade="all" lazy="false">
+            <column name="m_id" />
+        </many-to-one>
+        
+<!--         <many-to-one name="cdataVO" class="com.cdata.model.CdataVO" cascade="all" lazy="false"> -->
+<!--             <column name="c_id" /> -->
+<!--         </many-to-one> -->
+        
+    </class>
+</hibernate-mapping>
+
