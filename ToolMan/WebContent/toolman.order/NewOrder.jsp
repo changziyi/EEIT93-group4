@@ -92,7 +92,7 @@
 			<label>施工地址</label><!-- 	ok -->
 			<input type="text" id="o_city" name="o_city" value="台北市"/>
 			<input type="text" id="o_district" name="o_district" value="內湖區"/>
-			<input type="text" id="o_addr"name="o_addr" value="內湖路三段60巷12弄10號"/>
+			<input type="text" id="o_addr"name="o_addr" value=""/>
 		</div>
 		
 		<div id='map'></div>
@@ -109,53 +109,53 @@
 	</form>
 
 	<script>
-// 	var coordinate=null;
-// 	var googlecoordinate=null;
-// 	var o_location=null;
-// 	$( function() {
-// 	    $( "#datepicker" ).datepicker();
-// 	    googlecoordinate = 'https://maps.googleapis.com/maps/api/geocode/json?'
-// 	    $('#o_addr').on('blur',getCoordinate);	
+	var coordinate=null;
+	var googlecoordinate=null;
+	var o_location=null;
+	$( function() {
+	    $( "#datepicker" ).datepicker();
+	    googlecoordinate = 'https://maps.googleapis.com/maps/api/geocode/json?'
+	    $('#o_addr').on('blur',getCoordinate);	
 	    
 	 
-// 	});
+	});
 	    
 
-// 	function getCoordinate(){
-// 		var a1 = $('#o_city').val();
-// 		var a2 = $('#o_district').val();
-// 		var a3 = $('#o_addr').val();
-// 		o_location =a1+a2+a3;
-// 		$.getJSON(googlecoordinate,{'address':o_location},function(data){
-// 			for(var i=0;i<data.results.length;i++) {
-// 		        var location = data.results[i].geometry.location;
-// 		        alert(location);
-// 		        }
-// 		//data 就是server端回傳的結果
-// 		coordinate = location;
-// 		initMap();
-// 			});
-// // 		
+	function getCoordinate(){
+		var a1 = $('#o_city').val();
+		var a2 = $('#o_district').val();
+		var a3 = $('#o_addr').val();
+		o_location =a1+a2+a3;
+		$.getJSON(googlecoordinate,{'address':o_location},function(data){
+			for(var i=0;i<data.results.length;i++) {
+		        var location = data.results[i].geometry.location;
+		        alert(location);
+		        }
+		//data 就是server端回傳的結果
+		coordinate = location;
+		initMap();
+			});
+// 		
 				
-// 	}
-// 	 function initMap() {
-// 		 var uluru =null;
-// 	        if(coordinate==null){ 
-// 	        	uluru={ "lat" : 25.0339639, "lng" : 121.5644722}
-// 	        }
-// 	        else{
-// 	        	uluru = coordinate;
-// 	        }           
+	}
+	 function initMap() {
+		 var uluru =null;
+	        if(coordinate==null){ 
+	        	uluru={ "lat" : 25.0339639, "lng" : 121.5644722}
+	        }
+	        else{
+	        	uluru = coordinate;
+	        }           
 	            
-// 	        var map = new google.maps.Map(document.getElementById('map'), {
-// 	          zoom: 15,
-// 	          center: uluru
-// 	        });
-// 	        var marker = new google.maps.Marker({
-// 	          position: uluru,
-// 	          map: map
-// 	        });
-// 	      }	
+	        var map = new google.maps.Map(document.getElementById('map'), {
+	          zoom: 15,
+	          center: uluru
+	        });
+	        var marker = new google.maps.Marker({
+	          position: uluru,
+	          map: map
+	        });
+	      }	
 		
 	</script>
  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAj-PEjC_YSdYGHEvhIKnyojxufjKYy6OE&callback=initMap"
