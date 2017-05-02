@@ -1,6 +1,0 @@
-<<<<<<< HEAD
-Manifest-Version: 1.0
-Class-Path: 
-
-=======
->>>>>>> branch 'master' of https://github.com/changziyi/EEIT93group4.git

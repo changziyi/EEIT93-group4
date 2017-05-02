@@ -76,7 +76,7 @@ public class OrderController extends HttpServlet {
 			//Integer m_id = mdataVO.getM_id();//automatically filled in
 			//CdataVO cdataVO = session.getAttribute("cdata");
 			//String c_id = cdataVO.getC_id(); //automatically filled in
-			if("insert".equals(action)){
+			
 			Timestamp o_tdate = new Timestamp(System.currentTimeMillis());
 			String b_name ="如意棒裝潢";
 			Integer m_id = 1001;
@@ -87,12 +87,15 @@ public class OrderController extends HttpServlet {
 			OproDAO oprodao = new OproDAO();
 			OproVO oproVO = new OproVO();
 			List<OproVO> oproVOlist = new ArrayList<OproVO>();
+			
 			for(MProVO mproVO : mproVOlist){
-			String mpro = mproVO.getM_pro();
-			Integer mproid = mproVO.getM_proid();
-			oproVO.setM_proid(mproid);
-			oproVO.setO_pro(mpro);
-			oproVOlist.add(oproVO);
+					
+				String mpro = mproVO.getM_pro();
+				Integer mproid = mproVO.getM_proid();
+				oproVO.setM_proid(mproid);
+				oproVO.setO_pro(mpro);
+				oproVOlist.add(oproVO);
+				
 			}
 			oprodao.insertOpro(oproVOlist);
 			
@@ -132,31 +135,32 @@ public class OrderController extends HttpServlet {
 				//test
 				System.out.println(action+","+o_des+","+req_exp+","+h_type+","+o_location+","+o_note );
 				
+				orderVO = new OrderVO();
+				orderVO.setB_name(b_name);
+				orderVO.setC_id(c_id);
+				orderVO.setO_bdate(o_bdate);
+				orderVO.setO_des(o_des);
+				orderVO.setReq_exp(req_exp);
+				orderVO.setH_type(h_type);
+				orderVO.setO_location(o_location);
+				orderVO.setS_name("o_notresponded");
+				orderVO.setO_tdate(o_tdate);
+				
 				//when error exits, return to the previous page
+			if("insert".equals(action)){
 				if(!errormsg.isEmpty()){
 					RequestDispatcher rd = request.getRequestDispatcher("NewOrder.jsp");
 					rd.forward(request, response);
-	
 				}
 				else{	//checked ok, forward to the confirmorder page
-					orderVO = new OrderVO();
-					orderVO.setB_name(b_name);
-					orderVO.setC_id(c_id);
-					orderVO.setO_bdate(o_bdate);
-					orderVO.setO_des(o_des);
-					orderVO.setReq_exp(req_exp);
-					orderVO.setH_type(h_type);
-					orderVO.setO_location(o_location);
-					orderVO.setS_name("o_notresponded");
-					orderVO.setO_tdate(o_tdate);
 					RequestDispatcher rd = request.getRequestDispatcher("confirmorder.jsp");
 					rd.forward(request, response);
 					}
-				}
+			}
 			
 			// order confirmed and insert the data
 			if("confirmorder".equals(action)){
-				
+
 				OrderService orderservice = new OrderService();
 				orderservice.insert(orderVO);
 				
