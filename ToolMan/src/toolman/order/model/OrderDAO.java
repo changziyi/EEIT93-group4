@@ -167,7 +167,7 @@ public class OrderDAO implements OrderDAO_Interface {
 		try {
 			session.beginTransaction();
 			Query query = session.createQuery("delete from OrderVO where o_id = ?");
-			query.setParameter(1, o_id);
+			query.setParameter(0, o_id);
 			count = query.executeUpdate();		
 			session.getTransaction().commit();
 		} catch (RuntimeException ex) {
@@ -177,6 +177,23 @@ public class OrderDAO implements OrderDAO_Interface {
 		return count;
 	}
 
+	@Override
+	public void updateSnameAsDeletedById(Integer o_id) {
+
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		Integer count = 0;
+		
+		try {
+			session.beginTransaction();				
+			Query query = session.createQuery("Update OrderVO set s_name='o_deleted' where o_id=?");
+			query.setParameter(0,o_id);
+			query.executeUpdate();
+			session.getTransaction().commit();
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}	
+	}
 
 	@Override
 	public void updateOrder(OrderVO orderVO) {
@@ -393,6 +410,8 @@ public class OrderDAO implements OrderDAO_Interface {
 			 orderVO.setO_id(3001);
 			 orderdao.updateOrder(orderVO);
 		}
+
+
 
 
 

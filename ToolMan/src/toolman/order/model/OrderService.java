@@ -66,13 +66,19 @@ public class OrderService {
     	dao.updateOrder(orderVO);
     }
     public void deleteExpiredOrder(){
+
        
+
             //examine all orders and delete expired orders
-        	OrderDAO orderdao = new OrderDAO();
-            List<OrderVO> orders = orderdao.getAllOrder();
+    		dao = new OrderDAO();
+    		List<OrderVO> orders = dao.getAllOrder();
             for(OrderVO orderVO2 : orders) {
-                if(System.currentTimeMillis()- orderVO2.getO_tdate().getTime() >= orderVO2.getReq_exp()) {
-                	deleteById(orderVO2.getO_id());
+            	dao = new OrderDAO();           	
+             	Long currenttime = System.currentTimeMillis();
+            	Long orderdate = orderVO2.getO_tdate().getTime();
+            	Long exptime = orderVO2.getReq_exp();
+                if(orderdate-currenttime  >= exptime ) {
+                	dao.updateSnameAsDeletedById(orderVO2.getO_id());
                 }
             }
         }
