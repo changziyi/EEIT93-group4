@@ -53,15 +53,16 @@
 			</tr>
 			<tr>
 				<td>相關證照:
-				<div><img id="m_cel"></div>
-				<input type="file" name="m_cel" class="upl"></td>
+				<div><img id="m_cer"></div>
+				<input type="file" name="m_cer" class="upl"></td>
 			</tr>
 			<tr>
 <!-- 				<td><input type="submit" value="送出審核"></td> -->
 <!-- 				<td><input type="hidden" name="action" value="OpenStore"></td> -->
-				<td><input type="button" name="nextPage" value="下一頁"></td>
+				<td><input type="submit" name="nextPage" value="下一部"></td>
 				<td><input type="hidden" name="m_city" ></td>
 				<td><input type="hidden" name="m_district" ></td>
+				<td><input type="hidden" name="action" value="OpenStoreStep" ></td>
 			</tr>
 		</table>
 	</div>
@@ -72,7 +73,7 @@
 	
 	$(function() {
 		
-		$('input[name="m_cel"]').on('change', function(event) {
+		$('input[name="m_cer"]').on('change', function(event) {
 			preview(this);
 		});
 		
@@ -81,7 +82,7 @@
 			if (input.files && input.files[0]) {
 				var reader = new FileReader();
 				reader.onload = function(e) {
-					$('#m_cel').attr({
+					$('#m_cer').attr({
 						'src' : e.target.result,
 						'class' : 'changeImg'
 					});
@@ -103,9 +104,6 @@
 		    }
 		});
 		
-		$('input[name="nextPage"]').click(function() {
-			$(location).attr('href', 'OpenStoreDesc.jsp');
-		});
 		
 	});
 

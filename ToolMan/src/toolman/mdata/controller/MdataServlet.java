@@ -33,8 +33,17 @@ public class MdataServlet extends HttpServlet {
 
 		request.setCharacterEncoding("UTF-8");
 		String action = request.getParameter("action");
-
-		if ("OpenStore".equals(action)) {
+		
+		if ("OpenStoreStep".equals(action)) {
+			
+			
+			
+			
+			
+		}
+		
+		
+		if ("OpenStoreStep".equals(action)) {
 			
 			Map<String, String> errorMsgs = new HashMap<String, String>();
 			request.setAttribute("errorMsgs", errorMsgs);
@@ -60,7 +69,7 @@ public class MdataServlet extends HttpServlet {
 				errorMsgs.put("city", "請選擇縣市和地區");
 			}
 			
-			Part part = request.getPart("b_image");
+			Part part = request.getPart("m_cer");
 			InputStream in = part.getInputStream();
 			// System.out.println("size:" + part.getSize());
 			// System.out.println("in:" + in);
@@ -92,7 +101,7 @@ public class MdataServlet extends HttpServlet {
 			Timestamp m_jdate = new Timestamp(System.currentTimeMillis());
 
 			mdataVO.setM_name(m_name);
-			mdataVO.setB_image(buf);
+			mdataVO.setM_cer(buf);
 			mdataVO.setM_jdate(m_jdate);
 			mdataVO.setM_city(m_city);
 			mdataVO.setM_district(m_district);

@@ -18,7 +18,7 @@
 	<div>
 	<table>
 		<tr>
-			<td><div><img height="200px" src="${pageContext.servletContext.contextPath}/master/master.do?image=${mdataVO.m_id}"></div></td>
+			<td><div><img height="200px" src="${pageContext.servletContext.contextPath}/master/master.do?type=master&image=${mdataVO.m_id}"></div></td>
 		</tr>
 		<tr>
 			<td>店家名稱:
