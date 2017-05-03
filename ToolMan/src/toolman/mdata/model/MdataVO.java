@@ -6,6 +6,7 @@ import java.util.Set;
 
 import toolman.discussion.model.DiscussionVO;
 import toolman.mpro.model.MProVO;
+import toolman.order.model.OrderVO;
 import toolman.work.model.WorkVO;
 
 public class MdataVO implements java.io.Serializable {
@@ -30,6 +31,15 @@ public class MdataVO implements java.io.Serializable {
 	private Set<MProVO> mpros = new HashSet<MProVO>();
 	private Set<WorkVO> works = new HashSet<WorkVO>();
 	private Set<DiscussionVO> discussions = new HashSet<DiscussionVO>();
+	private Set<OrderVO> orders = new HashSet<OrderVO>();// added by benny
+
+	public Set<OrderVO> getOrders() {// added by benny
+		return orders;
+	}
+
+	public void setOrders(Set<OrderVO> orders) {// added by benny
+		this.orders = orders;
+	}
 
 	public Integer getM_id() {
 		return m_id;

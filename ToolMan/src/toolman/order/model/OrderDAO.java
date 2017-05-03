@@ -329,6 +329,7 @@ public class OrderDAO implements OrderDAO_Interface {
 		return querylist;
 	}
 	
+	
 	public static void main(String[] args) {
 		OrderDAO orderdao = new OrderDAO();
 		OrderVO orderVO = new OrderVO();
@@ -445,6 +446,9 @@ public class OrderDAO implements OrderDAO_Interface {
 			 orderVO.setO_id(3001);
 			 orderdao.updateOrder(orderVO);
 		}
+
+
+
 
 
 

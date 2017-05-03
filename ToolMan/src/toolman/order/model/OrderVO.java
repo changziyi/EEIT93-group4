@@ -4,13 +4,15 @@ import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.Set;
 
+import toolman.cdata.model.CdataVO;
+import toolman.mdata.model.MdataVO;
 import toolman.opro.model.OproVO;
 
 public class OrderVO {
 	private Integer o_id;
 	private String b_name;
-	private Integer m_id;
-	private String c_id;
+//	private Integer m_id;
+//	private String c_id;
 	private Timestamp o_bdate;
 	private Timestamp o_edate;
 	private String o_des;
@@ -27,7 +29,35 @@ public class OrderVO {
 	private String ma_des;
 	private Set<OproVO> opros;
 	private Timestamp o_tdate;
+	private CdataVO c_id;
+	private MdataVO m_id;
 	
+	public void setM_id(MdataVO m_id) {
+		this.m_id = m_id;
+	}
+	public MdataVO getM_id() {
+		return m_id;
+	}
+	
+	public void setC_id(CdataVO c_id) {
+		this.c_id = c_id;
+	}	
+	public CdataVO getC_id() {
+			return c_id;
+		}
+	
+//	public Integer getM_id() {
+//	return m_id;
+//}
+//public void setM_id(Integer m_id) {
+//	this.m_id = m_id;
+//}
+//		public String getC_id() {
+//	return c_id;
+//}
+//public void setC_id(String c_id) {
+//	this.c_id = c_id;
+//}
 	public Timestamp getO_tdate() {
 		return o_tdate;
 	}
@@ -52,18 +82,8 @@ public class OrderVO {
 	public void setB_name(String b_name) {
 		this.b_name = b_name;
 	}
-	public Integer getM_id() {
-		return m_id;
-	}
-	public void setM_id(Integer m_id) {
-		this.m_id = m_id;
-	}
-	public String getC_id() {
-		return c_id;
-	}
-	public void setC_id(String c_id) {
-		this.c_id = c_id;
-	}
+
+
 	public Timestamp getO_bdate() {
 		return o_bdate;
 	}
