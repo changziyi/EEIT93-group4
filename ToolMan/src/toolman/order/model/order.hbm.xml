@@ -12,8 +12,6 @@
         
 
         <property name="b_name" column="b_name" />
-        <property name="m_id" column="m_id" />
-        <property name="c_id" column="c_id" />
         <property name="o_bdate" column="o_bdate" />
         <property name="o_edate" column="o_edate" />
         <property name="o_des" column="o_des" />
