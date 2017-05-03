@@ -23,11 +23,13 @@ import toolman.cdata.model.CdataVO;
 public class CdataServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+	public void doGet(HttpServletRequest req, HttpServletResponse res) 
+			throws ServletException, IOException {
 		doPost(req, res);
 	}
 
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) 
+			throws ServletException, IOException {
 		//存放錯誤訊息
 		Map<String, String> errorMsgs = new HashMap<>();
 		HttpSession session = req.getSession();
@@ -123,15 +125,10 @@ public class CdataServlet extends HttpServlet {
 			} catch (IllegalArgumentException e) {
 				c_jdate = new Timestamp(System.currentTimeMillis());
 			}
-			//DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//			CdataVO cdata = new CdataVO();
-//			Calendar calobj = Calendar.getInstance();
-//			Timestamp o_bdatetest = new Timestamp(calobj.getTimeInMillis());
-//			cdata.setC_jdate(o_bdatetest);
-					
 			Integer c_rating = 0;// 消費者評分
 			Integer c_finished = 0;// 已完成消費數
 
+			
 			// CdataVO cdataVO = new CdataVO();
 			// cdataVO.setC_id(c_id);
 			// cdataVO.setC_pwd(c_pwd);
@@ -156,8 +153,6 @@ public class CdataServlet extends HttpServlet {
 					
 
 			session.setAttribute("cdataVO", cdataVO);
-//			RequestDispatcher rd = req.getRequestDispatcher("/cdata/InsertCdataSuccess.jsp");// 註冊成功
-//			rd.forward(req, resp);
 			resp.sendRedirect(resp.encodeRedirectURL("InsertCdataSuccess.jsp"));
 			return;
 		} catch (Exception e) {

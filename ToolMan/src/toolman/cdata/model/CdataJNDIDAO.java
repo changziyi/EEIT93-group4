@@ -230,8 +230,6 @@ public class CdataJNDIDAO implements CdataDAO_interface{
 		}
 	}
 
-	//查詢評價順序
-
 	@Override
 	public List<CdataVO> getAll() {
 		// TODO Auto-generated method stub
@@ -299,6 +297,7 @@ public class CdataJNDIDAO implements CdataDAO_interface{
 	public static void main(String args[]){
 		
 		CdataJNDIDAO dao = new CdataJNDIDAO();
+		
 		/**************************** 測試新增 ********************************/	
 		
 //		CdataVO cdataVO = new CdataVO();

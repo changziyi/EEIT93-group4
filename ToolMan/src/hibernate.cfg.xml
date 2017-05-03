@@ -5,12 +5,17 @@
 <hibernate-configuration>
 
 	<session-factory>
-
-		<!-- JDBC連線池 (預設會使用Hibernate內建的連線池)(不建議用在實際的專案) -->
+        
+        <!-- 連線池c3p0設定-->
 		<property name="hibernate.connection.driver_class">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>
 		<property name="hibernate.connection.url">jdbc:sqlserver://localhost:1433;DatabaseName=ToolMan</property>
 		<property name="hibernate.connection.username">sa</property>
-		<property name="hibernate.connection.password">sa123456</property>
+		<property name="hibernate.connection.password">sa123456</property>       
+		<property name="hibernate.connection.provider_class">org.hibernate.connection.C3P0ConnectionProvider</property>
+		<property name="hibernate.c3p0.min_size">5</property>
+		<property name="hibernate.c3p0.max_size">20</property>
+		<property name="hibernate.c3p0.timeout">1800</property>
+		<property name="hibernate.c3p0.max_statements">50</property>
         
 		<!--SQL方言,以下使用SQLServer -->
 		<property name="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</property>
@@ -29,6 +34,7 @@
 
 		<!--Java物件與資料庫表格的映射檔 -->
 		<mapping resource="toolman/cdata/model/Cdata.hbm.xml" />
+
 		<mapping resource="toolman/work/model/work.hbm.xml" />
 		<mapping resource="toolman/opro/model/opro.hbm.xml" />
 		<mapping resource="toolman/order/model/order.hbm.xml" />
@@ -36,9 +42,6 @@
 		<mapping resource="toolman/mdata/model/mdata.hbm.xml" />
 		<mapping resource="toolman/discussion/model/discussion.hbm.xml" />
 		<mapping resource="toolman/building/model/building.hbm.xml" />
-		
-
-
 
 	</session-factory>
 	

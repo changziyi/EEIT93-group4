@@ -7,7 +7,11 @@
 <title>Insert Success</title>
 </head>
 <body>
+<<<<<<< HEAD
 <H1>註冊資料成功，歡迎加入</H1>
+=======
+<H1>${ cdataVO.c_name }，註冊資料成功，歡迎加入</H1>
+>>>>>>> branch 'master' of https://github.com/changziyi/EEIT93-group4.git
 帳號: ${ cdataVO.c_id }<BR>
 密碼: ${ cdataVO.c_pwd }<BR>
 姓名: ${ cdataVO.c_name }<BR>

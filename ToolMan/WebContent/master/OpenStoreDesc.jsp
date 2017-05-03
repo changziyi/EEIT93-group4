@@ -41,7 +41,7 @@
 		<tr>
 			<td>
 				<input type="submit" value="送出審核">
-				<input type="hidden" name="action" value="OpenStore">
+				<input type="hidden" name="action" value="OpenStoreComplete">
 			</td>
 		</tr>
 	</table>

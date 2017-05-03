@@ -29,8 +29,6 @@ public class CdataVO implements java.io.Serializable{
 	
 //	private Set<OrderVO> orders = new  HashSet<OrderVO>();//評價
 	
-	private CdataVO cdataVO;//媒合
-	
 	 
 
 //	public Set<OrderVO> getOrders() {
@@ -39,12 +37,7 @@ public class CdataVO implements java.io.Serializable{
 //	public void setOrders(Set<OrderVO> orders) {
 //		this.orders = orders;
 //	}
-	public CdataVO getCdataVO() {
-		return cdataVO;
-	}
-	public void setCdataVO(CdataVO cdataVO) {
-		this.cdataVO = cdataVO;
-	}
+
 	public String getC_id() {
 		return c_id;
 	}

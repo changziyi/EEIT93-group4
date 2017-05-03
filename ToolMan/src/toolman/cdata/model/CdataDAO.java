@@ -14,7 +14,7 @@ public class CdataDAO implements CdataDAO_interface{
 	
 	private static final String GET_ALL_STMT = "from CdataVO order by c_id";
 
-	//登入系統
+	//登入
 	@Override
 	public CdataVO login_in(String c_id) {
 		// TODO Auto-generated method stub
@@ -145,6 +145,8 @@ public class CdataDAO implements CdataDAO_interface{
 //		cdataVO.setC_birth(java.sql.Date.valueOf("1980-12-27"));
 //		cdataVO.setC_finished(0);
 //		dao.update(cdataVO);	
+		
+		/*********************** 新增刪除未完成  *****************************/	
 		
 //		dao.delete("Snoopy");
 	}	

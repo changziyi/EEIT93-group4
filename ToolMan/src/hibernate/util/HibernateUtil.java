@@ -1,3 +1,10 @@
+
+
+/*
+ * This class not only produces the global org.hibernate.SessionFactory reference in its static initializer;
+ * it also hides the fact that it uses a static singleton
+*/
+
 package hibernate.util;
 
 import org.hibernate.SessionFactory;
