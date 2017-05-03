@@ -23,6 +23,7 @@ import javax.servlet.http.HttpSession;
 import org.json.simple.JSONValue;
 
 import toolman.building.model.BuildingVO;
+import toolman.cdata.model.CdataVO;
 import toolman.mdata.model.MdataVO;
 import toolman.mpro.model.MProDAO;
 import toolman.mpro.model.MProVO;
@@ -48,10 +49,14 @@ public class OrderController extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		
+		String action = request.getParameter("action");
+		
 		//Reservation button pressed 
-//		HttpSession session = request.getSession();// placed in jsp instead
-//		MdataVO mdataVO = session.getAttribute("mdataVO");
-//		Collection<MproVO> mproVOset = session.getAttribute("mproVOset");
+		HttpSession session = request.getSession();// placed in jsp instead
+		MdataVO mdataVO = (MdataVO) session.getAttribute("mdataVO");
+		Collection<MProVO> mproVOset = (Collection<MProVO>) session.getAttribute("mproVOset");
+		CdataVO cdataVO = (CdataVO) session.getAttribute("cdata");
 		
 		//test
 //		String action = request.getParameter("action");
@@ -61,33 +66,33 @@ public class OrderController extends HttpServlet {
 //		String o_location = request.getParameter("o_location");
 //		String o_note = request.getParameter("o_note");
 //		System.out.println(action+","+o_des+","+req_exp+","+h_type+","+o_location+","+o_note );
-		System.out.println(request.getParameter("req_exp"));
+//		System.out.println(request.getParameter("req_exp"));
 		
-		String action = request.getParameter("action");
-		HttpSession session = request.getSession();
+
 		if("insert".equals(action)){
 		OrderVO orderVO = null;
 		//new Order and Insert Order
-			Map<String,String> errormsg = new HashMap<String,String>();//error message
+			Map<String,String> errormsg = new HashMap<String,String>();//error message						
 			
-			
-			
-			//open while merge with mdata servlet
-//			String b_name = request.getParameter("b_name");//automatically filled in			
-			//MdataVO mdataVO = request.getAttribute("mdataVO");
-			//Integer m_id = mdataVO.getM_id();//automatically filled in
-			//CdataVO cdataVO = session.getAttribute("cdata");
-			//String c_id = cdataVO.getC_id(); //automatically filled in
+			//open while merge with mdata servlet			
+			String b_name = mdataVO.getB_name();//automatically filled in			
+//			String c_id = cdataVO.getC_id(); //automatically filled in, but I don't need c_id, I just need cdataVO
 			
 			Timestamp o_tdate = new Timestamp(System.currentTimeMillis());
-			String b_name ="如意棒裝潢";
-			Integer m_id = 1001;
-			String c_id = "Micky";
 			
+			//test data
+//			String b_name ="如意棒裝潢";
+//			Integer m_id = 1001;
+//			String c_id = "Micky";
+			
+			// deal with mpro and opro tables first
 			MProDAO mprodao = new MProDAO();
-			List<MProVO> mproVOlist = mprodao.getByMid(m_id);
 			OproDAO oprodao = new OproDAO();
 			OproVO oproVO = new OproVO();
+			
+			//mpro and opro have no service file
+			Integer m_id = mdataVO.getM_id();// only for pro use
+			List<MProVO> mproVOlist = mprodao.getByMid(m_id);
 			List<OproVO> oproVOlist = new ArrayList<OproVO>();
 			
 			for(MProVO mproVO : mproVOlist){
@@ -99,8 +104,9 @@ public class OrderController extends HttpServlet {
 				oproVOlist.add(oproVO);
 				
 			}
-			oprodao.insertOpro(oproVOlist);
+			oprodao.insertOpro(oproVOlist);// opro done
 			
+			//time to deal with main content
 			Calendar calobj = Calendar.getInstance();
 			Timestamp o_bdate = new Timestamp(calobj.getTimeInMillis());//automatically filled in
 			
@@ -138,8 +144,9 @@ public class OrderController extends HttpServlet {
 				System.out.println(action+","+o_des+","+req_exp+","+h_type+","+o_location+","+o_note );
 				
 				orderVO = new OrderVO();
-				orderVO.setB_name(b_name);
-				orderVO.setC_id(c_id);
+				orderVO.setB_name(b_name);// sent from the top
+				orderVO.setM_id(mdataVO);// sent from the top
+				orderVO.setC_id(cdataVO);// sent from the top
 				orderVO.setO_bdate(o_bdate);
 				orderVO.setO_des(o_des);
 				orderVO.setReq_exp(req_exp);
