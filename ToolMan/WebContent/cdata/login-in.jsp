@@ -153,9 +153,9 @@
               </div>
               <a class="forgotmember" href="../cdata/login-up.jsp">還不是會員嗎?</a>
               <a class="forgot" href="forgotpwd.jsp">忘記密碼?</a>
-               
+               <input type="hidden" name="login_mumber" value="login_on_mumber">
               <input type="submit" class="submit" value="登入">
-              <input type="hidden" name="login_mumber" value="login_on_mumber">
+              
               <hr>
               <span>或</span>
             </form>

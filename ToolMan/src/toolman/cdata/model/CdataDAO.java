@@ -4,11 +4,13 @@ package toolman.cdata.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
-
+import org.hibernate.criterion.Restrictions;
 
 import hibernate.util.HibernateUtil;
+
 
 public class CdataDAO implements CdataDAO_interface{
 	
@@ -17,12 +19,16 @@ public class CdataDAO implements CdataDAO_interface{
 	//登入
 	@Override
 	public CdataVO login_in(String c_id) {
-		// TODO Auto-generated method stub
 		CdataVO cdataVO = null;
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try {
 			session.beginTransaction();
-			cdataVO = (CdataVO) session.get(CdataVO.class, c_id);
+//			Criteria query = session.createCriteria(CdataVO.class);
+//			query.add(Restrictions.eq("c_id", "Micky"));
+//			query.setParameter(0, c_id);
+			cdataVO = (CdataVO) session.get(CdataVO.class, "Micky");
+			
+//			cdataVO = (CdataVO) query.list().get(0);
 			session.getTransaction().commit();
 		} catch (RuntimeException ex) {
 			session.getTransaction().rollback();
@@ -96,11 +102,11 @@ public class CdataDAO implements CdataDAO_interface{
 		
 		/*********************** 查詢登入帳號完成  *****************************/
 		
-//		CdataVO cdataVO = dao.login_in("micky");
-//		System.out.println("----------------------------------");
-//		System.out.print("帳號 : " + cdataVO.getC_id() + ",");
-//		System.out.println("密碼 : " + cdataVO.getC_pwd());
-//		System.out.println("----------------------------------");
+		CdataVO cdataVO = dao.login_in("Micky");
+		System.out.println("----------------------------------");
+		System.out.print("帳號 : " + cdataVO.getC_id() + ",");
+		System.out.println("密碼 : " + cdataVO.getC_pwd());
+		System.out.println("----------------------------------");
 		
 		/*********************** 新增註冊完成  *****************************/
 		

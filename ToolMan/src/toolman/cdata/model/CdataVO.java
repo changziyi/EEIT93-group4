@@ -94,10 +94,10 @@ public class CdataVO implements java.io.Serializable{
 	public void setC_jdate(Timestamp c_jdate) {
 		this.c_jdate = c_jdate;
 	}
-	public Integer getC_rating() {
+	public Integer getC_averrating() {
 		return c_averrating;
 	}
-	public void setC_rating(Integer c_rating) {
+	public void setC_averrating(Integer c_rating) {
 		this.c_averrating = c_rating;
 	}
 	public Integer getM_id() {
