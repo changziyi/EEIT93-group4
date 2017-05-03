@@ -26,19 +26,19 @@
 		<table>
 			<tr>
 				<td>師傅姓名:
-				<input type="text" name="m_name" value="${param.m_name}"/>${errorMsgs.name1}${errorMsgs.name2}</td>
+				<input type="text" name="m_name" value="${mdataVO.m_name}"/>${errorMsgs.name1}${errorMsgs.name2}</td>
 			</tr>
 			<tr>
 				<td>電話:
-				<input type="text" name="m_cel" /></td>
+				<input type="text" name="m_cel" value="${mdataVO.m_cel}"/></td>
 			<tr>
 				<td>信箱:
-				<input type="text" name="m_email" /></td>
+				<input type="text" name="m_email" value="${mdataVO.m_email}"/></td>
 			</tr>
 			<tr>
 				<td>地址:
 				<span id="twzipcode"></span>
-				<input type="text" name="m_addr" />${errorMsgs.city}
+				<input type="text" name="m_addr" value="${mdataVO.m_addr}"/>${errorMsgs.city}${errorMsgs.addr}
 				</td>
 			</tr>
 			<tr>
@@ -52,17 +52,15 @@
 				</td>
 			</tr>
 			<tr>
-				<td>相關證照:
+				<td>專業證照:
 				<div><img id="m_cer"></div>
-				<input type="file" name="m_cer" class="upl"></td>
+				<input type="file" name="m_cer" ></td>
 			</tr>
 			<tr>
-<!-- 				<td><input type="submit" value="送出審核"></td> -->
-<!-- 				<td><input type="hidden" name="action" value="OpenStore"></td> -->
-				<td><input type="submit" name="nextPage" value="下一部"></td>
-				<td><input type="hidden" name="m_city" ></td>
-				<td><input type="hidden" name="m_district" ></td>
+				<td><input type="submit" name="nextPage" value="下一步"></td>
 				<td><input type="hidden" name="action" value="OpenStoreStep" ></td>
+				<td><input type="hidden" name="m_city" value="${mdataVO.m_city}" ></td>
+				<td><input type="hidden" name="m_district" value="${mdataVO.m_district}"></td>
 			</tr>
 		</table>
 	</div>
@@ -73,10 +71,12 @@
 	
 	$(function() {
 		
+		//使用者選取圖片時觸發
 		$('input[name="m_cer"]').on('change', function(event) {
 			preview(this);
 		});
 		
+		//預覽圖片
 		function preview(input) {
 
 			if (input.files && input.files[0]) {
@@ -90,18 +90,39 @@
 				reader.readAsDataURL(input.files[0]);
 			}
 		}
-	
+		
+		
+// 		$(':checkbox').click(function(){
+// 		    var data = [];
+//         	$(':checkbox[name = "m_pro"]:checked').each(function() {
+// //         		console.log($(this).val());
+//         		data.push($(this).val());
+//         	});
+// //         	console.log(data);
+//     		$.each(data, function(idx,value) {
+// // 				console.log(idx);
+// // 				console.log(value);
+				
+// 			});
+//         });
+    	
+		
+		//縣市選單，透過hidden欄位取值ˋ
+		var city = $('input[name="m_city"]');
+		var district = $('input[name="m_district"]');
+		
 		$('#twzipcode').twzipcode({
 			'css': ['county', 'district', 'zipcode'],
-		    'zipcodeSel'  : '106',
-// 		    'countySel'   : '臺北市',
-// 		    'districtSel' : '大安區',
+		    'countySel'   : '${mdataVO.m_city}',
+		    'districtSel' : '${mdataVO.m_district}',
 		    'onCountySelect': function () {
-		    	$('input[name="m_city"]').attr("value",this.value);
+		    	city.attr("value", this.value);
 		    },
 			'onDistrictSelect': function () {
-		    	$('input[name="m_district"]').attr("value",this.value);
+				district.attr("value", this.value);
 		    }
+// 		    'countySel'   : city.attr("value"),
+// 		    'districtSel' : district.attr("value")
 		});
 		
 		

@@ -1,6 +1,5 @@
 package toolman.work.model;
 
-import java.util.Collection;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -10,10 +9,10 @@ import org.hibernate.SessionFactory;
 import hibernate.util.HibernateUtil;
 import toolman.mdata.model.MdataVO;
 
-public class WorkDAO implements WorkDAO_Interface {
+public class WorkDAO implements WorkDAO_interface {
 
 	@Override
-	public void Insert(WorkVO workVO) {
+	public void insert(WorkVO workVO) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try {
 			session.beginTransaction();
@@ -24,9 +23,9 @@ public class WorkDAO implements WorkDAO_Interface {
 			throw ex;
 		}
 	}
-
+	
 	@Override
-	public Collection<WorkVO> getWorkByMid(Integer m_id) {
+	public List<WorkVO> getWorkByMid(Integer m_id) {
 		List<WorkVO> querylist = null;
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try {

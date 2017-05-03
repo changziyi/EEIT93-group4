@@ -23,14 +23,14 @@
 		<tr>
 		<td>首頁圖片:
 			<div><img id="b_image"></div>
-			<input type="file" name="b_image" class="upl"></td>
+			<input type="file" name="b_image" /></td>
 		</tr>
 		<tr>
 			<td>店家名稱:
-			<input type="text" name="b_name" /></td>
+			<input type="text" name="b_name" value="${mdataVO.b_name}"/></td>
 		</tr>
 		<tr>
-			<td>店家簡介:
+			<td>店家介紹:
 			<textarea name="b_des"></textarea></td>
 		</tr>
 		<tr>
