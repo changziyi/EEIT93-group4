@@ -35,6 +35,14 @@
 		<!--Java物件與資料庫表格的映射檔 -->
 		<mapping resource="toolman/cdata/model/Cdata.hbm.xml" />
 
+		<mapping resource="toolman/work/model/work.hbm.xml" />
+		<mapping resource="toolman/opro/model/opro.hbm.xml" />
+		<mapping resource="toolman/order/model/order.hbm.xml" />
+		<mapping resource="toolman/mpro/model/mpro.hbm.xml" />
+		<mapping resource="toolman/mdata/model/mdata.hbm.xml" />
+		<mapping resource="toolman/discussion/model/discussion.hbm.xml" />
+		<mapping resource="toolman/building/model/building.hbm.xml" />
+
 	</session-factory>
 	
 </hibernate-configuration>
