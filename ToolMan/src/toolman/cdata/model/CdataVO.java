@@ -5,6 +5,8 @@ import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.Set;
 
+import toolman.order.model.OrderVO;
+
 //import com.order.model.OrderVO;
 
 public class CdataVO implements java.io.Serializable{
@@ -18,7 +20,7 @@ public class CdataVO implements java.io.Serializable{
 	private String c_district;
 	private String c_addr;
 	private Timestamp c_jdate;
-	private Integer c_rating;
+	private Integer c_averrating;
 	private Integer m_id;
 	private String s_name;	
 	private String c_fb;
@@ -27,16 +29,16 @@ public class CdataVO implements java.io.Serializable{
 	private Date c_birth;
 	private Integer c_finished;
 	
-//	private Set<OrderVO> orders = new  HashSet<OrderVO>();//評價
+	private Set<OrderVO> orders = new  HashSet<OrderVO>();//評價
 	
 	 
 
-//	public Set<OrderVO> getOrders() {
-//		return orders;
-//	}
-//	public void setOrders(Set<OrderVO> orders) {
-//		this.orders = orders;
-//	}
+	public Set<OrderVO> getOrders() {
+		return orders;
+	}
+	public void setOrders(Set<OrderVO> orders) {
+		this.orders = orders;
+	}
 
 	public String getC_id() {
 		return c_id;
@@ -93,10 +95,10 @@ public class CdataVO implements java.io.Serializable{
 		this.c_jdate = c_jdate;
 	}
 	public Integer getC_rating() {
-		return c_rating;
+		return c_averrating;
 	}
 	public void setC_rating(Integer c_rating) {
-		this.c_rating = c_rating;
+		this.c_averrating = c_rating;
 	}
 	public Integer getM_id() {
 		return m_id;

@@ -25,12 +25,14 @@ public class MdataPageServlet extends HttpServlet {
 		
 		MdataService mdataSvc = new MdataService();
 		MdataVO mdataVO = mdataSvc.findByPrimaryKey(m_id);
-		System.out.println("get: " + mdataVO.getM_id());
 		
 		HttpSession session = request.getSession();
 		session.setAttribute("mdataVO", mdataVO);
-		RequestDispatcher successView = request.getRequestDispatcher("/master/MasterPage.jsp");
-		successView.forward(request, response);
+		MdataVO m = (MdataVO)session.getAttribute("mdataVO");
+		System.out.println("sessionM_id: " + m.getM_id());
+		response.sendRedirect("MasterPage.jsp");
+//		RequestDispatcher successView = request.getRequestDispatcher("/master/MasterPage.jsp");
+//		successView.forward(request, response);
 		return;
 		
 	}

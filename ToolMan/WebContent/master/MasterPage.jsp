@@ -1,22 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>${mdataVO.b_name}</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<style>
+</style>
 </head>
 <body>
-
+<div class="container">
+	<div class="row">
+		<img height="450px" src='${pageContext.servletContext.contextPath}/master/master.do?type=master&image=${mdataVO.m_id}'/>
+	</div>
 	<div>
-		<img height="200px" src='${pageContext.servletContext.contextPath}/master/master.do?image=${mdataVO.m_id}'/>
 		<H3>${mdataVO.b_name}</H3>
-			專業：<c:forEach var="aMpro" items="${mdataVO.mpros}">${aMpro.m_pro}
-			</c:forEach>
-				<br />
-			師傅：${mdataVO.m_name} <br />
-			地區：${mdataVO.m_city}　${mdataVO.m_district} <br />
+		<p>專業：<c:forEach var="aMpro" items="${mdataVO.mpros}">${aMpro.m_pro}</c:forEach></p>
+		<p>師傅：${mdataVO.m_name}</p>
+		<p>地區：${mdataVO.m_city}　${mdataVO.m_district}</p>
 	</div>
 	<br /><hr /><br />
 	<div>
@@ -35,6 +41,6 @@
 			</form>
 		</div>
 	</div>
-
+</div> <!--container-->
 </body>
 </html>

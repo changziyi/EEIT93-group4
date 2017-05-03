@@ -1,4 +1,4 @@
-package test.sen;
+package toolman.mdata.controller;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -15,8 +15,10 @@ import javax.servlet.http.Part;
 
 import toolman.mdata.model.MdataService;
 import toolman.mdata.model.MdataVO;
+import toolman.work.model.WorkService;
+import toolman.work.model.WorkVO;
 
-@WebServlet("/TestFormData")
+@WebServlet("/master/TestFormData")
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 5 * 1024 * 1024, maxRequestSize = 5 * 5 * 1024 * 1024)
 public class TestFormData extends HttpServlet {
 
@@ -29,9 +31,9 @@ public class TestFormData extends HttpServlet {
 			throws ServletException, IOException {
 		
 		
-		byte[] b0 = null;
-		byte[] b1 = null;
-		byte[] b2 = null;
+		byte[] img1 = null;
+		byte[] img2 = null;
+		byte[] img3 = null;
 		
 		Collection<Part> parts = request.getParts();
 		for (Part part : parts) {
@@ -39,60 +41,33 @@ public class TestFormData extends HttpServlet {
 			if (part.getContentType() != null) {
 				if ("file0".equals(pName)) {
 					InputStream in0 = part.getInputStream();
-					b0 = new byte[in0.available()];
-					in0.read(b0);
+					img1 = new byte[in0.available()];
+					in0.read(img1);
 					in0.close();
 				}
 				if ("file1".equals(pName)) {
 					InputStream in1 = part.getInputStream();
-					b1 = new byte[in1.available()];
-					in1.read(b1);
+					img2 = new byte[in1.available()];
+					in1.read(img2);
 					in1.close();
 				}
-//				if ("file2".equals(pName)) {
-//					InputStream in2 = part.getInputStream();
-//					b2 = new byte[in2.available()];
-//					in2.read(b2);
-//					in2.close();
-//				}
+				if ("file2".equals(pName)) {
+					InputStream in2 = part.getInputStream();
+					img3 = new byte[in2.available()];
+					in2.read(img3);
+					in2.close();
+				}
 			}
 		}
 		
+		WorkVO workVO = new WorkVO();
+		workVO.setImg1(img1);
+		workVO.setImg2(img2);
+		workVO.setImg3(img3);
 		
-		MdataVO mdataVO = new MdataVO();
-		mdataVO.setB_image(b0);
-		mdataVO.setM_cer(b1);
+		WorkService workSvc = new WorkService();
+		workSvc.insert(workVO);
 		
-		MdataService mdataSvc = new MdataService();
-		mdataSvc.insert(mdataVO);
-		
-		
-		
-//		String email = "";
-//		String password = "";
-//		InputStream in = null;
-//
-//		Collection<Part> parts = request.getParts();
-//		for (Part part : parts) {
-//			String pName = part.getName();
-//			String value = request.getParameter(pName);
-//			System.out.println(part.getSize());
-//			if (part.getContentType() == null) {
-//
-//				if (pName.equals("email")) {
-//					email = value;
-//				} else if (pName.equals("password")) {
-//					password = value;
-//				}
-//
-//			} else {
-//
-//				in = part.getInputStream();
-//				in.close();
-//			}
-//		}
-//
-//
 		PrintWriter out = response.getWriter();
 
 		String email = request.getParameter("email");

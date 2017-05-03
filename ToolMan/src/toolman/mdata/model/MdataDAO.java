@@ -144,6 +144,33 @@ public class MdataDAO implements MdataDAO_interface {
 		return list;
 	}
 	
+	// Benny's recommendation function
+	@Override
+	public List<MdataVO> getCityAndDistrictAndMPro(String m_city, String m_district, String m_pro) {
+		List<MdataVO> list = null;
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try {
+			session.beginTransaction();
+			Criteria query = session.createCriteria(MdataVO.class, "m");
+			query.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);// transform the result to distinct
+			query.createAlias("m.mpros","p");// set alias for variable mpros and it's table
+			Criterion c1 = Restrictions.eq("m.m_city", m_city);
+			Criterion c2 = Restrictions.eq("m.m_district", m_district);
+			Criterion c3 = Restrictions.like("p.m_pro", "%" + m_pro + "%");//retrieve m_pro column from the 
+			query.add(Restrictions.or(
+					Restrictions.and(Restrictions.and(c1,c2),Restrictions.and(c2,c3)),
+					Restrictions.and(c1,c3)
+					)
+				);
+			list = query.list();
+			session.getTransaction().commit();
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
+		return list;
+	}
+	
 	@Override
 	public List<MdataVO> SearchByCityAndMpro(String m_city, String input) {
 		List<MdataVO> list = null;

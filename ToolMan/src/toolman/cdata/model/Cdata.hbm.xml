@@ -16,7 +16,7 @@
 		<property name="c_district" column="c_district" />
 		<property name="c_addr" column="c_addr" />
 		<property name="c_jdate" column="c_jdate" />
-		<property name="c_rating" column="c_rating" />
+		<property name="c_rating" column="c_averrating" />
 		<property name="m_id" column="m_id" />
 		<property name="s_name" column="s_name" />
 		<property name="c_fb" column="c_fb" />
@@ -28,12 +28,12 @@
 		
 		<!--評價-->
 		
-<!-- 		<set name="orders" table="oreder" lazy="false" cascade="all"  inverse="true"  order-by="c_id asc">			 -->
-<!-- 			<key> -->
-<!-- 				<column name="o_id" /> -->
-<!-- 			</key> -->
-<!-- 			<one-to-many class="toolman.opro.model.OproVO" /> -->
-<!-- 		</set>		 -->
+		<set name="orders" table="ord" lazy="false" cascade="all"  inverse="true"  order-by="o_id asc">			
+			<key>
+				<column name="o_id" />
+			</key>
+			<one-to-many class="toolman.order.model.OrderVO" />
+		</set>		
 	
 	</class>
 </hibernate-mapping>

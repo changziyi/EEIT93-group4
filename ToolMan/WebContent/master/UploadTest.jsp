@@ -128,9 +128,9 @@
 					contentType : false,
 					processData : false,
 					type : 'POST',
-//	 				success : function(reutrnData) {
-//	 					alert(reutrnData);
-//	 				}
+// 	 				success : function(reutrnData) {
+// 	 					alert(reutrnData);
+// 	 				}
 				});
 			});
 			
