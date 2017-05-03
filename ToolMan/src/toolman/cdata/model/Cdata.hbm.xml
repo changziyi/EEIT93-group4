@@ -28,12 +28,12 @@
 		
 		<!--評價-->
 		
-<!-- 		<set name="orders" table="oreder" lazy="false" cascade="all"  inverse="true"  order-by="c_id asc">			 -->
-<!-- 			<key> -->
-<!-- 				<column name="o_id" /> -->
-<!-- 			</key> -->
-<!-- 			<one-to-many class="toolman.opro.model.OproVO" /> -->
-<!-- 		</set>		 -->
+		<set name="orders" table="ord" lazy="false" cascade="all"  inverse="true"  order-by="c_id asc">			
+			<key>
+				<column name="o_id" />
+			</key>
+			<one-to-many class="toolman.opro.model.OproVO" />
+		</set>		
 	
 	</class>
 </hibernate-mapping>

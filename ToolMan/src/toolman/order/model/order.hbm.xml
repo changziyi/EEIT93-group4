@@ -38,13 +38,13 @@
 			<one-to-many class="toolman.opro.model.OproVO" />
 		</set>
 
-<!--         <many-to-one name="m_id" class="toolman.mdata.model.MdataVO" lazy="false"> -->
-<!--             <column name="m_id" /> -->
-<!--         </many-to-one> -->
+        <many-to-one name="m_id" class="toolman.mdata.model.MdataVO" lazy="false">
+            <column name="m_id" />
+        </many-to-one>
         
-<!--         <many-to-one name="c_id" class="toolman.cdata.model.CdataVO" lazy="false"> -->
-<!--             <column name="c_id" /> -->
-<!--         </many-to-one> -->
+        <many-to-one name="c_id" class="toolman.cdata.model.CdataVO" lazy="false">
+            <column name="c_id" />
+        </many-to-one>
     </class>
 </hibernate-mapping>
 

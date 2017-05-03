@@ -5,6 +5,8 @@ import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.Set;
 
+import toolman.order.model.OrderVO;
+
 //import com.order.model.OrderVO;
 
 public class CdataVO implements java.io.Serializable{
@@ -27,16 +29,16 @@ public class CdataVO implements java.io.Serializable{
 	private Date c_birth;
 	private Integer c_finished;
 	
-//	private Set<OrderVO> orders = new  HashSet<OrderVO>();//評價
+	private Set<OrderVO> orders = new  HashSet<OrderVO>();//評價
 	
 	 
 
-//	public Set<OrderVO> getOrders() {
-//		return orders;
-//	}
-//	public void setOrders(Set<OrderVO> orders) {
-//		this.orders = orders;
-//	}
+	public Set<OrderVO> getOrders() {
+		return orders;
+	}
+	public void setOrders(Set<OrderVO> orders) {
+		this.orders = orders;
+	}
 
 	public String getC_id() {
 		return c_id;
