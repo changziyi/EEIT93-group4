@@ -306,7 +306,7 @@ public class MdataDAO implements MdataDAO_interface {
 //		System.out.print(mdataVO.getB_des() + ",");
 //		System.out.println(mdataVO.getSa_mnote());
 //		System.out.println("----------------------------------");
-//		Set<MProVO> set = mdataVO.getM_pros();
+//		Set<MProVO> set = mdataVO.getMpros();
 //		for (MProVO aMPro : set) {
 //			System.out.print(aMPro.getM_proid() + ",");
 //			System.out.println(aMPro.getM_pro());
@@ -356,7 +356,7 @@ public class MdataDAO implements MdataDAO_interface {
 //			System.out.print(aMaster.getB_image() + ",");
 //			System.out.print(aMaster.getB_des() + ",");
 //			System.out.println(aMaster.getSa_mnote());
-//			Set<MProVO> set2 = aMaster.getM_pros();
+//			Set<MProVO> set2 = aMaster.getMpros();
 //			for (MProVO aMPro : set2) {
 //				System.out.print(aMPro.getM_proid() + ",");
 //				System.out.println(aMPro.getM_pro());
