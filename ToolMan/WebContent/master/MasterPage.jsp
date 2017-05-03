@@ -25,6 +25,8 @@
 			<p>專業：<c:forEach var="aMpro" items="${mdataVO.mpros}">${aMpro.m_pro}</c:forEach></p>
 			<p>師傅：${mdataVO.m_name}</p>
 			<p>地區：${mdataVO.m_city}　${mdataVO.m_district}</p>
+   			<input type="button" id="reservemaster" value="預約師傅" >
+   			
 		</div>
 	</div>
   <ul class="nav nav-tabs">
@@ -71,4 +73,7 @@
 	</div>
 </div> <!--container-->
 </body>
+<script>
+$("#reservemaster").on("click",function(){window.location='${pageContext.servletContext.contextPath}/toolman.order/NewOrder.jsp'});
+</script>
 </html>

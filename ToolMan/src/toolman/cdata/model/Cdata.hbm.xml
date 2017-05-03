@@ -8,8 +8,9 @@
 		<id name="c_id" column="c_id">		
 			 <generator class="assigned"/>
 		</id>
-		<property name="c_name" column="c_name" />
+		
 		<property name="c_pwd" column="c_pwd" />
+		<property name="c_name" column="c_name" />
 		<property name="c_cel" column="c_cel" />
 		<property name="c_email" column="c_email" />
 		<property name="c_city" column="c_city" />

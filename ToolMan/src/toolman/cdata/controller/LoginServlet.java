@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import jdk.nashorn.internal.runtime.Context;
 import toolman.cdata.model.CdataService;
 import toolman.cdata.model.CdataVO;
 
@@ -55,9 +56,9 @@ public class LoginServlet extends HttpServlet {
 		
 		
 		CdataService cs = new CdataService();
-		CdataVO  c = cs.login_in(c_id, c_pwd);
-		if (c != null){
-			session.setAttribute("LoginOK", c);//物件放入Session範圍內，識別字串為"LoginOK"，表示此使用者已經登入
+		CdataVO  cdataVO = cs.login_in(c_id, c_pwd);
+		if (cdataVO != null){
+			session.setAttribute("LoginOK", cdataVO);//物件放入Session範圍內，識別字串為"LoginOK"，表示此使用者已經登入
 		}else{
 			errorMsgs.put("LoginError", "該帳號不存在或密碼錯誤");
 		}
@@ -69,7 +70,7 @@ public class LoginServlet extends HttpServlet {
 			if (target != null) {
 			    resp.sendRedirect(resp.encodeRedirectURL(contextPath + target));
 			}else{
-			    resp.sendRedirect(resp.encodeRedirectURL(contextPath + "/cdata/index.jsp"));
+			    resp.sendRedirect(resp.encodeRedirectURL(req.getContextPath()+"/master/List.jsp"));
 			}			
 			return;
 		}else{
