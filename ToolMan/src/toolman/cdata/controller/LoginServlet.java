@@ -22,7 +22,7 @@ public class LoginServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) 
 			throws ServletException, IOException {
-		
+		doPost(req,resp);
 
 	}
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) 
@@ -32,7 +32,6 @@ public class LoginServlet extends HttpServlet {
 		req.setAttribute("errorMsgs", errorMsgs);
 		// 設定輸入資料的編碼
 		req.setCharacterEncoding("UTF-8");
-		
 		HttpSession session = req.getSession();
 		/******************************** 登入 ***********************************/
 		String login_mumber = req.getParameter("login_mumber");
