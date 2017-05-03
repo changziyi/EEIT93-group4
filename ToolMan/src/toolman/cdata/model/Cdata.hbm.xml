@@ -16,7 +16,7 @@
 		<property name="c_district" column="c_district" />
 		<property name="c_addr" column="c_addr" />
 		<property name="c_jdate" column="c_jdate" />
-		<property name="c_rating" column="c_rating" />
+		<property name="c_rating" column="c_averrating" />
 		<property name="m_id" column="m_id" />
 		<property name="s_name" column="s_name" />
 		<property name="c_fb" column="c_fb" />

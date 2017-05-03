@@ -20,7 +20,7 @@ public class CdataVO implements java.io.Serializable{
 	private String c_district;
 	private String c_addr;
 	private Timestamp c_jdate;
-	private Integer c_rating;
+	private Integer c_averrating;
 	private Integer m_id;
 	private String s_name;	
 	private String c_fb;
@@ -95,10 +95,10 @@ public class CdataVO implements java.io.Serializable{
 		this.c_jdate = c_jdate;
 	}
 	public Integer getC_rating() {
-		return c_rating;
+		return c_averrating;
 	}
 	public void setC_rating(Integer c_rating) {
-		this.c_rating = c_rating;
+		this.c_averrating = c_rating;
 	}
 	public Integer getM_id() {
 		return m_id;
