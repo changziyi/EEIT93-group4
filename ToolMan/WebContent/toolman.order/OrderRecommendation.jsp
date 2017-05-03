@@ -4,11 +4,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>Order Recommendation</title>
 </head>
 <body>
-<form name="reserveorder" action="toolman/order/controller/OrderController.do">
-<input type="submit">
-</form>
+
 </body>
 </html>

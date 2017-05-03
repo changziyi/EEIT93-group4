@@ -166,6 +166,8 @@ public class OrderController extends HttpServlet {
 				OrderVO orderVO2 = (OrderVO) session.getAttribute("orderVO");
 				OrderService orderservice = new OrderService();
 				orderservice.insert(orderVO2);
+				RequestDispatcher rd = request.getRequestDispatcher("/toolman.order/OrderRecommendation.do");
+				rd.forward(request, response);
 			}
 //			else if("alterorder".equals(action)){
 //				
