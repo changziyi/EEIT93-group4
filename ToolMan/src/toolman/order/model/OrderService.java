@@ -4,6 +4,9 @@ import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.List;
 
+
+
+
 public class OrderService {
 
 	OrderDAO_Interface dao = null;
@@ -76,5 +79,35 @@ public class OrderService {
                 }
             }
         }
+    
+// -------------------------rating
+    
+    public 	OrderVO  getRate(Integer o_id) {
+		return  dao.getRate(o_id);
+
+	}
+    
+    public Integer updateOrderRate(Integer m_rating, Integer c_rating, String ca_des, String ma_des,Integer o_id) {
+    	Integer  count = dao.updateOrderRate( m_rating,  c_rating, ca_des,  ma_des, o_id);
+    	return  count;
+    }        
+    	
+    	
+    	
+//		OrderVO orderVO = new OrderVO();
+//
+//		orderVO.setO_id(o_id);
+//
+//		orderVO.setM_rating(m_rating);
+//		orderVO.setC_rating(c_rating);
+//		orderVO.setCa_des(ca_des);
+//		orderVO.setMa_des(ma_des);
+//
+//		
+//		dao.updateOrder(orderVO);
+//
+//		return dao.getRate(o_id);
+//	}
+    
     }
 

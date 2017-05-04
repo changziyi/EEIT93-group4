@@ -6,6 +6,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
+
+
 public interface OrderDAO_Interface {
     public void insert(OrderVO orderVO);
     public List<OrderVO>  getAllOrder();
@@ -21,9 +23,10 @@ public interface OrderDAO_Interface {
     public Integer deleteById(Integer o_id);
     public void updateOrder(OrderVO orderVO);
 
-
-
-
+   //----------------------------ratting 
+    
+    public OrderVO  getRate(Integer o_id);
+    public Integer updateOrderRate(Integer m_rating, Integer c_rating,String ca_des, String ma_des,Integer o_id);
 
 
 }

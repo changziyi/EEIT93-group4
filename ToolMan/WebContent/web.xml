@@ -39,12 +39,12 @@
 
 
  <servlet>
-    <servlet-name>OrderServlet</servlet-name>
+    <servlet-name>OrderController</servlet-name>
     <servlet-class>toolman.order.controller.OrderController</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>OrderServlet</servlet-name>
-    <url-pattern>/order/order.do</url-pattern>
+    <servlet-name>OrderController</servlet-name>
+    <url-pattern>/toolman/order/controller/OrderController.do</url-pattern>
   </servlet-mapping>
   
   
