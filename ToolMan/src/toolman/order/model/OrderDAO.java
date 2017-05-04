@@ -316,7 +316,6 @@ public class OrderDAO implements OrderDAO_Interface {
 
 	
 	public Integer updateOrderRate(Integer m_rating, Integer c_rating,String ca_des, String ma_des,Integer o_id) {
-		
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Integer count = 0;		
 		try {
