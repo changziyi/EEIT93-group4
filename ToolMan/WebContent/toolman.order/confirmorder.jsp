@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<jsp:useBean id="orderVO" class="toolman.order.model.OrderVO"/>
+<jsp:useBean id="orderVO" class="toolman.order.model.OrderVO" scope="request"/>
 </head>
 <body>
 
@@ -16,9 +16,9 @@
 						<td>${orderVO.getM_id()}</td>
 						<td>${orderVO.getC_id()}</td></tr>
 					
-					<tr><td>${orderVO.getO_bdate()}</td>
+					<tr><td>${orderVO.getO_bdate()}</td></tr>
 						<td>${orderVO.getO_des()}</td>
-						<td>${orderVO.getReq_exp()}</td></tr>
+						<td>${orderVO.getReq_exp()}</td>
 					
 					<tr><td>${orderVO.getH_type()}</td>
 						<td>${orderVO.getO_location()}</td>
