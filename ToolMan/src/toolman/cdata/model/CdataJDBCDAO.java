@@ -17,20 +17,20 @@ public class CdataJDBCDAO implements CdataDAO_interface{
 	String passwd = "sa123456";
 	
 	private static final String INSERT_CDATA = "INSERT INTO cdata (c_id, c_pwd, c_name, c_cel, c_email, c_city, c_district,"
-			+ "c_addr, c_birth, c_rating, c_finished, c_jdate) VALUES (?,?,?,?,?,?,?,?,?,?,?,getdate())";
+			+ "c_addr, c_birth, c_averrating, c_finished, c_jdate) VALUES (?,?,?,?,?,?,?,?,?,?,?,getdate())";
 	private static final String INSERT_CDATA_All = "INSERT INTO cdata (c_id, c_pwd, c_name, c_cel, c_email, c_city, c_district,"
-			+ "c_addr, c_jdate, c_rating, s_name, c_fb, c_google, sa_cnote, c_birth, c_finished) "
+			+ "c_addr, c_jdate, c_averrating, s_name, c_fb, c_google, sa_cnote, c_birth, c_finished) "
 			+ "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 	
 	
 	
 	private static final String UPDATE ="UPDATE cdata set c_pwd=?, c_name=?, c_cel=?, c_email=?, c_city=?, c_district=?,"
-			+ "c_addr=?, c_jdate=?, c_rating=?, s_name=?, c_fb=?, c_google=?, sa_cnote=?, c_birth=?, "
+			+ "c_addr=?, c_jdate=?, c_averrating=?, s_name=?, c_fb=?, c_google=?, sa_cnote=?, c_birth=?, "
 			+ "c_finished=? WHERE c_id = ?";
 	private static final String DELETE = "DELETE FROM cdata WHERE c_id = ?";
 	private static final String GETONE = "SELECT c_id, c_pwd, c_name, c_cel, c_email, c_city, c_district, c_addr, c_jdate,"
 			+ "c_rating, m_id, s_name, c_fb, c_google, sa_cnote, c_birth, c_finished FROM cdata WHERE c_id = ?";
-	private static final String GETALL = "SELECT c_id, c_pwd, c_name, c_cel, c_email, c_city, c_district, c_addr, c_jdate, c_rating,"
+	private static final String GETALL = "SELECT c_id, c_pwd, c_name, c_cel, c_email, c_city, c_district, c_addr, c_jdate, c_averrating,"
 			+ "m_id, s_name, c_fb, c_google, sa_cnote, c_birth, c_finished FROM cdata ORDER BY c_id";
 	
 	
@@ -60,7 +60,7 @@ public class CdataJDBCDAO implements CdataDAO_interface{
 				cdataVO.setC_district(rs.getString("c_district"));
 				cdataVO.setC_addr(rs.getString("c_addr"));
 				cdataVO.setC_jdate(rs.getTimestamp("c_jdate"));
-				cdataVO.setC_rating(rs.getInt("c_rating"));
+				cdataVO.setC_averrating(rs.getInt("c_averrating"));
 				cdataVO.setM_id(rs.getInt("m_id"));
 				cdataVO.setS_name(rs.getString("s_name"));
 				cdataVO.setC_fb(rs.getString("c_fb"));
@@ -118,7 +118,7 @@ public class CdataJDBCDAO implements CdataDAO_interface{
 			pstmt.setString(7, cdataVO.getC_district());
 			pstmt.setString(8, cdataVO.getC_addr());
 			pstmt.setDate(9, cdataVO.getC_birth());
-			pstmt.setInt(10, cdataVO.getC_rating());
+			pstmt.setInt(10, cdataVO.getC_averrating());
 			pstmt.setInt(11, cdataVO.getC_finished());
 			
 			int num = pstmt.executeUpdate();
@@ -164,7 +164,7 @@ public class CdataJDBCDAO implements CdataDAO_interface{
 			pstmt.setString(6, cdataVO.getC_district());
 			pstmt.setString(7, cdataVO.getC_addr());
 			pstmt.setTimestamp(8, cdataVO.getC_jdate());
-			pstmt.setInt(9, cdataVO.getC_rating());			
+			pstmt.setInt(9, cdataVO.getC_averrating());			
 			pstmt.setString(10, cdataVO.getS_name());
 			pstmt.setString(11, cdataVO.getC_fb());
 			pstmt.setString(12, cdataVO.getC_google());
@@ -264,7 +264,7 @@ public class CdataJDBCDAO implements CdataDAO_interface{
 				cdataVO.setC_district(rs.getString("c_district"));
 				cdataVO.setC_addr(rs.getString("c_addr"));
 				cdataVO.setC_jdate(rs.getTimestamp("c_jdate"));
-				cdataVO.setC_rating(rs.getInt("c_rating"));
+				cdataVO.setC_averrating(rs.getInt("c_averrating"));
 				cdataVO.setM_id(rs.getInt("m_id"));
 				cdataVO.setS_name(rs.getString("s_name"));
 				cdataVO.setC_fb(rs.getString("c_fb"));
