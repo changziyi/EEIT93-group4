@@ -28,7 +28,7 @@ public class CdataService {
 
 	//註冊
 	public CdataVO addCdata(String c_id,String c_pwd,String c_name,String c_cel,String c_email, String c_city, 
-			String c_district, String c_addr,Date c_birth, Integer c_rating, Integer c_finished, Timestamp c_jdate){
+			String c_district, String c_addr,Date c_birth, Integer c_averrating, Integer c_finished, Timestamp c_jdate){
 
 		CdataVO cdataVO = new CdataVO();
 		cdataVO.setC_id(c_id);
@@ -40,7 +40,7 @@ public class CdataService {
 		cdataVO.setC_district(c_district);
 		cdataVO.setC_addr(c_addr);
 		cdataVO.setC_birth(c_birth);
-		cdataVO.setC_rating(c_rating);
+		cdataVO.setC_averrating(c_averrating);
 		cdataVO.setC_finished(c_finished);
 		cdataVO.setC_jdate(c_jdate);
 		dao.insert(cdataVO);

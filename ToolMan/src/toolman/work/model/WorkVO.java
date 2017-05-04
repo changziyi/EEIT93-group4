@@ -2,7 +2,7 @@ package toolman.work.model;
 
 import toolman.mdata.model.MdataVO;
 
-public class WorkVO {
+public class WorkVO implements java.io.Serializable{
 	
 	private Integer work_id;
 	private String work_name;
