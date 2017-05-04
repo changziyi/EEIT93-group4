@@ -22,42 +22,94 @@
 	src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
 <script
 	src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"
+	type="text/javascript"></script>
+<script type="text/javascript"
+	src="http://masonry.desandro.com/jquery.masonry.min.js"></script>
+
 <style>
+.content_box {
+	display: inline-block;
+	border: 1px solid red;
+	padding: 10px;
+	margin: 10px 10px 10px 0;
+	overflow: hidden;
+	width: 327px;
+}
 </style>
+
+<script>
+	$(function() {
+		$('#_container').imagesLoaded(function() {
+			$('#_container').masonry({
+				itemSelector : '.content_box',
+				columnWidth : 364,
+				animate : true
+			});
+		});
+	});
+</script>
+
 </head>
 <body>
 	<div class="container">
+			style="height: 800px; width: 1100px; overflow: hidden; margin: 0 auto;">
+			<div class="row">
+				<div class="col-md-3" style="background-color: #e6ccff">
+					<H2 style="color: #a94dff" align="center">測試用頁面</H2>
+				</div>
+			</div>
 
-		<div class="row">
-			<div class="col-md-3" style="background-color: #e6ccff">
-				<H2 style="color: #a94dff" align="center">測試用頁面</H2>
+			<div class="row">
+				<div class="col-md-3" style="background-color: powderblue">
+
+					<div align="center">
+						<button class="btn btn-primary btn-lg" data-toggle="modal"
+							data-target="#myModal01">我要許願</button>
+					</div>
+					<BR>
+					<div align="center">
+						<button class="btn btn-primary btn-sm" data-toggle="modal"
+							data-target="#myModal02">什麼是許願池</button>
+					</div>
+
+				</div>
+				<div id="_container"
+		style="height: 800px; width: 1100px; overflow: hidden; margin: 0 auto;">
+				<div class="col-md-1"></div>
+				<div class="col-md-8" style="background-color: pink" align="center">
+					<div>
+						<div class="content_box">
+							<img src="../images/001.jpg" alt="" class="img-responsive">內容一顯示在這個位置,後面都是廢話劈哩啪啦劈哩啪啦劈哩啪啦劈哩啪啦劈哩啪啦劈哩啪啦劈哩啪啦劈哩啪啦劈哩啪啦劈哩啪啦劈哩啪啦劈哩啪啦劈哩啪啦劈哩啪啦劈哩啪啦劈哩啪啦
+						</div>
+						<div class="content_box">
+							<img src="../images/005.jpg" alt="" class="img-responsive">內容二在這邊出現啦，多打幾個字比較好辨識
+						</div>
+						<div class="content_box">
+							<img src="../images/002.jpg" alt="" class="img-responsive">內容三不想講話
+						</div>
+						<div class="content_box">
+							<img src="../images/004.jpg" alt="" class="img-responsive">內容四，這裡也是廢話雞哩咕嚕雞哩咕嚕雞哩咕嚕雞哩咕嚕雞哩咕嚕雞哩咕嚕雞哩咕嚕雞哩咕嚕雞哩咕嚕雞哩咕嚕雞哩咕嚕雞哩咕嚕雞哩咕嚕雞哩咕嚕雞哩咕嚕雞哩咕嚕雞哩咕嚕雞哩咕嚕雞哩咕嚕雞哩咕嚕雞哩咕嚕雞哩咕嚕雞哩咕嚕
+						</div>
+						<div class="content_box">
+							<img src="../images/006.jpg" alt="" class="img-responsive">內容五只會說哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈
+						</div>
+						<div class="content_box">
+							<img src="../images/008.jpg" alt="" class="img-responsive">內容六瀑布流他媽的難做
+						</div>
+						<div class="content_box">
+							<img src="../images/011.jpg" alt="" class="img-responsive">內容七相衝到了搞屁喔
+						</div>
+						<div class="content_box">
+							<img src="../images/012.jpg" alt="" class="img-responsive">內容八墊底了啦，所以我要打好長一串所以我要打好長一串所以我要打好長一串所以我要打好長一串所以我要打好長一串所以我要打好長一串所以我要打好長一串所以我要打好長一串所以我要打好長一串所以我要打好長一串所以我要打好長一串所以我要打好長一串所以我要打好長一串
+						</div>
+					</div>
+				</div>
+			</div>
 			</div>
 		</div>
 
-		<div class="row">
-			<div class="col-md-3" style="background-color: powderblue">
-
-				<div align="center">
-					<button class="btn btn-primary btn-lg" data-toggle="modal"
-						data-target="#myModal01">我要許願</button>
-				</div>
-				<BR>
-				<div align="center">
-					<button class="btn btn-primary btn-sm" data-toggle="modal"
-						data-target="#myModal02">什麼是許願池</button>
-				</div>
-
-			</div>
-			<div class="col-md-1"></div>
-			<div class="col-md-8" style="background-color: pink">
-				<div>
-					<c:forEach var="wishpoolVO" items="${list}">
-                    ${wishpoolVO.w_content}
-                    </c:forEach>
-				</div>
-			</div>
-		</div>
-	</div>
 
 	<!-- 我要許願表單 -->
 	<div class="modal fade" id="myModal01" tabindex="-1" role="dialog"

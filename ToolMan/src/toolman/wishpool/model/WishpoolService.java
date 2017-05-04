@@ -2,6 +2,9 @@ package toolman.wishpool.model;
 
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
+
 
 
 public class WishpoolService {
@@ -12,25 +15,19 @@ public class WishpoolService {
 		dao = new WishpoolDAO();
 	}
 
-	public WishpoolVO insert(String w_pro, String w_city,String w_district, byte[] w_image,
-			String w_content) {
-
-		WishpoolVO wishpoolVO = new WishpoolVO();
-
-		wishpoolVO.setW_pro(w_pro);
-		wishpoolVO.setW_city(w_city);
-		wishpoolVO.setW_district(w_district);
-		wishpoolVO.setW_image(w_image);
-		wishpoolVO.setW_city(w_content);
-		dao.insert(wishpoolVO);
-
-		return wishpoolVO;
-	}
-	
-	
 	public void insert(WishpoolVO wishpoolVO) {
 		dao.insert(wishpoolVO);
 	}
+	
+	public List<WishpoolVO> getAll() {
+		return dao.getAll();
+		
+	}
+	
+	public WishpoolVO findByPrimaryKey(Integer w_id) {
+		return dao.findByPrimaryKey(w_id);
+	}
+	
     //新增
 	/*public WishpoolVO updateWishpool(Integer w_id, String c_id, String w_content, byte[] w_image,
 			String w_pro, String s_name, String w_city,String w_district, Date w_date ) {
