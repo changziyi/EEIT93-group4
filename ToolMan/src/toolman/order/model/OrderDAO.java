@@ -18,7 +18,10 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
+
 import hibernate.util.HibernateUtil;
+import toolman.mdata.model.MdataVO;
+import toolman.rdata.model.RdataVO;
 import toolman.work.model.WorkVO;
 
 public class OrderDAO implements OrderDAO_Interface {
@@ -167,7 +170,7 @@ public class OrderDAO implements OrderDAO_Interface {
 		try {
 			session.beginTransaction();
 			Query query = session.createQuery("delete from OrderVO where o_id = ?");
-			query.setParameter(0, o_id);
+			query.setParameter(1, o_id);
 			count = query.executeUpdate();		
 			session.getTransaction().commit();
 		} catch (RuntimeException ex) {
@@ -176,8 +179,7 @@ public class OrderDAO implements OrderDAO_Interface {
 		}
 		return count;
 	}
-	
-	@Override
+@Override
 	public void updateOrderSnameToUnfinishedReviewById(Integer o_id) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Integer count = 0;
@@ -230,6 +232,8 @@ public class OrderDAO implements OrderDAO_Interface {
 		}	
 	}
 
+
+
 	@Override
 	public void updateOrder(OrderVO orderVO) {
 		
@@ -237,7 +241,8 @@ public class OrderDAO implements OrderDAO_Interface {
 			Integer count = 0;
 			
 			try {
-				session.beginTransaction();				
+				session.beginTransaction();
+				
 				session.saveOrUpdate(orderVO);
 				session.getTransaction().commit();
 			} catch (RuntimeException ex) {
@@ -306,8 +311,34 @@ public class OrderDAO implements OrderDAO_Interface {
 		}
 		return querylist;
 	}
+	
+	
 
-
+	
+	public Integer updateOrderRate(Integer m_rating, Integer c_rating,String ca_des, String ma_des,Integer o_id) {
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		Integer count = 0;		
+		try {
+			session.beginTransaction();
+			Query query = session.createQuery("update OrderVO set m_rating = ? , c_rating = ? , ca_des = ? , ma_des = ? where o_id = ?");
+			query.setParameter(0, m_rating);
+			query.setParameter(1, c_rating);
+			query.setParameter(2, ca_des);
+			query.setParameter(3, ma_des);
+			query.setParameter(4, o_id);
+			query.executeUpdate();			
+			session.getTransaction().commit();
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
+		return count;
+	}
+	
+	
+	
+	
+	
 	@Override
 	public List<OrderVO> getAllOrderByCAndDateAndSname(String c_id,Timestamp o_tdate1, Timestamp o_tdate2,String s_name){
 		List<OrderVO> querylist = null;
@@ -328,15 +359,28 @@ public class OrderDAO implements OrderDAO_Interface {
 		}
 		return querylist;
 	}
+	@Override
+	public OrderVO getRate(Integer o_id) {
+		OrderVO orderVO = null;
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try {
+			session.beginTransaction();
+			orderVO = (OrderVO) session.get(OrderVO.class, o_id);
+			session.getTransaction().commit();
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
+		return orderVO;
+	}
 	
-	
-	public static void main(String[] args) {
+	public static void main(String[] args) { 
 		OrderDAO orderdao = new OrderDAO();
 		OrderVO orderVO = new OrderVO();
 		//insert tested ok
-	//		orderVO.setB_name("木工人");
-	//		orderVO.setM_id(1001);
-	//		orderVO.setC_id("testcustomer");
+//			orderVO.setB_name("木工人");
+//			orderVO.setM_id(1001);
+//		orderVO.setC_id("testcustomer");
 			
 	//		java.sql.Date date = new java.sql.Date(2017/05/01);
 			
@@ -384,7 +428,7 @@ public class OrderDAO implements OrderDAO_Interface {
 //			Timestamp o_bdatetest2 = new Timestamp(calobj2.getTimeInMillis());
 //			orderdao.getOrderByDate(o_bdatetest,o_bdatetest2);
 //		
-//		//getOrderByM
+		//getOrderByM
 //		orderdao.getOrderByM(1001);
 //		
 //		//getAllOrderByMAndDate tested ok
@@ -432,32 +476,36 @@ public class OrderDAO implements OrderDAO_Interface {
 //		
 //		//updateOrder
 
-			 Calendar calobj1 = Calendar.getInstance();
-			 Timestamp o_edatetest = new Timestamp(calobj1.getTimeInMillis());
-			 orderVO.setO_edate(o_edatetest); 
-			 orderVO.setS_name("o_finished"); 
-			 orderVO.setM_onote("none");
-			 orderVO.setC_onote("none"); 
-			 orderVO.setSa_onote("none"); 
-			 orderVO.setM_rating(5);  
-			 orderVO.setC_rating(4);  
-			 orderVO.setCa_des("good"); 
-			 orderVO.setMa_des("great"); 
-			 orderVO.setO_id(3001);
-			 orderdao.updateOrder(orderVO);
+//			 Calendar calobj1 = Calendar.getInstance();
+//			 Timestamp o_edatetest = new Timestamp(calobj1.getTimeInMillis());
+//			 orderVO.setO_edate(o_edatetest); 
+//			 orderVO.setS_name("o_finished"); 
+//			 orderVO.setM_onote("none");
+//			 orderVO.setC_onote("none"); 
+//			 orderVO.setSa_onote("none"); 
+//			 orderVO.setM_rating(5);  
+//			 orderVO.setC_rating(4);  
+//			 orderVO.setCa_des("good"); 
+//			 orderVO.setMa_des("great"); 
+//			 orderVO.setO_id(3006);
+//			 orderdao.updateOrder(orderVO);
+//		
+		
+	
+		OrderVO orderVO2 =  orderdao.getRate(3006);
+//		
+//		
+		System.out.print(orderVO2.getM_rating() + ",");
+		System.out.print(orderVO2.getC_rating() + ",");
+		System.out.print(orderVO2.getCa_des() + ",");
+		System.out.print(orderVO2.getMa_des() + ",");
+		
+
 		}
 
 
-
-
-
-
-
-
-
-
-
-
+	
+	
 
 	}
 

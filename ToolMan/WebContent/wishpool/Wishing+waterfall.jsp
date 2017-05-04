@@ -27,6 +27,7 @@
 	type="text/javascript"></script>
 <script type="text/javascript"
 	src="http://masonry.desandro.com/jquery.masonry.min.js"></script>
+<script src="${pageContext.servletContext.contextPath}/js/jquery.twzipcode.min.js"></script>
 
 <style>
 .content_box {
@@ -36,6 +37,9 @@
 	margin: 10px 10px 10px 0;
 	overflow: hidden;
 	width: 327px;
+}
+.zipcode {
+	display: none;
 }
 </style>
 
@@ -48,6 +52,21 @@
 				animate : true
 			});
 		});
+		
+		
+		var city = $('input[name="w_city"]');
+		var district = $('input[name="w_district"]');
+		$('#twzipcode').twzipcode({
+			'css': ['county', 'district', 'zipcode'],
+		    'onCountySelect': function () {
+		    	city.attr("value", this.value);
+		    },
+			'onDistrictSelect': function () {
+				district.attr("value", this.value);
+			}
+		});
+		
+		
 	});
 </script>
 
@@ -137,29 +156,30 @@
 								</td>
 							</tr>
 							<tr>
-								<td>位在地址： <select name="w_city">
-										<option>台北市</option>
-										<option>桃園市</option>
-										<option>新竹市</option>
-										<option>苗栗市</option>
-										<option>台中市</option>
-										<option>彰化市</option>
-										<option>雲林市</option>
-										<option>嘉義市</option>
-										<option>台南市</option>
-										<option>高雄市</option>
-								</select> <select name="w_district">
-										<option>大安區</option>
-										<option>北投區</option>
-										<option>士林區</option>
-										<option>中山區</option>
-										<option>龍井區</option>
-										<option>沙鹿區</option>
-										<option>柳營區</option>
-										<option>六甲區</option>
-										<option>鳳山區</option>
-										<option>美濃區</option>
-								</select>
+								<td id="twzipcode">位在地址：
+<!-- 											 <select name="w_city"> -->
+<!-- 										<option>台北市</option> -->
+<!-- 										<option>桃園市</option> -->
+<!-- 										<option>新竹市</option> -->
+<!-- 										<option>苗栗市</option> -->
+<!-- 										<option>台中市</option> -->
+<!-- 										<option>彰化市</option> -->
+<!-- 										<option>雲林市</option> -->
+<!-- 										<option>嘉義市</option> -->
+<!-- 										<option>台南市</option> -->
+<!-- 										<option>高雄市</option> -->
+<!-- 								</select> <select name="w_district"> -->
+<!-- 										<option>大安區</option> -->
+<!-- 										<option>北投區</option> -->
+<!-- 										<option>士林區</option> -->
+<!-- 										<option>中山區</option> -->
+<!-- 										<option>龍井區</option> -->
+<!-- 										<option>沙鹿區</option> -->
+<!-- 										<option>柳營區</option> -->
+<!-- 										<option>六甲區</option> -->
+<!-- 										<option>鳳山區</option> -->
+<!-- 										<option>美濃區</option> -->
+<!-- 								</select> -->
 								</td>
 							</tr>
 							<tr>
@@ -176,6 +196,8 @@
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
 						<button type="submit" class="btn btn-primary">送出</button>
+						<input type="hidden" name="w_city" >
+						<input type="hidden" name="w_district" >
 					</div>
 				</div>
 			</form>
