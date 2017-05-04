@@ -23,15 +23,15 @@ public class WishpoolDAO implements WishpoolDAO_interface {
 	}
 
 	private static final String INSERT_STMT =
-		      "INSERT INTO wishpool (c_id,w_content,W_image,w_pro,s_name,w_city,w_district,w_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+		      "INSERT INTO wishpool (c_id,w_content,w_image,w_pro,s_name,w_city,w_district,w_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 	private static final String GET_ALL_STMT =
-		      "SELECT w_id,c_id,w_con,w_image,w_pro,s_name,w_city,w_district,w_date FROM wishpool order by w_id";
+		      "SELECT w_id,c_id,w_content,w_image,w_pro,s_name,w_city,w_district,w_date FROM wishpool order by w_id";
 	private static final String GET_ONE_STMT =
-		      "SELECT w_id,c_id,w_con,w_image,w_pro,s_name,w_city,w_district,w_date FROM wishpool where w_id = ?";
+		      "SELECT w_id,c_id,w_content,w_image,w_pro,s_name,w_city,w_district,w_date FROM wishpool where w_id = ?";
 	private static final String DELETE =
 		      "DELETE FROM wishpool where w_id = ?";
 	private static final String UPDATE =
-		      "UPDATE wishpool set c_id=?, w_con=?, w_image=?, w_pro=?, s_name=?, w_city=?, w_district=?, w_date=? where w_id = ?";
+		      "UPDATE wishpool set c_id=?, w_content=?, w_image=?, w_pro=?, s_name=?, w_city=?, w_district=?, w_date=? where w_id = ?";
 
 	@Override
 	public void insert(WishpoolVO wishpoolVO) {
@@ -51,16 +51,16 @@ public class WishpoolDAO implements WishpoolDAO_interface {
 		    pstmt.setBytes(3,wishpoolVO.getW_image());
 		  //ByteArrayInputStream bis = new ByteArrayInputStream(bsource);
 		  //pstmt.setBinaryStream(3,bis);
+		  // 上傳圖片的另一種方法
 			pstmt.setString(4, wishpoolVO.getW_pro());
 			pstmt.setString(5, wishpoolVO.getS_name());
 			pstmt.setString(6, wishpoolVO.getW_city());
 			pstmt.setString(7, wishpoolVO.getW_district());
 			pstmt.setTimestamp(8, wishpoolVO.getW_date());
 			
-
 			pstmt.executeUpdate();
 
-			// Handle any SQL errors
+			// Handle any driver errors 捕捉資料庫錯誤
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
@@ -187,7 +187,6 @@ public class WishpoolDAO implements WishpoolDAO_interface {
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				// empVo �]�٬� Domain objects
 				wishpoolVO = new WishpoolVO();
 				wishpoolVO.setW_id(rs.getInt("W_id"));
 				wishpoolVO.setC_id(rs.getString("C_id"));
@@ -249,8 +248,7 @@ public class WishpoolDAO implements WishpoolDAO_interface {
 			pstmt = con.prepareStatement(GET_ALL_STMT);
 			rs = pstmt.executeQuery();
 
-			while (rs.next()) {
-				// empVO �]�٬� Domain objects				
+			while (rs.next()) {			
 				wishpoolVO = new WishpoolVO();
 				wishpoolVO.setW_id(rs.getInt("W_id"));
 				wishpoolVO.setC_id(rs.getString("C_id"));
@@ -296,7 +294,7 @@ public class WishpoolDAO implements WishpoolDAO_interface {
 		return list;
 	}
 	
-	public static void main(String  args[]){
+	/*public static void main(String  args[]){
 		
 		WishpoolDAO dao = new WishpoolDAO();
 		
@@ -308,7 +306,6 @@ public class WishpoolDAO implements WishpoolDAO_interface {
 		wishpoolVO1.setW_pro("屋頂");
 		wishpoolVO1.setS_name("上傳成功");
 		dao.insert(wishpoolVO1);
-		
 		
 	
 	List<WishpoolVO> list = dao.getAll();
@@ -323,5 +320,7 @@ public class WishpoolDAO implements WishpoolDAO_interface {
 		System.out.print(allwish.getW_date() + ",");
 	 }
 	}
+	
+	*/
 
 }

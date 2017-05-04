@@ -27,6 +27,15 @@
 		<servlet-name>Test_DataSource</servlet-name>
 		<url-pattern>/Test_DataSource</url-pattern>
 	</servlet-mapping>
-	
 
+ <servlet>
+    <servlet-name>OrderController</servlet-name>
+    <servlet-class>toolman.order.controller.OrderController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>OrderController</servlet-name>
+    <url-pattern>/toolman/order/controller/OrderController.do</url-pattern>
+  </servlet-mapping>
+  
+  
 </web-app>
