@@ -374,7 +374,7 @@ public class OrderDAO implements OrderDAO_Interface {
 		return orderVO;
 	}
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) { 
 		OrderDAO orderdao = new OrderDAO();
 		OrderVO orderVO = new OrderVO();
 		//insert tested ok
