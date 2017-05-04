@@ -68,7 +68,7 @@ public class OrderRecommendation extends HttpServlet {
 		System.out.println("after dispatched");
 	}
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// benny intend to control the priority of do method
+		// benny intend to control the priority of method
 		if(imgexist==false){
 		doPost(request, response);
 		}
