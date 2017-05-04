@@ -27,16 +27,6 @@
 		<servlet-name>Test_DataSource</servlet-name>
 		<url-pattern>/Test_DataSource</url-pattern>
 	</servlet-mapping>
-<!-- servlet/jsp(I)p.65 -->
-	<servlet>
-		<servlet-name>CadataServlet</servlet-name>
-		<servlet-class>com.Cadata.controller.CadataServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>CadataServlet</servlet-name>
-		<url-pattern>/cdata/Cdata.do</url-pattern>
-	</servlet-mapping>
-
 
  <servlet>
     <servlet-name>OrderController</servlet-name>

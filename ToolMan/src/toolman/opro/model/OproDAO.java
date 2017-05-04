@@ -17,7 +17,6 @@ import hibernate.util.HibernateUtil;
 import toolman.order.model.OrderVO;
 import toolman.work.model.WorkVO;
 
-
 public class OproDAO implements OproDAO_Interface {
 
 	@Override

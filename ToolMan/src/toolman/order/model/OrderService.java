@@ -68,14 +68,39 @@ public class OrderService {
     public void updateOrder(OrderVO orderVO){
     	dao.updateOrder(orderVO);
     }
+    
+    public void updateOrderSnameToFishedById(){
+	    	dao = new OrderDAO();
+			List<OrderVO> orders = dao.getAllOrder();
+			for(OrderVO orderVO2 : orders) {
+			if(orderVO2.getM_rating()!=null && orderVO2.getC_rating()!=null){
+	        dao = new OrderDAO();  
+	    	dao.updateOrderSnameToFishedById(orderVO2.getO_id());
+			}
+		 }
+    }
+    public void updateOrderSnameToUnfinishedReviewById(){
+    	dao = new OrderDAO();
+		List<OrderVO> orders = dao.getAllOrder();
+		for(OrderVO orderVO2 : orders) {
+			if((orderVO2.getM_rating()==null&orderVO2.getC_rating()!=null)||(orderVO2.getM_rating()!=null&orderVO2.getC_rating()==null)){
+		        dao = new OrderDAO();  
+		    	dao.updateOrderSnameToUnfinishedReviewById(orderVO2.getO_id());
+		    	}
+	 }
+}
     public void deleteExpiredOrder(){
-       
+
             //examine all orders and delete expired orders
-        	OrderDAO orderdao = new OrderDAO();
-            List<OrderVO> orders = orderdao.getAllOrder();
+    		dao = new OrderDAO();
+    		List<OrderVO> orders = dao.getAllOrder();
             for(OrderVO orderVO2 : orders) {
-                if(System.currentTimeMillis()- orderVO2.getO_tdate().getTime() >= orderVO2.getReq_exp()) {
-                	deleteById(orderVO2.getO_id());
+            	dao = new OrderDAO();           	
+             	Long currenttime = System.currentTimeMillis();
+            	Long orderdate = orderVO2.getO_tdate().getTime();
+            	Long exptime = orderVO2.getReq_exp();
+                if(orderdate-currenttime  >= exptime ) {
+                	dao.updateSnameAsDeletedById(orderVO2.getO_id());
                 }
             }
         }

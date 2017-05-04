@@ -1,4 +1,4 @@
-package toolman.order.controller;
+//package toolman.order.controller;
 //
 //import java.util.List;
 //import java.util.Timer;
@@ -19,27 +19,28 @@ package toolman.order.controller;
 //@WebListener
 //public class OrderListener implements ServletContextListener{
 //	private  java.util.Timer  timer  =  null;  
-//
+//	OrderService orderService = new OrderService();
 //    public OrderListener() {
 //
 //    }
 //
 //    public void contextInitialized(ServletContextEvent event)  { 
 //          
-//    	 Timer timer = null;
-///   	 OrderService orderService = new OrderService();
+//    	 
 //	        timer = new Timer();
 //	        timer.schedule(new TimerTask(){
 //	            public void run(){//inner class
 //	            	orderService.deleteExpiredOrder();
+//	            	orderService.updateOrderSnameToUnfinishedReviewById();
+//	            	orderService.updateOrderSnameToFishedById();
 //	            }
 //	        }, 0, 1000l*5); // execute the task every 5 seconds for test
 //    }// execute the task every 2 hours
 //         
 //   
 //    public void contextDestroyed(ServletContextEvent event)  { 
-////    	if(timer!=null) timer.cancel();      
-////	       event.getServletContext().log("定时器销毁");     
+//    	if(timer!=null) timer.cancel();      
+//	       event.getServletContext().log("定时器销毁");     
 //    	}
 //   
 //  }

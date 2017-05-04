@@ -12,8 +12,6 @@
         
 
         <property name="b_name" column="b_name" />
-        <property name="m_id" column="m_id" />
-        <property name="c_id" column="c_id" />
         <property name="o_bdate" column="o_bdate" />
         <property name="o_edate" column="o_edate" />
         <property name="o_des" column="o_des" />
@@ -38,13 +36,13 @@
 			<one-to-many class="toolman.opro.model.OproVO" />
 		</set>
 
-<!--         <many-to-one name="m_id" class="toolman.mdata.model.MdataVO" lazy="false"> -->
-<!--             <column name="m_id" /> -->
-<!--         </many-to-one> -->
+        <many-to-one name="m_id" class="toolman.mdata.model.MdataVO" lazy="false">
+            <column name="m_id" />
+        </many-to-one>
         
-<!--         <many-to-one name="c_id" class="toolman.cdata.model.CdataVO" lazy="false"> -->
-<!--             <column name="c_id" /> -->
-<!--         </many-to-one> -->
+        <many-to-one name="c_id" class="toolman.cdata.model.CdataVO" lazy="false">
+            <column name="c_id" />
+        </many-to-one>
     </class>
 </hibernate-mapping>
 

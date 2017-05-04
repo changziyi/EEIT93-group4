@@ -91,9 +91,14 @@ public class MdataService {
 	public List<MdataVO> getCity(String m_city) {
 		return dao.getCity(m_city);
 	}
-
+	
 	public List<MdataVO> SearchByCityAndMpro(String m_city, String m_pro) {
 		return dao.SearchByCityAndMpro(m_city, m_pro);
+	}
+	// Benny's recommendation function
+	public List<MdataVO> getCityAndDistrictAndMPro(String m_city, String m_district, String m_pro){	
+		List<MdataVO> mdatas = dao.getCityAndDistrictAndMPro(m_city, m_district, m_pro);
+		return mdatas;
 	}
 	
 	public String getAllJson() {

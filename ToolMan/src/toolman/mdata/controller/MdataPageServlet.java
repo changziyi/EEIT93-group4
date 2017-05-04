@@ -25,12 +25,14 @@ public class MdataPageServlet extends HttpServlet {
 		
 		MdataService mdataSvc = new MdataService();
 		MdataVO mdataVO = mdataSvc.findByPrimaryKey(m_id);
-		System.out.println("get: " + mdataVO.getM_id());
 		
 		HttpSession session = request.getSession();
 		session.setAttribute("mdataVO", mdataVO);
-		RequestDispatcher successView = request.getRequestDispatcher("/master/MasterPage.jsp");
-		successView.forward(request, response);
+		MdataVO m = (MdataVO)session.getAttribute("mdataVO");
+		System.out.println("sessionM_id: " + m.getM_id());
+		response.sendRedirect("MasterPage.jsp");
+//		RequestDispatcher successView = request.getRequestDispatcher("/master/MasterPage.jsp");
+//		successView.forward(request, response);
 		return;
 		
 	}
@@ -47,6 +49,7 @@ public class MdataPageServlet extends HttpServlet {
 		if ("MasterPage_Q".equals(action)) {
 			
 			String d_des = request.getParameter("d_des");
+			System.out.println("d_des: " + d_des);
 			Timestamp d_date = new Timestamp(System.currentTimeMillis());
 			
 			DiscussionVO discussionVO = new DiscussionVO();
@@ -58,10 +61,10 @@ public class MdataPageServlet extends HttpServlet {
 			DiscussionService discussionSvc = new DiscussionService();
 			discussionSvc.insert(discussionVO);
 			
-			response.sendRedirect("masterPage.do?m_id=" + mdataVO.getM_id());
+//			response.sendRedirect("masterPage.do?m_id=" + mdataVO.getM_id());
 //			RequestDispatcher successView = request.getRequestDispatcher("/master/MasterPage.jsp");
 //			successView.forward(request, response);
-			return;
+//			return;
 			
 		}//MasterPage_Q
 		

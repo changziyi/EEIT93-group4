@@ -41,21 +41,25 @@
 	<form name="orderform" action="OrderController.do">
 		<div>
 		<label>服務公司名稱:</label>
-<%-- 	<span>${param.b_name}</span> --%>
-		<span>TOOL KING</span> 
+		<span>${mdataVO.b_name}</span>
+<!--  for test <span>TOOL KING</span>  -->
 		</div>
 		<label>服務類別</label>
 		<div id="pro" name="opro_id">
-		<!-- parameters come directly from servlet , so the Ajax may not be needed-->	
-<%-- 		<c:forEach var="oproset" varStatus="stat" items="${mproset}"> --%>
-		<!-- retrieve Collection object  mproset  from session.setAttribute("mproset",mproset)-->								
-<%-- 				<input type="checkbox" value=${oproset.m_proid} name="o_proid"/>${oproset.m_pro}	 --%>		
-<%-- 		</c:forEach> --%>
-		<div>
-			<c:forEach var="i" begin="1" end="5">
-			<input type="checkbox" value="oprotest" name="o_proid"/>oprotest1
-			</c:forEach>
-		</div><span value=${param.erroropro}></span>
+		
+<!-- 	parameters come directly from servlet , so the Ajax may not be needed-->	
+		<c:forEach var="oproset" varStatus="stat" items="${mdataVO.mpros}">
+		
+<!-- 	retrieve Collection object  mproset  from session.setAttribute("mproset",mproset)								 -->
+				<input type="checkbox" value=${oproset.m_proid} name="o_proid"/>${oproset.m_pro}			
+		</c:forEach>
+
+<!-- 		for test -->
+<!-- 		<div> -->
+<%-- 			<c:forEach var="i" begin="1" end="5"> --%>
+<!-- 			<input type="checkbox" value="oprotest" name="o_proid"/>oprotest1 -->
+<%-- 			</c:forEach> --%>
+<!-- 		</div><span value=${param.erroropro}></span> -->
 		
 		<div id="datecalendar">
 			<label>預約日期</label>
