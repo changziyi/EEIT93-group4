@@ -9,7 +9,7 @@ import org.json.simple.JSONValue;
 
 public class DiscussionService {
 	
-	DiscussionDAO_interface dao = null;
+	DiscussionDAO dao = null;
 	
 	public DiscussionService() {
 		dao = new DiscussionDAO();
@@ -33,9 +33,10 @@ public class DiscussionService {
 		for (DiscussionVO aDiscussions : discussions) {
 			Map jContent = new HashMap();
 			jContent.put("mid", aDiscussions.getMdataVO().getM_id());
+			jContent.put("cid", aDiscussions.getC_id());
 			jContent.put("des", aDiscussions.getD_des());
 			jContent.put("reply", aDiscussions.getD_reply());
-			jContent.put("date", aDiscussions.getD_date());
+			jContent.put("date", aDiscussions.getD_date().toString());
 			jList.add(jContent);
 		}
 		return JSONValue.toJSONString(jList);

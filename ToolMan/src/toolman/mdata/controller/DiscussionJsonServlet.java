@@ -17,13 +17,14 @@ public class DiscussionJsonServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		Integer master = new Integer(request.getParameter("master"));
+		System.out.println("master: " + master);
 		
 		response.setContentType("text/html;charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		
-		DiscussionService discussionService = new DiscussionService();
+		DiscussionService discussionSvc = new DiscussionService();
 		
-		out.print(discussionService.getByMidJson(master));
+		out.print(discussionSvc.getByMidJson(master));
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

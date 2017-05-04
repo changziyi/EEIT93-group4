@@ -62,15 +62,12 @@
     
 		</div>
 		<div id="menu2" class="tab-pane fade">
-			<h3>Menu 2</h3>
-			<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
-					
 			<div>
-				<c:forEach var="aDiscussions" items="${mdataVO.discussions}"><br />Q: ${aDiscussions.d_des}
-					<c:if test="${not empty aDiscussions.d_reply}"><br />A: ${aDiscussions.d_reply}
-					</c:if>
-					<br />
-				</c:forEach>
+<%-- 				<c:forEach var="aDiscussions" items="${mdataVO.discussions}"><br />Q: ${aDiscussions.d_des} --%>
+<%-- 					<c:if test="${not empty aDiscussions.d_reply}"><br />A: ${aDiscussions.d_reply} --%>
+<%-- 					</c:if> --%>
+<!-- 					<br /> -->
+<%-- 				</c:forEach> --%>
 				<div>
 					<div id="show"></div>
 					<p>提問</p>
@@ -103,20 +100,38 @@
 		$(function() {
 			
 			//點選問與答區塊，load內容
+			var docFragment = $(document.createDocumentFragment());
+			var show = $('#show');
 			$('a[href="#menu2"]').one('click', function() {
-				var docFragment = $(document.createDocumentFragment());
-				var myDiv = $('#show');
-				$.getJSON('DiscussionJsonServlet',{master:1002},function(datas){
-					$.each(datas,function(idx,park){
-						var title = park.ParkName + "-"  + park.Name;
-						var img = $("<img />").attr('src',park.Image).addClass('col-md-4 img-responsive img-thumbnail');
-						var a = $("<a></a>").attr({'href':park.Image,'data-lightbox':'park','data-title':title}).append(img);
-						docFragment.append(a);
+				$.getJSON('DiscussionJsonServlet',{'master':'${mdataVO.m_id}'},function(data){
+					$.each(data,function(i,dis){
+						var cid = $('<p></p>').text(dis.cid + '　' + dis.date);
+// 						var date = $('<span></span>').text(dis.date);
+						var des = $('<p></p>').text(dis.des);
+						var reply = $('<p></p>').text(dis.reply);
+						var row = $('<div></div>').append([cid,des,reply]);
+						var onediv = $('<div></div>').append(row);
+						docFragment.append(onediv);
 					});
-					myDiv.append(docFragment);
+					show.append(docFragment);
 				})
 			});
 			
+			$('input[name="question"]').on('click', function() {
+				$.post("DiscussionJsonServlet", {"master":"${mdataVO.m_id}"}, function(datas) {
+					$.getJSON('DiscussionJsonServlet',{'master':'${mdataVO.m_id}'},function(data){
+						$.each(data,function(i,dis){
+							$('#show').empty();
+							var cid = $('<p></p>').text(dis.cid + '　' + dis.date);
+		// 					var date = $('<span></span>').text(dis.date);
+							var des = $('<p></p>').text(dis.des);
+							var reply = $('<p></p>').text(dis.reply);
+							var row = $('<div></div>').append([cid,des,reply]);
+							var onediv = $('<div></div>').append(row);
+							$('#show').append([cid,des,reply]);
+						});
+				}
+			)});
 			
 // 			$('input[name="question"]').on('click', function() {
 //				$.post("FirstServlet", {"name":"Mary", "age":"25"}, function(data) {
