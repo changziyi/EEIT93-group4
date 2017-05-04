@@ -72,7 +72,7 @@
 					<div id="show"></div>
 					<p>提問</p>
 					<form method="post" action="masterPage.do">
-						<textarea name="d_des"></textarea><br />
+						<textarea name="d_des" id="d_des"></textarea><br />
 						<input type="button" name="question" value="送出"><input type="reset" value="取消">
 <!-- 						<input type="submit" value="送出"><input type="reset" value="取消"> -->
 <!-- 						<input type="hidden" name="action" value="MasterPage_Q"> -->
@@ -99,7 +99,7 @@
 	
 		$(function() {
 			
-			//點選問與答區塊，load內容
+			//點選問與答區塊，load問與答內容
 			var docFragment = $(document.createDocumentFragment());
 			var show = $('#show');
 			$('a[href="#menu2"]').one('click', function() {
@@ -117,27 +117,25 @@
 				})
 			});
 			
+			//使用者提問，動態更新問與答區塊
 			$('input[name="question"]').on('click', function() {
-				$.post("DiscussionJsonServlet", {"master":"${mdataVO.m_id}"}, function(datas) {
+				$.post("masterPage.do", {"m_id":"${mdataVO.m_id}",'action':'MasterPage_Q','d_des':$('#d_des').val()}, function(datas) {
+					$('#d_des').val(null);
 					$.getJSON('DiscussionJsonServlet',{'master':'${mdataVO.m_id}'},function(data){
+						$('#show').empty();
 						$.each(data,function(i,dis){
-							$('#show').empty();
 							var cid = $('<p></p>').text(dis.cid + '　' + dis.date);
-		// 					var date = $('<span></span>').text(dis.date);
+// 							var date = $('<span></span>').text(dis.date);
 							var des = $('<p></p>').text(dis.des);
 							var reply = $('<p></p>').text(dis.reply);
 							var row = $('<div></div>').append([cid,des,reply]);
 							var onediv = $('<div></div>').append(row);
 							$('#show').append([cid,des,reply]);
 						});
-				}
-			)});
+					});
+				});
+			});
 			
-// 			$('input[name="question"]').on('click', function() {
-//				$.post("FirstServlet", {"name":"Mary", "age":"25"}, function(data) {
-//					$('#show').append('<h2>' + data + '</h2>');
-//				}
-//			)});
 			
 			//上傳圖片限制三張
 			upload.on('change', function(event) {
@@ -233,8 +231,8 @@
   
 	
 </div> <!--container-->
-</body>
 <script>
 $("#reservemaster").on("click",function(){window.location='${pageContext.servletContext.contextPath}/toolman.order/NewOrder.jsp'});
 </script>
+</body>
 </html>
