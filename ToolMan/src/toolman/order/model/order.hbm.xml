@@ -31,7 +31,7 @@
 
 		<set name="opros" table="opro" lazy="false" cascade="all"  inverse="true"  order-by="o_proid asc">			
 			<key>
-				<column name="o_proid" />
+				<column name="o_id" />
 			</key>
 			<one-to-many class="toolman.opro.model.OproVO" />
 		</set>
