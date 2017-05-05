@@ -89,7 +89,7 @@ public class OproDAO implements OproDAO_Interface {
 		OproVO oproVO = new OproVO();
 		oproVO.setO_pro("木工");
 //		oproVO.setM_proid(10001);//合併師傅專業後註解
-		oproVO.setOrderVO(orderVO);
+		oproVO.setO_id(orderVO);
 		oproVOset.add(oproVO);	
 		dao.insertOpro(oproVOset);
 		

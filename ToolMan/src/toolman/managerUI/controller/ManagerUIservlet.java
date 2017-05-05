@@ -26,23 +26,19 @@ import toolman.order.model.OrderVO;
 /**
  * Servlet implementation class managerUIservlet
  */
-@WebServlet("/toolman.managerUI/managerUIservlet.do")
-public class managerUIservlet extends HttpServlet {
+@WebServlet("/toolman.managerUI.controller/ManagerUIservlet.do")
+public class ManagerUIservlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public managerUIservlet() {
+    public ManagerUIservlet() {
         super();
 
     }
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doPost(request, response);
-	}
-
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String action = request.getParameter("c");
+		
+		String action = request.getParameter("action");
 		
 		//get m
 		if("m".equals(action)){
@@ -103,7 +99,7 @@ public class managerUIservlet extends HttpServlet {
 			for(OproVO oproVO : opros){
 				opro = oproVO.getO_pro();			
 			}
-			System.out.println(opro);
+//			System.out.println(opro);
 			String o_location = orderVO.getO_location();
 			String s_name = orderVO.getS_name();
 			Integer c_rating = orderVO.getC_rating();
@@ -154,6 +150,11 @@ public class managerUIservlet extends HttpServlet {
 			
 			
 		}
+
 	}
+		protected void doPost(HttpServletRequest requset, HttpServletResponse response) throws ServletException, IOException {
+			doGet(requset, response);
+		}
+	
 
 }

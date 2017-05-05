@@ -38,7 +38,7 @@
 			
 				<ul class="nav nav-tabs nav-justified" style="width:800px; margin:auto;" >
 				
-					<li data-id="m" data-toggle="tab" role="presentation" class="active, " id="masterlist"><a href="#"><div>師傅列表</div></a></li>
+					<li data-id="m" data-toggle="tab" role="presentation" class="active" id="masterlist"><a href="#"><div>師傅列表</div></a></li>
 					
 					<li data-id="c" data-toggle="tab" role="presentation" id="customerlist" ><a href="#" ><div >消費者列表</div></a></li>
 					
@@ -72,10 +72,9 @@
 
 <script>
 
-	$(function(){
+	$(function(){		
 		
-		
-	   loadProduct(id);	
+	   loadProduct("m");	
 	   //讀取xml資料
 // 	   $.ajax({
 // 		   'url':'XMLServlet',
@@ -93,23 +92,23 @@
 // 		 	                            .addClass('list-group-item')
 // 		 	                            .attr('data-id',$(this).children('CategoryID').text());
 // 		 	  docFrag.append(eleLi);
-// 		   })
+// 		   });
 // 		   myUl.append(docFrag);
-	   })
+// 	   });
 	   
 	   $('#navigator>ul>li').on('click','li',function(){	
 		   var id = $(this).data('id');
 		   loadProduct(id);
 // 		   $('ul.list-group>li').removeClass('active');
 // 		   $('ul.list-group>li[data-id="' + id + '"]').addClass('active');
-	   })
+	   });
 	   
 	   
 	   function loadProduct(id){
-		   $.getJSON('managerUIservlet',{'action':id}, function(datas){
+		   $.getJSON('${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIservlet.do',{'action':id}, function(datas){
 			   var tb = $('#eventlist>tbody');
 			   var docFrag = $(document.createDocumentFragment());
-			   tb.empty()
+			   tb.empty();
 			   $.each(datas,function(idx,thedata){
 				   //onsole.log(product.ProductName);
 				   var cell1 = $('<td></td>').text(thedata.c_jdate);
@@ -123,9 +122,9 @@
 				   docFrag.append(row);
 			   });
 			   tb.append(docFrag);
-		   })	   
+		   });   
 	   }
-	})
+	}); 
 
 </script>
 
