@@ -15,11 +15,25 @@
 				<input type="text" class="form-control" id="txtSearch"
 				name="keyword" autocomplete="off">
 				<input type="button" value="Load" id="buttonLoad">
-
+				<input type="hidden" name="m_city" value="${mdataVO.m_city}" >
 
 			</div>
 		</form>
 		
+			位在地址： 
+				<select name="m_city">
+					<option>台北市</option>
+					<option>桃園市</option>
+					<option>新竹市</option>
+					<option>苗栗市</option>
+					<option>台中市</option>
+					<option>彰化市</option>
+					<option>雲林市</option>
+					<option>嘉義市</option>
+					<option>台南市</option>
+					<option>高雄市</option>
+				</select>
+	
 		<div id="div1"></div>	
 	</div>
 	
@@ -42,7 +56,7 @@
 					if(xhr.status==200){
 						var datas = JSON.parse(xhr.responseText);
 						show.style.display = "block";
-							
+							console.log(datas);
 						var eleDiv = document.createElement("div");
 						eleDiv.className = "list-group";
 						
@@ -52,7 +66,7 @@
 							}
 
 							for (var j = 0, max = datas.length; j < max; j++) {
-									var txtBtn = document.createTextNode(datas[j]);
+									var txtBtn = document.createTextNode(datas[j].B_name);
 									var eleBtn = document.createElement("button");
 										eleBtn.className = "list-group-item";
 										eleBtn.setAttribute("type", "button");
@@ -75,12 +89,12 @@
 						}
 				  })
 			}
-			xhr.open('get','search?keyword='+txt.value);
+			xhr.open('get','master/MdataJsonServlet?city='+txt.value+'&input='+txt.value);
 			xhr.send();
 		}
 		
 		function showMaster(){
-			$.getJSON('search',{'search':txt.value},function(list){
+			$.getJSON('MdataJsonServlet',{'MdataJsonServlet':txt.value},function(list){
 		console.log(123)
 	
 		for(var j=0,max=list.length; j<max;j++){
@@ -110,60 +124,15 @@
 			}
 		}
  
-// 		function callback(){
-
-// 		if (xhr.readyState == 4){
-//  		if(xhr.status == 200){
-//  			//要如何接收Server端回傳的XML資料
-// 			var doc = xhr.responseXML;
-
-//  			//讀取XML中的資料
- 			
-// 			var sections = doc.getElementsByTagName("Section");
-
-// 			while(myDiv.hasChildNodes()){
-// 			myDiv.removeChild(myDiv.lastChild);
-// 			}
-// 			for(var i=0,max=sections.length;i<max;i++){
-// 					var title =   sections[i].getElementsByTagName("stitle")[0].firstChild.nodeValue;
-// 					var body =    sections[i].getElementsByTagName("xbody")[0].firstChild.nodeValue;
-// 					var desc =    sections[i].getElementsByTagName("img")[0].getAttribute("description");
-//  					var imgPath = sections[i].getElementsByTagName("img")[0].firstChild.nodeValue;
-// 				    var eleImg =  document.createElement("img");
-				    
-// 				    eleImg.setAttribute("src",imgPath);
-// 				    eleImg.setAttribute("title",desc);
-// 				    eleImg.className = "img-thumbnail"
-				    
-// 	 				var eleDiv1 = document.createElement("div");
-// 	 				eleDiv1.className = "col-md-4";
-// 	 				eleDiv1.appendChild(eleImg);
-	 				
-// 				    var eleH3 = document.createElement("h3");
-// 				    var txtH3 = document.createTextNode(title);
-// 				    eleH3.appendChild(txtH3);
-				    
-// 				    var eleP = document.createElement("p");
-// 				    var txtP = document.createTextNode(body.substr(0 , 150) +"...");
-// 				    eleP.appendChild(txtP);
-				    
-// 				    var eleDiv2 = document.createElement("div");
-// 				    eleDiv2.className = "col-md-8";
-// 				    eleDiv2.appendChild(eleH3);
-// 				    eleDiv2.appendChild(eleP);
-				    
-				    					    
-// 				    var eleRow = document.createElement("div");
-// 				    eleRow.className = "row";
-// 				    eleRow.appendChild(eleDiv1);
-// 				    eleRow.appendChild(eleDiv2);
-// 				    myDiv.appendChild(eleRow);
-// 					};	
-// 			}else{
-//  			alert(xhr.status + ":" + xhr.statusText);
-// 				}
-// 			}
-// 		}
+		var city = $('input[name="m_city"]');
+		$('#twzipcode').twzipcode({
+			'css': ['county', 'district', 'zipcode'],
+		    'countySel'   : '${mdataVO.m_city}',
+	
+		    'onCountySelect': function () {
+		    	city.attr("value", this.value);
+		    }
+		
 	</script>
 </body>
 </html>

@@ -3,6 +3,7 @@ package toolman.cdata.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import org.hibernate.Criteria;
 import org.hibernate.Query;
@@ -10,6 +11,7 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
 import hibernate.util.HibernateUtil;
+import toolman.order.model.OrderVO;
 
 
 public class CdataDAO implements CdataDAO_interface{
@@ -96,17 +98,63 @@ public class CdataDAO implements CdataDAO_interface{
 		}
 		return list;
 	}
+	//cdata_des
+	public CdataVO cdata_des(String c_id) {
+		CdataVO cdataVO = null;
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try {
+			session.beginTransaction();
+			cdataVO = (CdataVO) session.get(CdataVO.class, c_id);
+			session.getTransaction().commit();
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
+		return cdataVO;
+	}
+	
 
 	public static void main(String args[]){		
 		CdataDAO  dao = new CdataDAO();
 		
+		
+		/*********************** 查詢媒合  *****************************/
+		
+		CdataVO cdataVO = dao.cdata_des("PolarBear");
+		System.out.print(cdataVO.getC_id() + ",");
+		System.out.println(cdataVO.getC_name());
+		
+		Set<OrderVO> orders = cdataVO.getOrders();
+		for (OrderVO aOrder : orders) {
+			System.out.print(" 師傅 : "+ aOrder.getB_name()+" , ");
+			System.out.println(" 時間 : "+ aOrder.getO_edate());
+		}
+		
+		/*********************** 評價  *****************************/
+		//評價
+//		CdataVO cdataVO = dao.findByPrimaryKey("PolarBear");
+//		System.out.print(cdataVO.getC_id() + ",");
+//		System.out.println(cdataVO.getC_name());
+//			
+//		Set<OrderVO> orders = cdataVO.getOrders();
+//		for (OrderVO aOrder : orders) {
+//			System.out.println(" 師傅 :" + aOrder.getB_name());
+//			System.out.println(" 時間 : " + aOrder.getO_edate());
+//			System.out.println(" 留言 : " + aOrder.getMa_des());
+//			System.out.println("---------------------------------");
+//		}
+		
+		
+		
+		
+		
 		/*********************** 查詢登入帳號完成  *****************************/
 		
-		CdataVO cdataVO = dao.login_in("Micky");
-		System.out.println("----------------------------------");
-		System.out.print("帳號 : " + cdataVO.getC_id() + ",");
-		System.out.println("密碼 : " + cdataVO.getC_pwd());
-		System.out.println("----------------------------------");
+//		CdataVO cdataVO = dao.login_in("Micky");
+//		System.out.println("----------------------------------");
+//		System.out.print("帳號 : " + cdataVO.getC_id() + ",");
+//		System.out.println("密碼 : " + cdataVO.getC_pwd());
+//		System.out.println("----------------------------------");
 		
 		/*********************** 新增註冊完成  *****************************/
 		
@@ -155,5 +203,6 @@ public class CdataDAO implements CdataDAO_interface{
 		/*********************** 新增刪除未完成  *****************************/	
 		
 //		dao.delete("Snoopy");
-	}	
+	}
+
 }

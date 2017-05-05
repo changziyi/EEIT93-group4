@@ -26,12 +26,13 @@
 		<property name="c_birth" column="c_birth" />
 		<property name="c_finished" column="c_finished" />
 		
-<!-- 		<set name="orders" table="ord" lazy="false" cascade="all"  inverse="true"  order-by="o_id asc">			 -->
-<!-- 			<key> -->
-<!-- 				<column name="o_id" /> -->
-<!-- 			</key> -->
-<!-- 			<one-to-many class="toolman.order.model.OrderVO" /> -->
-<!-- 		</set>		 -->
+		<set name="orders" table="ord" lazy="false" cascade="all"  inverse="true"  order-by="o_edate asc">	
+																					<!--依訂單完成時間排序-->		
+			<key>
+				<column name="c_id" />
+			</key>
+			<one-to-many class="toolman.order.model.OrderVO" />
+		</set>		
 	
 	</class>
 </hibernate-mapping>
