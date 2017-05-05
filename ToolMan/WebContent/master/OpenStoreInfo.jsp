@@ -26,19 +26,19 @@
 		<table>
 			<tr>
 				<td>師傅姓名:
-				<input type="text" name="m_name" value="${mdataVO.m_name}"/>${errorMsgs.name1}${errorMsgs.name2}</td>
+				<input type="text" name="m_name" value="${cdata_mdataVO.m_name}"/>${errorMsgs.name1}${errorMsgs.name2}</td>
 			</tr>
 			<tr>
 				<td>電話:
-				<input type="text" name="m_cel" value="${mdataVO.m_cel}"/></td>
+				<input type="text" name="m_cel" value="${cdata_mdataVO.m_cel}"/></td>
 			<tr>
 				<td>信箱:
-				<input type="text" name="m_email" value="${mdataVO.m_email}"/></td>
+				<input type="text" name="m_email" value="${cdata_mdataVO.m_email}"/></td>
 			</tr>
 			<tr>
 				<td>地址:
 				<span id="twzipcode"></span>
-				<input type="text" name="m_addr" value="${mdataVO.m_addr}"/>${errorMsgs.city}${errorMsgs.addr}
+				<input type="text" name="m_addr" value="${cdata_mdataVO.m_addr}"/>${errorMsgs.city}${errorMsgs.addr}
 				</td>
 			</tr>
 			<tr>
@@ -59,8 +59,8 @@
 			<tr>
 				<td><input type="submit" name="nextPage" value="下一步"></td>
 				<td><input type="hidden" name="action" value="OpenStoreStep" ></td>
-				<td><input type="hidden" name="m_city" value="${mdataVO.m_city}" ></td>
-				<td><input type="hidden" name="m_district" value="${mdataVO.m_district}"></td>
+				<td><input type="hidden" name="m_city" value="${cdata_mdataVO.m_city}" ></td>
+				<td><input type="hidden" name="m_district" value="${cdata_mdataVO.m_district}"></td>
 			</tr>
 		</table>
 	</div>
@@ -113,8 +113,8 @@
 		
 		$('#twzipcode').twzipcode({
 			'css': ['county', 'district', 'zipcode'],
-		    'countySel'   : '${mdataVO.m_city}',
-		    'districtSel' : '${mdataVO.m_district}',
+		    'countySel'   : '${cdata_mdataVO.m_city}',
+		    'districtSel' : '${cdata_mdataVO.m_district}',
 		    'onCountySelect': function () {
 		    	city.attr("value", this.value);
 		    },

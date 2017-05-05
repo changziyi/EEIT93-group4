@@ -30,9 +30,8 @@ public class MdataPageServlet extends HttpServlet {
 		session.setAttribute("mdataVO", mdataVO);
 		MdataVO m = (MdataVO)session.getAttribute("mdataVO");
 		System.out.println("sessionM_id: " + m.getM_id());
+		System.out.println("sessionM_city: " + m.getM_city());
 		response.sendRedirect("MasterPage.jsp");
-//		RequestDispatcher successView = request.getRequestDispatcher("/master/MasterPage.jsp");
-//		successView.forward(request, response);
 		return;
 		
 	}
@@ -67,6 +66,10 @@ public class MdataPageServlet extends HttpServlet {
 //			return;
 			
 		}//MasterPage_Q
+		
+		if ("MasterPage_A".equals(action)) {
+			
+		}
 		
 //		Integer m_id = new Integer(request.getParameter("m_id"));
 //		MdataService mdataSvc = new MdataService();
