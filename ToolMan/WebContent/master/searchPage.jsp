@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -15,57 +15,17 @@
 .county {width:80px;height:25px;vertical-align: top}
 .zipcode {display: none;}
 .district {display: none;}
-#show {width:80%}
+.row {width:80%}
 </style>
 </head>
 <body>
 
-	<input type="text" name="search"><span id="twzipcode"></span>
-	<br><button type="button" id="btn">找師傅</button>
-	<input type="hidden" name="city">
-
-<!-- 
-	<div class="row">
-		<div class="col-sm-6 col-md-4">
-			<div class="thumbnail">
-				<img src="${pageContext.servletContext.contextPath}/image/fasion.jpg" data-holder-rendered="true">
-				<div class="caption">
-					<h3>忍者龜 <img src="${pageContext.servletContext.contextPath}/image/rating.jpg"></h3>
-					<p>地點：台北市大安區</p>
-					<p>專業：油漆工程、地板地磚</p>
-					<p>完成案件數量：7</p>
-				</div>
-			</div>
-		</div>
-		<div class="col-sm-6 col-md-4">
-			<div class="thumbnail">
-				<img src="${pageContext.servletContext.contextPath}/image/harden.jpg" data-holder-rendered="true">
-				<div class="caption">
-					<h3>買飯幫主 <img src="${pageContext.servletContext.contextPath}/image/rating.jpg"></h3>
-					<p>地點：台中市大里區</p>
-					<p>專業：水電工程</p>
-					<p>完成案件數量：3</p>
-				</div>
-			</div>
-		</div>
-		<div class="col-sm-6 col-md-4">
-			<div class="thumbnail">
-				<img src="${pageContext.servletContext.contextPath}/image/thunder.jpg" data-holder-rendered="true">
-				<div class="caption">
-					<h3>卡哇邦嘎 <img src="${pageContext.servletContext.contextPath}/image/rating.jpg"></h3>
-					<p>地點：高雄市三民區</p>
-					<p>專業：木工工程、室內裝潢</p>
-					<p>完成案件數量：10</p>
-				</div>
-			</div>
-		</div>
-	</div>
--->
-	
-	<div id="show" class="row"></div>
-
-
-
+	<form action="master.do" method="post">
+		<span id="twzipcode"></span><input type="text" name="search"><button type="button" id="btn">找師傅</button>
+		<input type="submit" value="servlet">
+		<input type="hidden" name="action" value="SearchMaster">
+		<input type="hidden" name="city">
+	</form>
 
 <script>
 	
@@ -80,28 +40,16 @@
 	});
 	
 	var search = $('input[name="search"]');
-	var show = $('#show');
 	
-	$('#btn').click (function() {
-		console.log('search value: ' + search.val());
-		var docFragment = $(document.createDocumentFragment());
-		$.getJSON('MdataJsonServlet', {'city':city.val(),'input':search.val()}, function(datas) {
-// 			search.val(null);
-			show.empty();
-			$.each(datas, function(i,master) {
-				var bImg = $('<img />').attr({'src':'${pageContext.servletContext.contextPath}/master/master.do?type=master&image=' + master.id,
-												'data-holder-rendered':'true'});
-				var ratingImg = $('<img />').attr('src','${pageContext.servletContext.contextPath}/image/rating.jpg');
-				var bname = $('<h3></h3>').text(master.bname).append(ratingImg);
-				var city = $('<p></p>').text(master.city + ' ' + master.district);
-				var finish = $('<p></p>').text(master.finish);
-				var pro = $('<p></p>').text(master.pro);
-				var caption = $('<div></div>').addClass('caption').append([bname,city,pro,finish]);
-				var thumbnail = $('<div></div>').addClass('thumbnail').append([bImg,caption]);
-				var col = $('<div></div>').addClass('col-sm-6 col-md-4').append([thumbnail]);
-				docFragment.append(col);
-			});
-			show.append(docFragment);
+	$('#btn').click(function() {
+		
+		$.ajax({
+			url : 'master.do',
+			data: {'city':city.val(),'input':search.val(),'action':'SearchMaster'},
+			type : 'POST',
+			success : function(returnData) {
+				$(location).attr('href','searchResult.jsp');
+			}
 		});
 	});
 
