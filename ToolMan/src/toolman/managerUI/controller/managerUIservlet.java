@@ -3,7 +3,9 @@ package toolman.managerUI.controller;
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.servlet.ServletException;
@@ -12,7 +14,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.JSONValue;
+
 import toolman.cdata.model.CdataService;
+import toolman.cdata.model.CdataVO;
+import toolman.mdata.model.MdataService;
 import toolman.opro.model.OproVO;
 import toolman.order.model.OrderService;
 import toolman.order.model.OrderVO;
@@ -40,18 +46,47 @@ public class managerUIservlet extends HttpServlet {
 		
 		//get m
 		if("m".equals(action)){
-			
-			
-			
+			MdataService mdataService = new MdataService();
+			String mjasonstring = mdataService.getAllJson();			
 		}
+		
 		//get c
 		if("c".equals(action)){
 			
-		CdataService cdataservice = new CdataService();
-		
+			List<CdataVO> list = new ArrayList<CdataVO>();
+			CdataService cdataservice = new CdataService();
+			list = cdataservice.getAll();
+			List list2 = new ArrayList();
+			Map map = new HashMap();
+				for(int i=0;i<list.size();i++){
+					CdataVO cdataVO = list.get(i);
+					Timestamp c_jdate =	cdataVO.getC_jdate();
+					String c_name =	cdataVO.getC_name();
+					String c_id	= cdataVO.getC_id();
+					String c_addr = cdataVO.getC_addr();
+					String c_district = cdataVO.getC_district();
+					String c_city = cdataVO.getC_city();
+					String c_location = c_city + c_district + c_addr;					
+					String s_name = cdataVO.getS_name();
+					Integer c_averrating = cdataVO.getC_averrating();
+					String sa_cnote	=cdataVO.getSa_cnote();
+					map.put("c_jdate","c_jdate");
+					map.put("c_name","c_name");
+					map.put("c_id","c_id");
+					map.put("c_city","c_city");
+					map.put("c_district","c_district");
+					map.put("c_addr","c_addr");
+					map.put("s_name","s_name");
+					map.put("c_averrating","c_averrating");
+					map.put("sa_cnote","sa_cnote");	
+					list2.add(map);
+				}
+				JSONValue.toJSONString(list2);
 		}
+		
 		//get o
 //		if("o".equals(action)){
+			List list = new ArrayList();
 			List<OrderVO> orderlist = new ArrayList<OrderVO>();
 			OrderService orderservice = new OrderService();
 			orderlist = orderservice.getAllOrder();
@@ -66,8 +101,7 @@ public class managerUIservlet extends HttpServlet {
 				String opro = null;
 				
 			for(OproVO oproVO : opros){
-				opro = oproVO.getO_pro();
-			
+				opro = oproVO.getO_pro();			
 			}
 			System.out.println(opro);
 			String o_location = orderVO.getO_location();
@@ -75,6 +109,18 @@ public class managerUIservlet extends HttpServlet {
 			Integer c_rating = orderVO.getC_rating();
 			Integer m_rating = orderVO.getM_rating();
 			String sa_onote = orderVO.getSa_onote();
+			
+			Map map = new HashMap();
+			map.put("o_tdate", o_tdate);
+			map.put("o_bname", o_bname);
+			map.put("o_id", o_id);
+			map.put("opros", opros);
+			map.put("o_location", o_location);
+			map.put("s_name", s_name);
+			map.put("c_rating", c_rating);
+			map.put("m_rating", m_rating);
+			map.put("sa_onote", sa_onote);
+			list.add(map);
 			
 			// test
 //			System.out.println(o_tdate);
@@ -88,14 +134,15 @@ public class managerUIservlet extends HttpServlet {
 //			System.out.println(sa_onote);
 				
 			}
+			JSONValue.toJSONString(list);
 //		}
-		//get r
+		//get report
 		if("r".equals(action)){
 			
 			
 			
 		}
-		//get a
+		//get analysis
 		if("a".equals(action)){
 			
 			
