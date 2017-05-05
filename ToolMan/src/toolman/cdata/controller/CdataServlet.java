@@ -28,6 +28,7 @@ public class CdataServlet extends HttpServlet {
 		doPost(req, res);
 	}
 
+	
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) 
 			throws ServletException, IOException {
 		//存放錯誤訊息
