@@ -46,6 +46,10 @@ public class CdataService {
 		dao.insert(cdataVO);
 		return cdataVO;
 	}
+	public CdataVO cdata_des(String c_id){
+		return  dao.cdata_des(c_id); 
+		
+	}
 	
 
 }
