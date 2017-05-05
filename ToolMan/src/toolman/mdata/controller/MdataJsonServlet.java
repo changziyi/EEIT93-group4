@@ -20,7 +20,7 @@ import toolman.mdata.model.MdataService;
 import toolman.mdata.model.MdataVO;
 import toolman.mpro.model.MProVO;
 
-@WebServlet("/test/MdataJsonServlet")
+@WebServlet("/master/MdataJsonServlet")
 public class MdataJsonServlet extends HttpServlet {
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
