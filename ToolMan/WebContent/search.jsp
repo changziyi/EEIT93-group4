@@ -15,11 +15,25 @@
 				<input type="text" class="form-control" id="txtSearch"
 				name="keyword" autocomplete="off">
 				<input type="button" value="Load" id="buttonLoad">
-
+				<input type="hidden" name="m_city" value="${mdataVO.m_city}" >
 
 			</div>
 		</form>
 		
+			位在地址： 
+				<select name="m_city">
+					<option>台北市</option>
+					<option>桃園市</option>
+					<option>新竹市</option>
+					<option>苗栗市</option>
+					<option>台中市</option>
+					<option>彰化市</option>
+					<option>雲林市</option>
+					<option>嘉義市</option>
+					<option>台南市</option>
+					<option>高雄市</option>
+				</select>
+	
 		<div id="div1"></div>	
 	</div>
 	
@@ -42,7 +56,7 @@
 					if(xhr.status==200){
 						var datas = JSON.parse(xhr.responseText);
 						show.style.display = "block";
-							
+							console.log(datas);
 						var eleDiv = document.createElement("div");
 						eleDiv.className = "list-group";
 						
@@ -52,7 +66,7 @@
 							}
 
 							for (var j = 0, max = datas.length; j < max; j++) {
-									var txtBtn = document.createTextNode(datas[j]);
+									var txtBtn = document.createTextNode(datas[j].B_name);
 									var eleBtn = document.createElement("button");
 										eleBtn.className = "list-group-item";
 										eleBtn.setAttribute("type", "button");
@@ -110,7 +124,15 @@
 			}
 		}
  
-
+		var city = $('input[name="m_city"]');
+		$('#twzipcode').twzipcode({
+			'css': ['county', 'district', 'zipcode'],
+		    'countySel'   : '${mdataVO.m_city}',
+	
+		    'onCountySelect': function () {
+		    	city.attr("value", this.value);
+		    }
+		
 	</script>
 </body>
 </html>
