@@ -157,6 +157,8 @@ public class MdataDAO implements MdataDAO_interface {
 			Criterion c1 = Restrictions.eq("m.m_city", m_city);
 			Criterion c2 = Restrictions.eq("m.m_district", m_district);
 			Criterion c3 = Restrictions.like("p.m_pro", "%" + m_pro + "%");//retrieve m_pro column from the 
+//			query.add(Restrictions.and(c1,c2));//tested ok
+//			query.add(Restrictions.and(c1,c3));//tested ok
 			query.add(Restrictions.or(
 					Restrictions.and(Restrictions.and(c1,c2),Restrictions.and(c2,c3)),
 					Restrictions.and(c1,c3)
@@ -194,23 +196,23 @@ public class MdataDAO implements MdataDAO_interface {
 	}
 	
 	public static void main(String[] args) {
-		
-		MdataDAO dao = new MdataDAO();
-		
-		//D車join
-		List<MdataVO> list7 = dao.SearchByCityAndMpro("台北市","水");
-		for (MdataVO list : list7) {
-			System.out.print(list.getM_city() + ",");
-			System.out.print(list.getM_id() + ",");
-			System.out.print(list.getM_name() + ",");
-			System.out.println(list.getB_name());
-			Set<MProVO> mpros = list.getMpros();
-			for (MProVO aMpro : mpros) {
-				System.out.println(aMpro.getM_pro());
-			}
-			System.out.println("-----------------");
-		}
-		
+//		
+//		MdataDAO dao = new MdataDAO();
+//		
+//		//D車join
+//		List<MdataVO> list7 = dao.SearchByCityAndMpro("台北市","水");
+//		for (MdataVO list : list7) {
+//			System.out.print(list.getM_city() + ",");
+//			System.out.print(list.getM_id() + ",");
+//			System.out.print(list.getM_name() + ",");
+//			System.out.println(list.getB_name());
+//			Set<MProVO> mpros = list.getMpros();
+//			for (MProVO aMpro : mpros) {
+//				System.out.println(aMpro.getM_pro());
+//			}
+//			System.out.println("-----------------");
+//		}
+//		
 		
 		//B車join
 //		List<Object[]> list5 = dao.Search_B("水");
@@ -391,6 +393,16 @@ public class MdataDAO implements MdataDAO_interface {
 //			}
 //		}
 		
+		//Benny test
+		MdataDAO dao =new MdataDAO();
+		 List<MdataVO> vo = dao.getCityAndDistrictAndMPro("台北市", "中正區", "水電工程");
+		 for (MdataVO list : vo) {
+				System.out.print(list.getM_city() + ",");
+				System.out.print(list.getM_id() + ",");
+				System.out.print(list.getM_name() + ",");
+				System.out.println(list.getB_name());
+				Set<MProVO> mpros = list.getMpros();
+		 }
 	}//main()
 
 }//MasterDAO

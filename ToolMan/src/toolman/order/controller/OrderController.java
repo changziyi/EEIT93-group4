@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -36,6 +37,7 @@ import toolman.order.model.OrderVO;
  * Servlet implementation class OrderController
  */
 @WebServlet("/toolman.order/OrderController.do")
+
 public class OrderController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -154,7 +156,7 @@ public class OrderController extends HttpServlet {
 				orderVO.setO_location(o_location);
 				orderVO.setS_name("o_notresponded");
 				orderVO.setO_tdate(o_tdate);
-				session.setAttribute("orderVO", orderVO);
+				request.setAttribute("orderVO", orderVO);
 				
 				//when error exits, return to the previous page
 			
@@ -170,8 +172,10 @@ public class OrderController extends HttpServlet {
 			
 			// order confirmed and insert the data
 			if("confirmorder".equals(action)){
-				OrderVO orderVO2 = (OrderVO) session.getAttribute("orderVO");
+				OrderVO orderVO2 = (OrderVO) request.getAttribute("orderVO");
 				OrderService orderservice = new OrderService();
+				//test
+				System.out.println(orderVO2.getB_name());
 				orderservice.insert(orderVO2);
 				RequestDispatcher rd = request.getRequestDispatcher("/toolman.order/OrderRecommendation.do");
 				rd.forward(request, response);
@@ -181,11 +185,17 @@ public class OrderController extends HttpServlet {
 //				RequestDispatcher rd = request.getRequestDispatcher("NewOrder.jsp");
 //				rd.forward(request, response);
 //			}
-			else{
+			if("alterorder".equals(action)){
 				request.setAttribute("alertmsg", "訂單尚未確認，是否離開此頁面");
 				RequestDispatcher rd = request.getRequestDispatcher("NewOrder.jsp");
 				rd.forward(request, response);
 			}
+	
+			
+			
+			
+			
+	
 	}
 
 }

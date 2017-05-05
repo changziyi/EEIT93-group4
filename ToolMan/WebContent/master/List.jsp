@@ -10,6 +10,8 @@
 
 <%-- 	<img height="200px" src='${pageContext.servletContext.contextPath}/master/master.do?image=${mdataVO.m_id}'/> --%>
 	
+	<br><div><a href='${pageContext.servletContext.contextPath}/master/OpenStoreInfo.jsp'>我要開店</a></div><br>
+	
 	<img height="200px" src='${pageContext.servletContext.contextPath}/master/master.do?type=master&image=1000'/>
 	<a href='${pageContext.servletContext.contextPath}/master/masterPage.do?m_id=1000'>master1000</a><br />
 	
