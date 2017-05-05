@@ -107,7 +107,7 @@ public class MdataServlet extends HttpServlet {
 			mdataVO.setM_jdate(m_jdate);
 
 			if (!errorMsgs.isEmpty()) {
-				session.setAttribute("mdataVO", mdataVO);
+				session.setAttribute("cdata_mdataVO", mdataVO);
 				response.sendRedirect("OpenStoreInfo.jsp");
 				return;
 			}
@@ -115,7 +115,7 @@ public class MdataServlet extends HttpServlet {
 			// MdataService mdataSvc = new MdataService();
 			// mdataSvc.insert(mdataVO);
 
-			session.setAttribute("mdataVO", mdataVO);
+			session.setAttribute("cdata_mdataVO", mdataVO);
 			response.sendRedirect("OpenStoreDesc.jsp");
 			return;
 

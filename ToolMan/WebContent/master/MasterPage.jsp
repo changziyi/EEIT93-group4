@@ -93,16 +93,13 @@
 	
 	
 	<script>
-		var btn = $('#buttonUpload');
-		var upload = $('input[type="file"]');
-		var myDiv = $('#div1');
 	
 		$(function() {
 			
 			//點選問與答區塊，load問與答內容
-			var docFragment = $(document.createDocumentFragment());
 			var show = $('#show');
 			$('a[href="#menu2"]').one('click', function() {
+				var docFragment = $(document.createDocumentFragment());
 				$.getJSON('DiscussionJsonServlet',{'master':'${mdataVO.m_id}'},function(data){
 					$.each(data,function(i,dis){
 						var cid = $('<p></p>').text(dis.cid + '　' + dis.date);
@@ -121,6 +118,7 @@
 			$('input[name="question"]').on('click', function() {
 				$.post("masterPage.do", {"m_id":"${mdataVO.m_id}",'action':'MasterPage_Q','d_des':$('#d_des').val()}, function(datas) {
 					$('#d_des').val(null);
+					var docFragment = $(document.createDocumentFragment());
 					$.getJSON('DiscussionJsonServlet',{'master':'${mdataVO.m_id}'},function(data){
 						$('#show').empty();
 						$.each(data,function(i,dis){
@@ -130,12 +128,17 @@
 							var reply = $('<p></p>').text(dis.reply);
 							var row = $('<div></div>').append([cid,des,reply]);
 							var onediv = $('<div></div>').append(row);
-							$('#show').append([cid,des,reply]);
+							docFragment.append(onediv);
 						});
+						show.append(docFragment);
 					});
 				});
 			});
 			
+			
+			var btn = $('#buttonUpload');
+			var upload = $('input[type="file"]');
+			var myDiv = $('#div1');
 			
 			//上傳圖片限制三張
 			upload.on('change', function(event) {
@@ -195,6 +198,7 @@
 				}
 			}
 			
+			//上傳作品圖片
 			btn.click(function() {
 	
 				var others = $('form').serializeArray();
@@ -204,13 +208,13 @@
 	
 				$.each(others, function(index, input) {
 					formData.append(input.name, input.value);
-					console.log('name: ' + input.name);
-					console.log('value: ' + input.value);
+// 					console.log('name: ' + input.name);
+// 					console.log('value: ' + input.value);
 				});
 	
 				for (var i = 0; i < photos.length; i++) {
 					formData.append('file' + i, photos[i]);
-					console.log(photos[i]);
+// 					console.log(photos[i]);
 				}
 	
 				$.ajax({
@@ -220,9 +224,21 @@
 					contentType : false,
 					processData : false,
 					type : 'POST',
-// 		 			success : function(reutrnData) {
+		 			success : function(reutrnData) {
 // 		 				alert(reutrnData);
-// 		 			}
+						$('#img0').removeAttr('src').removeAttr('class');
+						$('#img1').removeAttr('src').removeAttr('class');
+						$('#img2').removeAttr('src').removeAttr('class');
+						upload.val(null);
+		 			},
+		 			beforeSend : function() {
+		 				
+		 			},
+		 			complete : function() {
+		 				
+		 			}
+		 			
+		 			
 				});
 			});
 			
