@@ -48,6 +48,8 @@ public class OrderRecommendation extends HttpServlet {
 		HttpSession session = request.getSession();
 		session.setAttribute("recommendmaster", mdadaVOlist);
 		
+		
+		
 		//tested ok
 		System.out.println("test start");
 		List<MdataVO> mdadaVOlist2 =(List<MdataVO>) session.getAttribute("recommendmaster");

@@ -20,7 +20,7 @@ import toolman.mdata.model.MdataService;
 import toolman.mdata.model.MdataVO;
 import toolman.mpro.model.MProVO;
 
-@WebServlet("/test/MdataJsonServlet")
+@WebServlet("/master/MdataJsonServlet")
 public class MdataJsonServlet extends HttpServlet {
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -42,10 +42,11 @@ public class MdataJsonServlet extends HttpServlet {
 		MdataService mdataSvc = new MdataService();
 		
 //		out.println(mdataSvc.getCityAndDistrict(m_city, m_district));
-//		out.println(mdataSvc.getCityJson(m_city));
 //		out.println(mdataSvc.getDistrictJson(m_district));
 //		out.println(mdataSvc.SearchByCityAndMproJson(m_city, m_pro));
-		out.println(mdataSvc.SearchByCityAndMproJson(m_city, input));
+		
+		out.println(mdataSvc.getCityJson(m_city));
+//		out.println(mdataSvc.SearchByCityAndMproJson(m_city, input));
 		
 		
 		Long s2 = System.currentTimeMillis();

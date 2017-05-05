@@ -14,6 +14,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 
 import hibernate.util.HibernateUtil;
+import toolman.mpro.model.MProVO;
 import toolman.order.model.OrderVO;
 import toolman.work.model.WorkVO;
 
@@ -82,13 +83,13 @@ public class OproDAO implements OproDAO_Interface {
 		OrderVO orderVO = new OrderVO();
 		orderVO.setO_id(3001);
 		
-//		MproVO MproVO = new MproVO();//合併師傅專業後打開
-//		MproVO.setM_proid(10000);//合併師傅專業後打開
+		MProVO MproVO = new MProVO();//合併師傅專業後打開
+		MproVO.setM_proid(10000);//合併師傅專業後打開
 		
 		OproVO oproVO = new OproVO();
 		oproVO.setO_pro("木工");
-		oproVO.setM_proid(10001);//合併師傅專業後註解
-		oproVO.setO_id(orderVO);
+//		oproVO.setM_proid(10001);//合併師傅專業後註解
+		oproVO.setOrderVO(orderVO);
 		oproVOset.add(oproVO);	
 		dao.insertOpro(oproVOset);
 		
