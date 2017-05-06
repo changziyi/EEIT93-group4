@@ -10,6 +10,9 @@
 	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 <!-- jquery -->
+<!-- datatable-->
+<script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
 <!-- bootstrap -->
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -77,17 +80,12 @@
 <!-- main content here -->		
 	<article>
 	<table id="eventlist" style="margin:auto;width:900px; border: 2px solid blue; horizontal-align:center;">
-	<thead>
-             <tr>
-                <th>1</th>
-                <th>2</th>
-                <th>3</th>
-                <th>4</th>
-             </tr>
-    </thead>
-	<tbody>
-	
-	</tbody>
+		<thead>
+			<th></th>
+	    </thead>
+		<tbody>
+		
+		</tbody>
 	
 	</table>
 	<input type="hidden" />
@@ -97,11 +95,11 @@
 <script>
 
 	$(function(){		
-		
-	   loadProduct("m");	
-	   
+	
+		loadProduct('m');
+		datatableinit();
 	   $('#navigator>ul>li').on('click',function(){	
-		   
+
 		   var id = $(this).data('id');
 		   loadProduct(id);
 //  		   $('#navigator>ul>li').removeClass('active');
@@ -111,7 +109,8 @@
 	   
 	   
 	   function loadProduct(id){
-			   $.getJSON('${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIservlet.do',{'action':id}, function(datas){
+		   
+			   $.getJSON('${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIServlet.do',{'action':id}, function(datas){
 				   var th = $('#eventlist>thead');
 				   var tb = $('#eventlist>tbody');
 				   var docFrag = $(document.createDocumentFragment());
@@ -119,6 +118,8 @@
 				   tb.empty();
 				   th.empty();
 			   if(id=="o"){
+				   
+				   th.empty();
 				   	var thc1 = $('<th></th>').text('師傅編號').addClass('eventlistthreadtrth');
 				   	var thc2 = $('<th></th>').text('店家名稱').addClass('eventlistthreadtrth');
 				   	var thc3 = $('<th></th>').text('師傅名稱').addClass('eventlistthreadtrth');
@@ -143,6 +144,8 @@
 					docFrag.append(rowth);
 			   }
 			   else if(id=="m"){
+				   
+				   th.empty();
 					var thc1 = $('<th></th>').text('師傅編號').addClass('eventlistthreadtrth');
 					var thc2 = $('<th></th>').text('店家名稱').addClass('eventlistthreadtrth');
 					var thc3 = $('<th></th>').text('師傅名稱').addClass('eventlistthreadtrth');
@@ -155,6 +158,8 @@
 					docFrag.append(rowth);
 			   }
 			   else if(id=="c"){
+				   
+				   th.empty();
 				   var thc1 = $('<th></th>').text('下單日期').addClass('eventlistthreadtrth');
 					var thc2 = $('<th></th>').text('消費者名稱').addClass('eventlistthreadtrth');
 					var thc3 = $('<th></th>').text('消費者帳戶').addClass('eventlistthreadtrth');
@@ -172,6 +177,8 @@
 					   
 					   if(id=="o"){
 					   console.log(data);
+					   tb.empty();
+					   
 					  	var cell1 = $('<td></td>').text(data.o_tdate).addClass('eventlisttbodytrtd');
 						var cell2 = $('<td></td>').text(data.o_bname).addClass('eventlisttbodytrtd');
 						var cell3 = $('<td></td>').text(data.c_id).addClass('eventlisttbodytrtd');
@@ -190,7 +197,8 @@
 						}//end if
 				  
 				  else if(id=="m"){					  	  				
-					   
+					   tb.empty();
+					     
 				   var mid =  $('<input type="button" width="500px" /> ').val(data.M_id).addClass('eventlisttbodytrtd');
 				   var cell1 = $('<td></td>').html(mid).addClass('eventlisttbodytrtd');
 				   var cell2 = $('<td></td>').text(data.B_name).addClass('eventlisttbodytrtd');
@@ -209,7 +217,8 @@
 					}//end if
 				   
 					else if(id=="c"){
-
+						   tb.empty();
+						   
 					   var cell1 = $('<td></td>').text(data.c_jdate).addClass('eventlisttbodytrtd');;
 					   var cell2 = $('<td></td>').text(data.c_id).addClass('eventlisttbodytrtd');;
 					   var cell3 = $('<td></td>').text(data.c_name).addClass('eventlisttbodytrtd');;
@@ -227,9 +236,30 @@
 			   th.append(docFrag);
 			   tb.append(docFrag2);
 			   
+			   
 		  	 }//end get json function
 			);//end get json
+			
 	   }//end loadProduct(id) function
+	function datatableinit(){
+		$('#eventlist').DataTable({
+// 			retrieve: true,
+// 			"lengthMenu":[1, 2, 3, "All"],
+			"pageLength": 1,
+// 			 "lengthMenu": [ [1, 25, 50, -1], [1, 25, 50, "All"] ],
+// 			"iDisplayLength": 10
+//			  	destroy: true,
+//			 		aaData: response.data	
+					 }
+			 );			   
+	   }//end datatableinit
+	function datatabledestory(){
+		$('#eventlist').DataTable({
+			  	destroy: true,
+// 			 	aaData: response.data	
+					 }
+			 );			   
+	   }//end datatabledestory
 	}// end ready function
   ); //end ready
 

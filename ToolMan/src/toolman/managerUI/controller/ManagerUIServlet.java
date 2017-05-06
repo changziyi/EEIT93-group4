@@ -33,11 +33,11 @@ import toolman.order.model.OrderVO;
 /**
  * Servlet implementation class managerUIservlet
  */
-@WebServlet("/toolman.managerUI.controller/ManagerUIservlet.do")
-public class ManagerUIservlet extends HttpServlet {
+@WebServlet("/toolman.managerUI.controller/ManagerUIServlet.do")
+public class ManagerUIServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public ManagerUIservlet() {
+    public ManagerUIServlet() {
         super();
 
     }
@@ -49,26 +49,9 @@ public class ManagerUIservlet extends HttpServlet {
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
-		//test ok
-//		MdataDAO dao = new MdataDAO();
-//		List<MdataVO> mdatas = dao.getAll();
-//		List<Map> jList = new LinkedList<Map>();
-//		for (MdataVO aMdata : mdatas) {
-//			Map jContent = new HashMap();
-//			jContent.put("M_id", aMdata.getM_id());
-//			jContent.put("B_name", aMdata.getB_name());
-//			jContent.put("M_name", aMdata.getM_name());
-//			jContent.put("M_city", aMdata.getM_city());
-//			jContent.put("M_district", aMdata.getM_district());
-//			jList.add(jContent);
-//		}			
-//		String mjasonstring = JSONValue.toJSONString(jList);
-//		PrintWriter out = response.getWriter();
-//		out.write( mjasonstring);
-//		out.flush();
-//		System.out.println(mjasonstring);
+
 		
-		//get m
+		//get m tested ok
 		if("m".equals(action)){
 							
 			MdataDAO dao = new MdataDAO();
@@ -97,7 +80,7 @@ public class ManagerUIservlet extends HttpServlet {
 			System.out.println(mjasonstring);
 		}
 		
-		//get c
+		//get c tested ok
 		if("c".equals(action)){
 			
 			List<CdataVO> list = new ArrayList<CdataVO>();
@@ -137,7 +120,7 @@ public class ManagerUIservlet extends HttpServlet {
 
 		}
 		
-		//get o
+		//get o tested ok
 		if("o".equals(action)){
 			OrderService orderservice = new OrderService();
 			out.write(orderservice.getAllOrderJson());
