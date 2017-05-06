@@ -124,17 +124,16 @@ public class ManagerUIservlet extends HttpServlet {
 					map.put("c_id",c_id);
 					map.put("c_city",c_city);
 					map.put("c_district",c_district);
-					map.put("c_district2",c_district);
 					map.put("c_addr",c_addr);
 					map.put("s_name",s_name);
 					map.put("c_averrating",c_averrating);
 					map.put("sa_cnote",sa_cnote);	
 					list2.add(map);
 				}
-				String mjasonstring = JSONValue.toJSONString(list2);
-				out.write(mjasonstring);
+				String cjasonstring = JSONValue.toJSONString(list2);
+				out.write(cjasonstring);
 				out.flush();
-				System.out.println(mjasonstring);
+				System.out.println(cjasonstring);
 
 		}
 		

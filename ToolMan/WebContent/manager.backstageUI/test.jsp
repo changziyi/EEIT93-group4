@@ -101,7 +101,7 @@
 			   $.ajax({
 			        type: "GET",
 			        dataType: "json",
-			        url: "${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIservlet.do?action=o",
+			        url: "${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIservlet.do?action=c",
 			        async: true,
 			        success: function(data){
 

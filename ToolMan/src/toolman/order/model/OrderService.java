@@ -144,7 +144,7 @@ public class OrderService {
 			Integer o_id  = orderVO.getO_id();
 			Set<OproVO> opros = orderVO.getOpros();
 			
-			String o_location = orderVO.getO_location();
+			String o_location = orderVO.getO_location().substring(0,6);
 			String s_name = orderVO.getS_name();
 			Integer c_rating = orderVO.getC_rating();
 			Integer m_rating = orderVO.getM_rating();

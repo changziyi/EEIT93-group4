@@ -98,83 +98,104 @@
 
 	$(function(){		
 		
-	   loadProduct("o");	
+	   loadProduct("m");	
 	   
 	   $('#navigator>ul>li').on('click',function(){	
 		   
 		   var id = $(this).data('id');
 		   loadProduct(id);
- 		   $('#navigator>ul>li').removeClass('active');
-  		   $('#navigator>ul>li[data-id="' + id + '"]').addClass('active');
-	   });
+//  		   $('#navigator>ul>li').removeClass('active');
+//   		   $('#navigator>ul>li[data-id="' + id + '"]').addClass('active');
+	   	}//end on function
+	   );// end on
 	   
 	   
 	   function loadProduct(id){
-		   $.getJSON('${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIservlet.do',{'action':id}, function(datas){
-			   var th = $('#eventlist>thead');
-			   var tb = $('#eventlist>tbody');
-			   var docFrag = $(document.createDocumentFragment());
-			   var docFrag2 = $(document.createDocumentFragment());
-			   tb.empty();
-			   
+			   $.getJSON('${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIservlet.do',{'action':id}, function(datas){
+				   var th = $('#eventlist>thead');
+				   var tb = $('#eventlist>tbody');
+				   var docFrag = $(document.createDocumentFragment());
+				   var docFrag2 = $(document.createDocumentFragment());
+				   tb.empty();
+				   th.empty();
+			   if(id=="o"){
+				   	var thc1 = $('<th></th>').text('師傅編號').addClass('eventlistthreadtrth');
+				   	var thc2 = $('<th></th>').text('店家名稱').addClass('eventlistthreadtrth');
+				   	var thc3 = $('<th></th>').text('師傅名稱').addClass('eventlistthreadtrth');
+				   	var thc4 = $('<th></th>').text('店家地址').addClass('eventlistthreadtrth');
+				   	var thc5 = $('<th></th>').text('師傅專業').addClass('eventlistthreadtrth');
+				   	var thc6 = $('<th></th>').text('店家狀態').addClass('eventlistthreadtrth');
+				   	var thc7 = $('<th></th>').text('平均分數').addClass('eventlistthreadtrth');
+				   	var thc8 = $('<th></th>').text('管理者註記').addClass('eventlistthreadtrth');
+				   	var thc9 = $('<th></th>').text('管理者註記').addClass('eventlistthreadtrth');
+				   	var thc10 = $('<th></th>').text('管理者註記').addClass('eventlistthreadtrth');
+				   	var thc1 = $('<th></th>').text('下單日期').addClass('eventlistthreadtrth');
+					var thc2 = $('<th></th>').text('店家名稱').addClass('eventlistthreadtrth');
+					var thc3 = $('<th></th>').text('消費者帳戶').addClass('eventlistthreadtrth');
+					var thc4 = $('<th></th>').text('訂單編號').addClass('eventlistthreadtrth');
+					var thc5 = $('<th></th>').text('服務類別').addClass('eventlistthreadtrth');
+					var thc6 = $('<th></th>').text('服務地址').addClass('eventlistthreadtrth');
+					var thc7 = $('<th></th>').text('訂單狀態').addClass('eventlistthreadtrth');
+					var thc8 = $('<th></th>').text('師傅評分').addClass('eventlistthreadtrth');
+					var thc9 = $('<th></th>').text('消費者評分').addClass('eventlistthreadtrth');
+					var thc10 = $('<th></th>').text('管理者註記').addClass('eventlistthreadtrth');
+					var rowth = $('<tr></tr>').append([thc1,thc2,thc3,thc4,thc5,thc6,thc7,thc8,thc9,thc10]);
+					docFrag.append(rowth);
+			   }
+			   else if(id=="m"){
+					var thc1 = $('<th></th>').text('師傅編號').addClass('eventlistthreadtrth');
+					var thc2 = $('<th></th>').text('店家名稱').addClass('eventlistthreadtrth');
+					var thc3 = $('<th></th>').text('師傅名稱').addClass('eventlistthreadtrth');
+					var thc4 = $('<th></th>').text('店家地址').addClass('eventlistthreadtrth');
+					var thc5 = $('<th></th>').text('師傅專業').addClass('eventlistthreadtrth');
+					var thc6 = $('<th></th>').text('店家狀態').addClass('eventlistthreadtrth');
+					var thc7 = $('<th></th>').text('平均分數').addClass('eventlistthreadtrth');
+					var thc8 = $('<th></th>').text('管理者註記').addClass('eventlistthreadtrth');
+					var rowth = $('<tr></tr>').append([thc1,thc2,thc3,thc4,thc5,thc6,thc7,thc8]);
+					docFrag.append(rowth);
+			   }
+			   else if(id=="c"){
+				   var thc1 = $('<th></th>').text('下單日期').addClass('eventlistthreadtrth');
+					var thc2 = $('<th></th>').text('消費者名稱').addClass('eventlistthreadtrth');
+					var thc3 = $('<th></th>').text('消費者帳戶').addClass('eventlistthreadtrth');
+					var thc4 = $('<th></th>').text('消費者地址').addClass('eventlistthreadtrth');
+					var thc5 = $('<th></th>').text('消費者狀態').addClass('eventlistthreadtrth');
+					var thc6 = $('<th></th>').text('平均分數').addClass('eventlistthreadtrth');
+					var thc7 = $('<th></th>').text('管理者註記').addClass('eventlistthreadtrth');
+					var rowth = $('<tr></tr>').append([thc1,thc2,thc3,thc4,thc5,thc6,thc7]);
+					docFrag.append(rowth);
+				   
+			   }
 			   $.each(datas,function(i,data){
 				   console.log(data);
-				   
-				   if(id=="o"){
-					  var thc1 = $('<th></th>').text('師傅編號').addClass('eventlistthreadtrth');
-					   var thc2 = $('<th></th>').text('店家名稱').addClass('eventlistthreadtrth');
-					   var thc3 = $('<th></th>').text('師傅名稱').addClass('eventlistthreadtrth');
-					   var thc4 = $('<th></th>').text('店家地址').addClass('eventlistthreadtrth');
-					   var thc5 = $('<th></th>').text('師傅專業').addClass('eventlistthreadtrth');
-					   var thc6 = $('<th></th>').text('店家狀態').addClass('eventlistthreadtrth');
-					   var thc7 = $('<th></th>').text('平均分數').addClass('eventlistthreadtrth');
-					   var thc8 = $('<th></th>').text('管理者註記').addClass('eventlistthreadtrth');
-					   var thc9 = $('<th></th>').text('管理者註記').addClass('eventlistthreadtrth');
-					   var thc10 = $('<th></th>').text('管理者註記').addClass('eventlistthreadtrth');
-					   var thc1 = $('<th></th>').text('下單日期').addClass('eventlistthreadtrth');
-						var thc2 = $('<th></th>').text('店家名稱').addClass('eventlistthreadtrth');
-						var thc3 = $('<th></th>').text('消費者帳戶').addClass('eventlistthreadtrth');
-						var thc4 = $('<th></th>').text('訂單編號').addClass('eventlistthreadtrth');
-						var thc5 = $('<th></th>').text('服務類別').addClass('eventlistthreadtrth');
-						var thc6 = $('<th></th>').text('服務地址').addClass('eventlistthreadtrth');
-						var thc7 = $('<th></th>').text('訂單狀態').addClass('eventlistthreadtrth');
-						var thc8 = $('<th></th>').text('師傅評分').addClass('eventlistthreadtrth');
-						var thc9 = $('<th></th>').text('消費者評分').addClass('eventlistthreadtrth');
-						var thc10 = $('<th></th>').text('管理者註記').addClass('eventlistthreadtrth');
-						   var cell1 = $('<td></td>').text(data.o_tdate).addClass('eventlisttbodytrtd');
-						   var cell2 = $('<td></td>').text(data.o_bname).addClass('eventlisttbodytrtd');
-						   var cell3 = $('<td></td>').text(data.c_id).addClass('eventlisttbodytrtd');
-						   var cell4 = $('<td></td>').text(data.o_id).addClass('eventlisttbodytrtd');
-// 						   var cell5 = $('<td></td>').text(data.opros).addClass('eventlisttbodytrtd');
-						   var cell6 = $('<td></td>').text(data.o_location).addClass('eventlisttbodytrtd');
-						   var cell7 = $('<td></td>').text(data.s_name).addClass('eventlisttbodytrtd');
-						   var cell8 = $('<td></td>').text(data.m_arating).addClass('eventlisttbodytrtd');
-						   var cell9 = $('<td></td>').text(data.c_arating).addClass('eventlisttbodytrtd');
-						   var sanote =  $('<input type="text" width="500px" /> ').val(data.sa_onote).addClass('eventlisttbodytrtd');
-						   var cell10 = $('<td></td>').html(sanote).addClass('eventlisttbodytrtd');
-						   var rowth = $('<tr></tr>').append([thc1,thc2,thc3,thc4,thc5,thc6,thc7,thc8,thc9,thc10]);
- 						   var rowtb = $('<tr></tr>').append([cell1,cell2,cell3,cell4,cell5,cell6,cell7,cell8,cell9,cell10]);
-						   
- 						   docFrag.append(rowth);
- 						   docFrag2.append(rowtb);
-							}	
+
+					   
+					   if(id=="o"){
+					   console.log(data);
+					  	var cell1 = $('<td></td>').text(data.o_tdate).addClass('eventlisttbodytrtd');
+						var cell2 = $('<td></td>').text(data.o_bname).addClass('eventlisttbodytrtd');
+						var cell3 = $('<td></td>').text(data.c_id).addClass('eventlisttbodytrtd');
+						var cell4 = $('<td></td>').text(data.o_id).addClass('eventlisttbodytrtd');
+ 						var cell5 = $('<td></td>').text(data.opros).addClass('eventlisttbodytrtd');
+						var cell6 = $('<td></td>').text(data.o_location).addClass('eventlisttbodytrtd');
+						var cell7 = $('<td></td>').text(data.s_name).addClass('eventlisttbodytrtd');
+						var cell8 = $('<td></td>').text(data.m_arating).addClass('eventlisttbodytrtd');
+						var cell9 = $('<td></td>').text(data.c_arating).addClass('eventlisttbodytrtd');
+						var sanote =  $('<input type="text" width="500px" /> ').val(data.sa_onote).addClass('eventlisttbodytrtd');
+						var cell10 = $('<td></td>').html(sanote).addClass('eventlisttbodytrtd');
+						var rowth = $('<tr></tr>').append([thc1,thc2,thc3,thc4,thc5,thc6,thc7,thc8,thc9,thc10]);
+ 						var rowtb = $('<tr></tr>').append([cell1,cell2,cell3,cell4,cell5,cell6,cell7,cell8,cell9,cell10]);
+ 						docFrag.append(rowth);
+ 						docFrag2.append(rowtb);
+						}//end if
 				  
-				  else if(id=="m"){
-// 					var th = $('#eventlist>thead').html('');
-// 					var tb = $('#eventlist>tbody').html('');
-				   var thc1 = $('<th></th>').text('師傅編號').addClass('eventlistthreadtrth');
-				   var thc2 = $('<th></th>').text('店家名稱').addClass('eventlistthreadtrth');
-				   var thc3 = $('<th></th>').text('師傅名稱').addClass('eventlistthreadtrth');
-				   var thc4 = $('<th></th>').text('店家地址').addClass('eventlistthreadtrth');
-				   var thc5 = $('<th></th>').text('師傅專業').addClass('eventlistthreadtrth');
-				   var thc6 = $('<th></th>').text('店家狀態').addClass('eventlistthreadtrth');
-				   var thc7 = $('<th></th>').text('平均分數').addClass('eventlistthreadtrth');
-				   var thc8 = $('<th></th>').text('管理者註記').addClass('eventlistthreadtrth');
+				  else if(id=="m"){					  	  				
+					   
 				   var mid =  $('<input type="button" width="500px" /> ').val(data.M_id).addClass('eventlisttbodytrtd');
 				   var cell1 = $('<td></td>').html(mid).addClass('eventlisttbodytrtd');
 				   var cell2 = $('<td></td>').text(data.B_name).addClass('eventlisttbodytrtd');
 				   var cell3 = $('<td></td>').text(data.M_name).addClass('eventlisttbodytrtd');
-				   var cell4 = $('<td></td>').text(data.M_city+data.M_district+data.M_addr).addClass('eventlisttbodytrtd');
+				   var cell4 = $('<td></td>').text(data.M_city+data.M_district).addClass('eventlisttbodytrtd');
 				   var cell5 = $('<td></td>').text(data.Mpros).addClass('eventlisttbodytrtd');
 				   var cell6 = $('<td></td>').text(data.S_name).addClass('eventlisttbodytrtd');
 				   var cell7 = $('<td></td>').text(data.M_arating).addClass('eventlisttbodytrtd');
@@ -185,30 +206,33 @@
 				   
 				   docFrag.append(rowth);
   				   docFrag2.append(rowtb);
-					}
+					}//end if
 				   
-				else if(id=="c"){
-// 					   var th = $('#eventlist>thead').html('');
-// 					   var tb = $('#eventlist>tbody').html('');
-					   var cell1 = $('<td></td>').text(data[0].c_jdate);
-					   var cell2 = $('<td></td>').text(data[1].c_id);
-					   var cell3 = $('<td></td>').text(data[2].c_name);
-					   var cell4 = $('<td></td>').text(data[3].c_city+thedata.c_district+thedata.c_addr);
-					   var cell5 = $('<td></td>').text(data[0].s_name);
-					   var cell6 = $('<td></td>').text(data[0].c_averrating);
-					   var cell7 = $('<td></td>').text(data[0].sa_note);
+					else if(id=="c"){
+
+					   var cell1 = $('<td></td>').text(data.c_jdate).addClass('eventlisttbodytrtd');;
+					   var cell2 = $('<td></td>').text(data.c_id).addClass('eventlisttbodytrtd');;
+					   var cell3 = $('<td></td>').text(data.c_name).addClass('eventlisttbodytrtd');;
+					   var cell4 = $('<td></td>').text(data.c_city+data.c_district).addClass('eventlisttbodytrtd');;
+					   var cell5 = $('<td></td>').text(data.s_name).addClass('eventlisttbodytrtd');;
+					   var cell6 = $('<td></td>').text(data.c_averrating).addClass('eventlisttbodytrtd');;
+					   var cell7 = $('<td></td>').text(data.sa_note).addClass('eventlisttbodytrtd');;
 					   var row = $('<tr></tr>').append([cell1,cell2,cell3,cell4,cell5,cell6,cell7]);
 					   docFrag.append(row);
-						}
-				
-				
-			   });
-			   th.append(docFrag2);
-			   tb.append(docFrag);
+					   
+						}// end if
+					}// end each function
+			   );//each
 			   
-		   });   
-	   }
-	}); 
+			   th.append(docFrag);
+			   tb.append(docFrag2);
+			   
+		  	 }//end get json function
+			);//end get json
+	   }//end loadProduct(id) function
+	}// end ready function
+  ); //end ready
+
 
 </script>
 
