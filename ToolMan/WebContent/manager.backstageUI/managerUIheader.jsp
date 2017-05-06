@@ -28,6 +28,22 @@
 	 min-width:150px;
 	 text-align:center;
 	}
+	.eventlistthreadtr {
+	 width:70px;
+	 text-align:center;
+	}
+	.eventlistthreadtrth {
+	 width:70px;
+	 text-align:center;
+	}
+	.eventlisttbodytr {
+	 width:70px;
+	 text-align:center;
+	}
+	.eventlisttbodytrtd {
+	 width:70px;
+	 text-align:center;
+	}
 </style>
 </head>
 <body>
@@ -36,7 +52,7 @@
 		<nav >
 			<div id="navigator" >
 			
-				<ul class="nav nav-tabs nav-justified" style="width:400px; margin:auto;" >
+				<ul style="margin: auto;width:900px; horizontal-align:center;" class="nav nav-tabs nav-justified"  >
 				
 					<li  data-toggle="tab" role="presentation" class="active" id="masterlist" data-id="m"><a href="#"><div>師傅列表</div></a></li>
 					
@@ -60,7 +76,7 @@
 	</div>
 <!-- main content here -->		
 	<article>
-	<table id="eventlist">
+	<table id="eventlist" style="margin:auto;width:900px; border: 2px solid blue; horizontal-align:center;">
 	<thead>
              <tr>
                 <th>1</th>
@@ -123,22 +139,24 @@
 				   console.log(data);
 				   console.log(data.B_name);
 				if(id=="m"){
-				   var thc1 = $('<th></th>').text('師傅編號');
-				   var thc2 = $('<th></th>').text('店家名稱');
-				   var thc3 = $('<th></th>').text('師傅名稱');
-				   var thc4 = $('<th></th>').text('店家地址');
-				   var thc5 = $('<th></th>').text('店家狀態');
-				   var thc6 = $('<th></th>').text('平均分數');
-				   var thc7 = $('<th></th>').text('管理者註記');
-				   var cell1 = $('<td></td>').text(data.M_id);
-				   var cell2 = $('<td></td>').text(data.B_name);
-				   var cell3 = $('<td></td>').text(data.c_name);
-				   var cell4 = $('<td></td>').text(data.c_city+data.c_district+data.c_addr);
-				   var cell5 = $('<td></td>').text(data.s_name);
-				   var cell6 = $('<td></td>').text(data.c_averrating);
-				   var cell7 = $('<td></td>').text(data.sa_note);
-				   var rowth = $('<tr></tr>').append([thc1,thc2,thc3,thc4,thc5,thc6,thc7]);
-				   var rowtb = $('<tr></tr>').append([cell1,cell2,cell3,cell4,cell5,cell6,cell7]);
+				   var thc1 = $('<th></th>').text('師傅編號').addClass('eventlistthreadtrth');
+				   var thc2 = $('<th></th>').text('店家名稱').addClass('eventlistthreadtrth');
+				   var thc3 = $('<th></th>').text('師傅名稱').addClass('eventlistthreadtrth');
+				   var thc4 = $('<th></th>').text('店家地址').addClass('eventlistthreadtrth');
+				   var thc5 = $('<th></th>').text('師傅專業').addClass('eventlistthreadtrth');
+				   var thc6 = $('<th></th>').text('店家狀態').addClass('eventlistthreadtrth');
+				   var thc7 = $('<th></th>').text('平均分數').addClass('eventlistthreadtrth');
+				   var thc8 = $('<th></th>').text('管理者註記').addClass('eventlistthreadtrth');
+				   var cell1 = $('<td></td>').text(data.M_id).addClass('eventlisttbodytrtd');
+				   var cell2 = $('<td></td>').text(data.B_name).addClass('eventlisttbodytrtd');
+				   var cell3 = $('<td></td>').text(data.M_name).addClass('eventlisttbodytrtd');
+				   var cell4 = $('<td></td>').text(data.M_city+data.M_district+data.M_addr).addClass('eventlisttbodytrtd');
+				   var cell5 = $('<td></td>').text(data.Mpros).addClass('eventlisttbodytrtd');
+				   var cell6 = $('<td></td>').text(data.S_name).addClass('eventlisttbodytrtd');
+				   var cell7 = $('<td></td>').text(data.M_arating).addClass('eventlisttbodytrtd');
+				   var cell8 = $('<td></td>').text(data.Sa_mnote).addClass('eventlisttbodytrtd');
+				   var rowth = $('<tr></tr>').append([thc1,thc2,thc3,thc4,thc5,thc6,thc7,thc8]).addClass('eventlistthreadtr');
+				   var rowtb = $('<tr></tr>').append([cell1,cell2,cell3,cell4,cell5,cell6,cell7,cell8]).addClass('eventlisttbodytrtd');
 				   
 				   docFrag.append(rowth);
 				   docFrag.append(rowtb);

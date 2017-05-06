@@ -24,6 +24,7 @@ import toolman.cdata.model.CdataVO;
 import toolman.mdata.model.MdataDAO;
 import toolman.mdata.model.MdataService;
 import toolman.mdata.model.MdataVO;
+import toolman.mpro.model.MProVO;
 import toolman.opro.model.OproVO;
 import toolman.order.model.OrderService;
 import toolman.order.model.OrderVO;
@@ -78,7 +79,15 @@ public class ManagerUIservlet extends HttpServlet {
 				jContent.put("B_name", aMdata.getB_name());
 				jContent.put("M_name", aMdata.getM_name());
 				jContent.put("M_city", aMdata.getM_city());
+				jContent.put("M_addr", aMdata.getM_addr());
 				jContent.put("M_district", aMdata.getM_district());
+				jContent.put("M_arating", aMdata.getM_arating());
+				jContent.put("S_name", aMdata.getS_name());
+				jContent.put("Sa_mnote", aMdata.getSa_mnote());
+				Set<MProVO> mpros = aMdata.getMpros();
+				for(MProVO getmpros:mpros){
+				jContent.put("Mpros", getmpros.getM_pro());
+				}
 				jList.add(jContent);
 			}			
 			String mjasonstring = JSONValue.toJSONString(jList);
@@ -136,29 +145,28 @@ public class ManagerUIservlet extends HttpServlet {
 				String o_bname = orderVO.getB_name();
 				Integer o_id = orderVO.getO_id();
 				Set<OproVO> opros = orderVO.getOpros();
-				String opro = null;
 				
-			for(OproVO oproVO : opros){
-				opro = oproVO.getO_pro();			
-			}
-//			System.out.println(opro);
-			String o_location = orderVO.getO_location();
-			String s_name = orderVO.getS_name();
-			Integer c_rating = orderVO.getC_rating();
-			Integer m_rating = orderVO.getM_rating();
-			String sa_onote = orderVO.getSa_onote();
+				String o_location = orderVO.getO_location();
+				String s_name = orderVO.getS_name();
+				Integer c_rating = orderVO.getC_rating();
+				Integer m_rating = orderVO.getM_rating();
+				String sa_onote = orderVO.getSa_onote();
 			
-			Map map = new HashMap();
-			map.put("o_tdate", o_tdate);
-			map.put("o_bname", o_bname);
-			map.put("o_id", o_id);
-			map.put("opros", opros);
-			map.put("o_location", o_location);
-			map.put("s_name", s_name);
-			map.put("c_rating", c_rating);
-			map.put("m_rating", m_rating);
-			map.put("sa_onote", sa_onote);
-			list.add(map);
+				Map map = new HashMap();
+				map.put("o_tdate", o_tdate);
+				map.put("o_bname", o_bname);
+				map.put("o_id", o_id);
+				for(OproVO oproVO : opros){
+					String	opro = oproVO.getO_pro();	
+					map.put("opros", opros);
+	//				System.out.println(opro);
+				}
+				map.put("o_location", o_location);
+				map.put("s_name", s_name);
+				map.put("c_rating", c_rating);
+				map.put("m_rating", m_rating);
+				map.put("sa_onote", sa_onote);
+				list.add(map);
 			
 			// test
 //			System.out.println(o_tdate);
