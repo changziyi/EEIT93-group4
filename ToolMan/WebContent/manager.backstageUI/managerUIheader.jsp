@@ -54,13 +54,13 @@
 			
 				<ul style="margin: auto;width:900px; horizontal-align:center;" class="nav nav-tabs nav-justified"  >
 				
-					<li  data-toggle="tab" role="presentation" class="active" id="masterlist" data-id="m"><a href="#"><div>師傅列表</div></a></li>
+					<li  data-toggle="tab" role="presentation"  id="masterlist" data-id="m"><a href="#"><div>師傅列表</div></a></li>
 					
 					<li  data-toggle="tab" role="presentation" id="customerlist" data-id="c"><a href="#"><div >消費者列表</div></a></li>
 					
 					<li  data-toggle="tab" role="presentation" id="reportlist" data-id="r"><a href="#"><div>檢舉案件</div></a></li>
 					
-					<li  data-toggle="tab" role="presentation" id="orderlist"><a href="#" data-id="o"><div>訂單列表</div></a></li>
+					<li  data-toggle="tab" role="presentation" id="orderlist" data-id="o" class="active"><a href="#" ><div>訂單列表</div></a></li>
 	
 					<li  data-toggle="tab" role="presentation" id="customeranalysis" data-id="a"><a href="#"><div>用戶分析</div></a></li>
 										
@@ -98,34 +98,15 @@
 
 	$(function(){		
 		
-	   loadProduct("m");	
-	   //讀取xml資料
-// 	   $.ajax({
-// 		   'url':'XMLServlet',
-// 		   'type':'GET',
-// 		   'dataType':'xml'
-// 	   }).done(function(datas){
-// 		   var myUl = $('ul.list-group');
-// 		   myUl.empty();
-// 		   var docFrag = $(document.createDocumentFragment());
-// 		   $(datas).find("Category").each(function(){
-// 			   //  <li data-id="2" class="list-group-item">Condiments</li>
-// 		 	  //console.log($(this).children('CategoryID').text());
-// 		 	  //console.log($(this).children('CategoryName').text());
-// 		 	  var eleLi = $("<li></li>").text($(this).children('CategoryName').text())
-// 		 	                            .addClass('list-group-item')
-// 		 	                            .attr('data-id',$(this).children('CategoryID').text());
-// 		 	  docFrag.append(eleLi);
-// 		   });
-// 		   myUl.append(docFrag);
-// 	   });
+	   loadProduct("o");	
 	   
-// 	   $('#navigator>ul>li').on('click','li',function(){	
-// 		   var id = $(this).data('id');
-// 		   loadProduct(id);
-// // 		   $('ul.list-group>li').removeClass('active');
-// // 		   $('ul.list-group>li[data-id="' + id + '"]').addClass('active');
-// 	   });
+	   $('#navigator>ul>li').on('click',function(){	
+		   
+		   var id = $(this).data('id');
+		   loadProduct(id);
+ 		   $('#navigator>ul>li').removeClass('active');
+  		   $('#navigator>ul>li[data-id="' + id + '"]').addClass('active');
+	   });
 	   
 	   
 	   function loadProduct(id){
@@ -135,10 +116,52 @@
 			   var docFrag = $(document.createDocumentFragment());
 			   var docFrag2 = $(document.createDocumentFragment());
 			   tb.empty();
+			   
 			   $.each(datas,function(i,data){
 				   console.log(data);
-				   console.log(data.B_name);
-				if(id=="m"){
+				   
+				   if(id=="o"){
+					  var thc1 = $('<th></th>').text('師傅編號').addClass('eventlistthreadtrth');
+					   var thc2 = $('<th></th>').text('店家名稱').addClass('eventlistthreadtrth');
+					   var thc3 = $('<th></th>').text('師傅名稱').addClass('eventlistthreadtrth');
+					   var thc4 = $('<th></th>').text('店家地址').addClass('eventlistthreadtrth');
+					   var thc5 = $('<th></th>').text('師傅專業').addClass('eventlistthreadtrth');
+					   var thc6 = $('<th></th>').text('店家狀態').addClass('eventlistthreadtrth');
+					   var thc7 = $('<th></th>').text('平均分數').addClass('eventlistthreadtrth');
+					   var thc8 = $('<th></th>').text('管理者註記').addClass('eventlistthreadtrth');
+					   var thc9 = $('<th></th>').text('管理者註記').addClass('eventlistthreadtrth');
+					   var thc10 = $('<th></th>').text('管理者註記').addClass('eventlistthreadtrth');
+					   var thc1 = $('<th></th>').text('下單日期').addClass('eventlistthreadtrth');
+						var thc2 = $('<th></th>').text('店家名稱').addClass('eventlistthreadtrth');
+						var thc3 = $('<th></th>').text('消費者帳戶').addClass('eventlistthreadtrth');
+						var thc4 = $('<th></th>').text('訂單編號').addClass('eventlistthreadtrth');
+						var thc5 = $('<th></th>').text('服務類別').addClass('eventlistthreadtrth');
+						var thc6 = $('<th></th>').text('服務地址').addClass('eventlistthreadtrth');
+						var thc7 = $('<th></th>').text('訂單狀態').addClass('eventlistthreadtrth');
+						var thc8 = $('<th></th>').text('師傅評分').addClass('eventlistthreadtrth');
+						var thc9 = $('<th></th>').text('消費者評分').addClass('eventlistthreadtrth');
+						var thc10 = $('<th></th>').text('管理者註記').addClass('eventlistthreadtrth');
+						   var cell1 = $('<td></td>').text(data.o_tdate).addClass('eventlisttbodytrtd');
+						   var cell2 = $('<td></td>').text(data.o_bname).addClass('eventlisttbodytrtd');
+						   var cell3 = $('<td></td>').text(data.c_id).addClass('eventlisttbodytrtd');
+						   var cell4 = $('<td></td>').text(data.o_id).addClass('eventlisttbodytrtd');
+// 						   var cell5 = $('<td></td>').text(data.opros).addClass('eventlisttbodytrtd');
+						   var cell6 = $('<td></td>').text(data.o_location).addClass('eventlisttbodytrtd');
+						   var cell7 = $('<td></td>').text(data.s_name).addClass('eventlisttbodytrtd');
+						   var cell8 = $('<td></td>').text(data.m_arating).addClass('eventlisttbodytrtd');
+						   var cell9 = $('<td></td>').text(data.c_arating).addClass('eventlisttbodytrtd');
+						   var sanote =  $('<input type="text" width="500px" /> ').val(data.sa_onote).addClass('eventlisttbodytrtd');
+						   var cell10 = $('<td></td>').html(sanote).addClass('eventlisttbodytrtd');
+						   var rowth = $('<tr></tr>').append([thc1,thc2,thc3,thc4,thc5,thc6,thc7,thc8,thc9,thc10]);
+ 						   var rowtb = $('<tr></tr>').append([cell1,cell2,cell3,cell4,cell5,cell6,cell7,cell8,cell9,cell10]);
+						   
+ 						   docFrag.append(rowth);
+ 						   docFrag2.append(rowtb);
+							}	
+				  
+				  else if(id=="m"){
+// 					var th = $('#eventlist>thead').html('');
+// 					var tb = $('#eventlist>tbody').html('');
 				   var thc1 = $('<th></th>').text('師傅編號').addClass('eventlistthreadtrth');
 				   var thc2 = $('<th></th>').text('店家名稱').addClass('eventlistthreadtrth');
 				   var thc3 = $('<th></th>').text('師傅名稱').addClass('eventlistthreadtrth');
@@ -147,21 +170,26 @@
 				   var thc6 = $('<th></th>').text('店家狀態').addClass('eventlistthreadtrth');
 				   var thc7 = $('<th></th>').text('平均分數').addClass('eventlistthreadtrth');
 				   var thc8 = $('<th></th>').text('管理者註記').addClass('eventlistthreadtrth');
-				   var cell1 = $('<td></td>').text(data.M_id).addClass('eventlisttbodytrtd');
+				   var mid =  $('<input type="button" width="500px" /> ').val(data.M_id).addClass('eventlisttbodytrtd');
+				   var cell1 = $('<td></td>').html(mid).addClass('eventlisttbodytrtd');
 				   var cell2 = $('<td></td>').text(data.B_name).addClass('eventlisttbodytrtd');
 				   var cell3 = $('<td></td>').text(data.M_name).addClass('eventlisttbodytrtd');
 				   var cell4 = $('<td></td>').text(data.M_city+data.M_district+data.M_addr).addClass('eventlisttbodytrtd');
 				   var cell5 = $('<td></td>').text(data.Mpros).addClass('eventlisttbodytrtd');
 				   var cell6 = $('<td></td>').text(data.S_name).addClass('eventlisttbodytrtd');
 				   var cell7 = $('<td></td>').text(data.M_arating).addClass('eventlisttbodytrtd');
-				   var cell8 = $('<td></td>').text(data.Sa_mnote).addClass('eventlisttbodytrtd');
+				   var sanote =  $('<input type="text" width="500px" /> ').val(data.Sa_mnote).addClass('eventlisttbodytrtd');
+				   var cell8 = $('<td></td>').html(sanote).addClass('eventlisttbodytrtd');
 				   var rowth = $('<tr></tr>').append([thc1,thc2,thc3,thc4,thc5,thc6,thc7,thc8]).addClass('eventlistthreadtr');
 				   var rowtb = $('<tr></tr>').append([cell1,cell2,cell3,cell4,cell5,cell6,cell7,cell8]).addClass('eventlisttbodytrtd');
 				   
 				   docFrag.append(rowth);
-				   docFrag.append(rowtb);
+  				   docFrag2.append(rowtb);
 					}
-				if(id=="c"){
+				   
+				else if(id=="c"){
+// 					   var th = $('#eventlist>thead').html('');
+// 					   var tb = $('#eventlist>tbody').html('');
 					   var cell1 = $('<td></td>').text(data[0].c_jdate);
 					   var cell2 = $('<td></td>').text(data[1].c_id);
 					   var cell3 = $('<td></td>').text(data[2].c_name);
@@ -172,6 +200,8 @@
 					   var row = $('<tr></tr>').append([cell1,cell2,cell3,cell4,cell5,cell6,cell7]);
 					   docFrag.append(row);
 						}
+				
+				
 			   });
 			   th.append(docFrag2);
 			   tb.append(docFrag);

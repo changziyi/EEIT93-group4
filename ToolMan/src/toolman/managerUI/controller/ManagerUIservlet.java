@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -47,7 +48,7 @@ public class ManagerUIservlet extends HttpServlet {
 		String action = request.getParameter("action");
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");
-		
+		PrintWriter out = response.getWriter();
 		//test ok
 //		MdataDAO dao = new MdataDAO();
 //		List<MdataVO> mdatas = dao.getAll();
@@ -91,7 +92,6 @@ public class ManagerUIservlet extends HttpServlet {
 				jList.add(jContent);
 			}			
 			String mjasonstring = JSONValue.toJSONString(jList);
-			PrintWriter out = response.getWriter();
 			out.write(mjasonstring);
 			out.flush();
 			System.out.println(mjasonstring);
@@ -107,7 +107,9 @@ public class ManagerUIservlet extends HttpServlet {
 			Map map = new HashMap();
 				for(int i=0;i<list.size();i++){
 					CdataVO cdataVO = list.get(i);
-					Timestamp c_jdate =	cdataVO.getC_jdate();
+					Timestamp c_jdatestamp =	cdataVO.getC_jdate();
+					SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+					String c_jdate = df.format(c_jdatestamp);
 					String c_name =	cdataVO.getC_name();
 					String c_id	= cdataVO.getC_id();
 					String c_addr = cdataVO.getC_addr();
@@ -117,71 +119,44 @@ public class ManagerUIservlet extends HttpServlet {
 					String s_name = cdataVO.getS_name();
 					Integer c_averrating = cdataVO.getC_averrating();
 					String sa_cnote	=cdataVO.getSa_cnote();
-					map.put("c_jdate","c_jdate");
-					map.put("c_name","c_name");
-					map.put("c_id","c_id");
-					map.put("c_city","c_city");
-					map.put("c_district","c_district");
-					map.put("c_addr","c_addr");
-					map.put("s_name","s_name");
-					map.put("c_averrating","c_averrating");
-					map.put("sa_cnote","sa_cnote");	
+					map.put("c_jdate",c_jdate);
+					map.put("c_name",c_name);
+					map.put("c_id",c_id);
+					map.put("c_city",c_city);
+					map.put("c_district",c_district);
+					map.put("c_district2",c_district);
+					map.put("c_addr",c_addr);
+					map.put("s_name",s_name);
+					map.put("c_averrating",c_averrating);
+					map.put("sa_cnote",sa_cnote);	
 					list2.add(map);
 				}
-				JSONValue.toJSONString(list2);
+				String mjasonstring = JSONValue.toJSONString(list2);
+				out.write(mjasonstring);
+				out.flush();
+				System.out.println(mjasonstring);
+
 		}
 		
 		//get o
-//		if("o".equals(action)){
-			List list = new ArrayList();
-			List<OrderVO> orderlist = new ArrayList<OrderVO>();
+		if("o".equals(action)){
 			OrderService orderservice = new OrderService();
-			orderlist = orderservice.getAllOrder();
+			out.write(orderservice.getAllOrderJson());
+//			System.out.println(ojasonstring);
+		
 			
-			for(int i=0; i<orderlist.size();i++){
-				
-				OrderVO orderVO = orderlist.get(i);
-				Timestamp o_tdate = orderVO.getO_tdate();
-				String o_bname = orderVO.getB_name();
-				Integer o_id = orderVO.getO_id();
-				Set<OproVO> opros = orderVO.getOpros();
-				
-				String o_location = orderVO.getO_location();
-				String s_name = orderVO.getS_name();
-				Integer c_rating = orderVO.getC_rating();
-				Integer m_rating = orderVO.getM_rating();
-				String sa_onote = orderVO.getSa_onote();
+			//tested ok
+//			List list = new ArrayList();
+//			Map map = new HashMap();
+//			map.put("c_jdate","1");
+//			map.put("c_name","2");
+//			map.put("c_id","3");
+//			list.add(map);
+//			String mjasonstring = JSONValue.toJSONString(list);
+//			out.write(mjasonstring);
+//			out.flush();
+		}
 			
-				Map map = new HashMap();
-				map.put("o_tdate", o_tdate);
-				map.put("o_bname", o_bname);
-				map.put("o_id", o_id);
-				for(OproVO oproVO : opros){
-					String	opro = oproVO.getO_pro();	
-					map.put("opros", opros);
-	//				System.out.println(opro);
-				}
-				map.put("o_location", o_location);
-				map.put("s_name", s_name);
-				map.put("c_rating", c_rating);
-				map.put("m_rating", m_rating);
-				map.put("sa_onote", sa_onote);
-				list.add(map);
-			
-			// test
-//			System.out.println(o_tdate);
-//			System.out.println(o_bname);
-//			System.out.println(o_id);
-//			
-//			System.out.println(o_location);
-//			System.out.println(s_name);
-//			System.out.println(c_rating);
-//			System.out.println(m_rating);
-//			System.out.println(sa_onote);
-				
-			}
-			JSONValue.toJSONString(list);
-//		}
 		//get report
 		if("r".equals(action)){
 			
@@ -202,7 +177,7 @@ public class ManagerUIservlet extends HttpServlet {
 		}
 
 	}
-		protected void doPost(HttpServletRequest requset, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest requset, HttpServletResponse response) throws ServletException, IOException {
 			doGet(requset, response);
 		}
 	
