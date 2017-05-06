@@ -36,19 +36,19 @@
 		<nav >
 			<div id="navigator" >
 			
-				<ul class="nav nav-tabs nav-justified" style="width:800px; margin:auto;" >
+				<ul class="nav nav-tabs nav-justified" style="width:400px; margin:auto;" >
 				
-					<li data-id="m" data-toggle="tab" role="presentation" class="active" id="masterlist"><a href="#"><div>師傅列表</div></a></li>
+					<li  data-toggle="tab" role="presentation" class="active" id="masterlist" data-id="m"><a href="#"><div>師傅列表</div></a></li>
 					
-					<li data-id="c" data-toggle="tab" role="presentation" id="customerlist" ><a href="#" ><div >消費者列表</div></a></li>
+					<li  data-toggle="tab" role="presentation" id="customerlist" data-id="c"><a href="#"><div >消費者列表</div></a></li>
 					
-					<li data-id="r" data-toggle="tab" role="presentation" id="reportlist" ><a href="#" ><div>檢舉案件</div></a></li>
+					<li  data-toggle="tab" role="presentation" id="reportlist" data-id="r"><a href="#"><div>檢舉案件</div></a></li>
 					
-					<li data-id="o" data-toggle="tab" role="presentation" id="orderlist"><a href="#" ><div>訂單列表</div></a></li>
+					<li  data-toggle="tab" role="presentation" id="orderlist"><a href="#" data-id="o"><div>訂單列表</div></a></li>
 	
-					<li data-id="a" data-toggle="tab" role="presentation" id="customeranalysis"><a href="#" ><div>用戶分析</div></a></li>
+					<li  data-toggle="tab" role="presentation" id="customeranalysis" data-id="a"><a href="#"><div>用戶分析</div></a></li>
 										
-					<li data-id="ad" data-toggle="tab" role="presentation" id="adlist"><a href="#" ><div>廣告</div></a></li>
+					<li  data-toggle="tab" role="presentation" id="adlist" data-id="ad"><a href="#"><div>廣告</div></a></li>
 							
 				</ul>
 			</div>
@@ -60,8 +60,16 @@
 	</div>
 <!-- main content here -->		
 	<article>
-	<table>
-	<tbody id="eventlist">
+	<table id="eventlist">
+	<thead>
+             <tr>
+                <th>1</th>
+                <th>2</th>
+                <th>3</th>
+                <th>4</th>
+             </tr>
+    </thead>
+	<tbody>
 	
 	</tbody>
 	
@@ -96,32 +104,60 @@
 // 		   myUl.append(docFrag);
 // 	   });
 	   
-	   $('#navigator>ul>li').on('click','li',function(){	
-		   var id = $(this).data('id');
-		   loadProduct(id);
-// 		   $('ul.list-group>li').removeClass('active');
-// 		   $('ul.list-group>li[data-id="' + id + '"]').addClass('active');
-	   });
+// 	   $('#navigator>ul>li').on('click','li',function(){	
+// 		   var id = $(this).data('id');
+// 		   loadProduct(id);
+// // 		   $('ul.list-group>li').removeClass('active');
+// // 		   $('ul.list-group>li[data-id="' + id + '"]').addClass('active');
+// 	   });
 	   
 	   
 	   function loadProduct(id){
 		   $.getJSON('${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIservlet.do',{'action':id}, function(datas){
+			   var th = $('#eventlist>thead');
 			   var tb = $('#eventlist>tbody');
 			   var docFrag = $(document.createDocumentFragment());
+			   var docFrag2 = $(document.createDocumentFragment());
 			   tb.empty();
-			   $.each(datas,function(idx,thedata){
-				   //onsole.log(product.ProductName);
-				   var cell1 = $('<td></td>').text(thedata.c_jdate);
-				   var cell2 = $('<td></td>').text(thedata.c_id);
-				   var cell3 = $('<td></td>').text(thedata.c_name);
-				   var cell4 = $('<td></td>').text(thedata.c_city+thedata.c_district+thedata.c_addr);
-				   var cell5 = $('<td></td>').text(thedata.s_name);
-				   var cell6 = $('<td></td>').text(thedata.c_averrating);
-				   var cell7 = $('<td></td>').text(thedata.sa_note);
-				   var row = $('<tr></tr>').append([cell1,cell2,cell3,cell4,cell5,cell6,cell7]);
-				   docFrag.append(row);
+			   $.each(datas,function(i,data){
+				   console.log(data);
+				   console.log(data.B_name);
+				if(id=="m"){
+				   var thc1 = $('<th></th>').text('師傅編號');
+				   var thc2 = $('<th></th>').text('店家名稱');
+				   var thc3 = $('<th></th>').text('師傅名稱');
+				   var thc4 = $('<th></th>').text('店家地址');
+				   var thc5 = $('<th></th>').text('店家狀態');
+				   var thc6 = $('<th></th>').text('平均分數');
+				   var thc7 = $('<th></th>').text('管理者註記');
+				   var cell1 = $('<td></td>').text(data.M_id);
+				   var cell2 = $('<td></td>').text(data.B_name);
+				   var cell3 = $('<td></td>').text(data.c_name);
+				   var cell4 = $('<td></td>').text(data.c_city+data.c_district+data.c_addr);
+				   var cell5 = $('<td></td>').text(data.s_name);
+				   var cell6 = $('<td></td>').text(data.c_averrating);
+				   var cell7 = $('<td></td>').text(data.sa_note);
+				   var rowth = $('<tr></tr>').append([thc1,thc2,thc3,thc4,thc5,thc6,thc7]);
+				   var rowtb = $('<tr></tr>').append([cell1,cell2,cell3,cell4,cell5,cell6,cell7]);
+				   
+				   docFrag.append(rowth);
+				   docFrag.append(rowtb);
+					}
+				if(id=="c"){
+					   var cell1 = $('<td></td>').text(data[0].c_jdate);
+					   var cell2 = $('<td></td>').text(data[1].c_id);
+					   var cell3 = $('<td></td>').text(data[2].c_name);
+					   var cell4 = $('<td></td>').text(data[3].c_city+thedata.c_district+thedata.c_addr);
+					   var cell5 = $('<td></td>').text(data[0].s_name);
+					   var cell6 = $('<td></td>').text(data[0].c_averrating);
+					   var cell7 = $('<td></td>').text(data[0].sa_note);
+					   var row = $('<tr></tr>').append([cell1,cell2,cell3,cell4,cell5,cell6,cell7]);
+					   docFrag.append(row);
+						}
 			   });
+			   th.append(docFrag2);
 			   tb.append(docFrag);
+			   
 		   });   
 	   }
 	}); 

@@ -1,9 +1,12 @@
 package toolman.managerUI.controller;
 
 import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -18,7 +21,9 @@ import org.json.simple.JSONValue;
 
 import toolman.cdata.model.CdataService;
 import toolman.cdata.model.CdataVO;
+import toolman.mdata.model.MdataDAO;
 import toolman.mdata.model.MdataService;
+import toolman.mdata.model.MdataVO;
 import toolman.opro.model.OproVO;
 import toolman.order.model.OrderService;
 import toolman.order.model.OrderVO;
@@ -39,11 +44,48 @@ public class ManagerUIservlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String action = request.getParameter("action");
+		response.setContentType("application/json");
+		response.setCharacterEncoding("UTF-8");
+		
+		//test ok
+//		MdataDAO dao = new MdataDAO();
+//		List<MdataVO> mdatas = dao.getAll();
+//		List<Map> jList = new LinkedList<Map>();
+//		for (MdataVO aMdata : mdatas) {
+//			Map jContent = new HashMap();
+//			jContent.put("M_id", aMdata.getM_id());
+//			jContent.put("B_name", aMdata.getB_name());
+//			jContent.put("M_name", aMdata.getM_name());
+//			jContent.put("M_city", aMdata.getM_city());
+//			jContent.put("M_district", aMdata.getM_district());
+//			jList.add(jContent);
+//		}			
+//		String mjasonstring = JSONValue.toJSONString(jList);
+//		PrintWriter out = response.getWriter();
+//		out.write( mjasonstring);
+//		out.flush();
+//		System.out.println(mjasonstring);
 		
 		//get m
 		if("m".equals(action)){
-			MdataService mdataService = new MdataService();
-			String mjasonstring = mdataService.getAllJson();			
+							
+			MdataDAO dao = new MdataDAO();
+			List<MdataVO> mdatas = dao.getAll();
+			List<Map> jList = new LinkedList<Map>();
+			for (MdataVO aMdata : mdatas) {
+				Map jContent = new HashMap();
+				jContent.put("M_id", aMdata.getM_id());
+				jContent.put("B_name", aMdata.getB_name());
+				jContent.put("M_name", aMdata.getM_name());
+				jContent.put("M_city", aMdata.getM_city());
+				jContent.put("M_district", aMdata.getM_district());
+				jList.add(jContent);
+			}			
+			String mjasonstring = JSONValue.toJSONString(jList);
+			PrintWriter out = response.getWriter();
+			out.write(mjasonstring);
+			out.flush();
+			System.out.println(mjasonstring);
 		}
 		
 		//get c
