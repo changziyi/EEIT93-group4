@@ -46,6 +46,7 @@ public class ManagerUIServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String action = request.getParameter("action");
+//		action = "c";
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
@@ -83,13 +84,12 @@ public class ManagerUIServlet extends HttpServlet {
 		//get c tested ok
 		if("c".equals(action)){
 			
-			List<CdataVO> list = new ArrayList<CdataVO>();
 			CdataService cdataservice = new CdataService();
-			list = cdataservice.getAll();
+			List<CdataVO> list = cdataservice.getAll();
 			List list2 = new ArrayList();
 			Map map = new HashMap();
-				for(int i=0;i<list.size();i++){
-					CdataVO cdataVO = list.get(i);
+				for(CdataVO cdataVO:list){
+
 					Timestamp c_jdatestamp =	cdataVO.getC_jdate();
 					SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 					String c_jdate = df.format(c_jdatestamp);
@@ -102,6 +102,7 @@ public class ManagerUIServlet extends HttpServlet {
 					String s_name = cdataVO.getS_name();
 					Integer c_averrating = cdataVO.getC_averrating();
 					String sa_cnote	=cdataVO.getSa_cnote();
+					System.out.println(c_id);
 					map.put("c_jdate",c_jdate);
 					map.put("c_name",c_name);
 					map.put("c_id",c_id);
