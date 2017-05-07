@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="toolman.cdata.model.CdataVO" table="cdata">
+
+		<id name="c_id" column="c_id">		
+			 <generator class="assigned"/>
+		</id>
+		
+		<property name="c_pwd" column="c_pwd" />
+		<property name="c_name" column="c_name" />
+		<property name="c_cel" column="c_cel" />
+		<property name="c_email" column="c_email" />
+		<property name="c_city" column="c_city" />
+		<property name="c_district" column="c_district" />
+		<property name="c_addr" column="c_addr" />
+		<property name="c_jdate" column="c_jdate" />
+		<property name="c_averrating" column="c_averrating" />
+		<property name="m_id" column="m_id" />
+		<property name="s_name" column="s_name" />
+		<property name="c_fb" column="c_fb" />
+		<property name="c_google" column="c_google" />
+		<property name="sa_cnote" column="sa_cnote" />
+		<property name="c_birth" column="c_birth" />
+		<property name="c_finished" column="c_finished" />
+		
+		<set name="orders" table="ord" lazy="false" cascade="all"  inverse="true"  order-by="o_edate asc">	
+																					<!--依訂單完成時間排序-->		
+			<key>
+				<column name="c_id" />
+			</key>
+			<one-to-many class="toolman.order.model.OrderVO" />
+		</set>		
+	
+	</class>
+</hibernate-mapping>
+
