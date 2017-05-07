@@ -112,39 +112,43 @@
 
 <script>
 	var table ;
-
+	var navagatorid = $('#navigator>ul>li.active').data('id');
 
 $(function(){
 // 		$(document).ajaxComplete(function(){
 // 			 datatableinit();
 // 		});	//open and everything goes wrong
-
+		
 		loadProduct('m');
 		$('#navigator>ul>li').on('click',navigatorevent);//end on do not add ()
-	    functionrow();
-// 	    subfunctionrow();
+		
+		functionrow();
+ 	    subfunctionrow();
 	   
 	}// end ready function
 ); //end ready   
 
 	function navigatorevent(){
-		 
+		
 		 $('#eventlist').dataTable().fnDestroy();   
 		   var id = $(this).data('id');
+		   navagatorid = id;
 		   loadProduct(id);
-//		   $('#navigator>ul>li').removeClass('active');
-// 		   $('#navigator>ul>li[data-id="' + id + '"]').addClass('active');
+		   $('#navigator>ul>li').removeClass('active');
+		   $('#navigator>ul>li[data-id="' + id + '"]').addClass('active');
+		   
 		   functionrow();
 // 		   subfunctionrow(); 
 		   
 	}//navigatorevent()
 	
 	function functionrow(){
-		var navdiv = $('#functionrow>ul');
+
 		var docFragfunction = $(document.createDocumentFragment());
-	   if( $('#navigator>ul>li.active').data('id')== 'm'){
+		
+	   if( navagatorid== 'm'){
 		   
-			$('#functionrow2').empty();
+ 			$('#functionrow2').empty();
 			var allmaster = '<li data-toggle="tab" role="presentation" data-id="allmaster" class="active"><a href="#">所有師傅</a></li>';
 			var masterstatus = '<li data-toggle="tab" role="presentation" data-id="masterstatus" ><a href="#">師傅狀態</a></li>';
 			var toactm = '<li data-toggle="tab" role="presentation" data-id="toactm" ><a href="#">動作</a></li>';
@@ -155,9 +159,10 @@ $(function(){
 			var li4 = $(showblacklistc);
 			docFragfunction.append([li1,li2,li3,li4]);
 			$('#functionrow2').append(docFragfunction);
+			
 		}//end else if
 		
-		else if($('#navigator>ul>li.active').data('id')== 'c'){
+		else if(navagatorid== 'c'){
 			
 			$('#functionrow2').empty();
 			var allcustomer = '<li data-toggle="tab" role="presentation" data-id="allmaster" class="active"><a href="#">所有消費者</a></li>';
@@ -173,10 +178,10 @@ $(function(){
 			
 		}//end else if
 		
-// 		else if($('#navigator>ul>li.active').data('id')== 'o'){
+		else if(navagatorid== 'o'){
 			
 			$('#functionrow2').empty();
-			var allorder = '<li data-toggle="tab" role="presentation" data-id="allmaster" ><a href="#">所有訂單</a></li>';
+			var allorder = '<li data-toggle="tab" role="presentation" data-id="allmaster" class="active" ><a href="#">所有訂單</a></li>';
 			var orderstatus = '<li data-toggle="tab" role="presentation" data-id="allmaster" ><a href="#">訂單狀態</a></li>';
 			var toacto = '<li data-toggle="tab" role="presentation" data-id="allmaster" ><a href="#">動作</a></li>';
 			var showblacklisto = '<li data-toggle="tab" role="presentation" data-id="allmaster" ><a href="#">問題交易</a></li>';
@@ -187,43 +192,50 @@ $(function(){
 			docFragfunction.append([li1,li2,li3,li4]);
 			$('#functionrow2').append(docFragfunction);
 			
-// 		}// end else if 
+ 		}// end else if 
 
 	}//end functionrow
 	
 
-// 	   function subfunctionrow(){
-		
-// 		   if( $('#navigator>ul>li.active').data('id')== 'm'){
-// 				$('#subfunctionrow').empty();
-// 				var applicationreviewm = '<input type="button" value="審核師傅"/>';
-// 				var suspensionm = '<input type="button" value="停權"/>';
-// 				var sendmessagem = '<input type="button" value="傳送訊息"/>';
-// 				var blacklistm = '<input type="button" value="黑名單"/>';
-// 				$('#subfunctionrow').html( applicationreviewm );
-// 				$('#subfunctionrow').html( suspensionm );
-// 				$('#subfunctionrow').html( sendmessagem );
-// 				$('#subfunctionrow').html( blacklistm );
-				
-// 			}//end else if
-// 			else if($('#navigator>ul>li.active').data('id')== 'c'){
-// 				$('#subfunctionrow').empty();
-// 				var suspensionc = '<input type="button" value="停權"/>';
-// 				var sendmessagec = '<input type="button" value="傳送訊息"/>';
-// 				var blacklistc = '<input type="button" value="黑名單"/>';
-// 				$('#subfunctionrow').html(suspensionc);
-// 				$('#subfunctionrow').html( sendmessagec );
-// 				$('#subfunctionrow').html( blacklistc );
-				
-// 			}//end else if
-// 			else if($('#navigator>ul>li.active').data('id')== 'o'){
-// 				$('#subfunctionrow').empty();
-// 				var suspensionc = '<input type="button" value="訊息"/>';
-// 				$('#subfunctionrow').html(suspensionc);
+	   function subfunctionrow(){
 
-// 			}// end else if 
+			var docFragsubfunction = $(document.createDocumentFragment());
+		   if( navagatorid== 'm'){
+				$('#subfunctionrow').empty();
+				var applicationreviewm = '<input type="button" value="審核師傅"/>';
+				var suspensionm = '<input type="button" value="停權"/>';
+				var sendmessagem = '<input type="button" value="傳送訊息"/>';
+				var blacklistm = '<input type="button" value="黑名單"/>';
+				var b1 = $(applicationreviewm);
+				var b2 = $(suspensionm);
+				var b3 = $(sendmessagem);
+				var b4 = $(blacklistm);
+				docFragsubfunction.append([b1,b2,b3,b4]);
+				$('#subfunctionrow').append(docFragsubfunction);
+			}//end else if
+			
+			else if(navagatorid== 'c'){
+				$('#subfunctionrow').empty();
+				var suspensionc = '<input type="button" value="停權"/>';
+				var sendmessagec = '<input type="button" value="傳送訊息"/>';
+				var blacklistc = '<input type="button" value="黑名單"/>';
+				var b1 = $(suspensionc);
+				var b1 = $(sendmessagec);
+				var b1 = $(blacklistc);
+				docFragsubfunction.append([b1,b2,b3]);
+				$('#subfunctionrow').append(docFragsubfunction);
+			}//end else if
+			
+			else if(navagatorid== 'o'){
+				$('#subfunctionrow').empty();
+				var suspensionc = '<input type="button" value="訊息"/>';
+				var b1 = $(suspensionc);
+				docFragsubfunction.append([b1]);
+				$('#subfunctionrow').append(docFragsubfunction);
+				
+			}// end else if 
 	
-// 		}//end functionrow
+		}//end functionrow
 		
 	   function loadProduct(id){
 
@@ -308,8 +320,9 @@ $(function(){
 						var cell7 = $('<td></td>').text(data.s_name).addClass('eventlisttbodytrtd');
 						var cell8 = $('<td></td>').text(data.m_arating).addClass('eventlisttbodytrtd');
 						var cell9 = $('<td></td>').text(data.c_arating).addClass('eventlisttbodytrtd');
-						var sanote =  $('<input type="text" width="500px" /> ').val(data.sa_onote).addClass('eventlisttbodytrtd');
-						var cell10 = $('<td></td>').html(sanote).addClass('eventlisttbodytrtd');
+						var wordsanote =  $('<span style="visibility: hidden;font-size:0px;margin:0pxlpadding:0px;"></span> ').text(data.sa_onote).addClass('eventlisttbodytrtd');
+						var saonote =  $('<input type="text" width="500px" /> ').val(data.sa_onote).addClass('eventlisttbodytrtd');
+						var cell10 = $('<td></td>').html(saonote).addClass('eventlisttbodytrtd').append(wordsanote);
  						var rowtb = $('<tr></tr>').append([cell1,cell2,cell3,cell4,cell5,cell6,cell7,cell8,cell9,cell10]);
  						docFragtb.append(rowtb);
 						}//end if
@@ -318,15 +331,17 @@ $(function(){
 					   tb.empty();
 					     
 				   var mid =  $('<input type="button" width="500px" /> ').val(data.M_id).addClass('eventlisttbodytrtd');
-				   var cell1 = $('<td></td>').html(mid).addClass('eventlisttbodytrtd');
+				   var midwordmid =  $('<span style="visibility: hidden;font-size:0px;margin:0pxlpadding:0px;"></span> ').text(data.M_id).addClass('eventlisttbodytrtd');
+				   var cell1 = $('<td></td>').html(mid).addClass('eventlisttbodytrtd').append(midwordmid);
 				   var cell2 = $('<td></td>').text(data.B_name).addClass('eventlisttbodytrtd');
 				   var cell3 = $('<td></td>').text(data.M_name).addClass('eventlisttbodytrtd');
 				   var cell4 = $('<td></td>').text(data.M_city+data.M_district).addClass('eventlisttbodytrtd');
 				   var cell5 = $('<td></td>').text(data.Mpros).addClass('eventlisttbodytrtd');
 				   var cell6 = $('<td></td>').text(data.S_name).addClass('eventlisttbodytrtd');
 				   var cell7 = $('<td></td>').text(data.M_arating).addClass('eventlisttbodytrtd');
-				   var sanote =  $('<input type="text" width="500px" /> ').val(data.Sa_mnote).addClass('eventlisttbodytrtd');
-				   var cell8 = $('<td></td>').html(sanote).addClass('eventlisttbodytrtd');
+				   var wordsanote =  $('<span style="visibility: hidden;font-size:0px;margin:0pxlpadding:3px;"></span> ').text(data.Sa_mnote).addClass('eventlisttbodytrtd');
+				   var samnote =  $('<input type="text" width="500px" /> ').val(data.Sa_mnote).addClass('eventlisttbodytrtd');
+				   var cell8 = $('<td></td>').html(samnote).addClass('eventlisttbodytrtd').append(wordsanote);
 				   var rowtb = $('<tr></tr>').append([cell1,cell2,cell3,cell4,cell5,cell6,cell7,cell8]).addClass('eventlisttbodytrtd');				   
   				   docFragtb.append(rowtb);
 					}//end if
@@ -340,7 +355,9 @@ $(function(){
 					   var cell4 = $('<td></td>').text(data.c_city+data.c_district).addClass('eventlisttbodytrtd');;
 					   var cell5 = $('<td></td>').text(data.s_name).addClass('eventlisttbodytrtd');;
 					   var cell6 = $('<td></td>').text(data.c_averrating).addClass('eventlisttbodytrtd');;
-					   var cell7 = $('<td></td>').text(data.sa_note).addClass('eventlisttbodytrtd');;
+					   var wordsanote =  $('<span style="visibility: hidden;font-size:0px;margin:0pxlpadding:0px;"></span> ').text(data.sa_cnote).addClass('eventlisttbodytrtd');
+					   var sacnote =  $('<input type="text" width="500px" /> ').val(data.sa_cnote).addClass('eventlisttbodytrtd');
+					   var cell7 = $('<td></td>').text(samnote).addClass('eventlisttbodytrtd').append(wordsanote);;
 					   var row = $('<tr></tr>').append([cell1,cell2,cell3,cell4,cell5,cell6,cell7]);
 					   docFragtb.append(row);
 					   
