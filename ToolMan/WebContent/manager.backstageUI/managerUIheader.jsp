@@ -107,18 +107,7 @@ var table ;
 
 
 	$(function(){
-// 		$(document).ajaxComplete(function(){
-// 			 datatableinit();
 
-// 		});
-
-// 		var rowsPerPage = 3;  //row per page
-// 		var rowNumber=0;      //total row
-// 		var pageNumber=0;     //total page      
-// 		var whichPage=1;      //current page index
-// 		var pageIndexArray[]=null;
-// 		var pageIndex=0; 
-		
 		loadProduct('m');
 
 	   $('#navigator>ul>li').on('click',function(){			   
@@ -129,8 +118,7 @@ var table ;
 //   		   $('#navigator>ul>li[data-id="' + id + '"]').addClass('active');
 		   
 	   	}//end on function
-	   );// end on
-	   
+	   );// end on	   
 // 	   datatableinit();
 	}// end ready function
 ); //end ready   
@@ -288,39 +276,6 @@ var table ;
 						 );	//end datable	   
 				   }//end datatabledestory function
 				   
-// 				function pageselection(){
-
-					
-// 					rowNumber=list.size();
-// 				    if (rowNumber%rowsPerPage !=0)
-// 				     pageNumber=rowNumber/rowsPerPage +1;
-// 				    else pageNumber=rowNumber/rowsPerPage;    
-
-// 				    pageIndexArray=new int[pageNumber]; 
-// 				    for (int i=1 ; i<=pageIndexArray.length ; i++)
-// 				    pageIndexArray[i-1]=i*rowsPerPage-rowsPerPage;
-					  
-// 					    if(changepage==false){
-// 						    whichPage=1;
-// 						    pageIndex=0;
-// 					    }//end if
-// 					    else if(changepage==false){
-// 						    whichPage = $(#pages).value();//get clicked page
-// 						    pageIndex=pageIndexArray[whichPage-1];
-// 					    }//end else if
-// 					    else{
-// 					    	 if (pageNumber>0){
-// 					              whichPage=pageNumber;
-// 					              pageIndex=pageIndexArray[pageNumber-1];
-// 					    	}
-// 					    }//end else
-// 					    $('#pageindex').text('第'+whichPage/pageNumber+'頁');//buttom indicator
-// 				  }// end page function
-				   
-// window.onload=function(){
-// 	datatableinit();
-	
-// }
 
 </script>
 
