@@ -273,7 +273,7 @@ var table ;
 			// 			"lengthMenu":[1, 2, 3, "All"],
 // 						destroy: true,
 // 						"pageLength": 1,
-						 "lengthMenu": [ [1, 25, 50, -1], [1, 25, 50, "All"] ],
+						 "lengthMenu": [ [1, 2, 50, -1], [1, 2, 50, "All"] ],
 			// 			"iDisplayLength": 10
 			//			  	destroy: true,
 			//			 		aaData: response.data	
