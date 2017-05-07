@@ -103,23 +103,26 @@
 
 
 <script>
-// table = null;
-// $(document).ajaxComplete(function(){
-// 	 datatableinit();
-// });
+var table ;
+
+
 	$(function(){
-	
+// 		$(document).ajaxComplete(function(){
+// 			 datatableinit();
+
+// 		});
+
 // 		var rowsPerPage = 3;  //row per page
 // 		var rowNumber=0;      //total row
 // 		var pageNumber=0;     //total page      
 // 		var whichPage=1;      //current page index
 // 		var pageIndexArray[]=null;
 // 		var pageIndex=0; 
-
+		
 		loadProduct('m');
 
-	   $('#navigator>ul>li').on('click',function(){	
-		  
+	   $('#navigator>ul>li').on('click',function(){			   
+		   $('#eventlist').dataTable().fnDestroy();   
 		   var id = $(this).data('id');
 		   loadProduct(id);
 //  		   $('#navigator>ul>li').removeClass('active');
@@ -133,14 +136,15 @@
 ); //end ready   
 	   
 	   function loadProduct(id){
-		   
+
 			   $.getJSON('${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIServlet.do',{'action':id}, function(datas){
-				   var th = $('#eventlist>thead');
-				   var tb = $('#eventlist>tbody');
+					 var th = $('#eventlist>thead');
+					 var tb = $('#eventlist>tbody');
 				   var docFragth = $(document.createDocumentFragment());
 				   var docFragtb = $(document.createDocumentFragment());
 				   tb.empty();
 				   th.empty();
+				   
 			   if(id=="o"){
 				   
 				   th.empty();
@@ -264,12 +268,12 @@
 			   
 	   }//end loadProduct(id) function
 				function datatableinit(){
-					$('#eventlist').DataTable({
-						retrieve: true,
+				table =	$('#eventlist').DataTable({
+// 						retrieve: true,
 			// 			"lengthMenu":[1, 2, 3, "All"],
-						
+// 						destroy: true,
 // 						"pageLength": 1,
-			// 			 "lengthMenu": [ [1, 25, 50, -1], [1, 25, 50, "All"] ],
+						 "lengthMenu": [ [1, 25, 50, -1], [1, 25, 50, "All"] ],
 			// 			"iDisplayLength": 10
 			//			  	destroy: true,
 			//			 		aaData: response.data	
