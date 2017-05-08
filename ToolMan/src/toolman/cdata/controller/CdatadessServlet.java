@@ -34,15 +34,14 @@ public class CdatadessServlet extends HttpServlet {
 		CdataVO cdataVO = new CdataVO();
 		CdataService cs = new CdataService();	
 		cdataVO = cs.cdata_des("PolarBear");		
-		session.setAttribute("cdataVO", cdataVO);
-		
+		session.setAttribute("cdataVO", cdataVO);	
 		Set<OrderVO> orders = cdataVO.getOrders();
 		for (OrderVO aOrder : orders) {
 			System.out.print(" 師傅 : "+ aOrder.getB_name()+" , ");
 			System.out.println(" 時間 : "+ aOrder.getO_edate());
-			session.setAttribute("orders", orders);
 		}
 		session.setAttribute("orders", orders);
+		System.out.print(c_id);
 		
 		RequestDispatcher failureView = request.getRequestDispatcher("test1.jsp");
 		failureView.forward(request,response);	

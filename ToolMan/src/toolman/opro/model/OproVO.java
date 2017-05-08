@@ -1,5 +1,6 @@
 package toolman.opro.model;
 
+import toolman.mpro.model.MProVO;
 import toolman.order.model.OrderVO;
 //import toolman.mpro.model.MproVO;//合併師傅專業後打開
 public class OproVO {
@@ -7,23 +8,25 @@ public class OproVO {
 	Integer o_proid;
 	OrderVO o_id;
 	String o_pro;
-	Integer m_proid;//合併師傅專業後註解
-//	MproVO m_proid;//合併師傅專業後打開
+//	Integer m_proid;//合併師傅專業後註解
+	MProVO m_proid;//合併師傅專業後打開
 	
-//	public MproVO getM_proid() { //合併師傅專業後打開
-//		return m_proid;
-//	}
-//	public void setM_proid(MproVO m_proid) {//合併師傅專業後打開
-//		this.m_proid = m_proid;
-//	}
 
 	
-	public Integer getM_proid() {//合併師傅專業後註解
+	//合併師傅專業後打開
+	public MProVO getM_proid() {
 		return m_proid;
 	}
-	public void setM_proid(Integer m_proid) {//合併師傅專業後註解
+	//合併師傅專業後打開
+	public void setM_proid(MProVO m_proid) {
 		this.m_proid = m_proid;
 	}
+	//	public Integer getM_proid() {//合併師傅專業後註解
+//		return m_proid;
+//	}
+//	public void setM_Proid(Integer m_proid) {//合併師傅專業後註解
+//		this.m_proid = m_proid;
+//	}
 	public Integer getO_proid() {
 		return o_proid;
 	}
