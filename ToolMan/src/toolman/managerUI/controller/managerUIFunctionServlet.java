@@ -29,8 +29,76 @@ public class managerUIFunctionServlet extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String uiaction = request.getParameter("functionaction");
-		if(uiaction="")
+		String functionaction = request.getParameter("functionaction");
+		if(functionaction=""){
+			
+			
+		}
+		if(functionaction=""){
+			
+			
+		}
+		if(functionaction=""){
+			
+			
+		}
+		if(functionaction=""){
+			
+			
+		}
+		if(functionaction=""){
+			
+			
+		}
+		if(functionaction=""){
+			
+			
+		}
+		if(functionaction=""){
+			
+			
+		}
+		
+		if(functionaction=""){
+			
+			
+		}
+		if(functionaction=""){
+			
+			
+		}
+		if(functionaction=""){
+			
+			
+		}
+		if(functionaction=""){
+			
+			
+		}
+		if(functionaction=""){
+			
+			
+		}
+		if(functionaction=""){
+			
+			
+		}
+		if(functionaction=""){
+			
+			
+		}
+		if(functionaction=""){
+			
+			
+		}
+		if(functionaction=""){
+			
+			
+		}
+		if(functionaction=""){
+			
+			
+		}
 		
 	}
 
