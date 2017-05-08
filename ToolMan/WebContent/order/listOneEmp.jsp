@@ -6,6 +6,8 @@
 <%
 	OrderVO orderVO = (OrderVO) request.getAttribute("orderVO"); //EmpServlet.java (Concroller), 存入req的empVO物件 (包括幫忙取出的empVO, 也包括輸入資料錯誤時的empVO物件)
 %>
+
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -28,13 +30,14 @@
 		<th>消費者評價說明</th>
 	</tr>
 	<tr align='center' valign='middle'>
-		<td>${orderVO.o_id}</td>
-		<td>${orderVO.b_name}</td>
-		<td>${orderVO.o_edate}</td>
-		<td>${orderVO.o_des}</td>
-		<td>${orderVO.o_location}</td>
-		<td>${orderVO.m_rating}</td>
-        <td>${orderVO.ca_des}</td>
+	
+		<td><%=orderVO.getO_id()%></td>
+		<td><%=orderVO.getB_name()%></td>
+		<td><%=orderVO.getO_edate()%></td>
+		<td><%=orderVO.getO_des()%></td>
+		<td><%=orderVO.getO_location()%></td>
+		<td><%=orderVO.getM_rating()%></td>
+        <td><%=orderVO.getCa_des()%></td>
         
 	 </tr>
 </table>
