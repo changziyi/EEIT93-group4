@@ -219,19 +219,20 @@ public class MdataDAO implements MdataDAO_interface {
 //		
 		dao.updatemasterSname(1001);
 //		//D車join
-//		List<MdataVO> list7 = dao.SearchByCityAndMpro("臺北市","水");
-//		for (MdataVO list : list7) {
-//			System.out.print(list.getM_city() + ",");
-//			System.out.print(list.getM_id() + ",");
-//			System.out.print(list.getM_name() + ",");
-//			System.out.println(list.getB_name());
-//			Set<MProVO> mpros = list.getMpros();
-//			for (MProVO aMpro : mpros) {
-//				System.out.println(aMpro.getM_pro());
-//			}
-//			System.out.println("-----------------");
-//		}
 
+/*		List<MdataVO> list7 = dao.SearchByCityAndMpro("臺北市","水");
+		for (MdataVO list : list7) {
+			System.out.print(list.getM_city() + ",");
+			System.out.print(list.getM_id() + ",");
+			System.out.print(list.getM_name() + ",");
+			System.out.println(list.getB_name());
+			Set<MProVO> mpros = list.getMpros();
+			for (MProVO aMpro : mpros) {
+				System.out.println(aMpro.getM_pro());
+			}
+			System.out.println("-----------------");
+		}
+*/
 		
 		//B車join
 //		List<Object[]> list5 = dao.Search_B("水");
