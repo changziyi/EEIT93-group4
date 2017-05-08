@@ -46,6 +46,16 @@ public class WishpoolServlet extends HttpServlet {
 			WishpoolService wishpoolSvc = new WishpoolService();
 			WishpoolVO wishpoolVO = wishpoolSvc.findByPrimaryKey(img);
 			byte[] w_image = wishpoolVO.getW_image();
+			
+			if (w_image == null || w_image.length == 0) {
+				InputStream in = getServletContext().getResourceAsStream("/images/no_image.PNG");
+				w_image = new byte[in.available()];
+				in.read(w_image);
+				out.write(w_image);
+				in.close();
+				return;
+			}
+			
 			out.write(w_image);
 			out.close();
 			}

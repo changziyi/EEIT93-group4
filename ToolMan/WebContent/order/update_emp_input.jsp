@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
     <%@ page import="toolman.order.model.*"%>
     
   <%
@@ -28,12 +29,14 @@
 </head>
 <body>
 	
+	
 <FORM METHOD="post" ACTION="OrderController.do" name="form1">
 	<div>
 	訂單編號:<font color=red><b>*</b></font>
 	<span> <%=orderVO.getO_id()%></span>
 	 <span><%=orderVO.getB_name()%></span>
 	</div>
+	
 	<label>分數</label>
 			<input type="radio" name="m_rating" value="5" checked="checked">5
 			<input type="radio" name="m_rating" value="4" >4

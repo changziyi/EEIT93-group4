@@ -163,7 +163,7 @@ public class BlacklistJDBCDAO implements BlacklistDAO_interface {
 	}
 
 	@Override
-	public List<BlacklistVO> getAll() {
+	public List<BlacklistVO> getAllBlacklist() {
 		// TODO Auto-generated method stub
 		List<BlacklistVO> list = new ArrayList<BlacklistVO>();
 		BlacklistVO blacklistVO = null;
@@ -247,7 +247,7 @@ public class BlacklistJDBCDAO implements BlacklistDAO_interface {
 //				+ "---------------------------------------------------------");
 
 		/************************** 測試多筆查詢 ****************************/
-		 List<BlacklistVO> list =dao.getAll();
+		 List<BlacklistVO> list =dao.getAllBlacklist();
 		 for(BlacklistVO mda : list){
 		System.out.print(mda.getBk_id() + ",");
 	
