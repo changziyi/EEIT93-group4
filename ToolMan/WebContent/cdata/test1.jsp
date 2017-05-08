@@ -17,7 +17,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-	<jsp:useBean id="cdataVO" class="toolman.cdata.model.CdataVO" scope="session"/>
+<%-- 	<jsp:useBean id="cdataVO" class="toolman.cdata.model.CdataVO" scope="session"/> --%>
 <div class="container">
 
   <ul class="nav nav-tabs"style="width:400px;" >
@@ -27,12 +27,11 @@
   <div class="tab-content">
     <div id="home" class="tab-pane fade in active">
       <h3>HOME</h3>
-<%--     	<p>師傅：<c:forEach var="cdata" items="${orders}">${cdata.m_id}</c:forEach></p> --%>
-<%-- 		<p>時間：${orders.b_name}</p> --%>
-<%-- 		<p>留言：${orders.o_edate}</p> --%>
-		<p>師傅：${cdataVO.c_id}</p>
-		<p>時間：${orderVO}</p>
-		<p>留言：${orderVO}</p>
+      <c:forEach var="cdata" items="${orders}">
+    	<p>師傅：${cdata.b_name}</p>
+		<p>時間：${cdata.o_edate}</p>
+		<p>留言：${cdata.ma_des}</p>
+	</c:forEach>
       </div>
     <div id="menu2" class="tab-pane fade">
       <h3>Menu 2</h3>

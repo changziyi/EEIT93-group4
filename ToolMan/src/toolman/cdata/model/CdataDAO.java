@@ -1,6 +1,8 @@
 package toolman.cdata.model;
 
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -112,24 +114,53 @@ public class CdataDAO implements CdataDAO_interface{
 		}
 		return cdataVO;
 	}
-	
+	//BY Benny
+	public void updatecustomerSname(Integer c_id) {
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try {
+			session.beginTransaction();
+			Query query = session.createQuery("from CdataVO set s_name=:s where c_id=:c");
+			query.setParameter("s","c_sus");
+			query.setParameter("c",c_id);
+			Integer count = query.executeUpdate();
+			session.getTransaction().commit();
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
+	}
 
 	public static void main(String args[]){		
 		CdataDAO  dao = new CdataDAO();
-		
-		
-		/*********************** 查詢媒合  *****************************/
-		
-		CdataVO cdataVO = dao.cdata_des("PolarBear");
-		System.out.print(cdataVO.getC_id() + ",");
-		System.out.println(cdataVO.getC_name());
-		
-		Set<OrderVO> orders = cdataVO.getOrders();
-		for (OrderVO aOrder : orders) {
-			System.out.print(" 師傅 : "+ aOrder.getB_name()+" , ");
-			System.out.println(" 時間 : "+ aOrder.getO_edate());
+		List<CdataVO> list= dao.getAll();
+		for(CdataVO cdataVO:list){
+			Timestamp c_jdatestamp =	cdataVO.getC_jdate();
+			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			String c_jdate = df.format(c_jdatestamp);
+			String c_name =	cdataVO.getC_name();
+			String c_id	= cdataVO.getC_id();
+			String c_addr = cdataVO.getC_addr();
+			String c_district = cdataVO.getC_district();
+			String c_city = cdataVO.getC_city();
+			String c_location = c_city + c_district + c_addr;					
+			String s_name = cdataVO.getS_name();
+			Integer c_averrating = cdataVO.getC_averrating();
+			String sa_cnote	=cdataVO.getSa_cnote();
+			System.out.println(c_id);
 		}
-		
+//		
+//		/*********************** 查詢媒合  *****************************/
+//		
+//		CdataVO cdataVO = dao.cdata_des("PolarBear");
+//		System.out.print(cdataVO.getC_id() + ",");
+//		System.out.println(cdataVO.getC_name());
+//		
+//		Set<OrderVO> orders = cdataVO.getOrders();
+//		for (OrderVO aOrder : orders) {
+//			System.out.print(" 師傅 : "+ aOrder.getB_name()+" , ");
+//			System.out.println(" 時間 : "+ aOrder.getO_edate());
+//		}
+//		
 		/*********************** 評價  *****************************/
 		//評價
 //		CdataVO cdataVO = dao.cdata_des("PolarBear");
