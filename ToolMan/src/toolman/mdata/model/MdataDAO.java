@@ -200,7 +200,7 @@ public class MdataDAO implements MdataDAO_interface {
 		MdataDAO dao = new MdataDAO();
 //		
 //		//D車join
-		List<MdataVO> list7 = dao.SearchByCityAndMpro("臺北市","水");
+/*		List<MdataVO> list7 = dao.SearchByCityAndMpro("臺北市","水");
 		for (MdataVO list : list7) {
 			System.out.print(list.getM_city() + ",");
 			System.out.print(list.getM_id() + ",");
@@ -212,7 +212,7 @@ public class MdataDAO implements MdataDAO_interface {
 			}
 			System.out.println("-----------------");
 		}
-
+*/
 		
 		//B車join
 //		List<Object[]> list5 = dao.Search_B("水");

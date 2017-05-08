@@ -18,10 +18,13 @@
 </style>
 </head>
 <body>
-
-	<input type="text" name="search"><span id="twzipcode"></span>
-	<br><button type="button" id="btn">找師傅</button>
-	<input type="hidden" name="city">
+	
+	<form action="master.do" method="post">
+		<span id="twzipcode"></span><input type="text" name="search"><button type="button" id="btn">找師傅</button>
+		<input type="submit" value="servlet">
+		<input type="hidden" name="action" value="SearchResult">
+		<input type="hidden" name="city" >
+	</form>
 
 <!--  
 	<div class="row">
@@ -93,13 +96,14 @@
 			show.append(docFragment);
 		});
 		
-
+		console.log(city.val());
+		
 		$('#twzipcode').twzipcode({
 			'css': ['county', 'district', 'zipcode'],
-			'countySel' : '臺北市',
 			'onCountySelect': function () {
 		    	city.attr("value", this.value);
-		    }
+		    },
+		    'countySel':'${search.m_city}'
 		});
 		
 	})
