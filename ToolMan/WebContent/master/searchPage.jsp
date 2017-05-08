@@ -24,7 +24,7 @@
 		<span id="twzipcode"></span><input type="text" name="search"><button type="button" id="btn">找師傅</button>
 		<input type="submit" value="servlet">
 		<input type="hidden" name="action" value="SearchMaster">
-		<input type="hidden" name="city">
+		<input type="hidden" name="city" >
 	</form>
 
 <script>
@@ -33,10 +33,10 @@
 
 	$('#twzipcode').twzipcode({
 		'css': ['county', 'district', 'zipcode'],
-		'countySel' : '臺北市',
 		'onCountySelect': function () {
 	    	city.attr("value", this.value);
-	    }
+	    },
+		'countySel':'臺北市'
 	});
 	
 	var search = $('input[name="search"]');

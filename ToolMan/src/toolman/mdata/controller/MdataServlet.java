@@ -63,8 +63,8 @@ public class MdataServlet extends HttpServlet {
 			mdataVO.setB_name(input);
 			
 			session.setAttribute("search", mdataVO);
-			response.sendRedirect("searchResult.jsp");
-			return;
+//			response.sendRedirect("searchResult.jsp");
+//			return;
 			
 		}
 		
