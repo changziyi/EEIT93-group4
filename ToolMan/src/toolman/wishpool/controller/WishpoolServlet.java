@@ -14,12 +14,14 @@ import java.util.Map;
 import java.sql.Timestamp;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
+
 import toolman.wishpool.model.WishpoolDAO;
 import toolman.wishpool.model.WishpoolService;
 import toolman.wishpool.model.WishpoolVO;
@@ -32,7 +34,24 @@ public class WishpoolServlet extends HttpServlet {
 	WishpoolService wishpoolservice = new WishpoolService();
 
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		doPost(req, res);
+		
+		String type = req.getParameter("type");
+
+		if ("wishpool".equals(type)) {
+			String image = req.getParameter("image");
+			Integer img = new Integer(image);
+			res.setContentType("image/jpeg");
+
+			ServletOutputStream out = res.getOutputStream();
+			WishpoolService wishpoolSvc = new WishpoolService();
+			WishpoolVO wishpoolVO = wishpoolSvc.findByPrimaryKey(img);
+			byte[] w_image = wishpoolVO.getW_image();
+			out.write(w_image);
+			out.close();
+			}
+		
+		
+		
 	}
 
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
@@ -132,9 +151,9 @@ public class WishpoolServlet extends HttpServlet {
 		//呈現許願資料
 		
 
-		for (WishpoolVO vo : list) {
-			
-		}
+//		for (WishpoolVO vo : list) {
+//			
+//		}
 		for (int i = 0 ; i < list.size() ; i++) {
 			WishpoolVO vo = list.get(i);
 		}

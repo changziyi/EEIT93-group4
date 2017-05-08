@@ -33,7 +33,41 @@ public class MdataServlet extends HttpServlet {
 
 		request.setCharacterEncoding("UTF-8");
 		String action = request.getParameter("action");
-
+		
+		if ("SearchMaster".equals(action)) {
+			
+			String m_city = request.getParameter("city");
+			String input = request.getParameter("search");
+			
+			HttpSession session = request.getSession();
+			MdataVO mdataVO = new MdataVO();
+			
+			mdataVO.setM_city(m_city);
+			mdataVO.setB_name(input);
+			
+			session.setAttribute("search", mdataVO);
+			response.sendRedirect("searchResult.jsp");
+			return;
+			
+		}
+		
+		if("SearchMasterNext".equals(action)) {
+			
+			String m_city = request.getParameter("city");
+			String input = request.getParameter("search");
+			
+			HttpSession session = request.getSession();
+			MdataVO mdataVO = new MdataVO();
+			
+			mdataVO.setM_city(m_city);
+			mdataVO.setB_name(input);
+			
+			session.setAttribute("search", mdataVO);
+			response.sendRedirect("searchResult.jsp");
+			return;
+			
+		}
+		
 		if ("OpenStoreStep".equals(action)) {
 
 			Map<String, String> errorMsgs = new HashMap<String, String>();
@@ -107,7 +141,7 @@ public class MdataServlet extends HttpServlet {
 			mdataVO.setM_jdate(m_jdate);
 
 			if (!errorMsgs.isEmpty()) {
-				session.setAttribute("mdataVO", mdataVO);
+				session.setAttribute("cdata_mdataVO", mdataVO);
 				response.sendRedirect("OpenStoreInfo.jsp");
 				return;
 			}
@@ -115,7 +149,7 @@ public class MdataServlet extends HttpServlet {
 			// MdataService mdataSvc = new MdataService();
 			// mdataSvc.insert(mdataVO);
 
-			session.setAttribute("mdataVO", mdataVO);
+			session.setAttribute("cdata_mdataVO", mdataVO);
 			response.sendRedirect("OpenStoreDesc.jsp");
 			return;
 

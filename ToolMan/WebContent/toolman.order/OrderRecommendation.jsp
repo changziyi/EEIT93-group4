@@ -10,17 +10,15 @@
 
 </head>
 <body>
-<h1>get to this page </h1>
+<h1>Other masters you may like to check out</h1>
+<%-- 	<div>  <img src="${pageContext.servletContext.contextPath }/toolman.order/OrderRecommendation.do" /><div> --%>
 
-
-<%-- 	<div>  <img src="${pageContext.servletContext.contextPath }/toolman.order/OrderRecommendation" /><div> --%>
-<%@ page import="java.util.List" %>
-<%@ page import="javax.servlet.http.HttpSession" %>
-<% List mdataVOlist = (List) session.getAttribute("recommendmaster"); %>
 
 		<c:forEach var="master" varStatus="stat" items="${recommendmaster}">	
 					${master.b_name}
-					${master.m_name}		
+					${master.m_name}
+					${master.m_id}	
+		<img width="100" src="${pageContext.servletContext.contextPath}/toolman.order/OrderRecommendation.do?m_id=${master.m_id}"/>	
 		</c:forEach>
 
 <!-- </body> -->
