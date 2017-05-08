@@ -57,12 +57,12 @@ $(document).ready(function() {
 				api.open();
 			});
 		},
-		/*
+		
 		// while using upload option, please set
 		// startImageRenderer: false
 		// for a better effect
 		upload: {
-			url: './php/upload_file.php',
+			url: 'TestFormData',
             data: null,
             type: 'POST',
             enctype: 'multipart/form-data',
@@ -96,11 +96,11 @@ $(document).ready(function() {
 			container: '.fileuploader-thumbnails-input'
 		},
 		onRemove: function(item) {
-			$.post('php/upload_remove.php', {
+			$.post('TestFormData', {
 				file: item.name
 			});
 		},
-		*/
+		
     });
 	
 });

@@ -34,7 +34,7 @@
 <style>
 .content_box {
 	display: inline-block;
-	border: 2px solid #66b5ff ;
+	border: 2px dashed #66b5ff ;
 	padding: 10px;
 	margin: 10px 10px 10px 0;
 	overflow: hidden;
@@ -104,7 +104,7 @@
 					<div>
 						<c:forEach var="wishpoolVO" items="${list}">
 							<div class="content_box">
-								<b>使用者：${wishpoolVO.c_id}</b>
+								<b style="color:#a94dff">使用者：${wishpoolVO.c_id}</b>
 								<br>
 								位在地區：${wishpoolVO.w_city}${wishpoolVO.w_district} 
 								<br>
@@ -113,7 +113,9 @@
 								維修內容：${wishpoolVO.w_content}
 								<br>
 								維修項目照片： 
-								<img src="${pageContext.servletContext.contextPath}/wishpool/WishPool.do?type=wishpool&image=${wishpoolVO.w_id}" alt="示意圖" class="img-responsive" >
+								<img src="${pageContext.servletContext.contextPath}/wishpool/wishpool.do?type=wishpool&image=${wishpoolVO.w_id}" alt="示意圖" class="img-responsive" >
+								<br>
+								發送時間：${wishpoolVO.w_date}
 								
 							</div>
 						</c:forEach>
@@ -128,7 +130,7 @@
 	<div class="modal fade" id="myModal01" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
-			<form method="POST" action="WishPool.do"
+			<form method="POST" action="wishpool.do"
 				enctype="multipart/form-data">
 
 				<div class="modal-content">

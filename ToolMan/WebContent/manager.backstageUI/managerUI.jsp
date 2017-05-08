@@ -80,6 +80,7 @@
 			</div>
 			
 			<div id="subfunctionrow" style="margin: auto;width:900px; horizontal-align:center;" class="nav nav-tabs nav-justified">
+				<form action="${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIFunctionServlet.do"></form>
 			</div>
 	</header>
 <!-- Function button -->
@@ -115,9 +116,9 @@
 	var navagatorid = $('#navigator>ul>li.active').data('id');
 
 $(function(){
-// 		$(document).ajaxComplete(function(){
-// 			 datatableinit();
-// 		});	//open and everything goes wrong
+		$(document).ajaxComplete(function(){
+			 datatableinit();
+		});	//let's try it
 		
 		loadProduct('m');
 		$('#navigator>ul>li').on('click',navigatorevent);//end on do not add ()
@@ -138,7 +139,7 @@ $(function(){
 		   $('#navigator>ul>li[data-id="' + id + '"]').addClass('active');
 		   
 		   functionrow();
-// 		   subfunctionrow(); 
+		   subfunctionrow(); 
 		   
 	}//navigatorevent()
 	
@@ -201,37 +202,37 @@ $(function(){
 
 			var docFragsubfunction = $(document.createDocumentFragment());
 		   if( navagatorid== 'm'){
-				$('#subfunctionrow').empty();
-				var applicationreviewm = '<input type="button" value="審核師傅"/>';
-				var suspensionm = '<input type="button" value="停權"/>';
-				var sendmessagem = '<input type="button" value="傳送訊息"/>';
-				var blacklistm = '<input type="button" value="黑名單"/>';
+				$('#subfunctionrow>form').empty();
+				var applicationreviewm = '<span value="examinemaster" name="functionaction" style="padding:0px; margin:0px;" ><input type="button" value="審核師傅" /></span>';
+				var suspensionm = '<span value="suspensionm" name="functionaction" style="padding:0px; margin:0px;" ><input type="button" value="停權" name="functionaction"/></span>';
+				var sendmessagem = '<span value="sendmessagem" name="functionaction" style="padding:0px; margin:0px;" ><input type="button" value="傳送訊息" name="functionaction"/></span>';
+				var blacklistm = '<span value="blacklistm" name="functionaction" style="padding:0px; margin:0px;" ><input type="button" value="黑名單" name="functionaction"/></span>';
 				var b1 = $(applicationreviewm);
 				var b2 = $(suspensionm);
 				var b3 = $(sendmessagem);
 				var b4 = $(blacklistm);
 				docFragsubfunction.append([b1,b2,b3,b4]);
-				$('#subfunctionrow').append(docFragsubfunction);
+				$('#subfunctionrow>form').append(docFragsubfunction);
 			}//end else if
 			
 			else if(navagatorid== 'c'){
-				$('#subfunctionrow').empty();
-				var suspensionc = '<input type="button" value="停權"/>';
-				var sendmessagec = '<input type="button" value="傳送訊息"/>';
-				var blacklistc = '<input type="button" value="黑名單"/>';
+				$('#subfunctionrow>form').empty();
+				var suspensionc = '<span value="suspensionc" name="functionaction" style="padding:0px; margin:0px;" ><input type="button" value="停權" name="functionaction"/></span>';
+				var sendmessagec = '<span value="sendmessagec" name="functionaction" style="padding:0px; margin:0px;" ><input type="button" value="傳送訊息" name="functionaction"/></span>';
+				var blacklistc = '<span value="blacklistc" name="functionaction" style="padding:0px; margin:0px;" ><input type="button" value="黑名單" name="functionaction"/></span>';
 				var b1 = $(suspensionc);
 				var b1 = $(sendmessagec);
 				var b1 = $(blacklistc);
 				docFragsubfunction.append([b1,b2,b3]);
-				$('#subfunctionrow').append(docFragsubfunction);
+				$('#subfunctionrow>form').append(docFragsubfunction);
 			}//end else if
 			
 			else if(navagatorid== 'o'){
-				$('#subfunctionrow').empty();
-				var suspensionc = '<input type="button" value="訊息"/>';
-				var b1 = $(suspensionc);
+				$('#subfunctionrow>form').empty();
+				var sendmessageo = '<span value="sendmessageo" name="functionaction" style="padding:0px; margin:0px;" ><input type="button" value="訊息" name="functionaction"/></span>';
+				var b1 = $(sendmessageo);
 				docFragsubfunction.append([b1]);
-				$('#subfunctionrow').append(docFragsubfunction);
+				$('#subfunctionrow>form').append(docFragsubfunction);
 				
 			}// end else if 
 	
@@ -368,7 +369,7 @@ $(function(){
 			   
 			   th.append(docFragth);
 			   tb.append(docFragtb);
-			   datatableinit();
+// 			   datatableinit();// goes wrong often
 			   
 		  	 }//end get json function
 			);//end get json
