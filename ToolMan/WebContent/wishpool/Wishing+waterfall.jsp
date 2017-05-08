@@ -113,7 +113,7 @@
 								維修內容：${wishpoolVO.w_content}
 								<br>
 								維修項目照片： 
-								<img src="${pageContext.servletContext.contextPath}/wishpool/WishPool.do?type=wishpool&image=${wishpoolVO.w_id}" alt="示意圖" class="img-responsive" >
+								<img src="${pageContext.servletContext.contextPath}/wishpool/wishpool.do?type=wishpool&image=${wishpoolVO.w_id}" alt="示意圖" class="img-responsive" >
 								<br>
 								發送時間：${wishpoolVO.w_date}
 								
@@ -123,16 +123,14 @@
 				</div>
 			</div>
 		</div>
-	<div class="row">
-	<div class="col-md-3" style="background-color: pink; border:2px solid red">
-	</div>
+	
 
 
 	<!-----------------------------我要許願表單 ----------------------------------------->
 	<div class="modal fade" id="myModal01" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
-			<form method="POST" action="WishPool.do"
+			<form method="POST" action="wishpool.do"
 				enctype="multipart/form-data">
 
 				<div class="modal-content">
