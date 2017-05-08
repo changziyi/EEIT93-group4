@@ -129,6 +129,7 @@ public class MdataService {
 			jContent.put("city", aMdata.getM_city());
 			jContent.put("district", aMdata.getM_district());
 			jContent.put("finish", aMdata.getO_finished());
+			jContent.put("sta", aMdata.getS_name());
 			Set<MProVO> mpros = aMdata.getMpros();
 			List<String> pList = new LinkedList<String>();
 			for (MProVO aMpro : mpros) {
