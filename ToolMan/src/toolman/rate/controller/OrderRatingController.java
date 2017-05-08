@@ -172,7 +172,7 @@ public class OrderRatingController extends HttpServlet {
 		//			req.setAttribute("listEmps_ByDeptno",deptSvc.getEmpsByDeptno(deptno)); // 資料庫取出的list物件,存入request
 				
 			request.setAttribute("orderVO", orderVO2);
-                String url =  "listOneEmp.jsp";
+                String url =  "listAllEmp.jsp";
 				RequestDispatcher successView = request.getRequestDispatcher(url);   // 修改成功後,轉交回送出修改的來源網頁
 				successView.forward(request, response);
 //			

@@ -2,7 +2,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
 <%@ page import="toolman.order.model.*"%>
-<%@ page import="toolman.favorite.model.*"%>
 
 
 
@@ -13,12 +12,7 @@
     pageContext.setAttribute("list",list);
 
 %>
-<%
-	FavoriteService favoriteSvc = new FavoriteService();
-    List<FavoriteVO> like = favoriteSvc.getAllFavorite();
-    pageContext.setAttribute("like",like);
 
-%>
 <html>
 
 <head>
@@ -46,7 +40,7 @@
       <a class="navbar-brand" href="#">WebSiteName</a>
     </div>
     <ul class="nav navbar-nav">
-      <li class="active"><a href="#">Home</a></li>
+      <li class="active"><a href="<%=request.getContextPath()%>/cdata/index.jsp">Home</a></li>
    <li><a href="listAllEmp.jsp">訂單</a></li>
       <li><a href="like.jsp">收藏店家</a></li>
       <li><a href="dislike.jsp">黑名單</a></li>
@@ -59,7 +53,7 @@
 <b><font color=red></font></b>
 <table border='1' cellpadding='5' cellspacing='0' width='1200'>
 	<tr bgcolor='#CCCCFF' align='center' valign='middle' height='20'>
-		<td><h3>123654</h3>
+		<td><h3>訂單 </h3>
 		         </td></tr></table>
 
 <table border='1' bordercolor='#CCCCFF' width='1200'>
@@ -69,8 +63,9 @@
 		<th>訂單完成時間</th>
 		<th>維修項目說明</th>
 		<th>施工地址</th>
-		<th>師傅分數</th>
-		<th>消費者評價說明</th>
+		
+		<th>分數</th>
+		<th>留言</th>
 		<th>評分</th>
 		
 	</tr>
@@ -96,7 +91,7 @@
                    --%>  
                       
 			
-			 
+			<%-- 
 			<td>
 			
 			
@@ -112,16 +107,14 @@
 			     </FORM>
 			 
 			</td>
+			--%>
+			
 			<td>
-<!-- 			<FORM METHOD="get" action="Favorite.do"> -->
-			
-<!-- 			<input type="submit" value="加入最愛"> -->
-<!-- 			<input type="hidden" name="m_id" value=1001> -->
-<!-- 			<input type="hidden" name="c_id" value="Snoopy"> -->
-<!-- 			<input type="hidden" name="action"	value="addFavorite"> -->
-<!-- 			</FORM> -->
+${orderVO.m_rating}
 			</td>
-			
+				<td>
+${orderVO.ca_des}
+			</td>
 			
 			<td>
 			
