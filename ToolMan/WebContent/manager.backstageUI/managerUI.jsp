@@ -80,8 +80,7 @@
 			</div>
 			
 			<div id="subfunctionrow" style="margin: auto;width:900px; horizontal-align:center;" class="nav nav-tabs nav-justified">
-				<form action="${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIFunctionServlet.do"></form>
-			</div>
+							</div>
 	</header>
 <!-- Function button -->
 	<div>
@@ -109,26 +108,91 @@
 <!-- 	</div> -->
 	<input type="hidden" />
 	</article>
+	
+<!-- mail block from LIN DAN-->	
+	<div align="center">
+		<button class="btn btn-primary btn-lg" data-toggle="modal"
+			data-target="#myModal01">email</button>
+	</div>
+	<div class="modal fade" id="myModal01" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<form method="POST" action="${pageContext.servletContext.contextPath}/email/Email.do"
+				enctype="multipart/form-data">
 
+				<div class="modal-content">
+					<div class="modal-header">
+						<H4 style="color: blue">
+							email
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
 
+							</button>
+						</H4>
+					</div>
+					<div class="modal-body">
+						<table>
+							<tr>
+								<td>收件人 ： <input type="text" name="mss_id" required="true"
+									value="${param.mss_id}" />${errorMsgs.email1}${errorMsgs.email2}
+								</td>
+							</tr>
+						
+							<tr>
+								<td>主旨 ： <input type="text" name="ms_summary" required="true"
+									value="${param.ms_summary}" />${errorMsgs.email1}${errorMsgs.email2}
+								</td>
+							</tr>
+						
+							<tr>
+								<td><label style="vertical-align: top">內容：
+								
+								<textarea name="ms_content" style="width: 400px; height: 120px"
+								placeholder="請輸入內容"></textarea></td>
+							</tr>
+						</table>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+						<button type="submit" class="btn btn-primary">送出</button>			
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+<!-- end mail block-->
+	
 <script>
-	var table ;
-	var navagatorid = $('#navigator>ul>li.active').data('id');
+	var table ;//datatable variable not in use
+	var navagatorid = $('#navigator>ul>li.active').data('id');//top navigator
 
 $(function(){
 		$(document).ajaxComplete(function(){
-			 datatableinit();
+			 datatableinit();//execute datable when ajax is done
 		});	//let's try it
 		
-		loadProduct('m');
+		loadProduct('m');//build dynamic table
 		$('#navigator>ul>li').on('click',navigatorevent);//end on do not add ()
 		
-		functionrow();
- 	    subfunctionrow();
- 	   $('#subfunctionrow>form>span').on('click',togglerow);
+		functionrow();// build functionrow
+ 	    subfunctionrow();// build function buttons
+ 	   $('#subfunctionrow>a').on('click',togglehyper);//direct to other pages
+ 	  $('#subfunctionrow>span').on('click',togglegetmethod);//will return something when clicked 
+ 		 mail();//mail
 	}// end ready function
 ); //end ready   
-
+	function mail(){
+		
+//  			$('#emailblock').imagesLoaded(function() {
+//  				$('#emailblock').masonry({
+//  					itemSelector : '.content_box',
+//  					columnWidth : 275,
+//  					animate : true
+//  				});
+//  			});
+ 		}// end mail
+	
 	function navigatorevent(){
 		
 		 $('#eventlist').dataTable().fnDestroy();   
@@ -202,22 +266,22 @@ $(function(){
 
 			var docFragsubfunction = $(document.createDocumentFragment());
 		   if( navagatorid== 'm'){
-				$('#subfunctionrow>form').empty();
+				$('#subfunctionrow').empty();
 // 				$('#subfunctionrow>form>span').
-				var applicationreviewm = '<span value="applicationreviewm" name="functionaction" style="padding:0px; margin:0px;" ><input type="button" value="審核師傅" /></span>';
+				var applicationreviewm = '<a href="" id="applymasterlink" name="applicationreviewm"><input type="button" value="審核師傅" /></a>';
 				var suspensionm = '<span value="suspensionm" name="functionaction" style="padding:0px; margin:0px;" ><input type="button" value="停權" "/></span>';
-				var sendmessagem = '<span value="sendmessagem" name="functionaction" style="padding:0px; margin:0px;" ><input type="button" value="傳送訊息" "/></span>';
+				var sendmessagem = '<span value="sendmessagem" name="functionaction" style="padding:0px; margin:0px;" ><input type="button" data-target="#myModal01" data-toggle="modal" value="傳送訊息" "/></span>';
 				var blacklistm = '<span value="blacklistm" name="functionaction" style="padding:0px; margin:0px;" ><input type="button" value="黑名單" "/></span>';
 				var b1 = $(applicationreviewm);
 				var b2 = $(suspensionm);
 				var b3 = $(sendmessagem);
 				var b4 = $(blacklistm);
 				docFragsubfunction.append([b1,b2,b3,b4]);
-				$('#subfunctionrow>form').append(docFragsubfunction);
+				$('#subfunctionrow').append(docFragsubfunction);
 			}//end else if
 			
 			else if(navagatorid== 'c'){
-				$('#subfunctionrow>form').empty();
+				$('#subfunctionrow').empty();
 				var suspensionc = '<span value="suspensionc" name="functionaction" style=" padding:0px; margin:0px;" ><input type="button" value="停權"/></span>';
 				var sendmessagec = '<span value="sendmessagec" name="functionaction" style=" padding:0px; margin:0px;" ><input type="button" value="傳送訊息" /></span>';
 				var blacklistc = '<span value="blacklistc" name="functionaction" style=" padding:0px; margin:0px;" ><input type="button" value="黑名單" /></span>';
@@ -225,37 +289,57 @@ $(function(){
 				var b2 = $(sendmessagec);
 				var b3 = $(blacklistc);
 				docFragsubfunction.append([b1,b2,b3]);
-				$('#subfunctionrow>form').append(docFragsubfunction);
+				$('#subfunctionrow').append(docFragsubfunction);
 			}//end else if
 			
 			else if(navagatorid== 'o'){
-				$('#subfunctionrow>form').empty();
+				$('#subfunctionrow').empty();
 				var sendmessageo = '<span value="sendmessageo" name="functionaction" style="padding:0px; margin:0px;" ><input type="button" value="訊息" "/></span>';
 				var b1 = $(sendmessageo);
 				docFragsubfunction.append([b1]);
-				$('#subfunctionrow>form').append(docFragsubfunction);
+				$('#subfunctionrow').append(docFragsubfunction);
 				
 			}// end else if 
 	
 		}//end functionrow
 		
-		function togglerow(){
-          
+		function togglehyper(){
+			var valueattr =$(this).val();
+			var nameattr=$(this).attr('name');
 	            //get all toggled checkboxes 
 	           var checkboxdatas = [];
 	        	 $(":checkbox:checked").each(function(){            	  
 	            	   checkboxdatas.push($(this).val()); 
 	            })
-	            
-	            $('#subfunctionrow>form').html('<input type="hidden"'+'name='+toggledcheckbox+'value='+checkboxdatas+'/>');
-	        	$('#subfunctionrow>form').submit();
+	           
+	           var hyperlinkstring = "${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIServlet.do?";
+	           var hyperlinkparameter = "functionaction="+nameattr+"&toggledcheckbox="+checkboxdatas;
+	           var hyperlinkstringwithparameter=hyperlinkstring+hyperlinkparameter;
+	           $('#applymasterlink').attr("href",hyperlinkstringwithparameter);
+	           $('#applymasterlink').click();
+	            // $('#subfunctionrow').submit();
 // 	            $("#eventlist>tbody>tr>td>input:checked").each(function(){
 // 	            	var toggledvalue =$(this).val();	            	
 // 	            })//end each
 				//tested ok
-// 	            alert(datas);
 		}//end togglerow
 		
+		function togglegetmethod(){
+	          
+            //get all toggled checkboxes 
+           var checkboxdatas = [];
+        	 $(":checkbox:checked").each(function(){            	  
+            	   checkboxdatas.push($(this).val()); 
+            })
+           var nameattr=$(this).attr('name');
+           var hyperlinkstring = "${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIServlet.do?";
+//            var hyperlinkparameter = "functionaction="+nameattr+"&"+toggledcheckbox="+checkboxdatas;
+//            var hyperlinkstringwithparameter=hyperlinkstring+hyperlinkparameter;
+           $.get(hyperlinkstring,{"functionaction":nameattr,"toggledcheckbox":checkboxdatas},function(data){
+        	   alert(data);
+           })//end get function
+	}//end togglerow
+	
 	   function loadProduct(id){
 
 			   $.getJSON('${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIServlet.do',{'action':id}, function(datas){
@@ -406,7 +490,7 @@ $(function(){
 	   }//end loadProduct(id) function
 				function datatableinit(){
 				table =	$('#eventlist').DataTable({
-// 						retrieve: true,
+						retrieve: true,
 			// 			"lengthMenu":[1, 2, 3, "All"],
 // 						destroy: true,
 // 						"pageLength": 1,
