@@ -124,6 +124,7 @@ public class WishpoolServlet extends HttpServlet {
 		Timestamp w_date = new Timestamp(calobj.getTimeInMillis());
 		// 許願當下時間
 
+		res.sendRedirect("Wishing+waterfall.jsp");
 		
 		/*if (!errorMsgs.isEmpty()) {
 			req.setAttribute("wishpoolVO", wishpoolVO);
