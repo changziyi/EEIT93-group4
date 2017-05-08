@@ -36,7 +36,6 @@ public class MdataJsonServlet extends HttpServlet {
 		MdataService mdataSvc = new MdataService();
 		out.println(mdataSvc.SearchByCityAndMproJson(m_city, input));
 		
-		
 		Long s2 = System.currentTimeMillis();
 		System.out.println(s2-s1);
 	}

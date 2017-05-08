@@ -95,11 +95,7 @@ public class MdataService {
 	public List<MdataVO> SearchByCityAndMpro(String m_city, String m_pro) {
 		return dao.SearchByCityAndMpro(m_city, m_pro);
 	}
-	// Benny's recommendation function
-	public List<MdataVO> getCityAndDistrictAndMPro(String m_city, String m_district, String m_pro){	
-		List<MdataVO> mdatas = dao.getCityAndDistrictAndMPro(m_city, m_district, m_pro);
-		return mdatas;
-	}
+
 	
 	public String getAllJson() {
 		List<MdataVO> mdatas = dao.getAll();
@@ -154,5 +150,13 @@ public class MdataService {
 		}
 		return JSONValue.toJSONString(jList);
 	}
-
+	
+	//By Benny, Benny's recommendation function
+	public List<MdataVO> getCityAndDistrictAndMPro(String m_city, String m_district, String m_pro){	
+		List<MdataVO> mdatas = dao.getCityAndDistrictAndMPro(m_city, m_district, m_pro);
+		return mdatas;
+	}
+	public void updatemasterSname(Integer m_id, String s_name){
+		dao.updatemasterSname(m_id,s_name);	
+	} 
 }
