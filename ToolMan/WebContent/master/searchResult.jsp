@@ -111,8 +111,22 @@
 	var search = $('input[name="search"]');
 	var show = $('#show');
 	
-	$('#btn').click(function() {
+// 	$('#btn').click(function() {
 		
+// 		$.ajax({
+// 			url : 'master.do',
+// 			data: {'city':city.val(),'input':search.val(),'action':'SearchMasterNext'},
+// 			type : 'POST',
+// 			success : function(returnData) {
+// 				$(location).attr('href','searchResult.jsp');
+// 			}
+// 		});
+// 	});
+	
+	
+	
+	$('#btn').click (function() {
+		console.log('search value: ' + search.val());
 		$.ajax({
 			url : 'master.do',
 			data: {'city':city.val(),'input':search.val(),'action':'SearchMasterNext'},
@@ -121,31 +135,29 @@
 				$(location).attr('href','searchResult.jsp');
 			}
 		});
+		var docFragment = $(document.createDocumentFragment());
+		$.getJSON('MdataJsonServlet', {'city':city.val(),'input':search.val(), 'action':'SearchMasterNext'}, function(datas) {
+// 			search.val(null);
+			show.empty();
+			$.each(datas, function(i,master) {
+				var bImg = $('<img />').attr({'src':'${pageContext.servletContext.contextPath}/master/master.do?type=master&image=' + master.id,
+												'data-holder-rendered':'true'});
+				var a = $('<a></a>').attr('href','${pageContext.servletContext.contextPath}/master/masterPage.do?m_id='+ master.id).append(bImg);
+				var ratingImg = $('<img />').attr('src','${pageContext.servletContext.contextPath}/image/rating.jpg');
+				var bname = $('<h3></h3>').text(master.bname).append(ratingImg);
+				var city = $('<p></p>').text(master.city + ' ' + master.district);
+				var finish = $('<p></p>').text(master.finish);
+				var pro = $('<p></p>').text(master.pro);
+				var caption = $('<div></div>').addClass('caption').append([bname,city,pro,finish]);
+				var thumbnail = $('<div></div>').addClass('thumbnail').append([a,caption]);
+				var col = $('<div></div>').addClass('col-sm-6 col-md-4').append([thumbnail]);
+				docFragment.append(col);
+			});
+			show.append(docFragment);
+		});
+		
+		
 	});
-	
-// 	$('#btn').click (function() {
-// 		console.log('search value: ' + search.val());
-// 		var docFragment = $(document.createDocumentFragment());
-// 		$.getJSON('MdataJsonServlet', {'city':city.val(),'input':search.val()}, function(datas) {
-// // 			search.val(null);
-// 			show.empty();
-// 			$.each(datas, function(i,master) {
-// 				var bImg = $('<img />').attr({'src':'${pageContext.servletContext.contextPath}/master/master.do?type=master&image=' + master.id,
-// 												'data-holder-rendered':'true'});
-// 				var a = $('<a></a>').attr('href','${pageContext.servletContext.contextPath}/master/masterPage.do?m_id='+ master.id).append(bImg);
-// 				var ratingImg = $('<img />').attr('src','${pageContext.servletContext.contextPath}/image/rating.jpg');
-// 				var bname = $('<h3></h3>').text(master.bname).append(ratingImg);
-// 				var city = $('<p></p>').text(master.city + ' ' + master.district);
-// 				var finish = $('<p></p>').text(master.finish);
-// 				var pro = $('<p></p>').text(master.pro);
-// 				var caption = $('<div></div>').addClass('caption').append([bname,city,pro,finish]);
-// 				var thumbnail = $('<div></div>').addClass('thumbnail').append([a,caption]);
-// 				var col = $('<div></div>').addClass('col-sm-6 col-md-4').append([thumbnail]);
-// 				docFragment.append(col);
-// 			});
-// 			show.append(docFragment);
-// 		});
-// 	});
 
 </script>
 
