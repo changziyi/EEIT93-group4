@@ -54,20 +54,19 @@ public class LoginServlet extends HttpServlet {
 		boolean verify = VerifyRecaptcha.verify(gRecaptchaResponse);
 		System.out.println(" Name = " + c_id + "::password = " + c_pwd 
 				+ "::Captcha Verify"+verify);		
-		
-			
-		
+
 		CdataService cs = new CdataService();
 		CdataVO  cdataVO = cs.login_in(c_id, c_pwd);
 		if (cdataVO != null){
-			session.setAttribute("LoginOK", cdataVO);//物件放入Session範圍內，識別字串為"LoginOK"，表示此使用者已經登入
+			session.setAttribute("LoginOK", cdataVO);
 		}else{
 			errorMsgs.put("LoginError", "該帳號不存在或密碼錯誤");
 		}
 		
-		if(errorMsgs.isEmpty()){
+		if(errorMsgs.isEmpty() && verify){
 			String contextPath = getServletContext().getContextPath();			
 			String target = (String)session.getAttribute("target");
+			
 			if (target != null) {
 			    resp.sendRedirect(resp.encodeRedirectURL(contextPath + target));
 			}else{
