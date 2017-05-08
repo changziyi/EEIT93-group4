@@ -100,7 +100,7 @@ public class OrderController extends HttpServlet {
 			for(MProVO mproVO : mproVOlist){
 					
 //				Integer mproid = mproVO.getM_proid();
-				oproVO.setM_Proid(mproVO);//hibernate will find it's m_proid specified in the mapping for me
+				oproVO.setM_proid(mproVO);//hibernate will find it's m_proid specified in the mapping for me
 				oproVO.setO_pro(mproVO.getM_pro());
 				oproVOlist.add(oproVO);
 				
