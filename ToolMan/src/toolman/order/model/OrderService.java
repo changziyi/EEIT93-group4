@@ -51,6 +51,11 @@ public class OrderService {
     	List<OrderVO> orderlist = dao.getOrderByC(c_id);
     	return orderlist;
     }
+    
+    
+    
+    
+    
     public List<OrderVO>  getOrderByCAndDate(String c_id,Timestamp o_bdate1, Timestamp o_bdate2){
     	List<OrderVO> orderlist = dao.getOrderByCAndDate(c_id, o_bdate1, o_bdate2);
     	return orderlist;

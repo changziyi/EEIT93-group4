@@ -3,44 +3,75 @@
 <%@ page import="java.util.*"%>
 <%@ page import="toolman.order.model.*"%>
 
-<%
-	OrderVO orderVO = (OrderVO) request.getAttribute("orderVO"); //EmpServlet.java (Concroller), 存入req的empVO物件 (包括幫忙取出的empVO, 也包括輸入資料錯誤時的empVO物件)
-%>
-<%-- 此頁採用 JSTL 與 EL 取值 --%>
 
+
+<%-- 此頁採用 JSTL 與 EL 取值 --%>
 <%
-    OrderService orderSvc = new OrderService();
+	OrderService orderSvc = new OrderService();
     List<OrderVO> list = orderSvc.getAllOrder();
     pageContext.setAttribute("list",list);
 
 %>
 
-
 <html>
+
 <head>
 <title>cena</title>
+
 </head>
+
+<link rel="stylesheet"
+	href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+<script
+	src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	
+	
+	
+	
+	
 <body bgcolor='white'>
+
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">WebSiteName</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="<%=request.getContextPath()%>/cdata/index.jsp">Home</a></li>
+   <li><a href="listAllEmp.jsp">訂單</a></li>
+      <li><a href="like.jsp">收藏店家</a></li>
+      <li><a href="dislike.jsp">黑名單</a></li>
+      <li><a href="<%=request.getContextPath()%>/master/List.jsp">搜尋店家</a></li>
+    </ul>
+  </div>
+</nav>
+
+
 <b><font color=red></font></b>
-<table border='1' cellpadding='5' cellspacing='0' width='800'>
+<table border='1' cellpadding='5' cellspacing='0' width='1200'>
 	<tr bgcolor='#CCCCFF' align='center' valign='middle' height='20'>
-		<td><h3>123654</h3>
+		<td><h3>訂單 </h3>
 		         </td></tr></table>
 
-
-<table border='1' bordercolor='#CCCCFF' width='800'>
+<table border='1' bordercolor='#CCCCFF' width='1200'>
 	<tr>
 		<th>訂單編號</th>
 		<th>店家名稱</th>
 		<th>訂單完成時間</th>
 		<th>維修項目說明</th>
 		<th>施工地址</th>
-		<th>師傅分數</th>
-		<th>消費者評價說明</th>
+		
+		<th>分數</th>
+		<th>留言</th>
+		<th>評分</th>
+		
 	</tr>
 	
 	 <%@ include file="page1.file" %> 
-	<c:forEach var="orderVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">>
+	<c:forEach var="orderVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 	
 		<tr align='center' valign='middle'>
 			<td>${orderVO.o_id}</td>
@@ -60,7 +91,7 @@
                    --%>  
                       
 			
-			 
+			<%-- 
 			<td>
 			
 			
@@ -70,12 +101,114 @@
 	
 			     <input type="submit" value="修改">
 			     <input type="hidden" name="o_id" value="${orderVO.o_id}">
-			     <input type="hidden" name="action"	value="getOne_For_Update"></FORM>
+			     <input type="hidden" name="action"	value="getOne_For_Update">
+			     
+			     
+			     </FORM>
 			 
+			</td>
+			--%>
+			
+			<td>
+${orderVO.m_rating}
+			</td>
+				<td>
+${orderVO.ca_des}
 			</td>
 			
 			<td>
 			
+ <%------------------------------------------bootstrap評分-------------------------------------------------------%>
+
+
+  <FORM METHOD="post" ACTION="OrderController.do" name="form1">
+  
+  
+
+
+
+ <div>
+  <!-- Trigger the modal with a button -->
+  
+
+<!--  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" >評分</button> -->
+ 
+ 
+  <!-- Modal -->
+  
+<!--   <div class="modal fade" id="myModal" role="dialog" > -->
+<!--     <div class="modal-dialog"> -->
+    
+      <!-- Modal content-->
+      
+      <div class="modal-content">
+      
+     
+          
+          
+
+
+         <div class="modal-body">
+         
+         
+<h4 class="modal-title">評分給鼓勵吧</h4>
+         
+          
+    <label class="radio-inline">
+      <input type="radio" name="m_rating" value="5">5分
+    </label>
+    <label class="radio-inline">
+      <input type="radio" name="m_rating" value="4">4分
+    </label>
+    <label class="radio-inline">
+      <input type="radio" name="m_rating" value="3" checked="checked">3分
+    </label>
+     <label class="radio-inline">
+      <input type="radio" name="m_rating" value="2">2分
+    </label>
+     <label class="radio-inline">
+      <input type="radio" name="m_rating" value="1">1分
+    </label>
+          
+  
+         </div>
+        <div class="container-fluid">
+
+  
+      <label for="comment">留言</label>
+      <textarea class="form-control" rows="2" id="comment" name="ca_des">金肉炫風</textarea>
+    </div>
+
+  
+     
+         <div class="modal-footer">
+         
+         
+     
+			<input type="submit" value="送出" >
+			
+          	<input type="hidden" name="action" value="update">
+          	
+          	
+          	<input type="hidden" name="c_rating" value="5">	
+          	
+         <input type="hidden" name="ma_des" value="再見"/>
+          <input type="hidden" name="o_id" value="${orderVO.o_id}">	   
+          
+        </div>
+        
+        
+        
+        	
+        
+        
+      </div>
+  </div>
+<!--  </div> -->
+<!-- </div> -->
+
+</form>
+ <%------------------------------------------------萬里長城----------------------------------------------------%>
 			
 			</td>
 			</tr>
@@ -90,9 +223,19 @@
 			</td>
 			
 		</tr>--%>
+		
 	</c:forEach>
 </table>
  <%@ include file="page2.file" %>
+ </div>
  
+ 
+
+ 
+ 
+ <%----- --------%>
+
+
+
 </body>
 </html>

@@ -112,7 +112,7 @@ $(function(){
 				<ul>
 					<li><a href="test1.jsp">消費者檔案</a></li>
 					<li><a href="#">我的服務</a></li>	
-					<li><a href="#">我的消費</a></li>
+					<li><a href="<%=request.getContextPath()%>/order/listAllEmp.jsp">我的消費</a></li>
 					<li><a href="#">黑名單</a></li>							
 				</ul>			
 			</li>

@@ -26,7 +26,7 @@ import toolman.wishpool.model.WishpoolDAO;
 import toolman.wishpool.model.WishpoolService;
 import toolman.wishpool.model.WishpoolVO;
 
-@WebServlet("/wishpool/WishPool.do")
+@WebServlet("/wishpool/wishpool.do")
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 5 * 1024 * 1024, maxRequestSize = 5 * 5 * 1024 * 1024)
 public class WishpoolServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -46,6 +46,16 @@ public class WishpoolServlet extends HttpServlet {
 			WishpoolService wishpoolSvc = new WishpoolService();
 			WishpoolVO wishpoolVO = wishpoolSvc.findByPrimaryKey(img);
 			byte[] w_image = wishpoolVO.getW_image();
+			
+			if (w_image == null || w_image.length == 0) {
+				InputStream in = getServletContext().getResourceAsStream("/images/no_image.PNG");
+				w_image = new byte[in.available()];
+				in.read(w_image);
+				out.write(w_image);
+				in.close();
+				return;
+			}
+			
 			out.write(w_image);
 			out.close();
 			}
@@ -114,6 +124,7 @@ public class WishpoolServlet extends HttpServlet {
 		Timestamp w_date = new Timestamp(calobj.getTimeInMillis());
 		// 許願當下時間
 
+		res.sendRedirect("Wishing+waterfall.jsp");
 		
 		/*if (!errorMsgs.isEmpty()) {
 			req.setAttribute("wishpoolVO", wishpoolVO);
