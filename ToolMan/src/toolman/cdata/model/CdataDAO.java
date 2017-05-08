@@ -132,22 +132,23 @@ public class CdataDAO implements CdataDAO_interface{
 
 	public static void main(String args[]){		
 		CdataDAO  dao = new CdataDAO();
-		List<CdataVO> list= dao.getAll();
-		for(CdataVO cdataVO:list){
-			Timestamp c_jdatestamp =	cdataVO.getC_jdate();
-			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			String c_jdate = df.format(c_jdatestamp);
-			String c_name =	cdataVO.getC_name();
-			String c_id	= cdataVO.getC_id();
-			String c_addr = cdataVO.getC_addr();
-			String c_district = cdataVO.getC_district();
-			String c_city = cdataVO.getC_city();
-			String c_location = c_city + c_district + c_addr;					
-			String s_name = cdataVO.getS_name();
-			Integer c_averrating = cdataVO.getC_averrating();
-			String sa_cnote	=cdataVO.getSa_cnote();
-			System.out.println(c_id);
-		}
+		
+//		List<CdataVO> list= dao.getAll();
+//		for(CdataVO cdataVO:list){
+//			Timestamp c_jdatestamp =	cdataVO.getC_jdate();
+//			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//			String c_jdate = df.format(c_jdatestamp);
+//			String c_name =	cdataVO.getC_name();
+//			String c_id	= cdataVO.getC_id();
+//			String c_addr = cdataVO.getC_addr();
+//			String c_district = cdataVO.getC_district();
+//			String c_city = cdataVO.getC_city();
+//			String c_location = c_city + c_district + c_addr;					
+//			String s_name = cdataVO.getS_name();
+//			Integer c_averrating = cdataVO.getC_averrating();
+//			String sa_cnote	=cdataVO.getSa_cnote();
+//			System.out.println(c_id);
+//		}
 //		
 //		/*********************** 查詢媒合  *****************************/
 //		

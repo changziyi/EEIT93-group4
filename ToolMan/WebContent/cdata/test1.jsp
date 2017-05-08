@@ -32,12 +32,33 @@
 }
 
 .page {
-	text-align: center
+	text-align: center;
+}
+
+.b {
+/* 	text-align: center; */
+	border-bottom: 1px solid red;
+}
+
+hr {
+	border: 0;
+	height: 1px;
+	background-color: #d4d4d4;
+	color: #d4d4d4
+}
+.box{
+	height:300px;
+	width:300px;
+	background-color: gray;
+}
+.font_right{
+	float: right;
 }
 </style>
+	<!-- background-color: gray; -->
 	<%-- 	<jsp:useBean id="cdataVO" class="toolman.cdata.model.CdataVO" scope="session"/> --%>
 	<div class="container">
-		<ul class="nav nav-tabs" style="width: 600px; background-color: gray;">
+		<ul class="nav nav-tabs" style="width: 600px;">
 			<li class="active"><a data-toggle="tab" href="#home">評價</a></li>
 			<li><a data-toggle="tab" href="#menu2">媒合紀錄</a></li>
 		</ul>
@@ -52,6 +73,7 @@
 								type="checkbox" name="star" value="">3顆星 <input
 								type="checkbox" name="star" value="">2顆星 <input
 								type="checkbox" name="star" value="">1顆星
+							<hr>
 						</h6>
 					</div>
 					<div>
@@ -82,10 +104,24 @@
 				</div>
 			</div>
 			<div id="menu2" class="tab-pane fade">
-				<h3>Menu 2</h3>
-				<div Style="width: 600px; background-color: red;">
-					<p></p>
+				<div Style="width: 600px;">
+					<h6>
+						<input type="checkbox" name="star" value="">5顆星 <input
+							type="checkbox" name="star" value="">4顆星 <input
+							type="checkbox" name="star" value="">3顆星 <input
+							type="checkbox" name="star" value="">2顆星 <input
+							type="checkbox" name="star" value="">1顆星
+						<hr>
+					</h6>
+				</div>
+				<div Style="width:600px;">
+					<div class="box">
+						<c:forEach var="cdata" items="${orders}">
+							<div class="b">
+								<label>${cdata.b_name}</label><label class="font_right">${cdata.o_edate}</label>
+							</div>
+						</c:forEach>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
