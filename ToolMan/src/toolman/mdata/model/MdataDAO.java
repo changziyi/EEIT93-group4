@@ -144,34 +144,7 @@ public class MdataDAO implements MdataDAO_interface {
 		return list;
 	}
 	
-	// Benny's recommendation function
-	@Override
-	public List<MdataVO> getCityAndDistrictAndMPro(String m_city, String m_district, String m_pro) {
-		List<MdataVO> list = null;
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		try {
-			session.beginTransaction();
-			Criteria query = session.createCriteria(MdataVO.class, "m");
-			query.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);// transform the result to distinct
-			query.createAlias("m.mpros","p");// set alias for variable mpros and it's table
-			Criterion c1 = Restrictions.eq("m.m_city", m_city);
-			Criterion c2 = Restrictions.eq("m.m_district", m_district);
-			Criterion c3 = Restrictions.like("p.m_pro", "%" + m_pro + "%");//retrieve m_pro column from the 
-//			query.add(Restrictions.and(c1,c2));//tested ok
-//			query.add(Restrictions.and(c1,c3));//tested ok
-			query.add(Restrictions.or(
-					Restrictions.and(Restrictions.and(c1,c2),Restrictions.and(c2,c3)),
-					Restrictions.and(c1,c3)
-					)
-				);
-			list = query.list();
-			session.getTransaction().commit();
-		} catch (RuntimeException ex) {
-			session.getTransaction().rollback();
-			throw ex;
-		}
-		return list;
-	}
+	
 	
 	@Override
 	public List<MdataVO> SearchByCityAndMpro(String m_city, String input) {
@@ -195,23 +168,69 @@ public class MdataDAO implements MdataDAO_interface {
 		return list;
 	}
 	
+	//BY BENNY-- Benny's recommendation function
+		@Override
+		public List<MdataVO> getCityAndDistrictAndMPro(String m_city, String m_district, String m_pro) {
+			List<MdataVO> list = null;
+			Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+			try {
+				session.beginTransaction();
+				Criteria query = session.createCriteria(MdataVO.class, "m");
+				query.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);// transform the result to distinct
+				query.createAlias("m.mpros","p");// set alias for variable mpros and it's table
+				Criterion c1 = Restrictions.eq("m.m_city", m_city);
+				Criterion c2 = Restrictions.eq("m.m_district", m_district);
+				Criterion c3 = Restrictions.like("p.m_pro", "%" + m_pro + "%");//retrieve m_pro column from the 
+//				query.add(Restrictions.and(c1,c2));//tested ok
+//				query.add(Restrictions.and(c1,c3));//tested ok
+				query.add(Restrictions.or(
+						Restrictions.and(Restrictions.and(c1,c2),Restrictions.and(c2,c3)),
+						Restrictions.and(c1,c3)
+						)
+					);
+				list = query.list();
+				session.getTransaction().commit();
+			} catch (RuntimeException ex) {
+				session.getTransaction().rollback();
+				throw ex;
+			}
+			return list;
+		}
+		
+		public void updatemasterSname(Integer m_id) {
+			Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+			try {
+				session.beginTransaction();
+//				"from MdataVO set s_name=:s where m_id =:m"
+				Query query = session.createSQLQuery("update mdata set s_name='m_sus' where m_id=?");
+//				query.setParameter("s","m_sus");
+				query.setParameter(0,m_id);
+				Integer count = query.executeUpdate();
+				session.getTransaction().commit();
+			} catch (RuntimeException ex) {
+				session.getTransaction().rollback();
+				throw ex;
+			}
+		}
+		
 	public static void main(String[] args) {
 //		
 		MdataDAO dao = new MdataDAO();
 //		
+		dao.updatemasterSname(1001);
 //		//D車join
-		List<MdataVO> list7 = dao.SearchByCityAndMpro("臺北市","水");
-		for (MdataVO list : list7) {
-			System.out.print(list.getM_city() + ",");
-			System.out.print(list.getM_id() + ",");
-			System.out.print(list.getM_name() + ",");
-			System.out.println(list.getB_name());
-			Set<MProVO> mpros = list.getMpros();
-			for (MProVO aMpro : mpros) {
-				System.out.println(aMpro.getM_pro());
-			}
-			System.out.println("-----------------");
-		}
+//		List<MdataVO> list7 = dao.SearchByCityAndMpro("臺北市","水");
+//		for (MdataVO list : list7) {
+//			System.out.print(list.getM_city() + ",");
+//			System.out.print(list.getM_id() + ",");
+//			System.out.print(list.getM_name() + ",");
+//			System.out.println(list.getB_name());
+//			Set<MProVO> mpros = list.getMpros();
+//			for (MProVO aMpro : mpros) {
+//				System.out.println(aMpro.getM_pro());
+//			}
+//			System.out.println("-----------------");
+//		}
 
 		
 		//B車join
