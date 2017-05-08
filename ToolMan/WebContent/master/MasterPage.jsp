@@ -235,7 +235,7 @@ input[type="file"] {
 			}
 			
 			//上傳作品圖片
-			btn.click(function() {
+			btn.on('click',function() {
 	
 				var others = $('form').serializeArray();
 				var photos = $('input[type="file"]')[0].files;
@@ -266,6 +266,8 @@ input[type="file"] {
 						$('#img1').removeAttr('src').removeAttr('class');
 						$('#img2').removeAttr('src').removeAttr('class');
 						upload.val(null);
+						$('input[name="fileuploader-list-files"]').val('[]');
+						$('ul').find('.fileuploader-item').remove();
 		 			},
 		 			beforeSend : function() {
 		 				
