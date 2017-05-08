@@ -125,7 +125,7 @@ $(function(){
 		
 		functionrow();
  	    subfunctionrow();
-	   
+ 	   $('#subfunctionrow>form>span').on('click',togglerow);
 	}// end ready function
 ); //end ready   
 
@@ -203,10 +203,11 @@ $(function(){
 			var docFragsubfunction = $(document.createDocumentFragment());
 		   if( navagatorid== 'm'){
 				$('#subfunctionrow>form').empty();
-				var applicationreviewm = '<span value="examinemaster" name="functionaction" style="padding:0px; margin:0px;" ><input type="button" value="審核師傅" /></span>';
-				var suspensionm = '<span value="suspensionm" name="functionaction" style="padding:0px; margin:0px;" ><input type="button" value="停權" name="functionaction"/></span>';
-				var sendmessagem = '<span value="sendmessagem" name="functionaction" style="padding:0px; margin:0px;" ><input type="button" value="傳送訊息" name="functionaction"/></span>';
-				var blacklistm = '<span value="blacklistm" name="functionaction" style="padding:0px; margin:0px;" ><input type="button" value="黑名單" name="functionaction"/></span>';
+// 				$('#subfunctionrow>form>span').
+				var applicationreviewm = '<span value="applicationreviewm" name="functionaction" style="padding:0px; margin:0px;" ><input type="button" value="審核師傅" /></span>';
+				var suspensionm = '<span value="suspensionm" name="functionaction" style="padding:0px; margin:0px;" ><input type="button" value="停權" "/></span>';
+				var sendmessagem = '<span value="sendmessagem" name="functionaction" style="padding:0px; margin:0px;" ><input type="button" value="傳送訊息" "/></span>';
+				var blacklistm = '<span value="blacklistm" name="functionaction" style="padding:0px; margin:0px;" ><input type="button" value="黑名單" "/></span>';
 				var b1 = $(applicationreviewm);
 				var b2 = $(suspensionm);
 				var b3 = $(sendmessagem);
@@ -217,19 +218,19 @@ $(function(){
 			
 			else if(navagatorid== 'c'){
 				$('#subfunctionrow>form').empty();
-				var suspensionc = '<span value="suspensionc" name="functionaction" style="padding:0px; margin:0px;" ><input type="button" value="停權" name="functionaction"/></span>';
-				var sendmessagec = '<span value="sendmessagec" name="functionaction" style="padding:0px; margin:0px;" ><input type="button" value="傳送訊息" name="functionaction"/></span>';
-				var blacklistc = '<span value="blacklistc" name="functionaction" style="padding:0px; margin:0px;" ><input type="button" value="黑名單" name="functionaction"/></span>';
+				var suspensionc = '<span value="suspensionc" name="functionaction" style=" padding:0px; margin:0px;" ><input type="button" value="停權"/></span>';
+				var sendmessagec = '<span value="sendmessagec" name="functionaction" style=" padding:0px; margin:0px;" ><input type="button" value="傳送訊息" /></span>';
+				var blacklistc = '<span value="blacklistc" name="functionaction" style=" padding:0px; margin:0px;" ><input type="button" value="黑名單" /></span>';
 				var b1 = $(suspensionc);
-				var b1 = $(sendmessagec);
-				var b1 = $(blacklistc);
+				var b2 = $(sendmessagec);
+				var b3 = $(blacklistc);
 				docFragsubfunction.append([b1,b2,b3]);
 				$('#subfunctionrow>form').append(docFragsubfunction);
 			}//end else if
 			
 			else if(navagatorid== 'o'){
 				$('#subfunctionrow>form').empty();
-				var sendmessageo = '<span value="sendmessageo" name="functionaction" style="padding:0px; margin:0px;" ><input type="button" value="訊息" name="functionaction"/></span>';
+				var sendmessageo = '<span value="sendmessageo" name="functionaction" style="padding:0px; margin:0px;" ><input type="button" value="訊息" "/></span>';
 				var b1 = $(sendmessageo);
 				docFragsubfunction.append([b1]);
 				$('#subfunctionrow>form').append(docFragsubfunction);
@@ -237,6 +238,23 @@ $(function(){
 			}// end else if 
 	
 		}//end functionrow
+		
+		function togglerow(){
+          
+	            //get all toggled checkboxes 
+	           var checkboxdatas = [];
+	        	 $(":checkbox:checked").each(function(){            	  
+	            	   checkboxdatas.push($(this).val()); 
+	            })
+	            
+	            $('#subfunctionrow>form').html('<input type="hidden"'+'name='+toggledcheckbox+'value='+checkboxdatas+'/>');
+	        	$('#subfunctionrow>form').submit();
+// 	            $("#eventlist>tbody>tr>td>input:checked").each(function(){
+// 	            	var toggledvalue =$(this).val();	            	
+// 	            })//end each
+				//tested ok
+// 	            alert(datas);
+		}//end togglerow
 		
 	   function loadProduct(id){
 
@@ -248,60 +266,63 @@ $(function(){
 				   tb.empty();
 				   th.empty();
 				   
-			   if(id=="o"){
-				   
-				   th.empty();
-				   	var thc1 = $('<th></th>').text('師傅編號').addClass('eventlistthreadtrth');
-				   	var thc2 = $('<th></th>').text('店家名稱').addClass('eventlistthreadtrth');
-				   	var thc3 = $('<th></th>').text('師傅名稱').addClass('eventlistthreadtrth');
-				   	var thc4 = $('<th></th>').text('店家地址').addClass('eventlistthreadtrth');
-				   	var thc5 = $('<th></th>').text('師傅專業').addClass('eventlistthreadtrth');
-				   	var thc6 = $('<th></th>').text('店家狀態').addClass('eventlistthreadtrth');
-				   	var thc7 = $('<th></th>').text('平均分數').addClass('eventlistthreadtrth');
-				   	var thc8 = $('<th></th>').text('管理者註記').addClass('eventlistthreadtrth');
-				   	var thc9 = $('<th></th>').text('管理者註記').addClass('eventlistthreadtrth');
-				   	var thc10 = $('<th></th>').text('管理者註記').addClass('eventlistthreadtrth');
-				   	var thc1 = $('<th></th>').text('下單日期').addClass('eventlistthreadtrth');
-					var thc2 = $('<th></th>').text('店家名稱').addClass('eventlistthreadtrth');
-					var thc3 = $('<th></th>').text('消費者帳戶').addClass('eventlistthreadtrth');
-					var thc4 = $('<th></th>').text('訂單編號').addClass('eventlistthreadtrth');
-					var thc5 = $('<th></th>').text('服務類別').addClass('eventlistthreadtrth');
-					var thc6 = $('<th></th>').text('服務地址').addClass('eventlistthreadtrth');
-					var thc7 = $('<th></th>').text('訂單狀態').addClass('eventlistthreadtrth');
-					var thc8 = $('<th></th>').text('師傅評分').addClass('eventlistthreadtrth');
-					var thc9 = $('<th></th>').text('消費者評分').addClass('eventlistthreadtrth');
-					var thc10 = $('<th></th>').text('管理者註記').addClass('eventlistthreadtrth');
-					var rowth = $('<tr></tr>').append([thc1,thc2,thc3,thc4,thc5,thc6,thc7,thc8,thc9,thc10]);
-					docFragth.append(rowth);
-			   }
-			   else if(id=="m"){
-				   
-				   th.empty();
-					var thc1 = $('<th></th>').text('師傅編號').addClass('eventlistthreadtrth');
-					var thc2 = $('<th></th>').text('店家名稱').addClass('eventlistthreadtrth');
-					var thc3 = $('<th></th>').text('師傅名稱').addClass('eventlistthreadtrth');
-					var thc4 = $('<th></th>').text('店家地址').addClass('eventlistthreadtrth');
-					var thc5 = $('<th></th>').text('師傅專業').addClass('eventlistthreadtrth');
-					var thc6 = $('<th></th>').text('店家狀態').addClass('eventlistthreadtrth');
-					var thc7 = $('<th></th>').text('平均分數').addClass('eventlistthreadtrth');
-					var thc8 = $('<th></th>').text('管理者註記').addClass('eventlistthreadtrth');
-					var rowth = $('<tr></tr>').append([thc1,thc2,thc3,thc4,thc5,thc6,thc7,thc8]);
-					docFragth.append(rowth);
-			   }
-			   else if(id=="c"){
-				   
-				   th.empty();
-				   var thc1 = $('<th></th>').text('下單日期').addClass('eventlistthreadtrth');
-					var thc2 = $('<th></th>').text('消費者名稱').addClass('eventlistthreadtrth');
-					var thc3 = $('<th></th>').text('消費者帳戶').addClass('eventlistthreadtrth');
-					var thc4 = $('<th></th>').text('消費者地址').addClass('eventlistthreadtrth');
-					var thc5 = $('<th></th>').text('消費者狀態').addClass('eventlistthreadtrth');
-					var thc6 = $('<th></th>').text('平均分數').addClass('eventlistthreadtrth');
-					var thc7 = $('<th></th>').text('管理者註記').addClass('eventlistthreadtrth');
-					var rowth = $('<tr></tr>').append([thc1,thc2,thc3,thc4,thc5,thc6,thc7]);
-					docFragth.append(rowth);
-				   
-			   }
+				   if(id=="o"){
+					   
+					   th.empty();
+					   	var thc0 = $('<th></th>').addClass('eventlistthreadtrth');
+					   	var thc1 = $('<th></th>').text('師傅編號').addClass('eventlistthreadtrth');
+					   	var thc2 = $('<th></th>').text('店家名稱').addClass('eventlistthreadtrth');
+					   	var thc3 = $('<th></th>').text('師傅名稱').addClass('eventlistthreadtrth');
+					   	var thc4 = $('<th></th>').text('店家地址').addClass('eventlistthreadtrth');
+					   	var thc5 = $('<th></th>').text('師傅專業').addClass('eventlistthreadtrth');
+					   	var thc6 = $('<th></th>').text('店家狀態').addClass('eventlistthreadtrth');
+					   	var thc7 = $('<th></th>').text('平均分數').addClass('eventlistthreadtrth');
+					   	var thc8 = $('<th></th>').text('管理者註記').addClass('eventlistthreadtrth');
+					   	var thc9 = $('<th></th>').text('管理者註記').addClass('eventlistthreadtrth');
+					   	var thc10 = $('<th></th>').text('管理者註記').addClass('eventlistthreadtrth');
+					   	var thc1 = $('<th></th>').text('下單日期').addClass('eventlistthreadtrth');
+						var thc2 = $('<th></th>').text('店家名稱').addClass('eventlistthreadtrth');
+						var thc3 = $('<th></th>').text('消費者帳戶').addClass('eventlistthreadtrth');
+						var thc4 = $('<th></th>').text('訂單編號').addClass('eventlistthreadtrth');
+						var thc5 = $('<th></th>').text('服務類別').addClass('eventlistthreadtrth');
+						var thc6 = $('<th></th>').text('服務地址').addClass('eventlistthreadtrth');
+						var thc7 = $('<th></th>').text('訂單狀態').addClass('eventlistthreadtrth');
+						var thc8 = $('<th></th>').text('師傅評分').addClass('eventlistthreadtrth');
+						var thc9 = $('<th></th>').text('消費者評分').addClass('eventlistthreadtrth');
+						var thc10 = $('<th></th>').text('管理者註記').addClass('eventlistthreadtrth');
+						var rowth = $('<tr></tr>').append([thc0,thc1,thc2,thc3,thc4,thc5,thc6,thc7,thc8,thc9,thc10]);
+						docFragth.append(rowth);
+				   }
+				   else if(id=="m"){
+					   
+					   th.empty();
+					  	var thc0 = $('<th></th>').addClass('eventlistthreadtrth');
+						var thc1 = $('<th></th>').text('師傅編號').addClass('eventlistthreadtrth');
+						var thc2 = $('<th></th>').text('店家名稱').addClass('eventlistthreadtrth');
+						var thc3 = $('<th></th>').text('師傅名稱').addClass('eventlistthreadtrth');
+						var thc4 = $('<th></th>').text('店家地址').addClass('eventlistthreadtrth');
+						var thc5 = $('<th></th>').text('師傅專業').addClass('eventlistthreadtrth');
+						var thc6 = $('<th></th>').text('店家狀態').addClass('eventlistthreadtrth');
+						var thc7 = $('<th></th>').text('平均分數').addClass('eventlistthreadtrth');
+						var thc8 = $('<th></th>').text('管理者註記').addClass('eventlistthreadtrth');
+						var rowth = $('<tr></tr>').append([thc0,thc1,thc2,thc3,thc4,thc5,thc6,thc7,thc8]);
+						docFragth.append(rowth);
+				   }
+				   else if(id=="c"){
+					   
+					   th.empty();
+					    var thc0 = $('<th></th>').addClass('eventlistthreadtrth');
+					    var thc1 = $('<th></th>').text('下單日期').addClass('eventlistthreadtrth');
+						var thc2 = $('<th></th>').text('消費者名稱').addClass('eventlistthreadtrth');
+						var thc3 = $('<th></th>').text('消費者帳戶').addClass('eventlistthreadtrth');
+						var thc4 = $('<th></th>').text('消費者地址').addClass('eventlistthreadtrth');
+						var thc5 = $('<th></th>').text('消費者狀態').addClass('eventlistthreadtrth');
+						var thc6 = $('<th></th>').text('平均分數').addClass('eventlistthreadtrth');
+						var thc7 = $('<th></th>').text('管理者註記').addClass('eventlistthreadtrth');
+						var rowth = $('<tr></tr>').append([thc0,thc1,thc2,thc3,thc4,thc5,thc6,thc7]);
+						docFragth.append(rowth);
+					   
+				   }
 			   $.each(datas,function(i,data){
 				   console.log(data);//for test
 				   
@@ -309,47 +330,55 @@ $(function(){
 // 						for(var i=pageIndex;i<pageIndex+rowsPerPage;i++){
 					   
 					   if(id=="o"){
-					   console.log(data);
-					   tb.empty();
-					   
-					  	var cell1 = $('<td></td>').text(data.o_tdate).addClass('eventlisttbodytrtd');
-						var cell2 = $('<td></td>').text(data.o_bname).addClass('eventlisttbodytrtd');
-						var cell3 = $('<td></td>').text(data.c_id).addClass('eventlisttbodytrtd');
-						var cell4 = $('<td></td>').text(data.o_id).addClass('eventlisttbodytrtd');
- 						var cell5 = $('<td></td>').text(data.opros).addClass('eventlisttbodytrtd');
-						var cell6 = $('<td></td>').text(data.o_location).addClass('eventlisttbodytrtd');
-						var cell7 = $('<td></td>').text(data.s_name).addClass('eventlisttbodytrtd');
-						var cell8 = $('<td></td>').text(data.m_arating).addClass('eventlisttbodytrtd');
-						var cell9 = $('<td></td>').text(data.c_arating).addClass('eventlisttbodytrtd');
-						var wordsanote =  $('<span style="visibility: hidden;font-size:0px;margin:0pxlpadding:0px;"></span> ').text(data.sa_onote).addClass('eventlisttbodytrtd');
-						var saonote =  $('<input type="text" width="500px" /> ').val(data.sa_onote).addClass('eventlisttbodytrtd');
-						var cell10 = $('<td></td>').html(saonote).addClass('eventlisttbodytrtd').append(wordsanote);
- 						var rowtb = $('<tr></tr>').append([cell1,cell2,cell3,cell4,cell5,cell6,cell7,cell8,cell9,cell10]);
- 						docFragtb.append(rowtb);
+						   
+						   	console.log(data);
+						   	tb.empty();
+						   	var toggleword = $('<input type="checkbox" name="otoggle" />').val(data.o_id);
+						   	var cell0 = $('<td></td>').append(toggleword);
+						  	var cell1 = $('<td></td>').text(data.o_tdate).addClass('eventlisttbodytrtd');
+							var cell2 = $('<td></td>').text(data.o_bname).addClass('eventlisttbodytrtd');
+							var cell3 = $('<td></td>').text(data.c_id).addClass('eventlisttbodytrtd');
+							var cell4 = $('<td></td>').text(data.o_id).addClass('eventlisttbodytrtd');
+	 						var cell5 = $('<td></td>').text(data.opros).addClass('eventlisttbodytrtd');
+							var cell6 = $('<td></td>').text(data.o_location).addClass('eventlisttbodytrtd');
+							var cell7 = $('<td></td>').text(data.s_name).addClass('eventlisttbodytrtd');
+							var cell8 = $('<td></td>').text(data.m_arating).addClass('eventlisttbodytrtd');
+							var cell9 = $('<td></td>').text(data.c_arating).addClass('eventlisttbodytrtd');
+							var wordsanote =  $('<span style="visibility: hidden;font-size:0px;margin:0pxlpadding:0px;"></span> ').text(data.sa_onote).addClass('eventlisttbodytrtd');
+							var saonote =  $('<input type="text" width="500px" /> ').val(data.sa_onote).addClass('eventlisttbodytrtd');
+							var cell10 = $('<td></td>').html(saonote).addClass('eventlisttbodytrtd').append(wordsanote);
+	 						var rowtb = $('<tr></tr>').append([cell0,cell1,cell2,cell3,cell4,cell5,cell6,cell7,cell8,cell9,cell10]);
+	 						docFragtb.append(rowtb);
+	 						
 						}//end if
 				  
-				  else if(id=="m"){					  	  				
+				  else if(id=="m"){				
+					  
 					   tb.empty();
-					     
-				   var mid =  $('<input type="button" width="500px" /> ').val(data.M_id).addClass('eventlisttbodytrtd');
-				   var midwordmid =  $('<span style="visibility: hidden;font-size:0px;margin:0pxlpadding:0px;"></span> ').text(data.M_id).addClass('eventlisttbodytrtd');
-				   var cell1 = $('<td></td>').html(mid).addClass('eventlisttbodytrtd').append(midwordmid);
-				   var cell2 = $('<td></td>').text(data.B_name).addClass('eventlisttbodytrtd');
-				   var cell3 = $('<td></td>').text(data.M_name).addClass('eventlisttbodytrtd');
-				   var cell4 = $('<td></td>').text(data.M_city+data.M_district).addClass('eventlisttbodytrtd');
-				   var cell5 = $('<td></td>').text(data.Mpros).addClass('eventlisttbodytrtd');
-				   var cell6 = $('<td></td>').text(data.S_name).addClass('eventlisttbodytrtd');
-				   var cell7 = $('<td></td>').text(data.M_arating).addClass('eventlisttbodytrtd');
-				   var wordsanote =  $('<span style="visibility: hidden;font-size:0px;margin:0pxlpadding:3px;"></span> ').text(data.Sa_mnote).addClass('eventlisttbodytrtd');
-				   var samnote =  $('<input type="text" width="500px" /> ').val(data.Sa_mnote).addClass('eventlisttbodytrtd');
-				   var cell8 = $('<td></td>').html(samnote).addClass('eventlisttbodytrtd').append(wordsanote);
-				   var rowtb = $('<tr></tr>').append([cell1,cell2,cell3,cell4,cell5,cell6,cell7,cell8]).addClass('eventlisttbodytrtd');				   
-  				   docFragtb.append(rowtb);
+					   var toggleword =$('<input type="checkbox" name="mtoggle"/>').val(data.M_id);     
+					   var mid =  $('<input type="button" width="500px" /> ').val(data.M_id).addClass('eventlisttbodytrtd');
+					   var midwordmid =  $('<span style="visibility: hidden;font-size:0px;margin:0pxlpadding:0px;"></span> ').text(data.M_id).addClass('eventlisttbodytrtd');
+					   var cell0 = $('<td></td>').addClass('eventlisttbodytrtd').append(toggleword);  
+					   var cell1 = $('<td></td>').html(mid).addClass('eventlisttbodytrtd').append(midwordmid);
+					   var cell2 = $('<td></td>').text(data.B_name).addClass('eventlisttbodytrtd');
+					   var cell3 = $('<td></td>').text(data.M_name).addClass('eventlisttbodytrtd');
+					   var cell4 = $('<td></td>').text(data.M_city+data.M_district).addClass('eventlisttbodytrtd');
+					   var cell5 = $('<td></td>').text(data.Mpros).addClass('eventlisttbodytrtd');
+					   var cell6 = $('<td></td>').text(data.S_name).addClass('eventlisttbodytrtd');
+					   var cell7 = $('<td></td>').text(data.M_arating).addClass('eventlisttbodytrtd');
+					   var wordsanote =  $('<span style="visibility: hidden;font-size:0px;margin:0pxlpadding:3px;"></span> ').text(data.Sa_mnote).addClass('eventlisttbodytrtd');
+					   var samnote =  $('<input type="text" width="500px" /> ').val(data.Sa_mnote).addClass('eventlisttbodytrtd');
+					   var cell8 = $('<td></td>').html(samnote).addClass('eventlisttbodytrtd').append(wordsanote);
+					   var rowtb = $('<tr></tr>').append([cell0,cell1,cell2,cell3,cell4,cell5,cell6,cell7,cell8]).addClass('eventlisttbodytrtd');				   
+	  				   docFragtb.append(rowtb);
+	  				   
 					}//end if
 				   
 					else if(id=="c"){
-						   tb.empty();
-						   
+						
+					   tb.empty();
+					   var toggleword = $('<input type="checkbox" name="ctoggle" />').val(data.c_id);
+					   var cell0 = $('<td></td>').append(toggleword);
 					   var cell1 = $('<td></td>').text(data.c_jdate).addClass('eventlisttbodytrtd');;
 					   var cell2 = $('<td></td>').text(data.c_id).addClass('eventlisttbodytrtd');;
 					   var cell3 = $('<td></td>').text(data.c_name).addClass('eventlisttbodytrtd');;
@@ -359,7 +388,7 @@ $(function(){
 					   var wordsanote =  $('<span style="visibility: hidden;font-size:0px;margin:0pxlpadding:0px;"></span> ').text(data.sa_cnote).addClass('eventlisttbodytrtd');
 					   var sacnote =  $('<input type="text" width="500px" /> ').val(data.sa_cnote).addClass('eventlisttbodytrtd');
 					   var cell7 = $('<td></td>').text(samnote).addClass('eventlisttbodytrtd').append(wordsanote);;
-					   var row = $('<tr></tr>').append([cell1,cell2,cell3,cell4,cell5,cell6,cell7]);
+					   var row = $('<tr></tr>').append([cell0,cell1,cell2,cell3,cell4,cell5,cell6,cell7]);
 					   docFragtb.append(row);
 					   
 						}// end if

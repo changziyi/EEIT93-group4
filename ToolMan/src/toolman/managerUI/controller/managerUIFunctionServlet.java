@@ -29,8 +29,40 @@ public class managerUIFunctionServlet extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String uiaction = request.getParameter("functionaction");
-		if(uiaction="")
+		String functionaction = request.getParameter("functionaction");
+		String toggledcheckbox = request.getParameter("toggledcheckbox");
+		
+		if(functionaction.equals("applicationreviewm")){
+			
+			
+			
+		}
+		if(functionaction.equals("suspensionm")){
+			
+			
+		}
+		if(functionaction.equals("sendmessagem")){
+			
+			
+		}
+		if(functionaction.equals("blacklistm")){
+			
+			
+		}
+		if(functionaction.equals("suspensionc")){
+			
+			
+		}
+		if(functionaction.equals("sendmessagec")){
+			
+			
+		}
+		if(functionaction.equals("sendmessageo")){
+			
+			
+		}
+		
+		
 		
 	}
 
