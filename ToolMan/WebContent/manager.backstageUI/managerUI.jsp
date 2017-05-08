@@ -110,10 +110,7 @@
 	</article>
 	
 <!-- mail block from LIN DAN-->	
-	<div align="center">
-		<button class="btn btn-primary btn-lg" data-toggle="modal"
-			data-target="#myModal01">email</button>
-	</div>
+
 	<div class="modal fade" id="myModal01" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
