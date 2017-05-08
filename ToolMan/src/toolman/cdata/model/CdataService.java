@@ -3,6 +3,7 @@ package toolman.cdata.model;
 
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.List;
 
 
 
@@ -50,6 +51,8 @@ public class CdataService {
 		return  dao.cdata_des(c_id); 
 		
 	}
-	
+	public List<CdataVO> getAll() {
+		return dao.getAll();
+	}
 
 }

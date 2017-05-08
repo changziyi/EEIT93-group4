@@ -25,8 +25,7 @@ public class FavoriteJDBCDAO implements FavoriteDAO_interface {
 
 	@Override
 	public void insert(FavoriteVO favoriteVO) {
-		// TODO Auto-generated method stub
-		// 新增
+		
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
@@ -67,7 +66,6 @@ public class FavoriteJDBCDAO implements FavoriteDAO_interface {
 
 	@Override
 	public void delete(Integer F_id) {
-		// TODO Auto-generated method stub
 		Connection con = null;
 		PreparedStatement pstmt = null;
 
@@ -105,7 +103,6 @@ public class FavoriteJDBCDAO implements FavoriteDAO_interface {
 
 	@Override
 	public FavoriteVO findByPrimaryKey(Integer F_id) {
-		// TODO Auto-generated method stub
 
 		FavoriteVO favoriteVO = null;
 		Connection con = null;
@@ -163,8 +160,7 @@ public class FavoriteJDBCDAO implements FavoriteDAO_interface {
 	}
 
 	@Override
-	public List<FavoriteVO> getAll() {
-		// TODO Auto-generated method stub
+	public List<FavoriteVO> getAllFavorite() {
 		List<FavoriteVO> list = new ArrayList<FavoriteVO>();
 		FavoriteVO favoriteVO = null;
 
@@ -223,7 +219,7 @@ public class FavoriteJDBCDAO implements FavoriteDAO_interface {
 		/************************** 測試新增 ****************************/
 		FavoriteVO favoriteVO = new FavoriteVO();
 		
-		favoriteVO.setC_id("1001");
+		favoriteVO.setC_id("Snoopy");
 		favoriteVO.setM_id(1001);
 		
 		dao.insert(favoriteVO);
@@ -247,7 +243,7 @@ public class FavoriteJDBCDAO implements FavoriteDAO_interface {
 //				+ "---------------------------------------------------------");
 
 		/************************** 測試多筆查詢 ****************************/
-		 List<FavoriteVO> list =dao.getAll();
+		 List<FavoriteVO> list =dao.getAllFavorite();
 		 for(FavoriteVO mda : list){
 		System.out.print(mda.getF_id() + ",");
 	

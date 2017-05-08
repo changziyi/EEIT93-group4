@@ -132,7 +132,7 @@ public class CdataDAO implements CdataDAO_interface{
 		
 		/*********************** 評價  *****************************/
 		//評價
-//		CdataVO cdataVO = dao.findByPrimaryKey("PolarBear");
+//		CdataVO cdataVO = dao.cdata_des("PolarBear");
 //		System.out.print(cdataVO.getC_id() + ",");
 //		System.out.println(cdataVO.getC_name());
 //			

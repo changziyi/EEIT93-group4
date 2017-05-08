@@ -30,6 +30,21 @@
 			<p>師傅：${mdataVO.m_name}</p>
 			<p>地區：${mdataVO.m_city}　${mdataVO.m_district}</p>
    			<input type="button" id="reservemaster" value="預約師傅" >
+ <%--------------------------------------最愛與黑單--------------------------------------------------- --%>
+   			<FORM METHOD="get" action="/ToolMan/order/Favorite.do">
+			<input type="submit" value="加入最愛">
+			<input type="hidden" name="m_id" value="${mdataVO.m_id}">
+			<input type="hidden" name="c_id" value="Snoopy">
+			<input type="hidden" name="action"	value="addFavorite">
+			</FORM>
+			<FORM METHOD="get" action="/ToolMan/order/Dislike.do">
+			<input type="submit" value="黑名單">
+			<input type="hidden" name="m_id" value="${mdataVO.m_id}">
+			<input type="hidden" name="c_id" value="Snoopy">
+			<input type="hidden" name="action"	value="addDislike">
+			</FORM>
+			
+  <%--------------------------------------萬里長城--------------------------------------------------- --%>
    			
 		</div>
 	</div>

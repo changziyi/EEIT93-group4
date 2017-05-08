@@ -6,6 +6,10 @@
 <meta http-equiv="Content-Type" content="text/html"; charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="css/bootstrap.min.css">
+<style>
+.form-control{width:120px}
+.list-group-item{width:120px}
+</style>
 </head>
 <body>
 
@@ -14,25 +18,11 @@
 			<div class="form-group">
 				<input type="text" class="form-control" id="txtSearch"
 				name="keyword" autocomplete="off">
-				<input type="button" value="Load" id="buttonLoad">
+<!-- 				<input type="button" value="Load" id="buttonLoad"> -->
 				<input type="hidden" name="m_city" value="${mdataVO.m_city}" >
 
 			</div>
 		</form>
-		
-			位在地址： 
-				<select name="m_city">
-					<option>台北市</option>
-					<option>桃園市</option>
-					<option>新竹市</option>
-					<option>苗栗市</option>
-					<option>台中市</option>
-					<option>彰化市</option>
-					<option>雲林市</option>
-					<option>嘉義市</option>
-					<option>台南市</option>
-					<option>高雄市</option>
-				</select>
 	
 		<div id="div1"></div>	
 	</div>
@@ -75,7 +65,7 @@
 											document.myData.keyword.value = this.firstChild.nodeValue;
 											show.style.display = "none";
 											
-											showMaster();
+// 											showMaster();
 											
 										}, false)
 									eleDiv.appendChild(eleBtn);
@@ -105,33 +95,6 @@
 			}
 		})
 	}
-		
-	</script>
-	<script>
-		var xhr = null,
-		btn = document.getElementById("buttonLoad"),
-		myDiv = document.getElementById("div1");
- 		btn.addEventListener("click",load);
- 		function load(){
-		xhr = new XMLHttpRequest();
-		
-		if (xhr != null){
-			xhr.open("GET","master.xml");
-			xhr.send();
-			xhr.addEventListener("readystatechange",callback);
-		}else{
-			alert("您的瀏覽器不支援Ajax功能!!");
-			}
-		}
- 
-		var city = $('input[name="m_city"]');
-		$('#twzipcode').twzipcode({
-			'css': ['county', 'district', 'zipcode'],
-		    'countySel'   : '${mdataVO.m_city}',
-	
-		    'onCountySelect': function () {
-		    	city.attr("value", this.value);
-		    }
 		
 	</script>
 </body>
