@@ -36,6 +36,8 @@ public class CdatadessServlet extends HttpServlet {
 		cdataVO = cs.cdata_des("PolarBear");		
 		session.setAttribute("cdataVO", cdataVO);	
 		Set<OrderVO> orders = cdataVO.getOrders();
+		
+		
 		for (OrderVO aOrder : orders) {
 			System.out.print(" 師傅 : "+ aOrder.getB_name()+" , ");
 			System.out.println(" 時間 : "+ aOrder.getO_edate());
