@@ -200,6 +200,7 @@ $(function(){
 	   function subfunctionrow(){
 
 			var docFragsubfunction = $(document.createDocumentFragment());
+			
 		   if( navagatorid== 'm'){
 				$('#subfunctionrow').empty();
 				var applicationreviewm = '<input type="button" value="審核師傅"/>';
