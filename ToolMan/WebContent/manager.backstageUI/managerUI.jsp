@@ -115,9 +115,9 @@
 	var navagatorid = $('#navigator>ul>li.active').data('id');
 
 $(function(){
-// 		$(document).ajaxComplete(function(){
-// 			 datatableinit();
-// 		});	//open and everything goes wrong
+		$(document).ajaxComplete(function(){
+			 datatableinit();
+		});	//let's try it
 		
 		loadProduct('m');
 		$('#navigator>ul>li').on('click',navigatorevent);//end on do not add ()
@@ -138,7 +138,7 @@ $(function(){
 		   $('#navigator>ul>li[data-id="' + id + '"]').addClass('active');
 		   
 		   functionrow();
-// 		   subfunctionrow(); 
+		   subfunctionrow(); 
 		   
 	}//navigatorevent()
 	
@@ -368,7 +368,7 @@ $(function(){
 			   
 			   th.append(docFragth);
 			   tb.append(docFragtb);
-			   datatableinit();
+// 			   datatableinit();// goes wrong often
 			   
 		  	 }//end get json function
 			);//end get json
