@@ -162,8 +162,8 @@
 <script>
 	var table ;//datatable variable not in use
 	var navagatorid = $('#navigator>ul>li.active').data('id');//top navigator
-	var datastatus = $('#functionrow2>li>ul>li[name="datastatus"][data-buttonstate="selected"]').data('statusvalue');
- 	var datatime = $('#functionrow2>li>ul>li[name="datatime"][data-buttonstate="selected"]').data('statusvalue');
+	var datastatus = $('#functionrow>div>ul>li[name="datastatus"][data-buttonstate="selected"]').data('statusvalue');
+ 	var datatime = $('#functionrow>div>ul>li[name="datatime"][data-buttonstate="selected"]').data('statusvalue');
 
 
 $(function(){
@@ -174,15 +174,14 @@ $(function(){
 		functionrow();// build functionrow
  	    subfunctionrow();// build function buttons
 		$('#navigator>ul>li').on('click',navigatorevent);//upon swithing tab
-		loadProduct('m','allmaster','alldate');//build dynamic table
 		
-		$('#functionrow>ul>li').on('click',functionrowfiltering);//filtering
+
+		$('#functionrow>div>ul>li').on('click',functionrowfiltering);//filtering
  	   $('#subfunctionrow>a').on('click',togglehyper);//direct to other pages
  	  $('#subfunctionrow>span[id!="messagespanm"][id!="messagespanc"]').on('click',togglegetmethod);//will return something when clicked, maill has it's own form action
  		 mail();//mail
- 		$('#functionrow2>li>ul>li[name="datastatus"]').on('click',loadProduct(navagatorid,datastatus,datatime));
- 		$('#functionrow2>li>ul>li[name="datatime"]').on('click',loadProduct(navagatorid,datastatus,datatime));
 
+ 		loadProduct('m','allmaster','alldate');//build dynamic table
 }// end ready function
 ); //end ready   
 	function mail(){
@@ -303,20 +302,26 @@ $(function(){
 	
 		function functionrowfiltering(){
 		
-			 $('#eventlist').dataTable().fnDestroy();   
-			 	navagatorid = id;
-			 	datastatus = $(this).data('statusvalue');//both status and time selection have datastatus which makes me easiler to change their selected attribute without knowing what they are
-			 	whattype= $(this).attr('name');// to know the type of the clicked
-			 	if(whattype=="datastatus"){
-				   $('#functionrow2>li>ul>li[name="datastatus"]').removeAttr('data-buttonstate');//remove the selected attribute of all status 
-				   $('#functionrow2>li>ul>li[data-statusvalue="'+datastatus+'"]').attr('data-buttonstate','selected');// assign the clicked as currently selected 		   
-			 	}
+ 
+				 id = navagatorid;//tested ok//get navagitor id
+			 	datastatus = $(this).data('statusvalue');//tested ok//both status and time selection have datastatus which makes me easiler to change their selected attribute without knowing what they are
+			 	whattype= $(this).attr('name');//tested ok// to know the type of the clicked
+			 	if(whattype=="datastatus"){//tested ok
+				   $('#functionrow>div>ul>li[name="datastatus"]').removeAttr('data-buttonstate');//remove the selected attribute of all status 
+				   $('#functionrow>div>ul>li[data-statusvalue="'+datastatus+'"]').attr('data-buttonstate','selected');// assign the clicked as currently selected 		   
+			 	}//end if
 			 	if(whattype=="datatime"){
-					   $('#functionrow2>li>ul>li[name="datatime"]').removeAttr('data-buttonstate');//remove the selected attribute of all status 
-					   $('#functionrow2>li>ul>li[data-statusvalue="'+datastatus+'"]').attr('data-buttonstate','selected');// assign the clicked as currently selected 		   
-				 }
-			   datastatus = $('#functionrow2>li>ul>li[name="datastatus"][data-buttonstate="selected"]').data('statusvalue');// asign the variable to utilized the still selected datastatus
-			   datatime = $('#functionrow2>li>ul>li[name="datatime"][data-buttonstate="selected"]').data('statusvalue');
+					   $('#functionrow>div>ul>li[name="datatime"]').removeAttr('data-buttonstate');//remove the selected attribute of all status 
+					   $('#functionrow>div>ul>li[data-statusvalue="'+datastatus+'"]').attr('data-buttonstate','selected');// assign the clicked as currently selected 		   
+				 }//end if
+			   datastatus = $('#functionrow>div>ul>li[name="datastatus"][data-buttonstate="selected"]').data('statusvalue');//tested ok// asign the variable to utilized the still selected datastatus
+			   if(id=='o'){
+			  	 datatime = $('#functionrow>div>ul>li[name="datatime"][data-buttonstate="selected"]').data('statusvalue');//tested ok//only order tab has this event
+			   }//end if
+			   else{
+				   datatime='alltime';
+			   }
+// 				 $('#eventlist').dataTable().fnDestroy();  
 			   loadProduct(id,datastatus,datatime);
 			   // $('#navigator>ul>li[data-id="' + id + '"]')
 
