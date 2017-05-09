@@ -14,7 +14,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>emailing Page</title>
+<title>email Page</title>
 
 <link rel="stylesheet"
 	href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -136,7 +136,7 @@
 							</tr>
 						
 							<tr>
-								<td><label style="vertical-align: top">內容：
+								<td><label style="vertical-align: top">內容：</label>
 								
 								<textarea name="ms_content" style="width: 400px; height: 120px"
 								placeholder="請輸入內容"></textarea></td>
