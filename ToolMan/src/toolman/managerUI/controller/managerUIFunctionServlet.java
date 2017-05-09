@@ -1,6 +1,7 @@
 package toolman.managerUI.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,6 +12,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import toolman.cdata.model.CdataService;
+import toolman.cdata.model.CdataVO;
 import toolman.mdata.model.MdataService;
 import toolman.mdata.model.MdataVO;
 
@@ -39,9 +42,9 @@ public class managerUIFunctionServlet extends HttpServlet {
 		String functionaction = request.getParameter("functionaction");
 		String toggledcheckbox = request.getParameter("toggledcheckbox");
 		int lastindex = toggledcheckbox.lastIndexOf("\""); 
-		String[] arraytoggled = toggledcheckbox.replaceAll("\\[", "").replaceAll("\\]", "").split("");
+		String[] arraytoggled = toggledcheckbox.split("");
 		
-		if(functionaction.equals("applicationreviewm")){
+		if("applicationreviewm".equals(functionaction)){
 			List<MdataVO> list = new ArrayList<MdataVO>();
 			for(String m_id:arraytoggled){
 			MdataService mdataservice = new MdataService();
@@ -52,17 +55,21 @@ public class managerUIFunctionServlet extends HttpServlet {
 			rd.forward(request, response);	
 		}
 		
-		if(functionaction.equals("suspensionm")){
+		if("suspensionm".equals(functionaction)){
 			List<MdataVO> list = new ArrayList<MdataVO>();
+			Integer count=0;
 			for(String m_id:arraytoggled){
-			MdataService mdataservice = new MdataService();
-			mdataservice.updatemasterSname(Integer.parseInt(m_id),"m_sus");
+				MdataService mdataservice = new MdataService();
+			Integer	returnedcount = mdataservice.updatemasterSname(Integer.parseInt(m_id),"m_sus");
+			count= returnedcount+count;
 			}
-
+			PrintWriter out = response.getWriter();
+			System.out.print(count);
+			out.write(count);
 			
 		}
 		
-		if(functionaction.equals("sendmessagem")){
+		if("sendmessagem".equals(functionaction)){
 			List<MdataVO> list = new ArrayList<MdataVO>();
 			for(String m_id:arraytoggled){
 			MdataService mdataservice = new MdataService();
@@ -73,18 +80,28 @@ public class managerUIFunctionServlet extends HttpServlet {
 			rd.forward(request, response);	
 			
 		}
-		if(functionaction.equals("blacklistm")){
+		if("blacklistm".equals(functionaction)){
 			
 			
 		}
-		if(functionaction.equals("suspensionc")){
-			
-			
+		if("suspensionc".equals(functionaction)){
+			List<CdataVO> list = new ArrayList<CdataVO>();
+			Integer count=0;
+			for(String c_id:arraytoggled){
+				CdataService cdataservice = new CdataService();
+			Integer	returnedcount = cdataservice.updatecustomerSname(Integer.parseInt(c_id),"m_sus");
+			count= returnedcount+count;
+			}
+			PrintWriter out = response.getWriter();
+			System.out.print(count);
+			out.write(count);			
 		}
+		
 		if(functionaction.equals("sendmessagec")){
 			
 			
 		}
+		
 		if(functionaction.equals("sendmessageo")){
 			
 			

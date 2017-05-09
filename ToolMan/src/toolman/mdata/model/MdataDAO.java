@@ -202,7 +202,7 @@ public class MdataDAO implements MdataDAO_interface {
 			Integer count=0;
 			try {
 				session.beginTransaction();
-				Query query = session.createQuery("from MdataVO set s_name=:s where m_id=:m");
+				Query query = session.createQuery("update MdataVO set s_name=:s where m_id=:m");
 				query.setParameter("s",s_name);
 				query.setParameter("m",m_id);
 				count = query.executeUpdate();

@@ -115,19 +115,21 @@ public class CdataDAO implements CdataDAO_interface{
 		return cdataVO;
 	}
 	//BY Benny
-	public void updatecustomerSname(Integer c_id) {
+	public Integer updatecustomerSname(Integer c_id, String s_name) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		Integer count=0;
 		try {
 			session.beginTransaction();
-			Query query = session.createQuery("from CdataVO set s_name=:s where c_id=:c");
+			Query query = session.createQuery("update CdataVO set s_name=:s where c_id=:c");
 			query.setParameter("s","c_sus");
 			query.setParameter("c",c_id);
-			Integer count = query.executeUpdate();
+			count = query.executeUpdate();
 			session.getTransaction().commit();
 		} catch (RuntimeException ex) {
 			session.getTransaction().rollback();
 			throw ex;
 		}
+		return count;
 	}
 
 	public static void main(String args[]){		

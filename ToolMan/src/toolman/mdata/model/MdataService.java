@@ -156,8 +156,7 @@ public class MdataService {
 		List<MdataVO> mdatas = dao.getCityAndDistrictAndMPro(m_city, m_district, m_pro);
 		return mdatas;
 	}
-	public Integer updatemasterSname(Integer m_id, String s_name){
-		Integer count =dao.updatemasterSname(m_id,s_name);	
-		return count;
+	public Integer updatemasterSname(Integer m_id, String s_name){		
+		return dao.updatemasterSname(m_id,s_name);
 	} 
 }

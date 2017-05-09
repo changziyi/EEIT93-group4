@@ -110,10 +110,7 @@
 	</article>
 	
 <!-- mail block from LIN DAN-->	
-	<div align="center">
-		<button class="btn btn-primary btn-lg" data-toggle="modal"
-			data-target="#myModal01">email</button>
-	</div>
+
 	<div class="modal fade" id="myModal01" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
@@ -178,7 +175,7 @@ $(function(){
 		functionrow();// build functionrow
  	    subfunctionrow();// build function buttons
  	   $('#subfunctionrow>a').on('click',togglehyper);//direct to other pages
- 	  $('#subfunctionrow>span').on('click',togglegetmethod);//will return something when clicked 
+ 	  $('#subfunctionrow>span[id!="messagespanm"][id!="messagespanc"]').on('click',togglegetmethod);//will return something when clicked 
  		 mail();//mail
 	}// end ready function
 ); //end ready   
@@ -270,7 +267,7 @@ $(function(){
 // 				$('#subfunctionrow>form>span').
 				var applicationreviewm = '<a href="" id="applymasterlink" name="applicationreviewm"><input type="button" value="審核師傅" /></a>';
 				var suspensionm = '<span value="suspensionm" name="functionaction" style="padding:0px; margin:0px;" ><input type="button" value="停權" "/></span>';
-				var sendmessagem = '<span value="sendmessagem" name="functionaction" style="padding:0px; margin:0px;" ><input type="button" data-target="#myModal01" data-toggle="modal" value="傳送訊息" "/></span>';
+				var sendmessagem = '<span id="messagespan" value="sendmessagem" name="functionaction" style="padding:0px; margin:0px;" ><input type="button" data-target="#myModal01" data-toggle="modal" value="傳送訊息" "/></span>';
 				var blacklistm = '<span value="blacklistm" name="functionaction" style="padding:0px; margin:0px;" ><input type="button" value="黑名單" "/></span>';
 				var b1 = $(applicationreviewm);
 				var b2 = $(suspensionm);
@@ -312,7 +309,7 @@ $(function(){
 	            	   checkboxdatas.push($(this).val()); 
 	            })
 	           
-	           var hyperlinkstring = "${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIServlet.do?";
+	           var hyperlinkstring = "${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIServlet.do";
 	           var hyperlinkparameter = "functionaction="+nameattr+"&toggledcheckbox="+checkboxdatas;
 	           var hyperlinkstringwithparameter=hyperlinkstring+hyperlinkparameter;
 	           $('#applymasterlink').attr("href",hyperlinkstringwithparameter);
@@ -331,13 +328,14 @@ $(function(){
         	 $(":checkbox:checked").each(function(){            	  
             	   checkboxdatas.push($(this).val()); 
             })
-           var nameattr=$(this).attr('name');
-           var hyperlinkstring = "${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIServlet.do?";
-//            var hyperlinkparameter = "functionaction="+nameattr+"&"+toggledcheckbox="+checkboxdatas;
+            var checkboxdatas2=checkboxdatas.toString();
+           var nameattr=$(this).attr('value');//retrieve the value from functinaction
+           var hyperlinkstring = "${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIFunctionServlet.do";
+//            var hyperlinkparameter = "functionaction="+nameattr+"&"+toggledcheckbox="+checkboxdatas2;
 //            var hyperlinkstringwithparameter=hyperlinkstring+hyperlinkparameter;
-           $.get(hyperlinkstring,{"functionaction":nameattr,"toggledcheckbox":checkboxdatas},function(data){
+           $.post(hyperlinkstring,{"functionaction":nameattr,"toggledcheckbox":checkboxdatas2},function(data){
         	   alert(data);
-           })//end get function
+           });//end get function
 	}//end togglerow
 	
 	   function loadProduct(id){
