@@ -197,12 +197,12 @@ public class MdataDAO implements MdataDAO_interface {
 			return list;
 		}
 		
-		public void updatemasterSname(Integer m_id) {
+		public void updatemasterSname(Integer m_id,String s_name) {
 			Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 			try {
 				session.beginTransaction();
 				Query query = session.createQuery("from MdataVO set s_name=:s where m_id=:m");
-				query.setParameter("s","m_sus");
+				query.setParameter("s",s_name);
 				query.setParameter("m",m_id);
 				Integer count = query.executeUpdate();
 				session.getTransaction().commit();
