@@ -43,43 +43,52 @@ public class ManagerUIServlet extends HttpServlet {
     }
 
 
+	@SuppressWarnings("unused")
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String topnavigatorid = request.getParameter("topnavigatorid");
+		String topnavigatorid = request.getParameter("navigatorid");
+		String datastatus = request.getParameter("datastatus");
+		String datatime = request.getParameter("datatime");
 //		action = "c";
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
 
 		
+		
 		//get m tested ok
 		if("m".equals(topnavigatorid)){
-							
 			MdataDAO dao = new MdataDAO();
-			List<MdataVO> mdatas = dao.getAll();
-			List<Map> jList = new LinkedList<Map>();
-			for (MdataVO aMdata : mdatas) {
-				Map jContent = new HashMap();
-				jContent.put("M_id", aMdata.getM_id());
-				jContent.put("B_name", aMdata.getB_name());
-				jContent.put("M_name", aMdata.getM_name());
-				jContent.put("M_city", aMdata.getM_city());
-				jContent.put("M_addr", aMdata.getM_addr());
-				jContent.put("M_district", aMdata.getM_district());
-				jContent.put("M_arating", aMdata.getM_arating());
-				jContent.put("S_name", aMdata.getS_name());
-				jContent.put("Sa_mnote", aMdata.getSa_mnote());
-				Set<MProVO> mpros = aMdata.getMpros();
-				for(MProVO getmpros:mpros){
-				jContent.put("Mpros", getmpros.getM_pro());
-				}
-				jList.add(jContent);
-			}			
-			String mjasonstring = JSONValue.toJSONString(jList);
-			out.write(mjasonstring);
-			out.flush();
-			System.out.println(mjasonstring);
-		}
+			List<MdataVO> mdatas = null;
+				if("allmaster".equals(datastatus)){				
+					 mdatas = dao.getAll();				
+				}//end if		
+				else{
+					 mdatas = dao.getByAndSname(datastatus);
+				}//end else	
+					List<Map> jList = new LinkedList<Map>();
+					for (MdataVO aMdata : mdatas) {
+						Map jContent = new HashMap();
+						jContent.put("M_id", aMdata.getM_id());
+						jContent.put("B_name", aMdata.getB_name());
+						jContent.put("M_name", aMdata.getM_name());
+						jContent.put("M_city", aMdata.getM_city());
+						jContent.put("M_addr", aMdata.getM_addr());
+						jContent.put("M_district", aMdata.getM_district());
+						jContent.put("M_arating", aMdata.getM_arating());
+						jContent.put("S_name", aMdata.getS_name());
+						jContent.put("Sa_mnote", aMdata.getSa_mnote());
+						Set<MProVO> mpros = aMdata.getMpros();
+						for(MProVO getmpros:mpros){
+						jContent.put("Mpros", getmpros.getM_pro());
+						}// end for loop
+						jList.add(jContent);
+					}//end for loop
+					String mjasonstring = JSONValue.toJSONString(jList);
+					out.write(mjasonstring);
+					out.flush();
+					System.out.println(mjasonstring);				
+		}//end if
 		
 		//get c tested ok
 		if("c".equals(topnavigatorid)){
@@ -113,14 +122,14 @@ public class ManagerUIServlet extends HttpServlet {
 					map.put("c_averrating",c_averrating);
 					map.put("sa_cnote",sa_cnote);	
 					list2.add(map);
-				}
+				}//end for loop
 				String cjasonstring = JSONValue.toJSONString(list2);
 				System.out.println(cjasonstring);
 				out.write(cjasonstring);
 				out.flush();
 				System.out.println(cjasonstring);
 
-		}
+		}//end if
 		
 		//get o tested ok
 		if("o".equals(topnavigatorid)){
@@ -139,7 +148,7 @@ public class ManagerUIServlet extends HttpServlet {
 //			String mjasonstring = JSONValue.toJSONString(list);
 //			out.write(mjasonstring);
 //			out.flush();
-		}
+		}//end if
 			
 		//get report
 		if("r".equals(topnavigatorid)){

@@ -216,7 +216,7 @@ public class MdataDAO implements MdataDAO_interface {
 			}
 			return list;
 		}
-		
+		//BY BENNY--for manager backstage
 		public Integer updatemasterSname(Integer m_id,String s_name) {
 			Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 			Integer count=0;
@@ -233,7 +233,23 @@ public class MdataDAO implements MdataDAO_interface {
 			}
 			return count;
 		}
-		
+		//BY BENNY--for manager backstage
+		@Override
+		public List<MdataVO> getByAndSname(String s_name) {
+			List<MdataVO> list = null;
+			Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+			try {
+				session.beginTransaction();
+				Query query = session.createQuery("from MdataVO where s_name=:s ");
+				query.setString("s",s_name);
+				list = query.list();
+				session.getTransaction().commit();
+			} catch (RuntimeException ex) {
+				session.getTransaction().rollback();
+				throw ex;
+			}
+			return list;
+		}
 	public static void main(String[] args) {
 //		
 		MdataDAO dao = new MdataDAO();
@@ -241,7 +257,10 @@ public class MdataDAO implements MdataDAO_interface {
 //		dao.updatemasterSname(1001);
 		
 		//依照縣市、地區、專業查詢 --> 查師父頁面進階搜尋:條件為1.縣市、2.地區、3.專業
-		List<MdataVO> list8 = dao.SeachByCityAndDistrictAndMpro("臺北市","大安","地板");
+//		List<MdataVO> list8 = dao.SeachByCityAndDistrictAndMpro("臺北市","大安","地板");
+		
+		//by benny getByMidAndSname
+		List<MdataVO> list8 = dao.getByAndSname("審核通過");
 		for (MdataVO list : list8) {
 			System.out.print(list.getM_city() + ",");
 			System.out.print(list.getM_district() + ",");
@@ -466,5 +485,7 @@ public class MdataDAO implements MdataDAO_interface {
 //		 }
 		
 	}//main()
+
+
 
 }//MasterDAO

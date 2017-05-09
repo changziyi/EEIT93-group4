@@ -222,10 +222,10 @@ $(function(){
 				'<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"aria-haspopup="true" aria-expanded="false">師傅狀態<span class="caret"></span></button>';
 			var dropdownmenucontent=
 				'<li data-statusvalue="allmaster" data-buttonstate="selected" name="datastatus"><a href="#">所有師傅</a></li><li role="separator" class="divider"></li>'
-				+'<li data-statusvalue="m_nexamine" name="datastatus"><a href="#" >未審核</a></li><li role="separator" class="divider"></li>'
-				+'<li data-statusvalue="m_pass" name="datastatus"><a href="#" >已審核</a></li><li role="separator" class="divider"></li>'
-				+'<li data-statusvalue="m_npass" name="datastatus"><a href="#" >審核未過</a></li><li role="separator" class="divider"></li>';
-				+'<li data-statusvalue="m_sus" name="datastatus"><a href="#">停權中</a></li>';
+				+'<li data-statusvalue="未審核" name="datastatus"><a href="#" >未審核</a></li><li role="separator" class="divider"></li>'
+				+'<li data-statusvalue="審核通過" name="datastatus"><a href="#" >審核通過</a></li><li role="separator" class="divider"></li>'
+				+'<li data-statusvalue="審核未過" name="datastatus"><a href="#" >審核未過</a></li><li role="separator" class="divider"></li>';
+				+'<li data-statusvalue="停權中" name="datastatus"><a href="#">停權中</a></li>';
 			var dropdownmenustate = '<ul class="dropdown-menu">'+dropdownmenucontent +'</ul></li>';
 			var buttongroupdivend ='</div>'	
 			var masterstatus = buttongroupdiv+dropdowntitlestate+dropdownmenustate+buttongroupdivend;
@@ -321,7 +321,7 @@ $(function(){
 			   else{
 				   datatime='alltime';
 			   }
-// 				 $('#eventlist').dataTable().fnDestroy();  
+				 $('#eventlist').dataTable().fnDestroy();  
 			   loadProduct(id,datastatus,datatime);
 			   // $('#navigator>ul>li[data-id="' + id + '"]')
 
@@ -409,10 +409,10 @@ $(function(){
         		 alert("u forget to toggle the checkbox u dumb XD");
         	 }//end if
         	 else{
-           var valueattrr=$(this).attr('value');//retrieve the value from functinaction
-           var hyperlinkstring = "${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIFunctionServlet.do";
-//            var hyperlinkparameter = "functionaction="+valueattrr+"&+toggledcheckbox="+checkboxdatas2;
-//            var hyperlinkstringwithparameter=hyperlinkstring+hyperlinkparameter;
+           		var valueattrr=$(this).attr('value');//retrieve the value from functinaction
+           		var hyperlinkstring = "${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIFunctionServlet.do";
+//            	var hyperlinkparameter = "functionaction="+valueattrr+"&+toggledcheckbox="+checkboxdatas2;
+//           	 var hyperlinkstringwithparameter=hyperlinkstring+hyperlinkparameter;
            $.post(hyperlinkstring,{"functionaction":valueattrr,"toggledcheckbox":checkboxdatas2},function(data){
 				alert(data);
            });//end get function
@@ -422,7 +422,7 @@ $(function(){
 	
 	   function loadProduct(id,datastatus,datatime){
 // 		   "datastatus":datastatus,"datatime":datatime
-			   $.getJSON('${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIServlet.do',{'topnavigatorid':id}, function(datas){
+			   $.getJSON('${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIServlet.do',{'navigatorid':id,"datastatus":datastatus,"datatime":datatime}, function(datas){
 					 var th = $('#eventlist>thead');
 					 var tb = $('#eventlist>tbody');
 				   var docFragth = $(document.createDocumentFragment());

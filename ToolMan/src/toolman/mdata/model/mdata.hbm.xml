@@ -26,6 +26,11 @@
 		<property name="sa_mnote" column="sa_mnote" />
 		<property name="m_cer" column="m_cer" />
 		
+<!-- 		//by benny master status -->
+<!-- 		<many-to-one name="s_name" class="toolman.sname.model.SnameVO" lazy="false"> -->
+<!--             <column name="s_name" /> -->
+<!--         </many-to-one> -->
+		
 		<!--師父1-專業*-->
 		<set name="mpros" table="mpro" lazy="false" cascade="all" inverse="true" order-by="m_proid asc">			
 			<key>

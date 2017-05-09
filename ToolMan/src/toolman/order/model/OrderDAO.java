@@ -186,7 +186,7 @@ public class OrderDAO implements OrderDAO_Interface {
 		
 		try {
 			session.beginTransaction();				
-			Query query = session.createQuery("Update OrderVO set s_name='o_unfinishedreview' where o_id=?");
+			Query query = session.createQuery("Update OrderVO set s_name='一方未完成' where o_id=?");
 			query.setParameter(0,o_id);
 			query.executeUpdate();
 			session.getTransaction().commit();
@@ -203,7 +203,7 @@ public class OrderDAO implements OrderDAO_Interface {
 		
 		try {
 			session.beginTransaction();				
-			Query query = session.createQuery("Update OrderVO set s_name='o_finished' where o_id=?");
+			Query query = session.createQuery("Update OrderVO set s_name='已完成' where o_id=?");
 			query.setParameter(0,o_id);
 			query.executeUpdate();
 			session.getTransaction().commit();
@@ -222,7 +222,7 @@ public class OrderDAO implements OrderDAO_Interface {
 		
 		try {
 			session.beginTransaction();				
-			Query query = session.createQuery("Update OrderVO set s_name='o_deleted' where o_id=?");
+			Query query = session.createQuery("Update OrderVO set s_name='已刪除' where o_id=?");
 			query.setParameter(0,o_id);
 			query.executeUpdate();
 			session.getTransaction().commit();
