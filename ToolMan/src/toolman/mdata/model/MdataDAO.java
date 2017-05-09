@@ -217,19 +217,21 @@ public class MdataDAO implements MdataDAO_interface {
 			return list;
 		}
 		
-		public void updatemasterSname(Integer m_id) {
+		public Integer updatemasterSname(Integer m_id,String s_name) {
 			Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+			Integer count=0;
 			try {
 				session.beginTransaction();
-				Query query = session.createQuery("from MdataVO set s_name=:s where m_id=:m");
-				query.setParameter("s","m_sus");
+				Query query = session.createQuery("update MdataVO set s_name=:s where m_id=:m");
+				query.setParameter("s",s_name);
 				query.setParameter("m",m_id);
-				Integer count = query.executeUpdate();
+				count = query.executeUpdate();
 				session.getTransaction().commit();
 			} catch (RuntimeException ex) {
 				session.getTransaction().rollback();
 				throw ex;
 			}
+			return count;
 		}
 		
 	public static void main(String[] args) {

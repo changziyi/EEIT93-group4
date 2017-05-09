@@ -19,7 +19,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
+
+import toolman.cdata.model.CdataVO;
 import toolman.email.model.EmailDAO;
 import toolman.email.model.EmailService;
 import toolman.email.model.EmailVO;
@@ -34,6 +37,12 @@ public class EmailServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		doPost(req, res);
+		
+		//取得登入的帳號
+		HttpSession session = req.getSession();
+		CdataVO cdataVO = (CdataVO)session.getAttribute("LoginOK");
+		String Account = cdataVO.getC_id();
+				
 	}
 
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
@@ -43,8 +52,12 @@ public class EmailServlet extends HttpServlet {
 		// String action = req.getParameter("action");
 		// 設定文字編碼形式
 
+		//取得登入的帳號
+		HttpSession session = req.getSession();
+		CdataVO cdataVO = (CdataVO)session.getAttribute("LoginOK");
+		String SendAccount = cdataVO.getC_id();
 		
-		//if ("Wishing".equals(action)) {
+		//互寄mail
 		
 		
 		// 宣告錯誤訊息的變數
@@ -52,7 +65,11 @@ public class EmailServlet extends HttpServlet {
 		req.setAttribute("errorMsgs", errorMsgs);
 		EmailVO emailVO = new EmailVO();
 		
+		
 
+		
+		 
+		
 		// 收件者帳號
 		String mss_id = req.getParameter("mss_id");
 		if (mss_id == null || mss_id.trim().length() == 0) {
@@ -74,12 +91,21 @@ public class EmailServlet extends HttpServlet {
 			errorMsgs.put("content1", "請輸入內容");
 		}
 		
-	
-		DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		Calendar calobj = Calendar.getInstance();
-		Timestamp ms_date = new Timestamp(calobj.getTimeInMillis());
 		// 當下時間
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Timestamp ms_date = new Timestamp(System.currentTimeMillis());
+		
 
+		// 狀態
+		EmailService emailserv = new EmailService();
+		emailVO.setMsr_id(SendAccount);
+		emailVO.setMss_id(mss_id);
+		emailVO.setMs_summary(ms_summary);
+		emailVO.setMs_content(ms_content);
+		emailVO.setMs_date(ms_date);
+		emailVO.setS_name(false);
+		emailserv.insert(emailVO);
+		res.sendRedirect("email.jsp");
 		
 //		if (!errorMsgs.isEmpty()) {
 //			req.setAttribute("emailVO", emailVO);
@@ -95,11 +121,11 @@ public class EmailServlet extends HttpServlet {
 //		
 //		
 		
-		EmailVO addform = new EmailVO();
-		addform.setMss_id(mss_id);
-		addform.setMs_summary(ms_summary);
-		addform.setMs_content(ms_content);
-		emailservice.insert(addform);
+//		EmailVO addform = new EmailVO();
+//		addform.setMss_id(mss_id);
+//		addform.setMs_summary(ms_summary);
+//		addform.setMs_content(ms_content);
+//		emailservice.insert(addform);
         // 表單傳送到資料庫
 		
 		
@@ -112,12 +138,7 @@ public class EmailServlet extends HttpServlet {
 		emailservice.getAll();
 		
 		
-		//呈現許願資料
-		
 
-//		for (emailVO vo : list) {
-//			
-//		}
 		for (int i = 0 ; i < list.size() ; i++) {
 			EmailVO vo = list.get(i);
 		}

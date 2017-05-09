@@ -54,5 +54,7 @@ public class CdataService {
 	public List<CdataVO> getAll() {
 		return dao.getAll();
 	}
-
+	public Integer updatecustomerSname(Integer c_id, String s_name){		
+		return dao.updatecustomerSname(c_id, s_name);
+	}
 }
