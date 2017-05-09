@@ -1,6 +1,7 @@
 package toolman.cdata.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -46,27 +47,26 @@ public class LoginServlet extends HttpServlet {
 		if (c_pwd  == null || c_pwd.trim().length() == 0) {
 			errorMsgs.put("c_pwd", "請輸入密碼");
 		}
-		
-		if (!errorMsgs.isEmpty()) {
-			RequestDispatcher rd = req.getRequestDispatcher("/cdata/login-in.jsp");
-			rd.forward(req, resp);
-			return;//中斷
-		}
-		
-		
-		
+		//reCAPTCHA
+		String gRecaptchaResponse = req
+				.getParameter("g-recaptcha-response");
+		System.out.println(gRecaptchaResponse);
+		boolean verify = VerifyRecaptcha.verify(gRecaptchaResponse);
+		System.out.println(" Name = " + c_id + "::password = " + c_pwd 
+				+ "::Captcha Verify"+verify);		
+
 		CdataService cs = new CdataService();
 		CdataVO  cdataVO = cs.login_in(c_id, c_pwd);
 		if (cdataVO != null){
-			session.setAttribute("LoginOK", cdataVO);//物件放入Session範圍內，識別字串為"LoginOK"，表示此使用者已經登入
+			session.setAttribute("LoginOK", cdataVO);
 		}else{
 			errorMsgs.put("LoginError", "該帳號不存在或密碼錯誤");
 		}
 		
-		if(errorMsgs.isEmpty()){//是否為空值
-			String contextPath = getServletContext().getContextPath();
-			
+		if(errorMsgs.isEmpty() && verify){
+			String contextPath = getServletContext().getContextPath();			
 			String target = (String)session.getAttribute("target");
+			
 			if (target != null) {
 			    resp.sendRedirect(resp.encodeRedirectURL(contextPath + target));
 			}else{
@@ -74,14 +74,20 @@ public class LoginServlet extends HttpServlet {
 			}			
 			return;
 		}else{
-			RequestDispatcher rd = req.getRequestDispatcher("/cdata/login-in.jsp");//錯誤導向
-															//InsertCdataError.jsp /login-in.jsp
+			RequestDispatcher rd = req.getRequestDispatcher("/cdata/login-in.jsp");
+														
 			rd.forward(req, resp);
 			return;			
 		}
 		
 		
 		}
+		if (!errorMsgs.isEmpty()) {
+			RequestDispatcher rd = req.getRequestDispatcher("/cdata/login-in.jsp");
+			rd.forward(req, resp);
+			return;//中斷
+		}
+
 	}
 
 }

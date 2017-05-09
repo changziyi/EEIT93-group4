@@ -1,10 +1,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script src='https://www.google.com/recaptcha/api.js'></script>
 <title>Insert title here</title>
 <!-- <link rel="stylesheet" type="text/css" href="../js/login.css"> -->
 <!-- <link rel="stylesheet" href="jqueryui/style.css"> -->
@@ -25,7 +27,7 @@ body {
 
 .loginbox {
 	width: 400px;
-	height: 400px;
+	height: 500px;
 	border: solid 1px rgba(0, 0, 0, 0.15);
 	margin: 100px auto;
 	position: relative;
@@ -146,9 +148,13 @@ h2 {
 	text-decoration: none;
 	color: #cc792e;
 }
-
 .error {
 	text-align: center;
+}
+#recaptcha{
+	margin-top: 10px;
+	margin-left: 51px;
+	margin-bottom: 3px;
 }
 </style>
 <title>登入系統</title>
@@ -165,8 +171,12 @@ h2 {
 					<div class="passwordphoto"></div>
 					<input type="password" class="a" placeholder="請輸入密碼" name="pswd">
 					<div class="error">${errorMsgs.c_pwd}${errorMsgs.LoginError}</div>
+					<div>
+					<div class="g-recaptcha" id="recaptcha"
+			         data-sitekey="6LfxUyAUAAAAAE-AozM5vAPmEzh5fM33D0B4u69c"></div>
+			         </div>
 				</div>
-				<a class="forgotmember" href="../cdata/login-up.jsp">還不是會員嗎?</a>
+				<a class="forgotmember" href="login-up.jsp">還不是會員嗎?</a>
 				<div>
 					<a class="forgot" href="forgotpwd.jsp">忘記密碼?</a>
 				</div>
@@ -187,7 +197,8 @@ h2 {
 		</form>
 	</div>
 <script>
-//0.1
+
+//fb
 	function statusChangeCallback(response) {
 		console.log('statusChangeCallback');
 		console.log(response);
@@ -207,8 +218,8 @@ h2 {
 					+ 'into this app.';
 		} 
 	}
-	
-//0.3
+
+
 	function checkLoginState() {
 		FB.getLoginStatus(function(response) {
 			statusChangeCallback(response);

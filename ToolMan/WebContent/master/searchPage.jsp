@@ -21,8 +21,9 @@
 <body>
 
 	<form action="master.do" method="post">
-		<span id="twzipcode"></span><input type="text" name="search"><button type="button" id="btn">找師傅</button>
-		<input type="submit" value="servlet">
+		<span id="twzipcode"></span><input type="text" name="input">
+		<button type="button" id="btn">ajax</button>
+		<input type="submit" value="找師傅">
 		<input type="hidden" name="action" value="SearchMaster">
 		<input type="hidden" name="city" >
 	</form>
@@ -39,13 +40,13 @@
 		'countySel':'臺北市'
 	});
 	
-	var search = $('input[name="search"]');
+	var input = $('input[name="input"]');
 	
 	$('#btn').click(function() {
 		
 		$.ajax({
 			url : 'master.do',
-			data: {'city':city.val(),'input':search.val(),'action':'SearchMaster'},
+			data: {'city':city.val(),'input':input.val(), 'action':'SearchMaster'},
 			type : 'POST',
 			success : function(returnData) {
 				$(location).attr('href','searchResult.jsp');
