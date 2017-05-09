@@ -17,32 +17,32 @@
 	<div>
 	<table>
 		<tr>
-			<td><div><img height="200px" src="${pageContext.servletContext.contextPath}/master/master.do?type=master&image=${mdataVO.m_id}"></div></td>
+			<td><div><img height="200px" src="${pageContext.servletContext.contextPath}/master/master.do?type=master&image=${cdata_mdataVO.m_id}"></div></td>
 		</tr>
 		<tr>
-			<td>店家名稱:${mdataVO.b_name}</td>
+			<td>店家名稱:${cdata_mdataVO.b_name}</td>
 		</tr>
 		<tr>
-			<td>店家介紹:${mdataVO.b_des}</td>
+			<td>店家介紹:${cdata_mdataVO.b_des}</td>
 		</tr>
 		<tr>
-			<td>姓名:${mdataVO.m_name}</td>
+			<td>姓名:${cdata_mdataVO.m_name}</td>
 		</tr>
 		<tr>
-			<td>電話:${mdataVO.m_cel}</td>
+			<td>電話:${cdata_mdataVO.m_cel}</td>
 		</tr>
 		<tr>
-			<td>信箱:${mdataVO.m_email}</td>
+			<td>信箱:${cdata_mdataVO.m_email}</td>
 		</tr>
 		<tr>
-			<td>地址:${mdataVO.m_city}${mdataVO.m_district}${mdataVO.m_addr}</td>
+			<td>地址:${cdata_mdataVO.m_city}${cdata_mdataVO.m_district}${cdata_mdataVO.m_addr}</td>
 		</tr>
 		<tr>
-			<td>維修類別:<c:forEach var="aMpro" items="${mdataVO.mpros}">${aMpro.m_pro}
+			<td>維修類別:<c:forEach var="aMpro" items="${cdata_mdataVO.mpros}">${aMpro.m_pro}
 			</c:forEach></td>
 		</tr>
 		<tr>
-			<td>專業證照<div><img height="200px" src="${pageContext.servletContext.contextPath}/master/master.do?type=cer&image=${mdataVO.m_id}"></div></td>
+			<td>專業證照<div><img height="200px" src="${pageContext.servletContext.contextPath}/master/master.do?type=cer&image=${cdata_mdataVO.m_id}"></div></td>
 		</tr>
 		<tr>
 			<td>
@@ -59,7 +59,7 @@
 	$(function() {
 		
 		$('input[name="homePage"]').click(function() {
-			$(location).attr('href', 'List.jsp');
+			$(location).attr('href', 'searchPage.jsp');
 		});
 		
 	});

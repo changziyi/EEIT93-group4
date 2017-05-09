@@ -7,13 +7,29 @@
 <title>${mdataVO.b_name}</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/css/jquery.fileuploader-theme-thumbnails.css" media="all">
+<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/css/jquery.fileuploader.css" media="all">
 <link rel="stylesheet" href="${pageContext.servletContext.contextPath}/css/bootstrap.min.css">
 <script src="${pageContext.servletContext.contextPath}/js/jquery-3.2.1.min.js"></script>
 <script src="${pageContext.servletContext.contextPath}/js/bootstrap.min.js"></script>
+<script src="${pageContext.servletContext.contextPath}/js/jquery.fileuploader.min.js"></script>
+<script src="${pageContext.servletContext.contextPath}/js/custom.js"></script>
 <style>
 .changeImg {
 	width: 200px;
 	padding: 10px;
+}
+#uploadTemp {
+	line-height: normal;
+	background-color: #fff;
+	width: 560px;
+}
+.workImgArea {
+	vertical-align: top;
+	padding: 5px;
+}
+input[type="file"] {
+	display: inline;
 }
 </style>
 </head>
@@ -30,6 +46,21 @@
 			<p>師傅：${mdataVO.m_name}</p>
 			<p>地區：${mdataVO.m_city}　${mdataVO.m_district}</p>
    			<input type="button" id="reservemaster" value="預約師傅" >
+ <%--------------------------------------最愛與黑單--------------------------------------------------- --%>
+   			<FORM METHOD="get" action="/ToolMan/order/Favorite.do">
+			<input type="submit" value="加入最愛">
+			<input type="hidden" name="m_id" value="${mdataVO.m_id}">
+			<input type="hidden" name="c_id" value="Snoopy">
+			<input type="hidden" name="action"	value="addFavorite">
+			</FORM>
+			<FORM METHOD="get" action="/ToolMan/order/Dislike.do">
+			<input type="submit" value="黑名單">
+			<input type="hidden" name="m_id" value="${mdataVO.m_id}">
+			<input type="hidden" name="c_id" value="Snoopy">
+			<input type="hidden" name="action"	value="addDislike">
+			</FORM>
+			
+  <%--------------------------------------萬里長城--------------------------------------------------- --%>
    			
 		</div>
 	</div>
@@ -44,21 +75,27 @@
 
 	<div class="tab-content">
 		<div id="home" class="tab-pane fade in active">
-			<h3>HOME</h3>
-			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+			<p>${mdataVO.b_des}</p>
 		</div>
 		<div id="menu1" class="tab-pane fade">
-			<h3>作品集</h3>
-			<p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+			<div></div>
+			<div id="uploadTemp">
+				<form action="php/form_upload.php" method="post" enctype="multipart/form-data">
+					<div class="workImgArea">作品名稱　<input type="text" name="workname" required></div>
+					<div class="workImgArea">完工日期　<input type="text" name="worktime" required></div>
+					<div class="workImgArea">作品描述　<textarea name="workdes" required></textarea></div>
+					<input type="file" name="files" data-fileuploader-limit="3"><button type="button" id="buttonUpload">上傳</button>
+				</form>
+			</div>
 			
-			<form name="myData" action="TestFormData" enctype="multipart/form-data">
+			<!-- <form name="myData" action="TestFormData" enctype="multipart/form-data">
 				<div>
 					<label>Photos</label> <input type="file" id="file" name="file[]"
 						multiple="multiple">
 				</div>
 				<button type="button" id="buttonUpload">上傳</button>
 			</form>
-			<div id='div1'></div>
+			<div id='div1'></div> -->
     
 		</div>
 		<div id="menu2" class="tab-pane fade">
@@ -82,8 +119,7 @@
 
 		</div>
 		<div id="menu3" class="tab-pane fade">
-			<h3>Menu 3</h3>
-			<p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+			<h3>評價: ${mdataVO.m_arating}</h3>
 		</div>
 		<div id="menu4" class="tab-pane fade">
 			<h3>Menu 4</h3>
@@ -199,7 +235,7 @@
 			}
 			
 			//上傳作品圖片
-			btn.click(function() {
+			btn.on('click',function() {
 	
 				var others = $('form').serializeArray();
 				var photos = $('input[type="file"]')[0].files;
@@ -230,6 +266,8 @@
 						$('#img1').removeAttr('src').removeAttr('class');
 						$('#img2').removeAttr('src').removeAttr('class');
 						upload.val(null);
+						$('input[name="fileuploader-list-files"]').val('[]');
+						$('ul').find('.fileuploader-item').remove();
 		 			},
 		 			beforeSend : function() {
 		 				

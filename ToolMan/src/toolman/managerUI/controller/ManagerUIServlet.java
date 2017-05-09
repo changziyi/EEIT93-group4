@@ -86,10 +86,10 @@ public class ManagerUIServlet extends HttpServlet {
 			
 			CdataService cdataservice = new CdataService();
 			List<CdataVO> list = cdataservice.getAll();
+			
 			List list2 = new ArrayList();
-			Map map = new HashMap();
 				for(CdataVO cdataVO:list){
-
+					Map map = new HashMap();
 					Timestamp c_jdatestamp =	cdataVO.getC_jdate();
 					SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 					String c_jdate = df.format(c_jdatestamp);
@@ -115,6 +115,7 @@ public class ManagerUIServlet extends HttpServlet {
 					list2.add(map);
 				}
 				String cjasonstring = JSONValue.toJSONString(list2);
+				System.out.println(cjasonstring);
 				out.write(cjasonstring);
 				out.flush();
 				System.out.println(cjasonstring);

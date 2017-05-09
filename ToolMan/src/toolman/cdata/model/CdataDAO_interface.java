@@ -12,4 +12,5 @@ public interface CdataDAO_interface {
 	public void delete(String c_id);
 	public List<CdataVO> getAll();
 	public CdataVO cdata_des(String c_id);
+	public void updatecustomerSname(Integer c_id);
 }

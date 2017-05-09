@@ -15,4 +15,5 @@ public interface MdataDAO_interface {
 	// Benny's recommendation function
 	public List<MdataVO> getCityAndDistrictAndMPro(String m_city, String m_district, String m_pro);
 	public List<MdataVO> getAll();
+	public void updatemasterSname(Integer m_id,String s_name);
 }
