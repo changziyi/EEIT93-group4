@@ -2,11 +2,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<c:if test="${empty LoginOK}">
-	<c:set var="target" value="${pageContext.request.servletPath}"
-		scope="session" />
-	<c:redirect url="/cdata/login-in.jsp" />
-</c:if>
+<%-- <c:if test="${empty LoginOK}"> --%>
+<%-- 	<c:set var="target" value="${pageContext.request.servletPath}" --%>
+<%-- 		scope="session" /> --%>
+<%-- 	<c:redirect url="/cdata/login-in.jsp" /> --%>
+<%-- </c:if> --%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
@@ -25,21 +25,20 @@
 .a {
 	border: 2px dashed #66b5ff;
 	padding: 1px;
-	margin-top: 10px;
+	margin: 10px;
 	overflow: hidden;
-	/* 	height: 100px; */
 	background-color: #cce6ff;
 }
-
+#big-box{
+	width: 630px;
+}
 .page {
 	text-align: center;
 }
-
 .b {
 /* 	text-align: center; */
 	border-bottom: 1px solid red;
 }
-
 hr {
 	border: 0;
 	height: 1px;
@@ -57,12 +56,12 @@ hr {
 </style>
 	<!-- background-color: gray; -->
 	<%-- 	<jsp:useBean id="cdataVO" class="toolman.cdata.model.CdataVO" scope="session"/> --%>
-	<div class="container">
-		<ul class="nav nav-tabs" style="width: 600px;">
+	<div class="container" id="big-box">
+		<ul class="nav nav-tabs" >
 			<li class="active"><a data-toggle="tab" href="#home">評價</a></li>
 			<li><a data-toggle="tab" href="#menu2">媒合紀錄</a></li>
 		</ul>
-		<div class="tab-content">
+		<div class="tab-content" style="background-color:gray;">
 			<div id="home" class="tab-pane fade in active">
 				<div Style="width: 600px;">
 					<!--     background-color:red; -->
@@ -125,3 +124,6 @@ hr {
 				</div>
 			</div>
 		</div>
+	</div>
+</body>
+</html>

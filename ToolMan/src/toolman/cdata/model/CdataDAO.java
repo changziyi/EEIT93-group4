@@ -30,7 +30,7 @@ public class CdataDAO implements CdataDAO_interface{
 //			Criteria query = session.createCriteria(CdataVO.class);
 //			query.add(Restrictions.eq("c_id", "Micky"));
 //			query.setParameter(0, c_id);
-			cdataVO = (CdataVO) session.get(CdataVO.class, "Micky");
+			cdataVO = (CdataVO) session.get(CdataVO.class, c_id);
 			
 //			cdataVO = (CdataVO) query.list().get(0);
 			session.getTransaction().commit();
