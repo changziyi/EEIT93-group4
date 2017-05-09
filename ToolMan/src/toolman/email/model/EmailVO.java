@@ -8,7 +8,7 @@ public class EmailVO implements java.io.Serializable{
 	private Timestamp ms_date;
 	private String ms_summary;
 	private String ms_content;	
-	private String s_name;
+	private Boolean s_name;
 	
 	public Integer getMs_id() {
 		return ms_id;
@@ -46,10 +46,10 @@ public class EmailVO implements java.io.Serializable{
 	public void setMs_content(String ms_content) {
 		this.ms_content = ms_content;
 	}
-	public String getS_name() {
+	public Boolean getS_name() {
 		return s_name;
 	}
-	public void setS_name(String s_name) {
+	public void setS_name(Boolean s_name) {
 		this.s_name = s_name;
 	}
 		

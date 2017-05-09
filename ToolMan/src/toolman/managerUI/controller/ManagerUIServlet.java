@@ -45,7 +45,7 @@ public class ManagerUIServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String action = request.getParameter("action");
+		String topnavigatorid = request.getParameter("topnavigatorid");
 //		action = "c";
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");
@@ -53,7 +53,7 @@ public class ManagerUIServlet extends HttpServlet {
 
 		
 		//get m tested ok
-		if("m".equals(action)){
+		if("m".equals(topnavigatorid)){
 							
 			MdataDAO dao = new MdataDAO();
 			List<MdataVO> mdatas = dao.getAll();
@@ -82,7 +82,7 @@ public class ManagerUIServlet extends HttpServlet {
 		}
 		
 		//get c tested ok
-		if("c".equals(action)){
+		if("c".equals(topnavigatorid)){
 			
 			CdataService cdataservice = new CdataService();
 			List<CdataVO> list = cdataservice.getAll();
@@ -123,7 +123,7 @@ public class ManagerUIServlet extends HttpServlet {
 		}
 		
 		//get o tested ok
-		if("o".equals(action)){
+		if("o".equals(topnavigatorid)){
 			OrderService orderservice = new OrderService();
 			out.write(orderservice.getAllOrderJson());
 //			System.out.println(ojasonstring);
@@ -142,19 +142,19 @@ public class ManagerUIServlet extends HttpServlet {
 		}
 			
 		//get report
-		if("r".equals(action)){
+		if("r".equals(topnavigatorid)){
 			
 			
 			
 		}
 		//get analysis
-		if("a".equals(action)){
+		if("a".equals(topnavigatorid)){
 			
 			
 			
 		}
 		//get ad
-		if("ad".equals(action)){
+		if("ad".equals(topnavigatorid)){
 			
 			
 			

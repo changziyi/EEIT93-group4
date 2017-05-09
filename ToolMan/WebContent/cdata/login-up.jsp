@@ -69,8 +69,8 @@
         }
         .function-code{
             position: absolute;
-            right:705px;top:738px;
-/*             right:535px;top:738px; */
+            margin-top:14px;
+            margin-right:20px;
             font-family: "微軟雅黑";
             font-size: 20px;
         }
@@ -89,30 +89,16 @@
             <div>
               <input type="text" class="input" placeholder="帳號" name="id" autofocus>
               <div class="color" >${errorMsgs.c_id}</div>
-            </div>
-            <div>
               <input type="password" class="input" placeholder="密碼" name="pswd">
               <div class="color" >${errorMsgs.c_pwd}</div>
-            </div>
-            <div>
               <input type="text" class="input" placeholder="姓名" name="name">
               <div class="color" >${errorMsgs.c_name}</div>
-              
-            </div>
-            <div>
               <input type="text" class="input" id="datepicker" placeholder="生日" name="birth">
               <div class="color" >${errorMsgs.bday}</div>
-              
-            </div>
-            <div>
               <input type="text" class="input" placeholder="手機號碼" name="phone">
               <div class="color" >${errorMsgs.phone}</div>
-            </div>
-            <div>
               <input type="text" class="input" placeholder="E-mail" name="mail">
               <div class="color" >${errorMsgs.c_email}</div>
-            </div>
-            <div>
               <select class="input-city"  name="city">
                 <option value="台北市">台北市</option>
                 <option value="新北市">新北市</option>
@@ -124,16 +110,15 @@
                 <option value="萬華區">萬華區</option>
                 <option value="信義區">信義區</option>
               </select>
-            </div>
-            <div>
               <input type="text" class="input" placeholder="地址" name="addr">
               <input type="hidden" name="other">
               <div class="color" >${errorMsgs.c_addr}</div>
             </div>
+<!--             style="background-color:gray;" -->
             <div>
               <input type="password" class="input" placeholder="驗證碼" name="">        
-              <div class="function-code" id="createCade"></div><!--驗證碼驗證-->
-            </div>           
+              <span class="function-code" id="createCade"></span><!--驗證碼驗證--> 
+            </div>                 
             <input type="submit" id="register" class="submit" value="註冊">            
             <input type="hidden" name="action" value="">
           </form>
@@ -145,11 +130,11 @@
    		dateFormat: "yy-mm-dd"});//指定格式
     });
     
-	var code;//建立全新驗證碼
+	var code;
 	$(function(){
-		jcPublic.register();//註冊
-		jcPublic.createCode();//建立驗證碼
-		jcPublic.clickCode();//切換驗證碼
+		jcPublic.register();
+		jcPublic.createCode();
+		jcPublic.clickCode();
 		
 		$(".wrap>div>input").focus(function(){
 			$(this).css({"outline": "none" });
@@ -172,16 +157,16 @@
 				
 				if(code !== Code ){
 					$this.prev(".wrap").find(".code").html("驗證碼錯誤").addClass("move");//錯誤加入頁面
-					return currentThis.createCode();//輸入錯誤刷新驗證碼
+					return currentThis.createCode();
 					
 				}
 			})
 		},
 		createCode:function(){//建立驗證碼
 				var selectChar = new Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9,'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z');
-				//建立英文與數字混和驗證碼
+				
 				code="";
-				var codeLength=4;//驗證碼長度
+				var codeLength=4;
 				for(var i =0;i<codeLength;i++){
 					var index = Math.floor(Math.random()*selectChar.length)//隨機數
 					code +=selectChar[index];
@@ -189,7 +174,7 @@
 				}
 				return $("#createCade").html(code)
 		},
-		clickCode:function(){//點擊切換驗證碼
+		clickCode:function(){
 			var $this = this;
 			$("#createCade").on("click",function(){
 				return $this.createCode();

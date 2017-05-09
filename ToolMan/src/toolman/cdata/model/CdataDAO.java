@@ -115,40 +115,44 @@ public class CdataDAO implements CdataDAO_interface{
 		return cdataVO;
 	}
 	//BY Benny
-	public void updatecustomerSname(Integer c_id) {
+	public Integer updatecustomerSname(Integer c_id, String s_name) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		Integer count=0;
 		try {
 			session.beginTransaction();
-			Query query = session.createQuery("from CdataVO set s_name=:s where c_id=:c");
+			Query query = session.createQuery("update CdataVO set s_name=:s where c_id=:c");
 			query.setParameter("s","c_sus");
 			query.setParameter("c",c_id);
-			Integer count = query.executeUpdate();
+			count = query.executeUpdate();
 			session.getTransaction().commit();
 		} catch (RuntimeException ex) {
 			session.getTransaction().rollback();
 			throw ex;
 		}
+		return count;
 	}
 
 	public static void main(String args[]){		
 		CdataDAO  dao = new CdataDAO();
 		
-//		List<CdataVO> list= dao.getAll();
-//		for(CdataVO cdataVO:list){
-//			Timestamp c_jdatestamp =	cdataVO.getC_jdate();
-//			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//			String c_jdate = df.format(c_jdatestamp);
-//			String c_name =	cdataVO.getC_name();
-//			String c_id	= cdataVO.getC_id();
-//			String c_addr = cdataVO.getC_addr();
-//			String c_district = cdataVO.getC_district();
-//			String c_city = cdataVO.getC_city();
-//			String c_location = c_city + c_district + c_addr;					
-//			String s_name = cdataVO.getS_name();
-//			Integer c_averrating = cdataVO.getC_averrating();
-//			String sa_cnote	=cdataVO.getSa_cnote();
-//			System.out.println(c_id);
-//		}
+		List<CdataVO> list= dao.getAll();
+		for(CdataVO cdataVO:list){
+			Timestamp c_jdatestamp = cdataVO.getC_jdate();
+			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			String c_jdate = df.format(c_jdatestamp);
+			String c_name =	cdataVO.getC_name();
+			String c_id	= cdataVO.getC_id();
+			String c_addr = cdataVO.getC_addr();
+			String c_district = cdataVO.getC_district();
+			String c_city = cdataVO.getC_city();
+			String c_location = c_city + c_district + c_addr;					
+			String s_name = cdataVO.getS_name();
+			Integer c_averrating = cdataVO.getC_averrating();
+			String sa_cnote	=cdataVO.getSa_cnote();
+			System.out.println(c_id);
+			System.out.println( c_jdatestamp);
+			System.out.println( c_jdate);
+		}
 //		
 //		/*********************** 查詢媒合  *****************************/
 //		
