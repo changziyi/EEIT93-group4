@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="${pageContext.servletContext.contextPath}/css/bootstrap.min.css">
 <script src="${pageContext.servletContext.contextPath}/js/jquery-3.2.1.min.js"></script>
 <script src="${pageContext.servletContext.contextPath}/js/bootstrap.min.js"></script>
-<script src="${pageContext.servletContext.contextPath}/js/jquery.twzipcode.min.js"></script>
+<script src="${pageContext.servletContext.contextPath}/js/jquery.search.twzipcode.min.js"></script>
 <style>
 .county {width:80px;height:25px;vertical-align: top}
 .zipcode {display: none;}
