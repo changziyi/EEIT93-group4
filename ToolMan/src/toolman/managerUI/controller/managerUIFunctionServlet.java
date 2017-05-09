@@ -38,11 +38,14 @@ public class managerUIFunctionServlet extends HttpServlet {
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html");
+		PrintWriter out = response.getWriter();
 		String functionaction = request.getParameter("functionaction");
 		String toggledcheckbox = request.getParameter("toggledcheckbox");
 		int lastindex = toggledcheckbox.lastIndexOf("\""); 
-		String[] arraytoggled = toggledcheckbox.split("");
+		String[] arraytoggled = toggledcheckbox.split("\\,");
+		System.out.println(arraytoggled);
 		
 		if("applicationreviewm".equals(functionaction)){
 			List<MdataVO> list = new ArrayList<MdataVO>();
@@ -60,10 +63,11 @@ public class managerUIFunctionServlet extends HttpServlet {
 			Integer count=0;
 			for(String m_id:arraytoggled){
 				MdataService mdataservice = new MdataService();
+				System.out.println(m_id);
 			Integer	returnedcount = mdataservice.updatemasterSname(Integer.parseInt(m_id),"m_sus");
 			count= returnedcount+count;
-			}
-			PrintWriter out = response.getWriter();
+			}	
+			count.toString();
 			System.out.print(count);
 			out.write(count);
 			
@@ -92,7 +96,7 @@ public class managerUIFunctionServlet extends HttpServlet {
 			Integer	returnedcount = cdataservice.updatecustomerSname(Integer.parseInt(c_id),"m_sus");
 			count= returnedcount+count;
 			}
-			PrintWriter out = response.getWriter();
+			out = response.getWriter();
 			System.out.print(count);
 			out.write(count);			
 		}
