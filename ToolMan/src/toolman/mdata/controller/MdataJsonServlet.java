@@ -22,25 +22,45 @@ import toolman.mpro.model.MProVO;
 
 @WebServlet("/master/MdataJsonServlet")
 public class MdataJsonServlet extends HttpServlet {
-       
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String m_city = request.getParameter("city");
-		String input = request.getParameter("input");
-		
+		String action = request.getParameter("action");
 		response.setContentType("text/html;charset=UTF-8");
-		PrintWriter out = response.getWriter();
 		
-		Long s1 = System.currentTimeMillis();
+		if("homepagejson".equals(action)) {
+			String m_city = request.getParameter("city");
+			String input = request.getParameter("input");
+			
+			PrintWriter out = response.getWriter();
+			Long s1 = System.currentTimeMillis();
+			
+			MdataService mdataSvc = new MdataService();
+			out.println(mdataSvc.SearchByCityAndMproJson(m_city, input));
+			
+			Long s2 = System.currentTimeMillis();
+			System.out.println("首頁搜尋時間：" + (s2-s1));
+		}
 		
-		MdataService mdataSvc = new MdataService();
-		out.println(mdataSvc.SearchByCityAndMproJson(m_city, input));
+		if("advjson".equals(action)) {
+			String m_city = request.getParameter("city");
+			String m_district = request.getParameter("district");
+			String input = request.getParameter("input");
+			
+			PrintWriter out = response.getWriter();
+			Long s1 = System.currentTimeMillis();
+			
+			MdataService mdataSvc = new MdataService();
+			out.println(mdataSvc.SeachByCityAndDistrictAndMpro(m_city, m_district, input));
+			
+			Long s2 = System.currentTimeMillis();
+			System.out.println("進階搜尋時間：" + (s2-s1));
+		}
 		
-		Long s2 = System.currentTimeMillis();
-		System.out.println(s2-s1);
 	}
 
-	protected void doPost(HttpServletRequest requset, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest requset, HttpServletResponse response)
+			throws ServletException, IOException {
 		doGet(requset, response);
 	}
 

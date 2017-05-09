@@ -135,6 +135,30 @@ public class MdataService {
 		}
 		return JSONValue.toJSONString(jList);
 	}
+	
+	public String SeachByCityAndDistrictAndMpro(String m_city, String m_district, String m_pro) {
+		List<MdataVO> mdatas = dao.SeachByCityAndDistrictAndMpro(m_city, m_district, m_pro);
+		List<Map> jList = new LinkedList<Map>();
+		for (MdataVO aMdata : mdatas) {
+			Map jContent = new HashMap();
+			jContent.put("id", aMdata.getM_id());
+			jContent.put("bname", aMdata.getB_name());
+			jContent.put("mname", aMdata.getM_name());
+			jContent.put("rating", aMdata.getM_arating());
+			jContent.put("city", aMdata.getM_city());
+			jContent.put("district", aMdata.getM_district());
+			jContent.put("finish", aMdata.getO_finished());
+			jContent.put("sta", aMdata.getS_name());
+			Set<MProVO> mpros = aMdata.getMpros();
+			List<String> pList = new LinkedList<String>();
+			for (MProVO aMpro : mpros) {
+				pList.add(aMpro.getM_pro());
+				jContent.put("pro", pList);
+			}
+			jList.add(jContent);
+		}
+		return JSONValue.toJSONString(jList);
+	}
 
 	public String getCityJson(String m_city) {
 		List<MdataVO> mdatas = dao.getCity(m_city);

@@ -38,6 +38,7 @@ public class MdataServlet extends HttpServlet {
 		if ("SearchMaster".equals(action)) {
 			
 			String m_city = request.getParameter("city");
+			String m_district = "";
 			String input = request.getParameter("input");
 //			System.out.println("city= " + m_city);
 //			System.out.println("input= " + input);
@@ -46,6 +47,7 @@ public class MdataServlet extends HttpServlet {
 			MdataVO mdataVO = new MdataVO();
 			
 			mdataVO.setM_city(m_city);
+			mdataVO.setM_district(m_district);
 			mdataVO.setB_name(input);
 			
 			session.setAttribute("search", mdataVO);
@@ -57,14 +59,17 @@ public class MdataServlet extends HttpServlet {
 		if("SearchResult".equals(action)) {
 			
 			String m_city = request.getParameter("city");
+			String m_district = request.getParameter("district");
 			String input = request.getParameter("input");
 			System.out.println("city= " + m_city);
+			System.out.println("district= " + m_district);
 			System.out.println("input= " + input);
 			
 			HttpSession session = request.getSession();
 			MdataVO mdataVO = new MdataVO();
 			
 			mdataVO.setM_city(m_city);
+			mdataVO.setM_district(m_district);
 			mdataVO.setB_name(input);
 			
 			session.setAttribute("search", mdataVO);
@@ -212,10 +217,6 @@ public class MdataServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		String type = request.getParameter("type");
-		
-		if("json".equals(type)) {
-			doPost(request,response);
-		}
 
 		if ("master".equals(type)) {
 			String image = request.getParameter("image");
