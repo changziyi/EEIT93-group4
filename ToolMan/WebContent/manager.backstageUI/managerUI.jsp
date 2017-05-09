@@ -75,8 +75,7 @@
 
 		</nav>
 			<div id="functionrow" style="margin: auto;width:900px; horizontal-align:center;" >
-			   <ul id="functionrow2" role="navigation" style="border:2px solid black; margin: auto;width:900px; horizontal-align:center;" class="nav nav-pills " >
-			   </ul>
+
 			</div>
 			
 			<div id="subfunctionrow" style="margin: auto;width:900px; horizontal-align:center;" class="nav nav-tabs nav-justified">
@@ -163,8 +162,8 @@
 <script>
 	var table ;//datatable variable not in use
 	var navagatorid = $('#navigator>ul>li.active').data('id');//top navigator
-	var datastatus = $('#functionrow2>li>ul>li[name="datastatus"].active').data('status');
- 	var datatime = $('#functionrow2>li>ul>li[name="datatime"].active').data('time');
+	var datastatus = $('#functionrow2>li>ul>li[name="datastatus"][data-buttonstate="selected"]').data('statusvalue');
+ 	var datatime = $('#functionrow2>li>ul>li[name="datatime"][data-buttonstate="selected"]').data('statusvalue');
 
 
 $(function(){
@@ -172,11 +171,12 @@ $(function(){
 			 datatableinit();//execute datable when ajax is done
 		});	//let's try it
 
-
+		functionrow();// build functionrow
  	    subfunctionrow();// build function buttons
 		$('#navigator>ul>li').on('click',navigatorevent);//upon swithing tab
 		loadProduct('m','allmaster','alldate');//build dynamic table
-		functionrow();// build functionrow
+		
+		$('#functionrow>ul>li').on('click',functionrowfiltering);//filtering
  	   $('#subfunctionrow>a').on('click',togglehyper);//direct to other pages
  	  $('#subfunctionrow>span[id!="messagespanm"][id!="messagespanc"]').on('click',togglegetmethod);//will return something when clicked, maill has it's own form action
  		 mail();//mail
@@ -216,18 +216,18 @@ $(function(){
 		
 	   if( navagatorid== 'm'){
 		   
- 			$('#functionrow2').empty();
+ 			$('#functionrow').empty();
 // 			var allmaster = '<li data-toggle="tab" role="presentation" data-id="allmaster" class="active"><a href="#">所有師傅</a></li>';
 			var buttongroupdiv ='<div class="btn-group">'
 			var dropdowntitlestate = 
 				'<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"aria-haspopup="true" aria-expanded="false">師傅狀態<span class="caret"></span></button>';
-			var dropdownmenucontentstate=
-				'<li data-status="allmaster"><a href="#">所有師傅</a></li><li role="separator" class="divider"></li>'
-				+'<li data-status="m_nexamine"><a href="#">未審核</a></li><li role="separator" class="divider"></li>'
-				+'<li datastatus="m_pass"><a href="#">已審核</a></li><li role="separator" class="divider"></li>'
-				+'<li datastatus="m_npass"><a href="#">審核未過</a></li><li role="separator" class="divider"></li>';
-				+'<li datastatus="m_sus"><a href="#">停權中</a></li>';
-			var dropdownmenustate = '<ul class="dropdown-menu">'+dropdownmenucontentstate +'</ul></li>';
+			var dropdownmenucontent=
+				'<li data-statusvalue="allmaster" data-buttonstate="selected" name="datastatus"><a href="#">所有師傅</a></li><li role="separator" class="divider"></li>'
+				+'<li data-statusvalue="m_nexamine" name="datastatus"><a href="#" >未審核</a></li><li role="separator" class="divider"></li>'
+				+'<li data-statusvalue="m_pass" name="datastatus"><a href="#" >已審核</a></li><li role="separator" class="divider"></li>'
+				+'<li data-statusvalue="m_npass" name="datastatus"><a href="#" >審核未過</a></li><li role="separator" class="divider"></li>';
+				+'<li data-statusvalue="m_sus" name="datastatus"><a href="#">停權中</a></li>';
+			var dropdownmenustate = '<ul class="dropdown-menu">'+dropdownmenucontent +'</ul></li>';
 			var buttongroupdivend ='</div>'	
 			var masterstatus = buttongroupdiv+dropdowntitlestate+dropdownmenustate+buttongroupdivend;
 			
@@ -237,21 +237,21 @@ $(function(){
 			var li1 = $(masterstatus);
 			var li2 = $(showblacklistc);
 			docFragfunction.append([li1,li2]);
-			$('#functionrow2').append(docFragfunction);
+			$('#functionrow').append(docFragfunction);
 			
 		}//end else if
 		
 		else if(navagatorid== 'c'){
 			
-			$('#functionrow2').empty();
+			$('#functionrow').empty();
 
 
 			var buttongroupdiv ='<div class="btn-group">'
 			var dropdowntitlestate = 
 					'<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"aria-haspopup="true" aria-expanded="false">消費者狀態<span class="caret"></span></button>';
 			var dropdownmenucontentstate=
-					'<li data-status="allcustomer"><a href="#">所有消費者</a></li><li role="separator" class="divider"></li>'
-					+'<li datastatus="m_sus"><a href="#">停權中</a></li>';
+					'<li data-statusvalue="allcustomer" data-buttonstate="selected" name="datastatus"><a href="#">所有消費者</a></li><li role="separator" class="divider"></li>'
+					+'<li data-statusvalue="m_sus" name="datastatus"><a href="#">停權中</a></li>';
 					
 			var dropdownmenustate = '<ul class="dropdown-menu">'+dropdownmenucontentstate +'</ul></li>';
 			var buttongroupdivend ='</div>';		
@@ -262,22 +262,22 @@ $(function(){
 			var li1 = $(customerstatus);
 			var li2 = $(showblacklistc );
 			docFragfunction.append([li1,li2]);
-			$('#functionrow2').append(docFragfunction);
+			$('#functionrow').append(docFragfunction);
 			
 		}//end else if
 		
 		else if(navagatorid== 'o'){
 			
-			$('#functionrow2').empty();
+			$('#functionrow').empty();
 			var buttongroupdiv ='<div class="btn-group">';
 			var dropdowntitlestate = 
 						'<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"aria-haspopup="true" aria-expanded="false">訂單狀態<span class="caret"></span></button>';
 			var dropdownmenucontentstate=
-						'<li data-status="allorder"><a href="#">所有訂單</a></li><li role="separator" class="divider"></li>'
-						+'<li datastatus="o_inprogress"><a href="#">進行中</a></li><li role="separator" class="divider"></li>'
-						+'<li datastatus="o_deleted"><a href="#">已刪除</a></li><li role="separator" class="divider"></li>'
-						+'<li datastatus="o_unfinished"><a href="#">一方未評分</a></li><li role="separator" class="divider"></li>'
-						+'<li datastatus="o_finished"><a href="#">已完成</a></li>';
+						'<li data-statusvalue="allorder" data-buttonstate="selected" name="datastatus"><a href="#">所有訂單</a></li><li role="separator" class="divider"></li>'
+						+'<li data-statusvalue="o_inprogress" name="datastatus"><a href="#">進行中</a></li><li role="separator" class="divider"></li>'
+						+'<li data-statusvalue="o_deleted" name="datastatus"><a href="#">已刪除</a></li><li role="separator" class="divider"></li>'
+						+'<li data-statusvalue="o_unfinished" name="datastatus"><a href="#">一方未評分</a></li><li role="separator" class="divider"></li>'
+						+'<li data-statusvalue="o_finished" name="datastatus"><a href="#">已完成</a></li>';
 			var dropdownmenustate = '<ul class="dropdown-menu">'+dropdownmenucontentstate +'</ul></li>';
 			var buttongroupdivend ='</div>';
 			var orderstatus = buttongroupdiv+dropdowntitlestate+dropdownmenustate+buttongroupdivend;
@@ -285,23 +285,43 @@ $(function(){
 			var dropdowntitletime = 
 				'<button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown"aria-haspopup="true" aria-expanded="false">日期篩選<span class="caret"></span></button>';
 			var dropdownmenucontenttime=
-				'<li  data-time="halfyear"><a href="#">最近半年</a></li><li role="separator" class="divider"></li>'
-				+'<li data-time="oneyear"><a href="#">最近一年</a></li><li role="separator" class="divider"></li>'
-				+'<li data-time="onemonth"><a href="#">最近一個月</a></li><li role="separator" class="divider"></li>'
-				+'<li data-time="alldate" class="actiive"><a href="#">全部</a></li><li role="separator" class="divider"></li>';
+				'<li  data-statusvalue="halfyear" name="datatime"><a href="#">最近半年</a></li><li role="separator" class="divider"></li>'
+				+'<li data-statusvalue="oneyear" name="datatime"><a href="#">最近一年</a></li><li role="separator" class="divider"></li>'
+				+'<li data-statusvalue="onemonth" name="datatime"><a href="#">最近一個月</a></li><li role="separator" class="divider"></li>'
+				+'<li data-statusvalue="alldate" data-buttonstate="selected" name="datatime" ><a href="#">全部</a></li><li role="separator" class="divider"></li>';
 			var dropdownmenutime = '<ul class="dropdown-menu">'+dropdownmenucontenttime +'</ul></li>';
 			var mastertime = buttongroupdiv+dropdowntitletime+dropdownmenutime+buttongroupdivend;
 			
 			var li1 = $(orderstatus);
 			var li2 = $(mastertime);
 			docFragfunction.append([li1,li2]);
-			$('#functionrow2').append(docFragfunction);
+			$('#functionrow').append(docFragfunction);
 			
  		}// end else if 
 
 	}//end functionrow
 	
+		function functionrowfiltering(){
+		
+			 $('#eventlist').dataTable().fnDestroy();   
+			 	navagatorid = id;
+			 	datastatus = $(this).data('statusvalue');//both status and time selection have datastatus which makes me easiler to change their selected attribute without knowing what they are
+			 	whattype= $(this).attr('name');// to know the type of the clicked
+			 	if(whattype=="datastatus"){
+				   $('#functionrow2>li>ul>li[name="datastatus"]').removeAttr('data-buttonstate');//remove the selected attribute of all status 
+				   $('#functionrow2>li>ul>li[data-statusvalue="'+datastatus+'"]').attr('data-buttonstate','selected');// assign the clicked as currently selected 		   
+			 	}
+			 	if(whattype=="datatime"){
+					   $('#functionrow2>li>ul>li[name="datatime"]').removeAttr('data-buttonstate');//remove the selected attribute of all status 
+					   $('#functionrow2>li>ul>li[data-statusvalue="'+datastatus+'"]').attr('data-buttonstate','selected');// assign the clicked as currently selected 		   
+				 }
+			   datastatus = $('#functionrow2>li>ul>li[name="datastatus"][data-buttonstate="selected"]').data('statusvalue');// asign the variable to utilized the still selected datastatus
+			   datatime = $('#functionrow2>li>ul>li[name="datatime"][data-buttonstate="selected"]').data('statusvalue');
+			   loadProduct(id,datastatus,datatime);
+			   // $('#navigator>ul>li[data-id="' + id + '"]')
 
+		}//end table filtering
+	
 	   function subfunctionrow(){
 
 			var docFragsubfunction = $(document.createDocumentFragment());
@@ -342,6 +362,8 @@ $(function(){
 			}// end else if 
 	
 		}//end functionrow
+		
+		
 		
 		function togglehyper(){
 			var valueattr =$(this).val();
