@@ -58,8 +58,7 @@ public class managerUIFunctionServlet extends HttpServlet {
 			MdataService mdataservice = new MdataService();
 			mdataservice.updatemasterSname(Integer.parseInt(m_id),"m_sus");
 			}
-			RequestDispatcher rd = request.getRequestDispatcher("MasterPage.jsp");
-			rd.forward(request, response);	
+
 			
 		}
 		
