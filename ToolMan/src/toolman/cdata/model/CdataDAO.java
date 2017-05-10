@@ -130,7 +130,7 @@ public class CdataDAO implements CdataDAO_interface{
 		}
 		return count;
 	}
-	public List<CdataVO> getByAndSname(String s_name) {
+	public List<CdataVO> getBySname(String s_name) {
 		List<CdataVO> list = null;
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try {

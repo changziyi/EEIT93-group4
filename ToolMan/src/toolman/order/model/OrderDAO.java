@@ -351,7 +351,26 @@ public class OrderDAO implements OrderDAO_Interface {
 		}
 		return list;
 	}
-	
+    public List<OrderVO> getOrderBySnameAndDate(String s_name,Timestamp o_tdate1,Timestamp o_tdate2){
+    	List<OrderVO> querylist = null;
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		Integer count = 0;
+		
+		try {
+			session.beginTransaction();
+			Query query = session.createQuery("FROM OrderVO WHERE s_name=? o_tdate BETWEEN ? AND ?");
+			query.setParameter(1, s_name);
+			query.setParameter(2, o_tdate2);
+			query.setParameter(3, o_tdate2);
+			querylist = query.list();			
+			session.getTransaction().commit();
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
+		return querylist;
+	}	
+    
 //-------rating	
 	
 	@Override

@@ -65,7 +65,7 @@ public class ManagerUIServlet extends HttpServlet {
 					 mdatas = dao.getAll();				
 				}//end if		
 				else{
-					 mdatas = dao.getByAndSname(datastatus);
+					 mdatas = dao.getBySname(datastatus);
 				}//end else	
 					List<Map> jList = new LinkedList<Map>();
 					for (MdataVO aMdata : mdatas) {
@@ -100,7 +100,7 @@ public class ManagerUIServlet extends HttpServlet {
 				List<CdataVO> list = dao.getAll();		
 			}//end if		
 			else{
-				List<CdataVO> list = dao.getByAndSname(datastatus);
+				List<CdataVO> list = dao.getBySname(datastatus);
 			}//end else	
 
 			List list2 = new ArrayList();
@@ -141,12 +141,36 @@ public class ManagerUIServlet extends HttpServlet {
 		//get o tested ok
 		if("o".equals(topnavigatorid)){
 			OrderService orderservice = new OrderService();
-			if("allorder".equals(datastatus)){				
+			
+			if("allorder".equals(datastatus)){	
+				
 				out.write(orderservice.getAllOrderJson());
+				
 			}//end if		
-			else{
-				out.write(orderservice.getBySnameJson(datastatus));
-			}//end else			
+			else if ("oneyear".equals(datatime)){
+				
+				Timestamp o_tdate1 = new Timestamp(System.currentTimeMillis());
+				Timestamp o_tdate2 = new Timestamp(System.currentTimeMillis()-31536000000L);//365*24*60*60*1000
+				out.write(orderservice.getOrderBySnameAndDateJson(datastatus,o_tdate1,o_tdate2));
+				
+			}//end else	
+			else if ("halfyear".equals(datatime)){
+				
+				Timestamp o_tdate1 = new Timestamp(System.currentTimeMillis());
+				Timestamp o_tdate2 = new Timestamp(System.currentTimeMillis()-15768000000L);//365/2*24*60*60*1000
+				out.write(orderservice.getOrderBySnameAndDateJson(datastatus,o_tdate1,o_tdate2));
+
+			}//end else	
+			else if ("onemonth".equals(datatime)){
+				
+				Timestamp o_tdate1 = new Timestamp(System.currentTimeMillis());
+				Timestamp o_tdate2 = new Timestamp(System.currentTimeMillis()-2592000000L);//365/2*24*60*60*1000
+				out.write(orderservice.getOrderBySnameAndDateJson(datastatus,o_tdate1,o_tdate2));
+
+			}//end else	
+
+			
+			
 //			System.out.println(ojasonstring);
 			//tested ok
 //			List list = new ArrayList();

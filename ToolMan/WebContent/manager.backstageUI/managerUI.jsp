@@ -168,7 +168,7 @@
 
 // 		$(document).ajaxComplete(function(){
 // 			datatableinit(); //execute datable when ajax is done//fuck it, use deferred instead
-// 		});	//let's try it
+// 		});	
 $(function(){
 
 
@@ -318,7 +318,7 @@ $(function(){
 			 	whattype= $(this).attr('name');//tested ok// to know the type of the clicked
 			 	if(whattype=="datastatus"){//tested ok
 				   $('#functionrow>div>ul>li[name="datastatus"]').removeAttr('data-buttonstate');//remove the selected attribute of all status 
-				   $('#functionrow>div>ul>li[data-statusvalue="'+datastatus+'"]').attr('data-buttonstate','selected');// assign the clicked as currently selected 		   
+				   $('#functionrow>div>ul>li[data-statusvalue="'+datastatus+'"]').attr('data-buttonstate','selected');// assign the clicked to the currently selected 		   
 			 	}//end if
 			 	if(whattype=="datatime"){
 					   $('#functionrow>div>ul>li[name="datatime"]').removeAttr('data-buttonstate');//remove the selected attribute of all status 

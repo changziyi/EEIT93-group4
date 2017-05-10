@@ -235,7 +235,7 @@ public class MdataDAO implements MdataDAO_interface {
 		}
 		//BY BENNY--for manager backstage
 		@Override
-		public List<MdataVO> getByAndSname(String s_name) {
+		public List<MdataVO> getBySname(String s_name) {
 			List<MdataVO> list = null;
 			Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 			try {
@@ -260,7 +260,7 @@ public class MdataDAO implements MdataDAO_interface {
 //		List<MdataVO> list8 = dao.SeachByCityAndDistrictAndMpro("臺北市","大安","地板");
 		
 		//by benny getByMidAndSname
-		List<MdataVO> list8 = dao.getByAndSname("審核通過");
+		List<MdataVO> list8 = dao.getBySname("審核通過");
 		for (MdataVO list : list8) {
 			System.out.print(list.getM_city() + ",");
 			System.out.print(list.getM_district() + ",");
