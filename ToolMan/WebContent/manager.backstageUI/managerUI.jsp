@@ -167,7 +167,7 @@
 //  	var datatime = $('#functionrow>div>ul>li[name="datatime"][data-buttonstate="selected"]').data('statusvalue');
 
 // 		$(document).ajaxComplete(function(){
-// 			datatableinit(); //execute datable when ajax is done
+// 			datatableinit(); //execute datable when ajax is done//fuck it, use deferred instead
 // 		});	//let's try it
 $(function(){
 
@@ -200,9 +200,9 @@ $(function(){
 	function navigatorevent(){// order is of utmost,get navigator id, clear the table, build 2nd row and buttons, set active and selected filter, send 3 parameters to loadproduct
 		var id = $(this).data('id');
 		navagatorid = id;
-		
+
 		$('#eventlist').empty();
-// 		 $('#eventlist').dataTable().fnDestroy();
+		 $('#eventlist').dataTable().fnDestroy();
 		   $('#navigator>ul>li').removeClass('active');
 		   $('#navigator>ul>li[data-id="' + id + '"]').addClass('active');
 		 	functionrow();
@@ -331,10 +331,12 @@ $(function(){
 			   else{
 				   datatime='alltime';
 			   }
-// 				$('#eventlist').dataTable().fnDestroy();  
+ 
 				$('#eventlist').empty();
+// 				$('#eventlist').dataTable().fnDestroy(); 
 			   loadProduct(id,datastatus,datatime);
 			   // $('#navigator>ul>li[data-id="' + id + '"]')
+			   
 			   //rebinding
 			$('#functionrow>div>ul>li').on('click',functionrowfiltering);//filtering
 		}//end table filtering
@@ -450,11 +452,11 @@ $(function(){
 					   
 			 $.getJSON('${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIServlet.do',{'navigatorid':id,"datastatus":datastatus,"datatime":datatime}, function(data){
 				 buildtable(id,data);
-				 $.when(dfd)
-				 .done(alert("first"))
-				 .done(alert("second"))
-				 .done(datatableinit);
-
+				 $.when(dfd)//super great
+// 				 .done(alert("first"))
+// 				 .done(alert("second"))
+				 .done(datatableinit);//super great
+				 
 			 });//end get json
 	}//end loadproduct
 	
@@ -611,6 +613,7 @@ $(function(){
 			// 			"lengthMenu":[1, 2, 3, "All"],
 // 						destroy: true,
 // 						"pageLength": 1,
+
 						 "lengthMenu": [ [1, 2, 50, -1], [1, 2, 50, "All"] ]
 			// 			"iDisplayLength": 10
 			//			  	destroy: true,
