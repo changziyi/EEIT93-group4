@@ -313,33 +313,7 @@ public class OrderDAO implements OrderDAO_Interface {
 		}
 		return querylist;
 	}
-	
-	
 
-	
-	public Integer updateOrderRate(Integer m_rating, Integer c_rating,String ca_des, String ma_des,Integer o_id) {
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		Integer count = 0;		
-		try {
-			session.beginTransaction();
-			Query query = session.createQuery("update OrderVO set m_rating = ? , c_rating = ? , ca_des = ? , ma_des = ? where o_id = ?");
-			query.setParameter(0, m_rating);
-			query.setParameter(1, c_rating);
-			query.setParameter(2, ca_des);
-			query.setParameter(3, ma_des);
-			query.setParameter(4, o_id);
-			query.executeUpdate();			
-			session.getTransaction().commit();
-		} catch (RuntimeException ex) {
-			session.getTransaction().rollback();
-			throw ex;
-		}
-		return count;
-	}
-	
-	
-	
-	
 	
 	@Override
 	public List<OrderVO> getAllOrderByCAndDateAndSname(String c_id,Timestamp o_tdate1, Timestamp o_tdate2,String s_name){
@@ -361,6 +335,25 @@ public class OrderDAO implements OrderDAO_Interface {
 		}
 		return querylist;
 	}
+	
+	public List<OrderVO> getBySname(String s_name) {
+		List<OrderVO> list = null;
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try {
+			session.beginTransaction();
+			Query query = session.createQuery("from OrderVO where s_name=:s ");
+			query.setString("s",s_name);
+			list = query.list();
+			session.getTransaction().commit();
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
+		return list;
+	}
+	
+//-------rating	
+	
 	@Override
 	public OrderVO getRate(Integer o_id) {
 		OrderVO orderVO = null;
@@ -375,7 +368,30 @@ public class OrderDAO implements OrderDAO_Interface {
 		}
 		return orderVO;
 	}
-	
+	public Integer updateOrderRate(Integer m_rating, Integer c_rating,String ca_des, String ma_des,Integer o_id) {
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		Integer count = 0;		
+		try {
+			session.beginTransaction();
+			Query query = session.createQuery("update OrderVO set m_rating = ? , c_rating = ? , ca_des = ? , ma_des = ? where o_id = ?");
+			query.setParameter(0, m_rating);
+			query.setParameter(1, c_rating);
+			query.setParameter(2, ca_des);
+			query.setParameter(3, ma_des);
+			query.setParameter(4, o_id);
+			query.executeUpdate();			
+			session.getTransaction().commit();
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
+		return count;
+	}
+	@Override
+	public Set<CdataVO> getOrderListC(String c_id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	public static void main(String[] args) { 
 		OrderDAO orderdao = new OrderDAO();
 		OrderVO orderVO = new OrderVO();
@@ -506,11 +522,7 @@ public class OrderDAO implements OrderDAO_Interface {
 		}
 
 
-	@Override
-	public Set<CdataVO> getOrderListC(String c_id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 
 
 	

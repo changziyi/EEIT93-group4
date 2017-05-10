@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.simple.JSONValue;
 
+import toolman.cdata.model.CdataDAO;
 import toolman.cdata.model.CdataService;
 import toolman.cdata.model.CdataVO;
 import toolman.mdata.model.MdataDAO;
@@ -88,16 +89,22 @@ public class ManagerUIServlet extends HttpServlet {
 					out.write(mjasonstring);
 					out.flush();
 					System.out.println(mjasonstring);				
-		}//end if
+		}//end if m
 		
 		//get c tested ok
 		if("c".equals(topnavigatorid)){
+			CdataDAO dao = new CdataDAO();
+			List<CdataVO> cdatas = null;
 			
-			CdataService cdataservice = new CdataService();
-			List<CdataVO> list = cdataservice.getAll();
-			
+			if("allcustomer".equals(datastatus)){				
+				List<CdataVO> list = dao.getAll();		
+			}//end if		
+			else{
+				List<CdataVO> list = dao.getByAndSname(datastatus);
+			}//end else	
+
 			List list2 = new ArrayList();
-				for(CdataVO cdataVO:list){
+				for(CdataVO cdataVO:cdatas){
 					Map map = new HashMap();
 					Timestamp c_jdatestamp =	cdataVO.getC_jdate();
 					SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -129,15 +136,18 @@ public class ManagerUIServlet extends HttpServlet {
 				out.flush();
 				System.out.println(cjasonstring);
 
-		}//end if
+		}//end if c
 		
 		//get o tested ok
 		if("o".equals(topnavigatorid)){
 			OrderService orderservice = new OrderService();
-			out.write(orderservice.getAllOrderJson());
+			if("allorder".equals(datastatus)){				
+				out.write(orderservice.getAllOrderJson());
+			}//end if		
+			else{
+				out.write(orderservice.getBySnameJson(datastatus));
+			}//end else			
 //			System.out.println(ojasonstring);
-		
-			
 			//tested ok
 //			List list = new ArrayList();
 //			Map map = new HashMap();
@@ -148,7 +158,7 @@ public class ManagerUIServlet extends HttpServlet {
 //			String mjasonstring = JSONValue.toJSONString(list);
 //			out.write(mjasonstring);
 //			out.flush();
-		}//end if
+		}//end if o
 			
 		//get report
 		if("r".equals(topnavigatorid)){
