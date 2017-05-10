@@ -94,17 +94,17 @@ public class ManagerUIServlet extends HttpServlet {
 		//get c tested ok
 		if("c".equals(topnavigatorid)){
 			CdataDAO dao = new CdataDAO();
-			List<CdataVO> cdatas = null;
+			List<CdataVO> list = null;
 			
 			if("allcustomer".equals(datastatus)){				
-				List<CdataVO> list = dao.getAll();		
+				list = dao.getAll();		
 			}//end if		
 			else{
-				List<CdataVO> list = dao.getBySname(datastatus);
+				list = dao.getBySname(datastatus);
 			}//end else	
 
 			List list2 = new ArrayList();
-				for(CdataVO cdataVO:cdatas){
+				for(CdataVO cdataVO:list){
 					Map map = new HashMap();
 					Timestamp c_jdatestamp =	cdataVO.getC_jdate();
 					SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

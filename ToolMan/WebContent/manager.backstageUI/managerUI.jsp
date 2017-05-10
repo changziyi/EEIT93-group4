@@ -260,7 +260,7 @@ $(function(){
 					'<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"aria-haspopup="true" aria-expanded="false">消費者狀態<span class="caret"></span></button>';
 			var dropdownmenucontentstate=
 					'<li data-statusvalue="allcustomer" data-buttonstate="selected" name="datastatus"><a href="#">所有消費者</a></li><li role="separator" class="divider"></li>'
-					+'<li data-statusvalue="m_sus" name="datastatus"><a href="#">停權中</a></li>';
+					+'<li data-statusvalue="停權中" name="datastatus"><a href="#">停權中</a></li>';
 					
 			var dropdownmenustate = '<ul class="dropdown-menu">'+dropdownmenucontentstate +'</ul>';
 			var buttongroupdivend ='</div>';		
@@ -283,10 +283,10 @@ $(function(){
 						'<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"aria-haspopup="true" aria-expanded="false">訂單狀態<span class="caret"></span></button>';
 			var dropdownmenucontentstate=
 						'<li data-statusvalue="allorder" data-buttonstate="selected" name="datastatus"><a href="#">所有訂單</a></li><li role="separator" class="divider"></li>'
-						+'<li data-statusvalue="o_inprogress" name="datastatus"><a href="#">進行中</a></li><li role="separator" class="divider"></li>'
-						+'<li data-statusvalue="o_deleted" name="datastatus"><a href="#">已刪除</a></li><li role="separator" class="divider"></li>'
-						+'<li data-statusvalue="o_unfinished" name="datastatus"><a href="#">一方未評分</a></li><li role="separator" class="divider"></li>'
-						+'<li data-statusvalue="o_finished" name="datastatus"><a href="#">已完成</a></li>';
+						+'<li data-statusvalue="進行中" name="datastatus"><a href="#">進行中</a></li><li role="separator" class="divider"></li>'
+						+'<li data-statusvalue="已刪除" name="datastatus"><a href="#">已刪除</a></li><li role="separator" class="divider"></li>'
+						+'<li data-statusvalue="一方未評分" name="datastatus"><a href="#">一方未評分</a></li><li role="separator" class="divider"></li>'
+						+'<li data-statusvalue="已完成" name="datastatus"><a href="#">已完成</a></li>';
 			var dropdownmenustate = '<ul class="dropdown-menu">'+dropdownmenucontentstate +'</ul>';
 			var buttongroupdivend ='</div>';
 			var orderstatus = buttongroupdiv+dropdowntitlestate+dropdownmenustate+buttongroupdivend;
