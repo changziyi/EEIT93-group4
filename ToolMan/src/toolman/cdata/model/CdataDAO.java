@@ -1,6 +1,5 @@
 package toolman.cdata.model;
 
-
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -14,7 +13,6 @@ import org.hibernate.criterion.Restrictions;
 
 import hibernate.util.HibernateUtil;
 import toolman.order.model.OrderVO;
-
 
 public class CdataDAO implements CdataDAO_interface{
 	

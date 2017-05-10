@@ -6,12 +6,18 @@
 
 
 <%-- 此頁採用 JSTL 與 EL 取值 --%>
+
+
+
 <%
 	OrderService orderSvc = new OrderService();
     List<OrderVO> list = orderSvc.getAllOrder();
     pageContext.setAttribute("list",list);
 
 %>
+<%--
+<jsp:useBean id="listOrder" scope="request" type="java.util.Set" />
+--%>
 
 <html>
 
@@ -69,9 +75,11 @@
 		<th>評分</th>
 		
 	</tr>
+ 	
+	 <%@ include file="page1.file" %>  
+ 	<c:forEach var="orderVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>"> 	
 	
-	 <%@ include file="page1.file" %> 
-	<c:forEach var="orderVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
+<%-- 		<c:forEach var="orderVO" items="${listOrder}" >  --%>
 	
 		<tr align='center' valign='middle'>
 			<td>${orderVO.o_id}</td>
@@ -226,7 +234,7 @@ ${orderVO.ca_des}
 		
 	</c:forEach>
 </table>
- <%@ include file="page2.file" %>
+   <%@ include file="page2.file" %>  
  </div>
  
  

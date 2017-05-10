@@ -33,14 +33,26 @@
 			</key>
 			<one-to-many class="toolman.order.model.OrderVO" />
 		</set>		
-		
+
 		<set name="discussions" table="discussion" lazy="false" cascade="all" inverse="true" order-by="d_id asc">			
 			<key>
 				<column name="c_id" />
 			</key>
 			<one-to-many class="toolman.discussion.model.DiscussionVO" />
 		</set>
-		
+
+	<set name="favorites" table="favorite" lazy="false" cascade="all"  inverse="true"  order-by="f_id asc">																						
+			<key>
+				<column name="c_id" />
+			</key>
+			<one-to-many class="toolman.favorite.model.FavoriteVO" />
+		</set>	
+	<set name="blacklists" table="blacklist" lazy="false" cascade="all"  inverse="true"  order-by="bk_id asc">																						
+			<key>
+				<column name="c_id" />
+			</key>
+			<one-to-many class="toolman.blacklist.model.BlacklistVO" />
+		</set>	
 	</class>
 </hibernate-mapping>
 

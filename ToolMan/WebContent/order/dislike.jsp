@@ -72,8 +72,8 @@
 	
 		<tr align='center' valign='middle'>
 			<td>${blacklistVO.bk_id}</td>
-			<td>${blacklistVO.m_id}</td>
-			<td>${blacklistVO.c_id}</td>
+			<td>${blacklistVO.mdataVO.m_id}</td>
+			<td>${blacklistVO.cdataVO.c_id}</td>
 			
 			
 			

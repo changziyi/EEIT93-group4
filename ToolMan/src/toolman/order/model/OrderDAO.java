@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -511,8 +512,16 @@ public class OrderDAO implements OrderDAO_Interface {
 		}
 
 
+	@Override
+	public Set<CdataVO> getOrderListC(String c_id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
 	
 	
 
 	}
+	
 
