@@ -57,7 +57,7 @@ $(document).ready(function() {
 				api.open();
 			});
 		},
-		
+		/*
 		// while using upload option, please set
 		// startImageRenderer: false
 		// for a better effect
@@ -99,7 +99,7 @@ $(document).ready(function() {
 			$.post('TestFormData', {
 				file: item.name
 			});
-		},
+		},*/
 		
     });
 	

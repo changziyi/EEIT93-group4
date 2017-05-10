@@ -12,8 +12,8 @@
 <link rel="stylesheet" href="${pageContext.servletContext.contextPath}/css/bootstrap.min.css">
 <script src="${pageContext.servletContext.contextPath}/js/jquery-3.2.1.min.js"></script>
 <script src="${pageContext.servletContext.contextPath}/js/bootstrap.min.js"></script>
-<script src="${pageContext.servletContext.contextPath}/js/jquery.fileuploader.min.js"></script>
-<script src="${pageContext.servletContext.contextPath}/js/custom.js"></script>
+<%-- <script src="${pageContext.servletContext.contextPath}/js/jquery.fileuploader.min.js"></script> --%>
+<%-- <script src="${pageContext.servletContext.contextPath}/js/custom.js"></script> --%>
 <style>
 .changeImg {
 	width: 200px;
@@ -79,23 +79,23 @@ input[type="file"] {
 		</div>
 		<div id="menu1" class="tab-pane fade">
 			<div></div>
-			<div id="uploadTemp">
+<!-- 			<div id="uploadTemp">
 				<form action="php/form_upload.php" method="post" enctype="multipart/form-data">
 					<div class="workImgArea">作品名稱　<input type="text" name="workname" required></div>
 					<div class="workImgArea">完工日期　<input type="text" name="worktime" required></div>
 					<div class="workImgArea">作品描述　<textarea name="workdes" required></textarea></div>
 					<input type="file" name="files" data-fileuploader-limit="3"><button type="button" id="buttonUpload">上傳</button>
 				</form>
-			</div>
+			</div> -->
 			
-			<!-- <form name="myData" action="TestFormData" enctype="multipart/form-data">
-				<div>
-					<label>Photos</label> <input type="file" id="file" name="file[]"
-						multiple="multiple">
-				</div>
+			<div id='div1'></div>
+			<form name="myData" action="TestFormData" enctype="multipart/form-data">
+				<div><input type="file" id="file" name="file[]" multiple="multiple"></div>
+				<div class="workImgArea">作品名稱　<input type="text" name="workname" required></div>
+				<div class="workImgArea">完工日期　<input type="text" name="worktime" required></div>
+				<div class="workImgArea">作品描述　<textarea name="workdes"></textarea></div>
 				<button type="button" id="buttonUpload">上傳</button>
 			</form>
-			<div id='div1'></div> -->
     
 		</div>
 		<div id="menu2" class="tab-pane fade">
@@ -122,8 +122,10 @@ input[type="file"] {
 			<h3>評價: ${mdataVO.m_arating}</h3>
 		</div>
 		<div id="menu4" class="tab-pane fade">
-			<h3>Menu 4</h3>
-			<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+			<h3>成功媒合人次</h3>
+			<c:forEach var="orderCid" items="${mdataVO.orders}">
+				${orderCid.o_id}
+			</c:forEach>
 		</div>
 	</div>
 	
@@ -178,7 +180,9 @@ input[type="file"] {
 			
 			//上傳圖片限制三張
 			upload.on('change', function(event) {
-	
+				
+				myDiv.empty();
+				
 				if (event.target.files.length > 3) {
 					alert("限制為3張圖片，請重新選擇");
 					upload.val(null);
@@ -265,9 +269,11 @@ input[type="file"] {
 						$('#img0').removeAttr('src').removeAttr('class');
 						$('#img1').removeAttr('src').removeAttr('class');
 						$('#img2').removeAttr('src').removeAttr('class');
+						var successImg = $('<img />').attr('src','${pageContext.servletContext.contextPath}/image/jake.gif');
+						myDiv.append(successImg);
 						upload.val(null);
-						$('input[name="fileuploader-list-files"]').val('[]');
-						$('ul').find('.fileuploader-item').remove();
+// 						$('input[name="fileuploader-list-files"]').val('[]');
+// 						$('ul').find('.fileuploader-item').remove();
 		 			},
 		 			beforeSend : function() {
 		 				

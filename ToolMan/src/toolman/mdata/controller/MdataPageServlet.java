@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import toolman.cdata.model.CdataVO;
 import toolman.discussion.model.DiscussionService;
 import toolman.discussion.model.DiscussionVO;
 import toolman.mdata.model.MdataService;
@@ -43,6 +44,7 @@ public class MdataPageServlet extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		MdataVO mdataVO = (MdataVO)session.getAttribute("mdataVO");
+		CdataVO cdataVO = (CdataVO)session.getAttribute("loginOK");
 		System.out.println("post: " + mdataVO.getM_id());
 		
 		if ("MasterPage_Q".equals(action)) {

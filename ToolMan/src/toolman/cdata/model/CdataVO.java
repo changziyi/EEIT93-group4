@@ -5,6 +5,7 @@ import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.Set;
 
+import toolman.discussion.model.DiscussionVO;
 import toolman.order.model.OrderVO;
 
 //import com.order.model.OrderVO;
@@ -30,7 +31,7 @@ public class CdataVO implements java.io.Serializable{
 	private Integer c_finished;
 	
 	private Set<OrderVO> orders = new  HashSet<OrderVO>();//評價
-	
+	private Set<DiscussionVO> discussions = new HashSet<DiscussionVO>();//問與答
 	 
 
 	public Set<OrderVO> getOrders() {
@@ -142,6 +143,12 @@ public class CdataVO implements java.io.Serializable{
 	public void setC_finished(Integer c_finished) {
 		this.c_finished = c_finished;
 	}
-
+	public Set<DiscussionVO> getDiscussions() {
+		return discussions;
+	}
+	public void setDiscussions(Set<DiscussionVO> discussions) {
+		this.discussions = discussions;
+	}
+	
 	
 }
