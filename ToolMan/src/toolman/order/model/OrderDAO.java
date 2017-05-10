@@ -431,12 +431,12 @@ public class OrderDAO implements OrderDAO_Interface {
 //			orderdao.getOrderByDate(o_bdatetest,o_bdatetest2);
 //		
 		//getOrderByM
-//		List<OrderVO> list = orderdao.getOrderByM(1001);
-//		for(OrderVO alist : list) {
-//			System.out.print(alist.getM_id().getM_id() + ",");
-//			System.out.print(alist.getM_id().getB_name() + ",");
-//			System.out.println(alist.getC_id().getC_id());
-//		}
+		List<OrderVO> list = orderdao.getOrderByM(1001);
+		for(OrderVO alist : list) {
+			System.out.print(alist.getM_id().getM_id() + ",");
+			System.out.print(alist.getM_id().getB_name() + ",");
+			System.out.println(alist.getC_id().getC_id());
+		}
 			
 //		
 //		//getAllOrderByMAndDate tested ok

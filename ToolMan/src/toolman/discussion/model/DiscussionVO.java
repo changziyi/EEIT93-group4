@@ -9,8 +9,8 @@ public class DiscussionVO implements java.io.Serializable {
 	private String d_des;
 	private String d_reply;
 	private MdataVO mdataVO;
-//	private String c_id;
-	private CdataVO cdataVO;
+	private String c_id;
+//	private CdataVO cdataVO;
 	
 	public Integer getD_id() {
 		return d_id;
@@ -42,18 +42,17 @@ public class DiscussionVO implements java.io.Serializable {
 	public void setMdataVO(MdataVO mdataVO) {
 		this.mdataVO = mdataVO;
 	}
-	public CdataVO getCdataVO() {
-		return cdataVO;
-	}
-	public void setCdataVO(CdataVO cdataVO) {
-		this.cdataVO = cdataVO;
-	}
-	
-//	public String getC_id() {
-//		return c_id;
+//	public CdataVO getCdataVO() {
+//		return cdataVO;
 //	}
-//	public void setC_id(String c_id) {
-//		this.c_id = c_id;
+//	public void setCdataVO(CdataVO cdataVO) {
+//		this.cdataVO = cdataVO;
 //	}
+	public String getC_id() {
+		return c_id;
+	}
+	public void setC_id(String c_id) {
+		this.c_id = c_id;
+	}
 	
 }

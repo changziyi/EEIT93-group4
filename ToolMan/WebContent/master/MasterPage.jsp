@@ -96,15 +96,16 @@ input[type="file"] {
 				<div class="workImgArea">作品描述　<textarea name="workdes"></textarea></div>
 				<button type="button" id="buttonUpload">上傳</button>
 			</form>
+			<div>
+				<c:forEach var="aWork" items="${mdataVO.works}">
+<%-- 					${aWork.work_id} --%>
+					<img height="200px" src='${pageContext.servletContext.contextPath}/master/master.do?type=work&image=${mdataVO.m_id}'/>
+				</c:forEach>
+			</div>
     
 		</div>
 		<div id="menu2" class="tab-pane fade">
 			<div>
-<%-- 				<c:forEach var="aDiscussions" items="${mdataVO.discussions}"><br />Q: ${aDiscussions.d_des} --%>
-<%-- 					<c:if test="${not empty aDiscussions.d_reply}"><br />A: ${aDiscussions.d_reply} --%>
-<%-- 					</c:if> --%>
-<!-- 					<br /> -->
-<%-- 				</c:forEach> --%>
 				<div>
 					<div id="show"></div>
 					<p>提問</p>
@@ -120,11 +121,17 @@ input[type="file"] {
 		</div>
 		<div id="menu3" class="tab-pane fade">
 			<h3>評價: ${mdataVO.m_arating}</h3>
+			<c:forEach var="orderCid" items="${mdataVO.orders}">
+				${orderCid.c_id.c_id} ：
+				${orderCid.c_rating} - 
+				${orderCid.o_edate}<br>
+			</c:forEach>
 		</div>
 		<div id="menu4" class="tab-pane fade">
-			<h3>成功媒合人次</h3>
+			<h3>成功媒合人次:</h3>
 			<c:forEach var="orderCid" items="${mdataVO.orders}">
-				${orderCid.o_id}
+				${orderCid.c_id.c_id} - 
+				${orderCid.o_edate}<br>
 			</c:forEach>
 		</div>
 	</div>

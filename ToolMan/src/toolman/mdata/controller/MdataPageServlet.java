@@ -2,6 +2,7 @@ package toolman.mdata.controller;
 
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.util.Set;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -16,6 +17,7 @@ import toolman.discussion.model.DiscussionService;
 import toolman.discussion.model.DiscussionVO;
 import toolman.mdata.model.MdataService;
 import toolman.mdata.model.MdataVO;
+import toolman.order.model.OrderVO;
 
 @WebServlet("/master/masterPage.do")
 public class MdataPageServlet extends HttpServlet {
@@ -29,9 +31,9 @@ public class MdataPageServlet extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		session.setAttribute("mdataVO", mdataVO);
-		MdataVO m = (MdataVO)session.getAttribute("mdataVO");
-		System.out.println("sessionM_id: " + m.getM_id());
-		System.out.println("sessionM_city: " + m.getM_city());
+//		MdataVO m = (MdataVO)session.getAttribute("mdataVO");
+//		System.out.println("sessionM_id: " + m.getM_id());
+//		System.out.println("sessionM_city: " + m.getM_city());
 		response.sendRedirect("MasterPage.jsp");
 		return;
 		
@@ -44,7 +46,7 @@ public class MdataPageServlet extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		MdataVO mdataVO = (MdataVO)session.getAttribute("mdataVO");
-		CdataVO cdataVO = (CdataVO)session.getAttribute("loginOK");
+//		CdataVO cdataVO = (CdataVO)session.getAttribute("loginOK");
 		System.out.println("post: " + mdataVO.getM_id());
 		
 		if ("MasterPage_Q".equals(action)) {

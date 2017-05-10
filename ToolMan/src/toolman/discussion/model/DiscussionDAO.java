@@ -103,13 +103,13 @@ public class DiscussionDAO implements DiscussionDAO_interface {
 		
 		
 		//getByMid
-		List<DiscussionVO> list2 = dao.getByMid(1001);
-		for (DiscussionVO list : list2) {
-			System.out.print(list.getMdataVO().getM_id() + ",");
-			System.out.print(list.getD_id() + ",");
-			System.out.print(list.getCdataVO().getC_id() + ",");
-			System.out.println(list.getD_des());
-		}
+//		List<DiscussionVO> list2 = dao.getByMid(1001);
+//		for (DiscussionVO list : list2) {
+//			System.out.print(list.getMdataVO().getM_id() + ",");
+//			System.out.print(list.getD_id() + ",");
+//			System.out.print(list.getCdataVO().getC_id() + ",");
+//			System.out.println(list.getD_des());
+//		}
 		
 	}
 

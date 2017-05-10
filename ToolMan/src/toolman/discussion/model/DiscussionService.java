@@ -33,7 +33,7 @@ public class DiscussionService {
 		for (DiscussionVO aDiscussions : discussions) {
 			Map jContent = new HashMap();
 			jContent.put("mid", aDiscussions.getMdataVO().getM_id());
-			jContent.put("cid", aDiscussions.getCdataVO().getC_id());
+			jContent.put("cid", aDiscussions.getC_id());
 			jContent.put("des", aDiscussions.getD_des());
 			jContent.put("reply", aDiscussions.getD_reply());
 			jContent.put("date", aDiscussions.getD_date().toString());

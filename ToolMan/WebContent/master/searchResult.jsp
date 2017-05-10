@@ -67,7 +67,7 @@ body {font-family:Microsoft JhengHei;}
 		$.getJSON('MdataJsonServlet', {'city':'${search.m_city}','district':'${search.m_district}','input':'${search.b_name}','action':'advjson'}, function(datas) {
 			show.empty();
 			$.each(datas, function(i,master) {
-				if (master.sta == 'm_pass') {
+				if (master.sta == '審核通過') {
 					var bImg = $('<img />').attr({'src':'${pageContext.servletContext.contextPath}/master/master.do?type=master&image=' + master.id,
 						'data-holder-rendered':'true'});
 					var a = $('<a></a>').attr('href','${pageContext.servletContext.contextPath}/master/masterPage.do?m_id='+ master.id).append(bImg);

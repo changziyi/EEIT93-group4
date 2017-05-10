@@ -12,15 +12,16 @@
         <property name="d_date" column="d_date" />
         <property name="d_des" column="d_des" />
         <property name="d_reply" column="d_reply" />
+        <property name="c_id" column="c_id" />
         
         <many-to-one name="mdataVO" class="toolman.mdata.model.MdataVO" cascade="all" lazy="false">
             <column name="m_id" />
         </many-to-one>
-        
+<!--         
         <many-to-one name="cdataVO" class="toolman.cdata.model.CdataVO" cascade="all" lazy="false">
         	<column name="c_id" />
         </many-to-one>
-        
+-->         
     </class>
 </hibernate-mapping>
 
