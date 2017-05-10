@@ -14,12 +14,14 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
 
 
 import hibernate.util.HibernateUtil;
+import toolman.cdata.model.CdataVO;
 import toolman.mdata.model.MdataVO;
 import toolman.rdata.model.RdataVO;
 import toolman.work.model.WorkVO;
@@ -186,7 +188,7 @@ public class OrderDAO implements OrderDAO_Interface {
 		
 		try {
 			session.beginTransaction();				
-			Query query = session.createQuery("Update OrderVO set s_name='o_unfinishedreview' where o_id=?");
+			Query query = session.createQuery("Update OrderVO set s_name='一方未完成' where o_id=?");
 			query.setParameter(0,o_id);
 			query.executeUpdate();
 			session.getTransaction().commit();
@@ -203,7 +205,7 @@ public class OrderDAO implements OrderDAO_Interface {
 		
 		try {
 			session.beginTransaction();				
-			Query query = session.createQuery("Update OrderVO set s_name='o_finished' where o_id=?");
+			Query query = session.createQuery("Update OrderVO set s_name='已完成' where o_id=?");
 			query.setParameter(0,o_id);
 			query.executeUpdate();
 			session.getTransaction().commit();
@@ -222,7 +224,7 @@ public class OrderDAO implements OrderDAO_Interface {
 		
 		try {
 			session.beginTransaction();				
-			Query query = session.createQuery("Update OrderVO set s_name='o_deleted' where o_id=?");
+			Query query = session.createQuery("Update OrderVO set s_name='已刪除' where o_id=?");
 			query.setParameter(0,o_id);
 			query.executeUpdate();
 			session.getTransaction().commit();
@@ -504,8 +506,16 @@ public class OrderDAO implements OrderDAO_Interface {
 		}
 
 
+	@Override
+	public Set<CdataVO> getOrderListC(String c_id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
 	
 	
 
 	}
+	
 

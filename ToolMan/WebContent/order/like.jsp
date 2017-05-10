@@ -72,8 +72,8 @@
 	
 		<tr align='center' valign='middle'>
 			<td>${favoriteVO.f_id}</td>
-			<td>${favoriteVO.m_id}</td>
-			<td>${favoriteVO.c_id}</td>
+			<td>${favoriteVO.mdataVO.m_id}</td>
+			<td>${favoriteVO.cdataVO.c_id}</td>
 			
 			
 			
@@ -96,6 +96,11 @@
  
  
 
+     <FORM METHOD="post" ACTION="OrderController.do" >
+       <input type="submit" value="送出">
+        <input type="hidden" name="c_id" value="Snoopy">
+        <input type="hidden" name="action" value="listOrder">
+     </FORM>
  
  
  <%----- --------%>

@@ -2,6 +2,9 @@ package toolman.cdata.model;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Set;
+
+import toolman.order.model.OrderVO;
 
 
 public interface CdataDAO_interface {
@@ -13,4 +16,6 @@ public interface CdataDAO_interface {
 	public List<CdataVO> getAll();
 	public CdataVO cdata_des(String c_id);
 	public void updatecustomerSname(Integer c_id);
+
+
 }

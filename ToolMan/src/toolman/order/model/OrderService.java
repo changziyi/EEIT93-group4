@@ -11,6 +11,7 @@ import java.util.Set;
 
 import org.json.simple.JSONValue;
 
+import toolman.cdata.model.CdataVO;
 import toolman.opro.model.OproVO;
 
 
@@ -29,7 +30,7 @@ public class OrderService {
 	}
 	
 
-    public List<OrderVO>  getAllOrder(){
+    public List<OrderVO>  getAllOrder(){ 
     	List<OrderVO> orderlist = dao.getAllOrder();
     	return orderlist;
     }
@@ -52,7 +53,9 @@ public class OrderService {
     	return orderlist;
     }
     
-    
+    public Set<CdataVO> getOrderListC(String c_id) {
+		return dao.getOrderListC(c_id);
+	}
     
     
     

@@ -14,9 +14,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import toolman.blacklist.model.BlacklistService;
 import toolman.blacklist.model.BlacklistVO;
+import toolman.cdata.model.CdataVO;
 import toolman.favorite.model.FavoriteService;
 import toolman.favorite.model.FavoriteVO;
-
+import toolman.mdata.model.MdataVO;
 import toolman.order.model.OrderService;
 import toolman.order.model.OrderVO;
 
@@ -58,8 +59,13 @@ public class BlacklistController extends HttpServlet {
 
 				BlacklistVO blacklistVO = new BlacklistVO();
 				
-				blacklistVO.setC_id(c_id);
-				blacklistVO.setM_id(m_id);
+				CdataVO cdataVO = new CdataVO();
+				cdataVO.setC_id(c_id);
+				blacklistVO.setCdataVO(cdataVO);
+				
+				MdataVO mdataVO = new MdataVO();
+				mdataVO.setM_id(m_id);
+				blacklistVO.setMdataVO(mdataVO);
 				
 
 				/***************************2.開始查詢資料****************************************/

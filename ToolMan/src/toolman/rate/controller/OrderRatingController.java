@@ -12,6 +12,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -24,6 +25,7 @@ import javax.servlet.http.HttpSession;
 import org.json.simple.JSONValue;
 
 import toolman.building.model.BuildingVO;
+import toolman.cdata.model.CdataVO;
 import toolman.mdata.model.MdataVO;
 import toolman.mpro.model.MProDAO;
 import toolman.mpro.model.MProVO;
@@ -52,52 +54,44 @@ public class OrderRatingController extends HttpServlet {
 		
 		
 		
-		if ("getCdata".equals(action)) { 
+		
+		if ("listOrder".equals(action) ) {
 
-			List<String> errorMsgs = new LinkedList<String>();
-			 
+            List<String> errorMsgs = new LinkedList<String>();
+			
 			request.setAttribute("errorMsgs", errorMsgs);
 			
-		
-			
 			try {
-				/***************************1.接收請求參數****************************************/
-				String c_id = request.getParameter("c_id");
-				
-				
-				/***************************2.開始查詢資料*****************************************/
-				OrderService orderSvc = new OrderService();
-				OrderVO orderVO = (OrderVO) orderSvc.getOrderByC(c_id);
-				if (orderVO == null) {
-					errorMsgs.add("查無資料");
-				}
-				// Send the use back to the form, if there were errors
-				
-				
-				/***************************3.查詢完成,準備轉交(Send the Success view)*************/
-				request.setAttribute("orderVO", orderVO); // 資料庫取出的empVO物件,存入req
-				String url = "listOneEmp.jsp";
-				RequestDispatcher successView = request.getRequestDispatcher(url); // 成功轉交listOneEmp.jsp
-				successView.forward(request, response);
+				/*************************** 1.接收請求參數 ****************************************/
+				String c_id = request.getParameter("c_id");	
 
-				/***************************其他可能的錯誤處理*************************************/
+				/*************************** 2.開始查詢資料 ****************************************/
+				OrderService orderSvc = new OrderService();
+				Set<CdataVO> set = orderSvc.getOrderListC(c_id);
+
+				/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
+				request.setAttribute("listOrder", set);    // 資料庫取出的set物件,存入request
+
+				String url = null;
+				url =  "listAllEmp.jsp";            // 成功轉交 dept/listAllDept.jsp
+
+				RequestDispatcher successView = request.getRequestDispatcher(url);   // 修改成功後,轉交回送出修改的來源網頁
+				successView.forward(request, response);
+				/*************************** 其他可能的錯誤處理 ***********************************/
 			} catch (Exception e) {
-				errorMsgs.add("無法取得資料:" + e.getMessage());
-				RequestDispatcher failureView = request
-						.getRequestDispatcher("/select_page.jsp");
-				failureView.forward(request, response);
+				throw new ServletException(e);
 			}
 		}
 		
+		
+		
+		
 
-		if ("getOne_For_Update".equals(action)) { // 來自listAllEmp.jsp 或  /dept/listEmps_ByDeptno.jsp 的請求
-
+		if ("getOne_For_Update".equals(action)) { 
 			List<String> errorMsgs = new LinkedList<String>();
-			// Store this set in the request scope, in case we need to
-			// send the ErrorPage view.
+			
 			request.setAttribute("errorMsgs", errorMsgs);
 			
-		//	String requestURL = request.getParameter("requestURL"); // 送出修改的來源網頁路徑		
 			
 			try {
 				/***************************1.接收請求參數****************************************/

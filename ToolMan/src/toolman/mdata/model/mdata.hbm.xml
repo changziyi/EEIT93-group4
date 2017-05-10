@@ -57,7 +57,22 @@
 			</key>
 			<one-to-many class="toolman.order.model.OrderVO" />
 		</set>
+		
+		
 
+<set name="favorites" table="favorite" lazy="false" cascade="all"  inverse="true"  order-by="f_id asc">																						
+			<key>
+				<column name="m_id" />
+			</key>
+			<one-to-many class="toolman.favorite.model.FavoriteVO" />
+		</set>		
+
+<set name="blacklists" table="blacklist" lazy="false" cascade="all"  inverse="true"  order-by="bk_id asc">																						
+			<key>
+				<column name="m_id" />
+			</key>
+			<one-to-many class="toolman.blacklist.model.BlacklistVO" />
+		</set>	
 	</class>
 </hibernate-mapping>
 

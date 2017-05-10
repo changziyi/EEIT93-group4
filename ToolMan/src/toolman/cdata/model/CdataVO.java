@@ -5,6 +5,8 @@ import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.Set;
 
+import toolman.blacklist.model.BlacklistVO;
+import toolman.favorite.model.FavoriteVO;
 import toolman.order.model.OrderVO;
 
 //import com.order.model.OrderVO;
@@ -30,7 +32,9 @@ public class CdataVO implements java.io.Serializable{
 	private Integer c_finished;
 	
 	private Set<OrderVO> orders = new  HashSet<OrderVO>();//評價
-	
+	private Set<FavoriteVO> favorites = new HashSet<FavoriteVO>();//
+	private Set<BlacklistVO> blacklists = new HashSet<BlacklistVO>();//
+
 	 
 
 	public Set<OrderVO> getOrders() {
@@ -144,4 +148,19 @@ public class CdataVO implements java.io.Serializable{
 	}
 
 	
+	public Set<FavoriteVO> getFavorites() {
+		return favorites;
+	}
+
+	public void setFavorites(Set<FavoriteVO> favorites) {
+		this.favorites = favorites;
+	}
+	
+	public Set<BlacklistVO> getBlacklists() {
+		return blacklists;
+	}
+
+	public void setBlacklists(Set<BlacklistVO> blacklists) {
+		this.blacklists = blacklists;
+	}
 }
