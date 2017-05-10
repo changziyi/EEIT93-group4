@@ -64,7 +64,7 @@ public class managerUIFunctionServlet extends HttpServlet {
 			for(String m_id:arraytoggled){
 				MdataService mdataservice = new MdataService();
 				System.out.println(m_id);
-			Integer	returnedcount = mdataservice.updatemasterSname(Integer.parseInt(m_id),"m_sus");
+			Integer	returnedcount = mdataservice.updatemasterSname(Integer.parseInt(m_id),"停權中");
 			count= returnedcount+count;
 			}	
 			count.toString();
@@ -73,27 +73,29 @@ public class managerUIFunctionServlet extends HttpServlet {
 			
 		}
 		
-		if("sendmessagem".equals(functionaction)){
-			List<MdataVO> list = new ArrayList<MdataVO>();
-			for(String m_id:arraytoggled){
-			MdataService mdataservice = new MdataService();
-			MdataVO mdataVO =mdataservice.findByPrimaryKey(Integer.parseInt(m_id));
-			}
-			request.setAttribute("mdataVO", list);
-			RequestDispatcher rd = request.getRequestDispatcher("MasterPage.jsp");
-			rd.forward(request, response);	
-			
-		}
+//		if("sendmessagem".equals(functionaction)){
+//			List<MdataVO> list = new ArrayList<MdataVO>();
+//			for(String m_id:arraytoggled){
+//			MdataService mdataservice = new MdataService();
+//			MdataVO mdataVO =mdataservice.findByPrimaryKey(Integer.parseInt(m_id));
+//			}
+//			request.setAttribute("mdataVO", list);
+//			RequestDispatcher rd = request.getRequestDispatcher("MasterPage.jsp");
+//			rd.forward(request, response);	
+//			
+//		}// call emailservlet instead
+		
 		if("blacklistm".equals(functionaction)){
 			
 			
 		}
+		
 		if("suspensionc".equals(functionaction)){
 			List<CdataVO> list = new ArrayList<CdataVO>();
 			Integer count=0;
 			for(String c_id:arraytoggled){
 				CdataService cdataservice = new CdataService();
-			Integer	returnedcount = cdataservice.updatecustomerSname(Integer.parseInt(c_id),"m_sus");
+			Integer	returnedcount = cdataservice.updatecustomerSname(c_id,"停權中");
 			count= returnedcount+count;
 			}
 			out = response.getWriter();
@@ -101,15 +103,15 @@ public class managerUIFunctionServlet extends HttpServlet {
 			out.write(count);			
 		}
 		
-		if(functionaction.equals("sendmessagec")){
-			
-			
-		}
+//		if(functionaction.equals("sendmessagec")){
+//			
+//			
+//		}// call emailservlet instead
 		
-		if(functionaction.equals("sendmessageo")){
-			
-			
-		}
+//		if(functionaction.equals("sendmessageo")){
+//			
+//			
+//		}// call emailservlet instead
 		
 		
 		

@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.simple.JSONValue;
 
+import toolman.cdata.model.CdataDAO;
 import toolman.cdata.model.CdataService;
 import toolman.cdata.model.CdataVO;
 import toolman.mdata.model.MdataDAO;
@@ -64,7 +65,7 @@ public class ManagerUIServlet extends HttpServlet {
 					 mdatas = dao.getAll();				
 				}//end if		
 				else{
-					 mdatas = dao.getByAndSname(datastatus);
+					 mdatas = dao.getBySname(datastatus);
 				}//end else	
 					List<Map> jList = new LinkedList<Map>();
 					for (MdataVO aMdata : mdatas) {
@@ -88,14 +89,20 @@ public class ManagerUIServlet extends HttpServlet {
 					out.write(mjasonstring);
 					out.flush();
 					System.out.println(mjasonstring);				
-		}//end if
+		}//end if m
 		
 		//get c tested ok
 		if("c".equals(topnavigatorid)){
+			CdataDAO dao = new CdataDAO();
+			List<CdataVO> list = null;
 			
-			CdataService cdataservice = new CdataService();
-			List<CdataVO> list = cdataservice.getAll();
-			
+			if("allcustomer".equals(datastatus)){				
+				list = dao.getAll();		
+			}//end if		
+			else{
+				list = dao.getBySname(datastatus);
+			}//end else	
+
 			List list2 = new ArrayList();
 				for(CdataVO cdataVO:list){
 					Map map = new HashMap();
@@ -129,15 +136,42 @@ public class ManagerUIServlet extends HttpServlet {
 				out.flush();
 				System.out.println(cjasonstring);
 
-		}//end if
+		}//end if c
 		
 		//get o tested ok
 		if("o".equals(topnavigatorid)){
 			OrderService orderservice = new OrderService();
-			out.write(orderservice.getAllOrderJson());
-//			System.out.println(ojasonstring);
-		
 			
+			if("allorder".equals(datastatus)){	
+				
+				out.write(orderservice.getAllOrderJson());
+				
+			}//end if		
+			else if ("oneyear".equals(datatime)){
+				
+				Timestamp o_tdate1 = new Timestamp(System.currentTimeMillis());
+				Timestamp o_tdate2 = new Timestamp(System.currentTimeMillis()-31536000000L);//365*24*60*60*1000
+				out.write(orderservice.getOrderBySnameAndDateJson(datastatus,o_tdate1,o_tdate2));
+				
+			}//end else	
+			else if ("halfyear".equals(datatime)){
+				
+				Timestamp o_tdate1 = new Timestamp(System.currentTimeMillis());
+				Timestamp o_tdate2 = new Timestamp(System.currentTimeMillis()-15768000000L);//365/2*24*60*60*1000
+				out.write(orderservice.getOrderBySnameAndDateJson(datastatus,o_tdate1,o_tdate2));
+
+			}//end else	
+			else if ("onemonth".equals(datatime)){
+				
+				Timestamp o_tdate1 = new Timestamp(System.currentTimeMillis());
+				Timestamp o_tdate2 = new Timestamp(System.currentTimeMillis()-2592000000L);//365/2*24*60*60*1000
+				out.write(orderservice.getOrderBySnameAndDateJson(datastatus,o_tdate1,o_tdate2));
+
+			}//end else	
+
+			
+			
+//			System.out.println(ojasonstring);
 			//tested ok
 //			List list = new ArrayList();
 //			Map map = new HashMap();
@@ -148,7 +182,7 @@ public class ManagerUIServlet extends HttpServlet {
 //			String mjasonstring = JSONValue.toJSONString(list);
 //			out.write(mjasonstring);
 //			out.flush();
-		}//end if
+		}//end if o
 			
 		//get report
 		if("r".equals(topnavigatorid)){

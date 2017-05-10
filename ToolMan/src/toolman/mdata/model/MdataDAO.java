@@ -238,7 +238,7 @@ public class MdataDAO implements MdataDAO_interface {
 		}
 		//BY BENNY--for manager backstage
 		@Override
-		public List<MdataVO> getByAndSname(String s_name) {
+		public List<MdataVO> getBySname(String s_name) {
 			List<MdataVO> list = null;
 			Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 			try {
@@ -274,19 +274,22 @@ public class MdataDAO implements MdataDAO_interface {
 //		}
 		
 		//依照縣市、地區、專業查詢 --> 查師父頁面進階搜尋:條件為1.縣市、2.地區、3.專業
-		List<MdataVO> list8 = dao.SeachByCityAndDistrictAndMpro("臺北市","","");
-		for (MdataVO list : list8) {
-			System.out.print(list.getM_city() + ",");
-			System.out.print(list.getM_district() + ",");
-			System.out.print(list.getM_id() + ",");
-			System.out.print(list.getM_name() + ",");
-			System.out.println(list.getB_name());
-			Set<MProVO> mpros = list.getMpros();
-			for (MProVO aMpro : mpros) {
-				System.out.println(aMpro.getM_pro());
-			}
-			System.out.println("-----------------");
-		}
+//		List<MdataVO> list8 = dao.SeachByCityAndDistrictAndMpro("臺北市","","");
+		
+		//by benny getByMidAndSname
+//		List<MdataVO> list8 = dao.getBySname("審核通過");
+//		for (MdataVO list : list8) {
+//			System.out.print(list.getM_city() + ",");
+//			System.out.print(list.getM_district() + ",");
+//			System.out.print(list.getM_id() + ",");
+//			System.out.print(list.getM_name() + ",");
+//			System.out.println(list.getB_name());
+//			Set<MProVO> mpros = list.getMpros();
+//			for (MProVO aMpro : mpros) {
+//				System.out.println(aMpro.getM_pro());
+//			}
+//			System.out.println("-----------------");
+//		}
 		
 		//by benny getByMidAndSname
 //		List<MdataVO> list8 = dao.getByAndSname("審核通過");

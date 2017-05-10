@@ -12,6 +12,7 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
 import hibernate.util.HibernateUtil;
+import toolman.mdata.model.MdataVO;
 import toolman.order.model.OrderVO;
 
 public class CdataDAO implements CdataDAO_interface{
@@ -113,13 +114,13 @@ public class CdataDAO implements CdataDAO_interface{
 		return cdataVO;
 	}
 	//BY Benny
-	public Integer updatecustomerSname(Integer c_id, String s_name) {
+	public Integer updatecustomerSname(String c_id, String s_name) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Integer count=0;
 		try {
 			session.beginTransaction();
 			Query query = session.createQuery("update CdataVO set s_name=:s where c_id=:c");
-			query.setParameter("s","c_sus");
+			query.setString("s",s_name);
 			query.setParameter("c",c_id);
 			count = query.executeUpdate();
 			session.getTransaction().commit();
@@ -129,7 +130,21 @@ public class CdataDAO implements CdataDAO_interface{
 		}
 		return count;
 	}
-
+	public List<CdataVO> getBySname(String s_name) {
+		List<CdataVO> list = null;
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try {
+			session.beginTransaction();
+			Query query = session.createQuery("from CdataVO where s_name=:s ");
+			query.setString("s",s_name);
+			list = query.list();
+			session.getTransaction().commit();
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
+		return list;
+	}
 	public static void main(String args[]){		
 		CdataDAO  dao = new CdataDAO();
 		
