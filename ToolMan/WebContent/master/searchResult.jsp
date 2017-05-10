@@ -20,6 +20,7 @@ body {font-family:Microsoft JhengHei;}
 .zipcode {display: none;}
 /* .district {display: none;} */
 /* .row {width:82%} */
+.mascontent {width:75%;}
 .pro {
 	width: 15px;
 	height: 3px;
@@ -40,8 +41,6 @@ body {font-family:Microsoft JhengHei;}
 </style>
 </head>
 <body>
-<div class="row">
-	<div class=".col-md-3 .col-md-pull-9">
 		<form action="master.do" method="post">
 			<span id="twzipcode"></span><input type="text" name="input" value="${search.b_name}">
 			<button type="button" id="btn">ajax</button>
@@ -50,16 +49,15 @@ body {font-family:Microsoft JhengHei;}
 			<input type="hidden" name="city" >
 			<input type="hidden" name="district" >
 		</form>
-	</div>
+		
+		<div>
+			city= ${search.m_city}
+			district = ${search.m_district}
+			input= ${search.b_name}
+		</div>
+		
 <!-- 	<input id="input-4" name="input-4" value="3" class="rating rating-loading" data-show-clear="false" data-show-caption="false" data-readonly="true"> -->
-	<div id="show" class="row"></div>
-</div>
-
-<div>
-	city= ${search.m_city}
-	district = ${search.m_district}
-	input= ${search.b_name}
-</div>
+	<div id="show" class="row mascontent"></div>
 
 <script>
 	
@@ -69,7 +67,7 @@ body {font-family:Microsoft JhengHei;}
 		$.getJSON('MdataJsonServlet', {'city':'${search.m_city}','district':'${search.m_district}','input':'${search.b_name}','action':'advjson'}, function(datas) {
 			show.empty();
 			$.each(datas, function(i,master) {
-				if (master.sta == 'm_pass') {
+				if (master.sta == '審核通過') {
 					var bImg = $('<img />').attr({'src':'${pageContext.servletContext.contextPath}/master/master.do?type=master&image=' + master.id,
 						'data-holder-rendered':'true'});
 					var a = $('<a></a>').attr('href','${pageContext.servletContext.contextPath}/master/masterPage.do?m_id='+ master.id).append(bImg);

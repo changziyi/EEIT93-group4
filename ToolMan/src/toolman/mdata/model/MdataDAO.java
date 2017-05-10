@@ -16,6 +16,8 @@ import org.hibernate.criterion.Restrictions;
 import hibernate.util.HibernateUtil;
 import toolman.discussion.model.DiscussionVO;
 import toolman.mpro.model.MProVO;
+import toolman.order.model.OrderVO;
+import toolman.work.model.WorkVO;
 
 
 public class MdataDAO implements MdataDAO_interface {
@@ -157,6 +159,7 @@ public class MdataDAO implements MdataDAO_interface {
 			Criterion c2 = Restrictions.like("m.m_district", "%" + m_district + "%");
 			Criterion c3 = Restrictions.like("p.m_pro", "%" + m_pro + "%");
 			query.add(Restrictions.and(Restrictions.and(c1,c2),c3));
+			query.add(Restrictions.sqlRestriction("1=1 order by rand()"));
 			list = query.list();
 			session.getTransaction().commit();
 		} catch (RuntimeException ex) {
@@ -256,23 +259,52 @@ public class MdataDAO implements MdataDAO_interface {
 //		
 //		dao.updatemasterSname(1001);
 		
+		//測試作品集
+//		MdataVO mdataVO = dao.findByPrimaryKey(1001);
+//		Set<WorkVO> workVO =  mdataVO.getWorks();
+//		for(WorkVO aWork : workVO) {
+//			System.out.println(aWork.getWork_id());
+//		}
+		
+		//測試orders
+//		MdataVO mdataVO = dao.findByPrimaryKey(1001);
+//		Set<OrderVO> orders = mdataVO.getOrders();
+//		for(OrderVO aOrder : orders) {
+//			System.out.print(aOrder.getC_id().getC_id());
+//		}
+		
 		//依照縣市、地區、專業查詢 --> 查師父頁面進階搜尋:條件為1.縣市、2.地區、3.專業
-//		List<MdataVO> list8 = dao.SeachByCityAndDistrictAndMpro("臺北市","大安","地板");
+//		List<MdataVO> list8 = dao.SeachByCityAndDistrictAndMpro("臺北市","","");
 		
 		//by benny getByMidAndSname
-		List<MdataVO> list8 = dao.getBySname("審核通過");
-		for (MdataVO list : list8) {
-			System.out.print(list.getM_city() + ",");
-			System.out.print(list.getM_district() + ",");
-			System.out.print(list.getM_id() + ",");
-			System.out.print(list.getM_name() + ",");
-			System.out.println(list.getB_name());
-			Set<MProVO> mpros = list.getMpros();
-			for (MProVO aMpro : mpros) {
-				System.out.println(aMpro.getM_pro());
-			}
-			System.out.println("-----------------");
-		}
+//		List<MdataVO> list8 = dao.getBySname("審核通過");
+//		for (MdataVO list : list8) {
+//			System.out.print(list.getM_city() + ",");
+//			System.out.print(list.getM_district() + ",");
+//			System.out.print(list.getM_id() + ",");
+//			System.out.print(list.getM_name() + ",");
+//			System.out.println(list.getB_name());
+//			Set<MProVO> mpros = list.getMpros();
+//			for (MProVO aMpro : mpros) {
+//				System.out.println(aMpro.getM_pro());
+//			}
+//			System.out.println("-----------------");
+//		}
+		
+		//by benny getByMidAndSname
+//		List<MdataVO> list8 = dao.getByAndSname("審核通過");
+//		for (MdataVO list : list8) {
+//			System.out.print(list.getM_city() + ",");
+//			System.out.print(list.getM_district() + ",");
+//			System.out.print(list.getM_id() + ",");
+//			System.out.print(list.getM_name() + ",");
+//			System.out.println(list.getB_name());
+//			Set<MProVO> mpros = list.getMpros();
+//			for (MProVO aMpro : mpros) {
+//				System.out.println(aMpro.getM_pro());
+//			}
+//			System.out.println("-----------------");
+//		}
 		
 //		//D車join　依照縣市 AND(專業 OR 店家名稱)查詢 --> 首頁搜尋:條件為1.縣市、2.專業or店家名稱
 //		List<MdataVO> list7 = dao.SearchByCityAndMpro("臺北市","水");

@@ -90,8 +90,8 @@ public class OrderDAO implements OrderDAO_Interface {
 		
 		try {
 			session.beginTransaction();
-			Query query = session.createQuery("FROM OrderVO WHERE m_id = ?");
-			query.setParameter(1, m_id);
+			Query query = session.createQuery("FROM OrderVO WHERE m_id.m_id = ?");
+			query.setParameter(0, m_id);
 			querylist = query.list();			
 			session.getTransaction().commit();
 		} catch (RuntimeException ex) {
@@ -466,7 +466,13 @@ public class OrderDAO implements OrderDAO_Interface {
 //			orderdao.getOrderByDate(o_bdatetest,o_bdatetest2);
 //		
 		//getOrderByM
-//		orderdao.getOrderByM(1001);
+		List<OrderVO> list = orderdao.getOrderByM(1001);
+		for(OrderVO alist : list) {
+			System.out.print(alist.getM_id().getM_id() + ",");
+			System.out.print(alist.getM_id().getB_name() + ",");
+			System.out.println(alist.getC_id().getC_id());
+		}
+			
 //		
 //		//getAllOrderByMAndDate tested ok
 //			DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -529,13 +535,13 @@ public class OrderDAO implements OrderDAO_Interface {
 //		
 		
 	
-		OrderVO orderVO2 =  orderdao.getRate(3006);
+//		OrderVO orderVO2 =  orderdao.getRate(3006);
 //		
 //		
-		System.out.print(orderVO2.getM_rating() + ",");
-		System.out.print(orderVO2.getC_rating() + ",");
-		System.out.print(orderVO2.getCa_des() + ",");
-		System.out.print(orderVO2.getMa_des() + ",");
+//		System.out.print(orderVO2.getM_rating() + ",");
+//		System.out.print(orderVO2.getC_rating() + ",");
+//		System.out.print(orderVO2.getCa_des() + ",");
+//		System.out.print(orderVO2.getMa_des() + ",");
 		
 
 		}

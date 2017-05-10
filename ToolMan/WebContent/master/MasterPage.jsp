@@ -12,8 +12,8 @@
 <link rel="stylesheet" href="${pageContext.servletContext.contextPath}/css/bootstrap.min.css">
 <script src="${pageContext.servletContext.contextPath}/js/jquery-3.2.1.min.js"></script>
 <script src="${pageContext.servletContext.contextPath}/js/bootstrap.min.js"></script>
-<script src="${pageContext.servletContext.contextPath}/js/jquery.fileuploader.min.js"></script>
-<script src="${pageContext.servletContext.contextPath}/js/custom.js"></script>
+<%-- <script src="${pageContext.servletContext.contextPath}/js/jquery.fileuploader.min.js"></script> --%>
+<%-- <script src="${pageContext.servletContext.contextPath}/js/custom.js"></script> --%>
 <style>
 .changeImg {
 	width: 200px;
@@ -79,32 +79,33 @@ input[type="file"] {
 		</div>
 		<div id="menu1" class="tab-pane fade">
 			<div></div>
-			<div id="uploadTemp">
+<!-- 			<div id="uploadTemp">
 				<form action="php/form_upload.php" method="post" enctype="multipart/form-data">
 					<div class="workImgArea">作品名稱　<input type="text" name="workname" required></div>
 					<div class="workImgArea">完工日期　<input type="text" name="worktime" required></div>
 					<div class="workImgArea">作品描述　<textarea name="workdes" required></textarea></div>
 					<input type="file" name="files" data-fileuploader-limit="3"><button type="button" id="buttonUpload">上傳</button>
 				</form>
-			</div>
+			</div> -->
 			
-			<!-- <form name="myData" action="TestFormData" enctype="multipart/form-data">
-				<div>
-					<label>Photos</label> <input type="file" id="file" name="file[]"
-						multiple="multiple">
-				</div>
+			<div id='div1'></div>
+			<form name="myData" action="TestFormData" enctype="multipart/form-data">
+				<div><input type="file" id="file" name="file[]" multiple="multiple"></div>
+				<div class="workImgArea">作品名稱　<input type="text" name="workname" required></div>
+				<div class="workImgArea">完工日期　<input type="text" name="worktime" required></div>
+				<div class="workImgArea">作品描述　<textarea name="workdes"></textarea></div>
 				<button type="button" id="buttonUpload">上傳</button>
 			</form>
-			<div id='div1'></div> -->
+			<div>
+				<c:forEach var="aWork" items="${mdataVO.works}">
+<%-- 					${aWork.work_id} --%>
+					<img height="200px" src='${pageContext.servletContext.contextPath}/master/master.do?type=work&image=${mdataVO.m_id}'/>
+				</c:forEach>
+			</div>
     
 		</div>
 		<div id="menu2" class="tab-pane fade">
 			<div>
-<%-- 				<c:forEach var="aDiscussions" items="${mdataVO.discussions}"><br />Q: ${aDiscussions.d_des} --%>
-<%-- 					<c:if test="${not empty aDiscussions.d_reply}"><br />A: ${aDiscussions.d_reply} --%>
-<%-- 					</c:if> --%>
-<!-- 					<br /> -->
-<%-- 				</c:forEach> --%>
 				<div>
 					<div id="show"></div>
 					<p>提問</p>
@@ -120,23 +121,31 @@ input[type="file"] {
 		</div>
 		<div id="menu3" class="tab-pane fade">
 			<h3>評價: ${mdataVO.m_arating}</h3>
+			<c:forEach var="orderCid" items="${mdataVO.orders}">
+				${orderCid.c_id.c_id} ：
+				${orderCid.c_rating} - 
+				${orderCid.o_edate}<br>
+			</c:forEach>
 		</div>
 		<div id="menu4" class="tab-pane fade">
-			<h3>Menu 4</h3>
-			<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+			<h3>成功媒合人次:</h3>
+			<c:forEach var="orderCid" items="${mdataVO.orders}">
+				${orderCid.c_id.c_id} - 
+				${orderCid.o_edate}<br>
+			</c:forEach>
 		</div>
 	</div>
 	
 	
 	<script>
 	
-		$(function() {
+// 		$(function() {
 			
 			//點選問與答區塊，load問與答內容
 			var show = $('#show');
 			$('a[href="#menu2"]').one('click', function() {
 				var docFragment = $(document.createDocumentFragment());
-				$.getJSON('DiscussionJsonServlet',{'master':'${mdataVO.m_id}'},function(data){
+				$.getJSON('MdataJsonServlet',{'master':'${mdataVO.m_id}','action':'discussion'},function(data){
 					$.each(data,function(i,dis){
 						var cid = $('<p></p>').text(dis.cid + '　' + dis.date);
 // 						var date = $('<span></span>').text(dis.date);
@@ -155,7 +164,7 @@ input[type="file"] {
 				$.post("masterPage.do", {"m_id":"${mdataVO.m_id}",'action':'MasterPage_Q','d_des':$('#d_des').val()}, function(datas) {
 					$('#d_des').val(null);
 					var docFragment = $(document.createDocumentFragment());
-					$.getJSON('DiscussionJsonServlet',{'master':'${mdataVO.m_id}'},function(data){
+					$.getJSON('MdataJsonServlet',{'master':'${mdataVO.m_id}','action':'discussion'},function(data){
 						$('#show').empty();
 						$.each(data,function(i,dis){
 							var cid = $('<p></p>').text(dis.cid + '　' + dis.date);
@@ -178,7 +187,9 @@ input[type="file"] {
 			
 			//上傳圖片限制三張
 			upload.on('change', function(event) {
-	
+				
+				myDiv.empty();
+				
 				if (event.target.files.length > 3) {
 					alert("限制為3張圖片，請重新選擇");
 					upload.val(null);
@@ -265,9 +276,11 @@ input[type="file"] {
 						$('#img0').removeAttr('src').removeAttr('class');
 						$('#img1').removeAttr('src').removeAttr('class');
 						$('#img2').removeAttr('src').removeAttr('class');
+						var successImg = $('<img />').attr('src','${pageContext.servletContext.contextPath}/image/jake.gif');
+						myDiv.append(successImg);
 						upload.val(null);
-						$('input[name="fileuploader-list-files"]').val('[]');
-						$('ul').find('.fileuploader-item').remove();
+// 						$('input[name="fileuploader-list-files"]').val('[]');
+// 						$('ul').find('.fileuploader-item').remove();
 		 			},
 		 			beforeSend : function() {
 		 				
@@ -280,7 +293,7 @@ input[type="file"] {
 				});
 			});
 			
-		}); //outter function
+// 		}); //outter function
 	</script>
   
 	
