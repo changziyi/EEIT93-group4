@@ -163,8 +163,8 @@
 	var table ;//datatable variable not in use
 	var navagatorid = $('#navigator>ul>li.active').data('id');//top navigator
 	var dfd = $.Deferred();
-// 	var datastatus = $('#functionrow>div>ul>li[name="datastatus"][data-buttonstate="selected"]').data('statusvalue');
-//  	var datatime = $('#functionrow>div>ul>li[name="datatime"][data-buttonstate="selected"]').data('statusvalue');
+	var datastatus = $('#functionrow>div>ul>li[name="datastatus"][data-buttonstate="selected"]').data('statusvalue');
+ 	var datatime = $('#functionrow>div>ul>li[name="datatime"][data-buttonstate="selected"]').data('statusvalue');
 
 // 		$(document).ajaxComplete(function(){
 // 			datatableinit(); //execute datable when ajax is done//fuck it, use deferred instead
@@ -201,8 +201,8 @@ $(function(){
 		var id = $(this).data('id');
 		navagatorid = id;
 
-		$('#eventlist').empty();
-		 $('#eventlist').dataTable().fnDestroy();
+// 		$('#eventlist').empty();
+		 $('#eventlist').DataTable().destroy();
 		   $('#navigator>ul>li').removeClass('active');
 		   $('#navigator>ul>li[data-id="' + id + '"]').addClass('active');
 		 	functionrow();
@@ -235,7 +235,7 @@ $(function(){
 				'<li data-statusvalue="allmaster" data-buttonstate="selected" name="datastatus"><a href="#">所有師傅</a></li><li role="separator" class="divider"></li>'
 				+'<li data-statusvalue="未審核" name="datastatus"><a href="#" >未審核</a></li><li role="separator" class="divider"></li>'
 				+'<li data-statusvalue="審核通過" name="datastatus"><a href="#" >審核通過</a></li><li role="separator" class="divider"></li>'
-				+'<li data-statusvalue="審核未過" name="datastatus"><a href="#" >審核未過</a></li><li role="separator" class="divider"></li>';
+				+'<li data-statusvalue="審核未過" name="datastatus"><a href="#" >審核未過</a></li><li role="separator" class="divider"></li>'
 				+'<li data-statusvalue="停權中" name="datastatus"><a href="#">停權中</a></li>';
 			var dropdownmenustate = '<ul class="dropdown-menu">'+dropdownmenucontent +'</ul>';
 			var buttongroupdivend ='</div>'	
@@ -331,9 +331,8 @@ $(function(){
 			   else{
 				   datatime='alltime';
 			   }
- 
-				$('#eventlist').empty();
-// 				$('#eventlist').dataTable().fnDestroy(); 
+			   $('#eventlist').DataTable().destroy(); 
+// 				$('#eventlist').empty();
 			   loadProduct(id,datastatus,datatime);
 			   // $('#navigator>ul>li[data-id="' + id + '"]')
 			   
@@ -442,6 +441,10 @@ $(function(){
            $.post(hyperlinkstring,{"functionaction":valueattrr,"toggledcheckbox":checkboxdatas2},function(data){
 				alert(data);
            });//end get function
+// 		 	$('#eventlist').dataTable().fnDestroy();
+//    			$('#eventlist').empty();
+
+           loadProduct(navagatorid,datastatus,datatime);
        }//end else 
 	}//end togglerow
 	
@@ -609,9 +612,9 @@ $(function(){
 	   }//end loadtable function
 				function datatableinit(){
 				table =	$('#eventlist').DataTable({
-						retrieve: true,
+// 						retrieve: true,
 			// 			"lengthMenu":[1, 2, 3, "All"],
-// 						destroy: true,
+						destroy: true,
 // 						"pageLength": 1,
 
 						 "lengthMenu": [ [1, 2, 50, -1], [1, 2, 50, "All"] ]
