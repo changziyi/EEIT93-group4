@@ -24,6 +24,10 @@
 	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
 
 <style>
+	.dataTables_wrapper{
+		width:100%;
+		margin:auto;width:80%; border: 2px solid blue; horizontal-align:center;
+	}
 	#navigator ul li {
 	　display:inline;
 	 list-style-type:none;
@@ -48,6 +52,7 @@
 	 width:70px;
 	 text-align:center;
 	}
+	
 </style>
 </head>
 <body>
@@ -56,7 +61,7 @@
 		<nav >
 			<div id="navigator" >
 			
-				<ul style="margin: auto;width:900px; horizontal-align:center;" class="nav nav-tabs nav-justified"  >
+				<ul style="margin: auto;width:80%; horizontal-align:center;" class="nav nav-tabs nav-justified"  >
 				
 					<li  data-toggle="tab" role="presentation"  id="masterlist" data-id="m" class="active"><a href="#"><div>師傅列表</div></a></li>
 					
@@ -74,11 +79,11 @@
 			</div>
 
 		</nav>
-			<div id="functionrow" style="margin: auto;width:900px; horizontal-align:center;" class="nav nav-tabs nav-justified">
+			<div id="functionrow" style="margin: auto;width:80%; horizontal-align:center;" class="nav nav-tabs nav-justified">
 
 			</div>
 			
-			<div id="subfunctionrow" style="margin: auto;width:900px; horizontal-align:center;" class="nav nav-tabs nav-justified">
+			<div id="subfunctionrow" style="margin: auto;width:80%; horizontal-align:center;" class="nav nav-tabs nav-justified">
 			</div>
 	</header>
 <!-- Function button -->
@@ -87,7 +92,7 @@
 	</div>
 <!-- main content here -->		
 	<article>
-	<table id="eventlist" style="margin:auto;width:900px; border: 2px solid blue; horizontal-align:center;">
+	<table id="eventlist" class="display" >
 <!-- 		<thead> -->
 <!-- 			<th>1</th> -->
 <!-- 			<th>2</th> -->
@@ -459,7 +464,7 @@ $(function(){
 // 				 .done(alert("first"))
 // 				 .done(alert("second"))
 				 .done(datatableinit);//super great
-				 
+// 				 .done($(".dataTables_wrapper").css("width","80%"));
 			 });//end get json
 	}//end loadproduct
 	
@@ -616,7 +621,7 @@ $(function(){
 			// 			"lengthMenu":[1, 2, 3, "All"],
 						destroy: true,
 // 						"pageLength": 1,
-
+// 						"dom": '<lf<t>ip>',
 						 "lengthMenu": [ [1, 2, 50, -1], [1, 2, 50, "All"] ]
 			// 			"iDisplayLength": 10
 			//			  	destroy: true,
