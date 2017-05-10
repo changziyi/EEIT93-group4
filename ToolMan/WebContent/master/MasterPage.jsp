@@ -130,13 +130,13 @@ input[type="file"] {
 	
 	<script>
 	
-		$(function() {
+// 		$(function() {
 			
 			//點選問與答區塊，load問與答內容
 			var show = $('#show');
 			$('a[href="#menu2"]').one('click', function() {
 				var docFragment = $(document.createDocumentFragment());
-				$.getJSON('DiscussionJsonServlet',{'master':'${mdataVO.m_id}'},function(data){
+				$.getJSON('MdataJsonServlet',{'master':'${mdataVO.m_id}','action':'discussion'},function(data){
 					$.each(data,function(i,dis){
 						var cid = $('<p></p>').text(dis.cid + '　' + dis.date);
 // 						var date = $('<span></span>').text(dis.date);
@@ -155,7 +155,7 @@ input[type="file"] {
 				$.post("masterPage.do", {"m_id":"${mdataVO.m_id}",'action':'MasterPage_Q','d_des':$('#d_des').val()}, function(datas) {
 					$('#d_des').val(null);
 					var docFragment = $(document.createDocumentFragment());
-					$.getJSON('DiscussionJsonServlet',{'master':'${mdataVO.m_id}'},function(data){
+					$.getJSON('MdataJsonServlet',{'master':'${mdataVO.m_id}','action':'discussion'},function(data){
 						$('#show').empty();
 						$.each(data,function(i,dis){
 							var cid = $('<p></p>').text(dis.cid + '　' + dis.date);
@@ -280,7 +280,7 @@ input[type="file"] {
 				});
 			});
 			
-		}); //outter function
+// 		}); //outter function
 	</script>
   
 	
