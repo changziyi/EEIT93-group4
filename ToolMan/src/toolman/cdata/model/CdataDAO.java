@@ -28,7 +28,7 @@ public class CdataDAO implements CdataDAO_interface{
 //			Criteria query = session.createCriteria(CdataVO.class);
 //			query.add(Restrictions.eq("c_id", "Micky"));
 //			query.setParameter(0, c_id);
-			cdataVO = (CdataVO) session.get(CdataVO.class, "Micky");
+			cdataVO = (CdataVO) session.get(CdataVO.class, c_id);
 			
 //			cdataVO = (CdataVO) query.list().get(0);
 			session.getTransaction().commit();
@@ -113,26 +113,29 @@ public class CdataDAO implements CdataDAO_interface{
 		return cdataVO;
 	}
 	//BY Benny
-	public void updatecustomerSname(Integer c_id) {
+	public Integer updatecustomerSname(Integer c_id, String s_name) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		Integer count=0;
 		try {
 			session.beginTransaction();
-			Query query = session.createQuery("from CdataVO set s_name=:s where c_id=:c");
+			Query query = session.createQuery("update CdataVO set s_name=:s where c_id=:c");
 			query.setParameter("s","c_sus");
 			query.setParameter("c",c_id);
-			Integer count = query.executeUpdate();
+			count = query.executeUpdate();
 			session.getTransaction().commit();
 		} catch (RuntimeException ex) {
 			session.getTransaction().rollback();
 			throw ex;
 		}
+		return count;
 	}
 
 	public static void main(String args[]){		
 		CdataDAO  dao = new CdataDAO();
+		
 		List<CdataVO> list= dao.getAll();
 		for(CdataVO cdataVO:list){
-			Timestamp c_jdatestamp =	cdataVO.getC_jdate();
+			Timestamp c_jdatestamp = cdataVO.getC_jdate();
 			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			String c_jdate = df.format(c_jdatestamp);
 			String c_name =	cdataVO.getC_name();
@@ -145,6 +148,8 @@ public class CdataDAO implements CdataDAO_interface{
 			Integer c_averrating = cdataVO.getC_averrating();
 			String sa_cnote	=cdataVO.getSa_cnote();
 			System.out.println(c_id);
+			System.out.println( c_jdatestamp);
+			System.out.println( c_jdate);
 		}
 //		
 //		/*********************** 查詢媒合  *****************************/

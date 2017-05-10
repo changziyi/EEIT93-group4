@@ -41,7 +41,7 @@ public class EmailJDBCDAO implements EmailDAO_interface {
 			pstmt.setTimestamp(3, emailVO.getMs_date());
 			pstmt.setString(4, emailVO.getMs_summary());
 			pstmt.setString(5, emailVO.getMs_content());
-			pstmt.setString(6, emailVO.getS_name());
+			pstmt.setBoolean(6, emailVO.getS_name());
 
 			pstmt.executeUpdate();
 
@@ -90,7 +90,7 @@ public class EmailJDBCDAO implements EmailDAO_interface {
 			pstmt.setTimestamp(3, emailVO.getMs_date());
 			pstmt.setString(4, emailVO.getMs_summary());
 			pstmt.setString(5, emailVO.getMs_content());
-			pstmt.setString(6, emailVO.getS_name());
+			pstmt.setBoolean(6, emailVO.getS_name());
 
 			pstmt.executeUpdate();
 
@@ -193,7 +193,7 @@ public class EmailJDBCDAO implements EmailDAO_interface {
 				emailVO.setMs_date(rs.getTimestamp("ms_date"));
 				emailVO.setMs_summary(rs.getString("ms_summary"));
 				emailVO.setMs_content(rs.getString("ms_content"));
-				emailVO.setS_name(rs.getString("s_name"));
+				emailVO.setS_name(rs.getBoolean("s_name"));
 
 			
 					
@@ -259,7 +259,7 @@ public class EmailJDBCDAO implements EmailDAO_interface {
 				emailVO.setMs_date(rs.getTimestamp("ms_date"));
 				emailVO.setMs_summary(rs.getString("ms_summary"));
 				emailVO.setMs_content(rs.getString("ms_content"));
-				emailVO.setS_name(rs.getString("s_name"));
+				emailVO.setS_name(rs.getBoolean("s_name"));
 
 			
 				

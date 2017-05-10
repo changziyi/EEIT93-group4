@@ -44,10 +44,15 @@
 			<tr>
 				<td>維修類別:
 				<input type="checkbox" name="m_pro" value="地板地磚">地板地磚
-				<input type="checkbox" name="m_pro" value="水電工程">水電工程
 				<input type="checkbox" name="m_pro" value="防水抓漏">防水抓漏
-				<input type="checkbox" name="m_pro" value="油漆工程">油漆工程
 				<input type="checkbox" name="m_pro" value="室內裝潢">室內裝潢
+				<input type="checkbox" name="m_pro" value="冷氣空調">冷氣空調
+				<input type="checkbox" name="m_pro" value="水電工程">水電工程 <br>
+				<input type="checkbox" name="m_pro" value="門窗工程">門窗工程
+				<input type="checkbox" name="m_pro" value="油漆工程">油漆工程
+				<input type="checkbox" name="m_pro" value="木作工程">木作工程
+				<input type="checkbox" name="m_pro" value="泥作工程">泥作工程
+				<input type="checkbox" name="m_pro" value="照明工程">照明工程
 				${errorMsgs.m_pro}
 				</td>
 			</tr>

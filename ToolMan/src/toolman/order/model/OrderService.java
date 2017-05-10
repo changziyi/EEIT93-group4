@@ -121,19 +121,6 @@ public class OrderService {
                 }
             }
         }
-    
-// -------------------------rating
-    
-    public 	OrderVO  getRate(Integer o_id) {
-		return  dao.getRate(o_id);
-
-	}
-    
-    public Integer updateOrderRate(Integer m_rating, Integer c_rating, String ca_des, String ma_des,Integer o_id) {
-    	Integer  count = dao.updateOrderRate( m_rating,  c_rating, ca_des,  ma_des, o_id);
-    	return  count;
-    }        
-    	
     public String getAllOrderJson(){
     	List list = new ArrayList();
 		List<OrderVO> orderlist = new ArrayList<OrderVO>();
@@ -183,6 +170,19 @@ public class OrderService {
 		return ojasonstring;
     	
     }	
+// -------------------------rating
+    
+    public 	OrderVO  getRate(Integer o_id) {
+		return  dao.getRate(o_id);
+
+	}
+    
+    public Integer updateOrderRate(Integer m_rating, Integer c_rating, String ca_des, String ma_des,Integer o_id) {
+    	Integer  count = dao.updateOrderRate( m_rating,  c_rating, ca_des,  ma_des, o_id);
+    	return  count;
+    }        
+    	
+    
     	
 //		OrderVO orderVO = new OrderVO();
 //
