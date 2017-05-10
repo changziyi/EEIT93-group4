@@ -20,8 +20,8 @@
 	
 <!-- bootstrap -->
 <!-- datatable-->
-<script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
-<link rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
+	<script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
 
 <style>
 	#navigator ul li {
@@ -623,13 +623,6 @@ $(function(){
 						 	   
 				   }//end datatableinit
 				);}	//end datable	
-// 				function datatabledestory(){
-// 					$('#eventlist').DataTable({
-// 						  	destroy: true,
-// 			// 			 	aaData: response.data	
-// 								 }//end datable attribute
-// 						 );	//end datable	   
-// 				   }//end datatabledestory function
 				   
 				   
 </script>
