@@ -44,18 +44,20 @@ public class ManagerUIServlet extends HttpServlet {
     }
 
 
-	@SuppressWarnings("unused")
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String topnavigatorid = request.getParameter("navigatorid");
 		String datastatus = request.getParameter("datastatus");
 		String datatime = request.getParameter("datatime");
-//		action = "c";
+
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
 
-		
+//		topnavigatorid="o";
+//		datastatus="一方未評分";
+//		datatime="alldate";
 		
 		//get m tested ok
 		if("m".equals(topnavigatorid)){
@@ -146,29 +148,32 @@ public class ManagerUIServlet extends HttpServlet {
 				
 				out.write(orderservice.getAllOrderJson());
 				
+			}else if(!"allorder".equals(datastatus)&&"alldate".equals(datatime)){
+				out.write(orderservice.getBySnameJson(datastatus));
 			}//end if		
-			else if ("oneyear".equals(datatime)){
-				
-				Timestamp o_tdate1 = new Timestamp(System.currentTimeMillis());
-				Timestamp o_tdate2 = new Timestamp(System.currentTimeMillis()-31536000000L);//365*24*60*60*1000
-				out.write(orderservice.getOrderBySnameAndDateJson(datastatus,o_tdate1,o_tdate2));
-				
-			}//end else	
-			else if ("halfyear".equals(datatime)){
-				
-				Timestamp o_tdate1 = new Timestamp(System.currentTimeMillis());
-				Timestamp o_tdate2 = new Timestamp(System.currentTimeMillis()-15768000000L);//365/2*24*60*60*1000
-				out.write(orderservice.getOrderBySnameAndDateJson(datastatus,o_tdate1,o_tdate2));
-
-			}//end else	
-			else if ("onemonth".equals(datatime)){
-				
-				Timestamp o_tdate1 = new Timestamp(System.currentTimeMillis());
-				Timestamp o_tdate2 = new Timestamp(System.currentTimeMillis()-2592000000L);//365/2*24*60*60*1000
-				out.write(orderservice.getOrderBySnameAndDateJson(datastatus,o_tdate1,o_tdate2));
-
-			}//end else	
-
+			else if(!"allorder".equals(datastatus)&&!"alldate".equals(datatime)){
+				if ("oneyear".equals(datatime)){
+					
+					Timestamp o_tdate1 = new Timestamp(System.currentTimeMillis());
+					Timestamp o_tdate2 = new Timestamp(System.currentTimeMillis()-31536000000L);//365*24*60*60*1000
+					out.write(orderservice.getOrderBySnameAndDateJson(datastatus,o_tdate1,o_tdate2));
+					
+				}//end else	
+				else if ("halfyear".equals(datatime)){
+					
+					Timestamp o_tdate1 = new Timestamp(System.currentTimeMillis());
+					Timestamp o_tdate2 = new Timestamp(System.currentTimeMillis()-15768000000L);//365/2*24*60*60*1000
+					out.write(orderservice.getOrderBySnameAndDateJson(datastatus,o_tdate1,o_tdate2));
+	
+				}//end else	
+				else if ("onemonth".equals(datatime)){
+					
+					Timestamp o_tdate1 = new Timestamp(System.currentTimeMillis());
+					Timestamp o_tdate2 = new Timestamp(System.currentTimeMillis()-2592000000L);//365/2*24*60*60*1000
+					out.write(orderservice.getOrderBySnameAndDateJson(datastatus,o_tdate1,o_tdate2));
+	
+					}//end else	
+			}//else if datetime is not empty
 			
 			
 //			System.out.println(ojasonstring);

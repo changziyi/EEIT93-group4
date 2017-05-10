@@ -180,7 +180,7 @@ $(function(){
 		$('#functionrow>div>ul>li').on('click',functionrowfiltering);//filtering
 		
  	   $('#subfunctionrow>a').on('click',togglehyper);//direct to other pages
- 	  $('#subfunctionrow>span[id!="messagespanm"][id!="messagespanc"]').on('click',togglegetmethod);//will return something when clicked, maill has it's own form action
+//  	  $('#subfunctionrow>span[id!="messagespanm"],#subfunctionrow>span[id!="messagespanc"]').on('click',togglegetmethod);//will return something when clicked, maill has it's own form action
  		 mail();//mail
 
  		loadProduct('m','allmaster','alldate');//build dynamic table
@@ -188,7 +188,7 @@ $(function(){
 ); //end ready   
 	function mail(){
 		
-//  			$('#emailblock').imagesLoaded(function() {
+//  			$('#emailblock').imagesLoaded(function() {//waterfall
 //  				$('#emailblock').masonry({
 //  					itemSelector : '.content_box',
 //  					columnWidth : 275,
@@ -357,14 +357,14 @@ $(function(){
 				$('#subfunctionrow').append(docFragsubfunction);
 					//rebinding
 			 	 $('#subfunctionrow>a').on('click',togglehyper);//direct to other pages
-			 	 $('#subfunctionrow>span[id!="messagespanm"][id!="messagespanc"]').on('click',togglegetmethod);//will return something when clicked, maill has it's own form action
+// 			 	 $('#subfunctionrow>span[id!="messagespanm"][id!="messagespanc"]').on('click',togglegetmethod);//will return something when clicked, maill has it's own form action
 
 			}//end else if
 			
 			else if(navagatorid== 'c'){
 				$('#subfunctionrow').empty();
 				var suspensionc = '<span value="suspensionc" name="functionaction" style=" padding:0px; margin:0px;" ><input type="button" value="停權"/></span>';
-				var sendmessagec = '<span id="messagespanmc" value="sendmessagec" name="functionaction" style=" padding:0px; margin:0px;" ><input type="button" value="傳送訊息" /></span>';
+				var sendmessagec = '<span id="messagespanmc" value="sendmessagec" name="functionaction" style=" padding:0px; margin:0px;" ><input type="button" data-target="#myModal01" data-toggle="modal" value="傳送訊息" /></span>';
 				var blacklistc = '<span value="blacklistc" name="functionaction" style=" padding:0px; margin:0px;" ><input type="button" value="黑名單" /></span>';
 				var b1 = $(suspensionc);
 				var b2 = $(sendmessagec);
@@ -374,20 +374,20 @@ $(function(){
 				
 					//rebinding
 			 	  $('#subfunctionrow>a').on('click',togglehyper);//direct to other pages
-			 	  $('#subfunctionrow>span[id!="messagespanm"][id!="messagespanc"]').on('click',togglegetmethod);//will return something when clicked, maill has it's own form action
+// 			 	  $('#subfunctionrow>span[id!="messagespanm"][id!="messagespanc"]').on('click',togglegetmethod);//will return something when clicked, maill has it's own form action
 
 			}//end else if
 			
 			else if(navagatorid== 'o'){
 				$('#subfunctionrow').empty();
-				var sendmessageo = '<span value="sendmessageo" name="functionaction" style="padding:0px; margin:0px;" ><input type="button" value="訊息" "/></span>';
+				var sendmessageo = '<span id="messagespanmo" value="sendmessageo" name="functionaction" style="padding:0px; margin:0px;" ><input type="button" data-target="#myModal01" data-toggle="modal" value="訊息" "/></span>';
 				var b1 = $(sendmessageo);
 				docFragsubfunction.append([b1]);
 				$('#subfunctionrow').append(docFragsubfunction);
 				
 					//rebinding
 			 	  $('#subfunctionrow>a').on('click',togglehyper);//direct to other pages
-			 	  $('#subfunctionrow>span[id!="messagespanm"][id!="messagespanc"]').on('click',togglegetmethod);//will return something when clicked, maill has it's own form action
+// 			 	  $('#subfunctionrow>span[id!="messagespanm"][id!="messagespanc"]').on('click',togglegetmethod);//will return something when clicked, maill has it's own form action
 
 			}// end else if 
 	
