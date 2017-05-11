@@ -556,7 +556,7 @@ $(function(){
 						   	console.log(data);
 						   	
 						   	var toggleword = $('<input type="checkbox" name="otoggle" />').val(data.o_id);
-						   	var cell0 = $('<td></td>').append(toggleword);
+						   	var cell0 = $('<td></td>').addClass('eventlisttbodytrtd').append(toggleword);
 						  	var cell1 = $('<td></td>').text(data.o_tdate).addClass('eventlisttbodytrtd');
 							var cell2 = $('<td></td>').text(data.o_bname).addClass('eventlisttbodytrtd');
 							var cell3 = $('<td></td>').text(data.c_id).addClass('eventlisttbodytrtd');
@@ -600,7 +600,7 @@ $(function(){
 						
 						
 					   var toggleword = $('<input type="checkbox" name="ctoggle" />').val(data.c_id).attr('data-receiver',data.c_id);
-					   var cell0 = $('<td></td>').append(toggleword);
+					   var cell0 = $('<td></td>').addClass('eventlisttbodytrtd').append(toggleword);
 					   var cell1 = $('<td></td>').text(data.c_jdate).addClass('eventlisttbodytrtd');;
 					   var cell2 = $('<td></td>').text(data.c_id).addClass('eventlisttbodytrtd');;
 					   var cell3 = $('<td></td>').text(data.c_name).addClass('eventlisttbodytrtd');;
@@ -631,7 +631,6 @@ $(function(){
 				function datatableinit(){
 				table =	$('#eventlist').DataTable({
 // 						retrieve: true,
-			// 			"lengthMenu":[1, 2, 3, "All"],
 						destroy: true,
 // 						"pageLength": 1,
 // 						"dom": '<lf<t>ip>',
