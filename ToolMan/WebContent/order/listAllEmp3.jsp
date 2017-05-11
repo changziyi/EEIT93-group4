@@ -9,15 +9,18 @@
 
 
 
-<%
-	OrderService orderSvc = new OrderService();
-    List<OrderVO> list = orderSvc.getAllOrder();
-    pageContext.setAttribute("list",list);
+<%-- <%
 
-%>
-<%--
+// OrderService orderSvc = new OrderService();
+// List<OrderVO> list = orderSvc.getAllOrder();
+// pageContext.setAttribute("list",list);
+
+ %> --%>
+
+
+
 <jsp:useBean id="listOrder" scope="request" type="java.util.Set" />
---%>
+
 
 <html>
 
@@ -59,12 +62,13 @@
 <b><font color=red></font></b>
 <table border='1' cellpadding='5' cellspacing='0' width='1200'>
 	<tr bgcolor='#CCCCFF' align='center' valign='middle' height='20'>
-		<td><h3>訂單 </h3>
+		<td><h3>師傅訂單 </h3>
 		         </td></tr></table>
 
 <table border='1' bordercolor='#CCCCFF' width='1200'>
 	<tr>
 		<th>訂單編號</th>
+		<th>店家編號</th>
 		<th>店家名稱</th>
 		<th>訂單完成時間</th>
 		<th>維修項目說明</th>
@@ -76,13 +80,14 @@
 		
 	</tr>
  	
-	 <%@ include file="page1.file" %>  
- 	<c:forEach var="orderVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>"> 	
+<%-- 	 <%@ include file="page1.file" %>   --%>
+<%--  	<c:forEach var="orderVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>"> 	 --%>
 	
-<%-- 		<c:forEach var="orderVO" items="${listOrder}" >  --%>
+	<c:forEach var="orderVO" items="${listOrder}" > 
 	
 		<tr align='center' valign='middle'>
 			<td>${orderVO.o_id}</td>
+			<td>${orderVO.m_id.m_id}</td>
 			<td>${orderVO.b_name}</td>
 			<td>${orderVO.o_edate}</td>
 			<td>${orderVO.o_des}</td>
@@ -134,7 +139,7 @@ ${orderVO.ca_des}
  <%------------------------------------------bootstrap評分-------------------------------------------------------%>
 
 
-  <FORM METHOD="post" ACTION="OrderController.do" name="form1">
+  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/order/OrderController.do" name="form1">
   
   
 
@@ -239,23 +244,12 @@ ${orderVO.ca_des}
 		
 	</c:forEach>
 </table>
-   <%@ include file="page2.file" %>  
+<%--    <%@ include file="page2.file" %>   --%>
  </div>
  
-    <jsp:useBean id="mdataSvc" scope="page" class="toolman.mdata.model.MdataService" />
  
- 
-    <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/mdata/MdataOrderServlet.do" >
-       <b><font color=orange>選擇部門:</font></b>
-       <select size="1" name="m_id">
-         <c:forEach var="mdataVO" items="${mdataSvc.all}" > 
-          <option value="${mdataVO.m_id}">${mdataVO.b_name}
-         </c:forEach>   
-       </select>
 
-   <input type="submit" value="送出">
-       <input type="hidden" name="action" value="listOrder">
-     </FORM>
+ 
  
  <%----- --------%>
 

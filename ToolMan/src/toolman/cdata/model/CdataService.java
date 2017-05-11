@@ -4,6 +4,9 @@ package toolman.cdata.model;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Set;
+
+import toolman.order.model.OrderVO;
 
 
 
@@ -50,4 +53,10 @@ public class CdataService {
 	public Integer updatecustomerSname(String c_id, String s_name){		
 		return dao.updatecustomerSname(c_id, s_name);
 	}
+	
+	public Set<OrderVO> getOrderByC(String c_id) {//訂單
+		return dao.getOrderByC(c_id);
+	}
+	
+	
 }

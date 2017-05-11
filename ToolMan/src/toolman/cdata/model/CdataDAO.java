@@ -130,6 +130,13 @@ public class CdataDAO implements CdataDAO_interface{
 		}
 		return count;
 	}
+
+	@Override   //訂單
+	public Set<OrderVO> getOrderByC(String c_id) {		
+		Set<OrderVO> set = login_in(c_id).getOrders();
+		return set;
+	}
+
 	public List<CdataVO> getBySname(String s_name) {
 		List<CdataVO> list = null;
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
@@ -252,6 +259,11 @@ public class CdataDAO implements CdataDAO_interface{
 		/*********************** 新增刪除未完成  *****************************/	
 		
 //		dao.delete("Snoopy");
+	}
+	@Override
+	public Integer updatecustomerSname(Integer c_id, String s_name) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

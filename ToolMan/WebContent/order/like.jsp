@@ -41,9 +41,9 @@
     </div>
     <ul class="nav navbar-nav">
       <li class="active"><a href="#">Home</a></li>
-      <li><a href="listAllEmp.jsp">訂單</a></li>
-      <li><a href="like.jsp">收藏店家</a></li>
-      <li><a href="dislike.jsp">黑名單</a></li>
+      <li><a href="<%=request.getContextPath()%>/order/listAllEmp.jsp">訂單</a></li>
+      <li><a href="<%=request.getContextPath()%>/order/like.jsp">收藏店家</a></li>
+      <li><a href="<%=request.getContextPath()%>/order/dislike.jsp">黑名單</a></li>
       <li><a href="<%=request.getContextPath()%>/master/List.jsp">搜尋店家</a></li>
       
     </ul>
@@ -94,14 +94,18 @@
  <%@ include file="page2.file" %>
  </div>
  
- 
+  
+      <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/mdata/MdataOrderServlet.do" >
+       <input type="submit" value="師傅訂單">
+       <input type="hidden" name="m_id" value="1001">
+        <input type="hidden" name="action" value="listOrder">
+     </FORM>
 
-     <FORM METHOD="post" ACTION="OrderController.do" >
-       <input type="submit" value="送出">
+     <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/cdata/CdataOrderServlet.do" >
+       <input type="submit" value="消費者訂單">
         <input type="hidden" name="c_id" value="Snoopy">
         <input type="hidden" name="action" value="listOrder">
      </FORM>
- 
  
  <%----- --------%>
 
