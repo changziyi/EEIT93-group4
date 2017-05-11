@@ -24,10 +24,35 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <style>
-.avaliablecolor{
+.allunavaliable{
+	background-color:red;
+	color:white;
+}
+.morningavaliable{
+	background-color:yellow;
+	color:white;
+}
+.noonavaliable{
+	background-color:#E2C07C;
+	color:white;
+}
+.nightavaliable{
+	background-color:black;
+	color:white;
+}
+.allavaliable{
 	background-color:green;
 	color:white;
 }
+.todaycolor{
+	background-color:blue;
+	color:white;
+}
+.reservedcolor{
+	background-color:#5CB5A6;
+	color:white;
+}
+
 .grade-1{
 	background-color:blue;
 }
@@ -52,21 +77,28 @@
 
 $(document).ready(function () {
 	var eventData = [
-	    {"date":"2017-05-01","badge":true,"title":"不能預約"},
-	    {"date":"2017-05-02","badge":true,"title":"不能預約"},
-	    {"date":"2017-05-03","badge":true,"title":"不能預約"},
-	    {"date":"2017-05-04","badge":false,"title":"能預約", "body":"<p>fucker</p>" ,"classname":"avaliablecolor"},
-	    {"date":"2017-05-05","badge":false,"title":"能預約", "classname":"avaliablecolor"},
-	    {"date":"2017-05-06","badge":true,"title":"不能預約"},
-	    {"date":"2017-05-07","badge":true,"title":"不能預約"},
+		
+	    {"date":"2017-05-01","badge":false,"title":"整天不可預約",classname: "allunavaliable"},
+	    {"date":"2017-05-02","badge":false,"title":"上午可預約", classname: "morningavaliable"},
+	    {"date":"2017-05-03","badge":false,"title":"下午可預約", classname: "noonavaliable"},
+	    {"date":"2017-05-04","badge":false,"title":"晚上可預約", classname: "nightavaliable"},
+	    {"date":"2017-05-05","badge":false,"title":"整天可預約", classname: "allavaliable"},
+
 	    
 	];
+	
     $("#my-calendar").zabuto_calendar({
 //      language: "en"
 		today:true,
         legend: [
-            {type: "text", label: "不可預約", badge: "00"},
-            {type: "block", label: "可預約", classname: "avaliablecolor"},
+            {type: "block", label: "整天不可預約",classname: "allunavaliable"},
+            {type: "block", label: "上午可預約", classname: "morningavaliable"},
+            {type: "block", label: "下午可預約", classname: "noonavaliable"},
+            {type: "block", label: "晚上可預約", classname: "nightavaliable"},
+            {type: "block", label: "整天可預約",classname: "allavaliable"},
+            {type: "block", label: "今日",classname: "todaycolor"},
+            {type: "block", label: "已預約", badge: "今",classname: "reservedcolor"},
+            
             {type: "spacer"},
             {type: "text", label: "Bad"},
             {type: "list", list: ["grade-1", "grade-2", "grade-3", "grade-4"]},
@@ -75,7 +107,18 @@ $(document).ready(function () {
           data: eventData,
           
         });
-});
+});//end ready
+
+	function myDateFunction(id) {
+		  var date = $("#" + id).data("date");
+		  var hasEvent = $("#" + id).data("hasEvent");
+		  
+	}
+	
+	function myNavFunction(id) {
+		  var nav = $("#" + id).data("navigation");
+		  var to = $("#" + id).data("to");
+		}
 
 </script>
 </body>
