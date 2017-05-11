@@ -71,6 +71,8 @@
 </style>
 </head>
 <body>
+<div id="date-popover-content" class="popover-content"></div>
+</div>
 <div id="my-calendar" class="calendarclass"></div>
 
 <script type="application/javascript">
@@ -89,6 +91,12 @@ $(document).ready(function () {
 	
     $("#my-calendar").zabuto_calendar({
 //      language: "en"
+          action: function () {
+              return myDateFunction(this.id, false);
+          },
+          action_nav: function () {
+              return myNavFunction(this.id);
+          },
 		today:true,
         legend: [
             {type: "block", label: "整天不可預約",classname: "allunavaliable"},
@@ -106,20 +114,32 @@ $(document).ready(function () {
             ],
             
           data: eventData,
-          
+
         });
 });//end ready
 
-	function myDateFunction(id) {
-		  var date = $("#" + id).data("date");
-		  var hasEvent = $("#" + id).data("hasEvent");
-		  
+function myDateFunction(id, fromModal)  {
+		 $("#date-popover").hide();
+	        if (fromModal) {
+	            $("#" + id + "_modal").modal("hide");
+	        }
+	        var date = $("#" + id).data("date");
+	        var hasEvent = $("#" + id).data("hasEvent");
+	        if (hasEvent && !fromModal) {
+	            return false;
+	        }
+	        $("#date-popover-content").html('You clicked on date ' + date);
+	        return true;
+	
 	}
 	
 	function myNavFunction(id) {
-		  var nav = $("#" + id).data("navigation");
-		  var to = $("#" + id).data("to");
-		}
+
+	    var nav = $("#" + id).data("navigation");
+	    var to = $("#" + id).data("to");
+	    console.log('nav ' + nav + ' to: \ + to.month + ' + to.year);
+}
+	
 
 </script>
 </body>
