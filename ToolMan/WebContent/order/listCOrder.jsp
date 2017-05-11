@@ -9,15 +9,18 @@
 
 
 
-<%
-	OrderService orderSvc = new OrderService();
-    List<OrderVO> list = orderSvc.getAllOrder();
-    pageContext.setAttribute("list",list);
+<%-- <%
 
-%>
-<%--
+// OrderService orderSvc = new OrderService();
+// List<OrderVO> list = orderSvc.getAllOrder();
+// pageContext.setAttribute("list",list);
+
+ %> --%>
+
+
+
 <jsp:useBean id="listOrder" scope="request" type="java.util.Set" />
---%>
+
 
 <html>
 
@@ -47,7 +50,7 @@
     </div>
     <ul class="nav navbar-nav">
       <li class="active"><a href="<%=request.getContextPath()%>/cdata/index.jsp">Home</a></li>
- <li><a href="<%=request.getContextPath()%>/order/listAllEmp.jsp">訂單</a></li>
+    <li><a href="<%=request.getContextPath()%>/order/listAllEmp.jsp">訂單</a></li>
       <li><a href="<%=request.getContextPath()%>/order/like.jsp">收藏店家</a></li>
       <li><a href="<%=request.getContextPath()%>/order/dislike.jsp">黑名單</a></li>
       <li><a href="<%=request.getContextPath()%>/master/List.jsp">搜尋店家</a></li>
@@ -56,29 +59,17 @@
   </div>
 </nav>
 
-<%------------------------------------------------------------------------ --%>
-   <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/mdata/MdataOrderServlet.do" >
-       <input type="submit" value="師傅訂單">
-       <input type="hidden" name="m_id" value="1001">
-        <input type="hidden" name="action" value="listOrder">
-     </FORM>
 
-     <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/cdata/CdataOrderServlet.do" >
-       <input type="submit" value="消費者訂單">
-        <input type="hidden" name="c_id" value="Snoopy">
-        <input type="hidden" name="action" value="listOrder">
-     </FORM>
-     <%------------------------------------------------------------------- --%>
-     
 <b><font color=red></font></b>
 <table border='1' cellpadding='5' cellspacing='0' width='1200'>
 	<tr bgcolor='#CCCCFF' align='center' valign='middle' height='20'>
-		<td><h3>訂單 </h3>
+		<td><h3>我的訂單 </h3>
 		         </td></tr></table>
 
 <table border='1' bordercolor='#CCCCFF' width='1200'>
 	<tr>
 		<th>訂單編號</th>
+		<th>店家編號</th>
 		<th>店家名稱</th>
 		<th>訂單完成時間</th>
 		<th>維修項目說明</th>
@@ -90,13 +81,14 @@
 		
 	</tr>
  	
-	 <%@ include file="page1.file" %>  
- 	<c:forEach var="orderVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>"> 	
+<%-- 	 <%@ include file="page1.file" %>   --%>
+<%--  	<c:forEach var="orderVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>"> 	 --%>
 	
-<%-- 		<c:forEach var="orderVO" items="${listOrder}" >  --%>
+	<c:forEach var="orderVO" items="${listOrder}" > 
 	
 		<tr align='center' valign='middle'>
 			<td>${orderVO.o_id}</td>
+			<td>${orderVO.m_id.m_id}</td>
 			<td><a href='${pageContext.servletContext.contextPath}/master/masterPage.do?m_id=${orderVO.m_id.m_id}'>${orderVO.b_name}</a></td>
 			<td>${orderVO.o_edate}</td>
 			<td>${orderVO.o_des}</td>
@@ -148,7 +140,7 @@ ${orderVO.ca_des}
  <%------------------------------------------bootstrap評分-------------------------------------------------------%>
 
 
-  <FORM METHOD="post" ACTION="OrderController.do" name="form1">
+  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/order/OrderController.do" name="form1">
   
   
 
@@ -214,12 +206,8 @@ ${orderVO.ca_des}
      
 			<input type="submit" value="送出" >
 			
-          	<input type="hidden" name="action" value="update">
-          	
-          	
-          	<input type="hidden" name="c_rating" value="5">	
-          	
-         <input type="hidden" name="ma_des" value="再見"/>
+          	<input type="hidden" name="action" value="updateByC">
+          	        	
           <input type="hidden" name="o_id" value="${orderVO.o_id}">	   
           
         </div>
@@ -253,23 +241,12 @@ ${orderVO.ca_des}
 		
 	</c:forEach>
 </table>
-   <%@ include file="page2.file" %>  
+<%--    <%@ include file="page2.file" %>   --%>
  </div>
  
-    <jsp:useBean id="mdataSvc" scope="page" class="toolman.mdata.model.MdataService" />
  
- 
-    <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/mdata/MdataOrderServlet.do" >
-       <b><font color=orange>選擇部門:</font></b>
-       <select size="1" name="m_id">
-         <c:forEach var="mdataVO" items="${mdataSvc.all}" > 
-          <option value="${mdataVO.m_id}">${mdataVO.b_name}
-         </c:forEach>   
-       </select>
 
-   <input type="submit" value="送出">
-       <input type="hidden" name="action" value="listOrder">
-     </FORM>
+ 
  
  <%----- --------%>
 

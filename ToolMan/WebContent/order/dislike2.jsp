@@ -6,13 +6,9 @@
 
 
 <%-- 此頁採用 JSTL 與 EL 取值 --%>
+<jsp:useBean id="myHate" scope="request" type="java.util.Set" />
 
-<%
-	BlacklistService blacklistSvc = new BlacklistService();
-    List<BlacklistVO> list = blacklistSvc.getAllBlacklist();
-    pageContext.setAttribute("list",list);
 
-%>
 <html>
 
 <head>
@@ -46,6 +42,7 @@
       <li><a href="<%=request.getContextPath()%>/order/dislike.jsp">黑名單</a></li>
       <li><a href="<%=request.getContextPath()%>/master/List.jsp">搜尋店家</a></li>
       
+      
     </ul>
   </div>
 </nav>
@@ -54,12 +51,12 @@
 <b><font color=red></font></b>
 <table border='1' cellpadding='5' cellspacing='0' width='1200'>
 	<tr bgcolor='gray' align='center' valign='middle' height='20'>
-		<td><h3>黑名單</h3>
+		<td><h3>我的黑名單</h3>
 		         </td></tr></table>
 
 <table border='1' bordercolor='#CCCCFF' width='1200'>
 	<tr>
-		<th>編號</th>
+	
 		<th>店家編號</th>
 		<th>消費者帳號</th>
 		<th>刪除</th>
@@ -67,11 +64,15 @@
 		
 	</tr>
 	
-	 <%@ include file="page1.file" %> 
-	<c:forEach var="blacklistVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
+<%-- 	 <%@ include file="page1.file" %>  --%>
+<%-- 	<c:forEach var="blacklistVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>"> --%>
+	
+	
+		<c:forEach var="blacklistVO" items="${myHate}" > 
+	
 	
 		<tr align='center' valign='middle'>
-			<td>${blacklistVO.bk_id}</td>
+		
 			<td>${blacklistVO.mdataVO.b_name}</td>
 			<td>${blacklistVO.cdataVO.c_id}</td>
 			
@@ -91,14 +92,9 @@
 		
 	</c:forEach>
 </table>
- <%@ include file="page2.file" %>
  </div>
  
-   <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/cdata/CdataOrderServlet.do" >
-       <input type="submit" value="消費者最愛">
-        <input type="hidden" name="c_id" value="Snoopy">
-        <input type="hidden" name="action" value="myHate">
-     </FORM>
+ 
 
  
  

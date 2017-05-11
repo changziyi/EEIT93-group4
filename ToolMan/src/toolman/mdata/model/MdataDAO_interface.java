@@ -1,6 +1,9 @@
 package toolman.mdata.model;
 
 import java.util.List;
+import java.util.Set;
+
+import toolman.order.model.OrderVO;
 
 public interface MdataDAO_interface {
 	
@@ -17,5 +20,9 @@ public interface MdataDAO_interface {
 	public List<MdataVO> getCityAndDistrictAndMPro(String m_city, String m_district, String m_pro);
 	public List<MdataVO> getAll();
 	public Integer updatemasterSname(Integer m_id,String s_name);//by Benny
+	public List<MdataVO> getByAndSname(String s_name);//by Benny
+	
+    public Set<OrderVO> getOrderByM(Integer m_id);//訂單
+
 	public List<MdataVO> getBySname(String s_name);//by Benny
 }

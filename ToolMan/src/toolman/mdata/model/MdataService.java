@@ -9,6 +9,7 @@ import java.util.Set;
 import org.json.simple.JSONValue;
 
 import toolman.mpro.model.MProVO;
+import toolman.order.model.OrderVO;
 
 public class MdataService {
 
@@ -71,7 +72,9 @@ public class MdataService {
 
 		return dao.findByPrimaryKey(m_id);
 	}
-
+	public Set<OrderVO> getOrderByM(Integer m_id) {//訂單
+		return dao.getOrderByM(m_id);
+	}
 	public void update(MdataVO mdataVO) {
 		dao.update(mdataVO);
 	}
@@ -88,6 +91,7 @@ public class MdataService {
 		return dao.getAll();
 	}
 
+	
 	public List<MdataVO> getCity(String m_city) {
 		return dao.getCity(m_city);
 	}
@@ -183,4 +187,5 @@ public class MdataService {
 	public Integer updatemasterSname(Integer m_id, String s_name){		
 		return dao.updatemasterSname(m_id,s_name);
 	} 
+	
 }
