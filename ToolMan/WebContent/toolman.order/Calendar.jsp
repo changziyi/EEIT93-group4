@@ -78,39 +78,9 @@
 <script type="application/javascript">
 
 $(function(){
-	
-	$("#my-calendar").zabuto_calendar({
-//      language: "en"
-          action: function () {
-        	  return myDateFunction(this.id)
-          },
-          action_nav: function () {
-              return myNavFunction(this.id);
-          },
-		today:true,
 		
-        legend: [
-            {type: "block", label: "整天不可預約",classname: "allunavaliable"},
-            {type: "block", label: "上午可預約", classname: "morningavaliable"},
-            {type: "block", label: "下午可預約", classname: "noonavaliable"},
-            {type: "block", label: "晚上可預約", classname: "nightavaliable"},
-            {type: "block", label: "整天可預約",classname: "allavaliable"},
-            {type: "block", label: "今日",classname: "todaycolor"},
-            {type: "block", label: "已預約", badge: "今",classname: "reservedcolor"},
-            
-            {type: "spacer"},
-            {type: "text", label: "Bad"},
-            {type: "list", list: ["grade-1", "grade-2", "grade-3", "grade-4"]},
-            {type: "text", label: "Good"}
-            ],
-            data: eventdata,
-          
-		  
-        });//end zabuto_calendar
+	createcalendar();
 
-
-  
-	
 });//end ready
 
 function createcalendar(){
@@ -153,7 +123,7 @@ function createcalendar(){
 	    {"date":"2017-05-05","badge":false,"title":"整天可預約", classname: "allavaliable"},
 	    
 	];
-	var eventdata2=null;
+
 	function myDateFunction(id)  {
 // 		 $("#date-popover").hide();
 // 	        if (fromModal) {
@@ -169,14 +139,9 @@ function createcalendar(){
 	        var masterjson = '\{\"date\"\:\"'+date+'\"\,\"badge\"\:false\,\"title\"\:\"整天可預約\"\,\"classname\"\:\"nightavaliable\"\}';
 // 	        alert(masterjson);
 	        var json_obj= $.parseJSON(masterjson);
-	        this.eventdata.push(json_obj);
-// 	        var eventdata2=eventdata;
-			eventdata2 = this.eventdata;
-			eventdata=null;
-			eventdata = this.eventdata2;
+	        eventdata.push(json_obj);
 	        $('#outterdiv').empty();
 	        $('#outterdiv').html('<div id="my-calendar2" class="calendarclass"></div>');        
-
 	        createcalendar();
 // 			var json_obj= $.parseJSON('{"dame":"youall"}');
 	        
