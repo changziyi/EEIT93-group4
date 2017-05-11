@@ -71,28 +71,28 @@
 </style>
 </head>
 <body>
-<div id="date-popover-content" class="popover-content"></div>
+<div id="date-popover-content" class="popover-content">
+	<div id="my-calendar" class="calendarclass"></div>
 </div>
-<div id="my-calendar" class="calendarclass"></div>
 
 <script type="application/javascript">
-
-$(document).ready(function () {
-	var eventData = [
-		
-	    {"date":"2017-05-01","badge":false,"title":"整天不可預約",classname: "allunavaliable"},
-	    {"date":"2017-05-02","badge":false,"title":"上午可預約", classname: "morningavaliable"},
-	    {"date":"2017-05-03","badge":false,"title":"下午可預約", classname: "noonavaliable"},
-	    {"date":"2017-05-04","badge":false,"title":"晚上可預約", classname: "nightavaliable"},
-	    {"date":"2017-05-05","badge":false,"title":"整天可預約", classname: "allavaliable"},
-
-	    
-	];
+var eventdata = [		
+    {"date":"2017-05-01","badge":false,"title":"整天不可預約",classname: "allunavaliable"},
+    {"date":"2017-05-02","badge":false,"title":"上午可預約", classname: "morningavaliable"},
+    {"date":"2017-05-03","badge":false,"title":"下午可預約", classname: "noonavaliable"},
+    {"date":"2017-05-04","badge":false,"title":"晚上可預約", classname: "nightavaliable"},
+    {"date":"2017-05-05","badge":false,"title":"整天可預約", classname: "allavaliable"},
+];
+$(function(){
 	
+	createcalendar();
+});//end ready
+
+function createcalendar(){
     $("#my-calendar").zabuto_calendar({
 //      language: "en"
           action: function () {
-              return myDateFunction(this.id, false);
+              return myDateFunction(this.id);
           },
           action_nav: function () {
               return myNavFunction(this.id);
@@ -113,23 +113,38 @@ $(document).ready(function () {
             {type: "text", label: "Good"}
             ],
             
-          data: eventData,
-
-        });
-});//end ready
-
-function myDateFunction(id, fromModal)  {
-		 $("#date-popover").hide();
-	        if (fromModal) {
-	            $("#" + id + "_modal").modal("hide");
-	        }
+          data: eventdata,
+		  
+        });//end zabuto_calendar
+   		 alert(eventdata.toString());
+	}//end create calendar
+	function myDateFunction(id, fromModal)  {
+// 		 $("#date-popover").hide();
+// 	        if (fromModal) {
+// 	            $("#" + id + "_modal").modal("hide");
+// 	        }
 	        var date = $("#" + id).data("date");
-	        var hasEvent = $("#" + id).data("hasEvent");
-	        if (hasEvent && !fromModal) {
-	            return false;
-	        }
+// 	        var hasEvent = $("#" + id).data("hasEvent");
+// 	        if (hasEvent && !fromModal) {
+// 	            return false;
+// 	        }
 	        $("#date-popover-content").html('You clicked on date ' + date);
-	        return true;
+	        var masterjson = '\{\"date\"\:\"'+date+'\"\,\"badge\"\:false\,\"title\"\:\"整天可預約\"\,\"classname\"\:\"unallavaliable\"\}';
+	        alert(masterjson);
+	        var json_obj= $.parseJSON(masterjson);
+	        eventdata.push(json_obj);
+	        $('#date-popover-content').empty();
+	        $('#date-popover-content').html('<div id="my-calendar" class="calendarclass"></div>');        
+	        createcalendar();
+// 			var json_obj= $.parseJSON('{"dame":"youall"}');
+	        
+	        alert(json_obj);
+	        
+	       
+
+	        
+// 	        return true;
+// 	        {"date":"2017-05-05","badge":false,"title":"整天可預約", classname: "allavaliable"},
 	
 	}
 	
