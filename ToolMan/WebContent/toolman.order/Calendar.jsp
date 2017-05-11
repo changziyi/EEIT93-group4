@@ -104,6 +104,7 @@ $(document).ready(function () {
             {type: "list", list: ["grade-1", "grade-2", "grade-3", "grade-4"]},
             {type: "text", label: "Good"}
             ],
+            
           data: eventData,
           
         });
