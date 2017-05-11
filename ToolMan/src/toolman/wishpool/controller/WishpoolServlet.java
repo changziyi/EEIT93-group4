@@ -123,7 +123,8 @@ public class WishpoolServlet extends HttpServlet {
 		Calendar calobj = Calendar.getInstance();
 		Timestamp w_date = new Timestamp(calobj.getTimeInMillis());
 		// 許願當下時間
-
+		
+		
 		
 		/*if (!errorMsgs.isEmpty()) {
 			req.setAttribute("wishpoolVO", wishpoolVO);
@@ -147,6 +148,8 @@ public class WishpoolServlet extends HttpServlet {
 		wishpoolservice.insert(addform);
         // 表單傳送到資料庫
 		
+		res.sendRedirect("Wishing+waterfall.jsp");
+		
 		
 		List<WishpoolVO> list = new ArrayList<WishpoolVO>();
 		WishpoolVO wp1 = new WishpoolVO();
@@ -168,15 +171,16 @@ public class WishpoolServlet extends HttpServlet {
 			WishpoolVO vo = list.get(i);
 		}
 		
-		
+			
+	
 		
 		//測試用
 		System.out.println("確認表單上傳成功");
 		System.out.println("我想修 : " + w_pro);
 		System.out.println("位於： " + w_city + w_district);
 		System.out.println("示意圖： " + w_image);
-		System.out.println("問題描述:" + w_content);
-		System.out.println("發送時間:" + w_date);
+		System.out.println("問題描述: " + w_content);
+		System.out.println("發送時間: " + w_date);
 		
 		}
 	}

@@ -8,4 +8,5 @@ public interface WishpoolDAO_interface {
           public void delete(Integer w_id);
           public WishpoolVO findByPrimaryKey(Integer w_id);
           public List<WishpoolVO> getAll();
+		  public List<WishpoolVO> getAllByDate();
 }
