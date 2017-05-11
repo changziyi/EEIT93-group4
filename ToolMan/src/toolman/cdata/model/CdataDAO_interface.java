@@ -4,6 +4,8 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Set;
 
+import toolman.blacklist.model.BlacklistVO;
+import toolman.favorite.model.FavoriteVO;
 import toolman.mdata.model.MdataVO;
 import toolman.order.model.OrderVO;
 
@@ -20,6 +22,9 @@ public interface CdataDAO_interface {
 	public Integer updatecustomerSname(Integer c_id, String s_name);
 	
     public Set<OrderVO> getOrderByC(String c_id);//訂單
+    public Set<FavoriteVO> getFavoriteByC(String c_id);//訂單
+    public Set<BlacklistVO> getBlackByC(String c_id);//訂單
+
 
 	public List<CdataVO> getBySname(String s_name);
 	public Integer updatecustomerSname(String c_id, String s_name);

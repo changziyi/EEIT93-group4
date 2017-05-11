@@ -12,6 +12,8 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
 import hibernate.util.HibernateUtil;
+import toolman.blacklist.model.BlacklistVO;
+import toolman.favorite.model.FavoriteVO;
 import toolman.mdata.model.MdataVO;
 import toolman.order.model.OrderVO;
 
@@ -134,6 +136,16 @@ public class CdataDAO implements CdataDAO_interface{
 	@Override   //訂單
 	public Set<OrderVO> getOrderByC(String c_id) {		
 		Set<OrderVO> set = login_in(c_id).getOrders();
+		return set;
+	}
+	@Override   //訂單
+	public Set<FavoriteVO> getFavoriteByC(String c_id) {		
+		Set<FavoriteVO> set = login_in(c_id).getFavorites();
+		return set;
+	}
+	@Override   //訂單
+	public Set<BlacklistVO> getBlackByC(String c_id) {		
+		Set<BlacklistVO> set = login_in(c_id).getBlacklists();
 		return set;
 	}
 

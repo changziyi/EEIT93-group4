@@ -72,7 +72,7 @@
 	
 		<tr align='center' valign='middle'>
 			<td>${blacklistVO.bk_id}</td>
-			<td>${blacklistVO.mdataVO.m_id}</td>
+			<td>${blacklistVO.mdataVO.b_name}</td>
 			<td>${blacklistVO.cdataVO.c_id}</td>
 			
 			
@@ -94,7 +94,11 @@
  <%@ include file="page2.file" %>
  </div>
  
- 
+   <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/cdata/CdataOrderServlet.do" >
+       <input type="submit" value="消費者最愛">
+        <input type="hidden" name="c_id" value="Snoopy">
+        <input type="hidden" name="action" value="myHate">
+     </FORM>
 
  
  
