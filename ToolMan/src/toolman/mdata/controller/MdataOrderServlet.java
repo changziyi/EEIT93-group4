@@ -26,7 +26,6 @@ public class MdataOrderServlet extends HttpServlet {
 
 		String action = request.getParameter("action");
 
-		    // �Ӧ�select_page.jsp���ШD                                  // �Ӧ� dept/listAllDept.jsp���ШD
 		
 		if ("listOrder".equals(action) ) {
 

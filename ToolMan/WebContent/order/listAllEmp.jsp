@@ -55,7 +55,20 @@
   </div>
 </nav>
 
+<%------------------------------------------------------------------------ --%>
+   <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/mdata/MdataOrderServlet.do" >
+       <input type="submit" value="師傅訂單">
+       <input type="hidden" name="m_id" value="1001">
+        <input type="hidden" name="action" value="listOrder">
+     </FORM>
 
+     <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/cdata/CdataOrderServlet.do" >
+       <input type="submit" value="消費者訂單">
+        <input type="hidden" name="c_id" value="Snoopy">
+        <input type="hidden" name="action" value="listOrder">
+     </FORM>
+     <%------------------------------------------------------------------- --%>
+     
 <b><font color=red></font></b>
 <table border='1' cellpadding='5' cellspacing='0' width='1200'>
 	<tr bgcolor='#CCCCFF' align='center' valign='middle' height='20'>

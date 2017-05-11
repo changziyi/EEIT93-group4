@@ -6,13 +6,8 @@
 
 
 <%-- 此頁採用 JSTL 與 EL 取值 --%>
+<jsp:useBean id="myLike" scope="request" type="java.util.Set" />
 
-<%
-	FavoriteService favoriteSvc = new FavoriteService();
-    List<FavoriteVO> list = favoriteSvc.getAllFavorite();
-    pageContext.setAttribute("list",list);
-
-%>
 <html>
 
 <head>
@@ -59,7 +54,6 @@
 
 <table border='1' bordercolor='#CCCCFF' width='1200'>
 	<tr>
-		<th>編號</th>
 		<th>店家編號</th>
 		<th>消費者帳號</th>
 		<th>刪除</th>
@@ -67,11 +61,13 @@
 		
 	</tr>
 	
-	 <%@ include file="page1.file" %> 
-	<c:forEach var="favoriteVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
+<%-- 	 <%@ include file="page1.file" %>  --%>
+<%-- 	<c:forEach var="favoriteVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>"> --%>
+	
+		<c:forEach var="favoriteVO" items="${myLike}" > 
+	
 	
 		<tr align='center' valign='middle'>
-			<td>${favoriteVO.f_id}</td>
 			<td>${favoriteVO.mdataVO.b_name}</td>
 			<td>${favoriteVO.cdataVO.c_id}</td>
 			
@@ -91,14 +87,12 @@
 		
 	</c:forEach>
 </table>
- <%@ include file="page2.file" %>
  </div>
  
-    <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/cdata/CdataOrderServlet.do" >
-       <input type="submit" value="消費者最愛">
-        <input type="hidden" name="c_id" value="Snoopy">
-        <input type="hidden" name="action" value="myLike">
-     </FORM>
+  
+     
+
+   
  
  <%----- --------%>
 

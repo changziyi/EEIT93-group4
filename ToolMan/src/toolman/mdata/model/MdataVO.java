@@ -37,15 +37,6 @@ public class MdataVO implements java.io.Serializable {
 	private Set<FavoriteVO> favorites = new HashSet<FavoriteVO>();//
 	private Set<BlacklistVO> blacklists = new HashSet<BlacklistVO>();//
 
-
-	public Set<OrderVO> getOrders() {// added by benny
-		return orders;
-	}
-
-	public void setOrders(Set<OrderVO> orders) {// added by benny
-		this.orders = orders;
-	}
-
 	public Integer getM_id() {
 		return m_id;
 	}
@@ -220,5 +211,13 @@ public class MdataVO implements java.io.Serializable {
 
 	public void setBlacklists(Set<BlacklistVO> blacklists) {
 		this.blacklists = blacklists;
+	}
+
+	public Set<OrderVO> getOrders() {// added by benny
+		return orders;
+	}
+
+	public void setOrders(Set<OrderVO> orders) {// added by benny
+		this.orders = orders;
 	}
 }
