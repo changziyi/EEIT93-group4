@@ -4,6 +4,11 @@ package toolman.cdata.model;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Set;
+
+import toolman.blacklist.model.BlacklistVO;
+import toolman.favorite.model.FavoriteVO;
+import toolman.order.model.OrderVO;
 
 
 
@@ -16,14 +21,7 @@ public class CdataService {
 	
 	public CdataVO login_in(String c_id,String c_pwd){		
 		CdataDAO cdata = new CdataDAO();	
-		CdataVO cdataVO = cdata.login_in(c_id);//傳入參數c_id
-
-        // 如果cdata不等於 null 而且參數 c_pwd等於cdata內的c_pwd) 
-         if (cdataVO != null && c_pwd.equals(cdataVO.getC_pwd())){
-        //boolean equals(Object anObject):判斷字串是否與 Object相同
-        	 return cdataVO ;
-         }
-        // 傳回null物件
+		CdataVO cdataVO = cdata.login_in(c_id);
 		return cdataVO;
 	}
 
@@ -54,5 +52,18 @@ public class CdataService {
 	public List<CdataVO> getAll() {
 		return dao.getAll();
 	}
-
+	public Integer updatecustomerSname(String c_id, String s_name){		
+		return dao.updatecustomerSname(c_id, s_name);
+	}
+	
+	public Set<OrderVO> getOrderByC(String c_id) {//訂單
+		return dao.getOrderByC(c_id);
+	}
+	public Set<FavoriteVO> getFavoriteByC(String c_id) {//訂單
+		return dao.getFavoriteByC(c_id);
+	}
+	public Set<BlacklistVO> getBlackByC(String c_id) {//訂單
+		return dao.getBlackByC(c_id);
+	}
+	
 }

@@ -6,6 +6,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
+import toolman.cdata.model.CdataVO;
+
 
 
 public interface OrderDAO_Interface {
@@ -25,11 +27,15 @@ public interface OrderDAO_Interface {
     public void updateOrderSnameToFishedById(Integer o_id);
     public void updateOrderSnameToUnfinishedReviewById(Integer o_id);
     public void updateOrder(OrderVO orderVO);
-
+    public List<OrderVO> getBySname(String s_name);
+    public List<OrderVO> getOrderBySnameAndDate(String s_name,Timestamp o_tdate1,Timestamp o_tdate2);
    //----------------------------ratting 
     
-    public OrderVO  getRate(Integer o_id);
+    public OrderVO  getRate(Integer o_id);    
     public Integer updateOrderRate(Integer m_rating, Integer c_rating,String ca_des, String ma_des,Integer o_id);
+    public Integer updateOrderRateByC(Integer m_rating, String ca_des, Integer o_id);
+    public Integer updateOrderRateByM( Integer c_rating, String ma_des,Integer o_id);
 
+  //----------------------------ratting 
 
 }

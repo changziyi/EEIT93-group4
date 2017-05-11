@@ -1,6 +1,7 @@
 package toolman.cdata.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,7 +32,6 @@ public class LoginServlet extends HttpServlet {
 		
 		Map<String, String> errorMsgs = new HashMap<>();
 		req.setAttribute("errorMsgs", errorMsgs);
-		// 設定輸入資料的編碼
 		req.setCharacterEncoding("UTF-8");
 		HttpSession session = req.getSession();
 		/******************************** 登入 ***********************************/
@@ -46,42 +46,43 @@ public class LoginServlet extends HttpServlet {
 		if (c_pwd  == null || c_pwd.trim().length() == 0) {
 			errorMsgs.put("c_pwd", "請輸入密碼");
 		}
-		
+		//reCAPTCHA
+		String gRecaptchaResponse = req
+				.getParameter("g-recaptcha-response");
+		System.out.println(gRecaptchaResponse);		
+		boolean verify = VerifyRecaptcha.verify(gRecaptchaResponse);
+		System.out.println(" Name = " + c_id + "::password = " + c_pwd 
+				+ "::Captcha Verify"+verify);		
+
+		CdataService cs = new CdataService();
+		CdataVO  cdataVO = cs.login_in(c_id, c_pwd);		
+		//cross-database
+        if (cdataVO != null && c_id.equals(cdataVO.getC_id()) 
+        		&& c_pwd.equals(cdataVO.getC_pwd())){
+        	session.setAttribute("LoginOK", cdataVO);//登入成功
+        }else{
+			errorMsgs.put("LoginError", "該帳號不存在或密碼錯誤");
+			RequestDispatcher rd = req.getRequestDispatcher
+					(req.getContextPath()+"/cdata/login-in.jsp");
+		}
 		if (!errorMsgs.isEmpty()) {
 			RequestDispatcher rd = req.getRequestDispatcher("/cdata/login-in.jsp");
 			rd.forward(req, resp);
 			return;//中斷
 		}
-		
-		
-		
-		CdataService cs = new CdataService();
-		CdataVO  cdataVO = cs.login_in(c_id, c_pwd);
-		if (cdataVO != null){
-			session.setAttribute("LoginOK", cdataVO);//物件放入Session範圍內，識別字串為"LoginOK"，表示此使用者已經登入
-		}else{
-			errorMsgs.put("LoginError", "該帳號不存在或密碼錯誤");
-		}
-		
-		if(errorMsgs.isEmpty()){//是否為空值
-			String contextPath = getServletContext().getContextPath();
+        if(verify == true){ 
+        	 resp.sendRedirect(resp.encodeRedirectURL(req.getContextPath()+"/master/List.jsp"));
+//        	 System.out.println("C_id = " + cdataVO.getC_id());
+//        	 System.out.println("cdataVO = " + cdataVO);
+        }else{
+        	errorMsgs.put("gRecaptchaResponse", "請驗證我不是機器人");
+        	RequestDispatcher rd = req.getRequestDispatcher("/cdata/login-in.jsp");
+        	rd.forward(req, resp);
+        	return;
+        }
 			
-			String target = (String)session.getAttribute("target");
-			if (target != null) {
-			    resp.sendRedirect(resp.encodeRedirectURL(contextPath + target));
-			}else{
-			    resp.sendRedirect(resp.encodeRedirectURL(req.getContextPath()+"/master/List.jsp"));
-			}			
-			return;
-		}else{
-			RequestDispatcher rd = req.getRequestDispatcher("/cdata/login-in.jsp");//錯誤導向
-															//InsertCdataError.jsp /login-in.jsp
-			rd.forward(req, resp);
-			return;			
 		}
-		
-		
-		}
+
 	}
 
 }

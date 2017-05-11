@@ -13,9 +13,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
+import toolman.cdata.model.CdataVO;
 import toolman.favorite.model.FavoriteService;
 import toolman.favorite.model.FavoriteVO;
-
+import toolman.mdata.model.MdataVO;
 import toolman.order.model.OrderService;
 import toolman.order.model.OrderVO;
 
@@ -52,14 +53,20 @@ public class FavoriteController extends HttpServlet {
 			
 			try {
 				/***************************1.接收請求參數****************************************/
-				String c_id = request.getParameter("c_id").trim();	
+//				String c_id = request.getParameter("c_id").trim();	
 				Integer m_id = new Integer(request.getParameter("m_id").trim());
+				String c_id = request.getParameter("c_id").trim();	
 
+				
 				FavoriteVO favoriteVO = new FavoriteVO();
 				
-				favoriteVO.setC_id(c_id);
-				favoriteVO.setM_id(m_id);
+				CdataVO cdataVO = new CdataVO();
+				cdataVO.setC_id(c_id);
+				favoriteVO.setCdataVO(cdataVO);
 				
+				MdataVO mdataVO = new MdataVO();
+				mdataVO.setM_id(m_id);
+				favoriteVO.setMdataVO(mdataVO);
 
 				/***************************2.開始查詢資料****************************************/
 				FavoriteService favoriteSvc = new FavoriteService();
@@ -80,26 +87,27 @@ public class FavoriteController extends HttpServlet {
 			}
 		}
 		
-		if ("delete".equals(action)) { // �Ӧ�listAllEmp.jsp
-
+		if ("delete".equals(action)) { 
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			request.setAttribute("errorMsgs", errorMsgs);
 	
 			try {
-				/***************************1.�����ШD�Ѽ�***************************************/
 				Integer f_id = new Integer(request.getParameter("f_id"));
 				
-				/***************************2.�}�l�R�����***************************************/
+				
+				
 				FavoriteService favoriteSvc = new FavoriteService();
 				favoriteSvc.deleteFavorite(f_id);
 				
-				/***************************3.�R������,�ǳ����(Send the Success view)***********/								
+				
+				
 				String url = "/order/like.jsp";
 				RequestDispatcher successView = request.getRequestDispatcher(url); // 成功轉交update_emp_input.jsp
 				successView.forward(request, response);
-				/***************************��L�i�઺���~�B�z**********************************/
+
+			
 			} catch (Exception e) {
 				errorMsgs.add("修改資料取出時失敗:"+e.getMessage());
 				RequestDispatcher failureView = request

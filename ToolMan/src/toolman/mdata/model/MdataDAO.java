@@ -1,7 +1,6 @@
 package toolman.mdata.model;
 
-import java.util.HashSet;
-import java.util.Iterator;
+
 import java.util.List;
 import java.util.Set;
 
@@ -9,13 +8,13 @@ import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.criterion.Criterion;
-import org.hibernate.criterion.Order;
-import org.hibernate.criterion.Projections;
+
 import org.hibernate.criterion.Restrictions;
 
 import hibernate.util.HibernateUtil;
-import toolman.discussion.model.DiscussionVO;
 import toolman.mpro.model.MProVO;
+import toolman.order.model.OrderVO;
+import toolman.work.model.WorkVO;
 
 
 public class MdataDAO implements MdataDAO_interface {
@@ -61,7 +60,13 @@ public class MdataDAO implements MdataDAO_interface {
 			throw ex;
 		}
 	}
-
+	
+	@Override   //訂單
+	public Set<OrderVO> getOrderByM(Integer m_id) {		
+		Set<OrderVO> set = findByPrimaryKey(m_id).getOrders();
+		return set;
+	}
+	
 	@Override
 	public MdataVO findByPrimaryKey(Integer m_id) {
 		MdataVO mdataVO = null;
@@ -144,7 +149,28 @@ public class MdataDAO implements MdataDAO_interface {
 		return list;
 	}
 	
-	
+	@Override
+	public List<MdataVO> SeachByCityAndDistrictAndMpro(String m_city, String m_district, String m_pro) {
+		List<MdataVO> list = null;
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try {
+			session.beginTransaction();
+			Criteria query = session.createCriteria(MdataVO.class, "m");
+			query.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+			query.createAlias("m.mpros","p");
+			Criterion c1 = Restrictions.eq("m.m_city", m_city);
+			Criterion c2 = Restrictions.like("m.m_district", "%" + m_district + "%");
+			Criterion c3 = Restrictions.like("p.m_pro", "%" + m_pro + "%");
+			query.add(Restrictions.and(Restrictions.and(c1,c2),c3));
+//			query.add(Restrictions.sqlRestriction("1=1 order by rand()"));
+			list = query.list();
+			session.getTransaction().commit();
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
+		return list;
+	}
 	
 	@Override
 	public List<MdataVO> SearchByCityAndMpro(String m_city, String input) {
@@ -196,42 +222,122 @@ public class MdataDAO implements MdataDAO_interface {
 			}
 			return list;
 		}
-		
-		public void updatemasterSname(Integer m_id) {
+		//BY BENNY--for manager backstage
+		public Integer updatemasterSname(Integer m_id,String s_name) {
 			Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+			Integer count=0;
 			try {
 				session.beginTransaction();
-				Query query = session.createQuery("from MdataVO set s_name=:s where m_id=:m");
-				query.setParameter("s","m_sus");
+				Query query = session.createQuery("update MdataVO set s_name=:s where m_id=:m");
+				query.setParameter("s",s_name);
 				query.setParameter("m",m_id);
-				Integer count = query.executeUpdate();
+				count = query.executeUpdate();
 				session.getTransaction().commit();
 			} catch (RuntimeException ex) {
 				session.getTransaction().rollback();
 				throw ex;
 			}
+			return count;
 		}
-		
+		//BY BENNY--for manager backstage
+		@Override
+		public List<MdataVO> getBySname(String s_name) {
+			List<MdataVO> list = null;
+			Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+			try {
+				session.beginTransaction();
+				Query query = session.createQuery("from MdataVO where s_name=:s ");
+				query.setString("s",s_name);
+				list = query.list();
+				session.getTransaction().commit();
+			} catch (RuntimeException ex) {
+				session.getTransaction().rollback();
+				throw ex;
+			}
+			return list;
+		}
 	public static void main(String[] args) {
 //		
 		MdataDAO dao = new MdataDAO();
 //		
-		dao.updatemasterSname(1001);
-//		//D車join
-
-/*		List<MdataVO> list7 = dao.SearchByCityAndMpro("臺北市","水");
-		for (MdataVO list : list7) {
-			System.out.print(list.getM_city() + ",");
-			System.out.print(list.getM_id() + ",");
-			System.out.print(list.getM_name() + ",");
-			System.out.println(list.getB_name());
-			Set<MProVO> mpros = list.getMpros();
-			for (MProVO aMpro : mpros) {
-				System.out.println(aMpro.getM_pro());
-			}
-			System.out.println("-----------------");
+//		dao.updatemasterSname(1001);
+		
+		//測試作品集
+		MdataVO mdataVO = dao.findByPrimaryKey(1001);
+		Set<WorkVO> workVO =  mdataVO.getWorks();
+		for(WorkVO aWork : workVO) {
+			System.out.println(aWork.getWork_id());
+			System.out.println(aWork.getImg1());
+			System.out.println(aWork.getImg2());
+			System.out.println(aWork.getImg3());
 		}
-*/
+		
+		//測試orders
+//		MdataVO mdataVO = dao.findByPrimaryKey(1001);
+//		Set<OrderVO> orders = mdataVO.getOrders();
+//		for(OrderVO aOrder : orders) {
+//			System.out.print(aOrder.getC_id().getC_id());
+//		}
+		
+		//依照縣市、地區、專業查詢 --> 查師父頁面進階搜尋:條件為1.縣市、2.地區、3.專業
+//		List<MdataVO> list8 = dao.SeachByCityAndDistrictAndMpro("臺北市","","");
+//		for (MdataVO list : list8) {
+//			System.out.print(list.getM_city() + ",");
+//			System.out.print(list.getM_district() + ",");
+//			System.out.print(list.getM_id() + ",");
+//			System.out.print(list.getM_name() + ",");
+//			System.out.println(list.getB_name());
+//			Set<MProVO> mpros = list.getMpros();
+//			for (MProVO aMpro : mpros) {
+//				System.out.println(aMpro.getM_pro());
+//			}
+//			System.out.println("-----------------");
+//		}
+		
+		//by benny getByMidAndSname
+//		List<MdataVO> list8 = dao.getBySname("審核通過");
+//		for (MdataVO list : list8) {
+//			System.out.print(list.getM_city() + ",");
+//			System.out.print(list.getM_district() + ",");
+//			System.out.print(list.getM_id() + ",");
+//			System.out.print(list.getM_name() + ",");
+//			System.out.println(list.getB_name());
+//			Set<MProVO> mpros = list.getMpros();
+//			for (MProVO aMpro : mpros) {
+//				System.out.println(aMpro.getM_pro());
+//			}
+//			System.out.println("-----------------");
+//		}
+		
+		//by benny getByMidAndSname
+//		List<MdataVO> list8 = dao.getByAndSname("審核通過");
+//		for (MdataVO list : list8) {
+//			System.out.print(list.getM_city() + ",");
+//			System.out.print(list.getM_district() + ",");
+//			System.out.print(list.getM_id() + ",");
+//			System.out.print(list.getM_name() + ",");
+//			System.out.println(list.getB_name());
+//			Set<MProVO> mpros = list.getMpros();
+//			for (MProVO aMpro : mpros) {
+//				System.out.println(aMpro.getM_pro());
+//			}
+//			System.out.println("-----------------");
+//		}
+		
+//		//D車join　依照縣市 AND(專業 OR 店家名稱)查詢 --> 首頁搜尋:條件為1.縣市、2.專業or店家名稱
+//		List<MdataVO> list7 = dao.SearchByCityAndMpro("臺北市","水");
+//		for (MdataVO list : list7) {
+//			System.out.print(list.getM_city() + ",");
+//			System.out.print(list.getM_id() + ",");
+//			System.out.print(list.getM_name() + ",");
+//			System.out.println(list.getB_name());
+//			Set<MProVO> mpros = list.getMpros();
+//			for (MProVO aMpro : mpros) {
+//				System.out.println(aMpro.getM_pro());
+//			}
+//			System.out.println("-----------------");
+//		}
+
 		
 		//B車join
 //		List<Object[]> list5 = dao.Search_B("水");
@@ -414,15 +520,28 @@ public class MdataDAO implements MdataDAO_interface {
 		
 		//Benny test
 //		MdataDAO dao =new MdataDAO();
-//		 List<MdataVO> vo = dao.getCityAndDistrictAndMPro("台北市", "中正區", "水電工程");
+//		 List<MdataVO> vo = dao.getCityAndDistrictAndMPro("臺北市", "中正區", "");
 //		 for (MdataVO list : vo) {
+//			 	System.out.print(list.getM_id() + ",");
+//			 	System.out.print(list.getM_name() + ",");
+//			 	System.out.print(list.getB_name() + ",");
 //				System.out.print(list.getM_city() + ",");
-//				System.out.print(list.getM_id() + ",");
-//				System.out.print(list.getM_name() + ",");
-//				System.out.println(list.getB_name());
+//				System.out.println(list.getM_district());
 //				Set<MProVO> mpros = list.getMpros();
+//				for(MProVO mpro : mpros) {
+//					System.out.println(mpro.getM_pro());
+//				}
+//				System.out.println("---------------------");
 //		 }
 		
 	}//main()
+
+	@Override
+	public List<MdataVO> getByAndSname(String s_name) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
 
 }//MasterDAO

@@ -3,13 +3,13 @@ package toolman.mdata.controller;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Timestamp;
-import java.util.Collection;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.MultipartConfig;
@@ -23,6 +23,8 @@ import javax.servlet.http.Part;
 import toolman.mdata.model.MdataService;
 import toolman.mdata.model.MdataVO;
 import toolman.mpro.model.MProVO;
+import toolman.work.model.WorkService;
+import toolman.work.model.WorkVO;
 
 @WebServlet("/master/master.do")
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 5 * 1024 * 1024, maxRequestSize = 5 * 5 * 1024 * 1024)
@@ -33,16 +35,21 @@ public class MdataServlet extends HttpServlet {
 
 		request.setCharacterEncoding("UTF-8");
 		String action = request.getParameter("action");
+		System.out.println("action= " + action);
 		
 		if ("SearchMaster".equals(action)) {
 			
 			String m_city = request.getParameter("city");
-			String input = request.getParameter("search");
+			String m_district = "";
+			String input = request.getParameter("input");
+//			System.out.println("city= " + m_city);
+//			System.out.println("input= " + input);
 			
 			HttpSession session = request.getSession();
 			MdataVO mdataVO = new MdataVO();
 			
 			mdataVO.setM_city(m_city);
+			mdataVO.setM_district(m_district);
 			mdataVO.setB_name(input);
 			
 			session.setAttribute("search", mdataVO);
@@ -51,19 +58,24 @@ public class MdataServlet extends HttpServlet {
 			
 		}
 		
-		if("SearchMasterNext".equals(action)) {
+		if("SearchResult".equals(action)) {
 			
 			String m_city = request.getParameter("city");
-			String input = request.getParameter("search");
+			String m_district = request.getParameter("district");
+			String input = request.getParameter("input");
+			System.out.println("city= " + m_city);
+			System.out.println("district= " + m_district);
+			System.out.println("input= " + input);
 			
 			HttpSession session = request.getSession();
 			MdataVO mdataVO = new MdataVO();
 			
 			mdataVO.setM_city(m_city);
+			mdataVO.setM_district(m_district);
 			mdataVO.setB_name(input);
 			
 			session.setAttribute("search", mdataVO);
-//			response.sendRedirect("searchResult.jsp");
+			response.sendRedirect("searchResult.jsp");
 //			return;
 			
 		}
@@ -175,7 +187,7 @@ public class MdataServlet extends HttpServlet {
 			in.read(b_image);
 			in.close();
 			
-			MdataVO mdataVO = (MdataVO)session.getAttribute("mdataVO");
+			MdataVO mdataVO = (MdataVO)session.getAttribute("cdata_mdataVO");
 			mdataVO.setB_name(b_name);
 			mdataVO.setB_des(b_des);
 			mdataVO.setB_image(b_image);
@@ -187,7 +199,7 @@ public class MdataServlet extends HttpServlet {
 			mdataVO.setS_name("m_nchecked");
 			
 			if (!errorMsgs.isEmpty()) {
-				session.setAttribute("mdataVO", mdataVO);
+				session.setAttribute("cdata_mdataVO", mdataVO);
 				response.sendRedirect("OpenStoreDesc.jsp");
 				return;
 			}
@@ -195,7 +207,7 @@ public class MdataServlet extends HttpServlet {
 			MdataService mdataSvc = new MdataService();
 			mdataSvc.insert(mdataVO);
 			
-			session.setAttribute("mdataVO", mdataVO);
+			session.setAttribute("cdata_mdataVO", mdataVO);
 			response.sendRedirect("OpenStoreCheck.jsp");
 			return;
 
@@ -262,6 +274,50 @@ public class MdataServlet extends HttpServlet {
 			}
 
 			out.write(m_cer);
+			out.close();
+		}
+		
+		if ("work".equals(type)) {
+			String image = request.getParameter("image");
+			Integer img = new Integer(image);
+			response.setContentType("image/jpeg");
+
+			ServletOutputStream out = response.getOutputStream();
+			MdataService mdataSvc = new MdataService();
+			MdataVO mdataVO = mdataSvc.findByPrimaryKey(img);
+			
+			WorkService workSvc = new WorkService();
+			
+			Set<WorkVO> works = mdataVO.getWorks();
+			for(WorkVO aWork : works) {
+				WorkVO vo = workSvc.findByPrimaryKey(aWork.getWork_id());
+				vo.getImg1();
+			}
+			
+			for (WorkVO aWork : works) {
+				out.write(aWork.getImg1());
+				out.write(aWork.getImg2());
+				out.write(aWork.getImg3());
+			}
+			
+//			List<byte[]> imgarray = new ArrayList<byte[]>();
+//			for (WorkVO aWork : works) {
+//				imgarray.add(aWork.getImg1());
+//				imgarray.add(aWork.getImg2());
+//				imgarray.add(aWork.getImg3());
+//			}
+			
+//			if (m_cer == null || m_cer.length == 0) {
+//				InputStream in = getServletContext().getResourceAsStream("/image/jake.gif");
+//				m_cer = new byte[in.available()];
+//				in.read(m_cer);
+//				out.write(m_cer);
+//				in.close();
+//			}
+//			int i = 0;
+//			for (byte[] aImg : imgarray) {
+//				out.write(aImg);
+//			}
 			out.close();
 		}
 		

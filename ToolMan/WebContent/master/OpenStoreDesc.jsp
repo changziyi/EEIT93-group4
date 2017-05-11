@@ -27,7 +27,7 @@
 		</tr>
 		<tr>
 			<td>店家名稱:
-			<input type="text" name="b_name" value="${mdataVO.b_name}"/></td>
+			<input type="text" name="b_name" /></td>
 		</tr>
 		<tr>
 			<td>店家介紹:
