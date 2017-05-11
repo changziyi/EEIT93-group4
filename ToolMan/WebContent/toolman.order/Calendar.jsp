@@ -71,33 +71,24 @@
 </style>
 </head>
 <body>
-<div id="date-popover-content" class="popover-content">
+<div id="outterdiv">
 	<div id="my-calendar" class="calendarclass"></div>
 </div>
 
 <script type="application/javascript">
-var eventdata = [		
-    {"date":"2017-05-01","badge":false,"title":"整天不可預約",classname: "allunavaliable"},
-    {"date":"2017-05-02","badge":false,"title":"上午可預約", classname: "morningavaliable"},
-    {"date":"2017-05-03","badge":false,"title":"下午可預約", classname: "noonavaliable"},
-    {"date":"2017-05-04","badge":false,"title":"晚上可預約", classname: "nightavaliable"},
-    {"date":"2017-05-05","badge":false,"title":"整天可預約", classname: "allavaliable"},
-];
+
 $(function(){
 	
-	createcalendar();
-});//end ready
-
-function createcalendar(){
-    $("#my-calendar").zabuto_calendar({
+	$("#my-calendar").zabuto_calendar({
 //      language: "en"
           action: function () {
-              return myDateFunction(this.id);
+        	  return myDateFunction(this.id)
           },
           action_nav: function () {
               return myNavFunction(this.id);
           },
 		today:true,
+		
         legend: [
             {type: "block", label: "整天不可預約",classname: "allunavaliable"},
             {type: "block", label: "上午可預約", classname: "morningavaliable"},
@@ -112,40 +103,91 @@ function createcalendar(){
             {type: "list", list: ["grade-1", "grade-2", "grade-3", "grade-4"]},
             {type: "text", label: "Good"}
             ],
-            
-          data: eventdata,
+            data: eventdata,
+          
 		  
         });//end zabuto_calendar
-   		 alert(eventdata.toString());
+
+
+  
+	
+});//end ready
+
+function createcalendar(){
+	$("#my-calendar2").zabuto_calendar({
+//      language: "en"
+          action: function () {
+        	  return myDateFunction(this.id)
+          },
+          action_nav: function () {
+              return myNavFunction(this.id);
+          },
+		today:true,
+		
+        legend: [
+            {type: "block", label: "整天不可預約",classname: "allunavaliable"},
+            {type: "block", label: "上午可預約", classname: "morningavaliable"},
+            {type: "block", label: "下午可預約", classname: "noonavaliable"},
+            {type: "block", label: "晚上可預約", classname: "nightavaliable"},
+            {type: "block", label: "整天可預約",classname: "allavaliable"},
+            {type: "block", label: "今日",classname: "todaycolor"},
+            {type: "block", label: "已預約", badge: "今",classname: "reservedcolor"},
+            
+            {type: "spacer"},
+            {type: "text", label: "Bad"},
+            {type: "list", list: ["grade-1", "grade-2", "grade-3", "grade-4"]},
+            {type: "text", label: "Good"}
+            ],
+            data: eventdata,
+          
+		  
+        });//end zabuto_calendar
+   		 console.log(eventdata);
 	}//end create calendar
-	function myDateFunction(id, fromModal)  {
+	var eventdata = [		
+		
+	    {"date":"2017-05-01","badge":false,"title":"整天不可預約",classname: "allunavaliable"},
+	    {"date":"2017-05-02","badge":false,"title":"上午可預約", classname: "morningavaliable"},
+	    {"date":"2017-05-03","badge":false,"title":"下午可預約", classname: "noonavaliable"},
+	    {"date":"2017-05-04","badge":false,"title":"晚上可預約", classname: "nightavaliable"},
+	    {"date":"2017-05-05","badge":false,"title":"整天可預約", classname: "allavaliable"},
+	    
+	];
+	var eventdata2=null;
+	function myDateFunction(id)  {
 // 		 $("#date-popover").hide();
 // 	        if (fromModal) {
 // 	            $("#" + id + "_modal").modal("hide");
 // 	        }
 	        var date = $("#" + id).data("date");
+	        console.log(date);
 // 	        var hasEvent = $("#" + id).data("hasEvent");
 // 	        if (hasEvent && !fromModal) {
 // 	            return false;
 // 	        }
-	        $("#date-popover-content").html('You clicked on date ' + date);
-	        var masterjson = '\{\"date\"\:\"'+date+'\"\,\"badge\"\:false\,\"title\"\:\"整天可預約\"\,\"classname\"\:\"unallavaliable\"\}';
-	        alert(masterjson);
+// 	        $("#outterdiv").html('<h1>You clicked on date ' + date+'</h1>');
+	        var masterjson = '\{\"date\"\:\"'+date+'\"\,\"badge\"\:false\,\"title\"\:\"整天可預約\"\,\"classname\"\:\"nightavaliable\"\}';
+// 	        alert(masterjson);
 	        var json_obj= $.parseJSON(masterjson);
-	        eventdata.push(json_obj);
-	        $('#date-popover-content').empty();
-	        $('#date-popover-content').html('<div id="my-calendar" class="calendarclass"></div>');        
+	        this.eventdata.push(json_obj);
+// 	        var eventdata2=eventdata;
+			eventdata2 = this.eventdata;
+			eventdata=null;
+			eventdata = this.eventdata2;
+	        $('#outterdiv').empty();
+	        $('#outterdiv').html('<div id="my-calendar2" class="calendarclass"></div>');        
+
 	        createcalendar();
 // 			var json_obj= $.parseJSON('{"dame":"youall"}');
 	        
-	        alert(json_obj);
+// 	        alert(json_obj);
 	        
 	       
 
 	        
 // 	        return true;
 // 	        {"date":"2017-05-05","badge":false,"title":"整天可預約", classname: "allavaliable"},
-	
+		return true ;
 	}
 	
 	function myNavFunction(id) {
