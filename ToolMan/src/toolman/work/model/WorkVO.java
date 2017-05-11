@@ -1,5 +1,10 @@
 package toolman.work.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import toolman.workim.model.WorkimVO;
+
 import toolman.mdata.model.MdataVO;
 
 public class WorkVO implements java.io.Serializable{
@@ -11,6 +16,7 @@ public class WorkVO implements java.io.Serializable{
 	private byte[] img2;
 	private byte[] img3;
 	private MdataVO mdataVO;
+	private Set<WorkimVO> workims = new HashSet<WorkimVO>();
 	
 	public MdataVO getMdataVO() {
 		return mdataVO;
@@ -54,5 +60,11 @@ public class WorkVO implements java.io.Serializable{
 	public void setImg3(byte[] img3) {
 		this.img3 = img3;
 	}
-
+	public Set<WorkimVO> getWorkims() {
+		return workims;
+	}
+	public void setWorkims(Set<WorkimVO> workims) {
+		this.workims = workims;
+	}
+	
 }

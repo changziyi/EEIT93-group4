@@ -31,9 +31,6 @@ public class MdataPageServlet extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		session.setAttribute("mdataVO", mdataVO);
-//		MdataVO m = (MdataVO)session.getAttribute("mdataVO");
-//		System.out.println("sessionM_id: " + m.getM_id());
-//		System.out.println("sessionM_city: " + m.getM_city());
 		response.sendRedirect("MasterPage.jsp");
 		return;
 		
@@ -47,7 +44,6 @@ public class MdataPageServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		MdataVO mdataVO = (MdataVO)session.getAttribute("mdataVO");
 		CdataVO cdataVO = (CdataVO)session.getAttribute("LoginOK");
-		System.out.println("post: " + mdataVO.getM_id());
 		
 		if ("MasterPage_Q".equals(action)) {
 			

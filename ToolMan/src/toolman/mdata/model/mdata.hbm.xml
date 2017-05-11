@@ -48,7 +48,7 @@
 		</set>
 		
 		<!--師父1-問與答*-->
-		<set name="discussions" table="discussion" lazy="false" cascade="all" inverse="true" order-by="d_id asc">			
+		<set name="discussions" table="discussion" lazy="true" cascade="all" inverse="true" order-by="d_id asc">			
 			<key>
 				<column name="m_id" />
 			</key>
@@ -65,14 +65,14 @@
 		
 		
 
-<set name="favorites" table="favorite" lazy="false" cascade="all"  inverse="true"  order-by="f_id asc">																						
+<set name="favorites" table="favorite" lazy="true" cascade="all"  inverse="true"  order-by="f_id asc">																						
 			<key>
 				<column name="m_id" />
 			</key>
 			<one-to-many class="toolman.favorite.model.FavoriteVO" />
 		</set>		
 
-<set name="blacklists" table="blacklist" lazy="false" cascade="all"  inverse="true"  order-by="bk_id asc">																						
+<set name="blacklists" table="blacklist" lazy="true" cascade="all"  inverse="true"  order-by="bk_id asc">																						
 			<key>
 				<column name="m_id" />
 			</key>
