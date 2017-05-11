@@ -1,5 +1,6 @@
 package toolman.discussion.model;
 
+import toolman.cdata.model.CdataVO;
 import toolman.mdata.model.MdataVO;
 
 public class DiscussionVO implements java.io.Serializable {
@@ -9,7 +10,7 @@ public class DiscussionVO implements java.io.Serializable {
 	private String d_reply;
 	private MdataVO mdataVO;
 	private String c_id;
-//	private CustomerVO customerVO;
+//	private CdataVO cdataVO;
 	
 	public Integer getD_id() {
 		return d_id;
@@ -41,6 +42,12 @@ public class DiscussionVO implements java.io.Serializable {
 	public void setMdataVO(MdataVO mdataVO) {
 		this.mdataVO = mdataVO;
 	}
+//	public CdataVO getCdataVO() {
+//		return cdataVO;
+//	}
+//	public void setCdataVO(CdataVO cdataVO) {
+//		this.cdataVO = cdataVO;
+//	}
 	public String getC_id() {
 		return c_id;
 	}

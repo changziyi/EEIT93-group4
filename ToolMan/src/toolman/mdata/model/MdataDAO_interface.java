@@ -24,4 +24,5 @@ public interface MdataDAO_interface {
 	
     public Set<OrderVO> getOrderByM(Integer m_id);//訂單
 
+	public List<MdataVO> getBySname(String s_name);//by Benny
 }

@@ -107,8 +107,8 @@ public class OrderDAO implements OrderDAO_Interface {
 		
 		try {
 			session.beginTransaction();
-			Query query = session.createQuery("FROM OrderVO WHERE m_id = ?");
-			query.setParameter(1, m_id);
+			Query query = session.createQuery("FROM OrderVO WHERE m_id.m_id = ?");
+			query.setParameter(0, m_id);
 			querylist = query.list();			
 			session.getTransaction().commit();
 		} catch (RuntimeException ex) {
@@ -313,33 +313,7 @@ public class OrderDAO implements OrderDAO_Interface {
 		}
 		return querylist;
 	}
-	
-	
 
-	
-	public Integer updateOrderRate(Integer m_rating, Integer c_rating,String ca_des, String ma_des,Integer o_id) {
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		Integer count = 0;		
-		try {
-			session.beginTransaction();
-			Query query = session.createQuery("update OrderVO set m_rating = ? , c_rating = ? , ca_des = ? , ma_des = ? where o_id = ?");
-			query.setParameter(0, m_rating);
-			query.setParameter(1, c_rating);
-			query.setParameter(2, ca_des);
-			query.setParameter(3, ma_des);
-			query.setParameter(4, o_id);
-			query.executeUpdate();			
-			session.getTransaction().commit();
-		} catch (RuntimeException ex) {
-			session.getTransaction().rollback();
-			throw ex;
-		}
-		return count;
-	}
-	
-	
-	
-	
 	
 	@Override
 	public List<OrderVO> getAllOrderByCAndDateAndSname(String c_id,Timestamp o_tdate1, Timestamp o_tdate2,String s_name){
@@ -361,6 +335,44 @@ public class OrderDAO implements OrderDAO_Interface {
 		}
 		return querylist;
 	}
+	
+	public List<OrderVO> getBySname(String s_name) {
+		List<OrderVO> list = null;
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try {
+			session.beginTransaction();
+			Query query = session.createQuery("from OrderVO where s_name=:s ");
+			query.setString("s",s_name);
+			list = query.list();
+			session.getTransaction().commit();
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
+		return list;
+	}
+    public List<OrderVO> getOrderBySnameAndDate(String s_name,Timestamp o_tdate1,Timestamp o_tdate2){
+    	List<OrderVO> querylist = null;
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		Integer count = 0;
+		
+		try {
+			session.beginTransaction();
+			Query query = session.createQuery("FROM OrderVO WHERE s_name=? o_tdate BETWEEN ? AND ?");
+			query.setParameter(1, s_name);
+			query.setParameter(2, o_tdate2);
+			query.setParameter(3, o_tdate2);
+			querylist = query.list();			
+			session.getTransaction().commit();
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
+		return querylist;
+	}	
+    
+//-------rating	
+	
 	@Override
 	public OrderVO getRate(Integer o_id) {
 		OrderVO orderVO = null;
@@ -375,7 +387,25 @@ public class OrderDAO implements OrderDAO_Interface {
 		}
 		return orderVO;
 	}
-	
+	public Integer updateOrderRate(Integer m_rating, Integer c_rating,String ca_des, String ma_des,Integer o_id) {
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		Integer count = 0;		
+		try {
+			session.beginTransaction();
+			Query query = session.createQuery("update OrderVO set m_rating = ? , c_rating = ? , ca_des = ? , ma_des = ? where o_id = ?");
+			query.setParameter(0, m_rating);
+			query.setParameter(1, c_rating);
+			query.setParameter(2, ca_des);
+			query.setParameter(3, ma_des);
+			query.setParameter(4, o_id);
+			query.executeUpdate();			
+			session.getTransaction().commit();
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
+		return count;
+	}
 	public static void main(String[] args) { 
 		OrderDAO orderdao = new OrderDAO();
 		OrderVO orderVO = new OrderVO();
@@ -432,7 +462,13 @@ public class OrderDAO implements OrderDAO_Interface {
 //			orderdao.getOrderByDate(o_bdatetest,o_bdatetest2);
 //		
 		//getOrderByM
-//		orderdao.getOrderByM(1001);
+		List<OrderVO> list = orderdao.getOrderByM(1001);
+		for(OrderVO alist : list) {
+			System.out.print(alist.getM_id().getM_id() + ",");
+			System.out.print(alist.getM_id().getB_name() + ",");
+			System.out.println(alist.getC_id().getC_id());
+		}
+			
 //		
 //		//getAllOrderByMAndDate tested ok
 //			DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -496,7 +532,9 @@ public class OrderDAO implements OrderDAO_Interface {
 		
 //	
 //	OrderVO orderVO2 =  orderdao.getRate(3007);
-//		
+	
+//		OrderVO orderVO2 =  orderdao.getRate(3006);
+	
 //		System.out.print(orderVO2.getM_rating() + ",");
 //		System.out.print(orderVO2.getC_rating() + ",");
 //		System.out.print(orderVO2.getCa_des() + ",");
@@ -505,6 +543,11 @@ public class OrderDAO implements OrderDAO_Interface {
 		
 	//	orderdao.getOrderByC("Snoopy");
 
+//		
+//		System.out.print(orderVO2.getM_rating() + ",");
+//		System.out.print(orderVO2.getC_rating() + ",");
+//		System.out.print(orderVO2.getCa_des() + ",");
+//		System.out.print(orderVO2.getMa_des() + ",");
 		
 
 		
@@ -517,13 +560,3 @@ public class OrderDAO implements OrderDAO_Interface {
 		
 		
 		}
-
-
-	
-	
-	
-	
-
-	
-	
-

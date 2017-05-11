@@ -27,7 +27,8 @@ public interface OrderDAO_Interface {
     public void updateOrderSnameToFishedById(Integer o_id);
     public void updateOrderSnameToUnfinishedReviewById(Integer o_id);
     public void updateOrder(OrderVO orderVO);
-
+    public List<OrderVO> getBySname(String s_name);
+    public List<OrderVO> getOrderBySnameAndDate(String s_name,Timestamp o_tdate1,Timestamp o_tdate2);
    //----------------------------ratting 
     
     public OrderVO  getRate(Integer o_id);

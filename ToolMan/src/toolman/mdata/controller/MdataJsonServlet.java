@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.simple.JSONValue;
 
+import toolman.discussion.model.DiscussionService;
 import toolman.mdata.model.MdataService;
 import toolman.mdata.model.MdataVO;
 import toolman.mpro.model.MProVO;
@@ -55,6 +56,16 @@ public class MdataJsonServlet extends HttpServlet {
 			
 			Long s2 = System.currentTimeMillis();
 			System.out.println("進階搜尋時間：" + (s2-s1));
+		}
+		
+		if("discussion".equals(action)) {
+			Integer master = new Integer(request.getParameter("master"));
+			System.out.println("master: " + master);
+			
+			PrintWriter out = response.getWriter();
+			DiscussionService discussionSvc = new DiscussionService();
+			
+			out.print(discussionSvc.getByMidJson(master));
 		}
 		
 	}

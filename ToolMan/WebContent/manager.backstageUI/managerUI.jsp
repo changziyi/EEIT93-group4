@@ -20,10 +20,14 @@
 	
 <!-- bootstrap -->
 <!-- datatable-->
-<script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
-<link rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
+	<script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
 
 <style>
+	.dataTables_wrapper{
+		width:100%;
+		margin:auto;width:80%; border: 2px solid blue; horizontal-align:center;
+	}
 	#navigator ul li {
 	　display:inline;
 	 list-style-type:none;
@@ -48,6 +52,7 @@
 	 width:70px;
 	 text-align:center;
 	}
+	
 </style>
 </head>
 <body>
@@ -56,7 +61,7 @@
 		<nav >
 			<div id="navigator" >
 			
-				<ul style="margin: auto;width:900px; horizontal-align:center;" class="nav nav-tabs nav-justified"  >
+				<ul style="margin: auto;width:80%; horizontal-align:center;" class="nav nav-tabs nav-justified"  >
 				
 					<li  data-toggle="tab" role="presentation"  id="masterlist" data-id="m" class="active"><a href="#"><div>師傅列表</div></a></li>
 					
@@ -74,12 +79,12 @@
 			</div>
 
 		</nav>
-			<div id="functionrow" style="margin: auto;width:900px; horizontal-align:center;" >
+			<div id="functionrow" style="margin: auto;width:80%; horizontal-align:center;" class="nav nav-tabs nav-justified">
 
 			</div>
 			
-			<div id="subfunctionrow" style="margin: auto;width:900px; horizontal-align:center;" class="nav nav-tabs nav-justified">
-							</div>
+			<div id="subfunctionrow" style="margin: auto;width:80%; horizontal-align:center;" class="nav nav-tabs nav-justified">
+			</div>
 	</header>
 <!-- Function button -->
 	<div>
@@ -87,12 +92,12 @@
 	</div>
 <!-- main content here -->		
 	<article>
-	<table id="eventlist" style="margin:auto;width:900px; border: 2px solid blue; horizontal-align:center;">
-		<thead>
+	<table id="eventlist" class="display" >
+<!-- 		<thead> -->
 <!-- 			<th>1</th> -->
 <!-- 			<th>2</th> -->
-	    </thead>
-		<tbody>
+<!-- 	    </thead> -->
+<!-- 		<tbody> -->
 <!-- 			<tr><td>1</td><td>2</td></tr> -->
 <!-- 			<tr><td>1</td><td>2</td></tr> -->
 		</tbody>
@@ -162,23 +167,25 @@
 <script>
 	var table ;//datatable variable not in use
 	var navagatorid = $('#navigator>ul>li.active').data('id');//top navigator
+	var dfd = $.Deferred();
 	var datastatus = $('#functionrow>div>ul>li[name="datastatus"][data-buttonstate="selected"]').data('statusvalue');
  	var datatime = $('#functionrow>div>ul>li[name="datatime"][data-buttonstate="selected"]').data('statusvalue');
 
-
+// 		$(document).ajaxComplete(function(){
+// 			datatableinit(); //execute datable when ajax is done//fuck it, use deferred instead
+// 		});	
 $(function(){
-		$(document).ajaxComplete(function(){
-			 datatableinit();//execute datable when ajax is done
-		});	//let's try it
 
-		functionrow();// build functionrow
- 	    subfunctionrow();// build function buttons
+
+		$('#eventlist').empty();
 		$('#navigator>ul>li').on('click',navigatorevent);//upon swithing tab
-		
+		functionrow();// build functionrow
+		subfunctionrow();// build function buttons
 
 		$('#functionrow>div>ul>li').on('click',functionrowfiltering);//filtering
+		
  	   $('#subfunctionrow>a').on('click',togglehyper);//direct to other pages
- 	  $('#subfunctionrow>span[id!="messagespanm"][id!="messagespanc"]').on('click',togglegetmethod);//will return something when clicked, maill has it's own form action
+//  	  $('#subfunctionrow>span[id!="messagespanm"],#subfunctionrow>span[id!="messagespanc"]').on('click',togglegetmethod);//will return something when clicked, maill has it's own form action
  		 mail();//mail
 
  		loadProduct('m','allmaster','alldate');//build dynamic table
@@ -186,7 +193,7 @@ $(function(){
 ); //end ready   
 	function mail(){
 		
-//  			$('#emailblock').imagesLoaded(function() {
+//  			$('#emailblock').imagesLoaded(function() {//waterfall
 //  				$('#emailblock').masonry({
 //  					itemSelector : '.content_box',
 //  					columnWidth : 275,
@@ -195,28 +202,37 @@ $(function(){
 //  			});
  		}// end mail
 	
-	function navigatorevent(){
-		
-		 $('#eventlist').dataTable().fnDestroy();   
-		   var id = $(this).data('id');
-		   navagatorid = id;
-		   loadProduct(id);
+	function navigatorevent(){// order is of utmost,get navigator id, clear the table, build 2nd row and buttons, set active and selected filter, send 3 parameters to loadproduct
+		var id = $(this).data('id');
+		navagatorid = id;
+
+// 		$('#eventlist').empty();
+		 $('#eventlist').DataTable().destroy();
 		   $('#navigator>ul>li').removeClass('active');
 		   $('#navigator>ul>li[data-id="' + id + '"]').addClass('active');
+		 	functionrow();
 		   
-		   functionrow();
-		   subfunctionrow(); 
+		    
+		 datastatus = $('#functionrow>div>ul>li[name="datastatus"][data-buttonstate="selected"]').data('statusvalue');
+		 if(id=='o'){
+		  	 datatime = $('#functionrow>div>ul>li[name="datatime"][data-buttonstate="selected"]').data('statusvalue');//tested ok//only order tab has this event
+		   }//end if  
+		   else{
+			 datatime = 'alltime';
+		   }
+		 subfunctionrow(); 
+		 loadProduct(navagatorid,datastatus,datatime);
+
 		   
 	}//navigatorevent()
 	
 	function functionrow(){
 
-		var docFragfunction = $(document.createDocumentFragment());
+		var docFragfunction2 = $(document.createDocumentFragment());
 		
 	   if( navagatorid== 'm'){
 		   
  			$('#functionrow').empty();
-// 			var allmaster = '<li data-toggle="tab" role="presentation" data-id="allmaster" class="active"><a href="#">所有師傅</a></li>';
 			var buttongroupdiv ='<div class="btn-group">'
 			var dropdowntitlestate = 
 				'<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"aria-haspopup="true" aria-expanded="false">師傅狀態<span class="caret"></span></button>';
@@ -224,9 +240,9 @@ $(function(){
 				'<li data-statusvalue="allmaster" data-buttonstate="selected" name="datastatus"><a href="#">所有師傅</a></li><li role="separator" class="divider"></li>'
 				+'<li data-statusvalue="未審核" name="datastatus"><a href="#" >未審核</a></li><li role="separator" class="divider"></li>'
 				+'<li data-statusvalue="審核通過" name="datastatus"><a href="#" >審核通過</a></li><li role="separator" class="divider"></li>'
-				+'<li data-statusvalue="審核未過" name="datastatus"><a href="#" >審核未過</a></li><li role="separator" class="divider"></li>';
+				+'<li data-statusvalue="審核未過" name="datastatus"><a href="#" >審核未過</a></li><li role="separator" class="divider"></li>'
 				+'<li data-statusvalue="停權中" name="datastatus"><a href="#">停權中</a></li>';
-			var dropdownmenustate = '<ul class="dropdown-menu">'+dropdownmenucontent +'</ul></li>';
+			var dropdownmenustate = '<ul class="dropdown-menu">'+dropdownmenucontent +'</ul>';
 			var buttongroupdivend ='</div>'	
 			var masterstatus = buttongroupdiv+dropdowntitlestate+dropdownmenustate+buttongroupdivend;
 			
@@ -235,24 +251,23 @@ $(function(){
 			
 			var li1 = $(masterstatus);
 			var li2 = $(showblacklistc);
-			docFragfunction.append([li1,li2]);
-			$('#functionrow').append(docFragfunction);
+			docFragfunction2.append([li1,li2]);
+			$('#functionrow').append(docFragfunction2);
 			
+			$('#functionrow>div>ul>li').on('click',functionrowfiltering);//filtering
 		}//end else if
 		
 		else if(navagatorid== 'c'){
 			
 			$('#functionrow').empty();
-
-
 			var buttongroupdiv ='<div class="btn-group">'
 			var dropdowntitlestate = 
 					'<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"aria-haspopup="true" aria-expanded="false">消費者狀態<span class="caret"></span></button>';
 			var dropdownmenucontentstate=
 					'<li data-statusvalue="allcustomer" data-buttonstate="selected" name="datastatus"><a href="#">所有消費者</a></li><li role="separator" class="divider"></li>'
-					+'<li data-statusvalue="m_sus" name="datastatus"><a href="#">停權中</a></li>';
+					+'<li data-statusvalue="停權中" name="datastatus"><a href="#">停權中</a></li>';
 					
-			var dropdownmenustate = '<ul class="dropdown-menu">'+dropdownmenucontentstate +'</ul></li>';
+			var dropdownmenustate = '<ul class="dropdown-menu">'+dropdownmenucontentstate +'</ul>';
 			var buttongroupdivend ='</div>';		
 			var customerstatus = buttongroupdiv+dropdowntitlestate+dropdownmenustate+buttongroupdivend;
 							
@@ -260,9 +275,9 @@ $(function(){
 
 			var li1 = $(customerstatus);
 			var li2 = $(showblacklistc );
-			docFragfunction.append([li1,li2]);
-			$('#functionrow').append(docFragfunction);
-			
+			docFragfunction2.append([li1,li2]);
+			$('#functionrow').append(docFragfunction2);
+			$('#functionrow>div>ul>li').on('click',functionrowfiltering);//filtering
 		}//end else if
 		
 		else if(navagatorid== 'o'){
@@ -273,11 +288,11 @@ $(function(){
 						'<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"aria-haspopup="true" aria-expanded="false">訂單狀態<span class="caret"></span></button>';
 			var dropdownmenucontentstate=
 						'<li data-statusvalue="allorder" data-buttonstate="selected" name="datastatus"><a href="#">所有訂單</a></li><li role="separator" class="divider"></li>'
-						+'<li data-statusvalue="o_inprogress" name="datastatus"><a href="#">進行中</a></li><li role="separator" class="divider"></li>'
-						+'<li data-statusvalue="o_deleted" name="datastatus"><a href="#">已刪除</a></li><li role="separator" class="divider"></li>'
-						+'<li data-statusvalue="o_unfinished" name="datastatus"><a href="#">一方未評分</a></li><li role="separator" class="divider"></li>'
-						+'<li data-statusvalue="o_finished" name="datastatus"><a href="#">已完成</a></li>';
-			var dropdownmenustate = '<ul class="dropdown-menu">'+dropdownmenucontentstate +'</ul></li>';
+						+'<li data-statusvalue="進行中" name="datastatus"><a href="#">進行中</a></li><li role="separator" class="divider"></li>'
+						+'<li data-statusvalue="已刪除" name="datastatus"><a href="#">已刪除</a></li><li role="separator" class="divider"></li>'
+						+'<li data-statusvalue="一方未評分" name="datastatus"><a href="#">一方未評分</a></li><li role="separator" class="divider"></li>'
+						+'<li data-statusvalue="已完成" name="datastatus"><a href="#">已完成</a></li>';
+			var dropdownmenustate = '<ul class="dropdown-menu">'+dropdownmenucontentstate +'</ul>';
 			var buttongroupdivend ='</div>';
 			var orderstatus = buttongroupdiv+dropdowntitlestate+dropdownmenustate+buttongroupdivend;
 				
@@ -288,14 +303,14 @@ $(function(){
 				+'<li data-statusvalue="oneyear" name="datatime"><a href="#">最近一年</a></li><li role="separator" class="divider"></li>'
 				+'<li data-statusvalue="onemonth" name="datatime"><a href="#">最近一個月</a></li><li role="separator" class="divider"></li>'
 				+'<li data-statusvalue="alldate" data-buttonstate="selected" name="datatime" ><a href="#">全部</a></li><li role="separator" class="divider"></li>';
-			var dropdownmenutime = '<ul class="dropdown-menu">'+dropdownmenucontenttime +'</ul></li>';
+			var dropdownmenutime = '<ul class="dropdown-menu">'+dropdownmenucontenttime +'</ul>';
 			var mastertime = buttongroupdiv+dropdowntitletime+dropdownmenutime+buttongroupdivend;
 			
 			var li1 = $(orderstatus);
 			var li2 = $(mastertime);
-			docFragfunction.append([li1,li2]);
-			$('#functionrow').append(docFragfunction);
-			
+			docFragfunction2.append([li1,li2]);
+			$('#functionrow').append(docFragfunction2);
+			$('#functionrow>div>ul>li').on('click',functionrowfiltering);//filtering
  		}// end else if 
 
 	}//end functionrow
@@ -303,12 +318,12 @@ $(function(){
 		function functionrowfiltering(){
 		
  
-				 id = navagatorid;//tested ok//get navagitor id
+				id = navagatorid;//tested ok//get navagitor id
 			 	datastatus = $(this).data('statusvalue');//tested ok//both status and time selection have datastatus which makes me easiler to change their selected attribute without knowing what they are
 			 	whattype= $(this).attr('name');//tested ok// to know the type of the clicked
 			 	if(whattype=="datastatus"){//tested ok
 				   $('#functionrow>div>ul>li[name="datastatus"]').removeAttr('data-buttonstate');//remove the selected attribute of all status 
-				   $('#functionrow>div>ul>li[data-statusvalue="'+datastatus+'"]').attr('data-buttonstate','selected');// assign the clicked as currently selected 		   
+				   $('#functionrow>div>ul>li[data-statusvalue="'+datastatus+'"]').attr('data-buttonstate','selected');// assign the clicked to the currently selected 		   
 			 	}//end if
 			 	if(whattype=="datatime"){
 					   $('#functionrow>div>ul>li[name="datatime"]').removeAttr('data-buttonstate');//remove the selected attribute of all status 
@@ -321,10 +336,13 @@ $(function(){
 			   else{
 				   datatime='alltime';
 			   }
-				 $('#eventlist').dataTable().fnDestroy();  
+			   $('#eventlist').DataTable().destroy(); 
+// 				$('#eventlist').empty();
 			   loadProduct(id,datastatus,datatime);
 			   // $('#navigator>ul>li[data-id="' + id + '"]')
-
+			   
+			   //rebinding
+			$('#functionrow>div>ul>li').on('click',functionrowfiltering);//filtering
 		}//end table filtering
 	
 	   function subfunctionrow(){
@@ -332,7 +350,6 @@ $(function(){
 			var docFragsubfunction = $(document.createDocumentFragment());
 		   if( navagatorid== 'm'){
 				$('#subfunctionrow').empty();
-// 				$('#subfunctionrow>form>span').
 				var applicationreviewm = '<a href="" id="applymasterlink" name="applicationreviewm"><input type="button" value="審核師傅" /></a>';
 				var suspensionm = '<span value="suspensionm" name="functionaction" style="padding:0px; margin:0px;" ><input type="button" value="停權" "/></span>';
 				var sendmessagem = '<span id="messagespanm" value="sendmessagem" name="functionaction" style="padding:0px; margin:0px;" ><input type="button" data-target="#myModal01" data-toggle="modal" value="傳送訊息" "/></span>';
@@ -343,27 +360,40 @@ $(function(){
 				var b4 = $(blacklistm);
 				docFragsubfunction.append([b1,b2,b3,b4]);
 				$('#subfunctionrow').append(docFragsubfunction);
+					//rebinding
+			 	 $('#subfunctionrow>a').on('click',togglehyper);//direct to other pages
+// 			 	 $('#subfunctionrow>span[id!="messagespanm"][id!="messagespanc"]').on('click',togglegetmethod);//will return something when clicked, maill has it's own form action
+
 			}//end else if
 			
 			else if(navagatorid== 'c'){
 				$('#subfunctionrow').empty();
 				var suspensionc = '<span value="suspensionc" name="functionaction" style=" padding:0px; margin:0px;" ><input type="button" value="停權"/></span>';
-				var sendmessagec = '<span id="messagespanmc" value="sendmessagec" name="functionaction" style=" padding:0px; margin:0px;" ><input type="button" value="傳送訊息" /></span>';
+				var sendmessagec = '<span id="messagespanmc" value="sendmessagec" name="functionaction" style=" padding:0px; margin:0px;" ><input type="button" data-target="#myModal01" data-toggle="modal" value="傳送訊息" /></span>';
 				var blacklistc = '<span value="blacklistc" name="functionaction" style=" padding:0px; margin:0px;" ><input type="button" value="黑名單" /></span>';
 				var b1 = $(suspensionc);
 				var b2 = $(sendmessagec);
 				var b3 = $(blacklistc);
 				docFragsubfunction.append([b1,b2,b3]);
 				$('#subfunctionrow').append(docFragsubfunction);
+				
+					//rebinding
+			 	  $('#subfunctionrow>a').on('click',togglehyper);//direct to other pages
+// 			 	  $('#subfunctionrow>span[id!="messagespanm"][id!="messagespanc"]').on('click',togglegetmethod);//will return something when clicked, maill has it's own form action
+
 			}//end else if
 			
 			else if(navagatorid== 'o'){
 				$('#subfunctionrow').empty();
-				var sendmessageo = '<span value="sendmessageo" name="functionaction" style="padding:0px; margin:0px;" ><input type="button" value="訊息" "/></span>';
+				var sendmessageo = '<span id="messagespanmo" value="sendmessageo" name="functionaction" style="padding:0px; margin:0px;" ><input type="button" data-target="#myModal01" data-toggle="modal" value="訊息" "/></span>';
 				var b1 = $(sendmessageo);
 				docFragsubfunction.append([b1]);
 				$('#subfunctionrow').append(docFragsubfunction);
 				
+					//rebinding
+			 	  $('#subfunctionrow>a').on('click',togglehyper);//direct to other pages
+// 			 	  $('#subfunctionrow>span[id!="messagespanm"][id!="messagespanc"]').on('click',togglegetmethod);//will return something when clicked, maill has it's own form action
+
 			}// end else if 
 	
 		}//end functionrow
@@ -416,23 +446,38 @@ $(function(){
            $.post(hyperlinkstring,{"functionaction":valueattrr,"toggledcheckbox":checkboxdatas2},function(data){
 				alert(data);
            });//end get function
+// 		 	$('#eventlist').dataTable().fnDestroy();
+//    			$('#eventlist').empty();
+
+           loadProduct(navagatorid,datastatus,datatime);
        }//end else 
 	}//end togglerow
 	
 	
 	   function loadProduct(id,datastatus,datatime){
 // 		   "datastatus":datastatus,"datatime":datatime
-			   $.getJSON('${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIServlet.do',{'navigatorid':id,"datastatus":datastatus,"datatime":datatime}, function(datas){
-					 var th = $('#eventlist>thead');
-					 var tb = $('#eventlist>tbody');
-				   var docFragth = $(document.createDocumentFragment());
-				   var docFragtb = $(document.createDocumentFragment());
-				   tb.empty();
-				   th.empty();
-				   
-				   if(id=="o"){
+			
 					   
-					   th.empty();
+			 $.getJSON('${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIServlet.do',{'navigatorid':id,"datastatus":datastatus,"datatime":datatime}, function(data){
+				 buildtable(id,data);
+				 $.when(dfd)//super great
+// 				 .done(alert("first"))
+// 				 .done(alert("second"))
+				 .done(datatableinit);//super great
+// 				 .done($(".dataTables_wrapper").css("width","80%"));
+			 });//end get json
+	}//end loadproduct
+	
+	 function buildtable(id,datas){	
+		 dfd = $.Deferred();
+		 var table = $('#eventlist');
+		 table.empty();
+		 var th = $('<thead></thead>'); 
+		 var tb = $('<tbody></tbody>'); 
+		   var docFragth = $(document.createDocumentFragment());
+		   var docFragtb = $(document.createDocumentFragment());
+		   
+			   if(id=="o"){   					  
 					   	var thc0 = $('<th></th>').addClass('eventlistthreadtrth');
 					   	var thc1 = $('<th></th>').text('師傅編號').addClass('eventlistthreadtrth');
 					   	var thc2 = $('<th></th>').text('店家名稱').addClass('eventlistthreadtrth');
@@ -454,12 +499,12 @@ $(function(){
 						var thc8 = $('<th></th>').text('師傅評分').addClass('eventlistthreadtrth');
 						var thc9 = $('<th></th>').text('消費者評分').addClass('eventlistthreadtrth');
 						var thc10 = $('<th></th>').text('管理者註記').addClass('eventlistthreadtrth');
-						var rowth = $('<tr></tr>').append([thc0,thc1,thc2,thc3,thc4,thc5,thc6,thc7,thc8,thc9,thc10]);
+						var rowth = $('<tr></tr>').append([thc0,thc1,thc2,thc3,thc4,thc5,thc6,thc7,thc8,thc9,thc10]);						
 						docFragth.append(rowth);
 				   }
 				   else if(id=="m"){
 					   
-					   th.empty();
+					   
 					  	var thc0 = $('<th></th>').addClass('eventlistthreadtrth');
 						var thc1 = $('<th></th>').text('師傅編號').addClass('eventlistthreadtrth');
 						var thc2 = $('<th></th>').text('店家名稱').addClass('eventlistthreadtrth');
@@ -474,7 +519,7 @@ $(function(){
 				   }
 				   else if(id=="c"){
 					   
-					   th.empty();
+					  
 					    var thc0 = $('<th></th>').addClass('eventlistthreadtrth');
 					    var thc1 = $('<th></th>').text('下單日期').addClass('eventlistthreadtrth');
 						var thc2 = $('<th></th>').text('消費者名稱').addClass('eventlistthreadtrth');
@@ -496,7 +541,7 @@ $(function(){
 					   if(id=="o"){
 						   
 						   	console.log(data);
-						   	tb.empty();
+						   	
 						   	var toggleword = $('<input type="checkbox" name="otoggle" />').val(data.o_id);
 						   	var cell0 = $('<td></td>').append(toggleword);
 						  	var cell1 = $('<td></td>').text(data.o_tdate).addClass('eventlisttbodytrtd');
@@ -518,7 +563,7 @@ $(function(){
 				  
 				  else if(id=="m"){				
 					  
-					   tb.empty();
+					  
 					   var toggleword =$('<input type="checkbox" name="mtoggle"/>').val(data.M_id);     
 					   var mid =  $('<input type="button" width="500px" /> ').val(data.M_id).addClass('eventlisttbodytrtd');
 					   var midwordmid =  $('<span style="visibility: hidden;font-size:0px;margin:0pxlpadding:0px;"></span> ').text(data.M_id).addClass('eventlisttbodytrtd');
@@ -540,7 +585,7 @@ $(function(){
 				   
 					else if(id=="c"){
 						
-					   tb.empty();
+						
 					   var toggleword = $('<input type="checkbox" name="ctoggle" />').val(data.c_id);
 					   var cell0 = $('<td></td>').append(toggleword);
 					   var cell1 = $('<td></td>').text(data.c_jdate).addClass('eventlisttbodytrtd');;
@@ -562,32 +607,27 @@ $(function(){
 			   
 			   th.append(docFragth);
 			   tb.append(docFragtb);
+			   table.append(th);
+			   table.append(tb);
+			   
+			   dfd.resolve();
+			   return dfd;
 // 			   datatableinit();// goes wrong often
-			   
-		  	 }//end get json function
-			);//end get json
-			   
-	   }//end loadProduct(id) function
+			   			   
+	   }//end loadtable function
 				function datatableinit(){
 				table =	$('#eventlist').DataTable({
-						retrieve: true,
+// 						retrieve: true,
 			// 			"lengthMenu":[1, 2, 3, "All"],
-// 						destroy: true,
+						destroy: true,
 // 						"pageLength": 1,
-						 "lengthMenu": [ [1, 2, 50, -1], [1, 2, 50, "All"] ],
+// 						"dom": '<lf<t>ip>',
+						 "lengthMenu": [ [1, 2, 50, -1], [1, 2, 50, "All"] ]
 			// 			"iDisplayLength": 10
 			//			  	destroy: true,
-			//			 		aaData: response.data	
-								 }//end datable attribute
-						 );	//end datable		   
+						 	   
 				   }//end datatableinit
-				function datatabledestory(){
-					$('#eventlist').DataTable({
-						  	destroy: true,
-			// 			 	aaData: response.data	
-								 }//end datable attribute
-						 );	//end datable	   
-				   }//end datatabledestory function
+				);}	//end datable	
 				   
 				   
 </script>

@@ -17,11 +17,11 @@
         <many-to-one name="mdataVO" class="toolman.mdata.model.MdataVO" cascade="all" lazy="false">
             <column name="m_id" />
         </many-to-one>
-        
-<!--         <many-to-one name="cdataVO" class="com.cdata.model.CdataVO" cascade="all" lazy="false"> -->
-<!--             <column name="c_id" /> -->
-<!--         </many-to-one> -->
-        
+<!--         
+        <many-to-one name="cdataVO" class="toolman.cdata.model.CdataVO" cascade="all" lazy="false">
+        	<column name="c_id" />
+        </many-to-one>
+-->         
     </class>
 </hibernate-mapping>
 
