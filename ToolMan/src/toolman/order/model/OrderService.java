@@ -12,6 +12,7 @@ import java.util.Set;
 import org.json.simple.JSONValue;
 
 import toolman.cdata.model.CdataVO;
+import toolman.favorite.model.FavoriteVO;
 import toolman.opro.model.OproVO;
 
 
@@ -50,12 +51,19 @@ public class OrderService {
     }
     public List<OrderVO>  getOrderByC(String c_id){
     	List<OrderVO> orderlist = dao.getOrderByC(c_id);
+    	    	
     	return orderlist;
     }
-    
-    public Set<CdataVO> getOrderListC(String c_id) {
-		return dao.getOrderListC(c_id);
-	}
+//    
+//    public Set<CdataVO> getOrderByC(String c_id) {
+//    	OrderVO orderVO = new OrderVO();
+//		
+//		CdataVO cdataVO = new CdataVO();
+//		cdataVO.setC_id(c_id);
+//		orderVO.setC_id(cdataVO);
+//		
+//		return dao.getOrderByC(c_id);
+//	}
     
     
     

@@ -17,4 +17,7 @@ public interface CdataDAO_interface {
 	public CdataVO cdata_des(String c_id);
 
 	public Integer updatecustomerSname(Integer c_id, String s_name);
+	
+    public Set<OrderVO> getOrderByC(String c_id);//訂單
+
 }

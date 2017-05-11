@@ -33,7 +33,6 @@ public interface OrderDAO_Interface {
     public OrderVO  getRate(Integer o_id);
     public Integer updateOrderRate(Integer m_rating, Integer c_rating,String ca_des, String ma_des,Integer o_id);
 
-    public Set<CdataVO> getOrderListC(String c_id);
 
 
 }

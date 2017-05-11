@@ -26,6 +26,7 @@ import org.json.simple.JSONValue;
 
 import toolman.building.model.BuildingVO;
 import toolman.cdata.model.CdataVO;
+import toolman.favorite.model.FavoriteVO;
 import toolman.mdata.model.MdataVO;
 import toolman.mpro.model.MProDAO;
 import toolman.mpro.model.MProVO;
@@ -54,35 +55,7 @@ public class OrderRatingController extends HttpServlet {
 		
 		
 		
-		
-		if ("listOrder".equals(action) ) {
-
-            List<String> errorMsgs = new LinkedList<String>();
-			
-			request.setAttribute("errorMsgs", errorMsgs);
-			
-			try {
-				/*************************** 1.接收請求參數 ****************************************/
-				String c_id = request.getParameter("c_id");	
-
-				/*************************** 2.開始查詢資料 ****************************************/
-				OrderService orderSvc = new OrderService();
-				Set<CdataVO> set = orderSvc.getOrderListC(c_id);
-
-				/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
-				request.setAttribute("listOrder", set);    // 資料庫取出的set物件,存入request
-
-				String url = null;
-				url =  "listAllEmp.jsp";            // 成功轉交 dept/listAllDept.jsp
-
-				RequestDispatcher successView = request.getRequestDispatcher(url);   // 修改成功後,轉交回送出修改的來源網頁
-				successView.forward(request, response);
-				/*************************** 其他可能的錯誤處理 ***********************************/
-			} catch (Exception e) {
-				throw new ServletException(e);
-			}
-		}
-		
+	
 		
 		
 		

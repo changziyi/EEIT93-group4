@@ -130,6 +130,12 @@ public class CdataDAO implements CdataDAO_interface{
 		return count;
 	}
 
+	@Override   //訂單
+	public Set<OrderVO> getOrderByC(String c_id) {		
+		Set<OrderVO> set = login_in(c_id).getOrders();
+		return set;
+	}
+
 	public static void main(String args[]){		
 		CdataDAO  dao = new CdataDAO();
 		

@@ -59,7 +59,24 @@ public class OrderDAO implements OrderDAO_Interface {
 		}
 		return querylist;
 	}
-
+	@Override
+	public List<OrderVO> getOrderByC(String c_id) {
+		List<OrderVO> querylist = null;
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		Integer count = 0;
+		
+		try {
+			session.beginTransaction();
+			Query query = session.createQuery("FROM OrderVO WHERE c_id = ?");
+			query.setParameter(1, c_id);
+			querylist = query.list();	
+			session.getTransaction().commit();
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
+		return querylist;
+	}
 
 	@Override
 	public List<OrderVO>  getOrderByDate(Timestamp o_tdate1, Timestamp o_tdate2){
@@ -123,24 +140,7 @@ public class OrderDAO implements OrderDAO_Interface {
 	}
 
 
-	@Override
-	public List<OrderVO> getOrderByC(String c_id) {
-		List<OrderVO> querylist = null;
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		Integer count = 0;
-		
-		try {
-			session.beginTransaction();
-			Query query = session.createQuery("FROM OrderVO WHERE c_id = ?");
-			query.setParameter(1, c_id);
-			querylist = query.list();			
-			session.getTransaction().commit();
-		} catch (RuntimeException ex) {
-			session.getTransaction().rollback();
-			throw ex;
-		}
-		return querylist;
-	}
+	
 
 
 	@Override
@@ -410,6 +410,7 @@ public class OrderDAO implements OrderDAO_Interface {
 	//		orderdao.insert(orderVO);
 		
 		//getAllOrder tested ok
+//		
 //			orderdao.getAllOrder();
 
 //		//getOrderByDate tested ok
@@ -493,29 +494,36 @@ public class OrderDAO implements OrderDAO_Interface {
 //			 orderdao.updateOrder(orderVO);
 //		
 		
-	
-		OrderVO orderVO2 =  orderdao.getRate(3006);
+//	
+//	OrderVO orderVO2 =  orderdao.getRate(3007);
 //		
-//		
-		System.out.print(orderVO2.getM_rating() + ",");
-		System.out.print(orderVO2.getC_rating() + ",");
-		System.out.print(orderVO2.getCa_des() + ",");
-		System.out.print(orderVO2.getMa_des() + ",");
+//		System.out.print(orderVO2.getM_rating() + ",");
+//		System.out.print(orderVO2.getC_rating() + ",");
+//		System.out.print(orderVO2.getCa_des() + ",");
+//		System.out.print(orderVO2.getMa_des() + ",");
+		
+		
+	//	orderdao.getOrderByC("Snoopy");
+
 		
 
+		
+		}
+		
+		
+		
+		
+		
+		
+		
 		}
 
 
-	@Override
-	public Set<CdataVO> getOrderListC(String c_id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
+	
+	
 	
 	
 
-	}
+	
 	
 

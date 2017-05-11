@@ -1,7 +1,6 @@
 package toolman.mdata.model;
 
-import java.util.HashSet;
-import java.util.Iterator;
+
 import java.util.List;
 import java.util.Set;
 
@@ -9,13 +8,12 @@ import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.criterion.Criterion;
-import org.hibernate.criterion.Order;
-import org.hibernate.criterion.Projections;
+
 import org.hibernate.criterion.Restrictions;
 
 import hibernate.util.HibernateUtil;
-import toolman.discussion.model.DiscussionVO;
 import toolman.mpro.model.MProVO;
+import toolman.order.model.OrderVO;
 
 
 public class MdataDAO implements MdataDAO_interface {
@@ -61,7 +59,13 @@ public class MdataDAO implements MdataDAO_interface {
 			throw ex;
 		}
 	}
-
+	
+	@Override   //訂單
+	public Set<OrderVO> getOrderByM(Integer m_id) {		
+		Set<OrderVO> set = findByPrimaryKey(m_id).getOrders();
+		return set;
+	}
+	
 	@Override
 	public MdataVO findByPrimaryKey(Integer m_id) {
 		MdataVO mdataVO = null;
