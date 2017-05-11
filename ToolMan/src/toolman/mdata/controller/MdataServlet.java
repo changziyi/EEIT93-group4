@@ -294,12 +294,18 @@ public class MdataServlet extends HttpServlet {
 				vo.getImg1();
 			}
 			
-			List<byte[]> imgarray = new ArrayList<byte[]>();
 			for (WorkVO aWork : works) {
-				imgarray.add(aWork.getImg1());
-				imgarray.add(aWork.getImg2());
-				imgarray.add(aWork.getImg3());
+				out.write(aWork.getImg1());
+				out.write(aWork.getImg2());
+				out.write(aWork.getImg3());
 			}
+			
+//			List<byte[]> imgarray = new ArrayList<byte[]>();
+//			for (WorkVO aWork : works) {
+//				imgarray.add(aWork.getImg1());
+//				imgarray.add(aWork.getImg2());
+//				imgarray.add(aWork.getImg3());
+//			}
 			
 //			if (m_cer == null || m_cer.length == 0) {
 //				InputStream in = getServletContext().getResourceAsStream("/image/jake.gif");
@@ -308,10 +314,10 @@ public class MdataServlet extends HttpServlet {
 //				out.write(m_cer);
 //				in.close();
 //			}
-			
-			for (byte[] aImg : imgarray) {
-				out.write(aImg);
-			}
+//			int i = 0;
+//			for (byte[] aImg : imgarray) {
+//				out.write(aImg);
+//			}
 			out.close();
 		}
 		

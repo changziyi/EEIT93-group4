@@ -46,13 +46,12 @@ public class MdataPageServlet extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		MdataVO mdataVO = (MdataVO)session.getAttribute("mdataVO");
-//		CdataVO cdataVO = (CdataVO)session.getAttribute("loginOK");
+		CdataVO cdataVO = (CdataVO)session.getAttribute("LoginOK");
 		System.out.println("post: " + mdataVO.getM_id());
 		
 		if ("MasterPage_Q".equals(action)) {
 			
 			String d_des = request.getParameter("d_des");
-			System.out.println("d_des: " + d_des);
 			Timestamp d_date = new Timestamp(System.currentTimeMillis());
 			
 			DiscussionVO discussionVO = new DiscussionVO();
@@ -60,6 +59,7 @@ public class MdataPageServlet extends HttpServlet {
 			discussionVO.setD_des(d_des);
 			discussionVO.setD_date(d_date);
 			discussionVO.setMdataVO(mdataVO);
+			discussionVO.setC_id(cdataVO.getC_id());
 			
 			DiscussionService discussionSvc = new DiscussionService();
 			discussionSvc.insert(discussionVO);

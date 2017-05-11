@@ -159,7 +159,7 @@ public class MdataDAO implements MdataDAO_interface {
 			Criterion c2 = Restrictions.like("m.m_district", "%" + m_district + "%");
 			Criterion c3 = Restrictions.like("p.m_pro", "%" + m_pro + "%");
 			query.add(Restrictions.and(Restrictions.and(c1,c2),c3));
-			query.add(Restrictions.sqlRestriction("1=1 order by rand()"));
+//			query.add(Restrictions.sqlRestriction("1=1 order by rand()"));
 			list = query.list();
 			session.getTransaction().commit();
 		} catch (RuntimeException ex) {
@@ -260,11 +260,14 @@ public class MdataDAO implements MdataDAO_interface {
 //		dao.updatemasterSname(1001);
 		
 		//測試作品集
-//		MdataVO mdataVO = dao.findByPrimaryKey(1001);
-//		Set<WorkVO> workVO =  mdataVO.getWorks();
-//		for(WorkVO aWork : workVO) {
-//			System.out.println(aWork.getWork_id());
-//		}
+		MdataVO mdataVO = dao.findByPrimaryKey(1001);
+		Set<WorkVO> workVO =  mdataVO.getWorks();
+		for(WorkVO aWork : workVO) {
+			System.out.println(aWork.getWork_id());
+			System.out.println(aWork.getImg1());
+			System.out.println(aWork.getImg2());
+			System.out.println(aWork.getImg3());
+		}
 		
 		//測試orders
 //		MdataVO mdataVO = dao.findByPrimaryKey(1001);
@@ -275,6 +278,18 @@ public class MdataDAO implements MdataDAO_interface {
 		
 		//依照縣市、地區、專業查詢 --> 查師父頁面進階搜尋:條件為1.縣市、2.地區、3.專業
 //		List<MdataVO> list8 = dao.SeachByCityAndDistrictAndMpro("臺北市","","");
+//		for (MdataVO list : list8) {
+//			System.out.print(list.getM_city() + ",");
+//			System.out.print(list.getM_district() + ",");
+//			System.out.print(list.getM_id() + ",");
+//			System.out.print(list.getM_name() + ",");
+//			System.out.println(list.getB_name());
+//			Set<MProVO> mpros = list.getMpros();
+//			for (MProVO aMpro : mpros) {
+//				System.out.println(aMpro.getM_pro());
+//			}
+//			System.out.println("-----------------");
+//		}
 		
 		//by benny getByMidAndSname
 //		List<MdataVO> list8 = dao.getBySname("審核通過");
