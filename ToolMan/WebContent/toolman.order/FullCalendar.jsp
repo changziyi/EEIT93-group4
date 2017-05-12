@@ -89,10 +89,12 @@
 
 		<div id='external-events'>
 			<h4>Draggable Events</h4>
+			<div id='external-events2'>
 			<div class='fc-event' data-id="morning"data-start="00:00" data-end='12:00'>早上不可預約</div>
 			<div class='fc-event' data-id="noon"data-start="12:00" data-end='07:00'>下午不可預約</div>
 			<div class='fc-event' data-id="night"data-start="06:00" data-end='04:00'>晚上不可預約</div>
 			<div class='fc-event' data-id="allday"data-start="00:00" data-end='24:00'>整天不可預約</div>
+		</div>
 <!-- 			<p> -->
 <!-- 				<input type='checkbox' id='drop-remove' /> -->
 <!-- 				<label for='drop-remove'>remove after drop</label> -->
@@ -131,10 +133,12 @@
 <script>
 	var selectmenu=null;
 	var dragevent = null;
-	var eventid=null;
+	var randomnumber =null;
+	var eventstart = $(this).data('start');
+	var eventend = $(this).data('end');
 	$(function() {
 		
-		$('#external-events').on('click',assignrandom);
+		$('#external-events2>div').on('click',assignrandom);
 		draggableevent();
 		$('#selectmenu>input').on('change',repeatingevent);// end select change
 		/* initialize the calendar
@@ -143,10 +147,12 @@
 		buildcalendar();	
 	});// end ready
 	
-	function assignrandom(){
+	function assignrandom(event){
 		
-	var randomnumber = Math.random().toString();//not working after drop, because the real id is still the original
-	eventid = $(this).data('id')+ randomnumber ;
+	randomnumber = Math.random().toString();//not working after drop, because the real id is still the original
+	
+	eventstart = $(this).data('start');
+	eventend = $(this).data('end');
 	
 	}
 	function draggableevent(){
@@ -165,7 +171,7 @@
 	
 			$(this).data('event', {
 				
-				id: eventid,
+				id: $(this).data('id'),
 				title: $(this).text(), // use the element's text as the event title
 				duration: $(this).data('end'), // an end time (2pm in this example)
 			    
@@ -241,7 +247,8 @@
 	// 			$('#calendar').fullCalendar( 'renderEvent', dragevent);
 // 				console.log(event);
 				
-				
+				event._id = $(this).data('id')+randomnumber;
+				event.id=$(this).data('id')+randomnumber;
 				event.eventOverlap = 'false'; 
 // 				event.start= $(this).data('start');
 				// is the "remove after drop" checkbox checked?
@@ -254,10 +261,15 @@
 			},//end drop
 
 			eventReceive:function( event ) {
+				assignrandom(event);
+				event._id = $(this).data('id')+randomnumber;
+				event.id=$(this).data('id')+randomnumber;
 				console.log(event);
 // 				var randomnumber =Math.random().toString();//not working after drop, because the real id is still the original
 				
+				$(this).attr('data-id',$(this).data('id')+randomnumber);
 				checkoverlapping(event); 
+				
 				},
 			events: [{
 				
@@ -273,15 +285,17 @@
 		
 		var events = $('#calendar').fullCalendar('clientEvents');
 		if(events.length!=1){
-		for(i=1;i<events.length;i++){
+		for(i=0;i<events.length-1;i++){
 		// start-time in between any of the events
 		console.log(event);
-		var start0 = event.end;
-		var start1 = event.start;
-		var start2 = events[i].start;
-		var start3 = events[i].end;
+		var eventid1 = event.id;
+		var eventid2 = event._id;
+		var end1 = event.end._d;
+		var start1 = event.start._d.toString();
+		var start2 = events[i].start._d.toString();
+		var end2 = events[i].end._d;
 		var start4 = events[i].duration;
-		if(start1 == start2 && start0 == start3){
+		if(start1 == start2 ){
 			
 			$('#calendar').fullCalendar('removeEvents', event.id);
 		    return true;
