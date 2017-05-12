@@ -46,6 +46,7 @@ public class EmailVO implements java.io.Serializable{
 	public void setMs_content(String ms_content) {
 		this.ms_content = ms_content;
 	}
+
 	public Boolean getS_name() {
 		return s_name;
 	}

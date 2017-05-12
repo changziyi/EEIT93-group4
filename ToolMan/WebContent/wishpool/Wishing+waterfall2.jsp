@@ -4,9 +4,12 @@
 <%@ page import="java.util.*"%>
 <%@ page import="toolman.wishpool.model.*"%>
 <%@ page import="toolman.ad.model.*"%>
+<%@ page import="toolman.email.model.*"%>
+<%@ page import="toolman.cdata.model.*"%>
 
 <%
 	WishpoolService wishpoolSvc = new WishpoolService();
+
 
 	List<WishpoolVO> old_date = wishpoolSvc.getAll();
 	pageContext.setAttribute("old_date", old_date);
@@ -14,6 +17,13 @@
 	AdService adSvc = new AdService();
 	List<AdVO> gabs = adSvc.getAllBySname("ad_inprogress");
 	pageContext.setAttribute("get_sname", gabs);
+	
+	EmailService emailSvc = new EmailService();
+	HttpSession sessions = request.getSession();
+	CdataVO cdataVO = (CdataVO)sessions.getAttribute("LoginOK");
+	list<EmailVO> list = emailSvc.getMail(cdataVO.getC_id());
+	pageContext.setAttribute("list", list);
+	
 	
 %>
 
@@ -125,8 +135,8 @@
 
 		<div class="row">
 			<div class="col-md-3"
-				style="background-color: #99ceff; padding: 30px; border: 2px solid #66b5ff">
-
+				style="padding: 30px">
+<div style="border: 2px solid #66b5ff ; padding:50px; margin:10px ; background-color:#99ceff; border-radius:25px">
 				<div align="center">
 					<button class="btn btn-primary btn-lg" data-toggle="modal"
 						data-target="#myModal01" style="color: #cce6ff">
@@ -140,16 +150,18 @@
 						<b>什麼是許願池</b>
 					</button>
 				</div>
-				
-				<div style="background-color: #99ceff ; margin:100px 0 0 0 ; padding:10px">
+</div>				
+				<div style="background-color:#cce6ff ; margin:60px 0 0 0 ; padding:10px ; border: 2px solid #66b5ff">
 				<h2 align="center" style="color: #a94dff ">隨機廣告</h2>
-					 <c:forEach var="sname" end="2" items="${get_sname}">
+				<br>
+					 <c:forEach var="sname" end="3" items="${get_sname}">
 						 	<div>
-						 	${sname.mdataVO.b_name} ${sname.mdataVO.m_city}${sname.mdataVO.m_district}
+						 	 ${sname.mdataVO.m_city} ${sname.mdataVO.b_name}
 						 	<a href='${pageContext.servletContext.contextPath}/master/masterPage.do?m_id=${sname.m_id}'>
 						 		<img height="200px" class="img-responsive" src='${pageContext.servletContext.contextPath}/master/master.do?type=master&image=${sname.m_id}'/>
 						 	</a>
 						 	</div>
+						 	<br>
 					 </c:forEach>
 				</div>
 			</div>

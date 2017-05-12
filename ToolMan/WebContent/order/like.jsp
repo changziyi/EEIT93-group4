@@ -95,6 +95,8 @@
  </div>
  
     <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/cdata/CdataOrderServlet.do" >
+    
+    
        <input type="submit" value="消費者最愛">
         <input type="hidden" name="c_id" value="Snoopy">
         <input type="hidden" name="action" value="myLike">

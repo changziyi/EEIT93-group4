@@ -74,7 +74,7 @@ public class BlacklistController extends HttpServlet {
 								
 				/***************************3.查詢完成,準備轉交(Send the Success view)************/
 				request.setAttribute("blacklistVO", blacklistVO); // 資料庫取出的empVO物件,存入req
-			String url = "/order/dislike.jsp";
+			String url = "/order/thanks3.jsp";
 				RequestDispatcher successView = request.getRequestDispatcher(url); // 成功轉交update_emp_input.jsp
 				successView.forward(request, response);
 
@@ -103,7 +103,7 @@ public class BlacklistController extends HttpServlet {
 				blacklistSvc.deleteBlacklist(bk_id);
 				
 				/***************************3.�R������,�ǳ����(Send the Success view)***********/								
-				String url = "/order/dislike.jsp";
+				String url = "/order/thanks4.jsp";
 				RequestDispatcher successView = request.getRequestDispatcher(url); // 成功轉交update_emp_input.jsp
 				successView.forward(request, response);
 				/***************************��L�i�઺���~�B�z**********************************/
