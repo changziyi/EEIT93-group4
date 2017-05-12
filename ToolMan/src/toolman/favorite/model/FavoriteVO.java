@@ -1,10 +1,14 @@
 package toolman.favorite.model;
 
-public class FavoriteVO implements java.io.Serializable{
+import toolman.cdata.model.CdataVO;
+import toolman.mdata.model.MdataVO;
+
+public class FavoriteVO {
 	
 	private Integer f_id;
-	private String c_id;
-	private Integer m_id;
+
+	private CdataVO cdataVO;
+	private MdataVO mdataVO;
 
 	
 	
@@ -15,17 +19,20 @@ public class FavoriteVO implements java.io.Serializable{
 		this.f_id = f_id;
 	}
 
-	public String getC_id() {
-		return c_id;
+	
+	public CdataVO getCdataVO() {
+		return cdataVO;
 	}
-	public void setC_id(String c_id) {
-		this.c_id = c_id;
+	public void setCdataVO(CdataVO cdataVO) {
+		this.cdataVO = cdataVO;
+
 	}
-	public Integer getM_id() {
-		return m_id;
+	public MdataVO getMdataVO() {
+		return mdataVO;
 	}
-	public void setM_id(Integer m_id) {
-		this.m_id = m_id;
+	public void setMdataVO(MdataVO mdataVO) {
+		this.mdataVO = mdataVO;
+		
 	}
 	
 }

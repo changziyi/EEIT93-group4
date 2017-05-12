@@ -1,6 +1,8 @@
 package toolman.work.model;
 
+import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -8,6 +10,7 @@ import org.hibernate.SessionFactory;
 
 import hibernate.util.HibernateUtil;
 import toolman.mdata.model.MdataVO;
+import toolman.workim.model.WorkimVO;
 
 public class WorkDAO implements WorkDAO_interface {
 
@@ -41,7 +44,22 @@ public class WorkDAO implements WorkDAO_interface {
 		}
 		return querylist;
 	}
-
+	
+	@Override
+	public WorkVO findByPrimaryKey(Integer work_id) {
+		WorkVO workVO = null;
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try {
+			session.beginTransaction();
+			workVO = (WorkVO) session.get(WorkVO.class, work_id);
+			session.getTransaction().commit();
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
+		return workVO;
+	}
+	
 	@Override
 	public void update(WorkVO workVO) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
@@ -72,10 +90,23 @@ public class WorkDAO implements WorkDAO_interface {
 	}
 
 	public static void main(String[] args) {
-		WorkVO workVO = new WorkVO();
+//		WorkVO workVO = new WorkVO();
 		WorkDAO workdao = new WorkDAO();
 		MdataVO mdataVO = new MdataVO();
 //		mdataVO.setM_id(1004);
+		
+		//findByPrimaryKey
+		WorkVO workVO = workdao.findByPrimaryKey(5001);
+		System.out.print(workVO.getWork_name() + ",");
+		System.out.print(workVO.getWork_des() + ",");
+//		System.out.print(workVO.getImg1() + ",");
+//		System.out.print(workVO.getImg2() + ",");
+//		System.out.println(workVO.getImg3());
+		Set<WorkimVO> workims = workVO.getWorkims();
+		for(WorkimVO aWorkim :workims) {
+			System.out.print(aWorkim.getIm_id() + ",");
+			System.out.println(aWorkim.getIm_show());
+		}
 		
 		// insert
 //		workVO.setMdataVO(mdataVO);

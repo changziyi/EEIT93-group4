@@ -37,6 +37,9 @@
 		<mapping resource="toolman/mdata/model/mdata.hbm.xml" />
 		<mapping resource="toolman/discussion/model/discussion.hbm.xml" />
 		<mapping resource="toolman/building/model/building.hbm.xml" />
+		<mapping resource="toolman/favorite/model/favorite.hbm.xml" />
+		<mapping resource="toolman/blacklist/model/blacklist.hbm.xml" />
+		<mapping resource="toolman/workim/model/workim.hbm.xml" />
 
 	</session-factory>
 	

@@ -3,13 +3,14 @@ package toolman.mdata.controller;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.MultipartConfig;
@@ -23,6 +24,10 @@ import javax.servlet.http.Part;
 import toolman.mdata.model.MdataService;
 import toolman.mdata.model.MdataVO;
 import toolman.mpro.model.MProVO;
+import toolman.work.model.WorkService;
+import toolman.work.model.WorkVO;
+import toolman.workim.model.WorkimService;
+import toolman.workim.model.WorkimVO;
 
 @WebServlet("/master/master.do")
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 5 * 1024 * 1024, maxRequestSize = 5 * 5 * 1024 * 1024)
@@ -38,6 +43,7 @@ public class MdataServlet extends HttpServlet {
 		if ("SearchMaster".equals(action)) {
 			
 			String m_city = request.getParameter("city");
+			String m_district = "";
 			String input = request.getParameter("input");
 //			System.out.println("city= " + m_city);
 //			System.out.println("input= " + input);
@@ -46,6 +52,7 @@ public class MdataServlet extends HttpServlet {
 			MdataVO mdataVO = new MdataVO();
 			
 			mdataVO.setM_city(m_city);
+			mdataVO.setM_district(m_district);
 			mdataVO.setB_name(input);
 			
 			session.setAttribute("search", mdataVO);
@@ -57,14 +64,17 @@ public class MdataServlet extends HttpServlet {
 		if("SearchResult".equals(action)) {
 			
 			String m_city = request.getParameter("city");
+			String m_district = request.getParameter("district");
 			String input = request.getParameter("input");
 			System.out.println("city= " + m_city);
+			System.out.println("district= " + m_district);
 			System.out.println("input= " + input);
 			
 			HttpSession session = request.getSession();
 			MdataVO mdataVO = new MdataVO();
 			
 			mdataVO.setM_city(m_city);
+			mdataVO.setM_district(m_district);
 			mdataVO.setB_name(input);
 			
 			session.setAttribute("search", mdataVO);
@@ -212,10 +222,6 @@ public class MdataServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		String type = request.getParameter("type");
-		
-		if("json".equals(type)) {
-			doPost(request,response);
-		}
 
 		if ("master".equals(type)) {
 			String image = request.getParameter("image");
@@ -271,6 +277,19 @@ public class MdataServlet extends HttpServlet {
 			}
 
 			out.write(m_cer);
+			out.close();
+		}
+		
+		if ("work".equals(type)) {
+			String image = request.getParameter("image");
+			Integer img = new Integer(image);
+			response.setContentType("image/jpeg");
+
+			ServletOutputStream out = response.getOutputStream();
+			
+			WorkimService workimSvc = new WorkimService();
+			Collection<WorkimVO> workims = workimSvc.getByWorkid(img);
+			
 			out.close();
 		}
 		

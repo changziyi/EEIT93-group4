@@ -3,11 +3,18 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
 <%@ page import="toolman.wishpool.model.*"%>
+<%@ page import="toolman.ad.model.*"%>
 
 <%
 	WishpoolService wishpoolSvc = new WishpoolService();
-	List<WishpoolVO> list = wishpoolSvc.getAll();
-	pageContext.setAttribute("list", list);
+
+	List<WishpoolVO> new_date = wishpoolSvc.getAllByDate();
+	pageContext.setAttribute("new_date", new_date);
+	
+	AdService adSvc = new AdService();
+	List<AdVO> gabs = adSvc.getAllBySname("ad_inprogress");
+	pageContext.setAttribute("get_sname", gabs);
+	
 %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -34,13 +41,12 @@
 <style>
 .content_box {
 	display: inline-block;
-	border: 2px dashed #66b5ff ;
+	border: 2px dashed #66b5ff;
 	padding: 10px;
 	margin: 10px 10px 10px 0;
 	overflow: hidden;
 	width: 260px;
 	background-color: #cce6ff;
-	
 }
 
 .zipcode {
@@ -80,50 +86,97 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12" style="background-color: #99ceff">
-				<H1 style="color: #a94dff" align="center"><b>測試用頁面</b></H1>
+				<H1 style="color: #a94dff" align="center">
+					<b><許願池></b>
+				</H1>
 			</div>
 		</div>
-		<br>
+		<br />
+		<div align="right">
+			<b>新舊排序：</b> <select name="new" onchange="location = this.value">
+				<option value="Wishing+waterfall.jsp">從新到舊</option>
+				<option value="Wishing+waterfall2.jsp">從舊到新</option>
+			</select> <b>選擇縣市：</b> <select name="bycity">
+				<option value="">顯示全部</option>
+				<option value="">基隆市</option>
+				<option value="">臺北市</option>
+				<option value="">新北市</option>
+				<option value="">宜蘭縣</option>
+				<option value="">新竹市</option>
+				<option value="">新竹縣</option>
+				<option value="">桃園市</option>
+				<option value="">苗栗縣</option>
+				<option value="">臺中市</option>
+				<option value="">彰化縣</option>
+				<option value="">南投縣</option>
+				<option value="">嘉義市</option>
+				<option value="">嘉義縣</option>
+				<option value="">雲林縣</option>
+				<option value="">臺南市</option>
+				<option value="">高雄市</option>
+				<option value="">屏東縣</option>
+				<option value="">臺東縣</option>
+				<option value="">花蓮縣</option>
+				<option value="">金門縣</option>
+				<option value="">連江縣</option>
+				<option value="">澎湖縣</option>
+			</select>
+		</div>
 
 		<div class="row">
-			<div class="col-md-3" style="background-color: #99ceff; padding: 30px;border:2px solid #66b5ff">
+			<div class="col-md-3"
+				style="background-color: #99ceff; padding: 30px; border: 2px solid #66b5ff">
 
 				<div align="center">
 					<button class="btn btn-primary btn-lg" data-toggle="modal"
-						data-target="#myModal01" style="color:#cce6ff"><b>我要許願</b></button>
+						data-target="#myModal01" style="color: #cce6ff">
+						<b>我要許願</b>
+					</button>
 				</div>
 				<br>
 				<div align="center">
 					<button class="btn btn-primary btn-sm" data-toggle="modal"
-						data-target="#myModal02" style="color:#cce6ff"><b>什麼是許願池</b></button>
+						data-target="#myModal02" style="color: #cce6ff">
+						<b>什麼是許願池</b>
+					</button>
 				</div>
-
+				
+				<div style="background-color: #99ceff ; margin:100px 0 0 0 ; padding:10px">
+				<h2 align="center" style="color: #a94dff ">隨機廣告</h2>
+					 <c:forEach var="sname" end="2" items="${get_sname}">
+						 	<div>
+						 	${sname.mdataVO.b_name} ${sname.mdataVO.m_city}${sname.mdataVO.m_district}
+						 	<a href='${pageContext.servletContext.contextPath}/master/masterPage.do?m_id=${sname.m_id}'>
+						 		<img height="200px" class="img-responsive" src='${pageContext.servletContext.contextPath}/master/master.do?type=master&image=${sname.m_id}'/>
+						 	</a>
+						 	</div>
+					 </c:forEach>
+				</div>
 			</div>
-			<div class="col-md-9" id="wishblock" 
+			
+		
+	
+			<div class="col-md-9" id="wishblock"
 				style="overflow: hidden; margin: 0 auto; background-color: #99ceff"">
-					<div>
-						<c:forEach var="wishpoolVO" items="${list}">
-							<div class="content_box">
-								<b style="color:#a94dff">使用者：${wishpoolVO.c_id}</b>
-								<br>
-								位在地區：${wishpoolVO.w_city}${wishpoolVO.w_district} 
-								<br>
-								維修項目：${wishpoolVO.w_pro} 
-								<br> 
-								維修內容：${wishpoolVO.w_content}
-								<br>
-								維修項目照片： 
-								<img src="${pageContext.servletContext.contextPath}/wishpool/wishpool.do?type=wishpool&image=${wishpoolVO.w_id}" alt="示意圖" class="img-responsive" >
-								<br>
-								發送時間：${wishpoolVO.w_date}
-								
-							</div>
-						</c:forEach>
-					</div>
+				<div>
+					<c:forEach var="wishpoolVO" items="${new_date}">
+						<div class="content_box">
+							<b style="color: #a94dff">使用者：${wishpoolVO.c_id}</b> <br>
+							位在地區：${wishpoolVO.w_city}${wishpoolVO.w_district} <br>
+							維修項目：${wishpoolVO.w_pro} <br> 維修內容：${wishpoolVO.w_content} <br>
+							維修項目照片： <img
+								src="${pageContext.servletContext.contextPath}/wishpool/wishpool.do?type=wishpool&image=${wishpoolVO.w_id}"
+								alt="示意圖" class="img-responsive"> <br>
+							發送時間：${wishpoolVO.w_date} <br>
+							<button class="btn btn-primary" data-target="#123">我會修理</button>
+						</div>
+					</c:forEach>
 				</div>
 			</div>
 		</div>
-	
+		
+	</div>
+
 
 
 	<!-----------------------------我要許願表單 ----------------------------------------->
@@ -147,19 +200,19 @@
 					<div class="modal-body">
 						<table>
 							<tr>
-								<td>我想修 ： <input type="text" name="w_pro" required="true"
-									value="${param.w_pro}" />${errorMsgs.pro1}${errorMsgs.pro2}
+								<td><b>我想修 ：</b><br> <input type="text" name="w_pro"
+									required="true" value="${param.w_pro}" />${errorMsgs.pro1}${errorMsgs.pro2}
 								</td>
 							</tr>
 							<tr>
-								<td id="twzipcode">位在地址：</td>
+								<td id="twzipcode"><b>位在地址：</b><br></td>
 							</tr>
 							<tr>
-								<td>維修項目的照片： <input type="file" name="w_image"></td>
+								<td><b>維修項目的照片：</b> <input type="file" name="w_image"></td>
 							</tr>
 							<tr>
-								<td><label style="vertical-align: top">問題描述：</label> <textarea
-										name="w_content" style="width: 400px; height: 120px"
+								<td><label style="vertical-align: top"><b>問題描述：</b></label>
+									<textarea name="w_content" style="width: 400px; height: 120px"
 										placeholder="請描述問題原因"></textarea></td>
 							</tr>
 						</table>

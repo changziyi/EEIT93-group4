@@ -1,6 +1,5 @@
 package toolman.cdata.model;
 
-
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -13,8 +12,10 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
 import hibernate.util.HibernateUtil;
+import toolman.blacklist.model.BlacklistVO;
+import toolman.favorite.model.FavoriteVO;
+import toolman.mdata.model.MdataVO;
 import toolman.order.model.OrderVO;
-
 
 public class CdataDAO implements CdataDAO_interface{
 	
@@ -30,7 +31,7 @@ public class CdataDAO implements CdataDAO_interface{
 //			Criteria query = session.createCriteria(CdataVO.class);
 //			query.add(Restrictions.eq("c_id", "Micky"));
 //			query.setParameter(0, c_id);
-			cdataVO = (CdataVO) session.get(CdataVO.class, "Micky");
+			cdataVO = (CdataVO) session.get(CdataVO.class, c_id);
 			
 //			cdataVO = (CdataVO) query.list().get(0);
 			session.getTransaction().commit();
@@ -115,40 +116,75 @@ public class CdataDAO implements CdataDAO_interface{
 		return cdataVO;
 	}
 	//BY Benny
-	public void updatecustomerSname(Integer c_id) {
+	public Integer updatecustomerSname(String c_id, String s_name) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		Integer count=0;
 		try {
 			session.beginTransaction();
-			Query query = session.createQuery("from CdataVO set s_name=:s where c_id=:c");
-			query.setParameter("s","c_sus");
+			Query query = session.createQuery("update CdataVO set s_name=:s where c_id=:c");
+			query.setString("s",s_name);
 			query.setParameter("c",c_id);
-			Integer count = query.executeUpdate();
+			count = query.executeUpdate();
 			session.getTransaction().commit();
 		} catch (RuntimeException ex) {
 			session.getTransaction().rollback();
 			throw ex;
 		}
+		return count;
 	}
 
+	@Override   //訂單
+	public Set<OrderVO> getOrderByC(String c_id) {		
+		Set<OrderVO> set = login_in(c_id).getOrders();
+		return set;
+	}
+	@Override   //訂單
+	public Set<FavoriteVO> getFavoriteByC(String c_id) {		
+		Set<FavoriteVO> set = login_in(c_id).getFavorites();
+		return set;
+	}
+	@Override   //訂單
+	public Set<BlacklistVO> getBlackByC(String c_id) {		
+		Set<BlacklistVO> set = login_in(c_id).getBlacklists();
+		return set;
+	}
+
+	public List<CdataVO> getBySname(String s_name) {
+		List<CdataVO> list = null;
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try {
+			session.beginTransaction();
+			Query query = session.createQuery("from CdataVO where s_name=:s ");
+			query.setString("s",s_name);
+			list = query.list();
+			session.getTransaction().commit();
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
+		return list;
+	}
 	public static void main(String args[]){		
 		CdataDAO  dao = new CdataDAO();
 		
-//		List<CdataVO> list= dao.getAll();
-//		for(CdataVO cdataVO:list){
-//			Timestamp c_jdatestamp =	cdataVO.getC_jdate();
-//			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//			String c_jdate = df.format(c_jdatestamp);
-//			String c_name =	cdataVO.getC_name();
-//			String c_id	= cdataVO.getC_id();
-//			String c_addr = cdataVO.getC_addr();
-//			String c_district = cdataVO.getC_district();
-//			String c_city = cdataVO.getC_city();
-//			String c_location = c_city + c_district + c_addr;					
-//			String s_name = cdataVO.getS_name();
-//			Integer c_averrating = cdataVO.getC_averrating();
-//			String sa_cnote	=cdataVO.getSa_cnote();
-//			System.out.println(c_id);
-//		}
+		List<CdataVO> list= dao.getAll();
+		for(CdataVO cdataVO:list){
+			Timestamp c_jdatestamp = cdataVO.getC_jdate();
+			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			String c_jdate = df.format(c_jdatestamp);
+			String c_name =	cdataVO.getC_name();
+			String c_id	= cdataVO.getC_id();
+			String c_addr = cdataVO.getC_addr();
+			String c_district = cdataVO.getC_district();
+			String c_city = cdataVO.getC_city();
+			String c_location = c_city + c_district + c_addr;					
+			String s_name = cdataVO.getS_name();
+			Integer c_averrating = cdataVO.getC_averrating();
+			String sa_cnote	=cdataVO.getSa_cnote();
+			System.out.println(c_id);
+			System.out.println( c_jdatestamp);
+			System.out.println( c_jdate);
+		}
 //		
 //		/*********************** 查詢媒合  *****************************/
 //		
@@ -235,6 +271,11 @@ public class CdataDAO implements CdataDAO_interface{
 		/*********************** 新增刪除未完成  *****************************/	
 		
 //		dao.delete("Snoopy");
+	}
+	@Override
+	public Integer updatecustomerSname(Integer c_id, String s_name) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

@@ -24,6 +24,12 @@ public class WishpoolService {
 		
 	}
 	
+	public List<WishpoolVO> getAllByDate() {
+		return dao.getAllByDate();
+		
+	}
+	
+	
 	public WishpoolVO findByPrimaryKey(Integer w_id) {
 		return dao.findByPrimaryKey(w_id);
 	}

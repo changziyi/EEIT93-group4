@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.simple.JSONValue;
 
+import toolman.cdata.model.CdataDAO;
 import toolman.cdata.model.CdataService;
 import toolman.cdata.model.CdataVO;
 import toolman.mdata.model.MdataDAO;
@@ -43,50 +44,67 @@ public class ManagerUIServlet extends HttpServlet {
     }
 
 
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String action = request.getParameter("action");
-//		action = "c";
+		String topnavigatorid = request.getParameter("navigatorid");
+		String datastatus = request.getParameter("datastatus");
+		String datatime = request.getParameter("datatime");
+
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
 
+//		topnavigatorid="o";
+//		datastatus="一方未評分";
+//		datatime="alldate";
 		
 		//get m tested ok
-		if("m".equals(action)){
-							
+		if("m".equals(topnavigatorid)){
 			MdataDAO dao = new MdataDAO();
-			List<MdataVO> mdatas = dao.getAll();
-			List<Map> jList = new LinkedList<Map>();
-			for (MdataVO aMdata : mdatas) {
-				Map jContent = new HashMap();
-				jContent.put("M_id", aMdata.getM_id());
-				jContent.put("B_name", aMdata.getB_name());
-				jContent.put("M_name", aMdata.getM_name());
-				jContent.put("M_city", aMdata.getM_city());
-				jContent.put("M_addr", aMdata.getM_addr());
-				jContent.put("M_district", aMdata.getM_district());
-				jContent.put("M_arating", aMdata.getM_arating());
-				jContent.put("S_name", aMdata.getS_name());
-				jContent.put("Sa_mnote", aMdata.getSa_mnote());
-				Set<MProVO> mpros = aMdata.getMpros();
-				for(MProVO getmpros:mpros){
-				jContent.put("Mpros", getmpros.getM_pro());
-				}
-				jList.add(jContent);
-			}			
-			String mjasonstring = JSONValue.toJSONString(jList);
-			out.write(mjasonstring);
-			out.flush();
-			System.out.println(mjasonstring);
-		}
+			List<MdataVO> mdatas = null;
+				if("allmaster".equals(datastatus)){				
+					 mdatas = dao.getAll();				
+				}//end if		
+				else{
+					 mdatas = dao.getBySname(datastatus);
+				}//end else	
+					List<Map> jList = new LinkedList<Map>();
+					for (MdataVO aMdata : mdatas) {
+						Map jContent = new HashMap();
+						jContent.put("M_id", aMdata.getM_id());
+						jContent.put("B_name", aMdata.getB_name());
+						jContent.put("M_name", aMdata.getM_name());
+						jContent.put("M_city", aMdata.getM_city());
+						jContent.put("M_addr", aMdata.getM_addr());
+						jContent.put("M_district", aMdata.getM_district());
+						jContent.put("M_arating", aMdata.getM_arating());
+						jContent.put("S_name", aMdata.getS_name());
+						jContent.put("Sa_mnote", aMdata.getSa_mnote());
+						Set<MProVO> mpros = aMdata.getMpros();
+						for(MProVO getmpros:mpros){
+						jContent.put("Mpros", getmpros.getM_pro());
+						}// end for loop
+						jList.add(jContent);
+					}//end for loop
+					String mjasonstring = JSONValue.toJSONString(jList);
+					out.write(mjasonstring);
+					out.flush();
+					System.out.println(mjasonstring);				
+		}//end if m
 		
 		//get c tested ok
-		if("c".equals(action)){
+		if("c".equals(topnavigatorid)){
+			CdataDAO dao = new CdataDAO();
+			List<CdataVO> list = null;
 			
-			CdataService cdataservice = new CdataService();
-			List<CdataVO> list = cdataservice.getAll();
-			
+			if("allcustomer".equals(datastatus)){				
+				list = dao.getAll();		
+			}//end if		
+			else{
+				list = dao.getBySname(datastatus);
+			}//end else	
+
 			List list2 = new ArrayList();
 				for(CdataVO cdataVO:list){
 					Map map = new HashMap();
@@ -113,22 +131,52 @@ public class ManagerUIServlet extends HttpServlet {
 					map.put("c_averrating",c_averrating);
 					map.put("sa_cnote",sa_cnote);	
 					list2.add(map);
-				}
+				}//end for loop
 				String cjasonstring = JSONValue.toJSONString(list2);
 				System.out.println(cjasonstring);
 				out.write(cjasonstring);
 				out.flush();
 				System.out.println(cjasonstring);
 
-		}
+		}//end if c
 		
 		//get o tested ok
-		if("o".equals(action)){
+		if("o".equals(topnavigatorid)){
 			OrderService orderservice = new OrderService();
-			out.write(orderservice.getAllOrderJson());
-//			System.out.println(ojasonstring);
-		
 			
+			if("allorder".equals(datastatus)){	
+				
+				out.write(orderservice.getAllOrderJson());
+				
+			}else if(!"allorder".equals(datastatus)&&"alldate".equals(datatime)){
+				out.write(orderservice.getBySnameJson(datastatus));
+			}//end if		
+			else if(!"allorder".equals(datastatus)&&!"alldate".equals(datatime)){
+				if ("oneyear".equals(datatime)){
+					
+					Timestamp o_tdate1 = new Timestamp(System.currentTimeMillis());
+					Timestamp o_tdate2 = new Timestamp(System.currentTimeMillis()-31536000000L);//365*24*60*60*1000
+					out.write(orderservice.getOrderBySnameAndDateJson(datastatus,o_tdate1,o_tdate2));
+					
+				}//end else	
+				else if ("halfyear".equals(datatime)){
+					
+					Timestamp o_tdate1 = new Timestamp(System.currentTimeMillis());
+					Timestamp o_tdate2 = new Timestamp(System.currentTimeMillis()-15768000000L);//365/2*24*60*60*1000
+					out.write(orderservice.getOrderBySnameAndDateJson(datastatus,o_tdate1,o_tdate2));
+	
+				}//end else	
+				else if ("onemonth".equals(datatime)){
+					
+					Timestamp o_tdate1 = new Timestamp(System.currentTimeMillis());
+					Timestamp o_tdate2 = new Timestamp(System.currentTimeMillis()-2592000000L);//365/2*24*60*60*1000
+					out.write(orderservice.getOrderBySnameAndDateJson(datastatus,o_tdate1,o_tdate2));
+	
+					}//end else	
+			}//else if datetime is not empty
+			
+			
+//			System.out.println(ojasonstring);
 			//tested ok
 //			List list = new ArrayList();
 //			Map map = new HashMap();
@@ -139,22 +187,22 @@ public class ManagerUIServlet extends HttpServlet {
 //			String mjasonstring = JSONValue.toJSONString(list);
 //			out.write(mjasonstring);
 //			out.flush();
-		}
+		}//end if o
 			
 		//get report
-		if("r".equals(action)){
+		if("r".equals(topnavigatorid)){
 			
 			
 			
 		}
 		//get analysis
-		if("a".equals(action)){
+		if("a".equals(topnavigatorid)){
 			
 			
 			
 		}
 		//get ad
-		if("ad".equals(action)){
+		if("ad".equals(topnavigatorid)){
 			
 			
 			

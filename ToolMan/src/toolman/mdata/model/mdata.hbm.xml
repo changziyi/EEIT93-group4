@@ -26,6 +26,11 @@
 		<property name="sa_mnote" column="sa_mnote" />
 		<property name="m_cer" column="m_cer" />
 		
+<!-- 		//by benny master status -->
+<!-- 		<many-to-one name="s_name" class="toolman.sname.model.SnameVO" lazy="false"> -->
+<!--             <column name="s_name" /> -->
+<!--         </many-to-one> -->
+		
 		<!--師父1-專業*-->
 		<set name="mpros" table="mpro" lazy="false" cascade="all" inverse="true" order-by="m_proid asc">			
 			<key>
@@ -43,7 +48,7 @@
 		</set>
 		
 		<!--師父1-問與答*-->
-		<set name="discussions" table="discussion" lazy="false" cascade="all" inverse="true" order-by="d_id asc">			
+		<set name="discussions" table="discussion" lazy="true" cascade="all" inverse="true" order-by="d_id asc">			
 			<key>
 				<column name="m_id" />
 			</key>
@@ -53,11 +58,26 @@
 		<!-- added by benny -->
 		<set name="orders" table="ord" lazy="false" cascade="all" inverse="true" order-by="o_id asc">			
 			<key>
-				<column name="o_id" />
+				<column name="m_id" />
 			</key>
 			<one-to-many class="toolman.order.model.OrderVO" />
 		</set>
+		
+		
 
+<set name="favorites" table="favorite" lazy="true" cascade="all"  inverse="true"  order-by="f_id asc">																						
+			<key>
+				<column name="m_id" />
+			</key>
+			<one-to-many class="toolman.favorite.model.FavoriteVO" />
+		</set>		
+
+<set name="blacklists" table="blacklist" lazy="true" cascade="all"  inverse="true"  order-by="bk_id asc">																						
+			<key>
+				<column name="m_id" />
+			</key>
+			<one-to-many class="toolman.blacklist.model.BlacklistVO" />
+		</set>	
 	</class>
 </hibernate-mapping>
 

@@ -7,5 +7,5 @@ public interface WorkDAO_interface {
 	public List<WorkVO> getWorkByMid(Integer m_id);
 	public void update(WorkVO workVO);
 	public void delete(Integer work_id);
-
+	public WorkVO findByPrimaryKey(Integer work_id);
 }
