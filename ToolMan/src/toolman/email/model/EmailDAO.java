@@ -9,9 +9,15 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+
+import hibernate.util.HibernateUtil;
+import toolman.mdata.model.MdataVO;
+
 public class EmailDAO implements EmailDAO_interface {
 
-	
 	private static DataSource ds = null;
 	static {
 		try {
@@ -22,16 +28,12 @@ public class EmailDAO implements EmailDAO_interface {
 		}
 	}
 
-	private static final String INSERT_STMT =
-		      "INSERT INTO mes (mss_id,msr_id,ms_date,ms_summary,ms_content,s_name) VALUES (?, ?, ?, ?, ?, ?)";
-	private static final String GET_ALL_STMT =
-		      "SELECT ms_id,mss_id,msr_id,ms_date,ms_summary,ms_content,s_name FROM mes order by ms_date desc";
-	private static final String GET_ONE_STMT =
-		      "SELECT ms_id,mss_id,msr_id,ms_date,ms_summary,ms_content,s_name FROM mes order where md_id =?";
-	private static final String DELETE =
-		      "DELETE FROM mes where ms_id = ?";
-	private static final String UPDATE =
-		      "UPDATE mes set mss_id=?, msr_id=?, ms_date=?, ms_summary=?, ms_content=?, s_name=? where ms_id = ?";
+	private static final String INSERT_STMT = "INSERT INTO mes (mss_id,msr_id,ms_date,ms_summary,ms_content,s_name) VALUES (?, ?, ?, ?, ?, ?)";
+	private static final String GET_ALL_STMT = "SELECT ms_id,mss_id,msr_id,ms_date,ms_summary,ms_content,s_name FROM mes order by ms_date desc";
+	private static final String GET_ONE_STMT = "SELECT ms_id,mss_id,msr_id,ms_date,ms_summary,ms_content,s_name FROM mes  where mss_id = ?";
+	private static final String GET_ONE_STMT_BY_KEY = "SELECT ms_id,mss_id,msr_id,ms_date,ms_summary,ms_content,s_name FROM mes  where ms_id = ?";
+	private static final String DELETE = "DELETE FROM mes where ms_id = ?";
+	private static final String UPDATE = "UPDATE mes set mss_id=?, msr_id=?, ms_date=?, ms_summary=?, ms_content=?, s_name=? where ms_id = ?";
 
 	@Override
 	public void insert(EmailVO emailVO) {
@@ -43,7 +45,7 @@ public class EmailDAO implements EmailDAO_interface {
 
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(INSERT_STMT);
-
+			pstmt.setString(1, emailVO.getMss_id());
 			pstmt.setString(1, emailVO.getMss_id());
 			pstmt.setString(2, emailVO.getMsr_id());
 			pstmt.setTimestamp(3, emailVO.getMs_date());
@@ -55,8 +57,7 @@ public class EmailDAO implements EmailDAO_interface {
 
 			// Handle any driver errors 捕捉資料庫錯誤
 		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
+			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
 		} finally {
 			if (pstmt != null) {
@@ -99,8 +100,7 @@ public class EmailDAO implements EmailDAO_interface {
 
 			// Handle any driver errors
 		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
+			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
 		} finally {
 			if (pstmt != null) {
@@ -126,20 +126,17 @@ public class EmailDAO implements EmailDAO_interface {
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
-           
+
 		try {
 
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(DELETE);
 
-
-
 			pstmt.executeUpdate();
 
 			// Handle any driver errors
 		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
+			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
 		} finally {
 			if (pstmt != null) {
@@ -187,14 +184,72 @@ public class EmailDAO implements EmailDAO_interface {
 				emailVO.setMs_content(rs.getString("ms_content"));
 				emailVO.setS_name(rs.getBoolean("s_name"));
 
-			
-				
 			}
 
 			// Handle any driver errors
 		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return emailVO;
+	}
+
+	
+	
+	@Override
+	public EmailVO findByPrimaryKey1(Integer ms_id) {
+
+		EmailVO emailVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_ONE_STMT_BY_KEY);
+
+			pstmt.setInt(1, ms_id);
+
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				emailVO = new EmailVO();
+				emailVO.setMs_id(rs.getInt("ms_id"));
+				emailVO.setMss_id(rs.getString("mss_id"));
+				emailVO.setMsr_id(rs.getString("msr_id"));
+				emailVO.setMs_date(rs.getTimestamp("ms_date"));
+				emailVO.setMs_summary(rs.getString("ms_summary"));
+				emailVO.setMs_content(rs.getString("ms_content"));
+				emailVO.setS_name(rs.getBoolean("s_name"));
+
+			}
+
+			// Handle any driver errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
 		} finally {
 			if (rs != null) {
@@ -223,6 +278,83 @@ public class EmailDAO implements EmailDAO_interface {
 	}
 
 	@Override
+	public List<EmailVO> getMail(String mss_id) {
+		List<EmailVO> list = new ArrayList<EmailVO>();
+		EmailVO emailVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_ONE_STMT);
+			pstmt.setString(1, mss_id);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				emailVO = new EmailVO();
+				emailVO.setMs_id(rs.getInt("ms_id"));
+				emailVO.setMss_id(rs.getString("mss_id"));
+				emailVO.setMsr_id(rs.getString("msr_id"));
+				emailVO.setMs_date(rs.getTimestamp("ms_date"));
+				emailVO.setMs_summary(rs.getString("ms_summary"));
+				emailVO.setMs_content(rs.getString("ms_content"));
+				emailVO.setS_name(rs.getBoolean("s_name"));
+				list.add(emailVO);
+			}
+		} catch (SQLException se) {
+		
+		}
+		return list;
+	}
+
+	
+	
+	@Override
+	public List<EmailVO> getOneMail(Integer ms_id) {
+		List<EmailVO> Onelist = new ArrayList<EmailVO>();
+		EmailVO emailVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_ONE_STMT);
+			pstmt.setInt(1, ms_id);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				emailVO = new EmailVO();
+				emailVO.setMs_id(rs.getInt("ms_id"));
+				emailVO.setMss_id(rs.getString("mss_id"));
+				emailVO.setMsr_id(rs.getString("msr_id"));
+				emailVO.setMs_date(rs.getTimestamp("ms_date"));
+				emailVO.setMs_summary(rs.getString("ms_summary"));
+				emailVO.setMs_content(rs.getString("ms_content"));
+				emailVO.setS_name(rs.getBoolean("s_name"));
+				Onelist.add(emailVO);
+			}
+		} catch (SQLException se) {
+			System.out.println(123);
+		}
+		return Onelist;
+	}
+
+	// List<EmailVO> list = null;
+	// Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+	// try {
+	// session.beginTransaction();
+	// Query query = session.createQuery("from EmailVO where mss_id = ? order by
+	// ms_date desc");
+	// query.setParameter(0, mss_id);
+	// list = query.list();
+	// session.getTransaction().commit();
+	// } catch (RuntimeException ex) {
+	// session.getTransaction().rollback();
+	// throw ex;
+	// }
+	// return list;
+
+	@Override
 	public List<EmailVO> getAll() {
 		List<EmailVO> list = new ArrayList<EmailVO>();
 		EmailVO emailVO = null;
@@ -237,7 +369,7 @@ public class EmailDAO implements EmailDAO_interface {
 			pstmt = con.prepareStatement(GET_ALL_STMT);
 			rs = pstmt.executeQuery();
 
-			while (rs.next()) {			
+			while (rs.next()) {
 
 				emailVO = new EmailVO();
 				emailVO.setMs_id(rs.getInt("ms_id"));
@@ -248,16 +380,12 @@ public class EmailDAO implements EmailDAO_interface {
 				emailVO.setMs_content(rs.getString("ms_content"));
 				emailVO.setS_name(rs.getBoolean("s_name"));
 
-			
-				
-	//SELECT w_id,c_id,w_con,w_image,w_pro,s_name,w_city,w_district,w_date FROM wishpool order by w_id"
-				list.add(emailVO); // Store the row in the list
+				list.add(emailVO); 
 			}
 
 			// Handle any driver errors
 		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
+			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
 		} finally {
 			if (rs != null) {
@@ -284,7 +412,9 @@ public class EmailDAO implements EmailDAO_interface {
 		}
 		return list;
 	}
-	
 
+	public static void main(String[] args) {
+
+	}
 
 }

@@ -1,14 +1,19 @@
+<%@page import="org.hibernate.SessionFactory"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
 <%@ page import="toolman.email.model.*"%>
+<%@ page import="toolman.cdata.model.*"%>
 
-<%
+<%	
 	EmailService emailSvc = new EmailService();
-	List<EmailVO> list = emailSvc.getAll();
+	HttpSession sessions = request.getSession();
+	CdataVO cdataVO = (CdataVO)sessions.getAttribute("LoginOK");
+	List<EmailVO> list = emailSvc.getMail(cdataVO.getC_id());
 	pageContext.setAttribute("list", list);
 %>
+
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -60,6 +65,11 @@
 	});
 </script>
 
+
+<script>
+
+
+<!-- </script> -->
 </head>
 <body>
 	<div class="container">
@@ -75,24 +85,27 @@
 
 				<div align="center">
 					<button class="btn btn-primary btn-lg" data-toggle="modal"
-						data-target="#myModal01">email</button>
+						data-target="#myModal01">Send Email</button>
 				</div>
 
 			</div>
 			<div class="col-md-9" id="emailblock" 
 				style="overflow: hidden; margin: 0 auto; background-color: #99ceff"">
+				
+			
 					<div>
 						<c:forEach var="emailVO" items="${list}">
-							<div class="content_box">								
-								收件人：${emailVO.mss_id}
+							<div class="content_box">
+								id : ${emailVO.ms_id}		<br>						
+								<span>收件人：${emailVO.mss_id}</span>
 								<br>
-								寄件人：${emailVO.msr_id}
+								<span>寄件人：${emailVO.msr_id}</span>
 								<br>
 								主旨： 
-								<input type="button" name="ms_summary" required="true"
-									value="${emailVO.ms_summary}" onClick="readMail"/>
+							<button class="btn btn-primary" data-toggle="modal" id="selectbtn"
+						data-target="#clickSummary" data-id="${emailVO.ms_id}">${emailVO.ms_summary}</button>
 								<br> 
-								內容：${emailVO.ms_content}
+								<span>內容：${emailVO.ms_content}</span>
 								<br> 
 								時間：${emailVO.ms_date}
 								<br> 
@@ -106,7 +119,7 @@
 		</div>
 	
 
-	<div class="modal fade" id="myModal01" tabindex="-1" role="dialog"
+	<div class="modal fade" id="clickSummary" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 <form method="POST" action="Email.do">
@@ -121,6 +134,55 @@
 							</button>
 						</H4>
 					</div>
+					<div class="modal-body">
+						<table>
+							<tr>
+								<td>收件人：${Onelist.mss_id}</td>
+							</tr>
+							<tr>
+								<td>寄件人：${Onelist.msr_id}</td>
+							</tr>
+							<tr>
+								<td>主旨：${Onelist.ms_content}</td>
+							<tr>								
+								<td>內容：${Onelist.ms_content}</td>
+							</tr>
+						</table>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">返回</button>
+<!-- 						<button class="btn btn-primary btn-lg" data-toggle="modal" -->
+<!-- 						data-target="#myModal01">回覆</button> -->
+<!-- 						<button type="button" class="btn btn-primary" data-target="#myModal01">回覆</button>		 -->
+
+					<button class="btn btn-primary btn-lg" data-toggle="modal"
+						id="#myModal01">回覆</button>
+						
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	
+	
+	
+	
+		<div class="modal fade" id="myModal01" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+		<form method="POST" action="Email.do">
+				<div class="modal-content">
+					<div class="modal-header">
+						<H4 style="color: blue">
+							email
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+
+							</button>
+						</H4>
+					</div>
+					
 					<div class="modal-body">
 						<table>
 							<tr>
@@ -143,6 +205,7 @@
 							</tr>
 						</table>
 					</div>
+					
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
 						<button type="submit" class="btn btn-primary">送出</button>			
@@ -151,5 +214,28 @@
 			</form>
 		</div>
 	</div>
+	<script type="text/javascript">
+// 	$('#selectbtn').click(function(){
+// 		var dataid = $(this).attr('data-id');
+// 		$.get('Email.do',{
+// 			'action':'findbypk',
+// 			'msid':dataid
+// 		});
+// 	})
+	$('button.btn-primary').click(function(){
+		var divparent =  $(this).parent('div');
+		var receiveid = divparent.children('span:first').text();
+		var receiveid2 = divparent.children('span:eq(1)').text();
+		var receiveid3 = $(this).text();
+		var receiveid4 = divparent.children('span:eq(2)').text();
+		$('td:first').text(receiveid);
+		$('td:eq(1)').text(receiveid2);
+		$('td:eq(2)').text("主旨: "+receiveid3);
+		$('td:eq(3)').text(receiveid4);
+		
+	})
+	
+	
+	</script>
 </body>
 </html>
