@@ -20,6 +20,14 @@
 		<many-to-one name="mdataVO" class="toolman.mdata.model.MdataVO" lazy="false">
             <column name="m_id" />
         </many-to-one>
+        
+        <!--作品圖片*-作品1-->
+		<set name="workims" table="workim" lazy="false" cascade="all" inverse="true"  order-by="im_id asc">			
+			<key>
+				<column name="work_id" />
+			</key>
+			<one-to-many class="toolman.workim.model.WorkimVO" />
+		</set>
 		
     </class>
 </hibernate-mapping>

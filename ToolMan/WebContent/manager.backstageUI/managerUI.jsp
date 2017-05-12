@@ -184,8 +184,10 @@ $(function(){
 		$('#functionrow>div>ul>li').on('click',functionrowfiltering);//filtering
 		
  	  	$('#subfunctionrow>a').on('click',togglehyper);//direct to other pages
- 	  	$('#subfunctionrow>span[id!="messagespanm"],#subfunctionrow>span[id!="messagespanc"]').on('click',togglegetmethod);//will return something when clicked, maill has it's own form action
- 		loadProduct('m','allmaster','alldate');//build dynamic table
+ 	  	$('#subfunctionrow>span:not(#messagespanm#messagespanc#messagespano)').on('click',togglegetmethod);//will return something when clicked, maill has it's own form action
+ 	  	$('#messagespanm,#messagespanc,#messagespano').on('click',mail);//will return something when clicked, maill has it's own form action
+
+ 	  	loadProduct('m','allmaster','alldate');//build dynamic table
  		
 }// end ready function
 ); //end ready   
@@ -360,7 +362,7 @@ $(function(){
 		   if( navagatorid== 'm'){
 				$('#subfunctionrow').empty();
 				var applicationreviewm = '<a href="" id="applymasterlink" name="applicationreviewm"><input type="button" value="審核師傅" /></a>';
-				var suspensionm = '<span value="suspensionm" name="functionaction" style="padding:0px; margin:0px;" ><input type="button" value="停權" "/></span>';
+				var suspensionm = '<span id="suspensionm" value="suspensionm" name="functionaction" style="padding:0px; margin:0px;" ><input type="button" value="停權" "/></span>';
 				var sendmessagem = '<span id="messagespanm" value="sendmessagem" name="functionaction" style="padding:0px; margin:0px;" ><input type="button"   value="傳送訊息" "/></span>';
 				var blacklistm = '<span value="blacklistm" name="functionaction" style="padding:0px; margin:0px;" ><input type="button" value="黑名單" "/></span>';
 				var b1 = $(applicationreviewm);
@@ -372,15 +374,15 @@ $(function(){
 				
 				//rebinding
 			 	$('#subfunctionrow>a').on('click',togglehyper);//direct to other pages
-				$('#subfunctionrow>span[id!="messagespanm"],#subfunctionrow>span[id!="messagespanc"],#subfunctionrow>span[id!="messagespano"]').on('click',togglegetmethod);//will return something when clicked, maill has it's own form action
-				$('#subfunctionrow>span[id="messagespanm"],#subfunctionrow>span[id="messagespanc"],#subfunctionrow>span[id="messagespano"]').on('click',mail);//will return something when clicked, maill has it's own form action
+			 	$('#subfunctionrow>span:not(#messagespanm,#messagespanc,#messagespano)').on('click',togglegetmethod);//will return something when clicked, maill has it's own form action
+			 	$('#messagespanm,#messagespanc,#messagespano').on('click',mail);//will return something when clicked, maill has it's own form action
 
 		   }//end else if
 			
 			else if(navagatorid== 'c'){
 				$('#subfunctionrow').empty();
-				var suspensionc = '<span value="suspensionc" name="functionaction" style=" padding:0px; margin:0px;" ><input type="button" value="停權"/></span>';
-				var sendmessagec = '<span id="messagespanmc" value="sendmessagec" name="functionaction" style=" padding:0px; margin:0px;" ><input type="button" value="傳送訊息" /></span>';
+				var suspensionc = '<span id="suspensionc" value="suspensionc" name="functionaction" style=" padding:0px; margin:0px;" ><input type="button" value="停權"/></span>';
+				var sendmessagec = '<span id="messagespanc" value="sendmessagec" name="functionaction" style=" padding:0px; margin:0px;" ><input type="button" value="傳送訊息" /></span>';
 				var blacklistc = '<span value="blacklistc" name="functionaction" style=" padding:0px; margin:0px;" ><input type="button" value="黑名單" /></span>';
 				var b1 = $(suspensionc);
 				var b2 = $(sendmessagec);
@@ -390,22 +392,22 @@ $(function(){
 				
 					//rebinding
 			 	$('#subfunctionrow>a').on('click',togglehyper);//direct to other pages
-			 	$('#subfunctionrow>span[id!="messagespanm"],#subfunctionrow>span[id!="messagespanc"],#subfunctionrow>span[id!="messagespano"]').on('click',togglegetmethod);//will return something when clicked, maill has it's own form action
-			 	$('#subfunctionrow>span[id="messagespanm"],#subfunctionrow>span[id="messagespanc"],#subfunctionrow>span[id="messagespano"]').on('click',mail);//will return something when clicked, maill has it's own form action
+			 	$('span:not(#messagespanm,#messagespanc,#messagespano)').on('click',togglegetmethod);//will return something when clicked, maill has it's own form action
+			 	$('#messagespanm,#messagespanc,#messagespano').on('click',mail);//will return something when clicked, maill has it's own form action
 
 			}//end else if
 			
 			else if(navagatorid== 'o'){
 				$('#subfunctionrow').empty();
-				var sendmessageo = '<span id="messagespanmo" value="sendmessageo" name="functionaction" style="padding:0px; margin:0px;" ><input type="button" value="訊息" "/></span>';
+				var sendmessageo = '<span id="messagespano" value="sendmessageo" name="functionaction" style="padding:0px; margin:0px;" ><input type="button" value="訊息" "/></span>';
 				var b1 = $(sendmessageo);
 				docFragsubfunction.append([b1]);
 				$('#subfunctionrow').append(docFragsubfunction);
 				
 					//rebinding
 			 	$('#subfunctionrow>a').on('click',togglehyper);//direct to other pages
-			 	$('#subfunctionrow>span[id!="messagespanm"],#subfunctionrow>span[id!="messagespanc"],#subfunctionrow>span[id!="messagespano"]').on('click',mail);//will return something when clicked, maill has it's own form action
-			 	$('#subfunctionrow>span[id="messagespanm"],#subfunctionrow>span[id="messagespanc"],#subfunctionrow>span[id="messagespano"]').on('click',mail);//will return something when clicked, maill has it's own form action
+// 			 	$('#subfunctionrow>span[id!="messagespanm"],#subfunctionrow>span[id!="messagespanc"],#subfunctionrow>span[id!="messagespano"]').on('click',mail);//will return something when clicked, maill has it's own form action
+			 	$('#messagespanm,#messagespanc,#messagespano').on('click',mail);//will return something when clicked, maill has it's own form action
 
 			}// end else if 
 	
@@ -555,7 +557,7 @@ $(function(){
 						   
 						   	console.log(data);
 						   	
-						   	var toggleword = $('<input type="checkbox" name="otoggle" />').val(data.o_id);
+						   	var toggleword = $('<input type="checkbox" name="otoggle" />').val(data.o_id).attr('data-receiver',data.o_bname+data.c_id);
 						   	var cell0 = $('<td></td>').addClass('eventlisttbodytrtd').append(toggleword);
 						  	var cell1 = $('<td></td>').text(data.o_tdate).addClass('eventlisttbodytrtd');
 							var cell2 = $('<td></td>').text(data.o_bname).addClass('eventlisttbodytrtd');

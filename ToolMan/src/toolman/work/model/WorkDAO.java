@@ -2,6 +2,7 @@ package toolman.work.model;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -9,6 +10,7 @@ import org.hibernate.SessionFactory;
 
 import hibernate.util.HibernateUtil;
 import toolman.mdata.model.MdataVO;
+import toolman.workim.model.WorkimVO;
 
 public class WorkDAO implements WorkDAO_interface {
 
@@ -94,12 +96,17 @@ public class WorkDAO implements WorkDAO_interface {
 //		mdataVO.setM_id(1004);
 		
 		//findByPrimaryKey
-//		WorkVO workVO = workdao.findByPrimaryKey(5001);
-//		System.out.print(workVO.getWork_name() + ",");
-//		System.out.print(workVO.getWork_des() + ",");
+		WorkVO workVO = workdao.findByPrimaryKey(5001);
+		System.out.print(workVO.getWork_name() + ",");
+		System.out.print(workVO.getWork_des() + ",");
 //		System.out.print(workVO.getImg1() + ",");
 //		System.out.print(workVO.getImg2() + ",");
 //		System.out.println(workVO.getImg3());
+		Set<WorkimVO> workims = workVO.getWorkims();
+		for(WorkimVO aWorkim :workims) {
+			System.out.print(aWorkim.getIm_id() + ",");
+			System.out.println(aWorkim.getIm_show());
+		}
 		
 		// insert
 //		workVO.setMdataVO(mdataVO);
