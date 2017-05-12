@@ -29,7 +29,9 @@ public class CdataOrderServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 
 		String action = request.getParameter("action");
-
+		//取得登入的寄件人帳號
+				
+				
 		
 		if ("listOrder".equals(action) ) {
 
