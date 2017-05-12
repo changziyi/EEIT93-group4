@@ -368,4 +368,10 @@ public class WishpoolJDBCDAO implements WishpoolDAO_interface {
 			System.out.print(allwish.getW_date() + ",");
 		 }
 	}
+
+	@Override
+	public List<WishpoolVO> getAllByDate() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

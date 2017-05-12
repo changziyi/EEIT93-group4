@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -25,6 +26,8 @@ import toolman.mdata.model.MdataVO;
 import toolman.mpro.model.MProVO;
 import toolman.work.model.WorkService;
 import toolman.work.model.WorkVO;
+import toolman.workim.model.WorkimService;
+import toolman.workim.model.WorkimVO;
 
 @WebServlet("/master/master.do")
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 5 * 1024 * 1024, maxRequestSize = 5 * 5 * 1024 * 1024)
@@ -283,35 +286,10 @@ public class MdataServlet extends HttpServlet {
 			response.setContentType("image/jpeg");
 
 			ServletOutputStream out = response.getOutputStream();
-			MdataService mdataSvc = new MdataService();
-			MdataVO mdataVO = mdataSvc.findByPrimaryKey(img);
 			
-			WorkService workSvc = new WorkService();
+			WorkimService workimSvc = new WorkimService();
+			Collection<WorkimVO> workims = workimSvc.getByWorkid(img);
 			
-			Set<WorkVO> works = mdataVO.getWorks();
-			for(WorkVO aWork : works) {
-				WorkVO vo = workSvc.findByPrimaryKey(aWork.getWork_id());
-				vo.getImg1();
-			}
-			
-			List<byte[]> imgarray = new ArrayList<byte[]>();
-			for (WorkVO aWork : works) {
-				imgarray.add(aWork.getImg1());
-				imgarray.add(aWork.getImg2());
-				imgarray.add(aWork.getImg3());
-			}
-			
-//			if (m_cer == null || m_cer.length == 0) {
-//				InputStream in = getServletContext().getResourceAsStream("/image/jake.gif");
-//				m_cer = new byte[in.available()];
-//				in.read(m_cer);
-//				out.write(m_cer);
-//				in.close();
-//			}
-			
-			for (byte[] aImg : imgarray) {
-				out.write(aImg);
-			}
 			out.close();
 		}
 		

@@ -47,10 +47,11 @@
     </div>
     <ul class="nav navbar-nav">
       <li class="active"><a href="<%=request.getContextPath()%>/cdata/index.jsp">Home</a></li>
-   <li><a href="listAllEmp.jsp">訂單</a></li>
-      <li><a href="like.jsp">收藏店家</a></li>
-      <li><a href="dislike.jsp">黑名單</a></li>
+ <li><a href="<%=request.getContextPath()%>/order/listAllEmp.jsp">訂單</a></li>
+      <li><a href="<%=request.getContextPath()%>/order/like.jsp">收藏店家</a></li>
+      <li><a href="<%=request.getContextPath()%>/order/dislike.jsp">黑名單</a></li>
       <li><a href="<%=request.getContextPath()%>/master/List.jsp">搜尋店家</a></li>
+      
     </ul>
   </div>
 </nav>
@@ -96,7 +97,7 @@
 	
 		<tr align='center' valign='middle'>
 			<td>${orderVO.o_id}</td>
-			<td>${orderVO.b_name}</td>
+			<td><a href='${pageContext.servletContext.contextPath}/master/masterPage.do?m_id=${orderVO.m_id.m_id}'>${orderVO.b_name}</a></td>
 			<td>${orderVO.o_edate}</td>
 			<td>${orderVO.o_des}</td>
 			<td>${orderVO.o_location}</td>

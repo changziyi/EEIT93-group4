@@ -46,7 +46,7 @@ public class CdataOrderServlet extends HttpServlet {
 
 				/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
 				request.setAttribute("listOrder", set);    // 資料庫取出的set物件,存入request
-				String url = "/order/listAllEmp2.jsp"; 
+				String url = "/order/listCOrder.jsp"; 
 				RequestDispatcher successView = request.getRequestDispatcher(url);   // 修改成功後,轉交回送出修改的來源網頁
 				successView.forward(request, response);
 				/*************************** 其他可能的錯誤處理 ***********************************/

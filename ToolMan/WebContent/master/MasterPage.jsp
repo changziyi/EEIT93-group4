@@ -7,8 +7,8 @@
 <title>${mdataVO.b_name}</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/css/jquery.fileuploader-theme-thumbnails.css" media="all">
-<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/css/jquery.fileuploader.css" media="all">
+<%-- <link rel="stylesheet" href="${pageContext.servletContext.contextPath}/css/jquery.fileuploader-theme-thumbnails.css" media="all"> --%>
+<%-- <link rel="stylesheet" href="${pageContext.servletContext.contextPath}/css/jquery.fileuploader.css" media="all"> --%>
 <link rel="stylesheet" href="${pageContext.servletContext.contextPath}/css/bootstrap.min.css">
 <script src="${pageContext.servletContext.contextPath}/js/jquery-3.2.1.min.js"></script>
 <script src="${pageContext.servletContext.contextPath}/js/bootstrap.min.js"></script>
@@ -98,8 +98,9 @@ input[type="file"] {
 			</form>
 			<div>
 				<c:forEach var="aWork" items="${mdataVO.works}">
-<%-- 					${aWork.work_id} --%>
-					<img height="200px" src='${pageContext.servletContext.contextPath}/master/master.do?type=work&image=${mdataVO.m_id}'/>
+					<c:forEach var="a" items="${aWork.workims}">
+						<p>${a.im_id}</p>
+					</c:forEach>
 				</c:forEach>
 			</div>
     

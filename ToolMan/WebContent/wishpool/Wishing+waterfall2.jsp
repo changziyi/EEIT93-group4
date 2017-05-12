@@ -8,8 +8,8 @@
 <%
 	WishpoolService wishpoolSvc = new WishpoolService();
 
-	List<WishpoolVO> new_date = wishpoolSvc.getAllByDate();
-	pageContext.setAttribute("new_date", new_date);
+	List<WishpoolVO> old_date = wishpoolSvc.getAll();
+	pageContext.setAttribute("old_date", old_date);
 	
 	AdService adSvc = new AdService();
 	List<AdVO> gabs = adSvc.getAllBySname("ad_inprogress");
@@ -93,9 +93,9 @@
 		</div>
 		<br />
 		<div align="right">
-			<b>新舊排序：</b> <select name="new" onchange="location = this.value">
-				<option value="Wishing+waterfall.jsp">從新到舊</option>
+			<b>新舊排序：</b> <select name="old" onchange="location = this.value">
 				<option value="Wishing+waterfall2.jsp">從舊到新</option>
+				<option value="Wishing+waterfall.jsp">從到新舊</option>
 			</select> <b>選擇縣市：</b> <select name="bycity">
 				<option value="">顯示全部</option>
 				<option value="">基隆市</option>
@@ -159,7 +159,7 @@
 			<div class="col-md-9" id="wishblock"
 				style="overflow: hidden; margin: 0 auto; background-color: #99ceff"">
 				<div>
-					<c:forEach var="wishpoolVO" items="${new_date}">
+					<c:forEach var="wishpoolVO" items="${old_date}">
 						<div class="content_box">
 							<b style="color: #a94dff">使用者：${wishpoolVO.c_id}</b> <br>
 							位在地區：${wishpoolVO.w_city}${wishpoolVO.w_district} <br>

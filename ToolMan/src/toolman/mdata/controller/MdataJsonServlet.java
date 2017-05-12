@@ -40,7 +40,7 @@ public class MdataJsonServlet extends HttpServlet {
 			out.println(mdataSvc.SearchByCityAndMproJson(m_city, input));
 			
 			Long s2 = System.currentTimeMillis();
-			System.out.println("首頁搜尋時間：" + (s2-s1));
+			System.out.println("homepagejson：" + (s2-s1));
 		}
 		
 		if("advjson".equals(action)) {
@@ -55,7 +55,7 @@ public class MdataJsonServlet extends HttpServlet {
 			out.println(mdataSvc.SeachByCityAndDistrictAndMpro(m_city, m_district, input));
 			
 			Long s2 = System.currentTimeMillis();
-			System.out.println("進階搜尋時間：" + (s2-s1));
+			System.out.println("advjson：" + (s2-s1));
 		}
 		
 		if("discussion".equals(action)) {

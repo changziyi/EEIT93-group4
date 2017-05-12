@@ -387,6 +387,8 @@ public class OrderDAO implements OrderDAO_Interface {
 		}
 		return orderVO;
 	}
+	
+	//--------------------------------------評價------------------------------------------
 	public Integer updateOrderRate(Integer m_rating, Integer c_rating,String ca_des, String ma_des,Integer o_id) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Integer count = 0;		
@@ -406,6 +408,45 @@ public class OrderDAO implements OrderDAO_Interface {
 		}
 		return count;
 	}
+	public Integer updateOrderRateByC(Integer m_rating,String ca_des,Integer o_id) {
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		Integer count = 0;		
+		try {
+			session.beginTransaction();
+			Query query = session.createQuery("update OrderVO set m_rating = ?  , ca_des = ?  where o_id = ?");
+			query.setParameter(0, m_rating);
+			query.setParameter(1, ca_des);
+			query.setParameter(2, o_id);
+			query.executeUpdate();			
+			session.getTransaction().commit();
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
+		return count;
+	}
+	public Integer updateOrderRateByM( Integer c_rating, String ma_des,Integer o_id) {
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		Integer count = 0;		
+		try {
+			session.beginTransaction();
+			Query query = session.createQuery("update OrderVO set c_rating = ?  , ma_des = ? where o_id = ?");
+			query.setParameter(0, c_rating);
+			query.setParameter(1, ma_des);
+			query.setParameter(2, o_id);
+			query.executeUpdate();			
+			session.getTransaction().commit();
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
+		return count;
+	}
+	
+	//--------------------------------------川普長城---------------------------------------------------
+	
+	
+	
 	public static void main(String[] args) { 
 		OrderDAO orderdao = new OrderDAO();
 		OrderVO orderVO = new OrderVO();
