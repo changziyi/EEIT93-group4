@@ -31,9 +31,6 @@ public class MdataPageServlet extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		session.setAttribute("mdataVO", mdataVO);
-//		MdataVO m = (MdataVO)session.getAttribute("mdataVO");
-//		System.out.println("sessionM_id: " + m.getM_id());
-//		System.out.println("sessionM_city: " + m.getM_city());
 		response.sendRedirect("MasterPage.jsp");
 		return;
 		
@@ -46,13 +43,11 @@ public class MdataPageServlet extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		MdataVO mdataVO = (MdataVO)session.getAttribute("mdataVO");
-//		CdataVO cdataVO = (CdataVO)session.getAttribute("loginOK");
-		System.out.println("post: " + mdataVO.getM_id());
+		CdataVO cdataVO = (CdataVO)session.getAttribute("LoginOK");
 		
 		if ("MasterPage_Q".equals(action)) {
 			
 			String d_des = request.getParameter("d_des");
-			System.out.println("d_des: " + d_des);
 			Timestamp d_date = new Timestamp(System.currentTimeMillis());
 			
 			DiscussionVO discussionVO = new DiscussionVO();
@@ -60,6 +55,7 @@ public class MdataPageServlet extends HttpServlet {
 			discussionVO.setD_des(d_des);
 			discussionVO.setD_date(d_date);
 			discussionVO.setMdataVO(mdataVO);
+			discussionVO.setC_id(cdataVO.getC_id());
 			
 			DiscussionService discussionSvc = new DiscussionService();
 			discussionSvc.insert(discussionVO);
