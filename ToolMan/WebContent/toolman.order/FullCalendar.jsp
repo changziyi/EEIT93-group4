@@ -90,9 +90,9 @@
 		<div id='external-events'>
 			<h4>Draggable Events</h4>
 			<div id='external-events2'>
-			<div class='fc-event' data-id="morning"data-start="01:00" data-end='12:00'>早上不可預約</div>
-			<div class='fc-event' data-id="noon"data-start="12:00" data-end='18:00'>下午不可預約</div>
-			<div class='fc-event' data-id="night"data-start="18:00" data-end='23:00'>晚上不可預約</div>
+			<div class='fc-event' data-id="morning"data-start="01:00" data-end='08:00'>早上不可預約</div>
+			<div class='fc-event' data-id="noon"data-start="12:00" data-end='06:00'>下午不可預約</div>
+			<div class='fc-event' data-id="night"data-start="18:00" data-end='06:00'>晚上不可預約</div>
 			
 		</div>
 		<div class='fc-event' id="alldayevent" data-id="allday"data-start="00:00" data-end='24:00'>整天不可預約</div>
@@ -247,7 +247,7 @@
 				right: 'month,agendaWeek,agendaDay'
 			},
 			editable: true,
-	
+			timezone:'local',
 			droppable: true, // this allows things to be dropped onto the calendar
 			eventDrop: function(event, delta, revertFunc) {
 				checkoverlapping(event);
@@ -314,16 +314,35 @@
 		console.log(event);
 		var eventid1 = event.id;
 		var eventid2 = event._id;
+		var eventitle = event.title;
+		var eventitle2 = events[i].title;
 		var end1 = event.end._d;
 		var start1 = event.start._d.toString();
 		var start2 = events[i].start._d.toString();
+		console.log(start1);
 		var end2 = events[i].end._d;
 		var start4 = events[i].duration;
+		var splitstring1 = start1.split(" ");
+		console.log(splitstring1);
+		
+		var splitstring2 = start2.split(" ");
+		console.log(splitstring2);
+		if((events[i].title == "整天不可預約")||(event.title =="整天不可預約")){
+		if((splitstring1[0]+splitstring1[1]+splitstring1[2]+splitstring1[3])==
+			(splitstring2[0]+splitstring2[1]+splitstring2[2]+splitstring2[3])){
+
+				$('#calendar').fullCalendar('removeEvents', event.id);
+				return true;
+				
+			}//end for
+		}//end if
 		if(start1 == start2 ){
+
 			
-			$('#calendar').fullCalendar('removeEvents', event.id);
-		    return true;
-			}
+				$('#calendar').fullCalendar('removeEvents', event.id);
+			    return true;
+				
+			}//end if
 		}//end if event!=1
 		//end-time in between any of the events
 // 		if(event.start > events[i].start && event.start < events[i].end){
