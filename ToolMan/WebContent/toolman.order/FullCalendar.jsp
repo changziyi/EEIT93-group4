@@ -90,11 +90,12 @@
 		<div id='external-events'>
 			<h4>Draggable Events</h4>
 			<div id='external-events2'>
-			<div class='fc-event' data-id="morning"data-start="00:00" data-end='12:00'>早上不可預約</div>
-			<div class='fc-event' data-id="noon"data-start="12:00" data-end='07:00'>下午不可預約</div>
-			<div class='fc-event' data-id="night"data-start="06:00" data-end='04:00'>晚上不可預約</div>
-			<div class='fc-event' data-id="allday"data-start="00:00" data-end='24:00'>整天不可預約</div>
+			<div class='fc-event' data-id="morning"data-start="01:00" data-end='12:00'>早上不可預約</div>
+			<div class='fc-event' data-id="noon"data-start="12:00" data-end='18:00'>下午不可預約</div>
+			<div class='fc-event' data-id="night"data-start="18:00" data-end='23:00'>晚上不可預約</div>
+			
 		</div>
+		<div class='fc-event' id="alldayevent" data-id="allday"data-start="00:00" data-end='24:00'>整天不可預約</div>
 <!-- 			<p> -->
 <!-- 				<input type='checkbox' id='drop-remove' /> -->
 <!-- 				<label for='drop-remove'>remove after drop</label> -->
@@ -136,6 +137,7 @@
 	var randomnumber =null;
 	var eventstart = $(this).data('start');
 	var eventend = $(this).data('end');
+	var eventidglobe =null;
 	$(function() {
 		
 		$('#external-events2>div').on('click',assignrandom);
@@ -156,25 +158,46 @@
 	
 	}
 	function draggableevent(){
-		
+		$('#alldayevent').each(function() {
+			
+			
+			// 		var dragevent = {
+							
+			// 				id: $(this).text(),	
+			// 				title: $(this).text(), // use the element's text as the event title
+			// 				start: $(this).data('start'), // a start time (10am in this example)
+			// 				time: $(this).data('endd'), // an end time (2pm in this example)
+			// 			    stick: true
+			// 		}
+					// store data so the calendar knows to render an event upon drop
+			
+					$(this).data('event', {
+						
+						id: $(this).data('id'),
+						title: $(this).text(), // use the element's text as the event title
+						duration: $(this).data('end'), // an end time (2pm in this example)
+					    
+					   	
+						start: $(this).data('start'), // a start time (10am in this example)
+					    stick: true // maintain when user navigates (see docs on the renderEvent method)
+					});
+			
+					// make the event draggable using jQuery UI
+					$(this).draggable({		
+						zIndex: 999,
+						revert: true,      // will cause the event to go back to its
+						revertDuration: 0  //  original position after the drag
+					});
+					
+				});
 		$('#external-events .fc-event').each(function() {
-	// 		var dragevent = {
-					
-	// 				id: $(this).text(),	
-	// 				title: $(this).text(), // use the element's text as the event title
-	// 				start: $(this).data('start'), // a start time (10am in this example)
-	// 				time: $(this).data('endd'), // an end time (2pm in this example)
-					
-	// 			    stick: true
-	// 		}
-			// store data so the calendar knows to render an event upon drop
+
 	
 			$(this).data('event', {
 				
 				id: $(this).data('id'),
 				title: $(this).text(), // use the element's text as the event title
 				duration: $(this).data('end'), // an end time (2pm in this example)
-			    
 			   	
 				start: $(this).data('start'), // a start time (10am in this example)
 			    stick: true // maintain when user navigates (see docs on the renderEvent method)
@@ -246,9 +269,10 @@
 			drop: function(date,event) {
 	// 			$('#calendar').fullCalendar( 'renderEvent', dragevent);
 // 				console.log(event);
-				
-				event._id = $(this).data('id')+randomnumber;
-				event.id=$(this).data('id')+randomnumber;
+				assignrandom(event);
+				eventidglobe =$(this).data('id')+randomnumber;
+				event._id =eventidglobe ;
+				event.id=eventidglobe;
 				event.eventOverlap = 'false'; 
 // 				event.start= $(this).data('start');
 				// is the "remove after drop" checkbox checked?
@@ -261,9 +285,9 @@
 			},//end drop
 
 			eventReceive:function( event ) {
-				assignrandom(event);
-				event._id = $(this).data('id')+randomnumber;
-				event.id=$(this).data('id')+randomnumber;
+				
+				event._id = eventidglobe;
+				event.id = eventidglobe;
 				console.log(event);
 // 				var randomnumber =Math.random().toString();//not working after drop, because the real id is still the original
 				
