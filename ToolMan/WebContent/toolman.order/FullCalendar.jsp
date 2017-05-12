@@ -83,7 +83,7 @@
 </style>
 </head>
 <body>
-<div>
+
 
 <div id='wrap'>
 
@@ -129,41 +129,62 @@
 		<div style='clear:both'></div>
 	</div>
 <script>
-var selectmenu=null;
-var dragevent = null;
-$(function() {
-	
-	$('#external-events .fc-event').each(function() {
-// 		var dragevent = {
-				
-// 				id: $(this).text(),	
-// 				title: $(this).text(), // use the element's text as the event title
-// 				start: $(this).data('start'), // a start time (10am in this example)
-// 				time: $(this).data('endd'), // an end time (2pm in this example)
-				
-// 			    stick: true
-// 		}
-		// store data so the calendar knows to render an event upon drop
-
-		$(this).data('event', {
-			
-			id: $(this).data('id'),
-			title: $(this).text(), // use the element's text as the event title
-			duration: $(this).data('end'), // an end time (2pm in this example)
-			start: $(this).data('start'), // a start time (10am in this example)
-		    			stick: true // maintain when user navigates (see docs on the renderEvent method)
-		});
-
-		// make the event draggable using jQuery UI
-		$(this).draggable({		
-			zIndex: 999,
-			revert: true,      // will cause the event to go back to its
-			revertDuration: 0  //  original position after the drag
-		});
+	var selectmenu=null;
+	var dragevent = null;
+	var eventid=null;
+	$(function() {
 		
-	});// end each
+		$('#external-events').on('click',assignrandom);
+		draggableevent();
+		$('#selectmenu>input').on('change',repeatingevent);// end select change
+		/* initialize the calendar
+		-----------------------------------------------------------------*/
+		
+		buildcalendar();	
+	});// end ready
 	
-	$('#selectmenu>input').on('change',function(){
+	function assignrandom(){
+		
+	var randomnumber = Math.random().toString();//not working after drop, because the real id is still the original
+	eventid = $(this).data('id')+ randomnumber ;
+	
+	}
+	function draggableevent(){
+		
+		$('#external-events .fc-event').each(function() {
+	// 		var dragevent = {
+					
+	// 				id: $(this).text(),	
+	// 				title: $(this).text(), // use the element's text as the event title
+	// 				start: $(this).data('start'), // a start time (10am in this example)
+	// 				time: $(this).data('endd'), // an end time (2pm in this example)
+					
+	// 			    stick: true
+	// 		}
+			// store data so the calendar knows to render an event upon drop
+	
+			$(this).data('event', {
+				
+				id: eventid,
+				title: $(this).text(), // use the element's text as the event title
+				duration: $(this).data('end'), // an end time (2pm in this example)
+			    
+			   	
+				start: $(this).data('start'), // a start time (10am in this example)
+			    stick: true // maintain when user navigates (see docs on the renderEvent method)
+			});
+	
+			// make the event draggable using jQuery UI
+			$(this).draggable({		
+				zIndex: 999,
+				revert: true,      // will cause the event to go back to its
+				revertDuration: 0  //  original position after the drag
+			});
+			
+		});// end each
+	}//end draggable event
+	
+	function repeatingevent(){
 		$('#calendar').fullCalendar( 'removeEvents', event._999);
 		
 		selectmenu = [];
@@ -171,85 +192,113 @@ $(function() {
 		checkedbox.each(function () {
 			selectmenu.push($(this).val());
 		});//end each
-		console.log(checkedbox);
-		console.log(selectmenu);
+// 		console.log(checkedbox);
+// 		console.log(selectmenu);
 		var repeatevent = 	{
 			
 			id:"repeatingitem",
 		    title:"programming",
 		    start: '00:00', // a start time (10am in this example)
-		    end: '24:00', // an end time (2pm in this example)
+		
+		    overlap: false,
+			end: '24:00', // an end time (2pm in this example)
 		    dow: selectmenu // Repeat monday and thursday
 		}
 		$('#calendar').fullCalendar( 'renderEvent', repeatevent);
 		
-// 		 $('#calendar').fullCalendar( 'destroy' );
-// 		 buildcalendar();
-	});// end select change
-	/* initialize the calendar
-	-----------------------------------------------------------------*/
-	buildcalendar();
+		//	 $('#calendar').fullCalendar( 'destroy' );
+		//	 buildcalendar();
+	}//end repeating event
 	
+	function buildcalendar(){
+		$('#calendar').fullCalendar({
+			header: {
+				left: 'prev,next today',
+				center: 'title',
+				right: 'month,agendaWeek,agendaDay'
+			},
+			editable: true,
+	
+			droppable: true, // this allows things to be dropped onto the calendar
+			eventDrop: function(event, delta, revertFunc) {
+				checkoverlapping(event);
+		        alert(event.title + " was dropped on " + event.start.format());
+	
+		        if (!confirm("Are you sure about this change?")) {
+		            revertFunc();
+		        }
+		       
+		    },
+			eventDragStop: function(event,jsEvent) {
+				 
+			    alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
+			    if( (20 <= jsEvent.pageX) & (jsEvent.pageX <= 220) & (240 <= jsEvent.pageY) & (jsEvent.pageY <= 350)){
+			      alert('delete: '+ event.id);
+			      $('#calendar').fullCalendar('removeEvents', event.id);
+			    }
+			},
+			drop: function(date,event) {
+	// 			$('#calendar').fullCalendar( 'renderEvent', dragevent);
+// 				console.log(event);
+				
+				
+				event.eventOverlap = 'false'; 
+// 				event.start= $(this).data('start');
+				// is the "remove after drop" checkbox checked?
+				
+				if ($('#drop-remove').is(':checked')) {
+					// if so, remove the element from the "Draggable Events" list
+					$(this).remove();
+				
+				}//end if
+			},//end drop
 
-});// end ready
-function buildcalendar(){
-	$('#calendar').fullCalendar({
-		header: {
-			left: 'prev,next today',
-			center: 'title',
-			right: 'month,agendaWeek,agendaDay'
-		},
-		editable: true,
-		overlap:true,
-		droppable: true, // this allows things to be dropped onto the calendar
-		eventDragStop: function(event,jsEvent) {
-		    alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
-		    if( (20 <= jsEvent.pageX) & (jsEvent.pageX <= 220) & (240 <= jsEvent.pageY) & (jsEvent.pageY <= 350)){
-		      alert('delete: '+ event.id);
-		      $('#calendar').fullCalendar('removeEvents', event.id);
-		    }
-		},
-		drop: function(date,event) {
-// 			$('#calendar').fullCalendar( 'renderEvent', dragevent);
-			event.id= $(this).data('id')+ date;
-// 			checkOverlap(event);
-			// is the "remove after drop" checkbox checked?
-			if ($('#drop-remove').is(':checked')) {
-				// if so, remove the element from the "Draggable Events" list
-				$(this).remove();
-			
-			}//end if
-		},//end drop
+			eventReceive:function( event ) {
+				console.log(event);
+// 				var randomnumber =Math.random().toString();//not working after drop, because the real id is still the original
+				
+				checkoverlapping(event); 
+				},
+			events: [{
+				
+				id:999,
+			    title:"programming",
+			    start: '00:00', // a start time (10am in this example)
+			    end: '24:00', // an end time (2pm in this example)
+			    dow: "\[" +selectmenu+" \]" // Repeat monday and thursday
+			}],//end repeating event
+		});// end full calendar
+	}//end create calendar
+	function checkoverlapping(event){
 		
-		events: [{
+		var events = $('#calendar').fullCalendar('clientEvents');
+		if(events.length!=1){
+		for(i=1;i<events.length;i++){
+		// start-time in between any of the events
+		console.log(event);
+		var start0 = event.end;
+		var start1 = event.start;
+		var start2 = events[i].start;
+		var start3 = events[i].end;
+		var start4 = events[i].duration;
+		if(start1 == start2 && start0 == start3){
 			
-			id:999,
-		    title:"programming",
-		    start: '00:00', // a start time (10am in this example)
-		    end: '24:00', // an end time (2pm in this example)
-		    dow: "\[" +selectmenu+" \]" // Repeat monday and thursday
-		}],//end repeating event
-	});// end full calendar
-}//end create calendar
-function checkOverlap(event) {  
-
-    var start = new Date(event.start);
-    var end = new Date(event.end);
-
-    var overlap = $('#calendar').fullCalendar('clientEvents', function(ev) {
-        if( ev == event)
-            return false;
-        var estart = new Date(ev.start);
-        var eend = new Date(ev.end);
-
-        return (Math.round(estart)/1000 < Math.round(end)/1000 && Math.round(eend) > Math.round(start));
-    });
-
-    if (overlap.length){  
-    	$('#calendar').fullCalendar( 'removeEvents' ,event);
-            //either move this event to available timeslot or remove it
-       }                  
-  }
+			$('#calendar').fullCalendar('removeEvents', event.id);
+		    return true;
+			}
+		}//end if event!=1
+		//end-time in between any of the events
+// 		if(event.start > events[i].start && event.start < events[i].end){
+// 			$('#calendar').fullCalendar('removeEvents', event.id);
+// 		    return true;
+// 		}
+// 		//any of the events in between/on the start-time and end-time
+// 		if(event.start <= events[i].start && event.start >= events[i].end){
+// 			$('#calendar').fullCalendar('removeEvents', event.id);
+// 		    return true;
+// 		}
+	  }
+	}
 </script>
 </body>
 </html>
