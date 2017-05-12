@@ -174,7 +174,7 @@ h2 {
 					<div>
 					<div class="g-recaptcha" id="recaptcha"
 			         data-sitekey="6LfxUyAUAAAAAE-AozM5vAPmEzh5fM33D0B4u69c"></div>
-			         </div><div class="error">${errorMsgs.gRecaptchaResponse}</div>
+			         </div>
 				</div>
 				<a class="forgotmember" href="login-up.jsp">還不是會員嗎?</a>
 				<div>
@@ -185,18 +185,17 @@ h2 {
 					<input type="submit" class="submit" value="登入">
 				</div>
 				<hr>
-				<!--FB -->
 				<div class="fb">
 					<div class="fb-login-button" onlogin="checkLoginState()" id="login"
 						data-max-rows="1" data-size="large" data-button-type="login_with"
-						scope="public_profile,email"></div>						
+						data-show-faces="false" data-auto-logout-link="false"
+						data-use-continue-as="false"></div>						
 				   </div>
 				   	<div style="visibility:hidden" id="status"></div>
-	</form>
+<!-- 				   <input type="button" id="btnLogout" value="Logout" onclick="Logout();"> -->
 		</div>
+		</form>
 	</div>
-		<!-- test photo-->
-		<div id="fb_photo"></div>
 <script>
 
 //fb
@@ -209,13 +208,11 @@ h2 {
     		var v = document.getElementById('status');
     		v.innerHTML = 'We are connected.';
     		if(v.innerHTML === 'We are connected.'){
-    			testAPI();
     			console.log(v.innerHTML);
-//     			test
-//     			window.location.reload();
-<%--     			location.href="<%=request.getContextPath()%>/master/List.jsp"; --%>
+    			window.location.reload();
+    			location.href="<%=request.getContextPath()%>/master/List.jsp";
     		}			
-			
+			testAPI();
 		} else if (response.status === 'not_authorized') {
 			document.getElementById('status').innerHTML = 'Please log '
 					+ 'into this app.';
@@ -225,7 +222,6 @@ h2 {
 
 	function checkLoginState() {
 		FB.getLoginStatus(function(response) {
-			console.log("Token : " + response.authResponse.accessToken);
 			statusChangeCallback(response);
 		});
 	}
@@ -263,23 +259,14 @@ h2 {
 		fjs.parentNode.insertBefore(js, fjs);
 	}(document, 'script', 'facebook-jssdk'));
 	
-	
+	//0.2
 	function testAPI() {
 		console.log('Welcome!  Fetching your information.... ');
-		
-		FB.api('/me','GET', 
-				
-				
-				
-				{fields: 'first_name,last_name,name,id,email,picture.width(200).height(200)'}, 
-				function(response) {
-				console.log('Successful login!! '+ ' id:' + response.id + ', name:' + response.name + 
-							', email:' + response.email);
-				document.getElementById('fb_photo').innerHTML = "<img src='" + response.picture.data.url +"'>";				
-			},function(response) {
-			    console.log(JSON.stringify(response));
-			}
-		);
+		FB.api('/me','GET', {fields: 'first_name,last_name,name,id,picture.width(50).height(50)'}, function(response) {
+				console.log('Successful login for: '+ response.name);
+				document.getElementById('status').innerHTML = 'Thanks for logging in, '
+				+ response.name + "," + response.id;				
+			});
 	}
 	
 	//picture
