@@ -214,7 +214,7 @@
 	}//end draggable event
 	
 	function repeatingevent(){
-		$('#calendar').fullCalendar( 'removeEvents', event._999);
+		$('#calendar').fullCalendar( 'removeEvents', 'repeatingitem');
 		
 		selectmenu = [];
 		var checkedbox = $('input[name="repeatingbox"]:checked');
