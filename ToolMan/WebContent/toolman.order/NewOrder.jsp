@@ -24,7 +24,7 @@
 	<link href="../js/smartform/smart_wizard_theme_arrows.min.css" rel="stylesheet" type="text/css" />
 <!-- smart_wizard -->
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	
+<meta name="viewport" content="width=device-width, initial-scale=1.0">	
 <%--open while login service is combined --%>
 <%-- 	<c:if test="${empty LoginOK}"> --%>
 <%-- 		<c:redirect url="/_02_login/login.jsp" /> --%>
@@ -40,7 +40,7 @@
 	</style>
 
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-	<title>Insert title here</title>
+	<title>預約師傅</title>
 	
 	<jsp:useBean id="mdataVO" class="toolman.mdata.model.MdataVO" scope="session"/>
 	<!-- retrieve MdataVO object from session-->
@@ -62,8 +62,8 @@
             
             <label>External Buttons:</label>
             <div class="btn-group navbar-btn" role="group">
-                <button class="btn btn-default" id="prev-btn" type="button">Go Previous</button>
-                <button class="btn btn-default" id="next-btn" type="button">Go Next</button>
+                <button class="btn btn-default" id="prev-btn" type="button">上一步</button>
+                <button class="btn btn-default" id="next-btn" type="button">下一步</button>
                 <button class="btn btn-danger" id="reset-btn" type="button">Reset Wizard</button>
             </div>
         </form>
@@ -73,116 +73,174 @@
         <!-- SmartWizard html -->
         <div id="smartwizard">
             <ul>
-                <li><a href="#step-1">步驟一<br /><small>填寫預約表</small></a></li>
-                <li><a href="#step-2">步驟二<br /><small>確認預約表</small></a></li>
+            	<li><a href="#step-1">步驟一<br /><small>預約時間</small></a></li>
+                <li><a href="#step-2">步驟一<br /><small>填寫預約表</small></a></li>
                 <li><a href="#step-3">步驟三<br /><small>預約完成</small></a></li>
                 
             </ul>
             
          <div>
         	 <!--  step1  -->
-                <div id="step-1" class="">
-                    <form name="orderform" role="form" action="OrderController.do" class="form-inline">
-						<div class="form-group" >
-								<div  >
-									<label>服務公司名稱:</label>
-									<span>${mdataVO.b_name}</span>
-							<!--  for test <span>TOOL KING</span>  -->
-								</div>
-								<label>服務類別</label>
-								<div id="pro" name="opro_id">
-								
-						<!-- 	parameters come directly from servlet , so the Ajax may not be needed-->	
-								<c:forEach var="oproset" varStatus="stat" items="${mdataVO.mpros}">
-								
-						<!-- 	retrieve Collection object  mproset  from session.setAttribute("mproset",mproset)								 -->
-										<input type="checkbox" value=${oproset.m_proid} name="o_proid"/>${oproset.m_pro}			
-								</c:forEach>
-						
-						<!-- 		for test -->
-						<!-- 		<div> -->
-						<%-- 			<c:forEach var="i" begin="1" end="5"> --%>
-						<!-- 			<input type="checkbox" value="oprotest" name="o_proid"/>oprotest1 -->
-						<%-- 			</c:forEach> --%>
-						<!-- 		</div><span value=${param.erroropro}></span> -->
-								
-								<div id="datecalendar" >
-									<label>預約日期</label>
-									<input type="text" id="datepicker" name="o_bdate" value="${param.o_bdate}">
-									<!-- 放jQuery的calendar -->
-								</div>
-								
-								<div>
-								<label>維修項目說明</label><!-- 	ok -->
-									<input type="text" name="o_des"/>
-								</div><span value=${param.erroro_des}></span>
-								
-								<div>
-								<label>未回應請求失效時間</label>
-									<input type="radio" name="req_exp" value="5000" checked="checked">5秒測試用
-									<input type="radio" name="req_exp" value="15000" >15秒測試用
-									<input type="radio" name="req_exp" value="2400000" >2小時
-									<input type="radio" name="req_exp" value="86400000">1天
-									<input type="radio" name="req_exp" value="172800000">2天
-									<input type="radio" name="req_exp" value="604800000">一周
-								</div><span value=${param.erroro_des}></span>
-								
-								<div>
-								<label>建築物型態</label>		
-								    <select name="h_type" value=${oproset.h_type}>
-									    <option value="1" selected="selected">公寓</option>
-									    <option value="2">三合院</option>
-									    <option value="3">透天屋</option>
-									    <option value="4">冰屋</option>
-									    <option value="5">狗屋</option>
-								    </select>
-								</div>
-								<div>
-									<label>施工地址</label><!-- 	ok -->
-									<input type="text" id="o_city" name="o_city" value="台北市"/>
-									<input type="text" id="o_district" name="o_district" value="內湖區"/>
-									<input type="text" id="o_addr"name="o_addr" value=""/>
-								</div>
-								
-								<div id='map'></div>
-								
-								<div>
-									<label>備註</label><!-- 	ok -->
-									<input type="text" name="o_note"/>
-								</div><span value=${param.erroro_note}></span>
-								<div>
-									<input type="hidden" name="action" value="insert">
-									<input type="submit" value="送出">
-							</div>
-							</div>
-						</form>
-     			</div>
+                <div id="step-1" class=""></div>	
      		<!--  step1  -->
      		<!--  step2  -->
                 <div id="step-2" class="">
-                    <h2>Step 2 Content</h2>
-                    <div> </div>
+                    <form id="bookform"name="orderform" role="form" action="OrderController.do" class="form-inline">
+						<div class="panel panel-default">
+							<div class="panel-heading">預約表</div>
+								<table class="table">
+                        		
+
+							<thead>
+
+							</thead>
+							<tbody>
+									<tr>
+										<td>
+										
+											<label>服務公司名稱:</label>
+										</td>
+										<td>
+											<div>
+												<span>${mdataVO.b_name}</span>
+										<!--  for test <span>TOOL KING</span>  -->
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											
+											<label>服務類別</label>
+											
+										</td>
+										<td>
+										<div id="pro" name="opro_id">
+								<!-- 	parameters come directly from servlet , so the Ajax may not be needed-->	
+										<c:forEach var="oproset" varStatus="stat" items="${mdataVO.mpros}">
+										
+								<!-- 	retrieve Collection object  mproset  from session.setAttribute("mproset",mproset)								 -->
+												<input type="checkbox" value=${oproset.m_proid} checked="checked" name="o_pro"/>${oproset.m_pro}
+															
+										</c:forEach>
+								
+								<!-- 		for test -->
+										
+								<%-- 			<c:forEach var="i" begin="1" end="5"> --%>
+								<!-- 			<input type="checkbox" value="oprotest" name="o_proid"/>oprotest1 -->
+								<%-- 			</c:forEach> --%>
+								<!-- 		</div><span value=${param.erroropro}>${param.erroropro}</span> -->
+										<span style="border:2px solid black;height:30px;" value=${errormsg.erroro_pro}>${errormsg.erroro_pro}</span>
+										</div>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											
+												<label>預約日期</label>
+										</td>
+										<td>
+											<div id="datecalendar" >
+												<input type="text" id="datepicker" name="o_bdate" value="${param.o_bdate}">
+												<!-- 放jQuery的calendar -->
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<label>維修項目說明</label><!-- 	ok -->
+										</td>
+		
+										<td>	
+											<input type="text" name="o_des"/>
+											<span style="border:2px solid black;height:30px;" value=${errormsg.erroro_des}>${errormsg.erroro_des}</span>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											
+											<label>未回應請求失效時間</label>
+										</td>
+										<td>
+											<div>
+												<input type="radio" name="req_exp" value="5000" checked="checked">5秒測試用
+												<input type="radio" name="req_exp" value="15000" >15秒測試用
+												<input type="radio" name="req_exp" value="2400000" >2小時
+												<input type="radio" name="req_exp" value="86400000">1天
+												<input type="radio" name="req_exp" value="172800000">2天
+												<input type="radio" name="req_exp" value="604800000">一周
+											</div>
+											<span value=${errormsg.erroro_des}>${errormsg.erroro_des}</span>
+										</td>
+									</tr>
+									<tr>	
+										<td>																
+										
+											<label>建築物型態</label>	
+										</td>
+										<td>	
+											<div>
+											    <select name="h_type" value=${oproset.h_type}>
+												    <option value="1" selected="selected">公寓</option>
+												    <option value="2">三合院</option>
+												    <option value="3">透天屋</option>
+												    <option value="4">冰屋</option>
+												    <option value="5">狗屋</option>
+											    </select>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											
+												<label>施工地址</label><!-- 	ok -->
+										</td>
+										<td>
+											<div>
+												<input type="text" id="o_city" name="o_city" value="台北市"/>
+												<input type="text" id="o_district" name="o_district" value="內湖區"/>
+												<input type="text" id="o_addr"name="o_addr" value=""/>
+												<span style="border:2px solid black;height:30px;"  value=${errormsg.erroro_location}>${errormsg.erroro_location}</span>
+											</div>
+										</td>
+										</tr>
+									<tr>
+										<td>
+											<div id='map'></div>
+										</td>
+									</tr>	
+									<tr>
+										<td>
+										
+											<label>備註</label><!-- 	ok -->
+										</td>
+										<td>
+												<div>
+													<input type="text" name="o_note"/>
+												</div>
+												<span value=${errormsg.erroro_note}></span>
+										</td>
+									</tr>	
+									<input type="hidden" name="action" value="insert"/>
+									<input type="submit"  value="submit"/>
+								</tbody>
+							
+						</table>
+						</div>
+					</form>
+                  </div> 
+              <!--  step2  --> 
+               <!--  step3  -->    
+		              
+			<!--  step3  --> 
                 <div id="step-3" class=""></div>
-            <!--  step2  -->    
-                <div id="step-4" class="">
-                    <h2>Step 4 Content</h2>
-                    <div class="panel panel-default">
-                        <div class="panel-heading">My Details</div>
-                        <table class="table">
-                            <tbody>
-                                <tr> <th>Name:</th> <td>Tim Smith</td> </tr>
-                                <tr> <th>Email:</th> <td>example@example.com</td> </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+                    
             </div>
         </div>
        
    
 	<!-- smart wizard head -->
 
-	</div> 
+
 
 	<script
 	  src="https://code.jquery.com/jquery-3.2.1.min.js"
@@ -194,93 +252,122 @@
 	var googlecoordinate=null;
 	var o_location=null;
 	$( function() {
-	    $( "#datepicker" ).datepicker();
-	    googlecoordinate = 'https://maps.googleapis.com/maps/api/geocode/json?'
-	   
-	    $('#o_addr').on('blur',getCoordinate);	
-	    
-	      $('#smartwizard').smartWizard();
-	      
-          // External Button Events
-          $("#reset-btn").on("click", function() {
-              // Reset wizard
-              $('#smartwizard').smartWizard("reset");
-              return true;
-          });
-          
-          $("#prev-btn").on("click", function() {
-              // Navigate previous
-              $('#smartwizard').smartWizard("prev");
-              return true;
-          });
-          
-          $("#next-btn").on("click", function() {
-              // Navigate next
-              $('#smartwizard').smartWizard("next");
-              return true;
-          });
-          
-          $("#theme_selector").on("change", function() {
-              // Change theme
-              $('#smartwizard').smartWizard("theme", $(this).val());
-              return true;
-          });
-          
-          // Set selected theme on page refresh
-          $("#theme_selector").change();
-	});	    
-	function smartform(){
-		 $('#smartwizard').smartWizard({
-             selected: 0, 
-             theme: 'default',
-             transitionEffect:'fade',
-             showStepURLhash: true,
-             toolbarSettings: {toolbarPosition: 'both',
-                               toolbarExtraButtons: [btnFinish, btnCancel]
-                             }
-	      });
-	      	
 		
-	}
-	function getCoordinate(){
-		var a1 = $('#o_city').val();
-		var a2 = $('#o_district').val();
-		var a3 = $('#o_addr').val();
-		o_location =a1+a2+a3;
-		$.getJSON(googlecoordinate,{'address':o_location},function(data){
-			for(var i=0;i<data.results.length;i++) {
-		        var location = data.results[i].geometry.location;
-		        alert(location);
-		        }
-		//data 就是server端回傳的結果
-		coordinate = location;
-		initMap();
-			});
-// 		
+	    $( "#datepicker" ).datepicker();
+	    
+	    //google map
+// 	    googlecoordinate = 'https://maps.googleapis.com/maps/api/geocode/json?'
+	   
+// 	    $('#o_addr').on('blur',getCoordinate);	
+	    
+	      
+// 	            // Smart Wizard events
+//             $("#smartwizard").on("leaveStep", function(e, anchorObject, stepNumber, stepDirection) {
+                
+//             });
+            
+//             // This event should initialize before initializing smartWizard
+//             // Otherwise this event wont load on first page load 
+//             $("#smartwizard").on("showStep", function(e, anchorObject, stepNumber, stepDirection, stepPosition) {
+//                 $("#message-box").append(" > <strong>showStep</strong> called on " + stepNumber + ". Direction: " + stepDirection+ ". Position: " + stepPosition);
+//             });
+            
+//             $("#smartwizard").on("beginReset", function(e) {
+//                 $("#message-box").append("<br /> > <strong>beginReset</strong> called");
+//             });
+            
+//             $("#smartwizard").on("endReset", function(e) {
+//                 $("#message-box").append(" > <strong>endReset</strong> called");
+//             });  
+            
+//             $("#smartwizard").on("themeChanged", function(e, theme) {
+//                 $("#message-box").append("<br /> > <strong>themeChanged</strong> called. New theme: " + theme);
+//             });
+            
+//             // Toolbar extra buttons
+            
+//               var btnsubmit = $('<button></button>').text('提交')
+// 	            	.addClass('btn btn-danger')
+// 	            	.on('click', function(){ $('#bookform').submit(); });                         
+  
+//             // Smart Wizard initialize
+//             $('#smartwizard').smartWizard({ 
+//                     selected: 0, 
+//                     theme: 'dots',
+//                     transitionEffect:'fade',
+//                     anchorSettings:{
+//                     	removeDoneStepOnNavigateBack:true,
+//                     },
+//                     toolbarSettings: {toolbarPosition: 'both',
+//                                       toolbarExtraButtons: [btnsubmit]
+//                                     },
+//                  });           
+            
+//             // External Button Events
+//             $("#reset-btn").on("click", function() {
+//                 // Reset wizard
+//                 $('#smartwizard').smartWizard("reset");
+//                 return true;
+//             });
+            
+//             $("#prev-btn").on("click", function() {
+//                 // Navigate previous
+//                 $('#smartwizard').smartWizard("prev");
+//                 return true;
+//             });
+            
+//             $("#next-btn").on("click", function() {
+//                 // Navigate next
+//                 $('#smartwizard').smartWizard("next");
+//                 return true;
+//             });
+            
+//             $("#theme_selector").on("change", function() {
+//                 // Change theme
+//                 $('#smartwizard').smartWizard("theme", $(this).val());
+//                 return true;
+//             })
+	});	    
+	
+// 	function getCoordinate(){
+// 		var a1 = $('#o_city').val();
+// 		var a2 = $('#o_district').val();
+// 		var a3 = $('#o_addr').val();
+// 		o_location =a1+a2+a3;
+// 		$.getJSON(googlecoordinate,{'address':o_location},function(data){
+// 			for(var i=0;i<data.results.length;i++) {
+// 		        var location = data.results[i].geometry.location;
+// 		        alert(location);
+// 		        }
+// 		//data 就是server端回傳的結果
+// 		coordinate = location;
+// 		initMap();
+// 			});
+// // 		
 				
-	}
-	 function initMap() {
-		 var uluru =null;
-	        if(coordinate==null){ 
-	        	uluru={ "lat" : 25.0339639, "lng" : 121.5644722}
-	        }
-	        else{
-	        	uluru = coordinate;
-	        }           
+// 	}
+// 	 function initMap() {
+// 		 var uluru =null;
+// 	        if(coordinate==null){ 
+// 	        	uluru={ "lat" : 25.0339639, "lng" : 121.5644722}
+// 	        }
+// 	        else{
+// 	        	uluru = coordinate;
+// 	        }           
 	            
-	        var map = new google.maps.Map(document.getElementById('map'), {
-	          zoom: 15,
-	          center: uluru
-	        });
-	        var marker = new google.maps.Marker({
-	          position: uluru,
-	          map: map
-	        });
-	 	}
+// 	        var map = new google.maps.Map(document.getElementById('map'), {
+// 	          zoom: 15,
+// 	          center: uluru
+// 	        });
+// 	        var marker = new google.maps.Marker({
+// 	          position: uluru,
+// 	          map: map
+// 	        });
+// 	 	}
 	  
 		
 	</script>
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAj-PEjC_YSdYGHEvhIKnyojxufjKYy6OE&callback=initMap"></script>
+<!-- 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAj-PEjC_YSdYGHEvhIKnyojxufjKYy6OE&callback=initMap"></script> -->
   
 	<script type="text/javascript" src="../js/smartform/jquery.smartWizard.min.js"></script>	
 	

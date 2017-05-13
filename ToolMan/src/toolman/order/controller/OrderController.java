@@ -80,38 +80,27 @@ public class OrderController extends HttpServlet {
 			String b_name = mdataVO.getB_name();//automatically filled in			
 //			String c_id = cdataVO.getC_id(); //automatically filled in, but I don't need c_id, I just need cdataVO
 			
-			Timestamp o_tdate = new Timestamp(System.currentTimeMillis());
+
 			
 			//test data
 //			String b_name ="如意棒裝潢";
 //			Integer m_id = 1001;
 //			String c_id = "Micky";
 			
-			// deal with mpro and opro tables first
-			MProDAO mprodao = new MProDAO();
-			OproDAO oprodao = new OproDAO();
-			OproVO oproVO = new OproVO();
+
 			
-			//mpro and opro have no service file
-			Integer m_id = mdataVO.getM_id();// only for pro use
-			List<MProVO> mproVOlist = mprodao.getByMid(m_id);
-			List<OproVO> oproVOlist = new ArrayList<OproVO>();
-			
-			for(MProVO mproVO : mproVOlist){
 					
 //				Integer mproid = mproVO.getM_proid();
-				oproVO.setM_proid(mproVO);//hibernate will find it's m_proid specified in the mapping for me
-				oproVO.setO_pro(mproVO.getM_pro());
-				oproVOlist.add(oproVO);
-				
-			}
-			oprodao.insertOpro(oproVOlist);// opro done
+//				oproVO.setM_proid(mproVO);//hibernate will find it's m_proid specified in the mapping for me
+
+			
 			
 			//time to deal with main content
 			Calendar calobj = Calendar.getInstance();
 			Timestamp o_bdate = new Timestamp(calobj.getTimeInMillis());//automatically filled in
 			
 				String o_des = request.getParameter("o_des");
+
 				if(o_des==null||o_des.trim().length() == 0){
 					errormsg.put("erroro_des", "必須輸入項目描述");			
 				}
@@ -140,7 +129,22 @@ public class OrderController extends HttpServlet {
 					errormsg.put("erroro_note", "長度超過限制");	
 					o_note = request.getParameter("o_note");
 				}
+				// deal with mpro and opro tables first
+				MProDAO mprodao = new MProDAO();
+				OproDAO oprodao = new OproDAO();
+				OproVO oproVO = new OproVO();
 				
+				//mpro and opro have no service file
+				Integer m_id = mdataVO.getM_id();// only for pro use
+				List<MProVO> mproVOlist = mprodao.getByMid(m_id);
+				List<OproVO> oproVOlist = new ArrayList<OproVO>();
+				
+				String[] o_pro = request.getParameterValues("o_pro");
+//				String[] o_pro = {"a","b","c"};
+				if(o_pro==null||o_pro.length == 0){
+					errormsg.put("erroro_pro", "必須選擇工程類別");			
+				}
+				Timestamp o_tdate = new Timestamp(System.currentTimeMillis());
 				//test
 				System.out.println(action+","+o_des+","+req_exp+","+h_type+","+o_location+","+o_note );
 				
@@ -155,15 +159,30 @@ public class OrderController extends HttpServlet {
 				orderVO.setO_location(o_location);
 				orderVO.setS_name("o_notresponded");
 				orderVO.setO_tdate(o_tdate);
+		
+				for(int i=0;i<o_pro.length;i++){
+					oproVO.setO_id(orderVO);	
+					oproVO.setO_pro(o_pro[i]);
+					oproVOlist.add(oproVO);
+					System.out.println(o_pro[i]);
+
+			}
 				request.setAttribute("orderVO", orderVO);
-				
+				request.setAttribute("errormsg", errormsg);
 				//when error exits, return to the previous page
 			
 				if(!errormsg.isEmpty()){					
-					RequestDispatcher rd = request.getRequestDispatcher("NewOrder.jsp");
+					RequestDispatcher rd = request.getRequestDispatcher("NewOrder.jsp?#step-2");
 					rd.forward(request, response);
 				}
 				else{	//checked ok, forward to the confirmorder page
+					OrderVO orderVO2 = (OrderVO) request.getAttribute("orderVO");
+					OrderService orderservice = new OrderService();					
+					oprodao.insertOpro(oproVOlist);// opro done
+					
+					//test
+					System.out.println(orderVO2.getB_name());
+					orderservice.insert(orderVO2);
 					RequestDispatcher rd = request.getRequestDispatcher("confirmorder.jsp");
 					rd.forward(request, response);
 					}
@@ -171,11 +190,7 @@ public class OrderController extends HttpServlet {
 			
 			// order confirmed and insert the data
 			if("confirmorder".equals(action)){
-				OrderVO orderVO2 = (OrderVO) request.getAttribute("orderVO");
-				OrderService orderservice = new OrderService();
-				//test
-				System.out.println(orderVO2.getB_name());
-				orderservice.insert(orderVO2);
+
 				RequestDispatcher rd = request.getRequestDispatcher("/toolman.order/OrderRecommendation.do");
 				rd.forward(request, response);
 			}
@@ -184,11 +199,7 @@ public class OrderController extends HttpServlet {
 //				RequestDispatcher rd = request.getRequestDispatcher("NewOrder.jsp");
 //				rd.forward(request, response);
 //			}
-			if("alterorder".equals(action)){
-				request.setAttribute("alertmsg", "訂單尚未確認，是否離開此頁面");
-				RequestDispatcher rd = request.getRequestDispatcher("NewOrder.jsp");
-				rd.forward(request, response);
-			}
+
 	
 			
 			
