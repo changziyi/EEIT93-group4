@@ -118,8 +118,10 @@ public class OrderController extends HttpServlet {
 					errormsg.put("erroroh_type", "必須選擇建築物型態");		
 				}
 				
-				
-				String o_location = request.getParameter("o_city")+request.getParameter("o_district")+request.getParameter("o_addr");
+				String o_city = request.getParameter("o_city");
+				String o_district = request.getParameter("o_district");
+				String o_addr = request.getParameter("o_addr");
+				String o_location = o_city+ o_district+o_addr;
 				if(o_location==null||o_location.trim().length() == 0){
 					errormsg.put("erroro_location", "必須輸入地點");			
 				}
@@ -139,8 +141,8 @@ public class OrderController extends HttpServlet {
 				List<MProVO> mproVOlist = mprodao.getByMid(m_id);
 				List<OproVO> oproVOlist = new ArrayList<OproVO>();
 				
-				String[] o_pro = request.getParameterValues("o_pro");
-//				String[] o_pro = {"a","b","c"};
+//				String[] o_pro = request.getParameterValues("o_pro");
+				String[] o_pro = {"a","b","c"};
 				if(o_pro==null||o_pro.length == 0){
 					errormsg.put("erroro_pro", "必須選擇工程類別");			
 				}
@@ -159,7 +161,7 @@ public class OrderController extends HttpServlet {
 				orderVO.setO_location(o_location);
 				orderVO.setS_name("o_notresponded");
 				orderVO.setO_tdate(o_tdate);
-		
+				
 				for(int i=0;i<o_pro.length;i++){
 					oproVO.setO_id(orderVO);	
 					oproVO.setO_pro(o_pro[i]);
@@ -167,6 +169,11 @@ public class OrderController extends HttpServlet {
 					System.out.println(o_pro[i]);
 
 			}
+				List addrlist = new ArrayList();
+				addrlist.add(o_city);
+				addrlist.add(o_district);
+				addrlist.add(o_addr);
+				request.setAttribute("addrlist",addrlist);
 				request.setAttribute("orderVO", orderVO);
 				request.setAttribute("errormsg", errormsg);
 				//when error exits, return to the previous page

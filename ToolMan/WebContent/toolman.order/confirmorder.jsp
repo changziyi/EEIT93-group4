@@ -35,9 +35,47 @@
 <!-- login please -->
 	
 	<style>
-	#map{
+		#map{
 		height:100px;
 		width:100px;
+	}
+	.containerstyle{
+		text-align:center;
+		width:800px;
+		margin:auto;
+		horizontal-align:center;
+/* 		border:1px solid blue; */
+	}
+	.stepstyle{
+		text-align:center;
+		width:800px;
+		margin:auto;
+		display:table;
+	}
+	.table{
+	text-align:center;
+	
+	}
+	.putmiddle{
+		margin:0 auto;
+		display:table;
+
+	}
+	.inputstyle{
+		width:200px;
+		float:left;
+	}
+	.errormsg{
+		width:150px;
+		float:left;
+	}
+	.textstyle{
+		font-family: Arial, "Microsoft Jhenghei",  
+		"WenQuanYi Zen Hei", "儷黑 Pro", 
+		"LiHei Pro","文泉驛正黑", 
+		"Microsoft JhengHei", 
+		"DFKai-sb", DFKai-SB, 
+		sans-serif;
 	}
 	</style>
 
@@ -51,30 +89,13 @@
 <body>
 <!-- smart wizard head -->
 
-        <form class="form-inline">
-             <div class="form-group" >
-              <label >Choose Theme:</label>
-              <select id="theme_selector" class="form-control">
-                    <option value="default">default</option>
-                    <option value="arrows">arrows</option>
-                    <option value="circles">circles</option>
-                    <option value="dots">dots</option>
-              </select>
-            </div>           
-            
-            <label>External Buttons:</label>
-            <div class="btn-group navbar-btn" role="group">
-                <button class="btn btn-default" id="prev-btn" type="button">上一步</button>
-                <button class="btn btn-default" id="next-btn" type="button">下一步</button>
-                <button class="btn btn-danger" id="reset-btn" type="button">Reset Wizard</button>
-            </div>
-        </form>
+        
 
         <br />
-        
+     <div class="container containerstyle textstyle putmiddle">
         <!-- SmartWizard html -->
         <div id="smartwizard">
-            <ul>
+            <ul class="textstyle">
             	<li><a href="#step-1">步驟一<br /><small>預約時間</small></a></li>
                 <li><a href="#step-2">步驟一<br /><small>填寫預約表</small></a></li>
                 <li><a href="#step-3">步驟三<br /><small>預約完成</small></a></li>
@@ -92,36 +113,52 @@
               <!--  step2  --> 
                <!--  step3  -->    
 		               <!--  step3  -->    
-		     <div id="step-3" class="">
-			     <div>
-					<table>
-						<tr><td>${orderVO.getB_name()}</td>
-							<td>${orderVO.getM_id()}</td>
-							<td>${orderVO.getC_id()}</td></tr>
-						
-						<tr><td>${orderVO.getO_bdate()}</td></tr>
-							<td>${orderVO.getO_des()}</td>
-							<td>${orderVO.getReq_exp()}</td>
-						
-						<tr><td>${orderVO.getH_type()}</td>
-							<td>${orderVO.getO_location()}</td>
-							<td>${orderVO.getS_name()}</td></tr>
-					</table>
-				</div>
-				<div>
-					<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/toolman.order/OrderController.do">
-						<input type="hidden" name="action"value="confirmorder">
-					    <input type="submit" value="確認訂單">
-					</FORM>
-				</div>
-		    </div>     
-			<!--  endstep3  --> 
-			
+		     <div id="step-3" class="textstyle">
+				     <div>
+						<table class="table textstyle" >
+						<tr><td>店家名稱</td><td>B_name</td></tr>
+							<tr><td>消費者名稱</td><td>Snoopy</td></tr>	
+							<tr><td>預約時間</td><td>2017-05-12 09:01:01</td></tr>	
+							<tr><td>工程項目</td><td>floor</td></tr>
+							<tr><td>訂單失效時間</td><td>5分鐘</td></tr>
+							<tr><td>建築物型態</td><td>公寓</td></tr>
+							<tr><td>裝修地點</td><td>台北市</td></tr>
+							<tr><td>訂單狀態</td><td>師傅尚未回應</td></tr>	
+						</table>
+	<%-- 						<tr><td>${orderVO.getB_name()}</td> --%>
+	<%-- 							<td>${orderVO.getM_id()}</td> --%>
+	<%-- 							<td>${orderVO.getC_id()}</td></tr> --%>
+							
+	<%-- 						<tr><td>${orderVO.getO_bdate()}</td></tr> --%>
+	<%-- 							<td>${orderVO.getO_des()}</td> --%>
+	<%-- 							<td>${orderVO.getReq_exp()}</td> --%>
+							
+	<%-- 						<tr><td>${orderVO.getH_type()}</td> --%>
+	<%-- 							<td>${orderVO.getO_location()}</td> --%>
+	<%-- 							<td>${orderVO.getS_name()}</td></tr> --%>
+	<!-- 					</table> -->
+					</div>
 
-                    
-            </div>
-        </div>
-       
+						<form class="form-inline">
+				             <div  >
+				              <label >Choose Theme:</label>
+				              <select id="theme_selector" class="form-control">
+				                    <option value="default">default</option>
+				                    <option value="arrows">arrows</option>
+				                    <option value="circles">circles</option>
+				                    <option value="dots">dots</option>
+				              </select>
+				            </div>           
+				              <span >
+				            	  <button id="btntobackstage" href="${pageContext.servletContext.contextPath}/order/listCOrder.jsp" class="btn btn-primary putmiddle" >進行訂單管理</button>
+					    	</span>
+				        </form>
+		    	</div>     
+			<!--  endstep3  --> 
+ 
+          </div>
+      </div>
+   </div>
    
 	<!-- smart wizard head -->
 
@@ -171,14 +208,12 @@
             
             // Toolbar extra buttons
             
-              var btnsubmit = $('<button></button>').text('進行訂單管理')
-	            	.addClass('btn btn-danger')
-	            	.on('click', function(){ $('#smartwizard').smartWizard("reset"); });                         
+                           
   
             // Smart Wizard initialize
             $('#smartwizard').smartWizard({ 
                     selected: 2, 
-                    theme: 'dots',
+                    theme: 'circles',
                     transitionEffect:'fade',
                     anchorSettings:{
                     	removeDoneStepOnNavigateBack:false,
@@ -187,7 +222,7 @@
                     	toolbarPosition: 'buttom',
                     	showNextButton:false,
                     	showPreviousButton:false,
-                        toolbarExtraButtons: [btnsubmit]
+                       
                                     },
                  });           
             
