@@ -44,9 +44,9 @@ public class managerUIFunctionServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		String functionaction = request.getParameter("functionaction");
 		String toggledcheckbox = request.getParameter("toggledcheckbox");
-		String masterid = request.getParameter("masterid");
-		String notevalue = request.getParameter("notevalue");
-		String noteid = request.getParameter("noteid");
+		String targetid = request.getParameter("targetid");//note
+		String notevalue = request.getParameter("notevalue");//note
+		String noteid = request.getParameter("noteid");//note
 //		int lastindex = toggledcheckbox.lastIndexOf("\""); 
 		String[] arraytoggled = toggledcheckbox.split("\\,");
 		System.out.println(arraytoggled);
@@ -90,8 +90,21 @@ public class managerUIFunctionServlet extends HttpServlet {
 		}
 		if("findmaster".equals(functionaction)){
 			MdataService mdataservice = new MdataService();
-			request.setAttribute("mdataVO", mdataservice.findByPrimaryKey(new Integer(masterid)));
-			RequestDispatcher rd = request.getRequestDispatcher("MasterPage.jsp");
+			request.setAttribute("mdataVO", mdataservice.findByPrimaryKey(new Integer(targetid)));
+			RequestDispatcher rd = request.getRequestDispatcher(request.getServletContext()+"/mdata/MasterPage.jsp");
+			rd.forward(request, response);	
+		}
+		if("findcustomer".equals(functionaction)){
+			CdataService cdataservice = new CdataService();
+			request.setAttribute("cdataVO", cdataservice.getById(targetid));
+			RequestDispatcher rd = request.getRequestDispatcher(request.getServletContext()+"/cdata/ShowCdata.jsp");
+			rd.forward(request, response);	
+		}
+		
+		if("findorder".equals(functionaction)){
+			OrderService orderservice = new OrderService();
+			request.setAttribute("orderVO", orderservice.getById(new Integer(targetid)));
+			RequestDispatcher rd = request.getRequestDispatcher(request.getServletContext()+"toolman.order/confirmorder.jsp");
 			rd.forward(request, response);	
 		}
 //		if("sendmessagem".equals(functionaction)){

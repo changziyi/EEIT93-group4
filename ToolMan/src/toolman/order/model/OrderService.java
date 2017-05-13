@@ -29,7 +29,9 @@ public class OrderService {
 	public void insert(OrderVO orderVO){
 		dao.insert(orderVO);
 	}
-	
+	public OrderVO getById(Integer o_id){
+		return dao.getById(o_id);
+	}
 
     public List<OrderVO>  getAllOrder(){ 
     	List<OrderVO> orderlist = dao.getAllOrder();

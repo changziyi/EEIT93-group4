@@ -351,7 +351,19 @@ public class OrderDAO implements OrderDAO_Interface {
 		}
 		return querylist;
 	}
-	
+	public OrderVO getById(Integer o_id){
+		OrderVO orderVO = null;
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try {
+			session.beginTransaction();
+			orderVO = (OrderVO) session.get(OrderVO.class, o_id);
+			session.getTransaction().commit();
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
+		return orderVO;
+	}
 	public List<OrderVO> getBySname(String s_name) {
 		List<OrderVO> list = null;
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();

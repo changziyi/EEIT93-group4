@@ -183,10 +183,10 @@ $(function(){
 		subfunctionrow();// build function buttons
 
 		$('#functionrow>div>ul>li').on('click',functionrowfiltering);//filtering
-		$('input[name="samnote"],input[name="saonote"],input[name="sacnote"]').on('change',updatenote);
- 	  	$('#subfunctionrow>a').on('click',togglehyper);//direct to other pages
- 	  	$('#subfunctionrow>span:not(#messagespanm#messagespanc#messagespano)').on('click',togglegetmethod);//will return something when clicked, maill has it's own form action
- 	  	$('#messagespanm,#messagespanc,#messagespano').on('click',mail);//will return something when clicked, maill has it's own form action
+		$('input[name="samnote"],input[name="saonote"],input[name="sacnote"]').on('change',updatenote);// input note
+ 	  	$('#subfunctionrow>a').on('click',togglehyper);//verify the master direct to other pages
+ 	  	$('#subfunctionrow>span:not(#messagespanm#messagespanc#messagespano)').on('click',togglegetmethod);//change m c o s_name//will return something when clicked, maill has it's own form action
+ 	  	$('#messagespanm,#messagespanc,#messagespano').on('click',mail);//mail
 
  	  	loadProduct('m','allmaster','alldate');//build dynamic table
  		
@@ -214,9 +214,9 @@ $(function(){
  		}// end mail
  	function updatenote(){
 
-        		var valueattrr=$(this).attr('value');//retrieve the value from functinaction
-        		var nameattr=$(this).attr('name');//retrieve the value from functinaction
-        		var noteid=$(this).attr('name');
+        		var valueattrr=$(this).attr('value');// get input value
+        		var nameattr=$(this).attr('name');//get input  name
+        		var noteid=$(this).attr('name');// get input id
         		var hyperlinkstring = "${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIFunctionServlet.do";
 //         		var hyperlinkparameter = "functionaction="+valueattrr+"&+toggledcheckbox="+checkboxdatas2;
 //        	 	var hyperlinkstringwithparameter=hyperlinkstring+hyperlinkparameter;
@@ -576,6 +576,8 @@ $(function(){
 						   	console.log(data);
 						   	
 						   	var toggleword = $('<input type="checkbox" name="otoggle" />').val(data.o_id).attr('data-receiver',data.o_bname+data.c_id);
+						   	var mid =  $('<input type="button"/> ').val(data.M_id).addClass('eventlisttbodytrtd');
+							var a =  $('<a></a> ').attr('href',"${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIFunctionServlet.do?"+"functionaction=findmaster"+"&+masterid="+data.M_id).append(mid);						  
 						   	var cell0 = $('<td></td>').addClass('eventlisttbodytrtd').append(toggleword);
 						  	var cell1 = $('<td></td>').text(data.o_tdate).addClass('eventlisttbodytrtd');
 							var cell2 = $('<td></td>').text(data.o_bname).addClass('eventlisttbodytrtd');
@@ -599,7 +601,7 @@ $(function(){
 					  
 					   var toggleword =$('<input type="checkbox" name="mtoggle"/>').val(data.M_id).attr('data-receiver',data.B_name);;     
 					   var mid =  $('<input type="button"/> ').val(data.M_id).addClass('eventlisttbodytrtd');
-					   var a =  $('<a></a> ').attr('href',"${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIFunctionServlet.do?"+"functionaction=findmaster"+"&+masterid="+data.M_id).append(mid);						  
+					   var a =  $('<a></a> ').attr('href',"${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIFunctionServlet.do?"+"functionaction=findmaster&targetid="+data.M_id).append(mid);						  
 					   var midwordmid =  $('<span style="visibility: hidden;font-size:0px;margin:0pxlpadding:0px;"></span> ').text(data.M_id).addClass('eventlisttbodytrtd');
 					   var cell0 = $('<td></td>').addClass('eventlisttbodytrtd').append(toggleword);  
 					   var cell1 = $('<td></td>').html(a).addClass('eventlisttbodytrtd').append(midwordmid);
@@ -621,6 +623,9 @@ $(function(){
 						
 						
 					   var toggleword = $('<input type="checkbox" name="ctoggle" />').val(data.c_id).attr('data-receiver',data.c_id);
+					   var mid =  $('<input type="button"/> ').val(data.c_id).addClass('eventlisttbodytrtd');
+					   var a =  $('<a></a> ').attr('href',"${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIFunctionServlet.do?"+"functionaction=findcustomer&targetid="+data.c_id).append(mid);						  
+
 					   var cell0 = $('<td></td>').addClass('eventlisttbodytrtd').append(toggleword);
 					   var cell1 = $('<td></td>').text(data.c_jdate).addClass('eventlisttbodytrtd');;
 					   var cell2 = $('<td></td>').text(data.c_id).addClass('eventlisttbodytrtd');;

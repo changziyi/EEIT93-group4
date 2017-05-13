@@ -116,6 +116,22 @@ public class CdataDAO implements CdataDAO_interface{
 		return cdataVO;
 	}
 	//BY Benny
+		public CdataVO getById(String c_id) {
+		
+			Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+			CdataVO cdataVO =null;
+			try {
+				session.beginTransaction();
+				cdataVO = (CdataVO) session.get(CdataVO.class, c_id);
+
+				session.getTransaction().commit();
+			} catch (RuntimeException ex) {
+				session.getTransaction().rollback();
+				throw ex;
+			}
+			return  cdataVO;
+		}
+	//BY Benny
 	public List<CdataVO> getBySname(String s_name) {
 		List<CdataVO> list = null;
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
