@@ -271,7 +271,23 @@ public class OrderDAO implements OrderDAO_Interface {
 		}
 		return querylist;
 	}
-
+	public int updatecustomerSaonote(Integer o_id, String sa_onote){
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		int count=0;
+		try {
+			session.beginTransaction();
+			Query query = session.createQuery("update OrderVO set sa_onote=:snote where c_id=:c");
+			query.setString("snote",sa_onote);
+			query.setParameter("c",o_id);
+			count = query.executeUpdate();
+			session.getTransaction().commit();
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
+		return count;
+		
+	}
 
 	@Override
 	public List<OrderVO> getOrderByMAndSname(Integer m_id, String s_name) {

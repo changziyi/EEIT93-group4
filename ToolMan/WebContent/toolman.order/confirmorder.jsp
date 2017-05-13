@@ -115,15 +115,17 @@
 		               <!--  step3  -->    
 		     <div id="step-3" class="textstyle">
 				     <div>
+
 						<table class="table textstyle" >
-						<tr><td>店家名稱</td><td>B_name</td></tr>
-							<tr><td>消費者名稱</td><td>Snoopy</td></tr>	
-							<tr><td>預約時間</td><td>2017-05-12 09:01:01</td></tr>	
-							<tr><td>工程項目</td><td>floor</td></tr>
-							<tr><td>訂單失效時間</td><td>5分鐘</td></tr>
-							<tr><td>建築物型態</td><td>公寓</td></tr>
-							<tr><td>裝修地點</td><td>台北市</td></tr>
-							<tr><td>訂單狀態</td><td>師傅尚未回應</td></tr>	
+						<tr><td>店家名稱</td><td>${orderVO.getB_name()}</td></tr>
+							<tr><td>消費者名稱</td><td>${orderVO.getC_id()}</td></tr>	
+							<tr><td>預約時間</td><td>${orderVO.getO_bdate()}</td></tr>	
+							<tr><td>工程類別</td><td id="oprolist"></tr>	
+							<tr><td>工程描述</td><td>${orderVO.getO_des()}</tr>
+							<tr><td>訂單失效時間</td><td>${orderVO.getReq_exp()}</td></tr>
+							<tr><td>建築物型態</td><td>${orderVO.getH_type()}</td></tr>
+							<tr><td>裝修地點</td><td>${orderVO.getO_location()}</td></tr>
+							<tr><td>訂單狀態</td><td>${orderVO.getS_name()}</td></tr>	
 						</table>
 	<%-- 						<tr><td>${orderVO.getB_name()}</td> --%>
 	<%-- 							<td>${orderVO.getM_id()}</td> --%>
@@ -173,9 +175,11 @@
 	var coordinate=null;
 	var googlecoordinate=null;
 	var o_location=null;
+	var oprolist = [];
+
 	$( function() {
-		
-	    $( "#datepicker" ).datepicker();
+		opro();
+
 	    
 	    //google map
 // 	    googlecoordinate = 'https://maps.googleapis.com/maps/api/geocode/json?'
@@ -250,7 +254,13 @@
                 $('#smartwizard').smartWizard("theme", $(this).val());
                 return true;
             })
-	});	    
+	});	//end ready
+	function opro(){	
+		<c:forEach var="oproset" varStatus="stat" items="${oproVOlist}">
+			oprolist.push("<c:out value="${oproset.o_pro}"></c:out>");
+		</c:forEach>
+		$('#oprolist').text(oprolist);
+	}
 	
 // 	function getCoordinate(){
 // 		var a1 = $('#o_city').val();

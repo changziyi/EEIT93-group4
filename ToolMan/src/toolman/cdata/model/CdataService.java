@@ -49,13 +49,15 @@ public class CdataService {
 		return  dao.cdata_des(c_id); 
 		
 	}
-	public List<CdataVO> getAll() {
+	public List<CdataVO> getAll() {//benny	
 		return dao.getAll();
 	}
-	public Integer updatecustomerSname(String c_id, String s_name){		
+	public  int updatecustomerSname(String c_id, String s_name){	//benny	
 		return dao.updatecustomerSname(c_id, s_name);
 	}
-	
+	public int updatecustomerSacnote(String c_id, String sa_cnote){
+		return dao.updatecustomerSname(c_id, sa_cnote);
+	}
 	public Set<OrderVO> getOrderByC(String c_id) {//訂單
 		return dao.getOrderByC(c_id);
 	}

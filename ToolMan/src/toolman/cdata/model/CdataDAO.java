@@ -116,7 +116,23 @@ public class CdataDAO implements CdataDAO_interface{
 		return cdataVO;
 	}
 	//BY Benny
-	public Integer updatecustomerSname(String c_id, String s_name) {
+	public List<CdataVO> getBySname(String s_name) {
+		List<CdataVO> list = null;
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try {
+			session.beginTransaction();
+			Query query = session.createQuery("from CdataVO where s_name=:s ");
+			query.setString("s",s_name);
+			list = query.list();
+			session.getTransaction().commit();
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
+		return list;
+	}
+	//benny
+	public int updatecustomerSname(String c_id, String s_name) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Integer count=0;
 		try {
@@ -132,7 +148,24 @@ public class CdataDAO implements CdataDAO_interface{
 		}
 		return count;
 	}
-
+	//benny
+	public int updatecustomerSacnote(String c_id, String sa_cnote){
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		int count=0;
+		try {
+			session.beginTransaction();
+			Query query = session.createQuery("update CdataVO set sa_cnote=:snote where c_id=:c");
+			query.setString("snote",sa_cnote);
+			query.setParameter("c",c_id);
+			count = query.executeUpdate();
+			session.getTransaction().commit();
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
+		return count;
+		
+	}
 	@Override   //訂單
 	public Set<OrderVO> getOrderByC(String c_id) {		
 		Set<OrderVO> set = login_in(c_id).getOrders();
@@ -149,21 +182,7 @@ public class CdataDAO implements CdataDAO_interface{
 		return set;
 	}
 
-	public List<CdataVO> getBySname(String s_name) {
-		List<CdataVO> list = null;
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		try {
-			session.beginTransaction();
-			Query query = session.createQuery("from CdataVO where s_name=:s ");
-			query.setString("s",s_name);
-			list = query.list();
-			session.getTransaction().commit();
-		} catch (RuntimeException ex) {
-			session.getTransaction().rollback();
-			throw ex;
-		}
-		return list;
-	}
+	
 	public static void main(String args[]){		
 		CdataDAO  dao = new CdataDAO();
 		
@@ -272,10 +291,6 @@ public class CdataDAO implements CdataDAO_interface{
 		
 //		dao.delete("Snoopy");
 	}
-	@Override
-	public Integer updatecustomerSname(Integer c_id, String s_name) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 
 }

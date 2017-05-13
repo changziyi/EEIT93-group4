@@ -223,13 +223,30 @@ public class MdataDAO implements MdataDAO_interface {
 			return list;
 		}
 		//BY BENNY--for manager backstage
-		public Integer updatemasterSname(Integer m_id,String s_name) {
+		public int updatemasterSname(Integer m_id,String s_name) {
 			Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-			Integer count=0;
+			int count=0;
 			try {
 				session.beginTransaction();
 				Query query = session.createQuery("update MdataVO set s_name=:s where m_id=:m");
 				query.setParameter("s",s_name);
+				query.setParameter("m",m_id);
+				count = query.executeUpdate();
+				session.getTransaction().commit();
+			} catch (RuntimeException ex) {
+				session.getTransaction().rollback();
+				throw ex;
+			}
+			return count;
+		}
+		//BY BENNY--for manager backstage
+		public int updatecustomerSamnote(Integer m_id, String sa_mnote){//by Benny
+			Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+			int count=0;
+			try {
+				session.beginTransaction();
+				Query query = session.createQuery("update MdataVO set sa_mnote=:snote where m_id=:m");
+				query.setParameter("snote",sa_mnote);
 				query.setParameter("m",m_id);
 				count = query.executeUpdate();
 				session.getTransaction().commit();
@@ -536,11 +553,8 @@ public class MdataDAO implements MdataDAO_interface {
 		
 	}//main()
 
-	@Override
-	public List<MdataVO> getByAndSname(String s_name) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
+	
 
 
 
