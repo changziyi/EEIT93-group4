@@ -108,7 +108,7 @@
                 <form class="form-inline">
 				             <div class="form-group" >
 				              <label >Choose Theme:</label>
-				              <select id="theme_selector" class="form-control">
+				              <select id="theme_selector1" class="form-control">
 				                    <option value="default">default</option>
 				                    <option value="arrows">arrows</option>
 				                    <option value="circles">circles</option>
@@ -397,6 +397,11 @@
                 $('#smartwizard').smartWizard("next");
                 return true;
             });
+            $("#theme_selector1").on("change", function() {
+                // Change theme
+                $('#smartwizard').smartWizard("theme", $(this).val());
+                return true;
+            })
             $("#theme_selector").on("change", function() {
                 // Change theme
                 $('#smartwizard').smartWizard("theme", $(this).val());
