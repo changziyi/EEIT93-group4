@@ -183,7 +183,7 @@ $(function(){
 		subfunctionrow();// build function buttons
 
 		$('#functionrow>div>ul>li').on('click',functionrowfiltering);//filtering
-		$('input[name="samnote"],input[name="saonote"],input[name="sacnote"]').on('change',updatenote);// input note
+		$('input[name="samnote"],[name="saonote"],[name="sacnote"]').on('change',updatenote);// input note
  	  	$('#subfunctionrow>a').on('click',togglehyper);//verify the master direct to other pages
  	  	$('#subfunctionrow>span:not(#messagespanm#messagespanc#messagespano)').on('click',togglegetmethod);//change m c o s_name//will return something when clicked, maill has it's own form action
  	  	$('#messagespanm,#messagespanc,#messagespano').on('click',mail);//mail
@@ -213,10 +213,11 @@ $(function(){
 
  		}// end mail
  	function updatenote(){
-
-        		var valueattrr=$(this).attr('value');// get input value
+				//tested ok
+        		var valueattrr=$(this).val();// get input value
         		var nameattr=$(this).attr('name');//get input  name
-        		var noteid=$(this).attr('name');// get input id
+        		var noteid=$(this).data('noteid');// get input id
+        		console.log(noteid);
         		var hyperlinkstring = "${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIFunctionServlet.do";
 //         		var hyperlinkparameter = "functionaction="+valueattrr+"&+toggledcheckbox="+checkboxdatas2;
 //        	 	var hyperlinkstringwithparameter=hyperlinkstring+hyperlinkparameter;
@@ -576,20 +577,21 @@ $(function(){
 						   	console.log(data);
 						   	
 						   	var toggleword = $('<input type="checkbox" name="otoggle" />').val(data.o_id).attr('data-receiver',data.o_bname+data.c_id);
-						   	var mid =  $('<input type="button"/> ').val(data.M_id).addClass('eventlisttbodytrtd');
-							var a =  $('<a></a> ').attr('href',"${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIFunctionServlet.do?"+"functionaction=findmaster"+"&+masterid="+data.M_id).append(mid);						  
-						   	var cell0 = $('<td></td>').addClass('eventlisttbodytrtd').append(toggleword);
+						   	var mid =  $('<input type="button"/> ').val(data.o_id).addClass('eventlisttbodytrtd');
+							var a =  $('<a></a> ').attr('href',"${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIFunctionServlet.do?"+"functionaction=findorder&targetid="+data.o_id).append(mid);						  
+							var midwordmid =  $('<span style="visibility: hidden;font-size:0px;margin:0pxlpadding:0px;"></span> ').text(data.o_id).addClass('eventlisttbodytrtd');
+							var cell0 = $('<td></td>').addClass('eventlisttbodytrtd').append(toggleword);
 						  	var cell1 = $('<td></td>').text(data.o_tdate).addClass('eventlisttbodytrtd');
 							var cell2 = $('<td></td>').text(data.o_bname).addClass('eventlisttbodytrtd');
 							var cell3 = $('<td></td>').text(data.c_id).addClass('eventlisttbodytrtd');
-							var cell4 = $('<td></td>').text(data.o_id).addClass('eventlisttbodytrtd');
+							var cell4 = $('<td></td>').html(a).addClass('eventlisttbodytrtd');
 	 						var cell5 = $('<td></td>').text(data.opros).addClass('eventlisttbodytrtd');
 							var cell6 = $('<td></td>').text(data.o_location).addClass('eventlisttbodytrtd');
 							var cell7 = $('<td></td>').text(data.s_name).addClass('eventlisttbodytrtd');
 							var cell8 = $('<td></td>').text(data.m_arating).addClass('eventlisttbodytrtd');
 							var cell9 = $('<td></td>').text(data.c_arating).addClass('eventlisttbodytrtd');
 							var wordsanote =  $('<span style="visibility: hidden;font-size:0px;margin:0pxlpadding:0px;"></span> ').text(data.sa_onote).addClass('eventlisttbodytrtd');
-							var saonote =  $('<input type="text"name="Saonote" width="500px" /> ').val(data.sa_onote).attr('data-noteid',data.o_id).addClass('eventlisttbodytrtd');
+							var saonote =  $('<input type="text"name="saonote" width="500px" /> ').val(data.sa_onote).attr('data-noteid',data.o_id).addClass('eventlisttbodytrtd');
 							var cell10 = $('<td></td>').html(saonote).addClass('eventlisttbodytrtd').append(wordsanote);
 	 						var rowtb = $('<tr></tr>').append([cell0,cell1,cell2,cell3,cell4,cell5,cell6,cell7,cell8,cell9,cell10]);
 	 						docFragtb.append(rowtb);
@@ -612,7 +614,7 @@ $(function(){
 					   var cell6 = $('<td></td>').text(data.S_name).addClass('eventlisttbodytrtd');
 					   var cell7 = $('<td></td>').text(data.M_arating).addClass('eventlisttbodytrtd');
 					   var wordsanote =  $('<span style="visibility: hidden;font-size:0px;margin:0pxlpadding:3px;"></span> ').text(data.Sa_mnote).addClass('eventlisttbodytrtd');
-					   var samnote =  $('<input type="text" name="Samnote" width="500px" /> ').val(data.Sa_mnote).attr('data-noteid',data.M_id).addClass('eventlisttbodytrtd');
+					   var samnote =  $('<input type="text" name="samnote" width="500px" /> ').val(data.Sa_mnote).attr('data-noteid',data.M_id).addClass('eventlisttbodytrtd');
 					   var cell8 = $('<td></td>').html(samnote).addClass('eventlisttbodytrtd').append(wordsanote);
 					   var rowtb = $('<tr></tr>').append([cell0,cell1,cell2,cell3,cell4,cell5,cell6,cell7,cell8]).addClass('eventlisttbodytrtd');				   
 	  				   docFragtb.append(rowtb);
@@ -625,17 +627,17 @@ $(function(){
 					   var toggleword = $('<input type="checkbox" name="ctoggle" />').val(data.c_id).attr('data-receiver',data.c_id);
 					   var mid =  $('<input type="button"/> ').val(data.c_id).addClass('eventlisttbodytrtd');
 					   var a =  $('<a></a> ').attr('href',"${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIFunctionServlet.do?"+"functionaction=findcustomer&targetid="+data.c_id).append(mid);						  
-
+					   var midwordmid =  $('<span style="visibility: hidden;font-size:0px;margin:0pxlpadding:0px;"></span> ').text(data.c_id).addClass('eventlisttbodytrtd');
 					   var cell0 = $('<td></td>').addClass('eventlisttbodytrtd').append(toggleword);
 					   var cell1 = $('<td></td>').text(data.c_jdate).addClass('eventlisttbodytrtd');;
-					   var cell2 = $('<td></td>').text(data.c_id).addClass('eventlisttbodytrtd');;
+					   var cell2 = $('<td></td>').html(a).addClass('eventlisttbodytrtd').append(midwordmid);
 					   var cell3 = $('<td></td>').text(data.c_name).addClass('eventlisttbodytrtd');;
 					   var cell4 = $('<td></td>').text(data.c_city+data.c_district).addClass('eventlisttbodytrtd');;
 					   var cell5 = $('<td></td>').text(data.s_name).addClass('eventlisttbodytrtd');;
 					   var cell6 = $('<td></td>').text(data.c_averrating).addClass('eventlisttbodytrtd');;
 					   var wordsanote =  $('<span style="visibility: hidden;font-size:0px;margin:0pxlpadding:0px;"></span> ').text(data.sa_cnote).addClass('eventlisttbodytrtd');
-					   var sacnote =  $('<input type="text" name="Sacnote" id= width="500px" /> ').val(data.sa_cnote).attr('data-noteid',data.c_id).addClass('eventlisttbodytrtd');
-					   var cell7 = $('<td></td>').text(samnote).addClass('eventlisttbodytrtd').append(wordsanote);;
+					   var sacnote =  $('<input type="text" name="sacnote" id= width="500px" /> ').val(data.sa_cnote).attr('data-noteid',data.c_id).addClass('eventlisttbodytrtd');
+					   var cell7 = $('<td></td>').html(sacnote).addClass('eventlisttbodytrtd').append(wordsanote);;
 					   var row = $('<tr></tr>').append([cell0,cell1,cell2,cell3,cell4,cell5,cell6,cell7]);
 					   docFragtb.append(row);
 					   
@@ -648,7 +650,9 @@ $(function(){
 			   tb.append(docFragtb);
 			   table.append(th);
 			   table.append(tb);
-			   
+			   //rebinding tested ok
+			   $('input[name="samnote"],[name="saonote"],[name="sacnote"]').on('change',updatenote);// input note
+
 			   dfd.resolve();
 			   return dfd;
 // 			   datatableinit();// goes wrong often

@@ -99,7 +99,7 @@
             	<li><a href="#step-1">步驟一<br /><small>預約時間</small></a></li>
                 <li><a href="#step-2">步驟一<br /><small>填寫預約表</small></a></li>
                 <li><a href="#step-3">步驟三<br /><small>預約完成</small></a></li>
-                
+                <li><a href="#step-1">步驟四<br /><small>結案與評分</small></a></li>
             </ul>
             
          <div>
