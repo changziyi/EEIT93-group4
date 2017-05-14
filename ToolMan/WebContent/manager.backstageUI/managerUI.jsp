@@ -493,7 +493,7 @@ $(function(){
 			
 					   
 			 $.getJSON('${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIServlet.do',{'navigatorid':id,"datastatus":datastatus,"datatime":datatime}, function(data){
-				 buildtable(id,data);
+				 buildtable(id,data,datatime);
 				 $.when(dfd)//super great
 // 				 .done(alert("first"))
 // 				 .done(alert("second"))
