@@ -72,7 +72,7 @@ public class managerUIFunctionServlet extends HttpServlet {
 			for(String m_id:arraytoggled){
 				MdataService mdataservice = new MdataService();
 				System.out.println(m_id);
-			Integer	returnedcount = mdataservice.updatemasterSname(Integer.parseInt(m_id),"停權中");
+				int	returnedcount = mdataservice.updatemasterSname(Integer.parseInt(m_id),"停權中");
 			count= returnedcount+count;
 			}	
 			
@@ -85,7 +85,7 @@ public class managerUIFunctionServlet extends HttpServlet {
 			int count=0;
 			for(String c_id:arraytoggled){
 				CdataService cdataservice = new CdataService();
-			Integer	returnedcount = cdataservice.updatecustomerSname(c_id,"停權中");
+			int	returnedcount = cdataservice.updatecustomerSname(c_id,"停權中");
 			count= returnedcount+count;
 			}
 			out = response.getWriter();
@@ -127,25 +127,27 @@ public class managerUIFunctionServlet extends HttpServlet {
 //			
 //		}// call emailservlet instead
 		
+		//tested ok
 		if("samnote".equals(functionaction)){
 			
 			int count=0;
 				MdataService mdataservice = new MdataService();
-			Integer	returnedcount = mdataservice.updatecustomerSamnote(Integer.parseInt(noteid),notevalue);
+			int	returnedcount = mdataservice.updatecustomerSamnote(Integer.parseInt(noteid),notevalue);
 			count= returnedcount+count;
 			
 			out = response.getWriter();
 			System.out.print(count);
-			out.write(count);			
+			out.write("done");			
 		}
+		//tested ok
 		if("sacnote".equals(functionaction)){
 		
 			int count=0;
 			
 			CdataService cdataservice = new CdataService();
-			Integer	returnedcount = cdataservice.updatecustomerSacnote(noteid,notevalue);
+			int	returnedcount = cdataservice.updatecustomerSacnote(noteid,notevalue);
 			count= returnedcount+count;
-			
+			System.out.print(notevalue);
 			out = response.getWriter();
 			System.out.print(count);
 			out.write(count);			
@@ -155,8 +157,8 @@ public class managerUIFunctionServlet extends HttpServlet {
 			Integer count=0;
 			
 			OrderService odataservice = new OrderService();
-			Integer	returnedcount = odataservice.updatecustomerSaonote(new Integer(noteid),notevalue);
-			count= returnedcount+count;
+			int	returnedcount = odataservice.updateOrderSaonote(Integer.parseInt(noteid),notevalue);
+			count= returnedcount;
 			
 			out = response.getWriter();
 			System.out.print(count);

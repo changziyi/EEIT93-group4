@@ -170,7 +170,7 @@ public class CdataDAO implements CdataDAO_interface{
 		int count=0;
 		try {
 			session.beginTransaction();
-			Query query = session.createQuery("update CdataVO set sa_cnote=:snote where c_id=:c");
+			Query query = session.createQuery("update CdataVO set sa_cnote =:snote where c_id=:c");
 			query.setString("snote",sa_cnote);
 			query.setParameter("c",c_id);
 			count = query.executeUpdate();

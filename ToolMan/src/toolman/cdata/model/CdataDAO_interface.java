@@ -28,5 +28,5 @@ public interface CdataDAO_interface {
     public CdataVO getById(String c_id);//benny
 	public List<CdataVO> getBySname(String s_name);//benny
 	public int updatecustomerSname(String c_id, String s_name);//benny
-	public int updatecustomerSacnote(String c_id, String s_name);//benny
+	public int updatecustomerSacnote(String c_id, String sa_cnote);//benny
 }

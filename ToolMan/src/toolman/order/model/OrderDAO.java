@@ -271,14 +271,14 @@ public class OrderDAO implements OrderDAO_Interface {
 		}
 		return querylist;
 	}
-	public int updatecustomerSaonote(Integer o_id, String sa_onote){
+	public int updateOrderSaonote(Integer o_id, String sa_onote){
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		int count=0;
 		try {
 			session.beginTransaction();
-			Query query = session.createQuery("update OrderVO set sa_onote=:snote where c_id=:c");
+			Query query = session.createQuery("update OrderVO set sa_onote=:snote where o_id=:o");
 			query.setString("snote",sa_onote);
-			query.setParameter("c",o_id);
+			query.setParameter("o",o_id);
 			count = query.executeUpdate();
 			session.getTransaction().commit();
 		} catch (RuntimeException ex) {

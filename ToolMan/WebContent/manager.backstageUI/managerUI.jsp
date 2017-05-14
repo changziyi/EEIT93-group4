@@ -141,7 +141,7 @@
 							</tr>
 						
 							<tr>
-								<td>主旨 ： <input type="text" name="ms_summary" required="true"
+								<td>主旨 ： <input type="text" id="messum" name="ms_summary" required="true"
 									value="${param.ms_summary}" />${errorMsgs.email1}${errorMsgs.email2}
 								</td>
 							</tr>
@@ -149,14 +149,14 @@
 							<tr>
 								<td><label style="vertical-align: top">內容：
 								
-								<textarea name="ms_content" style="width: 400px; height: 120px"
+								<textarea name="ms_content" id="mescontent" style="width: 400px; height: 120px"
 								placeholder="請輸入內容"></textarea></td>
 							</tr>
 						</table>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-						<button type="submit" class="btn btn-primary">送出</button>			
+						<button type="button" id="btnsubmitmail" class="btn btn-primary" data-dismiss="modal">送出</button>			
 					</div>
 				</div>
 			</form>
@@ -168,9 +168,10 @@
 	var table ;//datatable variable not in use
 	var navagatorid = $('#navigator>ul>li.active').data('id');//top navigator
 	var dfd = $.Deferred();
-	var datastatus = $('#functionrow>div>ul>li[name="datastatus"][data-buttonstate="selected"]').data('statusvalue');
- 	var datatime = $('#functionrow>div>ul>li[name="datatime"][data-buttonstate="selected"]').data('statusvalue');
-
+	var dfd2 = $.Deferred();
+	var datastatus = null;
+ 	var datatime = null;
+ 	var xhr = null;
 // 		$(document).ajaxComplete(function(){
 // 			datatableinit(); //execute datable when ajax is done//fuck it, use deferred instead
 // 		});	
@@ -185,33 +186,86 @@ $(function(){
 		$('#functionrow>div>ul>li').on('click',functionrowfiltering);//filtering
 		$('input[name="samnote"],[name="saonote"],[name="sacnote"]').on('change',updatenote);// input note
  	  	$('#subfunctionrow>a').on('click',togglehyper);//verify the master direct to other pages
- 	  	$('#subfunctionrow>span:not(#messagespanm#messagespanc#messagespano)').on('click',togglegetmethod);//change m c o s_name//will return something when clicked, maill has it's own form action
+ 	  	$('#subfunctionrow>span:not(#messagespanm,#messagespanc,#messagespano)').on('click',togglegetmethod);//change m c o s_name//will return something when clicked, maill has it's own form action
  	  	$('#messagespanm,#messagespanc,#messagespano').on('click',mail);//mail
-
+		
  	  	loadProduct('m','allmaster','alldate');//build dynamic table
- 		
+ 	  	datastatus = $('#functionrow>div>ul>li[name="datastatus"][data-buttonstate="selected"]').data('statusvalue');
+ 	 	datatime = $('#functionrow>div>ul>li[name="datatime"][data-buttonstate="selected"]').data('statusvalue');
+
 }// end ready function
 ); //end ready   
 
 	function mail(){
-	
+		var clickornot=false;
 		  //get all toggled checkboxes 
         var checkboxdatas = [];
-     	 $(":checkbox:checked").each(function(){            	  
-         	   checkboxdatas.push($(this).attr('data-receiver')); 
-         })        
-         checkboxdatas.toString();
-     	 if(checkboxdatas.toString()==""){
-     		 alert("u forget to toggle the checkbox u dumb XD");
-     	 }//end if
-     	 else{
-     		$('#receiver').val(checkboxdatas.toString()).text(checkboxdatas.toString());
-     		
-     		$('#myModal01').modal();
-     		
-    }//end else 
+		var checkboxdatasmaster = [];
+		var checkboxdatacustomer = [];
+		 if(navagatorid=='o'){// mail to both side of the transaction//tested ok
+	     	 $(":checkbox:checked").each(function(){            	  
+	     		checkboxdatasmaster.push($(this).attr('data-receiver1'));
+	     		checkboxdatacustomer.push($(this).attr('data-receiver2'));
+	         }) 
+	         if((checkboxdatasmaster.toString()=="")||(checkboxdatacustomer.toString()=="")){
+ 	     		 	alert("u forget to toggle the checkbox u dumb XD");
+ 	     	 }//end if
+ 	     	else{
+ 	     		 $('#btnsubmitmail').on('click',function(){
+ 	     			var hyperlinkstring = "${pageContext.servletContext.contextPath}/email/Email.do";
+ 	     			clickornot=!clickornot;
+ 					var mssid=$('#receiver').val();
+	 				var mssum=$('#messum').val();
+	 				var mscontent=$('#mescontent').val();
+					$.post(hyperlinkstring,{"mss_id":mssid,"ms_content":mscontent,"ms_summary":mssum},function(){
+						
+							$('#myModal01').modal("hide");
+					   
+						if (clickornot==true){
+			 	     		setTimeout(function () {
+			 	     		$('#receiver').val(checkboxdatacustomer.toString()).text(checkboxdatacustomer.toString());
+			 	     		$('#myModal01').modal('show');
+			 	     		 }, 300);
+			 	     			
+						}	
+					});//end get function
 
- 		}// end mail
+ 				});//end on clck
+ 				if(clickornot==false){
+	 				$('#receiver').val(checkboxdatasmaster.toString()).text(checkboxdatasmaster.toString());
+	 				$('#myModal01').modal('show');
+ 				}//end if				
+
+ 	   		}//end else 
+ 		 }//end if o
+ 		 else{//mail to only one side//tested ok
+ 			$('#btnsubmitmail').unbind("click");
+     	 		$(":checkbox:checked").each(function(){            	  
+         	   		checkboxdatas.push($(this).attr('data-receiver'));  		
+         	});//end each        
+     	 	if(checkboxdatas.toString()==""){
+     	     		 alert("u forget to toggle the checkbox u dumb XD");
+     	     	 }//end if
+     	 else{
+					$('#receiver').val(checkboxdatas.toString()).text(checkboxdatas.toString());
+		     		$('#myModal01').modal();
+		     		
+		     		$('#btnsubmitmail').on('click',function(){
+		     			var hyperlinkstring = "${pageContext.servletContext.contextPath}/email/Email.do";
+	 					var mssid=$('#receiver').val();
+		 				var mssum=$('#messum').val();
+		 				var mscontent=$('#mescontent').val();
+						$.post(hyperlinkstring,{"mss_id":mssid,"ms_content":mscontent,"ms_summary":mssum},function(){
+					    $('#myModal01').modal("hide");
+
+					});	//end post function
+				});//end post 
+   			 }//end else 
+ 		 }//end else
+ 	}// end mail
+ 	
+
+ 	
  	function updatenote(){
 				//tested ok
         		var valueattrr=$(this).val();// get input value
@@ -219,18 +273,44 @@ $(function(){
         		var noteid=$(this).data('noteid');// get input id
         		console.log(noteid);
         		var hyperlinkstring = "${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIFunctionServlet.do";
-//         		var hyperlinkparameter = "functionaction="+valueattrr+"&+toggledcheckbox="+checkboxdatas2;
+// 				var ajaxurl = "${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIFunctionServlet.do?";
+// 				var ajaxparam = "functionaction="+nameattr+"&notevalue="+valueattrr+"&noteid="+noteid;
+        		//         		var hyperlinkparameter = "functionaction="+valueattrr+"&+toggledcheckbox="+checkboxdatas2;
 //        	 	var hyperlinkstringwithparameter=hyperlinkstring+hyperlinkparameter;
-        $.post(hyperlinkstring,{"functionaction":nameattr,"notevalue":valueattrr,"noteid":noteid},function(data){
-				alert(data);
-        });//end get function
-//		 	$('#eventlist').dataTable().fnDestroy();
-// 			$('#eventlist').empty();
-
-        loadProduct(navagatorid,datastatus,datatime);
-		
+      	$.post(hyperlinkstring,{"functionaction":nameattr,"notevalue":valueattrr,"noteid":noteid},function(data,status){alert(data)} )//end get function
+// 		 	$('#eventlist').dataTable().fnDestroy();//in datatable initialization  use destory= true is better
+// 			$('#eventlist').empty();//in datatable initialization use destory= true is better
+		loadProduct(navagatorid,datastatus,datatime)
+//       			loadajax(ajaxurl,ajaxparam);
+//       			//assign the parameter to loadproduct or the code return nothing
+//       			loadProduct(navagatorid,datastatus,datatime);
  		}// end updatenote
  		
+ 	function loadajax(ajaxurl,ajaxparam) {		
+ 	        xhr = new XMLHttpRequest();
+ 			
+ 			if (xhr != null){
+ 				xhr.addEventListener("readystatechange",callbackajax);
+ 	            xhr.open('GET',ajaxurl+ajaxparam);
+ 				xhr.send();	
+ 			}else{
+ 				alert("您的瀏覽器不支援Ajax功能!!");
+ 			}	
+ 		}
+ 		function callbackajax(){
+ 			if(xhr.readyState == 4){
+ 				if(xhr.status == 200){			
+ 	                var data = xhr.responseText;
+ 					alert(data);
+ 					console.log(data);
+ 					loadProduct(navagatorid,datastatus,datatime);
+ 					
+ 				}else{
+ 					alert(xhr.status + ":" + xhr.statusText);
+ 				}
+ 			}					
+ 			
+ 		}
 	function navigatorevent(){// order is of utmost,get navigator id, clear the table, build 2nd row and buttons, set active and selected filter, send 3 parameters to loadproduct
 		var id = $(this).data('id');
 		navagatorid = id;
@@ -473,11 +553,15 @@ $(function(){
         		 alert("u forget to toggle the checkbox u dumb XD");
         	 }//end if
         	 else{
-           		var valueattrr=$(this).attr('value');//retrieve the value from functinaction
-           		var hyperlinkstring = "${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIFunctionServlet.do";
+           	var valueattrr=$(this).attr('value');//retrieve the value from functinaction
+           	var hyperlinkstring = "${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIFunctionServlet.do";
 //            	var hyperlinkparameter = "functionaction="+valueattrr+"&+toggledcheckbox="+checkboxdatas2;
-//           	 var hyperlinkstringwithparameter=hyperlinkstring+hyperlinkparameter;
-           $.post(hyperlinkstring,{"functionaction":valueattrr,"toggledcheckbox":checkboxdatas2},function(data){
+//           	var hyperlinkstringwithparameter=hyperlinkstring+hyperlinkparameter;
+//          		var ajaxurl = "${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIFunctionServlet.do?";
+// 				var ajaxparam = "functionaction="+valueattrr+"&toggledcheckbox="+checkboxdatas2;
+// 				loadajax(ajaxurl,ajaxparam);
+
+			$.post(hyperlinkstring,{"functionaction":valueattrr,"toggledcheckbox":checkboxdatas2},function(data){
 				alert(data);
            });//end get function
 // 		 	$('#eventlist').dataTable().fnDestroy();
@@ -576,7 +660,7 @@ $(function(){
 						   
 						   	console.log(data);
 						   	
-						   	var toggleword = $('<input type="checkbox" name="otoggle" />').val(data.o_id).attr('data-receiver',data.o_bname+data.c_id);
+						   	var toggleword = $('<input type="checkbox" name="otoggle" />').val(data.o_id).attr('data-receiver1',data.o_bname).attr('data-receiver2',data.c_id);
 						   	var mid =  $('<input type="button"/> ').val(data.o_id).addClass('eventlisttbodytrtd');
 							var a =  $('<a></a> ').attr('href',"${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIFunctionServlet.do?"+"functionaction=findorder&targetid="+data.o_id).append(mid);						  
 							var midwordmid =  $('<span style="visibility: hidden;font-size:0px;margin:0pxlpadding:0px;"></span> ').text(data.o_id).addClass('eventlisttbodytrtd');

@@ -56,7 +56,7 @@ public class CdataService {
 		return dao.updatecustomerSname(c_id, s_name);
 	}
 	public int updatecustomerSacnote(String c_id, String sa_cnote){//benny	
-		return dao.updatecustomerSname(c_id, sa_cnote);
+		return dao.updatecustomerSacnote(c_id, sa_cnote);
 	}
 	public CdataVO getById(String c_id){//benny
 		return dao.getById(c_id);

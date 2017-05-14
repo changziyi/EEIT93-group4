@@ -164,8 +164,8 @@ public class OrderService {
 		    	}
 	 }
 }
-    public int updatecustomerSaonote(Integer o_id, String sa_onote){
-    	return dao.updatecustomerSaonote(o_id,sa_onote);
+    public int updateOrderSaonote(Integer o_id, String sa_onote){
+    	return dao.updateOrderSaonote(o_id,sa_onote);
     }
     public void deleteExpiredOrder(){
 
