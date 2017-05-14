@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -21,9 +21,30 @@
 	
 <!-- bootstrap -->
 <!-- datatable-->
-	<script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
-	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
+	<script src="../js/datatable/datatable/jquery.dataTables.min.js"></script>
+	<script src="../js/datatable/jszip/jszip.min.js"></script>
+	<script src="../js/datatable/pdf/pdfmake.min.js"></script>
+	<script src="../js/datatable/button/buttons.html5.min.js"></script>
+	<script src="../js/datatable/button/dataTables.buttons.min.js"></script>
+<!-- 	<script src="../js/datatable/datatable/buttons.bootstrap.min.js"></script> -->
+	<script src="../js/datatable/datatable/jquery.dataTables.min.js"></script>
+	<script src="../js/datatable/datatable/dataTables.bootstrap.min.js"></script>
+<!-- 	<script src="../js/datatable/fixedheader/dataTables.fixedHeader.min.js"></script> -->
+	<script src="../js/datatable/responsive/dataTables.responsive.min.js"></script>
+	<script src="../js/datatable/responsive/responsive.bootstrap.min.js"></script>
+	<script src="../js/datatable/select/dataTables.select.min.js"></script>
+	<link rel="stylesheet" href="../js/datatable/button/buttons.dataTables.min.css">
+	<link rel="stylesheet" href="../js/datatable/button/buttons.bootstrap.min.css">
+<!-- 	<link rel="stylesheet" href="../js/datatable/datatable/jquery.dataTables.min.css">	 -->
+	<link rel="stylesheet" href="../js/datatable/datatable/dataTables.bootstrap.min.css">
+<!-- 	<link rel="stylesheet" href="../js/datatable/fixedheader/fixedHeader.bootstrap.min.css"> -->
+<!-- 	<link rel="stylesheet" href="../js/datatable/key/keyTable.bootstrap.min.css"> -->
+<!-- 	<link rel="stylesheet" href="../js/datatable/responsive/responsive.dataTables.min.css"> -->
+	<link rel="stylesheet" href="../js/datatable/responsive/responsive.bootstrap.min.css">
+	<link rel="stylesheet" href="../js/datatable/select/select.foundation.min.css">
 
+
+	
 <style>
 	.dataTables_wrapper{
 		width:100%;
@@ -95,7 +116,7 @@
 	</div>
 <!-- main content here -->		
 	<article>
-	<table id="eventlist" class="display" >
+	<table id="eventlist" class="table table-striped table-bordered" style="word-break: keep-all;display:table;text-align:center" >
 <!-- 		<thead> -->
 <!-- 			<th>1</th> -->
 <!-- 			<th>2</th> -->
@@ -712,7 +733,7 @@ $(function(){
 						
 						
 					   var toggleword = $('<input type="checkbox" name="ctoggle" />').val(data.c_id).attr('data-receiver',data.c_id);
-					   var mid =  $('<input type="button"/> ').val(data.c_id).addClass('eventlisttbodytrtd');
+					   var mid =  $('<input type="button" style="width:100px;word-break: keep-all"/> ').val(data.c_id).addClass('eventlisttbodytrtd');
 					   var a =  $('<a></a> ').attr('href',"${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIFunctionServlet.do?"+"functionaction=findcustomer&targetid="+data.c_id).append(mid);						  
 					   var midwordmid =  $('<span style="visibility: hidden;font-size:0px;margin:0pxlpadding:0px;"></span> ').text(data.c_id).addClass('eventlisttbodytrtd');
 					   var cell0 = $('<td></td>').addClass('eventlisttbodytrtd').append(toggleword);
@@ -746,12 +767,32 @@ $(function(){
 			   			   
 	   }//end loadtable function
 				function datatableinit(){
+					dom: 'Bfrtip', 
 				table =	$('#eventlist').DataTable({
+					 "autoWidth": true,
+					buttons: [
+						'copy', 'csv', 'excel', 'pdf', 'print'
+				    ],
+				    
+			    select: true,
+// 			        responsive: {
+// 			            details: {
+// 			                display: $.fn.dataTable.Responsive.display.modal( {
+// 			                    header: function ( row ) {
+// 			                        var data = row.data();
+// 			                        return 'Details for '+data[0]+' '+data[1];
+// 			                    }
+// 			                } ),
+// 			                renderer: $.fn.dataTable.Responsive.renderer.tableAll( {
+// 			                    tableClass: 'ui table'
+// 			                } )
+// 			            }
+// 			        },
 // 						retrieve: true,
 						destroy: true,
 // 						"pageLength": 1,
 // 						"dom": '<lf<t>ip>',
-						 "lengthMenu": [ [1, 2, 50, -1], [1, 2, 50, "All"] ]
+						 "lengthMenu": [ [5, 10, 50, -1], [5, 10, 50, "All"] ]
 			// 			"iDisplayLength": 10
 			//			  	destroy: true,
 						 	   
