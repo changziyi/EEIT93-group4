@@ -27,7 +27,10 @@
 <style>
 	.dataTables_wrapper{
 		width:100%;
-		margin:auto;width:80%; border: 2px solid blue; horizontal-align:center;
+		margin:auto;width:80%;  
+/* 		border: 2px solid blue; */
+		horizontal-align:center;
+		display:table;
 	}
 	#navigator ul li {
 	　display:inline;
@@ -193,8 +196,8 @@ $(function(){
  	  	datastatus = $('#functionrow>div>ul>li[name="datastatus"][data-buttonstate="selected"]').data('statusvalue');
  	 	datatime = $('#functionrow>div>ul>li[name="datatime"][data-buttonstate="selected"]').data('statusvalue');
 
-}// end ready function
-); //end ready   
+		}// end ready function
+	); //end ready   
 
 	function mail(){
 		var clickornot=false;
@@ -672,8 +675,8 @@ $(function(){
 	 						var cell5 = $('<td></td>').text(data.opros).addClass('eventlisttbodytrtd');
 							var cell6 = $('<td></td>').text(data.o_location).addClass('eventlisttbodytrtd');
 							var cell7 = $('<td></td>').text(data.s_name).addClass('eventlisttbodytrtd');
-							var cell8 = $('<td></td>').text(data.m_arating).addClass('eventlisttbodytrtd');
-							var cell9 = $('<td></td>').text(data.c_arating).addClass('eventlisttbodytrtd');
+							var cell8 = $('<td></td>').text(data.m_rating).addClass('eventlisttbodytrtd');
+							var cell9 = $('<td></td>').text(data.c_rating).addClass('eventlisttbodytrtd');
 							var wordsanote =  $('<span style="visibility: hidden;font-size:0px;margin:0pxlpadding:0px;"></span> ').text(data.sa_onote).addClass('eventlisttbodytrtd');
 							var saonote =  $('<input type="text"name="saonote" width="500px" /> ').val(data.sa_onote).attr('data-noteid',data.o_id).addClass('eventlisttbodytrtd');
 							var cell10 = $('<td></td>').html(saonote).addClass('eventlisttbodytrtd').append(wordsanote);

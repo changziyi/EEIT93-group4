@@ -75,6 +75,9 @@
 		"DFKai-sb", DFKai-SB, 
 		sans-serif;
 	}
+	.labelstyle{
+		text-align:right;
+	}
 	</style>
 
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -142,11 +145,11 @@
 									<tr>
 										<td>
 										
-											<label>服務公司名稱:</label>
+											<label class="labelstyle">服務公司名稱:</label>
 										</td>
 										<td>
 											<div>
-												<span>${mdataVO.b_name}</span>
+												<span class="inputstyle" >${mdataVO.b_name}</span>
 										<!--  for test <span>TOOL KING</span>  -->
 											</div>
 										</td>
@@ -154,16 +157,16 @@
 									<tr>
 										<td>
 											
-											<label>服務類別</label>
+											<label class="labelstyle">服務類別</label>
 											
 										</td>
 										<td>
 										<div id="pro" name="opro_id" class="inputstyle">
 								<!-- 	parameters come directly from servlet , so the Ajax may not be needed-->	
-										<c:forEach var="oproset" varStatus="stat" items="${mdataVO.mpros}">
+										<c:forEach var="oproset"  varStatus="stat" items="${mdataVO.mpros}">
 										
 								<!-- 	retrieve Collection object  mproset  from session.setAttribute("mproset",mproset)								 -->
-												<input type="checkbox"   value=${oproset.m_proid} checked="checked" name="o_pro"/>${oproset.m_pro}
+												<input type="checkbox" class="inputstyle"   value=${oproset.m_proid} checked="checked" name="o_pro"/>${oproset.m_pro}
 															
 										</c:forEach>
 								
@@ -180,7 +183,7 @@
 									<tr>
 										<td>
 											
-												<label>預約日期</label>
+												<label class="labelstyle">預約日期</label>
 										</td>
 										<td>
 											<div id="datecalendar" >
@@ -191,7 +194,7 @@
 									</tr>
 									<tr>
 										<td>
-											<label>維修項目說明</label><!-- 	ok -->
+											<label class="labelstyle">維修項目說明</label><!-- 	ok -->
 										</td>
 		
 										<td>	
@@ -202,7 +205,7 @@
 									<tr>
 										<td>
 											
-											<label>未回應請求失效時間</label>
+											<label class="labelstyle">未回應請求失效時間</label>
 										</td>
 										<td>
 											<div style="width: 400px;">
@@ -219,7 +222,7 @@
 									<tr>	
 										<td>																
 										
-											<label>建築物型態</label>	
+											<label class="labelstyle">建築物型態</label>	
 										</td>
 										<td>	
 											<div>
@@ -236,7 +239,7 @@
 									<tr>
 										<td>
 											
-												<label>施工地址</label><!-- 	ok -->
+												<label class="labelstyle">施工地址</label><!-- 	ok -->
 										</td>
 										<td>
 											<div>
@@ -255,7 +258,7 @@
 									<tr>
 										<td>
 										
-											<label >備註</label><!-- 	ok -->
+											<label class="labelstyle">備註</label><!-- 	ok -->
 										</td>
 										<td>
 												<div>
