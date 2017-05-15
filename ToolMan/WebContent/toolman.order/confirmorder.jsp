@@ -255,6 +255,7 @@
                 return true;
             })
 	});	//end ready
+	
 	function opro(){	
 		<c:forEach var="oproset" varStatus="stat" items="${oproVOlist}">
 			oprolist.push("<c:out value="${oproset.o_pro}"></c:out>");
