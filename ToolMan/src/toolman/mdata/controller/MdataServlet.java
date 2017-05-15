@@ -43,6 +43,7 @@ public class MdataServlet extends HttpServlet {
 			String m_city = request.getParameter("city");
 			String m_district = "";
 			String input = request.getParameter("input");
+			String m_pro = request.getParameter("pro");
 			
 			HttpSession session = request.getSession();
 			MdataVO mdataVO = new MdataVO();
@@ -50,6 +51,7 @@ public class MdataServlet extends HttpServlet {
 			mdataVO.setM_city(m_city);
 			mdataVO.setM_district(m_district);
 			mdataVO.setB_name(input);
+			mdataVO.setM_name(m_pro);
 			
 			session.setAttribute("search", mdataVO);
 			response.sendRedirect("searchResult.jsp");
@@ -57,7 +59,23 @@ public class MdataServlet extends HttpServlet {
 			
 		}
 		
-		if("SearchMpro".equals(action)) {
+		if ("SearchAll".equals(action)) {
+			
+			String m_city = request.getParameter("city");
+			String m_district = "";
+			String m_pro = "";
+			String input = "";
+			HttpSession session = request.getSession();
+			MdataVO mdataVO = new MdataVO();
+			
+			mdataVO.setM_city(m_city);
+			mdataVO.setM_district(m_district);
+			mdataVO.setB_name(input);
+			mdataVO.setM_name(m_pro);
+			
+			session.setAttribute("search", mdataVO);
+			response.sendRedirect("searchResult.jsp");
+			return;
 			
 		}
 		
@@ -82,7 +100,7 @@ public class MdataServlet extends HttpServlet {
 			
 			session.setAttribute("search", mdataVO);
 			response.sendRedirect("searchResult.jsp");
-//			return;
+			return;
 			
 		}
 		
