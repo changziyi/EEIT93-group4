@@ -636,39 +636,51 @@ var eventidglobe =null;
 			
 			}
 			function draggableevent(){
-				
-				$('#alldayevent').each(function() {
+				//not being used
+// 				$('#alldayevent').each(function() {
 					
 					
-					// 		var dragevent = {
+// 					// 		var dragevent = {
 									
-					// 				id: $(this).text(),	
-					// 				title: $(this).text(), // use the element's text as the event title
-					// 				start: $(this).data('start'), // a start time (10am in this example)
-					// 				time: $(this).data('endd'), // an end time (2pm in this example)
-					// 			    stick: true
-					// 		}
-							// store data so the calendar knows to render an event upon drop
+// 					// 				id: $(this).text(),	
+// 					// 				title: $(this).text(), // use the element's text as the event title
+// 					// 				start: $(this).data('start'), // a start time (10am in this example)
+// 					// 				time: $(this).data('endd'), // an end time (2pm in this example)
+// 					// 			    stick: true
+// 					// 		}
+// 							// store data so the calendar knows to render an event upon drop
 					
-							$(this).data('event', {
+// 							$(this).data('events', [{
 								
-								id: $(this).data('id'),
-								title: $(this).text(), // use the element's text as the event title
-								duration: $(this).data('end'), // an end time (2pm in this example)
-							    
-							   	
-								start: $(this).data('start'), // a start time (10am in this example)
-							    stick: true // maintain when user navigates (see docs on the renderEvent method)
-							});
+// 								id: 'morning',
+// 								title: '早上', // use the element's text as the event title
+// 								duration: '09:00', // an end time (2pm in this example)
+// 								start:'01:00', // a start time (10am in this example)
+// 							    stick: true // maintain when user navigates (see docs on the renderEvent method)
+// 							},
+// {
+								
+// 								id: 'noon',
+// 								title: '下午', // use the element's text as the event title
+// 								duration: '06:00', // an end time (2pm in this example)
+// 								start: '12:00', // a start time (10am in this example)
+// 							    stick: true // maintain when user navigates (see docs on the renderEvent method)
+// 							},{
+// 								id: 'night',
+// 								title: '晚上', // use the element's text as the event title
+// 								duration: '06:00', // an end time (2pm in this example)
+// 								start: '18:00', // a start time (10am in this example)
+// 							    stick: true // maintain when user navigates (see docs on the renderEvent method)
+// 							}]);
 					
-							// make the event draggable using jQuery UI
-							$(this).draggable({		
-								zIndex: 999,
-								revert: true,      // will cause the event to go back to its
-								revertDuration: 0  //  original position after the drag
-							});
+// 							// make the event draggable using jQuery UI
+// 							$(this).draggable({		
+// 								zIndex: 999,
+// 								revert: true,      // will cause the event to go back to its
+// 								revertDuration: 0  //  original position after the drag
+// 							});
 							
-						});
+// 						});
 				
 				$('#external-events .fc-event').each(function() {
 
@@ -703,16 +715,32 @@ var eventidglobe =null;
 				});//end each
 //		 		console.log(checkedbox);
 //		 		console.log(selectmenu);
-				var repeateventallday = 	{
+				var repeateventallday = [{
 					//means delete all repeating items and rebuild new ones
 					id:"repeateventeveryallday",
-				    title:"每整天",
-				    start: '00:00', // a start time (10am in this example)				
+				    title:"早上",
+				    start: '01:00', // a start time (10am in this example)				
+				    overlap: false,
+					end: '12:00', // an end time (2pm in this example)
+				    dow: selectmenu // Repeat monday and thursday
+				},{
+					//means delete all repeating items and rebuild new ones
+					id:"repeateventeveryallday",
+				    title:"下午",
+				    start: '12:00', // a start time (10am in this example)				
+				    overlap: false,
+					end: '18:00', // an end time (2pm in this example)
+				    dow: selectmenu // Repeat monday and thursday
+				},{
+					//means delete all repeating items and rebuild new ones
+					id:"repeateventeveryallday",
+				    title:"晚上",
+				    start: '18:00', // a start time (10am in this example)				
 				    overlap: false,
 					end: '24:00', // an end time (2pm in this example)
 				    dow: selectmenu // Repeat monday and thursday
-				}
-				$('#calendar').fullCalendar( 'renderEvent', repeateventallday);
+				}]
+				$('#calendar').fullCalendar( 'renderEvents', repeateventallday);
 				
 				//	 $('#calendar').fullCalendar( 'destroy' );
 				//	 buildcalendar();
@@ -858,6 +886,7 @@ var eventidglobe =null;
 // 						console.log(d);
 // 						event.start._d = s;
 						event._start._d = s;
+						checkoverlapping2(event);
 // 						console.log(event.start._d);
 // 						console.log(event._start._d);
 // 						console.log(event);
@@ -899,10 +928,10 @@ var eventidglobe =null;
 // 					console.log(event.start._d);
 // 					console.log(event._start._d);
 					console.log(event);
-				if(events.length!=0){
+				if(events.length>1){
 				for(i=0;i<events.length-1;i++){
 				// start-time in between any of the events
-	
+					
 					var eventid1 = event.id;
 					var eventid2 = event._id;
 					var eventitle = event.title;
@@ -927,11 +956,12 @@ var eventidglobe =null;
 								
 							}//end for
 						}//end if
+						
 					else if((splitstring1[0]+splitstring1[1]+splitstring1[2]+splitstring1[3]+splitstring1[4])==
 						(splitstring2[0]+splitstring2[1]+splitstring2[2]+splitstring2[3]+splitstring2[4])){
 	
 						
-							$('#calendar').fullCalendar('removeEvents', event.id);
+							$('#calendar').fullCalendar('removeEvents', eventid1);
 						    return true;
 							
 						}//end if
@@ -948,7 +978,64 @@ var eventidglobe =null;
 //		 		}
 			  }//end if event!=0
 			}
-		
+			//for checkbox
+			function checkoverlapping2(event){// no event can exists twice in 1 day, and no event can be added under all day unavailable
+				
+				var events = $('#calendar').fullCalendar('clientEvents');
+					
+// 					var d = new Date();
+// 					var ds = new Date(event.start._d).getTime();
+// 					var n = d.getTimezoneOffset()*60*1000;
+// 					d=new Date(ds+n);
+// 					console.log(ds+n);
+// 					console.log(d);
+// 					event.start._d = d;
+// 					event._start._d = d;
+// 					console.log(event.start._d);
+// 					console.log(event._start._d);
+// 					console.log(event);
+				
+				if(events.length>6){
+				for(i=0;i<events.length-1;i++){
+				// start-time in between any of the events
+					
+					var eventid1 = event.id;					
+					var eventid2 = event._id;
+					var eventid3 = events[i].id;
+					var eventitle = event.title;
+					var eventitle2 = events[i].title;
+					var end1 = event.end._d;
+					var start1 = event._start._d.toString();
+					var start2 = events[i]._start._d.toString();
+// 					console.log(start1);
+					var end2 = events[i].end._d;
+					var start4 = events[i].duration;
+					var splitstring1 = start1.split(" ");
+					console.log(splitstring1);
+					
+					var splitstring2 = start2.split(" ");
+					console.log(splitstring2);
+					if((events[i].title == "整天不可預約")||(event.title =="整天不可預約")){
+						if((splitstring1[0]+splitstring1[1]+splitstring1[2]+splitstring1[3])==
+							(splitstring2[0]+splitstring2[1]+splitstring2[2]+splitstring2[3])){
+								
+								$('#calendar').fullCalendar('removeEvents', event.id);
+								return true;
+								
+							}//end if
+						}//end if
+						
+					else if(((splitstring1[0]+splitstring1[1]+splitstring1[2]+splitstring1[3]+splitstring1[4])==
+						(splitstring2[0]+splitstring2[1]+splitstring2[2]+splitstring2[3]+splitstring2[4]))&&(eventid1!=eventid3)){							
+							$('#calendar').fullCalendar('removeEvents', eventid3);
+// 							$('#calendar').fullCalendar('removeEvents', eventid1);
+// 							$('#calendar').fullCalendar('renderEvents', eventid1);
+						    return true;
+						}//end if
+					}//end for
+				}//end if
+
+		}//end check2 function
 	</script>
 <!-- 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAj-PEjC_YSdYGHEvhIKnyojxufjKYy6OE&callback=initMap"></script> -->
   

@@ -858,6 +858,7 @@ var eventidglobe =null;
 // 						console.log(d);
 // 						event.start._d = s;
 						event._start._d = s;
+						
 // 						console.log(event.start._d);
 // 						console.log(event._start._d);
 // 						console.log(event);
@@ -899,10 +900,10 @@ var eventidglobe =null;
 // 					console.log(event.start._d);
 // 					console.log(event._start._d);
 					console.log(event);
-				if(events.length!=0){
+				if(events.length>1){
 				for(i=0;i<events.length-1;i++){
 				// start-time in between any of the events
-	
+					
 					var eventid1 = event.id;
 					var eventid2 = event._id;
 					var eventitle = event.title;
@@ -927,6 +928,7 @@ var eventidglobe =null;
 								
 							}//end for
 						}//end if
+						
 					else if((splitstring1[0]+splitstring1[1]+splitstring1[2]+splitstring1[3]+splitstring1[4])==
 						(splitstring2[0]+splitstring2[1]+splitstring2[2]+splitstring2[3]+splitstring2[4])){
 	
@@ -948,7 +950,62 @@ var eventidglobe =null;
 //		 		}
 			  }//end if event!=0
 			}
+			//for checkbox
+			function checkoverlapping2(event){// no event can exists twice in 1 day, and no event can be added under all day unavailable
+				
+				var events = $('#calendar').fullCalendar('clientEvents');
+					
+// 					var d = new Date();
+// 					var ds = new Date(event.start._d).getTime();
+// 					var n = d.getTimezoneOffset()*60*1000;
+// 					d=new Date(ds+n);
+// 					console.log(ds+n);
+// 					console.log(d);
+// 					event.start._d = d;
+// 					event._start._d = d;
+// 					console.log(event.start._d);
+// 					console.log(event._start._d);
+					console.log(event);
+				if(events.length>6){
+				for(i=0;i<events.length-1;i++){
+				// start-time in between any of the events
+					
+					var eventid1 = event.id;
+					var eventid2 = event._id;
+					var eventitle = event.title;
+					var eventitle2 = events[i].title;
+					var end1 = event.end._d;
+					var start1 = event._start._d.toString();
+					var start2 = events[i]._start._d.toString();
+// 					console.log(start1);
+					var end2 = events[i].end._d;
+					var start4 = events[i].duration;
+					var splitstring1 = start1.split(" ");
+					console.log(splitstring1);
+					
+					var splitstring2 = start2.split(" ");
+					console.log(splitstring2);
+					if((events[i].title == "整天不可預約")||(event.title =="整天不可預約")){
+						if((splitstring1[0]+splitstring1[1]+splitstring1[2]+splitstring1[3])==
+							(splitstring2[0]+splitstring2[1]+splitstring2[2]+splitstring2[3])){
 		
+								$('#calendar').fullCalendar('removeEvents', event.id);
+								return true;
+								
+							}//end for
+						}//end if
+						
+					else if((splitstring1[0]+splitstring1[1]+splitstring1[2]+splitstring1[3]+splitstring1[4])==
+						(splitstring2[0]+splitstring2[1]+splitstring2[2]+splitstring2[3]+splitstring2[4])){
+	
+						
+							$('#calendar').fullCalendar('removeEvents', event.id);
+						    return true;
+							
+						}//end if
+				}//end for
+			}//end if 
+		}//end check2 function
 	</script>
 <!-- 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAj-PEjC_YSdYGHEvhIKnyojxufjKYy6OE&callback=initMap"></script> -->
   
