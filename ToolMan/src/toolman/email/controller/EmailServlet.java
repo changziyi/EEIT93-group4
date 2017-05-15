@@ -69,8 +69,8 @@ public class EmailServlet extends HttpServlet {
 		//取得登入的寄件人帳號
 		HttpSession session = req.getSession();
 		CdataVO cdataVO = (CdataVO)session.getAttribute("LoginOK");
-		String SendAccount = cdataVO.getC_id();
-//		String SendAccount = "sa";//benny test
+//		String SendAccount = cdataVO.getC_id();
+		String SendAccount = "sa";//benny test
 		// 宣告錯誤訊息的變數
 		Map<String, String> errorMsgs = new HashMap<String, String>();
 		req.setAttribute("errorMsgs", errorMsgs);
@@ -114,43 +114,43 @@ public class EmailServlet extends HttpServlet {
 		
 		System.out.println("msid: " + emailVO.getMs_id());
 		
-		res.sendRedirect("email.jsp");
+//		res.sendRedirect("email.jsp");
 		
-		if (!errorMsgs.isEmpty()) {
-			req.setAttribute("emailVO", emailVO);
-			RequestDispatcher failureView = req.getRequestDispatcher("/email/Email.jsp");
-			failureView.forward(req, res);
-			return;
-		}
+//		if (!errorMsgs.isEmpty()) {
+//			req.setAttribute("emailVO", emailVO);
+//			RequestDispatcher failureView = req.getRequestDispatcher("/email/Email.jsp");
+//			failureView.forward(req, res);
+//			return;
+//		}
+////
+////		req.setAttribute("emailVO", emailservice.findByPrimaryKey(emailVO.getMs_id()));
+////		RequestDispatcher successView = req.getRequestDispatcher("/email/emailsucess.jsp");
+////		successView.forward(req, res);
+////		return;
+//		
+//		
+//		
+//		List<EmailVO> list = new ArrayList<EmailVO>();
+//		EmailVO email1 = new EmailVO();
 //
-//		req.setAttribute("emailVO", emailservice.findByPrimaryKey(emailVO.getMs_id()));
-//		RequestDispatcher successView = req.getRequestDispatcher("/email/emailsucess.jsp");
-//		successView.forward(req, res);
-//		return;
-		
-		
-		
-		List<EmailVO> list = new ArrayList<EmailVO>();
-		EmailVO email1 = new EmailVO();
-
-		email1.setMss_id(mss_id);
-		email1.setMs_summary(ms_summary);
-		email1.setMs_content(ms_content);
-		list.add(email1);
-		emailservice.getAll();
-		
-		for (int i = 0 ; i < list.size() ; i++) {
-			EmailVO vo = list.get(i);
-		}	
-		
-		//測試用
-		System.out.println("確認表單上傳成功");
-
-		System.out.println(mss_id);
-		System.out.println(ms_summary);
-		System.out.println(ms_content);
-
-		
+//		email1.setMss_id(mss_id);
+//		email1.setMs_summary(ms_summary);
+//		email1.setMs_content(ms_content);
+//		list.add(email1);
+//		emailservice.getAll();
+//		
+//		for (int i = 0 ; i < list.size() ; i++) {
+//			EmailVO vo = list.get(i);
+//		}	
+//		
+//		//測試用
+//		System.out.println("確認表單上傳成功");
+//
+//		System.out.println(mss_id);
+//		System.out.println(ms_summary);
+//		System.out.println(ms_content);
+//
+//		
 		}
 	}
 

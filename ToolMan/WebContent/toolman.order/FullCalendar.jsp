@@ -143,10 +143,11 @@
 		$('#external-events2>div').on('click',assignrandom);
 		draggableevent();
 		$('#selectmenu>input').on('change',repeatingevent);// end select change
+		buildcalendar();	
 		/* initialize the calendar
 		-----------------------------------------------------------------*/
 		
-		buildcalendar();	
+		
 	});// end ready
 	
 	function assignrandom(event){

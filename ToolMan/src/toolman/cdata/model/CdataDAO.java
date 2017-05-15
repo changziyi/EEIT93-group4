@@ -185,6 +185,7 @@ public class CdataDAO implements CdataDAO_interface{
 	@Override   //訂單
 	public Set<OrderVO> getOrderByC(String c_id) {		
 		Set<OrderVO> set = login_in(c_id).getOrders();
+		
 		return set;
 	}
 	@Override   //訂單
