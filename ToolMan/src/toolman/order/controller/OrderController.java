@@ -141,8 +141,8 @@ public class OrderController extends HttpServlet {
 				List<MProVO> mproVOlist = mprodao.getByMid(m_id);
 				List<OproVO> oproVOlist = new ArrayList<OproVO>();
 				
-//				String[] o_pro = request.getParameterValues("o_pro");
-				String[] o_pro = {"a","b","c"};
+				String[] o_pro = request.getParameterValues("o_pro");
+//				String[] o_pro = {"a","b","c"};
 				if(o_pro==null||o_pro.length == 0){
 					errormsg.put("erroro_pro", "必須選擇工程類別");			
 				}
@@ -173,6 +173,7 @@ public class OrderController extends HttpServlet {
 				addrlist.add(o_city);
 				addrlist.add(o_district);
 				addrlist.add(o_addr);
+				request.setAttribute("oproVOlist",oproVOlist);
 				request.setAttribute("addrlist",addrlist);
 				request.setAttribute("orderVO", orderVO);
 				request.setAttribute("errormsg", errormsg);

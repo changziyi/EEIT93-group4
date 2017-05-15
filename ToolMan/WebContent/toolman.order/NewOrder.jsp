@@ -166,7 +166,7 @@
 										<c:forEach var="oproset"  varStatus="stat" items="${mdataVO.mpros}">
 										
 								<!-- 	retrieve Collection object  mproset  from session.setAttribute("mproset",mproset)								 -->
-												<input type="checkbox" class="inputstyle"   value=${oproset.m_proid} checked="checked" name="o_pro"/>${oproset.m_pro}
+												<input type="checkbox" class="inputstyle"   value=${oproset.m_pro} checked="checked" name="o_pro"/>${oproset.m_pro}
 															
 										</c:forEach>
 								
