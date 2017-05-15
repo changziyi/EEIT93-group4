@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+    <class name="toolman.opro.model.OproVO" table="opro" >
+        
+        <id name="o_proid" column="o_proid">
+            <generator class="identity"/>
+        </id>
+        
+
+        <property name="o_pro" column="o_pro" />
+
+
+
+         <many-to-one name="m_proid" class="toolman.mpro.model.MProVO" cascade="all" lazy="false">
+            <column name="m_proid" />
+        </many-to-one>
+
+        <many-to-one name="o_id" class="toolman.order.model.OrderVO" cascade="all"  lazy="false">
+            <column name="o_id" />
+        </many-to-one>
+        
+    </class>
+</hibernate-mapping>
+
