@@ -21,7 +21,7 @@
 	EmailService emailSvc = new EmailService();
 	HttpSession sessions = request.getSession();
 	CdataVO cdataVO = (CdataVO)sessions.getAttribute("LoginOK");
-	list<EmailVO> list = emailSvc.getMail(cdataVO.getC_id());
+	List<EmailVO> list = emailSvc.getMail(cdataVO.getC_id());
 	pageContext.setAttribute("list", list);
 	
 	

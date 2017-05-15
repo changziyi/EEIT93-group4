@@ -20,8 +20,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
+import toolman.cdata.model.CdataVO;
 import toolman.wishpool.model.WishpoolDAO;
 import toolman.wishpool.model.WishpoolService;
 import toolman.wishpool.model.WishpoolVO;
@@ -71,6 +73,10 @@ public class WishpoolServlet extends HttpServlet {
 		// String action = req.getParameter("action");
 		// 設定文字編碼形式
 
+		
+		HttpSession session = req.getSession();
+		CdataVO cdataVO = (CdataVO)session.getAttribute("LoginOK");
+		String SendAccount = cdataVO.getC_id();
 		
 		//if ("Wishing".equals(action)) {
 		
