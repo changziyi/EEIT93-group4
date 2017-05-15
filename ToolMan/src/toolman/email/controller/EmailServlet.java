@@ -41,6 +41,7 @@ public class EmailServlet extends HttpServlet {
 		HttpSession session = req.getSession();
 		String action = req.getParameter("action");
 		String msid = req.getParameter("msid");
+		
 		if("findbypk".equals(action)){
 			EmailService emailSvc1 = new EmailService();
 			EmailVO emailVO = emailSvc1.getOneMail(new Integer(msid));
