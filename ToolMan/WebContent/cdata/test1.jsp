@@ -76,6 +76,7 @@ hr {
 						</h6>
 					</div>
 					<div>
+					<%@ include file="page1.file" %>  
 						<c:forEach var="cdata" items="${orders}">
 							<div class="a">
 								<p>
@@ -84,6 +85,7 @@ hr {
 								<p>${cdata.ma_des}</p>
 							</div>
 						</c:forEach>
+						<%@ include file="page2.file" %>
 						<div class="page">
 							<nav>
 							<ul class="pagination">

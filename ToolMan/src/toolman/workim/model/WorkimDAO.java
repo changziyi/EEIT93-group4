@@ -76,7 +76,7 @@ public class WorkimDAO implements WorkimDAO_interface {
 //		}
 		return count;
 	}
-
+	
 	@Override
 	public Collection<WorkimVO> getByWorkid(Integer work_id) {
 		List<WorkimVO> querylist = null;
@@ -111,10 +111,29 @@ public class WorkimDAO implements WorkimDAO_interface {
 		return workimVO;
 	}
 	
+	@Override
+	public byte[] getImg(Integer im_id) {
+		byte[] img = null;
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try {
+			session.beginTransaction();
+			Query query = session.createSQLQuery("SELECT im_show FROM workim WHERE im_id = ?");
+			query.setParameter(0, im_id);
+			img = (byte[])(query.list().get(0));
+			session.getTransaction().commit();
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
+		return img;
+	}
+	
 	public static void main(String[] args) throws IOException {
 
 		WorkimDAO dao = new WorkimDAO();
-
+		
+//		System.out.println(dao.getImg(4001));
+		
 		//tested ok
 //		Set<WorkimVO> workimVOset = new HashSet<WorkimVO>();
 //

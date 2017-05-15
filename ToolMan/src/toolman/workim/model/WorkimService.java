@@ -17,5 +17,9 @@ public class WorkimService {
 	public Collection<WorkimVO> getByWorkid(Integer work_id) {
 		return dao.getByWorkid(work_id);
 	}
+	
+	public byte[] getImg(Integer im_id) {
+		return dao.getImg(im_id);
+	}
 
 }

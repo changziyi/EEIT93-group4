@@ -16,6 +16,7 @@ import toolman.cdata.model.CdataService;
 import toolman.cdata.model.CdataVO;
 import toolman.mdata.model.MdataService;
 import toolman.mdata.model.MdataVO;
+import toolman.order.model.OrderService;
 
 /**
  * Servlet implementation class managerUIFunctionServlet
@@ -42,11 +43,18 @@ public class managerUIFunctionServlet extends HttpServlet {
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 		String functionaction = request.getParameter("functionaction");
-		String toggledcheckbox = request.getParameter("toggledcheckbox");
-		int lastindex = toggledcheckbox.lastIndexOf("\""); 
-		String[] arraytoggled = toggledcheckbox.split("\\,");
-		System.out.println(arraytoggled);
 		
+		String targetid = request.getParameter("targetid");//direct to other pages target id
+		String notevalue = request.getParameter("notevalue");//note value
+		String noteid = request.getParameter("noteid");//note target id
+		System.out.println(noteid);
+//		int lastindex = toggledcheckbox.lastIndexOf("\""); 
+		String[] arraytoggled ={};
+		if(request.getParameter("toggledcheckbox")!=null){
+		String toggledcheckbox = request.getParameter("toggledcheckbox");
+		arraytoggled = toggledcheckbox.split("\\,");
+		System.out.println(arraytoggled);
+		}
 		if("applicationreviewm".equals(functionaction)){
 			List<MdataVO> list = new ArrayList<MdataVO>();
 			for(String m_id:arraytoggled){
@@ -60,19 +68,53 @@ public class managerUIFunctionServlet extends HttpServlet {
 		
 		if("suspensionm".equals(functionaction)){
 			List<MdataVO> list = new ArrayList<MdataVO>();
-			Integer count=0;
+			int count=0;
 			for(String m_id:arraytoggled){
 				MdataService mdataservice = new MdataService();
 				System.out.println(m_id);
-			Integer	returnedcount = mdataservice.updatemasterSname(Integer.parseInt(m_id),"停權中");
+				int	returnedcount = mdataservice.updatemasterSname(Integer.parseInt(m_id),"停權中");
 			count= returnedcount+count;
 			}	
-			count.toString();
+			
 			System.out.print(count);
 			out.write(count);
 			
 		}
+		if("suspensionc".equals(functionaction)){
+			List<CdataVO> list = new ArrayList<CdataVO>();
+			int count=0;
+			for(String c_id:arraytoggled){
+				CdataService cdataservice = new CdataService();
+			int	returnedcount = cdataservice.updatecustomerSname(c_id,"停權中");
+			count= returnedcount+count;
+			}
+			out = response.getWriter();
+			System.out.print(count);
+			out.write(count);			
+		}
+		//tested ok
+		if("findmaster".equals(functionaction)){
+			MdataService mdataservice = new MdataService();
+			request.setAttribute("mdataVO", mdataservice.findByPrimaryKey(new Integer(targetid)));
+			RequestDispatcher rd = request.getRequestDispatcher("/master/MasterPage.jsp");
+			rd.forward(request, response);	
+		}
 		
+		//tested ok
+		if("findcustomer".equals(functionaction)){
+			CdataService cdataservice = new CdataService();
+			request.setAttribute("cdataVO", cdataservice.getById(targetid));
+			RequestDispatcher rd = request.getRequestDispatcher("/cdata/ShowCdata.jsp");
+			rd.forward(request, response);	
+		}
+		//tested ok
+		if("findorder".equals(functionaction)){
+			OrderService orderservice = new OrderService();
+			request.setAttribute("orderVO", orderservice.getById(new Integer(targetid)));
+			// maybe add if s_name.equals(完成或未完成) and direct to confirmorder.jsp step3 or 4
+			RequestDispatcher rd = request.getRequestDispatcher("/toolman.order/confirmorder.jsp");
+			rd.forward(request, response);	
+		}
 //		if("sendmessagem".equals(functionaction)){
 //			List<MdataVO> list = new ArrayList<MdataVO>();
 //			for(String m_id:arraytoggled){
@@ -85,23 +127,52 @@ public class managerUIFunctionServlet extends HttpServlet {
 //			
 //		}// call emailservlet instead
 		
-		if("blacklistm".equals(functionaction)){
+		//tested ok
+		if("samnote".equals(functionaction)){
 			
-			
-		}
-		
-		if("suspensionc".equals(functionaction)){
-			List<CdataVO> list = new ArrayList<CdataVO>();
-			Integer count=0;
-			for(String c_id:arraytoggled){
-				CdataService cdataservice = new CdataService();
-			Integer	returnedcount = cdataservice.updatecustomerSname(c_id,"停權中");
+			int count=0;
+				MdataService mdataservice = new MdataService();
+			int	returnedcount = mdataservice.updatecustomerSamnote(Integer.parseInt(noteid),notevalue);
 			count= returnedcount+count;
-			}
+			
+			out = response.getWriter();
+			System.out.print(count);
+			out.write("done");			
+		}
+		//tested ok
+		if("sacnote".equals(functionaction)){
+		
+			int count=0;
+			
+			CdataService cdataservice = new CdataService();
+			int	returnedcount = cdataservice.updatecustomerSacnote(noteid,notevalue);
+			count= returnedcount+count;
+			System.out.print(notevalue);
 			out = response.getWriter();
 			System.out.print(count);
 			out.write(count);			
 		}
+		if("saonote".equals(functionaction)){
+		
+			Integer count=0;
+			
+			OrderService odataservice = new OrderService();
+			int	returnedcount = odataservice.updateOrderSaonote(Integer.parseInt(noteid),notevalue);
+			count= returnedcount;
+			
+			out = response.getWriter();
+			System.out.print(count);
+			out.write(count);			
+		}
+		if("blacklistm".equals(functionaction)){
+			
+			
+		}
+		if("blacklistm".equals(functionaction)){
+			
+			
+		}
+
 		
 //		if(functionaction.equals("sendmessagec")){
 //			

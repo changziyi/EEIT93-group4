@@ -7,4 +7,5 @@ public interface WorkimDAO_interface {
 	public Integer delete(Collection<Integer> im_idlist);
 	public Collection<WorkimVO> getByWorkid(Integer work_id);
 	public WorkimVO findByPK(Integer im_id);
+	public byte[] getImg(Integer im_id);
 }

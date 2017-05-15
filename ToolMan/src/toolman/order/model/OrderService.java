@@ -29,7 +29,9 @@ public class OrderService {
 	public void insert(OrderVO orderVO){
 		dao.insert(orderVO);
 	}
-	
+	public OrderVO getById(Integer o_id){
+		return dao.getById(o_id);
+	}
 
     public List<OrderVO>  getAllOrder(){ 
     	List<OrderVO> orderlist = dao.getAllOrder();
@@ -162,6 +164,9 @@ public class OrderService {
 		    	}
 	 }
 }
+    public int updateOrderSaonote(Integer o_id, String sa_onote){
+    	return dao.updateOrderSaonote(o_id,sa_onote);
+    }
     public void deleteExpiredOrder(){
 
             //examine all orders and delete expired orders
