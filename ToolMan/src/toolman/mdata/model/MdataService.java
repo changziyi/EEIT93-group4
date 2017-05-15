@@ -271,4 +271,7 @@ public class MdataService {
 	public Integer updatemasterSname(Integer m_id, String s_name){		
 		return dao.updatemasterSname(m_id,s_name);
 	} 
+	public int updatecustomerSamnote(Integer m_id, String sa_mnote){//by Benny
+		return dao.updatecustomerSamnote(m_id,sa_mnote);
+	}
 }
