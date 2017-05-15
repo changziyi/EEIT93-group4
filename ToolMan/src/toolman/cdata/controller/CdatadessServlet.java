@@ -1,6 +1,7 @@
 package toolman.cdata.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Set;
 
 import javax.servlet.RequestDispatcher;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import antlr.collections.List;
 import toolman.cdata.model.CdataService;
 import toolman.cdata.model.CdataVO;
 import toolman.order.model.OrderVO;
@@ -28,13 +30,17 @@ public class CdatadessServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		request.setCharacterEncoding("UTF-8");
-		
+		ArrayList<CdataVO> cdataVOlist =  new ArrayList<CdataVO>();
 		String c_id = null;
 		HttpSession session = request.getSession();	
 		CdataVO cdataVO = new CdataVO();
 		CdataService cs = new CdataService();	
-		cdataVO = cs.cdata_des("PolarBear");		
-		session.setAttribute("cdataVO", cdataVO);	
+		cdataVO = cs.cdata_des("PolarBear");	
+		cdataVOlist.add(cdataVO);
+		
+		session.setAttribute("cdataVOlist", cdataVOlist);
+		session.setAttribute("cdataVO", cdataVO);
+		System.out.println(cdataVOlist);
 		Set<OrderVO> orders = cdataVO.getOrders();
 		
 		
@@ -42,7 +48,7 @@ public class CdatadessServlet extends HttpServlet {
 			System.out.print(" 師傅 : "+ aOrder.getB_name()+" , ");
 			System.out.println(" 時間 : "+ aOrder.getO_edate());
 		}
-		session.setAttribute("orders", orders);
+		request.setAttribute("orders", orders);
 		System.out.print(c_id);
 		
 		RequestDispatcher failureView = request.getRequestDispatcher("test1.jsp");
