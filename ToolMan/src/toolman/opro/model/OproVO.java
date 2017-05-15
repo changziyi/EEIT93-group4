@@ -9,18 +9,18 @@ public class OproVO {
 	OrderVO o_id;
 	String o_pro;
 //	Integer m_proid;//合併師傅專業後註解
-	MProVO m_proid;//合併師傅專業後打開
+//	MProVO m_proid;//合併師傅專業後打開
 	
 
 	
 	//合併師傅專業後打開
-	public MProVO getM_proid() {
-		return m_proid;
-	}
-	//合併師傅專業後打開
-	public void setM_proid(MProVO m_proid) {
-		this.m_proid = m_proid;
-	}
+//	public MProVO getM_proid() {
+//		return m_proid;
+//	}
+//	//合併師傅專業後打開
+//	public void setM_proid(MProVO m_proid) {
+//		this.m_proid = m_proid;
+//	}
 	//	public Integer getM_proid() {//合併師傅專業後註解
 //		return m_proid;
 //	}
