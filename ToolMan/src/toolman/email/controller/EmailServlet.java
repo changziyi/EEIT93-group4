@@ -65,16 +65,11 @@ public class EmailServlet extends HttpServlet {
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
 		req.setCharacterEncoding("UTF-8");
-		
-
-	
-
-		
 		//取得登入的寄件人帳號
 		HttpSession session = req.getSession();
 		CdataVO cdataVO = (CdataVO)session.getAttribute("LoginOK");
 		String SendAccount = cdataVO.getC_id();
-		
+//		String SendAccount = "sa";//benny test
 		// 宣告錯誤訊息的變數
 		Map<String, String> errorMsgs = new HashMap<String, String>();
 		req.setAttribute("errorMsgs", errorMsgs);
@@ -120,19 +115,19 @@ public class EmailServlet extends HttpServlet {
 		
 		res.sendRedirect("email.jsp");
 		
-//		if (!errorMsgs.isEmpty()) {
-//			req.setAttribute("emailVO", emailVO);
-//			RequestDispatcher failureView = req.getRequestDispatcher("/email/Email.jsp");
-//			failureView.forward(req, res);
-//			return;
-//		}
-
+		if (!errorMsgs.isEmpty()) {
+			req.setAttribute("emailVO", emailVO);
+			RequestDispatcher failureView = req.getRequestDispatcher("/email/Email.jsp");
+			failureView.forward(req, res);
+			return;
+		}
+//
 //		req.setAttribute("emailVO", emailservice.findByPrimaryKey(emailVO.getMs_id()));
 //		RequestDispatcher successView = req.getRequestDispatcher("/email/emailsucess.jsp");
 //		successView.forward(req, res);
 //		return;
-//		
-//		
+		
+		
 		
 		List<EmailVO> list = new ArrayList<EmailVO>();
 		EmailVO email1 = new EmailVO();

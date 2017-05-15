@@ -3,8 +3,6 @@ package toolman.mdata.controller;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -45,8 +43,6 @@ public class MdataServlet extends HttpServlet {
 			String m_city = request.getParameter("city");
 			String m_district = "";
 			String input = request.getParameter("input");
-//			System.out.println("city= " + m_city);
-//			System.out.println("input= " + input);
 			
 			HttpSession session = request.getSession();
 			MdataVO mdataVO = new MdataVO();
@@ -61,14 +57,20 @@ public class MdataServlet extends HttpServlet {
 			
 		}
 		
+		if("SearchMpro".equals(action)) {
+			
+		}
+		
 		if("SearchResult".equals(action)) {
 			
 			String m_city = request.getParameter("city");
 			String m_district = request.getParameter("district");
+			String m_pro = request.getParameter("pro");
 			String input = request.getParameter("input");
 			System.out.println("city= " + m_city);
 			System.out.println("district= " + m_district);
 			System.out.println("input= " + input);
+			System.out.println("pro= " + m_pro);
 			
 			HttpSession session = request.getSession();
 			MdataVO mdataVO = new MdataVO();
@@ -76,6 +78,7 @@ public class MdataServlet extends HttpServlet {
 			mdataVO.setM_city(m_city);
 			mdataVO.setM_district(m_district);
 			mdataVO.setB_name(input);
+			mdataVO.setM_name(m_pro);
 			
 			session.setAttribute("search", mdataVO);
 			response.sendRedirect("searchResult.jsp");
@@ -225,13 +228,14 @@ public class MdataServlet extends HttpServlet {
 
 		if ("master".equals(type)) {
 			String image = request.getParameter("image");
-			Integer img = new Integer(image);
+			Integer m_id = new Integer(image);
 			response.setContentType("image/jpeg");
 
 			ServletOutputStream out = response.getOutputStream();
 			MdataService mdataSvc = new MdataService();
-			MdataVO mdataVO = mdataSvc.findByPrimaryKey(img);
-			byte[] b_image = mdataVO.getB_image();
+//			MdataVO mdataVO = mdataSvc.findByPrimaryKey(m_id);
+//			byte[] b_image = mdataVO.getB_image();
+			byte[] b_image = mdataSvc.getImg(m_id);
 
 			if (b_image == null || b_image.length == 0) {
 				InputStream in = getServletContext().getResourceAsStream("/image/jake.gif");
@@ -288,8 +292,10 @@ public class MdataServlet extends HttpServlet {
 			ServletOutputStream out = response.getOutputStream();
 			
 			WorkimService workimSvc = new WorkimService();
-			Collection<WorkimVO> workims = workimSvc.getByWorkid(img);
+//			Collection<WorkimVO> workims = workimSvc.getByWorkid(img);
+			byte[] workim = workimSvc.getImg(img);
 			
+			out.write(workim);
 			out.close();
 		}
 		

@@ -16,6 +16,7 @@
 	AdService adSvc = new AdService();
 	List<AdVO> gabs = adSvc.getAllBySname("廣告結束");
 	pageContext.setAttribute("get_sname", gabs);
+
 	
 	
 %>

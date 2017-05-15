@@ -88,17 +88,20 @@ input[type="file"] {
 				</form>
 			</div> -->
 			
-			<div id='div1'></div>
-			<form name="myData" action="TestFormData" enctype="multipart/form-data">
-				<div><input type="file" id="file" name="file[]" multiple="multiple"></div>
-				<div class="workImgArea">作品名稱　<input type="text" name="workname" required></div>
-				<div class="workImgArea">完工日期　<input type="text" name="worktime" required></div>
-				<div class="workImgArea">作品描述　<textarea name="workdes"></textarea></div>
-				<button type="button" id="buttonUpload">上傳</button>
-			</form>
+			<c:if test="${LoginOK.m_id == mdataVO.m_id}">
+				<div id='div1'></div>
+				<form name="myData" action="TestFormData" enctype="multipart/form-data">
+					<div><input type="file" id="file" name="file[]" multiple="multiple"></div>
+					<div class="workImgArea">作品名稱　<input type="text" name="workname" required></div>
+					<div class="workImgArea">完工日期　<input type="text" name="worktime" required></div>
+					<div class="workImgArea">作品描述　<textarea name="workdes"></textarea></div>
+					<button type="button" id="buttonUpload">上傳</button>
+				</form>
+			</c:if>
 			<div>
 				<c:forEach var="aWork" items="${mdataVO.works}">
 					<c:forEach var="a" items="${aWork.workims}">
+						<img height="450px" src='${pageContext.servletContext.contextPath}/master/master.do?type=work&image=${a.im_id}'/>
 						<p>${a.im_id}</p>
 					</c:forEach>
 				</c:forEach>

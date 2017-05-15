@@ -10,15 +10,15 @@ public class MProVO implements java.io.Serializable{
 	private Integer m_proid;
 	private String m_pro;
 	private MdataVO mdataVO;
-	private Set<OproVO> oproVO;
+//	private Set<OproVO> oproVO;
 	
 	
-	public Set<OproVO> getOproVO() {
-		return oproVO;
-	}
-	public void setOproVO(Set<OproVO> oproVO) {
-		this.oproVO = oproVO;
-	}
+//	public Set<OproVO> getOproVO() {
+//		return oproVO;
+//	}
+//	public void setOproVO(Set<OproVO> oproVO) {
+//		this.oproVO = oproVO;
+//	}
 	
 	public Integer getM_proid() {
 		return m_proid;

@@ -80,7 +80,7 @@
 			
 			<td>
 			
-			  <FORM METHOD="post" ACTION="Dislike.do"> 
+			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/order/Dislike.do"> 
  			    <input type="submit" value="刪除">
  			    <input type="hidden" name="bk_id" value="${blacklistVO.bk_id}">
 		    <input type="hidden" name="action"value="delete"></FORM> 

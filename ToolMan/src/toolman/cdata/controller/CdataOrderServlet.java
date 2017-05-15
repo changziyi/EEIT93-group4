@@ -9,6 +9,7 @@ import javax.servlet.http.*;
 
 import toolman.blacklist.model.BlacklistVO;
 import toolman.cdata.model.CdataService;
+import toolman.cdata.model.CdataVO;
 import toolman.favorite.model.FavoriteVO;
 import toolman.order.model.OrderService;
 import toolman.order.model.OrderVO;
@@ -43,6 +44,10 @@ public class CdataOrderServlet extends HttpServlet {
 				/*************************** 2.開始查詢資料 ****************************************/
 				CdataService orderSvc = new CdataService();
 				Set<OrderVO> set = orderSvc.getOrderByC(c_id);
+				
+//				HttpSession session = request.getSession();
+//				CdataVO cdataVO =(CdataVO)session.getAttribute("LoginOK");
+//				String SendAccount = cdataVO.getC_id();
 
 				/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
 				request.setAttribute("listOrder", set);    // 資料庫取出的set物件,存入request

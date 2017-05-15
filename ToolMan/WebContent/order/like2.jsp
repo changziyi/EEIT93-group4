@@ -75,7 +75,7 @@
 			
 			<td>
 			
-			  <FORM METHOD="post" ACTION="Favorite.do"> 
+			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/order/Favorite.do"> 
  			    <input type="submit" value="刪除">
  			    <input type="hidden" name="f_id" value="${favoriteVO.f_id}">
 		    <input type="hidden" name="action"value="delete"></FORM> 

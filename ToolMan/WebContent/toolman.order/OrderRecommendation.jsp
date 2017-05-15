@@ -7,7 +7,6 @@
 	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <title>Order Recommendation</title>
 
-
 </head>
 <body>
 <h1>Other masters you may like to check out</h1>

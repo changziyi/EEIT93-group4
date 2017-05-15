@@ -28,45 +28,75 @@ public class MdataJsonServlet extends HttpServlet {
 		
 		String action = request.getParameter("action");
 		response.setContentType("text/html;charset=UTF-8");
+		PrintWriter out = response.getWriter();
 		
-		if("homepagejson".equals(action)) {
-			String m_city = request.getParameter("city");
-			String input = request.getParameter("input");
+		if("searchjson".equals(action)) {
 			
-			PrintWriter out = response.getWriter();
-			Long s1 = System.currentTimeMillis();
-			
-			MdataService mdataSvc = new MdataService();
-			out.println(mdataSvc.SearchByCityAndMproJson(m_city, input));
-			
-			Long s2 = System.currentTimeMillis();
-			System.out.println("homepagejson：" + (s2-s1));
-		}
-		
-		if("advjson".equals(action)) {
 			String m_city = request.getParameter("city");
 			String m_district = request.getParameter("district");
-			String input = request.getParameter("input");
+			String b_name = request.getParameter("input");
+			String m_pro = request.getParameter("pro");
 			
-			PrintWriter out = response.getWriter();
 			Long s1 = System.currentTimeMillis();
 			
 			MdataService mdataSvc = new MdataService();
-			out.println(mdataSvc.SeachByCityAndDistrictAndMpro(m_city, m_district, input));
+			
+			if ((m_pro.trim()).length() == 0 || m_pro == null){
+				out.println(mdataSvc.getMasterBySP(m_city, m_district, b_name));
+			} else {
+				out.println(mdataSvc.getMproBySP(m_pro, m_city, m_district, b_name));
+			}
 			
 			Long s2 = System.currentTimeMillis();
-			System.out.println("advjson：" + (s2-s1));
+			System.out.println("searchspjson：" + (s2-s1));
+			
+		}
+		
+		if("alljson".equals(action)) {
+			Long s1 = System.currentTimeMillis();
+			
+			MdataService mdataSvc = new MdataService();
+			out.println(mdataSvc.getAllBySP());
+			
+			Long s2 = System.currentTimeMillis();
+			System.out.println("alljson：" + (s2-s1));
 		}
 		
 		if("discussion".equals(action)) {
 			Integer master = new Integer(request.getParameter("master"));
 			System.out.println("master: " + master);
 			
-			PrintWriter out = response.getWriter();
 			DiscussionService discussionSvc = new DiscussionService();
 			
 			out.print(discussionSvc.getByMidJson(master));
 		}
+		
+//		if("homepagejson".equals(action)) {
+//			String m_city = request.getParameter("city");
+//			String input = request.getParameter("input");
+//			
+//			Long s1 = System.currentTimeMillis();
+//			
+//			MdataService mdataSvc = new MdataService();
+//			out.println(mdataSvc.SearchByCityAndMproJson(m_city, input));
+//			
+//			Long s2 = System.currentTimeMillis();
+//			System.out.println("homepagejson：" + (s2-s1));
+//		}
+//		
+//		if("advjson".equals(action)) {
+//			String m_city = request.getParameter("city");
+//			String m_district = request.getParameter("district");
+//			String input = request.getParameter("input");
+//			
+//			Long s1 = System.currentTimeMillis();
+//			
+//			MdataService mdataSvc = new MdataService();
+//			out.println(mdataSvc.SeachByCityAndDistrictAndMpro(m_city, m_district, input));
+//			
+//			Long s2 = System.currentTimeMillis();
+//			System.out.println("advjson：" + (s2-s1));
+//		}
 		
 	}
 
