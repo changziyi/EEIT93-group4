@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+    <class name="toolman.work.model.WorkVO" table="work" >
+        
+        <id name="work_id" column="work_id">
+            <generator class="identity"/>
+        </id>
+        
+        <property name="work_name" column="work_name" />
+        <property name="work_des" column="work_des" />
+        <property name="img1" column="img1" />
+        <property name="img2" column="img2" />
+        <property name="img3" column="img3" />
+		
+		<!-- 專業*-師父1-->
+		<many-to-one name="mdataVO" class="toolman.mdata.model.MdataVO" lazy="false">
+            <column name="m_id" />
+        </many-to-one>
+        
+        <!--作品圖片*-作品1-->
+		<set name="workims" table="workim" lazy="false" cascade="all" inverse="true"  order-by="im_id asc">			
+			<key>
+				<column name="work_id" />
+			</key>
+			<one-to-many class="toolman.workim.model.WorkimVO" />
+		</set>
+		
+    </class>
+</hibernate-mapping>
+
