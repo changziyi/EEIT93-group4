@@ -4,8 +4,6 @@
 <%@ page import="java.util.*"%>
 <%@ page import="toolman.wishpool.model.*"%>
 <%@ page import="toolman.ad.model.*"%>
-<%@ page import="toolman.email.model.*"%>
-<%@ page import="toolman.cdata.model.*"%>
 
 <%
 	WishpoolService wishpoolSvc = new WishpoolService();
@@ -14,14 +12,8 @@
 	pageContext.setAttribute("new_date", new_date);
 	
 	AdService adSvc = new AdService();
-	List<AdVO> gabs = adSvc.getAllBySname("ad_inprogress");
+	List<AdVO> gabs = adSvc.getAllBySname("廣告結束");
 	pageContext.setAttribute("get_sname", gabs);
-	
-	EmailService emailSvc = new EmailService();
-	HttpSession sessions = request.getSession();
-	CdataVO cdataVO = (CdataVO)sessions.getAttribute("LoginOK");
-	list<EmailVO> list = emailSvc.getMail(cdataVO.getC_id());
-	pageContext.setAttribute("list", list);
 	
 	
 %>
@@ -178,8 +170,13 @@
 							維修項目照片： <img
 								src="${pageContext.servletContext.contextPath}/wishpool/wishpool.do?type=wishpool&image=${wishpoolVO.w_id}"
 								alt="示意圖" class="img-responsive"> <br>
-							發送時間：${wishpoolVO.w_date} <br>
-							<button class="btn btn-primary" data-target="#123">我會修理</button>
+							<div align="center">
+							<button class="btn btn-primary btn-sm" data-toggle="modal"
+						data-target="#myModal03">
+						<b>我會修理</b>
+					</button><br>
+					發送時間：${wishpoolVO.w_date}
+					</div>
 						</div>
 					</c:forEach>
 				</div>
@@ -268,6 +265,38 @@
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-------------------------- 接下許願 ------------------------------>
+	<div class="modal fade" id="myModal03" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<H4 style="color: red" class="modal-title" id="myModalLabel">
+						許願單
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+					</H4>
+					</button>
+				</div>
+				<div var="wishpoolVO" items="${new_date}">
+							使用者：${wishpoolVO.c_id}<br>
+							位在地區：${wishpoolVO.w_city}${wishpoolVO.w_district} <br>
+							維修項目：${wishpoolVO.w_pro} <br> 
+							維修內容：${wishpoolVO.w_content} <br>
+							發送時間：${wishpoolVO.w_date} <br>
+							</div>
+							
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+						<button type="submit" class="btn btn-primary">確認接單</button>
+						<input type="hidden" name="w_city"> <input type="hidden"
+							name="w_district">
+					</div>
 			</div>
 		</div>
 	</div>

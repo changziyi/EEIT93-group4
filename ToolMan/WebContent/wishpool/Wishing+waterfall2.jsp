@@ -4,8 +4,7 @@
 <%@ page import="java.util.*"%>
 <%@ page import="toolman.wishpool.model.*"%>
 <%@ page import="toolman.ad.model.*"%>
-<%@ page import="toolman.email.model.*"%>
-<%@ page import="toolman.cdata.model.*"%>
+
 
 <%
 	WishpoolService wishpoolSvc = new WishpoolService();
@@ -15,14 +14,8 @@
 	pageContext.setAttribute("old_date", old_date);
 	
 	AdService adSvc = new AdService();
-	List<AdVO> gabs = adSvc.getAllBySname("ad_inprogress");
+	List<AdVO> gabs = adSvc.getAllBySname("廣告結束");
 	pageContext.setAttribute("get_sname", gabs);
-	
-	EmailService emailSvc = new EmailService();
-	HttpSession sessions = request.getSession();
-	CdataVO cdataVO = (CdataVO)sessions.getAttribute("LoginOK");
-	list<EmailVO> list = emailSvc.getMail(cdataVO.getC_id());
-	pageContext.setAttribute("list", list);
 	
 	
 %>
