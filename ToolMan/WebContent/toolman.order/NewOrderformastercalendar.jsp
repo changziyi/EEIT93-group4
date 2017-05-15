@@ -183,9 +183,9 @@
      
         <div id="smartwizard">
             <ul class="stepstyle textstyle">
-            	<li><a href="#step-1">步驟一<br /><small>預約時間</small></a></li>
-                <li><a href="#step-2">步驟一<br /><small>填寫預約表</small></a></li>
-                <li><a href="#step-3">步驟三<br /><small>預約完成</small></a></li>
+            	<li><a href="#step-1">步驟一<br /><small>選擇不可預約時間</small></a></li>
+                <li><a href="#step-2">步驟一<br /><small>填寫申請表</small></a></li>
+                <li><a href="#step-3">步驟三<br /><small>送出審核</small></a></li>
                 
             </ul>
       
@@ -759,7 +759,7 @@ var eventidglobe =null;
 				var repeateventmorning = 	{
 					//means delete all repeating items and rebuild new ones
 					id:"repeateventmorning",
-				    title:"每早",
+				    title:"早上",
 				    start: '01:00', // a start time (10am in this example)				
 				    overlap: true,
 					end: '09:00', // an end time (2pm in this example)
@@ -785,7 +785,7 @@ var eventidglobe =null;
 					//means delete all repeating items and rebuild new ones
 					id:"repeateventeverynoon",
 					
-				    title:"每下午",
+				    title:"下午",
 				    start: '12:00', // a start time (10am in this example)				
 				    overlap: true,
 					end: '18:00', // an end time (2pm in this example)
@@ -811,7 +811,7 @@ var eventidglobe =null;
 				var repeateventnight = 	{
 					//means delete all repeating items and rebuild new ones
 					id:"repeateventnight",
-				    title:"每晚",
+				    title:"晚上",
 				    start: '18:00', // a start time (10am in this example)				
 				    overlap: true,
 					end: '24:00', // an end time (2pm in this example)
@@ -850,7 +850,8 @@ var eventidglobe =null;
 					eventDragStop: function(event,jsEvent) {
 						 
 					    alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
-					    if( ( 1293<= jsEvent.pageX) | (jsEvent.pageX <= 300) | (1293 <= jsEvent.pageY) | (jsEvent.pageY <=690)){
+// 					    if( ( 130<= jsEvent.pageX)  && (jsEvent.pageX <= 230) &&(700 <= jsEvent.pageY)&& (jsEvent.pageY <=840))
+					if( ( 1270<= jsEvent.pageX)  || (jsEvent.pageX <= 170) ||(928 <= jsEvent.pageY)|| (jsEvent.pageY <=160)){
 					      alert('delete: '+ event.id);
 					      $('#calendar').fullCalendar('removeEvents', event.id);
 					    }
