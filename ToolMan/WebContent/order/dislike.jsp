@@ -41,9 +41,9 @@
     </div>
     <ul class="nav navbar-nav">
       <li class="active"><a href="#">Home</a></li>
-      <li><a href="listAllEmp.jsp">訂單</a></li>
-      <li><a href="like.jsp">收藏店家</a></li>
-      <li><a href="dislike.jsp">黑名單</a></li>
+ <li><a href="<%=request.getContextPath()%>/order/listAllEmp.jsp">訂單</a></li>
+      <li><a href="<%=request.getContextPath()%>/order/like.jsp">收藏店家</a></li>
+      <li><a href="<%=request.getContextPath()%>/order/dislike.jsp">黑名單</a></li>
       <li><a href="<%=request.getContextPath()%>/master/List.jsp">搜尋店家</a></li>
       
     </ul>
@@ -72,7 +72,7 @@
 	
 		<tr align='center' valign='middle'>
 			<td>${blacklistVO.bk_id}</td>
-			<td>${blacklistVO.mdataVO.m_id}</td>
+			<td>${blacklistVO.mdataVO.b_name}</td>
 			<td>${blacklistVO.cdataVO.c_id}</td>
 			
 			
@@ -94,7 +94,11 @@
  <%@ include file="page2.file" %>
  </div>
  
- 
+   <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/cdata/CdataOrderServlet.do" >
+       <input type="submit" value="消費者最愛">
+        <input type="hidden" name="c_id" value="Snoopy">
+        <input type="hidden" name="action" value="myHate">
+     </FORM>
 
  
  

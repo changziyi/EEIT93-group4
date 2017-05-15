@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Insert title here</title>
 <!-- jquery -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>	
@@ -20,10 +21,38 @@
 	
 <!-- bootstrap -->
 <!-- datatable-->
-<script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
-<link rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
+	<script src="../js/datatable/datatable/jquery.dataTables.min.js"></script>
+	<script src="../js/datatable/jszip/jszip.min.js"></script>
+	<script src="../js/datatable/pdf/pdfmake.min.js"></script>
+	<script src="../js/datatable/button/buttons.html5.min.js"></script>
+	<script src="../js/datatable/button/dataTables.buttons.min.js"></script>
+<!-- 	<script src="../js/datatable/datatable/buttons.bootstrap.min.js"></script> -->
+	<script src="../js/datatable/datatable/jquery.dataTables.min.js"></script>
+	<script src="../js/datatable/datatable/dataTables.bootstrap.min.js"></script>
+<!-- 	<script src="../js/datatable/fixedheader/dataTables.fixedHeader.min.js"></script> -->
+	<script src="../js/datatable/responsive/dataTables.responsive.min.js"></script>
+	<script src="../js/datatable/responsive/responsive.bootstrap.min.js"></script>
+	<script src="../js/datatable/select/dataTables.select.min.js"></script>
+	<link rel="stylesheet" href="../js/datatable/button/buttons.dataTables.min.css">
+	<link rel="stylesheet" href="../js/datatable/button/buttons.bootstrap.min.css">
+<!-- 	<link rel="stylesheet" href="../js/datatable/datatable/jquery.dataTables.min.css">	 -->
+	<link rel="stylesheet" href="../js/datatable/datatable/dataTables.bootstrap.min.css">
+<!-- 	<link rel="stylesheet" href="../js/datatable/fixedheader/fixedHeader.bootstrap.min.css"> -->
+<!-- 	<link rel="stylesheet" href="../js/datatable/key/keyTable.bootstrap.min.css"> -->
+<!-- 	<link rel="stylesheet" href="../js/datatable/responsive/responsive.dataTables.min.css"> -->
+	<link rel="stylesheet" href="../js/datatable/responsive/responsive.bootstrap.min.css">
+	<link rel="stylesheet" href="../js/datatable/select/select.foundation.min.css">
 
+
+	
 <style>
+	.dataTables_wrapper{
+		width:100%;
+		margin:auto;width:80%;  
+/* 		border: 2px solid blue; */
+		horizontal-align:center;
+		display:table;
+	}
 	#navigator ul li {
 	　display:inline;
 	 list-style-type:none;
@@ -48,6 +77,7 @@
 	 width:70px;
 	 text-align:center;
 	}
+	
 </style>
 </head>
 <body>
@@ -56,7 +86,7 @@
 		<nav >
 			<div id="navigator" >
 			
-				<ul style="margin: auto;width:900px; horizontal-align:center;" class="nav nav-tabs nav-justified"  >
+				<ul style="margin: auto;width:80%; horizontal-align:center;" class="nav nav-tabs nav-justified"  >
 				
 					<li  data-toggle="tab" role="presentation"  id="masterlist" data-id="m" class="active"><a href="#"><div>師傅列表</div></a></li>
 					
@@ -74,11 +104,10 @@
 			</div>
 
 		</nav>
-			<div id="functionrow" style="margin: auto;width:900px; horizontal-align:center;" class="nav nav-tabs nav-justified">
-
+			<div id="functionrow" style="margin: auto;width:80%; horizontal-align:center;" class="nav nav-tabs nav-justified">
 			</div>
 			
-			<div id="subfunctionrow" style="margin: auto;width:900px; horizontal-align:center;" class="nav nav-tabs nav-justified">
+			<div id="subfunctionrow" style="margin: auto;width:80%; horizontal-align:center;" class="nav nav-tabs nav-justified">
 			</div>
 	</header>
 <!-- Function button -->
@@ -87,7 +116,7 @@
 	</div>
 <!-- main content here -->		
 	<article>
-	<table id="eventlist" style="margin:auto;width:900px; border: 2px solid blue; horizontal-align:center;">
+	<table id="eventlist" class="table table-striped table-bordered" style="word-break: keep-all;display:table;text-align:center" >
 <!-- 		<thead> -->
 <!-- 			<th>1</th> -->
 <!-- 			<th>2</th> -->
@@ -130,13 +159,13 @@
 					<div class="modal-body">
 						<table>
 							<tr>
-								<td>收件人 ： <input type="text" name="mss_id" required="true"
-									value="${param.mss_id}" />${errorMsgs.email1}${errorMsgs.email2}
+								<td>收件人 ： <input type="text" id="receiver" name="mss_id" required="true"
+									/>
 								</td>
 							</tr>
 						
 							<tr>
-								<td>主旨 ： <input type="text" name="ms_summary" required="true"
+								<td>主旨 ： <input type="text" id="messum" name="ms_summary" required="true"
 									value="${param.ms_summary}" />${errorMsgs.email1}${errorMsgs.email2}
 								</td>
 							</tr>
@@ -144,14 +173,14 @@
 							<tr>
 								<td><label style="vertical-align: top">內容：
 								
-								<textarea name="ms_content" style="width: 400px; height: 120px"
+								<textarea name="ms_content" id="mescontent" style="width: 400px; height: 120px"
 								placeholder="請輸入內容"></textarea></td>
 							</tr>
 						</table>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-						<button type="submit" class="btn btn-primary">送出</button>			
+						<button type="button" id="btnsubmitmail" class="btn btn-primary" data-dismiss="modal">送出</button>			
 					</div>
 				</div>
 			</form>
@@ -163,9 +192,10 @@
 	var table ;//datatable variable not in use
 	var navagatorid = $('#navigator>ul>li.active').data('id');//top navigator
 	var dfd = $.Deferred();
-	var datastatus = $('#functionrow>div>ul>li[name="datastatus"][data-buttonstate="selected"]').data('statusvalue');
- 	var datatime = $('#functionrow>div>ul>li[name="datatime"][data-buttonstate="selected"]').data('statusvalue');
-
+	var dfd2 = $.Deferred();
+	var datastatus = null;
+ 	var datatime = null;
+ 	var xhr = null;
 // 		$(document).ajaxComplete(function(){
 // 			datatableinit(); //execute datable when ajax is done//fuck it, use deferred instead
 // 		});	
@@ -178,25 +208,133 @@ $(function(){
 		subfunctionrow();// build function buttons
 
 		$('#functionrow>div>ul>li').on('click',functionrowfiltering);//filtering
+		$('input[name="samnote"],[name="saonote"],[name="sacnote"]').on('change',updatenote);// input note
+ 	  	$('#subfunctionrow>a').on('click',togglehyper);//verify the master direct to other pages
+ 	  	$('#subfunctionrow>span:not(#messagespanm,#messagespanc,#messagespano)').on('click',togglegetmethod);//change m c o s_name//will return something when clicked, maill has it's own form action
+ 	  	$('#messagespanm,#messagespanc,#messagespano').on('click',mail);//mail
 		
- 	   $('#subfunctionrow>a').on('click',togglehyper);//direct to other pages
- 	  $('#subfunctionrow>span[id!="messagespanm"][id!="messagespanc"]').on('click',togglegetmethod);//will return something when clicked, maill has it's own form action
- 		 mail();//mail
+ 	  	loadProduct('m','allmaster','alldate');//build dynamic table
+ 	  	datastatus = $('#functionrow>div>ul>li[name="datastatus"][data-buttonstate="selected"]').data('statusvalue');
+ 	 	datatime = $('#functionrow>div>ul>li[name="datatime"][data-buttonstate="selected"]').data('statusvalue');
 
- 		loadProduct('m','allmaster','alldate');//build dynamic table
-}// end ready function
-); //end ready   
+		}// end ready function
+	); //end ready   
+
 	function mail(){
-		
-//  			$('#emailblock').imagesLoaded(function() {
-//  				$('#emailblock').masonry({
-//  					itemSelector : '.content_box',
-//  					columnWidth : 275,
-//  					animate : true
-//  				});
-//  			});
- 		}// end mail
-	
+		var clickornot=false;
+		  //get all toggled checkboxes 
+        var checkboxdatas = [];
+		var checkboxdatasmaster = [];
+		var checkboxdatacustomer = [];
+		 if(navagatorid=='o'){// mail to both side of the transaction//tested ok
+	     	 $(":checkbox:checked").each(function(){            	  
+	     		checkboxdatasmaster.push($(this).attr('data-receiver1'));
+	     		checkboxdatacustomer.push($(this).attr('data-receiver2'));
+	         }) 
+	         if((checkboxdatasmaster.toString()=="")||(checkboxdatacustomer.toString()=="")){
+ 	     		 	alert("u forget to toggle the checkbox u dumb XD");
+ 	     	 }//end if
+ 	     	else{
+ 	     		 $('#btnsubmitmail').on('click',function(){
+ 	     			var hyperlinkstring = "${pageContext.servletContext.contextPath}/email/Email.do";
+ 	     			clickornot=!clickornot;
+ 					var mssid=$('#receiver').val();
+	 				var mssum=$('#messum').val();
+	 				var mscontent=$('#mescontent').val();
+					$.post(hyperlinkstring,{"mss_id":mssid,"ms_content":mscontent,"ms_summary":mssum},function(){
+						
+							$('#myModal01').modal("hide");
+					   
+						if (clickornot==true){
+			 	     		setTimeout(function () {
+			 	     		$('#receiver').val(checkboxdatacustomer.toString()).text(checkboxdatacustomer.toString());
+			 	     		$('#myModal01').modal('show');
+			 	     		 }, 300);
+			 	     			
+						}	
+					});//end get function
+
+ 				});//end on clck
+ 				if(clickornot==false){
+	 				$('#receiver').val(checkboxdatasmaster.toString()).text(checkboxdatasmaster.toString());
+	 				$('#myModal01').modal('show');
+ 				}//end if				
+
+ 	   		}//end else 
+ 		 }//end if o
+ 		 else{//mail to only one side//tested ok
+ 			$('#btnsubmitmail').unbind("click");
+     	 		$(":checkbox:checked").each(function(){            	  
+         	   		checkboxdatas.push($(this).attr('data-receiver'));  		
+         	});//end each        
+     	 	if(checkboxdatas.toString()==""){
+     	     		 alert("u forget to toggle the checkbox u dumb XD");
+     	     	 }//end if
+     	 else{
+					$('#receiver').val(checkboxdatas.toString()).text(checkboxdatas.toString());
+		     		$('#myModal01').modal();
+		     		
+		     		$('#btnsubmitmail').on('click',function(){
+		     			var hyperlinkstring = "${pageContext.servletContext.contextPath}/email/Email.do";
+	 					var mssid=$('#receiver').val();
+		 				var mssum=$('#messum').val();
+		 				var mscontent=$('#mescontent').val();
+						$.post(hyperlinkstring,{"mss_id":mssid,"ms_content":mscontent,"ms_summary":mssum},function(){
+					    $('#myModal01').modal("hide");
+
+					});	//end post function
+				});//end post 
+   			 }//end else 
+ 		 }//end else
+ 	}// end mail
+ 	
+
+ 	
+ 	function updatenote(){
+				//tested ok
+        		var valueattrr=$(this).val();// get input value
+        		var nameattr=$(this).attr('name');//get input  name
+        		var noteid=$(this).data('noteid');// get input id
+        		console.log(noteid);
+        		var hyperlinkstring = "${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIFunctionServlet.do";
+// 				var ajaxurl = "${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIFunctionServlet.do?";
+// 				var ajaxparam = "functionaction="+nameattr+"&notevalue="+valueattrr+"&noteid="+noteid;
+        		//         		var hyperlinkparameter = "functionaction="+valueattrr+"&+toggledcheckbox="+checkboxdatas2;
+//        	 	var hyperlinkstringwithparameter=hyperlinkstring+hyperlinkparameter;
+      	$.post(hyperlinkstring,{"functionaction":nameattr,"notevalue":valueattrr,"noteid":noteid},function(data,status){alert(data)} )//end get function
+// 		 	$('#eventlist').dataTable().fnDestroy();//in datatable initialization  use destory= true is better
+// 			$('#eventlist').empty();//in datatable initialization use destory= true is better
+		loadProduct(navagatorid,datastatus,datatime)
+//       			loadajax(ajaxurl,ajaxparam);
+//       			//assign the parameter to loadproduct or the code return nothing
+//       			loadProduct(navagatorid,datastatus,datatime);
+ 		}// end updatenote
+ 		
+ 	function loadajax(ajaxurl,ajaxparam) {		
+ 	        xhr = new XMLHttpRequest();
+ 			
+ 			if (xhr != null){
+ 				xhr.addEventListener("readystatechange",callbackajax);
+ 	            xhr.open('GET',ajaxurl+ajaxparam);
+ 				xhr.send();	
+ 			}else{
+ 				alert("您的瀏覽器不支援Ajax功能!!");
+ 			}	
+ 		}
+ 		function callbackajax(){
+ 			if(xhr.readyState == 4){
+ 				if(xhr.status == 200){			
+ 	                var data = xhr.responseText;
+ 					alert(data);
+ 					console.log(data);
+ 					loadProduct(navagatorid,datastatus,datatime);
+ 					
+ 				}else{
+ 					alert(xhr.status + ":" + xhr.statusText);
+ 				}
+ 			}					
+ 			
+ 		}
 	function navigatorevent(){// order is of utmost,get navigator id, clear the table, build 2nd row and buttons, set active and selected filter, send 3 parameters to loadproduct
 		var id = $(this).data('id');
 		navagatorid = id;
@@ -338,6 +476,7 @@ $(function(){
 			   
 			   //rebinding
 			$('#functionrow>div>ul>li').on('click',functionrowfiltering);//filtering
+			
 		}//end table filtering
 	
 	   function subfunctionrow(){
@@ -346,8 +485,8 @@ $(function(){
 		   if( navagatorid== 'm'){
 				$('#subfunctionrow').empty();
 				var applicationreviewm = '<a href="" id="applymasterlink" name="applicationreviewm"><input type="button" value="審核師傅" /></a>';
-				var suspensionm = '<span value="suspensionm" name="functionaction" style="padding:0px; margin:0px;" ><input type="button" value="停權" "/></span>';
-				var sendmessagem = '<span id="messagespanm" value="sendmessagem" name="functionaction" style="padding:0px; margin:0px;" ><input type="button" data-target="#myModal01" data-toggle="modal" value="傳送訊息" "/></span>';
+				var suspensionm = '<span id="suspensionm" value="suspensionm" name="functionaction" style="padding:0px; margin:0px;" ><input type="button" value="停權" "/></span>';
+				var sendmessagem = '<span id="messagespanm" value="sendmessagem" name="functionaction" style="padding:0px; margin:0px;" ><input type="button"   value="傳送訊息" "/></span>';
 				var blacklistm = '<span value="blacklistm" name="functionaction" style="padding:0px; margin:0px;" ><input type="button" value="黑名單" "/></span>';
 				var b1 = $(applicationreviewm);
 				var b2 = $(suspensionm);
@@ -355,16 +494,18 @@ $(function(){
 				var b4 = $(blacklistm);
 				docFragsubfunction.append([b1,b2,b3,b4]);
 				$('#subfunctionrow').append(docFragsubfunction);
-					//rebinding
-			 	 $('#subfunctionrow>a').on('click',togglehyper);//direct to other pages
-			 	 $('#subfunctionrow>span[id!="messagespanm"][id!="messagespanc"]').on('click',togglegetmethod);//will return something when clicked, maill has it's own form action
+				
+				//rebinding
+			 	$('#subfunctionrow>a').on('click',togglehyper);//direct to other pages
+			 	$('#subfunctionrow>span:not(#messagespanm,#messagespanc,#messagespano)').on('click',togglegetmethod);//will return something when clicked, maill has it's own form action
+			 	$('#messagespanm,#messagespanc,#messagespano').on('click',mail);//will return something when clicked, maill has it's own form action
 
-			}//end else if
+		   }//end else if
 			
 			else if(navagatorid== 'c'){
 				$('#subfunctionrow').empty();
-				var suspensionc = '<span value="suspensionc" name="functionaction" style=" padding:0px; margin:0px;" ><input type="button" value="停權"/></span>';
-				var sendmessagec = '<span id="messagespanmc" value="sendmessagec" name="functionaction" style=" padding:0px; margin:0px;" ><input type="button" value="傳送訊息" /></span>';
+				var suspensionc = '<span id="suspensionc" value="suspensionc" name="functionaction" style=" padding:0px; margin:0px;" ><input type="button" value="停權"/></span>';
+				var sendmessagec = '<span id="messagespanc" value="sendmessagec" name="functionaction" style=" padding:0px; margin:0px;" ><input type="button" value="傳送訊息" /></span>';
 				var blacklistc = '<span value="blacklistc" name="functionaction" style=" padding:0px; margin:0px;" ><input type="button" value="黑名單" /></span>';
 				var b1 = $(suspensionc);
 				var b2 = $(sendmessagec);
@@ -373,21 +514,23 @@ $(function(){
 				$('#subfunctionrow').append(docFragsubfunction);
 				
 					//rebinding
-			 	  $('#subfunctionrow>a').on('click',togglehyper);//direct to other pages
-			 	  $('#subfunctionrow>span[id!="messagespanm"][id!="messagespanc"]').on('click',togglegetmethod);//will return something when clicked, maill has it's own form action
+			 	$('#subfunctionrow>a').on('click',togglehyper);//direct to other pages
+			 	$('span:not(#messagespanm,#messagespanc,#messagespano)').on('click',togglegetmethod);//will return something when clicked, maill has it's own form action
+			 	$('#messagespanm,#messagespanc,#messagespano').on('click',mail);//will return something when clicked, maill has it's own form action
 
 			}//end else if
 			
 			else if(navagatorid== 'o'){
 				$('#subfunctionrow').empty();
-				var sendmessageo = '<span value="sendmessageo" name="functionaction" style="padding:0px; margin:0px;" ><input type="button" value="訊息" "/></span>';
+				var sendmessageo = '<span id="messagespano" value="sendmessageo" name="functionaction" style="padding:0px; margin:0px;" ><input type="button" value="訊息" "/></span>';
 				var b1 = $(sendmessageo);
 				docFragsubfunction.append([b1]);
 				$('#subfunctionrow').append(docFragsubfunction);
 				
 					//rebinding
-			 	  $('#subfunctionrow>a').on('click',togglehyper);//direct to other pages
-			 	  $('#subfunctionrow>span[id!="messagespanm"][id!="messagespanc"]').on('click',togglegetmethod);//will return something when clicked, maill has it's own form action
+			 	$('#subfunctionrow>a').on('click',togglehyper);//direct to other pages
+// 			 	$('#subfunctionrow>span[id!="messagespanm"],#subfunctionrow>span[id!="messagespanc"],#subfunctionrow>span[id!="messagespano"]').on('click',mail);//will return something when clicked, maill has it's own form action
+			 	$('#messagespanm,#messagespanc,#messagespano').on('click',mail);//will return something when clicked, maill has it's own form action
 
 			}// end else if 
 	
@@ -408,7 +551,7 @@ $(function(){
 	        		 alert("u forget to toggle the checkbox u dumb XD");
 	        	 }//end if
 	        	 else{
-	        		var hyperlinkstring = "${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIFunctionServlet.do?";
+	        	   var hyperlinkstring = "${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIFunctionServlet.do?";
 	               var hyperlinkparameter = "functionaction="+nameattr+"&+toggledcheckbox="+checkboxdatas2;
 	               var hyperlinkstringwithparameter=hyperlinkstring+hyperlinkparameter;
 		           $('#applymasterlink').attr("href",hyperlinkstringwithparameter);
@@ -434,11 +577,15 @@ $(function(){
         		 alert("u forget to toggle the checkbox u dumb XD");
         	 }//end if
         	 else{
-           		var valueattrr=$(this).attr('value');//retrieve the value from functinaction
-           		var hyperlinkstring = "${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIFunctionServlet.do";
+           	var valueattrr=$(this).attr('value');//retrieve the value from functinaction
+           	var hyperlinkstring = "${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIFunctionServlet.do";
 //            	var hyperlinkparameter = "functionaction="+valueattrr+"&+toggledcheckbox="+checkboxdatas2;
-//           	 var hyperlinkstringwithparameter=hyperlinkstring+hyperlinkparameter;
-           $.post(hyperlinkstring,{"functionaction":valueattrr,"toggledcheckbox":checkboxdatas2},function(data){
+//           	var hyperlinkstringwithparameter=hyperlinkstring+hyperlinkparameter;
+//          		var ajaxurl = "${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIFunctionServlet.do?";
+// 				var ajaxparam = "functionaction="+valueattrr+"&toggledcheckbox="+checkboxdatas2;
+// 				loadajax(ajaxurl,ajaxparam);
+
+			$.post(hyperlinkstring,{"functionaction":valueattrr,"toggledcheckbox":checkboxdatas2},function(data){
 				alert(data);
            });//end get function
 // 		 	$('#eventlist').dataTable().fnDestroy();
@@ -454,12 +601,12 @@ $(function(){
 			
 					   
 			 $.getJSON('${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIServlet.do',{'navigatorid':id,"datastatus":datastatus,"datatime":datatime}, function(data){
-				 buildtable(id,data);
+				 buildtable(id,data,datatime);
 				 $.when(dfd)//super great
 // 				 .done(alert("first"))
 // 				 .done(alert("second"))
 				 .done(datatableinit);//super great
-				 
+// 				 .done($(".dataTables_wrapper").css("width","80%"));
 			 });//end get json
 	}//end loadproduct
 	
@@ -537,19 +684,22 @@ $(function(){
 						   
 						   	console.log(data);
 						   	
-						   	var toggleword = $('<input type="checkbox" name="otoggle" />').val(data.o_id);
-						   	var cell0 = $('<td></td>').append(toggleword);
+						   	var toggleword = $('<input type="checkbox" name="otoggle" />').val(data.o_id).attr('data-receiver1',data.o_bname).attr('data-receiver2',data.c_id);
+						   	var mid =  $('<input type="button"/> ').val(data.o_id).addClass('eventlisttbodytrtd');
+							var a =  $('<a></a> ').attr('href',"${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIFunctionServlet.do?"+"functionaction=findorder&targetid="+data.o_id).append(mid);						  
+							var midwordmid =  $('<span style="visibility: hidden;font-size:0px;margin:0pxlpadding:0px;"></span> ').text(data.o_id).addClass('eventlisttbodytrtd');
+							var cell0 = $('<td></td>').addClass('eventlisttbodytrtd').append(toggleword);
 						  	var cell1 = $('<td></td>').text(data.o_tdate).addClass('eventlisttbodytrtd');
 							var cell2 = $('<td></td>').text(data.o_bname).addClass('eventlisttbodytrtd');
 							var cell3 = $('<td></td>').text(data.c_id).addClass('eventlisttbodytrtd');
-							var cell4 = $('<td></td>').text(data.o_id).addClass('eventlisttbodytrtd');
+							var cell4 = $('<td></td>').html(a).addClass('eventlisttbodytrtd');
 	 						var cell5 = $('<td></td>').text(data.opros).addClass('eventlisttbodytrtd');
 							var cell6 = $('<td></td>').text(data.o_location).addClass('eventlisttbodytrtd');
 							var cell7 = $('<td></td>').text(data.s_name).addClass('eventlisttbodytrtd');
-							var cell8 = $('<td></td>').text(data.m_arating).addClass('eventlisttbodytrtd');
-							var cell9 = $('<td></td>').text(data.c_arating).addClass('eventlisttbodytrtd');
+							var cell8 = $('<td></td>').text(data.m_rating).addClass('eventlisttbodytrtd');
+							var cell9 = $('<td></td>').text(data.c_rating).addClass('eventlisttbodytrtd');
 							var wordsanote =  $('<span style="visibility: hidden;font-size:0px;margin:0pxlpadding:0px;"></span> ').text(data.sa_onote).addClass('eventlisttbodytrtd');
-							var saonote =  $('<input type="text" width="500px" /> ').val(data.sa_onote).addClass('eventlisttbodytrtd');
+							var saonote =  $('<input type="text"name="saonote" width="500px" /> ').val(data.sa_onote).attr('data-noteid',data.o_id).addClass('eventlisttbodytrtd');
 							var cell10 = $('<td></td>').html(saonote).addClass('eventlisttbodytrtd').append(wordsanote);
 	 						var rowtb = $('<tr></tr>').append([cell0,cell1,cell2,cell3,cell4,cell5,cell6,cell7,cell8,cell9,cell10]);
 	 						docFragtb.append(rowtb);
@@ -559,11 +709,12 @@ $(function(){
 				  else if(id=="m"){				
 					  
 					  
-					   var toggleword =$('<input type="checkbox" name="mtoggle"/>').val(data.M_id);     
-					   var mid =  $('<input type="button" width="500px" /> ').val(data.M_id).addClass('eventlisttbodytrtd');
+					   var toggleword =$('<input type="checkbox" name="mtoggle"/>').val(data.M_id).attr('data-receiver',data.B_name);;     
+					   var mid =  $('<input type="button"/> ').val(data.M_id).addClass('eventlisttbodytrtd');
+					   var a =  $('<a></a> ').attr('href',"${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIFunctionServlet.do?"+"functionaction=findmaster&targetid="+data.M_id).append(mid);						  
 					   var midwordmid =  $('<span style="visibility: hidden;font-size:0px;margin:0pxlpadding:0px;"></span> ').text(data.M_id).addClass('eventlisttbodytrtd');
 					   var cell0 = $('<td></td>').addClass('eventlisttbodytrtd').append(toggleword);  
-					   var cell1 = $('<td></td>').html(mid).addClass('eventlisttbodytrtd').append(midwordmid);
+					   var cell1 = $('<td></td>').html(a).addClass('eventlisttbodytrtd').append(midwordmid);
 					   var cell2 = $('<td></td>').text(data.B_name).addClass('eventlisttbodytrtd');
 					   var cell3 = $('<td></td>').text(data.M_name).addClass('eventlisttbodytrtd');
 					   var cell4 = $('<td></td>').text(data.M_city+data.M_district).addClass('eventlisttbodytrtd');
@@ -571,7 +722,7 @@ $(function(){
 					   var cell6 = $('<td></td>').text(data.S_name).addClass('eventlisttbodytrtd');
 					   var cell7 = $('<td></td>').text(data.M_arating).addClass('eventlisttbodytrtd');
 					   var wordsanote =  $('<span style="visibility: hidden;font-size:0px;margin:0pxlpadding:3px;"></span> ').text(data.Sa_mnote).addClass('eventlisttbodytrtd');
-					   var samnote =  $('<input type="text" width="500px" /> ').val(data.Sa_mnote).addClass('eventlisttbodytrtd');
+					   var samnote =  $('<input type="text" name="samnote" width="500px" /> ').val(data.Sa_mnote).attr('data-noteid',data.M_id).addClass('eventlisttbodytrtd');
 					   var cell8 = $('<td></td>').html(samnote).addClass('eventlisttbodytrtd').append(wordsanote);
 					   var rowtb = $('<tr></tr>').append([cell0,cell1,cell2,cell3,cell4,cell5,cell6,cell7,cell8]).addClass('eventlisttbodytrtd');				   
 	  				   docFragtb.append(rowtb);
@@ -581,17 +732,20 @@ $(function(){
 					else if(id=="c"){
 						
 						
-					   var toggleword = $('<input type="checkbox" name="ctoggle" />').val(data.c_id);
-					   var cell0 = $('<td></td>').append(toggleword);
+					   var toggleword = $('<input type="checkbox" name="ctoggle" />').val(data.c_id).attr('data-receiver',data.c_id);
+					   var mid =  $('<input type="button" style="width:100px;word-break: keep-all"/> ').val(data.c_id).addClass('eventlisttbodytrtd');
+					   var a =  $('<a></a> ').attr('href',"${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIFunctionServlet.do?"+"functionaction=findcustomer&targetid="+data.c_id).append(mid);						  
+					   var midwordmid =  $('<span style="visibility: hidden;font-size:0px;margin:0pxlpadding:0px;"></span> ').text(data.c_id).addClass('eventlisttbodytrtd');
+					   var cell0 = $('<td></td>').addClass('eventlisttbodytrtd').append(toggleword);
 					   var cell1 = $('<td></td>').text(data.c_jdate).addClass('eventlisttbodytrtd');;
-					   var cell2 = $('<td></td>').text(data.c_id).addClass('eventlisttbodytrtd');;
+					   var cell2 = $('<td></td>').html(a).addClass('eventlisttbodytrtd').append(midwordmid);
 					   var cell3 = $('<td></td>').text(data.c_name).addClass('eventlisttbodytrtd');;
 					   var cell4 = $('<td></td>').text(data.c_city+data.c_district).addClass('eventlisttbodytrtd');;
 					   var cell5 = $('<td></td>').text(data.s_name).addClass('eventlisttbodytrtd');;
 					   var cell6 = $('<td></td>').text(data.c_averrating).addClass('eventlisttbodytrtd');;
 					   var wordsanote =  $('<span style="visibility: hidden;font-size:0px;margin:0pxlpadding:0px;"></span> ').text(data.sa_cnote).addClass('eventlisttbodytrtd');
-					   var sacnote =  $('<input type="text" width="500px" /> ').val(data.sa_cnote).addClass('eventlisttbodytrtd');
-					   var cell7 = $('<td></td>').text(samnote).addClass('eventlisttbodytrtd').append(wordsanote);;
+					   var sacnote =  $('<input type="text" name="sacnote" id= width="500px" /> ').val(data.sa_cnote).attr('data-noteid',data.c_id).addClass('eventlisttbodytrtd');
+					   var cell7 = $('<td></td>').html(sacnote).addClass('eventlisttbodytrtd').append(wordsanote);;
 					   var row = $('<tr></tr>').append([cell0,cell1,cell2,cell3,cell4,cell5,cell6,cell7]);
 					   docFragtb.append(row);
 					   
@@ -604,32 +758,46 @@ $(function(){
 			   tb.append(docFragtb);
 			   table.append(th);
 			   table.append(tb);
-			   
+			   //rebinding tested ok
+			   $('input[name="samnote"],[name="saonote"],[name="sacnote"]').on('change',updatenote);// input note
+
 			   dfd.resolve();
 			   return dfd;
 // 			   datatableinit();// goes wrong often
 			   			   
 	   }//end loadtable function
 				function datatableinit(){
+					dom: 'Bfrtip', 
 				table =	$('#eventlist').DataTable({
+					 "autoWidth": true,
+					buttons: [
+						'copy', 'csv', 'excel', 'pdf', 'print'
+				    ],
+				    
+			    select: true,
+// 			        responsive: {
+// 			            details: {
+// 			                display: $.fn.dataTable.Responsive.display.modal( {
+// 			                    header: function ( row ) {
+// 			                        var data = row.data();
+// 			                        return 'Details for '+data[0]+' '+data[1];
+// 			                    }
+// 			                } ),
+// 			                renderer: $.fn.dataTable.Responsive.renderer.tableAll( {
+// 			                    tableClass: 'ui table'
+// 			                } )
+// 			            }
+// 			        },
 // 						retrieve: true,
-			// 			"lengthMenu":[1, 2, 3, "All"],
 						destroy: true,
 // 						"pageLength": 1,
-
-						 "lengthMenu": [ [1, 2, 50, -1], [1, 2, 50, "All"] ]
+// 						"dom": '<lf<t>ip>',
+						 "lengthMenu": [ [5, 10, 50, -1], [5, 10, 50, "All"] ]
 			// 			"iDisplayLength": 10
 			//			  	destroy: true,
 						 	   
 				   }//end datatableinit
 				);}	//end datable	
-// 				function datatabledestory(){
-// 					$('#eventlist').DataTable({
-// 						  	destroy: true,
-// 			// 			 	aaData: response.data	
-// 								 }//end datable attribute
-// 						 );	//end datable	   
-// 				   }//end datatabledestory function
 				   
 				   
 </script>

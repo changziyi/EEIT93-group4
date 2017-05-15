@@ -4,6 +4,11 @@ package toolman.cdata.model;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Set;
+
+import toolman.blacklist.model.BlacklistVO;
+import toolman.favorite.model.FavoriteVO;
+import toolman.order.model.OrderVO;
 
 
 
@@ -44,10 +49,26 @@ public class CdataService {
 		return  dao.cdata_des(c_id); 
 		
 	}
-	public List<CdataVO> getAll() {
+	public List<CdataVO> getAll() {//benny	
 		return dao.getAll();
 	}
-	public Integer updatecustomerSname(String c_id, String s_name){		
+	public  int updatecustomerSname(String c_id, String s_name){	//benny	
 		return dao.updatecustomerSname(c_id, s_name);
 	}
+	public int updatecustomerSacnote(String c_id, String sa_cnote){//benny	
+		return dao.updatecustomerSacnote(c_id, sa_cnote);
+	}
+	public CdataVO getById(String c_id){//benny
+		return dao.getById(c_id);
+	}
+	public Set<OrderVO> getOrderByC(String c_id) {//訂單
+		return dao.getOrderByC(c_id);
+	}
+	public Set<FavoriteVO> getFavoriteByC(String c_id) {//訂單
+		return dao.getFavoriteByC(c_id);
+	}
+	public Set<BlacklistVO> getBlackByC(String c_id) {//訂單
+		return dao.getBlackByC(c_id);
+	}
+	
 }

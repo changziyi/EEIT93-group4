@@ -4,6 +4,7 @@ import org.hibernate.*;
 
 
 import hibernate.util.HibernateUtil;
+import toolman.favorite.model.FavoriteVO;
 import toolman.order.model.OrderVO;
 
 import java.util.*;
@@ -30,8 +31,11 @@ public class BlacklistDAO implements BlacklistDAO_interface {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try {
 			session.beginTransaction();
-			BlacklistVO empvo = (BlacklistVO) session.get(BlacklistVO.class,bk_id);
-			session.delete(empvo);
+
+			BlacklistVO empVO = new BlacklistVO();
+			empVO.setBk_id(bk_id);
+			session.delete(empVO);
+
 			session.getTransaction().commit();
 		} catch (RuntimeException ex) {
 			session.getTransaction().rollback();

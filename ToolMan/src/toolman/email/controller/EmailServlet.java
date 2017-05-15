@@ -36,47 +36,51 @@ public class EmailServlet extends HttpServlet {
 	EmailService emailservice = new EmailService();
 
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		doPost(req, res);
 		
-		//取得登入的帳號
+		//取得登入的收件人帳號
 		HttpSession session = req.getSession();
-		CdataVO cdataVO = (CdataVO)session.getAttribute("LoginOK");
-		String Account = cdataVO.getC_id();
-				
+		String action = req.getParameter("action");
+		String msid = req.getParameter("msid");
+		if("findbypk".equals(action)){
+			EmailService emailSvc1 = new EmailService();
+			EmailVO emailVO = emailSvc1.getOneMail(new Integer(msid));
+			req.setAttribute("Onelist", emailVO);
+			
+		}
 	}
+	
+//	//取得單筆mail
+//	HttpSession session = req.getSession();
+//	EmailVO emailVO = (EmailVO)session.getAttribute("");
+//	String Account = cdataVO.getC_id();
+//			
+//}
+	
+	// 取得信件流水編號
+//	String ms_id_str = req.getParameter("ms_id");
+//	Integer ms_id = new Integer(ms_id_str);
+
+	
 
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
 		req.setCharacterEncoding("UTF-8");
-		
-		// String action = req.getParameter("action");
-		// 設定文字編碼形式
-
-		//取得登入的帳號
+		//取得登入的寄件人帳號
 		HttpSession session = req.getSession();
 		CdataVO cdataVO = (CdataVO)session.getAttribute("LoginOK");
 		String SendAccount = cdataVO.getC_id();
-		
-		//互寄mail
-		
-		
+//		String SendAccount = "sa";//benny test
 		// 宣告錯誤訊息的變數
 		Map<String, String> errorMsgs = new HashMap<String, String>();
 		req.setAttribute("errorMsgs", errorMsgs);
 		EmailVO emailVO = new EmailVO();
-		
-		
-
-		
-		 
-		
+				
 		// 收件者帳號
 		String mss_id = req.getParameter("mss_id");
 		if (mss_id == null || mss_id.trim().length() == 0) {
 			errorMsgs.put("mss_id1", "請輸入收件者帳號");
 		}
 		
-
 
 		// 主旨
 		String ms_summary = req.getParameter("ms_summary");
@@ -98,6 +102,7 @@ public class EmailServlet extends HttpServlet {
 
 		// 狀態
 		EmailService emailserv = new EmailService();
+
 		emailVO.setMsr_id(SendAccount);
 		emailVO.setMss_id(mss_id);
 		emailVO.setMs_summary(ms_summary);
@@ -105,48 +110,41 @@ public class EmailServlet extends HttpServlet {
 		emailVO.setMs_date(ms_date);
 		emailVO.setS_name(false);
 		emailserv.insert(emailVO);
+		
+		System.out.println("msid: " + emailVO.getMs_id());
+		
 		res.sendRedirect("email.jsp");
 		
-//		if (!errorMsgs.isEmpty()) {
-//			req.setAttribute("emailVO", emailVO);
-//			RequestDispatcher failureView = req.getRequestDispatcher("/email/Email.jsp");
-//			failureView.forward(req, res);
-//			return;
-//		}
-
+		if (!errorMsgs.isEmpty()) {
+			req.setAttribute("emailVO", emailVO);
+			RequestDispatcher failureView = req.getRequestDispatcher("/email/Email.jsp");
+			failureView.forward(req, res);
+			return;
+		}
+//
 //		req.setAttribute("emailVO", emailservice.findByPrimaryKey(emailVO.getMs_id()));
 //		RequestDispatcher successView = req.getRequestDispatcher("/email/emailsucess.jsp");
 //		successView.forward(req, res);
 //		return;
-//		
-//		
 		
-//		EmailVO addform = new EmailVO();
-//		addform.setMss_id(mss_id);
-//		addform.setMs_summary(ms_summary);
-//		addform.setMs_content(ms_content);
-//		emailservice.insert(addform);
-        // 表單傳送到資料庫
 		
 		
 		List<EmailVO> list = new ArrayList<EmailVO>();
 		EmailVO email1 = new EmailVO();
+
 		email1.setMss_id(mss_id);
 		email1.setMs_summary(ms_summary);
 		email1.setMs_content(ms_content);
 		list.add(email1);
 		emailservice.getAll();
 		
-		
-
 		for (int i = 0 ; i < list.size() ; i++) {
 			EmailVO vo = list.get(i);
-		}
-		
-		
+		}	
 		
 		//測試用
 		System.out.println("確認表單上傳成功");
+
 		System.out.println(mss_id);
 		System.out.println(ms_summary);
 		System.out.println(ms_content);

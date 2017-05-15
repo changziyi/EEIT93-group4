@@ -26,19 +26,23 @@ public class FavoriteDAO implements FavoriteDAO_interface {
 	}
 
 	@Override
+	
 	public void delete(Integer f_id) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try {
 			session.beginTransaction();
-			FavoriteVO empvo = (FavoriteVO) session.get(FavoriteVO.class, f_id);
-			session.delete(empvo);
+
+			FavoriteVO empVO = new FavoriteVO();
+			empVO.setF_id(f_id);
+			session.delete(empVO);
+
 			session.getTransaction().commit();
 		} catch (RuntimeException ex) {
 			session.getTransaction().rollback();
 			throw ex;
 		}
 	}
-
+	
 	@Override
 	public FavoriteVO findByPrimaryKey(Integer f_id) {
 		FavoriteVO empVO = null;
@@ -96,7 +100,7 @@ public class FavoriteDAO implements FavoriteDAO_interface {
 //		dao.update(empVO2);
 
 		// �R��
-//		dao.delete(7014);
+		dao.delete(12011);
 
 //		// �d��
 //		EmpVO empVO3 = dao.findByPrimaryKey(7001);

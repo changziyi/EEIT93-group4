@@ -12,6 +12,7 @@ import java.util.Set;
 import org.json.simple.JSONValue;
 
 import toolman.cdata.model.CdataVO;
+import toolman.favorite.model.FavoriteVO;
 import toolman.opro.model.OproVO;
 
 
@@ -28,7 +29,9 @@ public class OrderService {
 	public void insert(OrderVO orderVO){
 		dao.insert(orderVO);
 	}
-	
+	public OrderVO getById(Integer o_id){
+		return dao.getById(o_id);
+	}
 
     public List<OrderVO>  getAllOrder(){ 
     	List<OrderVO> orderlist = dao.getAllOrder();
@@ -98,12 +101,19 @@ public class OrderService {
     }
     public List<OrderVO>  getOrderByC(String c_id){
     	List<OrderVO> orderlist = dao.getOrderByC(c_id);
+    	    	
     	return orderlist;
     }
-    
-    public Set<CdataVO> getOrderListC(String c_id) {
-		return dao.getOrderListC(c_id);
-	}
+//    
+//    public Set<CdataVO> getOrderByC(String c_id) {
+//    	OrderVO orderVO = new OrderVO();
+//		
+//		CdataVO cdataVO = new CdataVO();
+//		cdataVO.setC_id(c_id);
+//		orderVO.setC_id(cdataVO);
+//		
+//		return dao.getOrderByC(c_id);
+//	}
     
     
     
@@ -154,6 +164,9 @@ public class OrderService {
 		    	}
 	 }
 }
+    public int updateOrderSaonote(Integer o_id, String sa_onote){
+    	return dao.updateOrderSaonote(o_id,sa_onote);
+    }
     public void deleteExpiredOrder(){
 
             //examine all orders and delete expired orders
@@ -277,23 +290,16 @@ public class OrderService {
     	Integer  count = dao.updateOrderRate( m_rating,  c_rating, ca_des,  ma_des, o_id);
     	return  count;
     }        
-    	
+    public Integer updateOrderRateByC(Integer m_rating, String ca_des,Integer o_id) {
+    	Integer  count = dao.updateOrderRateByC( m_rating, ca_des, o_id);
+    	return  count;
+    } 
+    public Integer updateOrderRateByM( Integer c_rating, String ma_des,Integer o_id) {
+    	Integer  count = dao.updateOrderRateByM(  c_rating,   ma_des, o_id);
+    	return  count;
+    } 
     
-    	
-//		OrderVO orderVO = new OrderVO();
-//
-//		orderVO.setO_id(o_id);
-//
-//		orderVO.setM_rating(m_rating);
-//		orderVO.setC_rating(c_rating);
-//		orderVO.setCa_des(ca_des);
-//		orderVO.setMa_des(ma_des);
-//
-//		
-//		dao.updateOrder(orderVO);
-//
-//		return dao.getRate(o_id);
-//	}
+    
     
     }
 

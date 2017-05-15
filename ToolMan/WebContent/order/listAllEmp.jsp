@@ -47,15 +47,29 @@
     </div>
     <ul class="nav navbar-nav">
       <li class="active"><a href="<%=request.getContextPath()%>/cdata/index.jsp">Home</a></li>
-   <li><a href="listAllEmp.jsp">訂單</a></li>
-      <li><a href="like.jsp">收藏店家</a></li>
-      <li><a href="dislike.jsp">黑名單</a></li>
+ <li><a href="<%=request.getContextPath()%>/order/listAllEmp.jsp">訂單</a></li>
+      <li><a href="<%=request.getContextPath()%>/order/like.jsp">收藏店家</a></li>
+      <li><a href="<%=request.getContextPath()%>/order/dislike.jsp">黑名單</a></li>
       <li><a href="<%=request.getContextPath()%>/master/List.jsp">搜尋店家</a></li>
+      
     </ul>
   </div>
 </nav>
 
+<%------------------------------------------------------------------------ --%>
+   <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/mdata/MdataOrderServlet.do" >
+       <input type="submit" value="師傅訂單">
+       <input type="hidden" name="m_id" value="1001">
+        <input type="hidden" name="action" value="listOrder">
+     </FORM>
 
+     <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/cdata/CdataOrderServlet.do" >
+       <input type="submit" value="消費者訂單">
+        <input type="hidden" name="c_id" value="Snoopy">
+        <input type="hidden" name="action" value="listOrder">
+     </FORM>
+     <%------------------------------------------------------------------- --%>
+     
 <b><font color=red></font></b>
 <table border='1' cellpadding='5' cellspacing='0' width='1200'>
 	<tr bgcolor='#CCCCFF' align='center' valign='middle' height='20'>
@@ -69,7 +83,7 @@
 		<th>訂單完成時間</th>
 		<th>維修項目說明</th>
 		<th>施工地址</th>
-		
+		<th>消費者</th>
 		<th>分數</th>
 		<th>留言</th>
 		<th>評分</th>
@@ -83,7 +97,7 @@
 	
 		<tr align='center' valign='middle'>
 			<td>${orderVO.o_id}</td>
-			<td>${orderVO.b_name}</td>
+			<td><a href='${pageContext.servletContext.contextPath}/master/masterPage.do?m_id=${orderVO.m_id.m_id}'>${orderVO.b_name}</a></td>
 			<td>${orderVO.o_edate}</td>
 			<td>${orderVO.o_des}</td>
 			<td>${orderVO.o_location}</td>
@@ -117,6 +131,11 @@
 			</td>
 			--%>
 			
+			<td>
+			
+			${orderVO.c_id.c_id}
+			
+			</td>
 			<td>
 ${orderVO.m_rating}
 			</td>
@@ -237,9 +256,20 @@ ${orderVO.ca_des}
    <%@ include file="page2.file" %>  
  </div>
  
+    <jsp:useBean id="mdataSvc" scope="page" class="toolman.mdata.model.MdataService" />
  
+ 
+    <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/mdata/MdataOrderServlet.do" >
+       <b><font color=orange>選擇部門:</font></b>
+       <select size="1" name="m_id">
+         <c:forEach var="mdataVO" items="${mdataSvc.all}" > 
+          <option value="${mdataVO.m_id}">${mdataVO.b_name}
+         </c:forEach>   
+       </select>
 
- 
+   <input type="submit" value="送出">
+       <input type="hidden" name="action" value="listOrder">
+     </FORM>
  
  <%----- --------%>
 

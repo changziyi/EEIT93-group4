@@ -15,9 +15,6 @@
 
 
 
-         <many-to-one name="m_proid" class="toolman.mpro.model.MProVO" cascade="all" lazy="false">
-            <column name="m_proid" />
-        </many-to-one>
 
         <many-to-one name="o_id" class="toolman.order.model.OrderVO" cascade="all"  lazy="false">
             <column name="o_id" />

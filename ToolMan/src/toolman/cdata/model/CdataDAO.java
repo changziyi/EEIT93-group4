@@ -12,6 +12,8 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
 import hibernate.util.HibernateUtil;
+import toolman.blacklist.model.BlacklistVO;
+import toolman.favorite.model.FavoriteVO;
 import toolman.mdata.model.MdataVO;
 import toolman.order.model.OrderVO;
 
@@ -114,22 +116,22 @@ public class CdataDAO implements CdataDAO_interface{
 		return cdataVO;
 	}
 	//BY Benny
-	public Integer updatecustomerSname(String c_id, String s_name) {
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		Integer count=0;
-		try {
-			session.beginTransaction();
-			Query query = session.createQuery("update CdataVO set s_name=:s where c_id=:c");
-			query.setString("s",s_name);
-			query.setParameter("c",c_id);
-			count = query.executeUpdate();
-			session.getTransaction().commit();
-		} catch (RuntimeException ex) {
-			session.getTransaction().rollback();
-			throw ex;
+		public CdataVO getById(String c_id) {
+		
+			Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+			CdataVO cdataVO =null;
+			try {
+				session.beginTransaction();
+				cdataVO = (CdataVO) session.get(CdataVO.class, c_id);
+
+				session.getTransaction().commit();
+			} catch (RuntimeException ex) {
+				session.getTransaction().rollback();
+				throw ex;
+			}
+			return  cdataVO;
 		}
-		return count;
-	}
+	//BY Benny
 	public List<CdataVO> getBySname(String s_name) {
 		List<CdataVO> list = null;
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
@@ -145,6 +147,58 @@ public class CdataDAO implements CdataDAO_interface{
 		}
 		return list;
 	}
+	//benny
+	public int updatecustomerSname(String c_id, String s_name) {
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		Integer count=0;
+		try {
+			session.beginTransaction();
+			Query query = session.createQuery("update CdataVO set s_name=:s where c_id=:c");
+			query.setString("s",s_name);
+			query.setParameter("c",c_id);
+			count = query.executeUpdate();
+			session.getTransaction().commit();
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
+		return count;
+	}
+	//benny
+	public int updatecustomerSacnote(String c_id, String sa_cnote){
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		int count=0;
+		try {
+			session.beginTransaction();
+			Query query = session.createQuery("update CdataVO set sa_cnote =:snote where c_id=:c");
+			query.setString("snote",sa_cnote);
+			query.setParameter("c",c_id);
+			count = query.executeUpdate();
+			session.getTransaction().commit();
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
+		return count;
+		
+	}
+	@Override   //訂單
+	public Set<OrderVO> getOrderByC(String c_id) {		
+		Set<OrderVO> set = login_in(c_id).getOrders();
+		return set;
+	}
+	@Override   //訂單
+	public Set<FavoriteVO> getFavoriteByC(String c_id) {		
+		Set<FavoriteVO> set = login_in(c_id).getFavorites();
+		return set;
+	}
+	@Override   //訂單
+	public Set<BlacklistVO> getBlackByC(String c_id) {		
+		Set<BlacklistVO> set = login_in(c_id).getBlacklists();
+		return set;
+	}
+
+	
 	public static void main(String args[]){		
 		CdataDAO  dao = new CdataDAO();
 		
@@ -253,5 +307,6 @@ public class CdataDAO implements CdataDAO_interface{
 		
 //		dao.delete("Snoopy");
 	}
+
 
 }
