@@ -8,7 +8,9 @@ import java.util.Set;
 
 import org.json.simple.JSONValue;
 
+import toolman.mpro.model.MProService;
 import toolman.mpro.model.MProVO;
+import toolman.order.model.OrderVO;
 
 public class MdataService {
 
@@ -71,7 +73,9 @@ public class MdataService {
 
 		return dao.findByPrimaryKey(m_id);
 	}
-
+	public Set<OrderVO> getOrderByM(Integer m_id) {//訂單
+		return dao.getOrderByM(m_id);
+	}
 	public void update(MdataVO mdataVO) {
 		dao.update(mdataVO);
 	}
@@ -88,6 +92,7 @@ public class MdataService {
 		return dao.getAll();
 	}
 
+	
 	public List<MdataVO> getCity(String m_city) {
 		return dao.getCity(m_city);
 	}
@@ -95,7 +100,10 @@ public class MdataService {
 	public List<MdataVO> SearchByCityAndMpro(String m_city, String m_pro) {
 		return dao.SearchByCityAndMpro(m_city, m_pro);
 	}
-
+	
+	public byte[] getImg(Integer m_id) {
+		return dao.getImg(m_id);
+	}
 	
 	public String getAllJson() {
 		List<MdataVO> mdatas = dao.getAll();
@@ -112,7 +120,6 @@ public class MdataService {
 		return JSONValue.toJSONString(jList);
 	}
 	
-	//首頁搜尋
 	public String SearchByCityAndMproJson(String m_city, String input) {
 		List<MdataVO> mdatas = dao.SearchByCityAndMpro(m_city, input);
 		List<Map> jList = new LinkedList<Map>();
@@ -129,6 +136,87 @@ public class MdataService {
 			List<String> pList = new LinkedList<String>();
 			for (MProVO aMpro : mpros) {
 				pList.add(aMpro.getM_pro());
+				jContent.put("pro", pList);
+			}
+			jList.add(jContent);
+		}
+		return JSONValue.toJSONString(jList);
+	}
+	
+	//首頁搜尋改用stored procedure搜尋
+	public String getMasterBySP(String city, String district, String input) {
+		List<Object[]> mdatas = dao.search(city, district, input);
+		MProService mproSvc = new MProService();
+		List<Object> mpros;
+		
+		List<Map> jList = new LinkedList<Map>();
+		for (Object[] aMata : mdatas) {
+			Map jContent = new HashMap();
+			jContent.put("id",aMata[0]);
+			jContent.put("bname",aMata[1]);
+			jContent.put("mname",aMata[2]);
+			jContent.put("city",aMata[3]);
+			jContent.put("district",aMata[4]);
+			jContent.put("bdes",aMata[5]);
+			jContent.put("rating",aMata[6]);
+			jContent.put("finish",aMata[7]);
+			jContent.put("sta",aMata[8]);
+			List<String> pList = new LinkedList<String>();
+			mpros = mproSvc.getByMidSp(new Integer((int) aMata[0]));
+			for (Object aMpro : mpros) {
+				pList.add(aMpro.toString());
+				jContent.put("pro", pList);
+			}
+			jList.add(jContent);
+		}
+		return JSONValue.toJSONString(jList);
+	}
+	
+	public String getMproBySP(String pro, String city, String district, String bname) {
+		List<Object[]> mdatas = dao.searchByMpro(pro, city, district, bname);
+		MProService mproSvc = new MProService();
+		List<Object> mpros;
+		List<Map> jList = new LinkedList<Map>();
+		for (Object[] aMata : mdatas) {
+			Map jContent = new HashMap();
+			jContent.put("id",aMata[1]);
+			jContent.put("bname",aMata[2]);
+			jContent.put("mname",aMata[3]);
+			jContent.put("city",aMata[4]);
+			jContent.put("district",aMata[5]);
+			jContent.put("bdes",aMata[6]);
+			jContent.put("rating",aMata[7]);
+			jContent.put("finish",aMata[8]);
+			List<String> pList = new LinkedList<String>();
+			mpros = mproSvc.getByMidSp(new Integer((int) aMata[1]));
+			for (Object aMpro : mpros) {
+				pList.add(aMpro.toString());
+				jContent.put("pro", pList);
+			}
+			jList.add(jContent);
+		}
+		return JSONValue.toJSONString(jList);
+	}
+	
+	public String getAllBySP() {
+		List<Object[]> mdatas = dao.searchAll();
+		MProService mproSvc = new MProService();
+		List<Object> mpros;
+		List<Map> jList = new LinkedList<Map>();
+		for (Object[] aMata : mdatas) {
+			Map jContent = new HashMap();
+			jContent.put("pro", aMata[0]);
+			jContent.put("id",aMata[1]);
+			jContent.put("bname",aMata[2]);
+			jContent.put("mname",aMata[3]);
+			jContent.put("city",aMata[4]);
+			jContent.put("district",aMata[5]);
+			jContent.put("rating",aMata[7]);
+			jContent.put("finish",aMata[8]);
+			List<String> pList = new LinkedList<String>();
+			mpros = mproSvc.getByMidSp(new Integer((int) aMata[0]));
+			for (Object aMpro : mpros) {
+				pList.add(aMpro.toString());
 				jContent.put("pro", pList);
 			}
 			jList.add(jContent);

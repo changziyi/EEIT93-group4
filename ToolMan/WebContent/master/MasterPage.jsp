@@ -7,8 +7,8 @@
 <title>${mdataVO.b_name}</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/css/jquery.fileuploader-theme-thumbnails.css" media="all">
-<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/css/jquery.fileuploader.css" media="all">
+<%-- <link rel="stylesheet" href="${pageContext.servletContext.contextPath}/css/jquery.fileuploader-theme-thumbnails.css" media="all"> --%>
+<%-- <link rel="stylesheet" href="${pageContext.servletContext.contextPath}/css/jquery.fileuploader.css" media="all"> --%>
 <link rel="stylesheet" href="${pageContext.servletContext.contextPath}/css/bootstrap.min.css">
 <script src="${pageContext.servletContext.contextPath}/js/jquery-3.2.1.min.js"></script>
 <script src="${pageContext.servletContext.contextPath}/js/bootstrap.min.js"></script>
@@ -88,18 +88,21 @@ input[type="file"] {
 				</form>
 			</div> -->
 			
-			<div id='div1'></div>
-			<form name="myData" action="TestFormData" enctype="multipart/form-data">
-				<div><input type="file" id="file" name="file[]" multiple="multiple"></div>
-				<div class="workImgArea">作品名稱　<input type="text" name="workname" required></div>
-				<div class="workImgArea">完工日期　<input type="text" name="worktime" required></div>
-				<div class="workImgArea">作品描述　<textarea name="workdes"></textarea></div>
-				<button type="button" id="buttonUpload">上傳</button>
-			</form>
+			<c:if test="${LoginOK.m_id == mdataVO.m_id}">
+				<div id='div1'></div>
+				<form name="myData" action="TestFormData" enctype="multipart/form-data">
+					<div><input type="file" id="file" name="file[]" multiple="multiple"></div>
+					<div class="workImgArea">作品名稱　<input type="text" name="workname" required></div>
+					<div class="workImgArea">完工日期　<input type="text" name="worktime" required></div>
+					<div class="workImgArea">作品描述　<textarea name="workdes"></textarea></div>
+					<button type="button" id="buttonUpload">上傳</button>
+				</form>
+			</c:if>
 			<div>
 				<c:forEach var="aWork" items="${mdataVO.works}">
-<%-- 					${aWork.work_id} --%>
-					<img height="200px" src='${pageContext.servletContext.contextPath}/master/master.do?type=work&image=${mdataVO.m_id}'/>
+					<c:forEach var="a" items="${aWork.workims}">
+						<img height="450px" src='${pageContext.servletContext.contextPath}/master/master.do?type=work&image=${a.im_id}'/>
+					</c:forEach>
 				</c:forEach>
 			</div>
     
