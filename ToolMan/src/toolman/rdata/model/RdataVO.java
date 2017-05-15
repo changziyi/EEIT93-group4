@@ -1,11 +1,12 @@
 package toolman.rdata.model;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 public class RdataVO implements java.io.Serializable{
 	
 	private Integer r_id;
-	private Date r_date;
+	private Timestamp r_date;
 	private String c_id;
 	private Integer m_id;
 	private String p_summary;
@@ -21,10 +22,10 @@ public class RdataVO implements java.io.Serializable{
 	public void setR_id(Integer r_id) {
 		this.r_id = r_id;
 	}
-	public Date getR_date() {
+	public Timestamp getR_date() {
 		return r_date;
 	}
-	public void setR_date(Date r_date) {
+	public void setR_date(Timestamp r_date) {
 		this.r_date = r_date;
 	}
 	public String getC_id() {
