@@ -1,6 +1,8 @@
 package toolman.cdata.controller;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -24,7 +26,7 @@ public class loginoutServlet extends HttpServlet {
 		doGet(request, response);
 		
 		request.getSession().removeAttribute("LoginOK");
-		request.getSession().removeAttribute("");
+		RequestDispatcher failureView = request.getRequestDispatcher(request.getContextPath()+"/cdata/login_in.jsp");
 	}
 
 }

@@ -192,6 +192,7 @@ h2 {
 						scope="public_profile,email"></div>						
 				   </div>
 				   	<div style="visibility:hidden" id="status"></div>
+				   	
 	</form>
 		</div>
 	</div>

@@ -1,0 +1,28 @@
+input {
+    outline: medium none;
+}
+input[type="search"] {
+	font-family:Microsoft JhengHei;
+    font-size: 100%;
+}
+input[type="search"] {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-sizing: content-box;
+    padding: 6px 10px 6px 10px;
+    transition: all 0.5s ease 0s;
+    width: 90px;
+}
+input[type="search"]:focus {
+    background-color: #fff;
+    border-color: #6dcff6;
+    box-shadow: 0 0 5px rgba(109, 207, 246, 0.5);
+    width: 200px;
+}
+/* input:-moz-placeholder { */
+/*     color: #999; */
+/* } */
+input::-webkit-input-placeholder { 
+	font-style:italic;
+	color:#B8B8B8; 
+}
