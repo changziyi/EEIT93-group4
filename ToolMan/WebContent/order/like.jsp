@@ -72,7 +72,7 @@
 	
 		<tr align='center' valign='middle'>
 			<td>${favoriteVO.f_id}</td>
-			<td>${favoriteVO.mdataVO.b_name}</td>
+			<td><a href='${pageContext.servletContext.contextPath}/master/masterPage.do?m_id=${favoriteVO.mdataVO.m_id}'>${favoriteVO.mdataVO.b_name}</a></td>
 			<td>${favoriteVO.cdataVO.c_id}</td>
 			
 			
@@ -95,6 +95,8 @@
  </div>
  
     <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/cdata/CdataOrderServlet.do" >
+    
+    
        <input type="submit" value="消費者最愛">
         <input type="hidden" name="c_id" value="Snoopy">
         <input type="hidden" name="action" value="myLike">

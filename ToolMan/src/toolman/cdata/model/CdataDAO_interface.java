@@ -19,13 +19,14 @@ public interface CdataDAO_interface {
 	public List<CdataVO> getAll();
 	public CdataVO cdata_des(String c_id);
 
-	public Integer updatecustomerSname(Integer c_id, String s_name);
+	
 	
     public Set<OrderVO> getOrderByC(String c_id);//訂單
     public Set<FavoriteVO> getFavoriteByC(String c_id);//訂單
     public Set<BlacklistVO> getBlackByC(String c_id);//訂單
 
-
-	public List<CdataVO> getBySname(String s_name);
-	public Integer updatecustomerSname(String c_id, String s_name);
+    public CdataVO getById(String c_id);//benny
+	public List<CdataVO> getBySname(String s_name);//benny
+	public int updatecustomerSname(String c_id, String s_name);//benny
+	public int updatecustomerSacnote(String c_id, String sa_cnote);//benny
 }

@@ -15,12 +15,6 @@
             <column name="m_id" />
         </many-to-one>
         
-        <set name="oproVO" table="opro" lazy="false" cascade="all"  inverse="true"  order-by="o_proid asc">			
-			<key>
-				<column name="m_proid" />
-			</key>
-			<one-to-many class="toolman.opro.model.OproVO" />
-		</set>
         
         
     </class>

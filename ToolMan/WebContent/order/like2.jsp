@@ -68,14 +68,14 @@
 	
 	
 		<tr align='center' valign='middle'>
-			<td>${favoriteVO.mdataVO.b_name}</td>
+			<td><a href='${pageContext.servletContext.contextPath}/master/masterPage.do?m_id=${favoriteVO.mdataVO.m_id}'>${favoriteVO.mdataVO.b_name}</a></td>
 			<td>${favoriteVO.cdataVO.c_id}</td>
 			
 			
 			
 			<td>
 			
-			  <FORM METHOD="post" ACTION="Favorite.do"> 
+			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/order/Favorite.do"> 
  			    <input type="submit" value="刪除">
  			    <input type="hidden" name="f_id" value="${favoriteVO.f_id}">
 		    <input type="hidden" name="action"value="delete"></FORM> 

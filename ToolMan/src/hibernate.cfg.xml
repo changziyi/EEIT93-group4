@@ -13,7 +13,8 @@
 		<property name="hibernate.connection.password">sa123456</property>
         
 		<!--SQL方言,以下使用SQLServer -->
-		<property name="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</property>
+<!-- 		<property name="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</property> -->
+		<property name="hibernate.dialect">hibernate.util.SQLServer2012DialectWithNvarchar</property>
 
 		<!--是否要顯示實際操作資料庫時的SQL -->
 		<property name="hibernate.show_sql">true</property>
@@ -39,7 +40,7 @@
 		<mapping resource="toolman/building/model/building.hbm.xml" />
 		<mapping resource="toolman/favorite/model/favorite.hbm.xml" />
 		<mapping resource="toolman/blacklist/model/blacklist.hbm.xml" />
-
+		<mapping resource="toolman/workim/model/workim.hbm.xml" />
 
 	</session-factory>
 	

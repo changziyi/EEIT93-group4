@@ -37,10 +37,11 @@
     </div>
     <ul class="nav navbar-nav">
       <li class="active"><a href="#">Home</a></li>
-      <li><a href="listAllEmp.jsp">訂單</a></li>
-      <li><a href="like.jsp">收藏店家</a></li>
-      <li><a href="dislike.jsp">黑名單</a></li>
+ <li><a href="<%=request.getContextPath()%>/order/listAllEmp.jsp">訂單</a></li>
+      <li><a href="<%=request.getContextPath()%>/order/like.jsp">收藏店家</a></li>
+      <li><a href="<%=request.getContextPath()%>/order/dislike.jsp">黑名單</a></li>
       <li><a href="<%=request.getContextPath()%>/master/List.jsp">搜尋店家</a></li>
+      
       
     </ul>
   </div>
@@ -79,7 +80,7 @@
 			
 			<td>
 			
-			  <FORM METHOD="post" ACTION="Dislike.do"> 
+			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/order/Dislike.do"> 
  			    <input type="submit" value="刪除">
  			    <input type="hidden" name="bk_id" value="${blacklistVO.bk_id}">
 		    <input type="hidden" name="action"value="delete"></FORM> 

@@ -25,4 +25,12 @@ public interface MdataDAO_interface {
     public Set<OrderVO> getOrderByM(Integer m_id);//訂單
 
 	public List<MdataVO> getBySname(String s_name);//by Benny
+	
+	//預存程序
+	public List<Object[]> search(String city, String district, String input);
+	public List<Object[]> searchByMpro(String pro, String city, String district, String bname);
+	
+	public List<Object[]> searchAll(); //C車getAll
+	public byte[] getImg(Integer m_id); //C車讀取圖片
+	
 }
