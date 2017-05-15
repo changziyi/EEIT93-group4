@@ -101,11 +101,8 @@ input[type="file"] {
 			<div>
 				<c:forEach var="aWork" items="${mdataVO.works}">
 					<c:forEach var="a" items="${aWork.workims}">
-<<<<<<< HEAD
 						<img height="450px" src='${pageContext.servletContext.contextPath}/master/master.do?type=work&image=${a.im_id}'/>
-=======
 						<p>${a.im_id}</p>
->>>>>>> branch 'master' of https://github.com/changziyi/EEIT93-group4.git
 					</c:forEach>
 				</c:forEach>
 			</div>
