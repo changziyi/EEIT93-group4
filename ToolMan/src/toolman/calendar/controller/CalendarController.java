@@ -44,7 +44,7 @@ public class CalendarController extends HttpServlet {
 		
 		String calendarjson = request.getParameter("calendarjson");
 		
-//		Map<String,String> map = new HashMap<String,String>();
+		Map<String,String> map = new HashMap<String,String>();
 		
 		
 		
