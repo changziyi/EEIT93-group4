@@ -143,10 +143,11 @@
 		$('#external-events2>div').on('click',assignrandom);
 		draggableevent();
 		$('#selectmenu>input').on('change',repeatingevent);// end select change
+		buildcalendar();	
 		/* initialize the calendar
 		-----------------------------------------------------------------*/
 		
-		buildcalendar();	
+		
 	});// end ready
 	
 	function assignrandom(event){
@@ -305,7 +306,7 @@
 			}],//end repeating event
 		});// end full calendar
 	}//end create calendar
-	function checkoverlapping(event){
+	function checkoverlapping(event){// no event can exists twice in 1 day, and no event can be added under all day unavailable
 		
 		var events = $('#calendar').fullCalendar('clientEvents');
 		if(events.length!=1){

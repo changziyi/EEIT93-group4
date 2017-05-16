@@ -286,12 +286,16 @@ public class RdataJDBCDAO implements RdataDAO_interface {
 		return list;
 	}
 
-	public static void main(String args[]) throws IOException {
+//	public static void main(String args[]) throws IOException {
 
-		RdataJDBCDAO dao = new RdataJDBCDAO();
+//		RdataJDBCDAO dao = new RdataJDBCDAO();
 
 		/************************** 測試新增 ****************************/
+<<<<<<< HEAD
 		RdataVO rdataVO = new RdataVO();
+=======
+//		RdataVO rdataVO = new RdataVO();
+>>>>>>> branch 'master' of https://github.com/changziyi/EEIT93-group4.git
 //		
 //		rdataVO.setR_date(java.sql.Date.valueOf("2017-02-08"));
 //		rdataVO.setC_id("1001");
@@ -341,21 +345,21 @@ public class RdataJDBCDAO implements RdataDAO_interface {
 //				+ "---------------------------------------------------------");
 
 		/************************** 測試多筆查詢 ****************************/
-		 List<RdataVO> list =dao.getAll();
-		 for(RdataVO mda : list){
-		System.out.print(mda.getR_id() + ",");
-		System.out.print(mda.getR_date() + ",");
-		System.out.print(mda.getC_id() + ",");
-		System.out.print(mda.getM_id() + ",");
-		System.out.print(mda.getP_summary() + ",");
-		System.out.print(mda.getP_content() + ",");
-		System.out.print(mda.getS_name() + ",");
-		System.out.print(mda.getSa_rnote() + ",");
-		System.out.print(mda.getD_id());
-		
-		 System.out.println("---------------------------------------------------------"
-		 + "---------------------------------------------------------");
-		 }
+//		 List<RdataVO> list =dao.getAll();
+//		 for(RdataVO mda : list){
+//		System.out.print(mda.getR_id() + ",");
+//		System.out.print(mda.getR_date() + ",");
+//		System.out.print(mda.getC_id() + ",");
+//		System.out.print(mda.getM_id() + ",");
+//		System.out.print(mda.getP_summary() + ",");
+//		System.out.print(mda.getP_content() + ",");
+//		System.out.print(mda.getS_name() + ",");
+//		System.out.print(mda.getSa_rnote() + ",");
+//		System.out.print(mda.getD_id());
+//		
+//		 System.out.println("---------------------------------------------------------"
+//		 + "---------------------------------------------------------");
+//		 }
 
-	}
+//	}
 }

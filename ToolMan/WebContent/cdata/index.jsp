@@ -121,7 +121,7 @@ $(function(){
 					
 					<li><a href="<%=request.getContextPath()%>/order/listAllEmp.jsp">我的消費</a></li>
 					
-					<li><a href="#">黑名單</a></li>							
+					<li><a href="#">黑名單</a></li>						
 				</ul>			
 			</li>
 		</ul>		
@@ -138,5 +138,18 @@ $(function(){
 <a href="<c:url value='test2.jsp' />">測試登入2</a><p/>
      
 </div>
+<<<<<<< HEAD
+=======
+ <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/cdata/CdataOrderServlet.do" >
+ 
+ 
+       <input type="submit" value="消費者訂單">
+        <input type="hidden" name="c_id" value="Snoopy">
+        <input type="hidden" name="action" value="listOrder">
+     </FORM>
+     <FORM METHOD="post" ACTION="../cdata/CdataOrderServlet.do />" >
+        <input type="submit" value="登出">	
+         </FORM>
+>>>>>>> branch 'master' of https://github.com/changziyi/EEIT93-group4.git
 </body>
 </html>
