@@ -41,7 +41,7 @@ public class CalendarDAO implements CalendarDAO_Interface {
 	}
 
 	@Override
-	public Integer deleteByM(Integer m_id) {
+	public void deleteByM(Integer m_id) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Integer count = 0;
 		
