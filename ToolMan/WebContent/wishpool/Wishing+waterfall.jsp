@@ -12,7 +12,7 @@
 	pageContext.setAttribute("new_date", new_date);
 	
 	AdService adSvc = new AdService();
-	List<AdVO> gabs = adSvc.getAllBySname("廣告結束");
+	List<AdVO> gabs = adSvc.getAllBySname("廣告進行中");
 	pageContext.setAttribute("get_sname", gabs);
 	
 	
