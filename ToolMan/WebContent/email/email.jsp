@@ -18,6 +18,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<link rel="Shortcut Icon" href="${pageContext.servletContext.contextPath}/favicon.ico" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>email Page</title>
 
@@ -106,6 +107,8 @@
 								時間：${emailVO.ms_date}
 								<br> 
 								狀態：${emailVO.s_name}
+								<br> 
+								垃圾桶：${emailVO.ms_trash}
 								
 							</div>
 						</c:forEach>

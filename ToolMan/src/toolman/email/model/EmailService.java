@@ -51,6 +51,7 @@ public class EmailService {
 			EmailContent.put("Ms_summary", aEmail.getMs_summary());
 			EmailContent.put("Ms_content", aEmail.getMs_content());
 			EmailContent.put("S_name", aEmail.getS_name());
+			EmailContent.put("Ms_trash", aEmail.getMs_trash());
 			MailList.add(EmailContent);
 		}
 		return JSONValue.toJSONString(MailList);
@@ -73,6 +74,7 @@ public String getOneMailJson(Integer ms_id) {
 		EmailContent.put("Ms_summary", aEmail.getMs_summary());
 		EmailContent.put("Ms_content", aEmail.getMs_content());
 		EmailContent.put("S_name", aEmail.getS_name());
+		EmailContent.put("Ms_trash", aEmail.getMs_trash());
 		OneMailList.add(EmailContent);
 	}
 	return JSONValue.toJSONString(OneMailList);

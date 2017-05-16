@@ -110,6 +110,7 @@ public class EmailServlet extends HttpServlet {
 		emailVO.setMs_content(ms_content);
 		emailVO.setMs_date(ms_date);
 		emailVO.setS_name(false);
+		emailVO.setMs_trash(false);
 		emailserv.insert(emailVO);
 		
 		System.out.println("msid: " + emailVO.getMs_id());
