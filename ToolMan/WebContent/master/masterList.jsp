@@ -4,27 +4,25 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>ToolMan</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="Shortcut Icon" href="${pageContext.servletContext.contextPath}/favicon.ico" />
 <link rel="stylesheet" href="${pageContext.servletContext.contextPath}/css/bootstrap.min.css">
 <link rel="stylesheet" href="${pageContext.servletContext.contextPath}/css/bootstrap-theme.min.css">
 <link rel="stylesheet" href="${pageContext.servletContext.contextPath}/css/theme.min.css">
-<script src="${pageContext.servletContext.contextPath}/js/jquery-3.2.1.min.js"></script>
-<script src="${pageContext.servletContext.contextPath}/js/bootstrap.min.js"></script>
-<script src="${pageContext.servletContext.contextPath}/js/jquery.search.twzipcode.min.js"></script>
+<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/nav/nav.css">
+<link href="${pageContext.servletContext.contextPath}/css/index/expandsearch.css" rel="stylesheet">
 <style>
 body {font-family:Microsoft JhengHei;}
 .county {width:80px;height:25px;vertical-align: top}
 .zipcode {display: none;}
-/* .district {display: none;} */
-/* .row {width:82%} */
-.mascontent {width:80%;}
+.form-control {margin:auto; width:120px; display:inline; font-family:Microsoft JhengHei; vertical-align: top}
 .proc {
 	width: 15px;
 	height: 3px;
 	padding: 5px;
-	margin-left:0;
- 	margin-right:5px;
+	margin-left: 0;
+ 	margin-right: 5px;
  	text-align: center;
 	border-radius: 3px;
 	color: #FFF5EE;
@@ -33,38 +31,95 @@ body {font-family:Microsoft JhengHei;}
 }
 .btn:hover {color: #FFF5EE;}
 .divpro {
-	margin-left:0;
-	margin-bottom:8px;
+	margin-left: 0;
+	margin-bottom: 8px;
 }
+.container {width: 90%;}
+.myDiv {position: relative; top: 100px}
+.pad {
+	padding-top: 15px; 
+	padding-left: 10px; 
+	padding-right: 30px; 
+	padding-bottom: 40px;
+}
+.result {
+	font-size: 25px;
+}
+.count {
+	color: #00BFFF;
+}
+.list-group {
+	margin-top: 50px;
+}
+.probtn {
+	font-size: 16px;
+}
+a {
+	color:White;
+}
+
 </style>
 </head>
 <body>
-		<form action="master.do" method="post">
-			<span id="twzipcode"></span><input type="text" name="input" value="${search.b_name}">
-			<button type="button" id="btn">ajax</button>
-			<input type="submit" value="找師傅">
-			<input type="hidden" name="action" value="SearchResult">
-			<input type="hidden" name="city" >
-			<input type="hidden" name="district" >
-		</form>
-		
+<jsp:include page="/nav/navigation.jsp" />
+	<div class="container myDiv">
 		<div>
 			city= ${search.m_city}
 			district = ${search.m_district}
 			pro= ${search.m_name}
 			input= ${search.b_name}
 		</div>
-		
-<!-- 	<input id="input-4" name="input-4" value="3" class="rating rating-loading" data-show-clear="false" data-show-caption="false" data-readonly="true"> -->
-	<div id="show" class="row"></div>
-
+		<div class="row">
+			<div class="col-xs-6 col-md-4">
+<!-- 					<h1 class="my-4">Shop Name</h1> -->
+					<div class="list-group">
+						<div id="resultcount" class="list-group-item"></div>
+						<div class="list-group-item">
+							<h3>專業</h3>
+							<div id="protag">
+								<a class="btn probtn" style="background:#FFA500">地板地磚</a>
+								<a class="btn probtn" style="background:#00BBFA">水電工程</a>
+								<a class="btn probtn" style="background:#5F9EA0">油漆工程</a>
+								<a class="btn probtn" style="background:#CD853F">木作工程</a><br>
+								<a class="btn probtn" style="background:#4682B4">防水抓漏</a>
+								<a class="btn probtn" style="background:#F08080">室內裝潢</a>
+								<a class="btn probtn" style="background:#FFBB33">照明工程</a>
+								<a class="btn probtn" style="background:#48D1CC">冷氣空調</a><br>
+								<a class="btn probtn" style="background:#FA8072">門窗工程</a>
+								<a class="btn probtn" style="background:#708090">泥作工程</a>
+							</div>
+						</div>
+						<div class="list-group-item">
+							<h3>地區</h3>
+							<span id="twzipcode"></span>
+<%-- 							<input type="text" name="input" value="${search.b_name}"> --%>
+							<input type="hidden" name="action" value="SearchResult">
+							<input type="hidden" name="city" >
+							<input type="hidden" name="district" >
+							<button type="button" id="btn" class="btn btn-xl">搜尋</button>
+						</div>
+					</div>
+                </div>
+			<div class="col-xs-12 col-sm-6 col-md-8"><div id="show" class="row"></div></div>
+		</div>
+	</div>
+	
+<script src="${pageContext.servletContext.contextPath}/js/jquery-3.2.1.min.js"></script>
+<script src="${pageContext.servletContext.contextPath}/js/bootstrap.min.js"></script>
+<script src="${pageContext.servletContext.contextPath}/js/jquery.search.twzipcode.min.js"></script>	
 <script>
 	
 // 	$(function() {
-		
+			
 		var docFragment = $(document.createDocumentFragment());
 		$.getJSON('MdataJsonServlet', {'city':'${search.m_city}','district':'${search.m_district}','input':'${search.b_name}','pro':'${search.m_name}','action':'searchjson'}, function(datas) {
 			show.empty();
+			
+			//json陣列數目，代表總共有幾個師傅
+			var mcount = datas.length;
+			var result = $('<div></div>').addClass('result').addClass('text-center').text('搜尋結果：總共找到 ' + mcount + ' 位師傅');
+			$('#resultcount').append(result);
+			
 			$.each(datas, function(i,master) {
 				var bImg = $('<img />').attr({'src':'${pageContext.servletContext.contextPath}/master/master.do?type=master&image=' + master.id,
 					'data-holder-rendered':'true'});
@@ -122,7 +177,7 @@ body {font-family:Microsoft JhengHei;}
 				}
 				divSpan.append([finish]);
 				var thumbnail = $('<div></div>').addClass('thumbnail').append([a,divSpan]);
-				var col = $('<div></div>').addClass('col-sm-6 col-md-4').append([thumbnail]);
+				var col = $('<div></div>').addClass('col-xs-6 col-sm-4').append([thumbnail]);
 				docFragment.append(col);
 			});
 			show.append(docFragment);
@@ -130,14 +185,18 @@ body {font-family:Microsoft JhengHei;}
 		
 		//專業LINK
 		$('#show').on('click', '.proc', function() {
+			var disval = district.val();
+			if (disval == '鄉鎮市區') {
+				disval = '';
+			}
 			link = $(this).text().trim();
 			console.log(link);
 			$.ajax({
 				url : 'master.do',
-				data: {'city':'${search.m_city}','pro':link,'action':'SearchResult'},
+				data: {'city':'${search.m_city}','district':disval,'pro':link,'action':'SearchResult'},
 				type : 'POST',
 				success : function(returnData) {
-					$(location).attr('href','searchResult.jsp');
+					$(location).attr('href','masterList.jsp');
 				}
 			});
 		});
@@ -146,7 +205,7 @@ body {font-family:Microsoft JhengHei;}
 		var district = $('input[name="district"]');
 		
 		$('#twzipcode').twzipcode({
-			'css': ['county', 'district', 'zipcode'],
+			'css': ['form-control', 'form-control', 'zipcode'],
 			'onCountySelect': function () {
 		    	city.attr('value', this.value);
 		    },
@@ -172,7 +231,7 @@ body {font-family:Microsoft JhengHei;}
 			data: {'city':city.val(),'district':disval,'input':input.val(),'action':'SearchResult'},
 			type : 'POST',
 			success : function(returnData) {
-				$(location).attr('href','searchResult.jsp');
+				$(location).attr('href','masterList.jsp');
 			}
 		});
 	});

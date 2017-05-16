@@ -5,6 +5,7 @@
 <%@ page import="java.util.Set" %>
 <%@ page import="toolman.order.model.*" %>
 <%	
+
  	Set<OrderVO> orders = (Set<OrderVO>) request.getAttribute("orders");
 	pageContext.setAttribute("orders2", orders);
 	
@@ -42,24 +43,34 @@ hr {
 .font_right{
 	float: right;
 }
+.cdata_box{
+	width:450px;
+	height:450px;
+	border: 1px solid red;
+	background-color:gary;
+	overflow: hidden;
+	float: right;
+	margin:15px;
+}
 </style>
+<div>
 	<div class="container">
-<!-- 		<div> -->
+		<div class="cdata_box"></div>
 		<div style="border: 2px solid gray;">
-		<div style="margin:10px;">
+		<div style="margin:15px;">
 			<img height="350px" wight="350px" src='${pageContext.servletContext.contextPath}/images/Plankton.jpg'/>
-		</div>
+			<a type="hidden" name="action" value="change_img"></a>
 		<div style="margin-left:15px; margin-top:15px;">
+		</div>
 			<p>姓名:&nbsp;${cdataVO.c_name}</p>
 			<p>地區:&nbsp;${cdataVO.c_city}&nbsp;${cdataVO.c_district}</p>
-		</div>
 		</div>
 		<ul class="nav nav-tabs" >
 			<li><a id="change-one" class="active" data-toggle="tab"  href="#home">評價</a></li>
 			<li><a id="change-two" data-toggle="tab" href="#menu2">媒合紀錄</a></li>
 		</ul>
- 
-		<div class="tab-content" style="background-color:gray;">
+<!--  style="background-color:gray;" -->
+		<div class="tab-content">
 			<div id="home" class="tab-pane fade in active">
 				<div>
 					<!--     background-color:red; -->
@@ -220,6 +231,7 @@ hr {
 				</div>
 			</div>
 		</div>
+	</div>
 	</div>
 </body>
 </html>
