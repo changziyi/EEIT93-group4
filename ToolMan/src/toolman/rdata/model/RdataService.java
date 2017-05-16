@@ -1,5 +1,6 @@
 package toolman.rdata.model;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import toolman.rdata.model.RdataVO;
@@ -14,7 +15,7 @@ public class RdataService {
 	
 	
 	
-	public RdataVO addRdata(java.sql.Date r_date, String c_id, Integer m_id, String p_summary, String p_content,
+	public RdataVO addRdata(Timestamp r_date, String c_id, Integer m_id, String p_summary, String p_content,
 			String s_name, String sa_rnote, Integer d_id ) {
 
 		RdataVO rdataVO = new RdataVO();
@@ -32,7 +33,7 @@ public class RdataService {
 		return rdataVO;
 	}
 
-	public RdataVO updateRdata(Integer r_id,java.sql.Date r_date, String c_id, Integer m_id, String p_summary, String p_content,
+	public RdataVO updateRdata(Integer r_id,Timestamp r_date, String c_id, Integer m_id, String p_summary, String p_content,
 			String s_name, String sa_rnote, Integer d_id ) {
 
 		RdataVO rdataVO = new RdataVO();

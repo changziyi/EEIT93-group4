@@ -122,7 +122,7 @@ $(function(){
 					
 					<li><a href="<%=request.getContextPath()%>/order/listAllEmp.jsp">我的消費</a></li>
 					
-					<li><a href="#">黑名單</a></li>							
+					<li><a href="#">黑名單</a></li>						
 				</ul>			
 			</li>
 		</ul>		
@@ -145,7 +145,9 @@ $(function(){
        <input type="submit" value="消費者訂單">
         <input type="hidden" name="c_id" value="Snoopy">
         <input type="hidden" name="action" value="listOrder">
-        
      </FORM>
+     <FORM METHOD="post" ACTION="../cdata/CdataOrderServlet.do />" >
+        <input type="submit" value="登出">	
+         </FORM>
 </body>
 </html>

@@ -4,11 +4,19 @@
 <html>
 <head>
 	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!-- jquery -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>	
+
+<!--full calendar-->
+	<link rel='stylesheet' href='../js/fullcalendar.min.css' />
+	<script src='../js/jquery-3.2.1.min.js'></script>
+	<script src='../js/moment.min.js'></script>
+	<script src='../js/fullcalendar.min.js'></script>
+<!--full calendar-->
+
+<!--  jquery  -->
+<!-- 	already exists in full calendar<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>	 -->
 	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-<!-- jquery -->
+<!-- 	already at the end of the body<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script> -->
+<!--  jquery -->
 <!-- bootstrap -->
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -23,8 +31,13 @@
 	<link href="../js/smartform/smart_wizard.min.css" rel="stylesheet" type="text/css" /> 
 	<link href="../js/smartform/smart_wizard_theme_arrows.min.css" rel="stylesheet" type="text/css" />
 <!-- smart_wizard -->
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">	
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">	
+<!-- smart_wizard -->
+
+
+
+
 <%--open while login service is combined --%>
 <%-- 	<c:if test="${empty LoginOK}"> --%>
 <%-- 		<c:redirect url="/_02_login/login.jsp" /> --%>
@@ -33,6 +46,72 @@
 <!-- login please -->
 	
 	<style>
+/* calendar */
+		body {
+		margin-top: 40px;
+		text-align: center;
+		font-size: 14px;
+		font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
+	}
+		
+	#wrap {
+		width: 1500px;
+		margin: 0 auto;
+	}
+		
+	#external-events {
+		float: left;
+		width: 300px;
+		height:500px;
+		padding: 0 10px;
+		border: 1px solid #ccc;
+		background: #eee;
+		text-align: left;
+	}
+	.repeatingevent {
+ 		float: left; 
+ 		width: 100px;
+		padding: 0 10px;
+		border: 1px solid #ccc;
+		background: #eee;
+		text-align: left;
+	}
+		
+	#external-events h4 {
+		font-size: 16px;
+		margin-top: 0;
+		padding-top: 1em;
+	}
+		
+	#external-events .fc-event {
+		margin: 10px 0;
+		cursor: pointer;
+	}
+
+		
+	#external-events p {
+		margin: 1.5em 0;
+		font-size: 11px;
+		color: #666;
+	}
+		
+	#external-events p input {
+		margin: 0;
+		vertical-align: middle;
+	}
+
+	#calendar {
+		float: right;
+		width: 900px;
+	}
+	.trashcan {
+	
+		margin:100px;
+		width:900px
+		border: 1px solid #ccc;
+
+	}
+/* calendar */	
 		#map{
 		height:100px;
 		width:100px;
@@ -78,6 +157,12 @@
 	.labelstyle{
 		text-align:right;
 	}
+	.fc-event{
+		width:100px;
+		display:table;
+		margin:auto;
+		
+	}
 	</style>
 
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -106,8 +191,77 @@
       
          <div>
         	 <!--  step1  -->
-                <div id="step-1" class="">
-                
+         <div id="step-1" class="">
+                <div id='wrap'>
+			<!-- draggable -->
+		<div id='external-events'  style="margin-top:46px;">
+			<h4 style="margin-left:20%;">預約時間</h4>
+			<div id='external-events2' style="margin-left:20%;">
+				<div class='fc-event' data-id="morning"data-start="01:00" data-end='08:00'>早上不可預約</div>
+				<div class='fc-event' data-id="noon"data-start="12:00" data-end='06:00'>下午不可預約</div>
+				<div class='fc-event' data-id="night"data-start="18:00" data-end='06:00'>晚上不可預約</div>
+				<div class='fc-event' id="alldayevent" data-id="allday"data-start="00:00" data-end='24:00'>整天不可預約</div>
+				
+			</div>
+		<!-- 			<p> -->
+<!-- 				<input type='checkbox' id='drop-remove' /> -->
+<!-- 				<label for='drop-remove'>remove after drop</label> -->
+<!-- 			</p> -->
+	
+			<div class='.repeatingevent'id="selectmenu" style="margin-left:20%;"> 
+				<table style="border-collapse: collapse; display: inline; ">
+<!-- 				beware that value is for dow, so it must be plain number-->
+					<tr><td colspan="4">每週一不可預約</td><td></td></tr>
+					<tr><td ><input type="checkbox" name="repeatingboxmorning" value="1" >早上</td>
+					<td><input type="checkbox" name="repeatingboxnoon" value="1" >下午</td>
+					<td><input type="checkbox" name="repeatingboxnight" value="1" >晚上</td>
+					<td><input type="checkbox" name="repeatingbox" value="1" >整天</td></tr>
+					
+					<tr><td colspan="4">每週二不可預約</td><td></td></tr>
+					<tr><td><input type="checkbox" name="repeatingboxmorning"value="2" >早上</td>
+					<td><input type="checkbox" name="repeatingboxnoon"value="2" >下午</td>
+					<td><input type="checkbox" name="repeatingboxnight"value="2" >晚上</td>
+					<td><input type="checkbox" name="repeatingbox"value="2" >整天</td></tr>
+					
+					<tr><td colspan="4">每週三不可預約</td><td></td></td>
+					<tr><td><input type="checkbox" name="repeatingboxmorning" value="3" >早上</td>
+					<td><input type="checkbox" name="repeatingboxnoon" value="3" >下午</td>
+					<td><input type="checkbox" name="repeatingboxnight" value="3" >晚上</td>
+					<td><input type="checkbox" name="repeatingbox" value="3" >整天</td></tr>
+					
+					<tr><td colspan="4">每週四不可預約</td><td></td></td>
+					<tr><td><input type="checkbox" name="repeatingboxmorning" value="4" >早上</td>
+					<td><input type="checkbox" name="repeatingboxnoon" value="4" >下午</td>
+					<td><input type="checkbox" name="repeatingboxnight" value="4" >晚上</td>
+					<td><input type="checkbox" name="repeatingbox" value="4" >整天</td></tr>
+					
+					<tr><td colspan="4">每週五不可預約</td><td></td></td>
+					<tr><td><input type="checkbox" name="repeatingboxmorning" value="5" >早上</td>
+					<td><input type="checkbox" name="repeatingboxnoon" value="5" >下午</td>
+					<td><input type="checkbox" name="repeatingboxnight" value="5" >晚上</td>
+					<td><input type="checkbox" name="repeatingbox" value="5" >整天</td></tr>
+					
+					<tr><td colspan="4">每週六不可預約</td><td></td></td>
+					<tr><td><input type="checkbox" name="repeatingboxmorning" value="6" >早上</td>
+					<td><input type="checkbox" name="repeatingboxnoon" value="6" >下午</td>
+					<td><input type="checkbox" name="repeatingboxnight" value="6" >晚上</td>
+					<td><input type="checkbox" name="repeatingbox" value="6" >整天</td></tr>
+					
+					<tr><td colspan="4">每週日不可預約</td><td></td></td>
+					<tr><td><input type="checkbox" name="repeatingboxmorning" value="0" >早上</td>
+					<td><input type="checkbox" name="repeatingboxnoon" value="0" >下午</td>
+					</td><td><input type="checkbox" name="repeatingboxnight" value="0" >晚上</td>
+					<td><input type="checkbox" name="repeatingbox" value="0" >整天</td></tr>
+					
+				</table>
+			</div>
+		</div>
+
+
+		<div id='calendar' style="float:left;"></div>
+	
+		<div style='clear:both'></div>
+	</div>
                 <form class="form-inline">
 				             <div class="form-group" >
 				              <label >Choose Theme:</label>
@@ -308,23 +462,45 @@
 
 
 
-	<script
-	  src="https://code.jquery.com/jquery-3.2.1.min.js"
-	  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-	  crossorigin="anonymous"></script>
+<!-- 	<script -->
+<!-- 	  src="https://code.jquery.com/jquery-3.2.1.min.js" -->
+<!-- 	  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" -->
+<!-- 	  crossorigin="anonymous"></script> -->
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	
 <script>
+//calendar
+var selectmenu=null;
+var dragevent = null;
+var randomnumber =null;
+var eventstart = $(this).data('start');
+var eventend = $(this).data('end');
+var eventidglobe =null;
+
 	var coordinate=null;
 	var googlecoordinate=null;
 	var o_location=null;
+	
 	$( function() {
+        /* calendar
+		-----------------------------------------------------------------*/
 		
+		$('#external-events2>div').on('click',assignrandom);
+		draggableevent();
+		$('input[name="repeatingbox"]').on('change',repeatingevent);// end select change
+		$('input[name="repeatingboxmorning"]').on('change',repeatingeventmorning);// end select change
+		$('input[name="repeatingboxnoon"]').on('change',repeatingeventnoon);// end select change
+		$('input[name="repeatingboxnight"]').on('change',repeatingeventnight);// end select change
+		buildcalendar();
+		/* calendar
+		-----------------------------------------------------------------*/
+
 	    $( "#datepicker" ).datepicker();
 	    
 	    //google map
-	    googlecoordinate = 'https://maps.googleapis.com/maps/api/geocode/json?'
+// 	    googlecoordinate = 'https://maps.googleapis.com/maps/api/geocode/json?'
 	   
-	    $('#o_addr').on('blur',getCoordinate);	
+// 	    $('#o_addr').on('blur',getCoordinate);	
 	    
 	      
 	            // Smart Wizard events
@@ -410,44 +586,368 @@
                 $('#smartwizard').smartWizard("theme", $(this).val());
                 return true;
             })
+ 
+		//calendar
 	});	    
 	
-	function getCoordinate(){
-		var a1 = $('#o_city').val();
-		var a2 = $('#o_district').val();
-		var a3 = $('#o_addr').val();
-		o_location =a1+a2+a3;
-		$.getJSON(googlecoordinate,{'address':o_location},function(data){
-			for(var i=0;i<data.results.length;i++) {
-		        var location = data.results[i].geometry.location;
-		        alert(location);
-		        }
-		//data 就是server端回傳的結果
-		coordinate = location;
-		initMap();
-			});
-// 		
+// 	function getCoordinate(){
+// 		var a1 = $('#o_city').val();
+// 		var a2 = $('#o_district').val();
+// 		var a3 = $('#o_addr').val();
+// 		o_location =a1+a2+a3;
+// 		$.getJSON(googlecoordinate,{'address':o_location},function(data){
+// 			for(var i=0;i<data.results.length;i++) {
+// 		        var location = data.results[i].geometry.location;
+// 		        alert(location);
+// 		        }
+// 		//data 就是server端回傳的結果
+// 		coordinate = location;
+// 		initMap();
+// 			});
+// // 		
 				
-	}
-	 function initMap() {
-		 var uluru =null;
-	        if(coordinate==null){ 
-	        	uluru={ "lat" : 25.0339639, "lng" : 121.5644722}
-	        }
-	        else{
-	        	uluru = coordinate;
-	        }           
+// 	}
+// 	 function initMap() {
+// 		 var uluru =null;
+// 	        if(coordinate==null){ 
+// 	        	uluru={ "lat" : 25.0339639, "lng" : 121.5644722}
+// 	        }
+// 	        else{
+// 	        	uluru = coordinate;
+// 	        }           
 	            
-	        var map = new google.maps.Map(document.getElementById('map'), {
-	          zoom: 15,
-	          center: uluru
-	        });
-	        var marker = new google.maps.Marker({
-	          position: uluru,
-	          map: map
-	        });
-	 	}
-	  
+// 	        var map = new google.maps.Map(document.getElementById('map'), {
+// 	          zoom: 15,
+// 	          center: uluru
+// 	        });
+// 	        var marker = new google.maps.Marker({
+// 	          position: uluru,
+// 	          map: map
+// 	        });
+// 	 	}
+	 
+	 /*-----------calendar---------*/
+	 function assignrandom(event){
+			
+			randomnumber = Math.random().toString();//not working after drop, because the real id is still the original
+			
+			eventstart = $(this).data('start');
+			eventend = $(this).data('end');
+			
+			}
+			function draggableevent(){
+				
+				$('#alldayevent').each(function() {
+					
+					
+					// 		var dragevent = {
+									
+					// 				id: $(this).text(),	
+					// 				title: $(this).text(), // use the element's text as the event title
+					// 				start: $(this).data('start'), // a start time (10am in this example)
+					// 				time: $(this).data('endd'), // an end time (2pm in this example)
+					// 			    stick: true
+					// 		}
+							// store data so the calendar knows to render an event upon drop
+					
+							$(this).data('event', {
+								
+								id: $(this).data('id'),
+								title: $(this).text(), // use the element's text as the event title
+								duration: $(this).data('end'), // an end time (2pm in this example)
+							    
+							   	
+								start: $(this).data('start'), // a start time (10am in this example)
+							    stick: true // maintain when user navigates (see docs on the renderEvent method)
+							});
+					
+							// make the event draggable using jQuery UI
+							$(this).draggable({		
+								zIndex: 999,
+								revert: true,      // will cause the event to go back to its
+								revertDuration: 0  //  original position after the drag
+							});
+							
+						});
+				
+				$('#external-events .fc-event').each(function() {
+
+			
+					$(this).data('event', {
+						
+						id: $(this).data('id'),
+						title: $(this).text(), // use the element's text as the event title
+						duration: $(this).data('end'), // an end time (2pm in this example)
+					   	
+						start: $(this).data('start'), // a start time (10am in this example)
+					    stick: true // maintain when user navigates (see docs on the renderEvent method)
+					});
+			
+					// make the event draggable using jQuery UI
+					$(this).draggable({		
+						zIndex: 999,
+						revert: true,      // will cause the event to go back to its
+						revertDuration: 0  //  original position after the drag
+					});
+					
+				});// end each
+			}//end draggable event
+			
+			function repeatingevent(){
+				$('#calendar').fullCalendar( 'removeEvents', 'repeateventeveryallday');
+				
+				selectmenu = [];
+				var checkedbox = $('input[name="repeatingbox"]:checked');
+				checkedbox.each(function () {
+					selectmenu.push($(this).val());
+				});//end each
+//		 		console.log(checkedbox);
+//		 		console.log(selectmenu);
+				var repeateventallday = 	{
+					//means delete all repeating items and rebuild new ones
+					id:"repeateventeveryallday",
+				    title:"每整天",
+				    start: '00:00', // a start time (10am in this example)				
+				    overlap: false,
+					end: '24:00', // an end time (2pm in this example)
+				    dow: selectmenu // Repeat monday and thursday
+				}
+				$('#calendar').fullCalendar( 'renderEvent', repeateventallday);
+				
+				//	 $('#calendar').fullCalendar( 'destroy' );
+				//	 buildcalendar();
+			}//end repeating event
+			
+			function repeatingeventmorning(){
+				$('#calendar').fullCalendar( 'removeEvents', 'repeateventmorning');
+				
+				selectmenu = [];
+				var checkedbox = $('input[name="repeatingboxmorning"]:checked');
+				checkedbox.each(function () {
+					selectmenu.push($(this).val());
+				});//end each
+//		 		console.log(checkedbox);
+//		 		console.log(selectmenu);
+				var repeateventmorning = 	{
+					//means delete all repeating items and rebuild new ones
+					id:"repeateventmorning",
+				    title:"每早",
+				    start: '01:00', // a start time (10am in this example)				
+				    overlap: true,
+					end: '09:00', // an end time (2pm in this example)
+				    dow: selectmenu // Repeat monday and thursday
+				}
+				$('#calendar').fullCalendar( 'renderEvent', repeateventmorning);
+				
+				//	 $('#calendar').fullCalendar( 'destroy' );
+				//	 buildcalendar();
+			}//end repeating event
+			
+			function repeatingeventnoon(){
+				$('#calendar').fullCalendar( 'removeEvents', 'repeateventeverynoon');
+				
+				selectmenu = [];
+				var checkedbox = $('input[name="repeatingboxnoon"]:checked');
+				checkedbox.each(function () {
+					selectmenu.push($(this).val());
+				});//end each
+//		 		console.log(checkedbox);
+//		 		console.log(selectmenu);
+				var repeateventnoon = 	{
+					//means delete all repeating items and rebuild new ones
+					id:"repeateventeverynoon",
+					
+				    title:"每下午",
+				    start: '12:00', // a start time (10am in this example)				
+				    overlap: true,
+					end: '18:00', // an end time (2pm in this example)
+				    dow: selectmenu, // Repeat monday and thursday
+				    
+				}
+				$('#calendar').fullCalendar( 'renderEvent', repeateventnoon);
+				
+				//	 $('#calendar').fullCalendar( 'destroy' );
+				//	 buildcalendar();
+			}//end repeating event
+			
+			function repeatingeventnight(){
+				$('#calendar').fullCalendar( 'removeEvents', 'repeateventnight');
+				
+				selectmenu = [];
+				var checkedbox = $('input[name="repeatingboxnight"]:checked');
+				checkedbox.each(function () {
+					selectmenu.push($(this).val());
+				});//end each
+//		 		console.log(checkedbox);
+//		 		console.log(selectmenu);
+				var repeateventnight = 	{
+					//means delete all repeating items and rebuild new ones
+					id:"repeateventnight",
+				    title:"每晚",
+				    start: '18:00', // a start time (10am in this example)				
+				    overlap: true,
+					end: '24:00', // an end time (2pm in this example)
+				    dow: selectmenu // Repeat monday and thursday
+				}
+				
+				$('#calendar').fullCalendar( 'renderEvent', repeateventnight);
+				
+				//	 $('#calendar').fullCalendar( 'destroy' );
+				//	 buildcalendar();
+			}//end repeating event
+			
+			function buildcalendar(){
+				
+				$('#calendar').fullCalendar({
+					
+				
+					header: {
+						left: 'prev,next today',
+						center: 'title',
+						right: 'month,agendaWeek,agendaDay'
+					},
+					editable: true,
+					timezone:'UTC',
+					
+					droppable: true, // this allows things to be dropped onto the calendar
+					eventDrop: function(event, delta, revertFunc) {
+						checkoverlapping(event);
+				        alert(event.title + " was dropped on " + event.start.format());
+			
+				        if (!confirm("Are you sure about this change?")) {
+				            revertFunc();
+				        }
+				       
+				    },
+					eventDragStop: function(event,jsEvent) {
+						 
+					    alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
+					    if( ( 1293<= jsEvent.pageX) | (jsEvent.pageX <= 300) | (1293 <= jsEvent.pageY) | (jsEvent.pageY <=690)){
+					      alert('delete: '+ event.id);
+					      $('#calendar').fullCalendar('removeEvents', event.id);
+					    }
+					},
+					drop: function(date,event) {
+			// 			$('#calendar').fullCalendar( 'renderEvent', dragevent);
+//		 				console.log(event);
+						assignrandom(event);
+						eventidglobe =$(this).data('id')+randomnumber;
+						event._id =eventidglobe ;
+						event.id=eventidglobe;
+						event.eventOverlap = 'false';
+						
+//		 				event.start= $(this).data('start');
+						// is the "remove after drop" checkbox checked?
+						
+						if ($('#drop-remove').is(':checked')) {
+							// if so, remove the element from the "Draggable Events" list
+							$(this).remove();
+						
+						}//end if
+					},//end drop
+					eventRender:function( event ) {
+						// Timezone calculation
+						console.log(event);
+						var d = new Date();
+						var ds = new Date(event.start._d).getTime();
+						var n = d.getTimezoneOffset()*60*1000;
+						var s =new Date(ds+n);
+						
+						//event.start._d and event._start._d is not the same
+// 						console.log(s);
+// 						console.log(d);
+// 						event.start._d = s;
+						event._start._d = s;
+// 						console.log(event.start._d);
+// 						console.log(event._start._d);
+// 						console.log(event);
+					},
+					eventReceive:function( event ) {
+
+						event._id = eventidglobe;
+						event.id = eventidglobe;
+						console.log(event);
+//		 				var randomnumber =Math.random().toString();//not working after drop, because the real id is still the original
+						
+						$(this).attr('data-id',$(this).data('id')+randomnumber);
+						checkoverlapping(event); 
+						
+						},
+					events: [{
+						
+						id:999,
+					    title:"programming",
+					    start: '00:00', // a start time (10am in this example)
+					    end: '24:00', // an end time (2pm in this example)
+					    dow: "\[" +selectmenu+" \]" // Repeat monday and thursday
+					}],//end repeating event
+				});// end full calendar
+			}//end create calendar
+			
+			function checkoverlapping(event){// no event can exists twice in 1 day, and no event can be added under all day unavailable
+				
+				var events = $('#calendar').fullCalendar('clientEvents');
+					
+// 					var d = new Date();
+// 					var ds = new Date(event.start._d).getTime();
+// 					var n = d.getTimezoneOffset()*60*1000;
+// 					d=new Date(ds+n);
+// 					console.log(ds+n);
+// 					console.log(d);
+// 					event.start._d = d;
+// 					event._start._d = d;
+// 					console.log(event.start._d);
+// 					console.log(event._start._d);
+					console.log(event);
+				if(events.length!=0){
+				for(i=0;i<events.length-1;i++){
+				// start-time in between any of the events
+	
+					var eventid1 = event.id;
+					var eventid2 = event._id;
+					var eventitle = event.title;
+					var eventitle2 = events[i].title;
+					var end1 = event.end._d;
+					var start1 = event._start._d.toString();
+					var start2 = events[i]._start._d.toString();
+// 					console.log(start1);
+					var end2 = events[i].end._d;
+					var start4 = events[i].duration;
+					var splitstring1 = start1.split(" ");
+					console.log(splitstring1);
+					
+					var splitstring2 = start2.split(" ");
+					console.log(splitstring2);
+					if((events[i].title == "整天不可預約")||(event.title =="整天不可預約")){
+						if((splitstring1[0]+splitstring1[1]+splitstring1[2]+splitstring1[3])==
+							(splitstring2[0]+splitstring2[1]+splitstring2[2]+splitstring2[3])){
+		
+								$('#calendar').fullCalendar('removeEvents', event.id);
+								return true;
+								
+							}//end for
+						}//end if
+					else if((splitstring1[0]+splitstring1[1]+splitstring1[2]+splitstring1[3]+splitstring1[4])==
+						(splitstring2[0]+splitstring2[1]+splitstring2[2]+splitstring2[3]+splitstring2[4])){
+	
+						
+							$('#calendar').fullCalendar('removeEvents', event.id);
+						    return true;
+							
+						}//end if
+				}//end for 
+				//end-time in between any of the events
+//		 		if(event.start > events[i].start && event.start < events[i].end){
+//		 			$('#calendar').fullCalendar('removeEvents', event.id);
+//		 		    return true;
+//		 		}
+//		 		//any of the events in between/on the start-time and end-time
+//		 		if(event.start <= events[i].start && event.start >= events[i].end){
+//		 			$('#calendar').fullCalendar('removeEvents', event.id);
+//		 		    return true;
+//		 		}
+			  }//end if event!=0
+			}
 		
 	</script>
 <!-- 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAj-PEjC_YSdYGHEvhIKnyojxufjKYy6OE&callback=initMap"></script> -->

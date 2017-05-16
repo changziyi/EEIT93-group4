@@ -1,13 +1,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
-<%-- <c:if test="${empty LoginOK}"> --%>
-<%-- 	<c:set var="target" value="${pageContext.request.servletPath}" --%>
-<%-- 		scope="session" /> --%>
-<%-- 	<c:redirect url="/cdata/login-in.jsp" /> --%>
-<%-- </c:if> --%>
-
+<%@ page import="toolman.cdata.model.*"%>
+<%@ page import="java.util.Set" %>
+<%@ page import="toolman.order.model.*" %>
+<%	
+ 	Set<OrderVO> orders = (Set<OrderVO>) request.getAttribute("orders");
+	pageContext.setAttribute("orders2", orders);
+	
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
@@ -58,8 +59,8 @@ hr {
 	<%-- 	<jsp:useBean id="cdataVO" class="toolman.cdata.model.CdataVO" scope="session"/> --%>
 	<div class="container" id="big-box">
 		<ul class="nav nav-tabs" >
-			<li class="active"><a data-toggle="tab" href="#home">評價</a></li>
-			<li><a data-toggle="tab" href="#menu2">媒合紀錄</a></li>
+			<li id="a" class="active" value=""><a data-toggle="tab" href="#home">評價</a></li>
+			<li id="b"><a data-toggle="tab" href="#menu2">媒合紀錄</a></li>
 		</ul>
 		<div class="tab-content" style="background-color:gray;">
 			<div id="home" class="tab-pane fade in active">
@@ -76,31 +77,93 @@ hr {
 						</h6>
 					</div>
 					<div>
-					<%@ include file="page1.file" %>  
-						<c:forEach var="cdata" items="${orders}">
+<%-- 					<%@ include file="page1.file" %>  --%>
+<%  int rowsPerPage = 5;  //每頁的筆數     
+    int rowNumber=0;      //總筆數
+    int pageNumber=0;     //總頁數     
+    int whichPage=1;      //第幾頁
+    int pageIndexArray[]=null;
+    int pageIndex=0; 
+%>
+
+<%  
+    rowNumber=orders.size();
+    if (rowNumber%rowsPerPage !=0)
+     pageNumber=rowNumber/rowsPerPage +1;
+    else pageNumber=rowNumber/rowsPerPage;    
+
+    pageIndexArray=new int[pageNumber]; 
+    for (int i=1 ; i<=pageIndexArray.length ; i++)
+    pageIndexArray[i-1]=i*rowsPerPage-rowsPerPage;
+%>
+
+<%  try {
+      whichPage = Integer.parseInt(request.getParameter("whichPage"));
+      pageIndex=pageIndexArray[whichPage-1];
+    } catch (NumberFormatException e) { //第一次執行的時候
+       whichPage=1;
+       pageIndex=0;
+    } catch (ArrayIndexOutOfBoundsException e) { //總頁數之外的錯誤頁數
+         if (pageNumber>0){
+              whichPage=pageNumber;
+              pageIndex=pageIndexArray[pageNumber-1];
+         }
+    } 
+%>
+<%-- <%if (pageNumber>0){%> --%>
+<%-- <b><font color= red>第<%=whichPage%>/<%=pageNumber%>頁</font></b> --%>
+<%-- <%}%> --%>
+<%-- <b>●符 合 查 詢 條 件 如 下 所 示: 共<font color=red><%=rowNumber%></font>筆</b> --%>
+
+
+						<c:forEach var="odata" items="${orders}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 							<div class="a">
 								<p>
-									<label>${cdata.b_name}</label><span>${cdata.o_edate}</span>
+									<label>${odata.b_name}</label><span>${odata.o_tdate}</span>
 								</p>
-								<p>${cdata.ma_des}</p>
+								<p>${odata.ma_des}</p>
 							</div>
 						</c:forEach>
-						<%@ include file="page2.file" %>
-						<div class="page">
-							<nav>
-							<ul class="pagination">
-								<li><a href="#"><span aria-hidden="true">&laquo;</span><span
-										class="sr-only">Previous</span></a></li>
-								<li><a href="#">1</a></li>
-								<li><a href="#">2</a></li>
-								<li><a href="#">3</a></li>
-								<li><a href="#">4</a></li>
-								<li><a href="#">5</a></li>
-								<li><a href="#"><span aria-hidden="true">&raquo;</span><span
-										class="sr-only">Next</span></a></li>
-							</ul>
-							</nav>
-						</div>
+<%-- 						<%@ include file="page2.file" %> --%>
+<table border="0">    
+ <tr>
+  <%if (rowsPerPage<rowNumber) {%>
+    <%if(pageIndex>=rowsPerPage){%>
+        <td><A href="${pageContext.servletContext.contextPath}/cdata/CdatadessServlet.do?whichPage=1">至第一頁</A>&nbsp;</td>
+        <td><A href="${pageContext.servletContext.contextPath}/cdata/CdatadessServlet.do?whichPage=<%=whichPage-1%>">上一頁 </A>&nbsp;</td>
+    <%}%>
+  
+    <%if(pageIndex<pageIndexArray[pageNumber-1]){%>
+       <div style="text-align: center">
+         <td><A href="${pageContext.servletContext.contextPath}/cdata/CdatadessServlet.do?whichPage=<%=whichPage+1%>">下一頁</A>&nbsp;</td>
+         <td><A href="${pageContext.servletContext.contextPath}/cdata/CdatadessServlet.do?whichPage=<%=pageNumber %>">至最後一頁</A>&nbsp;</td>
+      </div>  
+    <%}%>
+  <%}%>  
+ </tr>
+</table>    
+<%if ( pageNumber > 1) {%>
+<table border="0">   
+ <tr> 
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </td>
+   <FORM METHOD="post" ACTION="${pageContext.servletContext.contextPath}/cdata/CdatadessServlet.do">   
+        <td>
+           <select size="1" name="whichPage">
+        <%for (int i=1; i<=pageNumber; i++){%>
+           <option value="<%=i%>">跳至第<%=i%>頁
+        <%}%> 
+           </select>
+           <input type="submit" value="確定" >  
+        </td>
+   </FORM>
+ </tr>
+</table>
+<%}%>
+
 					</div>
 				</div>
 			</div>
@@ -117,11 +180,62 @@ hr {
 				</div>
 				<div Style="width:600px;">
 					<div class="box">
-						<c:forEach var="cdata" items="${orders}">
+					
+<%  
+    int rowsPerPage1 = 1;  //每頁的筆數     
+    int rowNumber1=0;      //總筆數
+    int pageNumber1=0;     //總頁數     
+    int pageIndexArray1[]=null;
+    int pageIndex1=0; 
+    int whichPage1=1;      //第幾頁
+%>
+
+<%  
+    rowNumber1=orders.size();
+    if (rowNumber1%rowsPerPage1 !=0)
+     pageNumber1=rowNumber1/rowsPerPage1 +1;
+    else pageNumber1=rowNumber1/rowsPerPage1;    
+
+    pageIndexArray1=new int[pageNumber1]; 
+    for (int i=1 ; i<=pageIndexArray1.length ; i++)
+    pageIndexArray1[i-1]=i*rowsPerPage1-rowsPerPage1;
+%>
+
+<%  try {
+      whichPage1 = Integer.parseInt(request.getParameter("whichPage"));
+      pageIndex1=pageIndexArray1[whichPage-1];
+    } catch (NumberFormatException e) { //第一次執行的時候
+       whichPage1=1;
+       pageIndex1=0;
+    } catch (ArrayIndexOutOfBoundsException e) { //總頁數之外的錯誤頁數
+         if (pageNumber1>0){
+              whichPage1=pageNumber1;
+              pageIndex1=pageIndexArray1[pageNumber1-1];
+         }
+    } 
+%>
+						<c:forEach var="odata" items="${orders}" begin="<%=pageIndex1%>" end="<%=pageIndex1+rowsPerPage1-1%>">
 							<div class="b">
-								<label>${cdata.b_name}</label><label class="font_right">${cdata.o_edate}</label>
+								<label>${odata.b_name}</label><label class="font_right">${odata.o_edate}</label>
+								
 							</div>
 						</c:forEach>
+						<table border="0">    
+ <tr>
+  <%if (rowsPerPage1<rowNumber1) {%>
+    <%if(pageIndex1>=rowsPerPage1){%>
+        <td><A href="${pageContext.servletContext.contextPath}/cdata/CdatadessServlet.do?whichPage=2">至第一頁</A>&nbsp;</td>
+        <td><A href="${pageContext.servletContext.contextPath}/cdata/CdatadessServlet.do?whichPage=<%=whichPage1-1%>">上一頁 </A>&nbsp;</td>
+    <%}%>
+  
+    <%if(pageIndex1<pageIndexArray1[pageNumber1-1]){%>
+       <div style="text-align: center">
+         <td><A href="${pageContext.servletContext.contextPath}/cdata/CdatadessServlet.do?whichPage=<%=whichPage1+1%>">下一頁</A>&nbsp;</td>
+         <td><A href="${pageContext.servletContext.contextPath}/cdata/CdatadessServlet.do?whichPage=<%=pageNumber1%>">至最後一頁</A>&nbsp;</td>
+      </div>  
+    <%}%>
+  <%}%>  
+ </tr>
 					</div>
 				</div>
 			</div>

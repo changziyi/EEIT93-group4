@@ -30,15 +30,17 @@ public class CdatadessServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		request.setCharacterEncoding("UTF-8");
-		ArrayList cdataVOlist =  new ArrayList();
+		ArrayList<CdataVO> cdataVOlist =  new ArrayList<CdataVO>();
 		String c_id = null;
 		HttpSession session = request.getSession();	
 		CdataVO cdataVO = new CdataVO();
 		CdataService cs = new CdataService();	
 		cdataVO = cs.cdata_des("PolarBear");	
 		cdataVOlist.add(cdataVO);
+		
 		session.setAttribute("cdataVOlist", cdataVOlist);
-		session.setAttribute("cdataVO", cdataVO);	
+		session.setAttribute("cdataVO", cdataVO);
+		System.out.println(cdataVOlist);
 		Set<OrderVO> orders = cdataVO.getOrders();
 		
 		
@@ -46,7 +48,7 @@ public class CdatadessServlet extends HttpServlet {
 			System.out.print(" 師傅 : "+ aOrder.getB_name()+" , ");
 			System.out.println(" 時間 : "+ aOrder.getO_edate());
 		}
-		session.setAttribute("orders", orders);
+		request.setAttribute("orders", orders);
 		System.out.print(c_id);
 		
 		RequestDispatcher failureView = request.getRequestDispatcher("test1.jsp");

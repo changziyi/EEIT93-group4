@@ -40,7 +40,7 @@ public class RdataJDBCDAO implements RdataDAO_interface {
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(INSERT_MANAGER);
 
-			pstmt.setDate(1, rdataVO.getR_date());
+			pstmt.setTimestamp(1, rdataVO.getR_date());
 			pstmt.setString(2, rdataVO.getC_id());
 			pstmt.setInt(3, rdataVO.getM_id());
 			pstmt.setString(4, rdataVO.getP_summary());
@@ -86,7 +86,7 @@ public class RdataJDBCDAO implements RdataDAO_interface {
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(UPDATE);
 
-			pstmt.setDate(1, rdataVO.getR_date());
+			pstmt.setTimestamp(1, rdataVO.getR_date());
 			pstmt.setString(2, rdataVO.getC_id());
 			pstmt.setInt(3, rdataVO.getM_id());
 			pstmt.setString(4, rdataVO.getP_summary());
@@ -181,7 +181,7 @@ public class RdataJDBCDAO implements RdataDAO_interface {
 			while (rs.next()) {
 				rdataVO = new RdataVO();
 				rdataVO.setR_id(rs.getInt("r_id"));
-				rdataVO.setR_date(rs.getDate("r_date"));
+				rdataVO.setR_date(rs.getTimestamp("r_date"));
 				rdataVO.setC_id(rs.getString("c_id"));
 				rdataVO.setM_id(rs.getInt("m_id"));
 				rdataVO.setP_summary(rs.getString("p_summary"));
@@ -241,7 +241,7 @@ public class RdataJDBCDAO implements RdataDAO_interface {
 			while (rs.next()) {
 				rdataVO = new RdataVO();
 				rdataVO.setR_id(rs.getInt("r_id"));
-				rdataVO.setR_date(rs.getDate("r_date"));
+				rdataVO.setR_date(rs.getTimestamp("r_date"));
 				rdataVO.setC_id(rs.getString("c_id"));
 				rdataVO.setM_id(rs.getInt("m_id"));
 				rdataVO.setP_summary(rs.getString("p_summary"));
@@ -281,22 +281,22 @@ public class RdataJDBCDAO implements RdataDAO_interface {
 		return list;
 	}
 
-	public static void main(String args[]) throws IOException {
+//	public static void main(String args[]) throws IOException {
 
-		RdataJDBCDAO dao = new RdataJDBCDAO();
+//		RdataJDBCDAO dao = new RdataJDBCDAO();
 
 		/************************** 測試新增 ****************************/
-		RdataVO rdataVO = new RdataVO();
-		
-		rdataVO.setR_date(java.sql.Date.valueOf("2017-02-08"));
-		rdataVO.setC_id("1001");
-		rdataVO.setM_id(1001);
-		rdataVO.setP_summary("態度不佳");
-		rdataVO.setP_content("這個人會亂吐檳榔渣，還會罵髒話");
-		rdataVO.setS_name("m_pass");
-		rdataVO.setSa_rnote(null);
-		rdataVO.setD_id(6001);
-		dao.insert(rdataVO);
+//		RdataVO rdataVO = new RdataVO();
+//		
+//		rdataVO.setR_date(java.sql.Date.valueOf("2017-02-08"));
+//		rdataVO.setC_id("1001");
+//		rdataVO.setM_id(1001);
+//		rdataVO.setP_summary("態度不佳");
+//		rdataVO.setP_content("這個人會亂吐檳榔渣，還會罵髒話");
+//		rdataVO.setS_name("m_pass");
+//		rdataVO.setSa_rnote(null);
+//		rdataVO.setD_id(6001);
+//		dao.insert(rdataVO);
 
 		/************************** 測試修改 ****************************/
 
@@ -336,21 +336,21 @@ public class RdataJDBCDAO implements RdataDAO_interface {
 //				+ "---------------------------------------------------------");
 
 		/************************** 測試多筆查詢 ****************************/
-		 List<RdataVO> list =dao.getAll();
-		 for(RdataVO mda : list){
-		System.out.print(mda.getR_id() + ",");
-		System.out.print(mda.getR_date() + ",");
-		System.out.print(mda.getC_id() + ",");
-		System.out.print(mda.getM_id() + ",");
-		System.out.print(mda.getP_summary() + ",");
-		System.out.print(mda.getP_content() + ",");
-		System.out.print(mda.getS_name() + ",");
-		System.out.print(mda.getSa_rnote() + ",");
-		System.out.print(mda.getD_id());
-		
-		 System.out.println("---------------------------------------------------------"
-		 + "---------------------------------------------------------");
-		 }
+//		 List<RdataVO> list =dao.getAll();
+//		 for(RdataVO mda : list){
+//		System.out.print(mda.getR_id() + ",");
+//		System.out.print(mda.getR_date() + ",");
+//		System.out.print(mda.getC_id() + ",");
+//		System.out.print(mda.getM_id() + ",");
+//		System.out.print(mda.getP_summary() + ",");
+//		System.out.print(mda.getP_content() + ",");
+//		System.out.print(mda.getS_name() + ",");
+//		System.out.print(mda.getSa_rnote() + ",");
+//		System.out.print(mda.getD_id());
+//		
+//		 System.out.println("---------------------------------------------------------"
+//		 + "---------------------------------------------------------");
+//		 }
 
-	}
+//	}
 }

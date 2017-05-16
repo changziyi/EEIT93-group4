@@ -21,7 +21,7 @@ body {font-family:Microsoft JhengHei;}
 /* .district {display: none;} */
 /* .row {width:82%} */
 .mascontent {width:80%;}
-.pro {
+.proc {
 	width: 15px;
 	height: 3px;
 	padding: 5px;
@@ -89,34 +89,34 @@ body {font-family:Microsoft JhengHei;}
 					var pa = $('<a href=""></a>');
 					switch(pro) {
 						case '地板地磚':
-							pa.addClass('btn btn-default btn-sm').css({'background':'#FFA500'});
+							pa.addClass('proc').css({'background':'#FFA500'});
 							break;
 						case '水電工程':
-							pa.addClass('btn btn-default btn-sm').css({'background':'#00BBFA'});
+							pa.addClass('proc').css({'background':'#00BBFA'});
 							break;
 						case '油漆工程':
-							pa.addClass('btn btn-default btn-sm').css({'background':'#5F9EA0'});
+							pa.addClass('proc').css({'background':'#5F9EA0'});
 							break;
 						case '木作工程':
-							pa.addClass('btn default').css({'background':'#CD853F','border':'none','padding':'7px','color':'white'});
+							pa.addClass('proc').css({'background':'#CD853F','border':'none','padding':'7px','color':'white'});
 							break;
 						case '防水抓漏':
-							pa.addClass('btn btn-default btn-sm').css({'background':'#4682B4'});
+							pa.addClass('proc').css({'background':'#4682B4'});
 							break;
 						case '室內裝潢':
-							pa.addClass('btn btn-default btn-sm').css({'background':'#F08080'});
+							pa.addClass('proc').css({'background':'#F08080'});
 							break;
 						case '照明工程':
-							pa.addClass('btn btn-default btn-sm').css({'background':'#FFBB33'});
+							pa.addClass('proc').css({'background':'#FFBB33'});
 							break;
 						case '冷氣空調':
-							pa.addClass('btn btn-default btn-sm').css({'background':'#48D1CC'});
+							pa.addClass('proc').css({'background':'#48D1CC'});
 							break;
 						case '門窗工程':
-							pa.addClass('btn btn-default btn-sm').css({'background':'#FA8072'});
+							pa.addClass('proc').css({'background':'#FA8072'});
 							break;
 						case '泥作工程':
-							pa.addClass('btn btn-default btn-sm').css({'background':'#708090'});
+							pa.addClass('proc').css({'background':'#708090'});
 							break;
 					}
 					divPro.append(pa.text(master.pro[i]));
@@ -131,7 +131,7 @@ body {font-family:Microsoft JhengHei;}
 		});
 		
 		//專業LINK
-		$('#show').on('click', '.btn-sm', function() {
+		$('#show').on('click', '.proc', function() {
 			link = $(this).text().trim();
 			console.log(link);
 			$.ajax({
@@ -155,7 +155,7 @@ body {font-family:Microsoft JhengHei;}
 		    'onDistrictSelect': function() {
 		    	district.attr('value', this.value);
 		    },
-		    'countySel':'${search.m_city}',
+		    'countySel':'${(search.m_city eq "all") ? "臺北市" : search.m_city}',
 		    'districtSel':'${search.m_district}'
 		});
 	
