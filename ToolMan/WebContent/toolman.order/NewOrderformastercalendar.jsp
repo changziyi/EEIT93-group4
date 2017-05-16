@@ -173,6 +173,7 @@
 
 </head>
 <body>
+	<jsp:include page="../Navigation.jsp">
 <!-- smart wizard head -->
 
         
@@ -277,7 +278,7 @@
 				            <div class="btn-group navbar-btn" role="group">
 				                <button class="btn btn-default" id="prev-btn1" type="button" disabled>上一步</button>
 				                <button class="btn btn-default" id="next-btn1" type="button">下一步</button>
-				                
+				                <button class="btn btn-primary" id="submitcalendar" type="button">完成日程表</button>
 				            </div>
 				        </form>
                 
@@ -484,7 +485,7 @@ var eventidglobe =null;
 	$( function() {
         /* calendar
 		-----------------------------------------------------------------*/
-		
+		$('#submitcalendar').on('click',calendarsubmit);
 		$('#external-events2>div').on('click',assignrandom);
 		draggableevent();
 		$('input[name="repeatingbox"]').on('change',repeatingevent);// end select change
@@ -588,8 +589,8 @@ var eventidglobe =null;
             })
  
 		//calendar
-	});	    
-	
+	});//end ready
+
 // 	function getCoordinate(){
 // 		var a1 = $('#o_city').val();
 // 		var a2 = $('#o_district').val();
@@ -627,6 +628,42 @@ var eventidglobe =null;
 // 	 	}
 	 
 	 /*-----------calendar---------*/
+	 	function calendarsubmit(){
+// 	 		var cache = [];
+// 	 		var calendarobj=$('#calendar').fullCalendar('clientEvents')
+// 	 		var calendarjson = JSON.stringify(calendarobj, function(key, value) {
+// 	 		    if (typeof value === 'calendarobj' && value !== null) {
+// 	 		        if (cache.indexOf(value) !== -1) {
+// 	 		            // Circular reference found, discard key
+// 	 		            return;
+// 	 		        }
+// 	 		        // Store value in our collection
+// 	 		        cache.push(value);
+// 	 		    }
+// 	 		    return value;
+// 	 		});
+	 		// Enable garbage collection
+// 		var calendarjson = JSON.stringify($('#calendar').fullCalendar('clientEvents'));
+	var calendarjson = JSON.stringify($("#calendar").fullCalendar("clientEvents").map(function(e) {
+	    var rv = {};
+	    Object.keys(e)
+	        .filter(function(k) {
+	            return k != "source" && !k.startsWith("_");
+	         })
+	        .forEach(function(k) {
+	            rv[k] = e[k];
+	        });
+	    return rv;
+	}));
+	console.log(json);
+// 	console.log(rv);
+		console.log($('#calendar').fullCalendar('clientEvents').toString());
+// 		console.log(calendarjson);
+		$.post('${pageContext.servletContext.contextPath}/toolman.calendar/CalendarController.do',{'calendarjson':calendarjson}, function(data){
+			alert("ok");
+		 });//end post
+		
+	}//end calendarsubmit
 	 function assignrandom(event){
 			
 			randomnumber = Math.random().toString();//not working after drop, because the real id is still the original
@@ -713,7 +750,7 @@ var eventidglobe =null;
 				checkedbox.each(function () {
 					selectmenu.push($(this).val());
 				});//end each
-//		 		console.log(checkedbox);
+// 		 		console.log(checkedbox);
 //		 		console.log(selectmenu);
 				var repeateventallday = [{
 					//means delete all repeating items and rebuild new ones
@@ -836,7 +873,7 @@ var eventidglobe =null;
 					},
 					editable: true,
 					timezone:'UTC',
-					
+// 					timezone = 'Asia/Taipei',
 					droppable: true, // this allows things to be dropped onto the calendar
 					eventDrop: function(event, delta, revertFunc) {
 						checkoverlapping(event);
@@ -876,7 +913,7 @@ var eventidglobe =null;
 					},//end drop
 					eventRender:function( event ) {
 						// Timezone calculation
-						console.log(event);
+// 						console.log(event);
 						var d = new Date();
 						var ds = new Date(event.start._d).getTime();
 						var n = d.getTimezoneOffset()*60*1000;
@@ -896,7 +933,7 @@ var eventidglobe =null;
 
 						event._id = eventidglobe;
 						event.id = eventidglobe;
-						console.log(event);
+// 						console.log(event);
 //		 				var randomnumber =Math.random().toString();//not working after drop, because the real id is still the original
 						
 						$(this).attr('data-id',$(this).data('id')+randomnumber);
@@ -928,7 +965,7 @@ var eventidglobe =null;
 // 					event._start._d = d;
 // 					console.log(event.start._d);
 // 					console.log(event._start._d);
-					console.log(event);
+// 					console.log(event);
 				if(events.length>1){
 				for(i=0;i<events.length-1;i++){
 				// start-time in between any of the events
@@ -944,10 +981,10 @@ var eventidglobe =null;
 					var end2 = events[i].end._d;
 					var start4 = events[i].duration;
 					var splitstring1 = start1.split(" ");
-					console.log(splitstring1);
+// 					console.log(splitstring1);
 					
 					var splitstring2 = start2.split(" ");
-					console.log(splitstring2);
+// 					console.log(splitstring2);
 					if((events[i].title == "整天不可預約")||(event.title =="整天不可預約")){
 						if((splitstring1[0]+splitstring1[1]+splitstring1[2]+splitstring1[3])==
 							(splitstring2[0]+splitstring2[1]+splitstring2[2]+splitstring2[3])){
@@ -1012,10 +1049,10 @@ var eventidglobe =null;
 					var end2 = events[i].end._d;
 					var start4 = events[i].duration;
 					var splitstring1 = start1.split(" ");
-					console.log(splitstring1);
+// 					console.log(splitstring1);
 					
 					var splitstring2 = start2.split(" ");
-					console.log(splitstring2);
+// 					console.log(splitstring2);
 					if((events[i].title == "整天不可預約")||(event.title =="整天不可預約")){
 						if((splitstring1[0]+splitstring1[1]+splitstring1[2]+splitstring1[3])==
 							(splitstring2[0]+splitstring2[1]+splitstring2[2]+splitstring2[3])){
