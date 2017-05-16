@@ -68,8 +68,8 @@ public class EmailServlet extends HttpServlet {
 		//取得登入的寄件人帳號
 		HttpSession session = req.getSession();
 		CdataVO cdataVO = (CdataVO)session.getAttribute("LoginOK");
-//		String SendAccount = cdataVO.getC_id();
-		String SendAccount = "sa";//benny test
+		String SendAccount = cdataVO.getC_id();
+//		String SendAccount = "sa";//benny test
 		// 宣告錯誤訊息的變數
 		Map<String, String> errorMsgs = new HashMap<String, String>();
 		req.setAttribute("errorMsgs", errorMsgs);
