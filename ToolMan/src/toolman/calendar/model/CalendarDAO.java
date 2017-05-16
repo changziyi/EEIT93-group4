@@ -55,7 +55,7 @@ public class CalendarDAO implements CalendarDAO_Interface {
 			session.getTransaction().rollback();
 			throw ex;
 		}
-		return count;
+	
 	}
 
 }
