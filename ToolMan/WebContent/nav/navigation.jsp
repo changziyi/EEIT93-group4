@@ -1,79 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-
-<link rel="stylesheet"
-	href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
-<script
-	src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
-<script
-	src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-<style>
-
-.navbar, .dropdown-menu {
-	background: #00BFFF;
-	border: none;
-}
-
-.nav>li>a, .dropdown-menu>li>a:focus, .dropdown-menu>li>a:hover,
-	.dropdown-menu>li>a, .dropdown-menu>li {
-	border-bottom: 2px solid transparent;
-}
-
-.nav>li>a:focus, .nav>li>a:hover, .nav .open>a, .nav .open>a:focus, .nav .open>a:hover,
-	.dropdown-menu>li>a:focus, .dropdown-menu>li>a:hover {
-	border-bottom: 2px solid transparent;
-	background: none;
-}
-
-.navbar a, .dropdown-menu>li>a, .dropdown-menu>li>a:focus,
-	.dropdown-menu>li>a:hover, .navbar-toggle {
-	color: #fff;
-}
-
-.dropdown-menu {
-	-webkit-box-shadow: none;
-	box-shadow: none;
-}
-
-.nav li:hover:nth-child(8n+1), .nav li.active:nth-child(8n+1) {
-	border-bottom: #C4E17F 3px solid;
-}
-
-.nav li:hover:nth-child(8n+2), .nav li.active:nth-child(8n+2) {
-	border-bottom: #FECF71 3px solid;
-}
-
-.nav li:hover:nth-child(8n+3), .nav li.active:nth-child(8n+3) {
-	border-bottom: #F0776C 3px solid;
-}
-
-.nav li:hover:nth-child(8n+4), .nav li.active:nth-child(8n+4) {
-	border-bottom: #669AE1 3px solid;
-}
-
-
-.navbar-toggle .icon-bar {
-	color: #fff;
-	background: #fff;
-}
-
-.navbar-brand {
-	font-size: 40px
-}
-
-a{
-font-size: 18PX
-}
-
-</style>
-
-</head>
+    pageEncoding="UTF-8"%>
 <div class="navbar-wrapper">
     <div class="container-fluid">
         <nav class="navbar navbar-fixed-top">
@@ -113,7 +39,7 @@ font-size: 18PX
 					        <div class="form-group">
 					          <input type="text" class="form-control" placeholder="Search">
 					        </div>
-					        <button type="submit" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+					        <button type="button" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
 					      </form>
 					</ul>
                      <!----------- 搜尋列----- -->
@@ -133,6 +59,3 @@ font-size: 18PX
             </div>
         </nav>
     </div>
-<body>
-</body>
-</html>

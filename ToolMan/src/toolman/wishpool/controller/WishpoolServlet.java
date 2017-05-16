@@ -164,6 +164,7 @@ public class WishpoolServlet extends HttpServlet {
 		
 		List<WishpoolVO> list = new ArrayList<WishpoolVO>();
 		WishpoolVO wp1 = new WishpoolVO();
+		wp1.setC_id(cdataVO.getC_id());
 		wp1.setW_pro(w_pro);
 		wp1.setW_city(w_city);
 		wp1.setW_district(w_district);
