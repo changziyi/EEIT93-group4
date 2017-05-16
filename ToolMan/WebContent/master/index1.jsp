@@ -10,7 +10,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Creative - Start Bootstrap Theme</title>
+    <title>ToolMan找師傅平台</title>
 
     <!-- Bootstrap core CSS -->
     <link href="${pageContext.servletContext.contextPath}/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -34,6 +34,7 @@
             width: 100%;
         }
     }
+    h3 {font-family:Microsoft JhengHei;}
     .zipcode {display: none;}
 	.district {display: none;}
 	.form-control {margin:auto; width:100px; display:inline; font-family:Microsoft JhengHei; vertical-align: top}
@@ -43,8 +44,8 @@
     .btn-master:hover {background-color: #87CEFA;}
     .search-text {width: 300px;}
     .proselect {width: 120px;}
+    .title2 {color:White;font-family:Microsoft JhengHei;}
     #btn {font-family:Microsoft JhengHei;box-shadow:4px 4px 12px -2px rgba(20%,20%,40%,0.5);}
-    
     </style>
 
 </head>
@@ -86,7 +87,7 @@
 					<div class="form-group">
 <%-- 						<span id="twzipcode"></span><input type="text" class="form-control search-text" name="input" value="${search.b_name}"> --%>
 <%-- 						<span id="twzipcode"></span><select class="form-control proselect"><option>類別</option><option>地板地磚</option></select><input type="text" class="form-control search-text" name="input" value="${search.b_name}"> --%>
-						<span id="twzipcode"></span><select class="form-control proselect" id="pro" name="pro"><option value="">類別</option><option value="地板地磚">地板地磚</option><option value="防水抓漏">防水抓漏</option><option value="室內裝潢">室內裝潢</option><option>冷氣空調</option><option>水電工程</option><option>門窗工程</option><option>木作工程</option><option>泥作工程</option><option>照明工程</option></select><input type="search" name="input" placeholder="or店家名稱">
+						<span id="twzipcode"></span><select class="form-control proselect" id="pro" name="pro"><option value="">類別</option><option value="地板地磚">地板地磚</option><option value="防水抓漏">防水抓漏</option><option value="室內裝潢">室內裝潢</option><option value="冷氣空調">冷氣空調</option><option value="水電工程">水電工程</option><option value="門窗工程">門窗工程</option><option value="木作工程">木作工程</option><option value="泥作工程">泥作工程</option><option value="照明工程">照明工程</option></select><input type="search" name="input" placeholder="or店家名稱">
 					</div>
 					<input type="hidden" name="action" value="SearchResult">
 					<input type="hidden" name="city" >
@@ -124,30 +125,30 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-3 col-md-6 text-center">
+                	<i class="fa fa-4x fa-heart text-primary sr-icons"><img src="${pageContext.servletContext.contextPath}/img/network.png"></i>
                     <div class="service-box">
-                        <i class="fa fa-4x fa-diamond text-primary sr-icons"></i>
-                        <h3>Sturdy Templates</h3>
+                        <h3>公開平台</h3>
                         <p class="text-muted">Our templates are updated regularly so they don't break.</p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 text-center">
+                    <i class="fa fa-4x fa-heart text-primary sr-icons"><img src="${pageContext.servletContext.contextPath}/img/pro.png"></i>
                     <div class="service-box">
-                        <i class="fa fa-4x fa-paper-plane text-primary sr-icons"></i>
-                        <h3>Ready to Ship</h3>
+                        <h3>專業師傅</h3>
                         <p class="text-muted">You can use this theme as is, or you can make changes!</p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 text-center">
+                <i class="fa fa-4x fa-heart text-primary sr-icons"><img src="${pageContext.servletContext.contextPath}/img/handshake.png"></i>
                     <div class="service-box">
-                        <i class="fa fa-4x fa-newspaper-o text-primary sr-icons"></i>
-                        <h3>Up to Date</h3>
+                        <h3>有效媒合</h3>
                         <p class="text-muted">We update dependencies to keep things fresh.</p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 text-center">
+                    <i class="fa fa-4x fa-heart text-primary sr-icons"><img src="${pageContext.servletContext.contextPath}/img/godzilla.png"></i>
                     <div class="service-box">
-                        <i class="fa fa-4x fa-heart text-primary sr-icons"></i>
-                        <h3>Made with Love</h3>
+                        <h3>哥吉拉</h3>
                         <p class="text-muted">You have to make your websites with love these days!</p>
                     </div>
                 </div>
@@ -159,12 +160,12 @@
         <div class="container-fluid">
             <div class="row no-gutter popup-gallery">
                 <div class="col-lg-4 col-sm-6">
-                    <a class="portfolio-box" href="${pageContext.servletContext.contextPath}/img/portfolio/fullsize/1.jpg">
-                        <img class="img-fluid" src="${pageContext.servletContext.contextPath}/img/portfolio/thumbnails/1.jpg" alt="">
+                    <a class="portfolio-box" href="${pageContext.servletContext.contextPath}/img/portfolio/fullsize/wood.jpg">
+                        <img class="img-fluid" src="${pageContext.servletContext.contextPath}/img/portfolio/thumbnails/wood.jpg" alt="">
                         <div class="portfolio-box-caption">
                             <div class="portfolio-box-caption-content">
                                 <div class="project-category text-faded">
-                                    Category
+                                	木作工程
                                 </div>
                                 <div class="project-name">
                                     Project Name
@@ -174,75 +175,75 @@
                     </a>
                 </div>
                 <div class="col-lg-4 col-sm-6">
-                    <a class="portfolio-box" href="${pageContext.servletContext.contextPath}/img/portfolio/fullsize/2.jpg">
-                        <img class="img-fluid" src="${pageContext.servletContext.contextPath}/img/portfolio/thumbnails/2.jpg" alt="">
+                    <a class="portfolio-box" href="${pageContext.servletContext.contextPath}/img/portfolio/fullsize/window.jpg">
+                        <img class="img-fluid" src="${pageContext.servletContext.contextPath}/img/portfolio/thumbnails/window.jpg" alt="">
                         <div class="portfolio-box-caption">
                             <div class="portfolio-box-caption-content">
                                 <div class="project-category text-faded">
-                                    Category
+                                	門窗工程
                                 </div>
                                 <div class="project-name">
-                                    Project Name
+                                   	 上推氣密窗、鋁合金護欄、氣密門	
                                 </div>
                             </div>
                         </div>
                     </a>
                 </div>
                 <div class="col-lg-4 col-sm-6">
-                    <a class="portfolio-box" href="${pageContext.servletContext.contextPath}/img/portfolio/fullsize/3.jpg">
-                        <img class="img-fluid" src="${pageContext.servletContext.contextPath}/img/portfolio/thumbnails/3.jpg" alt="">
+                    <a class="portfolio-box" href="${pageContext.servletContext.contextPath}/img/portfolio/fullsize/bathroom.jpg">
+                        <img class="img-fluid" src="${pageContext.servletContext.contextPath}/img/portfolio/thumbnails/bathroom.jpg" alt="">
                         <div class="portfolio-box-caption">
                             <div class="portfolio-box-caption-content">
                                 <div class="project-category text-faded">
-                                    Category
+                                	衛浴裝潢
                                 </div>
                                 <div class="project-name">
-                                    Project Name
+									淋浴拉門、乾溼分離
                                 </div>
                             </div>
                         </div>
                     </a>
                 </div>
                 <div class="col-lg-4 col-sm-6">
-                    <a class="portfolio-box" href="${pageContext.servletContext.contextPath}/img/portfolio/fullsize/4.jpg">
-                        <img class="img-fluid" src="${pageContext.servletContext.contextPath}/img/portfolio/thumbnails/4.jpg" alt="">
+                    <a class="portfolio-box" href="${pageContext.servletContext.contextPath}/img/portfolio/fullsize/wall.jpg">
+                        <img class="img-fluid" src="${pageContext.servletContext.contextPath}/img/portfolio/thumbnails/wall.jpg" alt="">
                         <div class="portfolio-box-caption">
                             <div class="portfolio-box-caption-content">
                                 <div class="project-category text-faded">
-                                    Category
+                                	泥做工程
                                 </div>
                                 <div class="project-name">
-                                    Project Name
+                                	米白磚文化石
                                 </div>
                             </div>
                         </div>
                     </a>
                 </div>
                 <div class="col-lg-4 col-sm-6">
-                    <a class="portfolio-box" href="${pageContext.servletContext.contextPath}/img/portfolio/fullsize/5.jpg">
-                        <img class="img-fluid" src="${pageContext.servletContext.contextPath}/img/portfolio/thumbnails/5.jpg" alt="">
+                    <a class="portfolio-box" href="${pageContext.servletContext.contextPath}/img/portfolio/fullsize/light.jpg">
+                        <img class="img-fluid" src="${pageContext.servletContext.contextPath}/img/portfolio/thumbnails/light.jpg" alt="">
                         <div class="portfolio-box-caption">
                             <div class="portfolio-box-caption-content">
                                 <div class="project-category text-faded">
-                                    Category
+                                	居家照明
                                 </div>
                                 <div class="project-name">
-                                    Project Name
+                                	情調崁燈
                                 </div>
                             </div>
                         </div>
                     </a>
                 </div>
                 <div class="col-lg-4 col-sm-6">
-                    <a class="portfolio-box" href="${pageContext.servletContext.contextPath}/img/portfolio/fullsize/6.jpg">
-                        <img class="img-fluid" src="${pageContext.servletContext.contextPath}/img/portfolio/thumbnails/6.jpg" alt="">
+                    <a class="portfolio-box" href="${pageContext.servletContext.contextPath}/img/portfolio/fullsize/in.jpg">
+                        <img class="img-fluid" src="${pageContext.servletContext.contextPath}/img/portfolio/thumbnails/in.jpg" alt="">
                         <div class="portfolio-box-caption">
                             <div class="portfolio-box-caption-content">
                                 <div class="project-category text-faded">
-                                    Category
+									室內裝潢
                                 </div>
                                 <div class="project-name">
-                                    Project Name
+									北歐風格
                                 </div>
                             </div>
                         </div>
@@ -252,10 +253,10 @@
         </div>
     </section>
 
-    <div class="call-to-action bg-dark">
+    <div class="call-to-action bg-customer">
         <div class="container text-center">
-            <h2>Free Download at Start Bootstrap!</h2>
-            <button type="button" id="btnall" class="btn btn-default btn-xl sr-button">現在開始找師傅</button>
+            <h2 class="title2">看看還有哪些師傅</h2>
+            <button type="button" id="btnall" class="btn btn-default btn-xl sr-button">開始找師傅</button>
 <!--             <a class="btn btn-default btn-xl sr-button" id="btnall" href="">現在開始找師傅</a> -->
         </div>
     </div>
