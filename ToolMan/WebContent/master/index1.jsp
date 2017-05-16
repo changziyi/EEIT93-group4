@@ -20,7 +20,8 @@
     <link href="${pageContext.servletContext.contextPath}/css/index/magnific-popup.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="${pageContext.servletContext.contextPath}/css/creative.min.css" rel="stylesheet">
+<%--     <link href="${pageContext.servletContext.contextPath}/css/creative.min.css" rel="stylesheet"> --%>
+    <link href="${pageContext.servletContext.contextPath}/css/creative.css" rel="stylesheet">
     <link href="${pageContext.servletContext.contextPath}/css/index/expandsearch.css" rel="stylesheet">
 
     <!-- Temporary navbar container fix -->
@@ -37,6 +38,7 @@
     h3 {font-family:Microsoft JhengHei;}
     .zipcode {display: none;}
 	.district {display: none;}
+    .fontmicro {font-family:Microsoft JhengHei;}
 	.form-control {margin:auto; width:100px; display:inline; font-family:Microsoft JhengHei; vertical-align: top}
     .bg-customer {background-color: #00BFFF;}
     .navbar-brand {color:blue;}
@@ -44,21 +46,22 @@
     .btn-master:hover {background-color: #87CEFA;}
     .search-text {width: 300px;}
     .proselect {width: 120px;}
-    .title2 {color:White;font-family:Microsoft JhengHei;}
+    .title2 {color:White;}
     #btn {font-family:Microsoft JhengHei;box-shadow:4px 4px 12px -2px rgba(20%,20%,40%,0.5);}
     </style>
 
 </head>
 
 <body id="page-top">
-
+	
     <!-- Navigation -->
+    <!--  
     <nav class="navbar fixed-top navbar-toggleable-md navbar-light" id="mainNav">
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarExample" aria-controls="navbarExample" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="container">
-<!--             <a class="navbar-brand" href="#page-top">Tool Man</a> -->
+            <a class="navbar-brand" href="#page-top">Tool Man</a>
             <div class="collapse navbar-collapse" id="navbarExample">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
@@ -77,6 +80,7 @@
             </div>
         </div>
     </nav>
+    -->
 
     <header class="masthead">
         <div class="header-content">
@@ -103,11 +107,11 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 offset-lg-2 text-center">
-                    <h2 class="section-heading text-white">We've got what you need!</h2>
+                    <h2 class="section-heading text-white">最有效率的修繕裝潢媒合平台</h2>
                     <hr class="light">
-                    <p class="text-white">網路資訊雖然充足但混亂，消費者無法迅速搜尋，師傅難以推廣業務量。因此，我們建立一個公開、透明、操作容易的平台，統整市場資訊，提供予消費者、師傅最有效率的尋找與媒合。
+                    <p class="text-white">網路資訊雖然充足但混亂，消費者無法迅速尋找師傅，而師傅難以推廣業務量。<br>因此，我們建立一個公開、透明、操作容易的平台，統整市場資訊，<br>提供予消費者、師傅雙方最有效率的尋找與媒合。
 </p>
-                    <a class="btn btn-default btn-xl sr-button" href="#services">Get Started!</a>
+                    <a class="btn btn-default btn-xl sr-button fontmicro" href="#services">了解更多</a>
                 </div>
             </div>
         </div>
@@ -117,7 +121,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">At Your Service</h2>
+                    <h2 class="section-heading">我們提供</h2>
                     <hr style="color:blue">
                 </div>
             </div>
@@ -128,28 +132,28 @@
                 	<i class="fa fa-4x fa-heart text-primary sr-icons"><img src="${pageContext.servletContext.contextPath}/img/network.png"></i>
                     <div class="service-box">
                         <h3>公開平台</h3>
-                        <p class="text-muted">Our templates are updated regularly so they don't break.</p>
+                        <p class="text-muted">資訊透明，操作容易。</p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 text-center">
                     <i class="fa fa-4x fa-heart text-primary sr-icons"><img src="${pageContext.servletContext.contextPath}/img/pro.png"></i>
                     <div class="service-box">
                         <h3>專業師傅</h3>
-                        <p class="text-muted">You can use this theme as is, or you can make changes!</p>
+                        <p class="text-muted">嚴格把關，挑選最專業的師傅。</p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 text-center">
                 <i class="fa fa-4x fa-heart text-primary sr-icons"><img src="${pageContext.servletContext.contextPath}/img/handshake.png"></i>
                     <div class="service-box">
-                        <h3>有效媒合</h3>
-                        <p class="text-muted">We update dependencies to keep things fresh.</p>
+                        <h3>快速媒合</h3>
+                        <p class="text-muted">提供最有效率的媒合機制。</p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 text-center">
                     <i class="fa fa-4x fa-heart text-primary sr-icons"><img src="${pageContext.servletContext.contextPath}/img/godzilla.png"></i>
                     <div class="service-box">
                         <h3>哥吉拉</h3>
-                        <p class="text-muted">You have to make your websites with love these days!</p>
+                        <p class="text-muted">幫您快速拆房子。</p>
                     </div>
                 </div>
             </div>
@@ -168,7 +172,7 @@
                                 	木作工程
                                 </div>
                                 <div class="project-name">
-                                    Project Name
+                                	專業木工
                                 </div>
                             </div>
                         </div>
@@ -265,9 +269,11 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 offset-lg-2 text-center">
-                    <h2 class="section-heading">Let's Get In Touch!</h2>
+                    <h2 class="section-heading fontmicro">聯絡我們</h2>
                     <hr class="primary">
-                    <p>Ready to start your next project with us? That's great! Give us a call or send us an email and we will get back to you as soon as possible!</p>
+                    <p>您選擇了找師傅，因此您值得擁有卓越的服務。精準、專業並且全心全意。<br>
+                    	而最重要的是，這些服務是針對您的需求量身打造，這就是找師傅的一貫理念。</p>
+                    <p>如果您有任何意見與問題，歡迎與我們聯繫！</p><br>
                 </div>
                 <div class="col-lg-4 offset-lg-2 text-center">
                     <i class="fa fa-phone fa-3x sr-contact"></i>
@@ -275,7 +281,7 @@
                 </div>
                 <div class="col-lg-4 text-center">
                     <i class="fa fa-envelope-o fa-3x sr-contact"></i>
-                    <p><a href="mailto:your-email@your-domain.com">feedback@startbootstrap.com</a></p>
+                    <p><a href="mailto:your-email@your-domain.com">ToolMan@Tmail.com</a></p>
                 </div>
             </div>
         </div>
