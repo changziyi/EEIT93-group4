@@ -7,11 +7,13 @@
 
 <%
 	WishpoolService wishpoolSvc = new WishpoolService();
+	
 
-	List<WishpoolVO> new_date = wishpoolSvc.getAllByDate();
+	List<WishpoolVO> new_date = wishpoolSvc.getAll(request.getParameter("order"),
+			request.getParameter("searchCity"));
 	pageContext.setAttribute("new_date", new_date);
 	
-	AdService adSvc = new AdService();
+    AdService adSvc = new AdService();
 	List<AdVO> gabs = adSvc.getAllBySname("廣告進行中");
 	pageContext.setAttribute("get_sname", gabs);
 	
@@ -40,7 +42,7 @@
 	src="${pageContext.servletContext.contextPath}/js/jquery.twzipcode.min.js"></script>
 
 <style>
-.content_box {
+.content-box {
 	display: inline-block;
 	border: 2px dashed #66b5ff;
 	padding: 10px;
@@ -50,16 +52,33 @@
 	background-color: #cce6ff;
 }
 
-.zipcode {
-	display: none;
+.bgcolor {
+   background-color: #00BFFF;
+
 }
+
+
+ .search-condition {
+	margin: 10px 0;
+}
+
+ .user-name {
+
+}
+
+ .btn-lg{
+     font-size: 20px;
+
+}
+
+
 </style>
 
 <script>
 	$(function() {
 		$('#wishblock').imagesLoaded(function() {
 			$('#wishblock').masonry({
-				itemSelector : '.content_box',
+				itemSelector : '.content-box',
 				columnWidth : 282,
 				animate : true
 			});
@@ -70,7 +89,7 @@
 		var city = $('input[name="w_city"]');
 		var district = $('input[name="w_district"]');
 		$('#twzipcode').twzipcode({
-			'css' : [ 'county', 'district', 'zipcode' ],
+			'css' : [ 'county', 'district', 'hidden' ],
 			'onCountySelect' : function() {
 				city.attr("value", this.value);
 			},
@@ -78,73 +97,69 @@
 				district.attr("value", this.value);
 			}
 		});
-
+		$('#bycity').twzipcode({
+			countyName:'searchCountry',
+			districtName:'searchDistrict',
+			zipcodeName:'searchZipcode',
+			'css' : [ 'county','hidden','hidden' ],
+			'onCountySelect' : function() {
+				location = "Wishing+waterfall.jsp?searchCity=" + this.value + "&order=" + $("#orderBy").val();
+			}
+		});
+		
+		//get parameter from parameter
+		var countryDefault = '<%=""%>';
+		
+		if (countryDefault != '') {
+			$("select[name=searchCountry]").val(countryDefault);	
+		}
 	});
 </script>
 
 </head>
 <body>
 	<div class="container">
-		<div class="row">
-			<div class="col-md-12" style="background-color: #99ceff">
-				<H1 style="color: #a94dff" align="center">
-					<b><許願池></b>
-				</H1>
-			</div>
+		<div class="page-header">
+			<h1>
+				許願池
+			</h1>
 		</div>
-		<br />
-		<div align="right">
-			<b>新舊排序：</b> <select name="new" onchange="location = this.value">
-				<option value="Wishing+waterfall.jsp">從新到舊</option>
-				<option value="Wishing+waterfall2.jsp">從舊到新</option>
-			</select> <b>選擇縣市：</b> <select name="bycity">
-				<option value="">顯示全部</option>
-				<option value="">基隆市</option>
-				<option value="">臺北市</option>
-				<option value="">新北市</option>
-				<option value="">宜蘭縣</option>
-				<option value="">新竹市</option>
-				<option value="">新竹縣</option>
-				<option value="">桃園市</option>
-				<option value="">苗栗縣</option>
-				<option value="">臺中市</option>
-				<option value="">彰化縣</option>
-				<option value="">南投縣</option>
-				<option value="">嘉義市</option>
-				<option value="">嘉義縣</option>
-				<option value="">雲林縣</option>
-				<option value="">臺南市</option>
-				<option value="">高雄市</option>
-				<option value="">屏東縣</option>
-				<option value="">臺東縣</option>
-				<option value="">花蓮縣</option>
-				<option value="">金門縣</option>
-				<option value="">連江縣</option>
-				<option value="">澎湖縣</option>
-			</select>
-		</div>
-
 		<div class="row">
-			<div class="col-md-3"
-				style="padding: 30px">
-<div style="border: 2px solid #66b5ff ; padding:50px; margin:10px ; background-color:#99ceff ;border-radius:25px">
-				<div align="center">
-					<button class="btn btn-primary btn-lg" data-toggle="modal"
-						data-target="#myModal01" style="color: #cce6ff">
-						<b>我要許願</b>
-					</button>
+				<div class="pull-right search-condition">
+			
+					<form name="searchForm" id="searchForm" action="Wishing+waterfall.jsp" method="get">
+					<b>新舊排序：</b> 
+					<span>
+					<select name="order" onchange="searchForm.submit();">
+						<option value="desc" <%="desc".equals(request.getParameter("order")) ? "selected" : "" %>>從新到舊</option>
+						<option value="asc" <%="asc".equals(request.getParameter("order")) ? "selected" : "" %>>從舊到新</option>
+					</select> 
+					</span>
+					<b>選擇縣市：</b> 
+					<span id="bycity"></span>
+					</form>
 				</div>
-				<br>
-				<div align="center">
-					<button class="btn btn-primary btn-sm" data-toggle="modal"
-						data-target="#myModal02" style="color: #cce6ff">
-						<b>什麼是許願池</b>
-					</button>
-				</div>
-</div>				
-				<div style="background-color:#cce6ff ; margin:60px 0 0 0 ; padding:10px ; border: 2px solid #66b5ff">
-				<h2 align="center" style="color: #a94dff ">隨機廣告</h2>
-				<br>
+		</div>
+		<div class="row">
+			<div class="col-md-3">
+				<div class="well text-center bgcolor">
+					<div>
+						<button class="btn btn-primary btn-lg" data-toggle="modal"
+							data-target="#myModal01">
+							我要許願
+						</button>
+					</div>
+					<br>
+					<div>
+						<button class="btn btn-primary btn-sm wish-btn" data-toggle="modal"
+							data-target="#myModal02">
+							什麼是許願池
+						</button>
+					</div>
+				</div>				
+				<div class="well bgcolor">
+					<h2 class="text-center">隨機廣告</h2>
+					<br>
 					 <c:forEach var="sname" end="3" items="${get_sname}">
 						 	<div>
 						 	 ${sname.mdataVO.m_city} ${sname.mdataVO.b_name}
@@ -157,26 +172,28 @@
 				</div>
 			</div>
 			
-		
-	
-			<div class="col-md-9" id="wishblock"
-				style="overflow: hidden; margin: 0 auto; background-color: #99ceff"">
-				<div>
+			<div class="col-md-9">
+				
+				<div class="row well bgcolor">
 					<c:forEach var="wishpoolVO" items="${new_date}">
-						<div class="content_box">
-							<b style="color: #a94dff">使用者：${wishpoolVO.c_id}</b> <br>
-							位在地區：${wishpoolVO.w_city}${wishpoolVO.w_district} <br>
-							維修項目：${wishpoolVO.w_pro} <br> 維修內容：${wishpoolVO.w_content} <br>
-							維修項目照片： <img
-								src="${pageContext.servletContext.contextPath}/wishpool/wishpool.do?type=wishpool&image=${wishpoolVO.w_id}"
-								alt="示意圖" class="img-responsive"> <br>
-							<div align="center">
-							<button class="btn btn-primary btn-sm" data-toggle="modal"
-						data-target="#myModal03">
-						<b>我會修理</b>
-					</button><br>
-					發送時間：${wishpoolVO.w_date}
-					</div>
+						<div class="col-md-4">
+							<div class="content-box">
+								<div><label class="user-name">使用者：</label><span>${wishpoolVO.c_id}</span></div>
+								<div>位在地區：${wishpoolVO.w_city}${wishpoolVO.w_district}</div>
+								<div>維修項目：${wishpoolVO.w_pro}</div>
+								<div>維修內容：${wishpoolVO.w_content}</div>
+								<div>維修項目照片： 
+									<img src="${pageContext.servletContext.contextPath}/wishpool/wishpool.do?type=wishpool&image=${wishpoolVO.w_id}"
+									alt="示意圖" class="img-responsive">
+								</div>
+								<div align="center">
+								<button class="btn btn-primary btn-sm" data-toggle="modal"
+									data-target="#wishDetailModal${wishpoolVO.w_id}">
+									我會修理</button>
+								<br>
+								<div class="pull-right">發送時間：${wishpoolVO.w_date}</div>
+								</div>
+							</div>
 						</div>
 					</c:forEach>
 				</div>
@@ -184,8 +201,6 @@
 		</div>
 		
 	</div>
-
-
 
 	<!-----------------------------我要許願表單 ----------------------------------------->
 	<div class="modal fade" id="myModal01" tabindex="-1" role="dialog"
@@ -213,7 +228,7 @@
 								</td>
 							</tr>
 							<tr>
-								<td id="twzipcode"><b>位在地址：</b><br></td>
+								<td><b>位在地址：</b><div id="twzipcode"></div></td>
 							</tr>
 							<tr>
 								<td><b>維修項目的照片：</b> <input type="file" name="w_image"></td>
@@ -239,7 +254,7 @@
 
 
 
-	<!-- 這裡是許願是什麼  -->
+	<!--------------------------- 這裡是許願是什麼  ---------------------------------------------->
 	<div class="modal fade" id="myModal02" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
@@ -269,37 +284,40 @@
 		</div>
 	</div>
 	
-	<!-------------------------- 接下許願 ------------------------------>
-	<div class="modal fade" id="myModal03" tabindex="-1" role="dialog"
-		aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<H4 style="color: red" class="modal-title" id="myModalLabel">
-						許願單
-						<button type="button" class="close" data-dismiss="modal"
-							aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-					</H4>
-					</button>
-				</div>
-				<div var="wishpoolVO" items="${new_date}">
-							使用者：${wishpoolVO.c_id}<br>
-							位在地區：${wishpoolVO.w_city}${wishpoolVO.w_district} <br>
-							維修項目：${wishpoolVO.w_pro} <br> 
-							維修內容：${wishpoolVO.w_content} <br>
-							發送時間：${wishpoolVO.w_date} <br>
-							</div>
-							
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-						<button type="submit" class="btn btn-primary">確認接單</button>
-						<input type="hidden" name="w_city"> <input type="hidden"
-							name="w_district">
+	<c:forEach var="wishpoolVO" items="${new_date}">
+		<!-------------------------- 接下許願 ------------------------------>
+		<div class="modal fade" id="wishDetailModal${wishpoolVO.w_id}" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<H4 style="color: red" class="modal-title" id="myModalLabel">
+							許願單
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span></button>
+						</H4>
 					</div>
+					<div class="modal-body">
+								使用者：${wishpoolVO.c_id}<br>
+								位在地區：${wishpoolVO.w_city}${wishpoolVO.w_district} <br>
+								維修項目：${wishpoolVO.w_pro} <br> 
+								維修內容：${wishpoolVO.w_content} <br>
+								發送時間：${wishpoolVO.w_date} <br>
+								</div>
+								
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+							<button type="submit" class="btn btn-primary">確認接單</button>
+							<input type="hidden" name="w_city"> <input type="hidden"
+								name="w_district">
+						</div>
+				</div>
 			</div>
 		</div>
-	</div>
+	</c:forEach>
+	
+	
 
 </body>
 </html>

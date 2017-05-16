@@ -14,9 +14,6 @@
 	src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 <style>
-body {
-	background: #b3ffff;
-}
 
 .navbar, .dropdown-menu {
 	background: #00BFFF;
@@ -25,12 +22,12 @@ body {
 
 .nav>li>a, .dropdown-menu>li>a:focus, .dropdown-menu>li>a:hover,
 	.dropdown-menu>li>a, .dropdown-menu>li {
-	border-bottom: 3px solid transparent;
+	border-bottom: 2px solid transparent;
 }
 
 .nav>li>a:focus, .nav>li>a:hover, .nav .open>a, .nav .open>a:focus, .nav .open>a:hover,
 	.dropdown-menu>li>a:focus, .dropdown-menu>li>a:hover {
-	border-bottom: 3px solid transparent;
+	border-bottom: 2px solid transparent;
 	background: none;
 }
 
@@ -49,32 +46,17 @@ body {
 }
 
 .nav li:hover:nth-child(8n+2), .nav li.active:nth-child(8n+2) {
-	border-bottom: #F7FDCA 3px solid;
-}
-
-.nav li:hover:nth-child(8n+3), .nav li.active:nth-child(8n+3) {
 	border-bottom: #FECF71 3px solid;
 }
 
-.nav li:hover:nth-child(8n+4), .nav li.active:nth-child(8n+4) {
+.nav li:hover:nth-child(8n+3), .nav li.active:nth-child(8n+3) {
 	border-bottom: #F0776C 3px solid;
 }
 
-.nav li:hover:nth-child(8n+5), .nav li.active:nth-child(8n+5) {
-	border-bottom: #DB9DBE 3px solid;
-}
-
-.nav li:hover:nth-child(8n+6), .nav li.active:nth-child(8n+6) {
-	border-bottom: #C49CDE 3px solid;
-}
-
-.nav li:hover:nth-child(8n+7), .nav li.active:nth-child(8n+7) {
+.nav li:hover:nth-child(8n+4), .nav li.active:nth-child(8n+4) {
 	border-bottom: #669AE1 3px solid;
 }
 
-.nav li:hover:nth-child(8n+8), .nav li.active:nth-child(8n+8) {
-	border-bottom: #62C2E4 3px solid;
-}
 
 .navbar-toggle .icon-bar {
 	color: #fff;
@@ -85,6 +67,9 @@ body {
 	font-size: 40px
 }
 
+a{
+font-size: 18PX
+}
 
 </style>
 
