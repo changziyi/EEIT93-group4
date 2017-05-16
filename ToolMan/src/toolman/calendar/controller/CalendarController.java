@@ -1,6 +1,7 @@
 package toolman.calendar.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.lang.reflect.Array;
 import java.sql.Timestamp;
 import java.text.DateFormat;
@@ -24,11 +25,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-
+import org.json.simple.JSONValue;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import toolman.calendar.model.CalendarService;
 import toolman.calendar.model.CalendarVO;
 import toolman.mdata.model.MdataVO;
 
@@ -59,17 +61,19 @@ public class CalendarController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String calendarjson = request.getParameter("calendarjson");
+	     String calendarjson = request.getParameter("calendarjson");
 		 CalendarVO calendarVO = new CalendarVO();
 		 MdataVO mdataVO = (MdataVO) request.getAttribute("mdataVO");
+		 Integer m_id = mdataVO.getM_id();
 		 System.out.println(calendarjson);
-		 
+		 CalendarService calendarservice = new CalendarService();
+		 List list = new ArrayList();
+//--------------------------------insert---------------------------------------------		 
 		JSONArray jsonarray = new JSONArray(calendarjson);
 		for (int i = 0; i < jsonarray.length(); i++) {
 		    JSONObject jsonobject = jsonarray.getJSONObject(i);
 		    String id = jsonobject.getString("id");
-		    String title = jsonobject.getString("title");
-		    
+		    String title = jsonobject.getString("title");		    
 		    String start1 = jsonobject.getString("start");
 		    DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			Calendar calobj = Calendar.getInstance();
@@ -97,8 +101,8 @@ public class CalendarController extends HttpServlet {
 		    calendarVO.setEnd(end);
 		    calendarVO.setStart(start);
 		    calendarVO.setAllDay(allDay);
-		    calendarVO.setClassName(className);
-		    
+		    calendarVO.setClassName(className);		    
+		    list.add(calendarVO);
 		    
 		    System.out.println(start);
 		    System.out.println(id);
@@ -108,6 +112,9 @@ public class CalendarController extends HttpServlet {
 		    System.out.println(allDay);
 		    System.out.println(overlap);
 		}
+		calendarservice.deleteByM(m_id);
+		calendarservice.InsertByM(list);
+//---------------------------------end insert---------------------------------------------		
 //		Gson gson = new Gson();
 //		List list = new ArrayList();
 //		String [] jsonarray = calendarjson.replaceAll("\\[", "").replaceAll("\\]", "").split("\\}\\,\\{");
@@ -146,6 +153,26 @@ public class CalendarController extends HttpServlet {
 //	        String key = (String)iter.next();
 //	        String value = menu.getString(key);
 //	        map.put(key,value);
+		
+		//---------------------------------get calendar---------------------------------------------
+		
+		List<CalendarVO> getlist = calendarservice.getByM(m_id);
+		
+		for(CalendarVO calendarVo:getlist){
+			Map map = new HashMap();
+			map.put("id", calendarVO.getId());
+			map.put("start", calendarVO.getStart());
+			map.put("title", calendarVO.getTitle());
+			map.put("end", calendarVO.getEnd());
+			map.put("allDay", calendarVO.getAllDay());
+			map.put("overlap", calendarVO.getOverlap());
+			map.put("className", calendarVO.getClassName());
+			list.add(map);
+		}			
+			PrintWriter out = response.getWriter();
+			out.write(JSONValue.toJSONString(list));
+		//---------------------------------end calendar---------------------------------------------
+				
 	    }
 		
 	

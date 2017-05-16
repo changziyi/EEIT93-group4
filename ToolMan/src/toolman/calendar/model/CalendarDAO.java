@@ -1,18 +1,21 @@
 package toolman.calendar.model;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
 
 import hibernate.util.HibernateUtil;
+import toolman.opro.model.OproVO;
 import toolman.order.model.OrderVO;
 
 public class CalendarDAO implements CalendarDAO_Interface {
 
 	@Override
-	public void InsertByM(CalendarVO calendarVO) {
+	public void InsertByM(Collection<CalendarVO> list) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();		
+		for(CalendarVO calendarVO:list){
 		try {
 			session.beginTransaction();
 			session.saveOrUpdate(calendarVO);
@@ -21,6 +24,7 @@ public class CalendarDAO implements CalendarDAO_Interface {
 			session.getTransaction().rollback();
 			throw ex;
 		}	
+	   }
 	}
 
 	@Override

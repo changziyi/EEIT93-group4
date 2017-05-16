@@ -5,8 +5,8 @@ import java.util.List;
 public class CalendarService {
 	CalendarDAO_Interface dao = new CalendarDAO();
 	
-	public void InsertByM(CalendarVO calendarVO){
-		dao.InsertByM(calendarVO);
+	public void InsertByM(List list){
+		dao.InsertByM(list);
 	}
 	public List<CalendarVO> getByM(Integer _id){
 		return dao.getByM(_id);
