@@ -5,6 +5,8 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.criteria.Order;
+
 
 
 public class WishpoolService {
@@ -19,14 +21,67 @@ public class WishpoolService {
 		dao.insert(wishpoolVO);
 	}
 	
-	public List<WishpoolVO> getAll() {
-		return dao.getAll();
+	public List<WishpoolVO> getAll(String order, String city) {
+		
+		System.out.println(order);
+		System.out.println(city);
+		
+		return dao.getAllByDate(order, city);
 		
 	}
-	
-	public List<WishpoolVO> getAllByDate() {
-		return dao.getAllByDate();
+		/*List<WishpoolVO> list = new ArrayList<WishpoolVO>();
+		WishpoolVO wp1 = new WishpoolVO();
+		wp1.setW_id(1);
+		wp1.setC_id("1");
+		wp1.setW_pro("電腦");
+		wp1.setW_city("台北市");
+		wp1.setW_district("北投區");
+		//wp1.setW_image();
+		wp1.setW_city("藍屏又一直當機");
+		//wp1.setW_date(2017-12-08);
+		list.add(wp1);
 		
+		
+		WishpoolVO wp2 = new WishpoolVO();
+		wp2.setW_id(2);
+		wp2.setC_id("2");
+		wp2.setW_pro("電腦");
+		wp2.setW_city("台北市");
+		wp2.setW_district("北投區");
+		//wp1.setW_image();
+		wp2.setW_city("藍屏又一直當機");
+		//wp1.setW_date(2017-12-08);
+		list.add(wp2);
+		
+		
+		WishpoolVO wp3 = new WishpoolVO();
+		wp3.setW_id(3);
+		wp3.setC_id("3");
+		wp3.setW_pro("電腦");
+		wp3.setW_city("台北市");
+		wp3.setW_district("北投區");
+		//wp1.setW_image();
+		wp3.setW_city("藍屏又一直當機");
+		//wp1.setW_date(2017-12-08);
+		list.add(wp3);
+		
+		WishpoolVO wp4 = new WishpoolVO();
+		wp4.setW_id(4);
+		wp4.setC_id("4");
+		wp4.setW_pro("電腦");
+		wp4.setW_city("台北市");
+		wp4.setW_district("北投區");
+		//wp1.setW_image();
+		wp4.setW_city("藍屏又一直當機");
+		//wp1.setW_date(2017-12-08);
+		list.add(wp4);
+		
+		return list;*/
+	
+	
+	
+	public List<WishpoolVO> getAll() {
+		return dao.getAll();
 	}
 	
 	

@@ -7,6 +7,7 @@ import java.sql.*;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
+import javax.persistence.criteria.Order;
 import javax.sql.DataSource;
 
 public class WishpoolDAO implements WishpoolDAO_interface {
@@ -285,7 +286,7 @@ public class WishpoolDAO implements WishpoolDAO_interface {
 	}
 
 	@Override
-	public List<WishpoolVO> getAllByDate() {
+	public List<WishpoolVO> getAllByDate(String order, String city) {
 		List<WishpoolVO> list_date = new ArrayList<WishpoolVO>();
 		WishpoolVO wishpoolVO = null;
 
@@ -294,11 +295,30 @@ public class WishpoolDAO implements WishpoolDAO_interface {
 		ResultSet rs = null;
 
 		try {
-
+			
+			StringBuilder sql = new StringBuilder("SELECT w_id,c_id,w_content,w_image,w_pro,s_name,w_city,w_district,w_date FROM wishpool");
+			
+			if (city != null && city.length() > 0) {
+				sql.append(" where w_city = ? ");
+			}
+			
+			if ("asc".equals(order)) {
+				sql.append(" order by w_date asc");
+			} else {
+				sql.append(" order by w_date desc");
+			}
+			
+			
 			con = ds.getConnection();
-			pstmt = con.prepareStatement(GET_ALLBYDATE_STMT);
+			pstmt = con.prepareStatement(sql.toString());
+			
+			if (city != null && city.length() > 0) {
+				pstmt.setString(0, city);
+			}
+			
+			
 			rs = pstmt.executeQuery();
-
+			
 			while (rs.next()) {
 				wishpoolVO = new WishpoolVO();
 				wishpoolVO.setW_id(rs.getInt("W_id"));
