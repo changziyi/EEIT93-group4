@@ -14,30 +14,23 @@
 <head>
 <title>Bootstrap Example</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-	<style>
+<style>
 .a {
 	border: 2px dashed #66b5ff;
-	padding: 1px;
-	margin: 10px;
+	margin: 5px 10px ;
 	overflow: hidden;
 	background-color: #cce6ff;
-}
-#big-box{
-	width: 630px;
 }
 .page {
 	text-align: center;
 }
 .b {
-/* 	text-align: center; */
+	text-align: center; 
 	border-bottom: 1px solid red;
 }
 hr {
@@ -46,25 +39,29 @@ hr {
 	background-color: #d4d4d4;
 	color: #d4d4d4
 }
-.box{
-	height:300px;
-	width:300px;
-	background-color: gray;
-}
 .font_right{
 	float: right;
 }
 </style>
-	<!-- background-color: gray; -->
-	<%-- 	<jsp:useBean id="cdataVO" class="toolman.cdata.model.CdataVO" scope="session"/> --%>
-	<div class="container" id="big-box">
+	<div class="container">
+<!-- 		<div> -->
+		<div style="border: 2px solid gray;">
+		<div style="margin:10px;">
+			<img height="350px" wight="350px" src='${pageContext.servletContext.contextPath}/images/Plankton.jpg'/>
+		</div>
+		<div style="margin-left:15px; margin-top:15px;">
+			<p>姓名:&nbsp;${cdataVO.c_name}</p>
+			<p>地區:&nbsp;${cdataVO.c_city}&nbsp;${cdataVO.c_district}</p>
+		</div>
+		</div>
 		<ul class="nav nav-tabs" >
-			<li id="a" class="active" value=""><a data-toggle="tab" href="#home">評價</a></li>
-			<li id="b"><a data-toggle="tab" href="#menu2">媒合紀錄</a></li>
+			<li><a id="change-one" class="active" data-toggle="tab"  href="#home">評價</a></li>
+			<li><a id="change-two" data-toggle="tab" href="#menu2">媒合紀錄</a></li>
 		</ul>
+ 
 		<div class="tab-content" style="background-color:gray;">
 			<div id="home" class="tab-pane fade in active">
-				<div Style="width: 600px;">
+				<div>
 					<!--     background-color:red; -->
 					<div>
 						<h6>
@@ -77,7 +74,7 @@ hr {
 						</h6>
 					</div>
 					<div>
-<%-- 					<%@ include file="page1.file" %>  --%>
+
 <%  int rowsPerPage = 5;  //每頁的筆數     
     int rowNumber=0;      //總筆數
     int pageNumber=0;     //總頁數     
@@ -110,76 +107,62 @@ hr {
          }
     } 
 %>
-<%-- <%if (pageNumber>0){%> --%>
-<%-- <b><font color= red>第<%=whichPage%>/<%=pageNumber%>頁</font></b> --%>
-<%-- <%}%> --%>
-<%-- <b>●符 合 查 詢 條 件 如 下 所 示: 共<font color=red><%=rowNumber%></font>筆</b> --%>
-
-
 						<c:forEach var="odata" items="${orders}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 							<div class="a">
 								<p>
-									<label>${odata.b_name}</label><span>${odata.o_tdate}</span>
+									<label>${odata.b_name}</label><span style="margin-left:40px;">${odata.o_tdate}</span>
 								</p>
 								<p>${odata.ma_des}</p>
 							</div>
 						</c:forEach>
-<%-- 						<%@ include file="page2.file" %> --%>
-<table border="0">    
- <tr>
-  <%if (rowsPerPage<rowNumber) {%>
-    <%if(pageIndex>=rowsPerPage){%>
-        <td><A href="${pageContext.servletContext.contextPath}/cdata/CdatadessServlet.do?whichPage=1">至第一頁</A>&nbsp;</td>
-        <td><A href="${pageContext.servletContext.contextPath}/cdata/CdatadessServlet.do?whichPage=<%=whichPage-1%>">上一頁 </A>&nbsp;</td>
-    <%}%>
-  
-    <%if(pageIndex<pageIndexArray[pageNumber-1]){%>
-       <div style="text-align: center">
-         <td><A href="${pageContext.servletContext.contextPath}/cdata/CdatadessServlet.do?whichPage=<%=whichPage+1%>">下一頁</A>&nbsp;</td>
-         <td><A href="${pageContext.servletContext.contextPath}/cdata/CdatadessServlet.do?whichPage=<%=pageNumber %>">至最後一頁</A>&nbsp;</td>
-      </div>  
-    <%}%>
-  <%}%>  
- </tr>
-</table>    
+<!-- <div > -->
+<!-- <table border="0">     -->
+<!--    <tr> -->
+<%--   <%if (rowsPerPage<rowNumber) {%> --%>
+<%--     <%if(pageIndex>=rowsPerPage){%> --%>
+<%--         <td><A href="${pageContext.servletContext.contextPath}/cdata/CdatadessServlet.do?whichPage=1">至第一頁</A>&nbsp;</td> --%>
+<%--         <td><A href="${pageContext.servletContext.contextPath}/cdata/CdatadessServlet.do?whichPage=<%=whichPage-1%>">上一頁 </A>&nbsp;</td> --%>
+<%--     <%}%> --%>
+<%--     <%if(pageIndex<pageIndexArray[pageNumber-1]){%> --%>
+<%--          <td><A href="${pageContext.servletContext.contextPath}/cdata/CdatadessServlet.do?whichPage=<%=whichPage+1%>">下一頁</A>&nbsp;</td> --%>
+<%--          <td><A href="${pageContext.servletContext.contextPath}/cdata/CdatadessServlet.do?whichPage=<%=pageNumber %>">至最後一頁</A>&nbsp;</td> --%>
+<%--     <%}%> --%>
+<%--   <%}%>   --%>
+<!--   </tr> -->
+<!-- </table>     -->
+<!-- </div> -->
 <%if ( pageNumber > 1) {%>
+<div style="margin-left:500px">
 <table border="0">   
  <tr> 
-        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        </td>
    <FORM METHOD="post" ACTION="${pageContext.servletContext.contextPath}/cdata/CdatadessServlet.do">   
         <td>
-           <select size="1" name="whichPage">
-        <%for (int i=1; i<=pageNumber; i++){%>
-           <option value="<%=i%>">跳至第<%=i%>頁
-        <%}%> 
+           <select  size="1" name="whichPage">
+        <%for (int i=1; i<=pageNumber; i++){%><option value="<%=i%>">跳至第<%=i%>頁<%}%> 
            </select>
            <input type="submit" value="確定" >  
         </td>
    </FORM>
  </tr>
 </table>
+</div>
 <%}%>
 
 					</div>
 				</div>
 			</div>
 			<div id="menu2" class="tab-pane fade">
-				<div Style="width: 600px;">
+				<div>
 					<h6>
 						<input type="checkbox" name="star" value="">5顆星 <input
 							type="checkbox" name="star" value="">4顆星 <input
 							type="checkbox" name="star" value="">3顆星 <input
-							type="checkbox" name="star" value="">2顆星 <input
+							type="checkbox" nam="star" value="">2顆星 <input
 							type="checkbox" name="star" value="">1顆星
 						<hr>
 					</h6>
 				</div>
 				<div Style="width:600px;">
-					<div class="box">
 					
 <%  
     int rowsPerPage1 = 1;  //每頁的筆數     
@@ -216,26 +199,23 @@ hr {
 %>
 						<c:forEach var="odata" items="${orders}" begin="<%=pageIndex1%>" end="<%=pageIndex1+rowsPerPage1-1%>">
 							<div class="b">
-								<label>${odata.b_name}</label><label class="font_right">${odata.o_edate}</label>
-								
+								<label>${odata.b_name}</label><label class="font_right">${odata.o_edate}</label>				
 							</div>
 						</c:forEach>
 						<table border="0">    
- <tr>
-  <%if (rowsPerPage1<rowNumber1) {%>
-    <%if(pageIndex1>=rowsPerPage1){%>
-        <td><A href="${pageContext.servletContext.contextPath}/cdata/CdatadessServlet.do?whichPage=2">至第一頁</A>&nbsp;</td>
-        <td><A href="${pageContext.servletContext.contextPath}/cdata/CdatadessServlet.do?whichPage=<%=whichPage1-1%>">上一頁 </A>&nbsp;</td>
-    <%}%>
-  
-    <%if(pageIndex1<pageIndexArray1[pageNumber1-1]){%>
-       <div style="text-align: center">
-         <td><A href="${pageContext.servletContext.contextPath}/cdata/CdatadessServlet.do?whichPage=<%=whichPage1+1%>">下一頁</A>&nbsp;</td>
-         <td><A href="${pageContext.servletContext.contextPath}/cdata/CdatadessServlet.do?whichPage=<%=pageNumber1%>">至最後一頁</A>&nbsp;</td>
-      </div>  
-    <%}%>
-  <%}%>  
- </tr>
+ 						<tr>
+  						<%if (rowsPerPage1<rowNumber1) {%>
+   						 <%if(pageIndex1>=rowsPerPage1){%>
+        				<td><A href="${pageContext.servletContext.contextPath}/cdata/CdatadessServlet.do?whichPage=2">至第一頁</A>&nbsp;</td>
+        				<td><A href="${pageContext.servletContext.contextPath}/cdata/CdatadessServlet.do?whichPage=<%=whichPage1-1%>">上一頁 </A>&nbsp;</td><%}%>
+   						 <%if(pageIndex1<pageIndexArray1[pageNumber1-1]){%>
+     					  <div style="text-align: center">
+         					<td><A href="${pageContext.servletContext.contextPath}/cdata/CdatadessServlet.do?whichPage=<%=whichPage1+1%>">下一頁</A>&nbsp;</td>
+         					<td><A href="${pageContext.servletContext.contextPath}/cdata/CdatadessServlet.do?whichPage=<%=pageNumber1%>">至最後一頁</A>&nbsp;</td>
+      					  </div>  
+    						<%}%><%}%>  
+ 						</tr>
+ 						</table>
 					</div>
 				</div>
 			</div>

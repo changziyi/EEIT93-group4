@@ -69,11 +69,11 @@ public class LoginServlet extends HttpServlet {
 			RequestDispatcher rd = req.getRequestDispatcher("/cdata/login-in.jsp");
 			rd.forward(req, resp);
 			return;//中斷
-		}
-        if(verify == true){ 
+		}			//true
+        if(verify == false){ 
 //        	 resp.sendRedirect(resp.encodeRedirectURL(req.getContextPath()+"/cdata/index.jsp"));//王修改
-//       	 resp.sendRedirect(resp.encodeRedirectURL(req.getContextPath()+"/master/List.jsp"));
-        	 resp.sendRedirect(resp.encodeRedirectURL(req.getContextPath()+"/wishpool/Wishing+waterfall.jsp"));
+       	 resp.sendRedirect(resp.encodeRedirectURL(req.getContextPath()+"/master/List.jsp"));
+//        	 resp.sendRedirect(resp.encodeRedirectURL(req.getContextPath()+"/wishpool/Wishing+waterfall.jsp"));
         	 
 //        	 System.out.println("C_id = " + cdataVO.getC_id());
 //        	 System.out.println("cdataVO = " + cdataVO);

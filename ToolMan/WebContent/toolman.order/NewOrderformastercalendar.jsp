@@ -46,6 +46,79 @@
 <!-- login please -->
 	
 	<style>
+/*------------navigation bar--------------------------------*/
+/* 	body { */
+/* 	background: #b3ffff; */
+/* } */
+
+.navbar, .dropdown-menu {
+	background: #00BFFF;
+	border: none;
+}
+
+.nav>li>a, .dropdown-menu>li>a:focus, .dropdown-menu>li>a:hover,
+	.dropdown-menu>li>a, .dropdown-menu>li {
+	border-bottom: 3px solid transparent;
+}
+
+.nav>li>a:focus, .nav>li>a:hover, .nav .open>a, .nav .open>a:focus, .nav .open>a:hover,
+	.dropdown-menu>li>a:focus, .dropdown-menu>li>a:hover {
+	border-bottom: 3px solid transparent;
+	background: none;
+}
+
+.navbar a, .dropdown-menu>li>a, .dropdown-menu>li>a:focus,
+	.dropdown-menu>li>a:hover, .navbar-toggle {
+	color: #fff;
+}
+
+.dropdown-menu {
+	-webkit-box-shadow: none;
+	box-shadow: none;
+}
+
+.nav li:hover:nth-child(8n+1), .nav li.active:nth-child(8n+1) {
+	border-bottom: #C4E17F 3px solid;
+}
+
+.nav li:hover:nth-child(8n+2), .nav li.active:nth-child(8n+2) {
+	border-bottom: #F7FDCA 3px solid;
+}
+
+.nav li:hover:nth-child(8n+3), .nav li.active:nth-child(8n+3) {
+	border-bottom: #FECF71 3px solid;
+}
+
+.nav li:hover:nth-child(8n+4), .nav li.active:nth-child(8n+4) {
+	border-bottom: #F0776C 3px solid;
+}
+
+.nav li:hover:nth-child(8n+5), .nav li.active:nth-child(8n+5) {
+	border-bottom: #DB9DBE 3px solid;
+}
+
+.nav li:hover:nth-child(8n+6), .nav li.active:nth-child(8n+6) {
+	border-bottom: #C49CDE 3px solid;
+}
+
+.nav li:hover:nth-child(8n+7), .nav li.active:nth-child(8n+7) {
+	border-bottom: #669AE1 3px solid;
+}
+
+.nav li:hover:nth-child(8n+8), .nav li.active:nth-child(8n+8) {
+	border-bottom: #62C2E4 3px solid;
+}
+
+.navbar-toggle .icon-bar {
+	color: #fff;
+	background: #fff;
+}
+
+.navbar-brand {
+	font-size: 40px
+}
+/*------------navigation bar--------------------------------*/
+	
 /* calendar */
 		body {
 		margin-top: 40px;
@@ -111,6 +184,7 @@
 		border: 1px solid #ccc;
 
 	}
+/*------------end navigation bar--------------------------------*/	
 /* calendar */	
 		#map{
 		height:100px;
@@ -170,10 +244,71 @@
 	
 	<jsp:useBean id="mdataVO" class="toolman.mdata.model.MdataVO" scope="session"/>
 	<!-- retrieve MdataVO object from session-->
-
+<!-------------------------------- navigation bar---------------------------------->
+<div class="navbar-wrapper">
+    <div class="container-fluid">
+        <nav class="navbar navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">ToolMan</a>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="#" class="">首頁</a></li>
+                        <li class=" dropdown">
+                            <a href="#" class="dropdown-toggle " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">我要找師傅  <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li class=" dropdown">
+                                    <a href="#" class="dropdown-toggle " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">New01</a>
+                                </li>
+                                <li><a href="#">New02</a></li>
+                            </ul>
+                        </li>                   
+                        <li class=" dropdown"><a href="#" class="dropdown-toggle " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">我要開店  <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">New01</a></li>
+                                <li><a href="#">New02</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="${pageContext.servletContext.contextPath}/wishpool/Wishing+waterfall.jsp">許願池  </a></li>
+                       </ul>
+                     <!----------- 搜尋列----- -->
+                       <ul class="navbar-right">
+					    <form class="navbar-form">
+					        <div class="form-group">
+					          <input type="text" class="form-control" placeholder="Search">
+					        </div>
+					        <button type="submit" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+					      </form>
+					</ul>
+                     <!----------- 搜尋列----- -->
+                    <ul class="nav navbar-nav pull-right">
+                        <li class=" dropdown"><a href="#" class="dropdown-toggle active" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">登入  <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="${pageContext.servletContext.contextPath}/wishpool/login-in.jsp">ToolMan 帳號</a></li>
+                                <li><a href="#">Facebook 帳號</a></li>
+                            </ul>
+                        </li>
+                        <li class=""><a href="#">登出</a></li>
+                    </ul>
+                </div>
+           
+                </div>
+            
+            </div>
+        </nav>
+    </div>
+<!--------------------------------end navigation bar---------------------------------->
 </head>
 <body>
-<!-- smart wizard head -->
+	
+<!----------------------------------- smart wizard head----------------------------- -->
 
         
 
@@ -183,7 +318,7 @@
      
         <div id="smartwizard">
             <ul class="stepstyle textstyle">
-            	<li><a href="#step-1">步驟一<br /><small>選擇不可預約時間</small></a></li>
+            	<li><a href="#step-1" style="white-space: nowrap">步驟一<br /><small>建立預約日程</small></a></li>
                 <li><a href="#step-2">步驟一<br /><small>填寫申請表</small></a></li>
                 <li><a href="#step-3">步驟三<br /><small>送出審核</small></a></li>
                 
@@ -192,7 +327,8 @@
          <div>
         	 <!--  step1  -->
          <div id="step-1" class="">
-                <div id='wrap'>
+  <!--------------------------------calendar---------------------------------->  
+        <div id='wrap'>
 			<!-- draggable -->
 		<div id='external-events'  style="margin-top:46px;">
 			<h4 style="margin-left:20%;">預約時間</h4>
@@ -258,8 +394,8 @@
 		</div>
 
 
-		<div id='calendar' style="float:left;"></div>
-	
+		<div id='calendar' style="float:left;width:800px;"></div>
+<!--------------------------------end calendar---------------------------------->
 		<div style='clear:both'></div>
 	</div>
                 <form class="form-inline">
@@ -277,7 +413,7 @@
 				            <div class="btn-group navbar-btn" role="group">
 				                <button class="btn btn-default" id="prev-btn1" type="button" disabled>上一步</button>
 				                <button class="btn btn-default" id="next-btn1" type="button">下一步</button>
-				                
+				                <button class="btn btn-primary" id="submitcalendar" type="button">完成日程表</button>
 				            </div>
 				        </form>
                 
@@ -484,7 +620,7 @@ var eventidglobe =null;
 	$( function() {
         /* calendar
 		-----------------------------------------------------------------*/
-		
+		$('#submitcalendar').on('click',calendarsubmit);
 		$('#external-events2>div').on('click',assignrandom);
 		draggableevent();
 		$('input[name="repeatingbox"]').on('change',repeatingevent);// end select change
@@ -588,8 +724,8 @@ var eventidglobe =null;
             })
  
 		//calendar
-	});	    
-	
+	});//end ready
+
 // 	function getCoordinate(){
 // 		var a1 = $('#o_city').val();
 // 		var a2 = $('#o_district').val();
@@ -627,6 +763,43 @@ var eventidglobe =null;
 // 	 	}
 	 
 	 /*-----------calendar---------*/
+	 	function calendarsubmit(){
+// 	 		var cache = [];
+// 	 		var calendarobj=$('#calendar').fullCalendar('clientEvents')
+// 	 		var calendarjson = JSON.stringify(calendarobj, function(key, value) {
+// 	 		    if (typeof value === 'calendarobj' && value !== null) {
+// 	 		        if (cache.indexOf(value) !== -1) {
+// 	 		            // Circular reference found, discard key
+// 	 		            return;
+// 	 		        }
+// 	 		        // Store value in our collection
+// 	 		        cache.push(value);
+// 	 		    }
+// 	 		    return value;
+// 	 		});
+	 		// Enable garbage collection
+// 		var calendarjson = JSON.stringify($('#calendar').fullCalendar('clientEvents'));
+	
+	var calendarjson = JSON.stringify($("#calendar").fullCalendar("clientEvents").map(function(e) {
+	    var rv = {};
+	    Object.keys(e)
+	        .filter(function(k) {
+	            return k != "source" && !k.startsWith("_");
+	         })
+	        .forEach(function(k) {
+	            rv[k] = e[k];
+	        });
+	    return rv;
+	}));
+	console.log(calendarjson);
+// 	console.log(rv);
+		console.log($('#calendar').fullCalendar('clientEvents').toString());
+// 		console.log(calendarjson);
+		$.post('${pageContext.servletContext.contextPath}/toolman.calendar/CalendarController.do',{'calendarjson':calendarjson}, function(data){
+			alert("ok");
+		 });//end post
+		
+	}//end calendarsubmit
 	 function assignrandom(event){
 			
 			randomnumber = Math.random().toString();//not working after drop, because the real id is still the original
@@ -713,7 +886,7 @@ var eventidglobe =null;
 				checkedbox.each(function () {
 					selectmenu.push($(this).val());
 				});//end each
-//		 		console.log(checkedbox);
+// 		 		console.log(checkedbox);
 //		 		console.log(selectmenu);
 				var repeateventallday = [{
 					//means delete all repeating items and rebuild new ones
@@ -836,7 +1009,7 @@ var eventidglobe =null;
 					},
 					editable: true,
 					timezone:'UTC',
-					
+// 					timezone = 'Asia/Taipei',
 					droppable: true, // this allows things to be dropped onto the calendar
 					eventDrop: function(event, delta, revertFunc) {
 						checkoverlapping(event);
@@ -876,7 +1049,7 @@ var eventidglobe =null;
 					},//end drop
 					eventRender:function( event ) {
 						// Timezone calculation
-						console.log(event);
+// 						console.log(event);
 						var d = new Date();
 						var ds = new Date(event.start._d).getTime();
 						var n = d.getTimezoneOffset()*60*1000;
@@ -896,7 +1069,7 @@ var eventidglobe =null;
 
 						event._id = eventidglobe;
 						event.id = eventidglobe;
-						console.log(event);
+// 						console.log(event);
 //		 				var randomnumber =Math.random().toString();//not working after drop, because the real id is still the original
 						
 						$(this).attr('data-id',$(this).data('id')+randomnumber);
@@ -928,7 +1101,7 @@ var eventidglobe =null;
 // 					event._start._d = d;
 // 					console.log(event.start._d);
 // 					console.log(event._start._d);
-					console.log(event);
+// 					console.log(event);
 				if(events.length>1){
 				for(i=0;i<events.length-1;i++){
 				// start-time in between any of the events
@@ -944,10 +1117,10 @@ var eventidglobe =null;
 					var end2 = events[i].end._d;
 					var start4 = events[i].duration;
 					var splitstring1 = start1.split(" ");
-					console.log(splitstring1);
+// 					console.log(splitstring1);
 					
 					var splitstring2 = start2.split(" ");
-					console.log(splitstring2);
+// 					console.log(splitstring2);
 					if((events[i].title == "整天不可預約")||(event.title =="整天不可預約")){
 						if((splitstring1[0]+splitstring1[1]+splitstring1[2]+splitstring1[3])==
 							(splitstring2[0]+splitstring2[1]+splitstring2[2]+splitstring2[3])){
@@ -1012,10 +1185,10 @@ var eventidglobe =null;
 					var end2 = events[i].end._d;
 					var start4 = events[i].duration;
 					var splitstring1 = start1.split(" ");
-					console.log(splitstring1);
+// 					console.log(splitstring1);
 					
 					var splitstring2 = start2.split(" ");
-					console.log(splitstring2);
+// 					console.log(splitstring2);
 					if((events[i].title == "整天不可預約")||(event.title =="整天不可預約")){
 						if((splitstring1[0]+splitstring1[1]+splitstring1[2]+splitstring1[3])==
 							(splitstring2[0]+splitstring2[1]+splitstring2[2]+splitstring2[3])){
