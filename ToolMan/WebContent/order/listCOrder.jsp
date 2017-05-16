@@ -150,13 +150,13 @@ ${orderVO.ca_des}
   <!-- Trigger the modal with a button -->
   
 
-<!--  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" >評分</button> -->
+ <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#${orderVO.o_id}" >評分</button> 
  
  
   <!-- Modal -->
   
-<!--   <div class="modal fade" id="myModal" role="dialog" > -->
-<!--     <div class="modal-dialog"> -->
+  <div class="modal fade" id="${orderVO.o_id}" role="dialog" > 
+    <div class="modal-dialog"> 
     
       <!-- Modal content-->
       
@@ -171,7 +171,8 @@ ${orderVO.ca_des}
          
          
 <h4 class="modal-title">評分給鼓勵吧</h4>
-         
+         <span>${orderVO.o_id}</span>
+          
           
     <label class="radio-inline">
       <input type="radio" name="m_rating" value="5">5分
@@ -219,8 +220,8 @@ ${orderVO.ca_des}
         
       </div>
   </div>
-<!--  </div> -->
-<!-- </div> -->
+ </div>
+ </div> 
 
 </form>
  <%------------------------------------------------萬里長城----------------------------------------------------%>

@@ -2,19 +2,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
 <%@ page import="toolman.order.model.*"%>
-<%@ page import="toolman.email.model.*"%>
 <%@ page import="toolman.cdata.model.*"%>
 
 
 
 <%-- 此頁採用 JSTL 與 EL 取值 --%>
-<%	
-	EmailService emailSvc = new EmailService();
-	HttpSession sessions = request.getSession();
-	CdataVO cdataVO = (CdataVO)sessions.getAttribute("LoginOK");
-	List<EmailVO> list2 = emailSvc.getMail(cdataVO.getC_id());
-	pageContext.setAttribute("list", list2);
-%>
+
 
 
 <%
@@ -72,12 +65,10 @@
      </FORM>
 
      <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/cdata/CdataOrderServlet.do" >
- 	<c:forEach var="emailVO" items="${list}">
  
        <input type="submit" value="消費者訂單">
-        <input type="hidden" name="c_id" value=${emailVO.c_id}>
+        <input type="hidden" name="c_id" value="Snoopy">
         <input type="hidden" name="action" value="listOrder">
-        </c:forEach>
      </FORM>
      <%------------------------------------------------------------------- --%>
      
@@ -169,13 +160,13 @@ ${orderVO.ca_des}
   <!-- Trigger the modal with a button -->
   
 
-<!--  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" >評分</button> -->
+ <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#${orderVO.o_id}" >評分</button> 
  
  
   <!-- Modal -->
   
-<!--   <div class="modal fade" id="myModal" role="dialog" > -->
-<!--     <div class="modal-dialog"> -->
+  <div class="modal fade" id="${orderVO.o_id}" role="dialog" > 
+    <div class="modal-dialog"> 
     
       <!-- Modal content-->
       
@@ -190,7 +181,7 @@ ${orderVO.ca_des}
          
          
 <h4 class="modal-title">評分給鼓勵吧</h4>
-         
+         <span>${orderVO.o_id}</span>
           
     <label class="radio-inline">
       <input type="radio" name="m_rating" value="5">5分
@@ -242,8 +233,8 @@ ${orderVO.ca_des}
         
       </div>
   </div>
-<!--  </div> -->
-<!-- </div> -->
+  </div> 
+ </div> 
 
 </form>
  <%------------------------------------------------萬里長城----------------------------------------------------%>

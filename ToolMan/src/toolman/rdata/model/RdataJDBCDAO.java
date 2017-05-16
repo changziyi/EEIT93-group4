@@ -22,12 +22,12 @@ public class RdataJDBCDAO implements RdataDAO_interface {
 	String userid = "sa";
 	String passwd = "sa123456";
 
-	private static final String INSERT_MANAGER = "INSERT INTO rdata (r_date, c_id, m_id, p_summary, p_content, s_name, sa_rnote, d_id) "
+	private static final String INSERT_MANAGER = "INSERT INTO rdata (r_date, c_id, m_id, p_summary, p_content, s_name, sa_rnote, d_id, o_id) "
 			+ "VALUES (?,?,?,?,?,?,?,?)";
-	private static final String UPDATE = "UPDATE rdata set r_date=?, c_id=?, m_id=?, p_summary=?, p_content=?, s_name=?, sa_rnote=?, d_id=? WHERE r_id = ?";
+	private static final String UPDATE = "UPDATE rdata set r_date=?, c_id=?, m_id=?, p_summary=?, p_content=?, s_name=?, sa_rnote=?, d_id=?, o_id=? WHERE r_id = ?";
 	private static final String DELETE = "DELETE FROM rdata WHERE r_id = ?";
-	private static final String GETONE = "SELECT r_id, r_date, c_id, m_id, p_summary, p_content, s_name, sa_rnote, d_id FROM rdata WHERE r_id = ?";
-	private static final String GETALL = "SELECT r_id, r_date, c_id, m_id, p_summary, p_content, s_name, sa_rnote, d_id FROM rdata ORDER BY r_id";
+	private static final String GETONE = "SELECT r_id, r_date, c_id, m_id, p_summary, p_content, s_name, sa_rnote, d_id, o_id FROM rdata WHERE r_id = ?";
+	private static final String GETALL = "SELECT r_id, r_date, c_id, m_id, p_summary, p_content, s_name, sa_rnote, d_id, o_id FROM rdata ORDER BY r_id";
 
 	@Override
 	public void insert(RdataVO rdataVO) {
@@ -40,7 +40,7 @@ public class RdataJDBCDAO implements RdataDAO_interface {
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(INSERT_MANAGER);
 
-			pstmt.setDate(1, rdataVO.getR_date());
+			pstmt.setTimestamp(1, rdataVO.getR_date());
 			pstmt.setString(2, rdataVO.getC_id());
 			pstmt.setInt(3, rdataVO.getM_id());
 			pstmt.setString(4, rdataVO.getP_summary());
@@ -48,7 +48,8 @@ public class RdataJDBCDAO implements RdataDAO_interface {
 			pstmt.setString(6, rdataVO.getS_name());
 			pstmt.setString(7, rdataVO.getSa_rnote());
 			pstmt.setInt(8, rdataVO.getD_id());
-			
+			pstmt.setInt(8, rdataVO.getO_id());
+
 
 			int num = pstmt.executeUpdate();
 			System.out.println("已新增" + num + "筆資料");
@@ -86,7 +87,7 @@ public class RdataJDBCDAO implements RdataDAO_interface {
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(UPDATE);
 
-			pstmt.setDate(1, rdataVO.getR_date());
+			pstmt.setTimestamp(1, rdataVO.getR_date());
 			pstmt.setString(2, rdataVO.getC_id());
 			pstmt.setInt(3, rdataVO.getM_id());
 			pstmt.setString(4, rdataVO.getP_summary());
@@ -94,6 +95,7 @@ public class RdataJDBCDAO implements RdataDAO_interface {
 			pstmt.setString(6, rdataVO.getS_name());
 			pstmt.setString(7, rdataVO.getSa_rnote());
 			pstmt.setInt(8, rdataVO.getD_id());
+			pstmt.setInt(8, rdataVO.getO_id());
 
 			int num = pstmt.executeUpdate();
 			System.out.println("已修改" + num + "筆資料");
@@ -181,7 +183,7 @@ public class RdataJDBCDAO implements RdataDAO_interface {
 			while (rs.next()) {
 				rdataVO = new RdataVO();
 				rdataVO.setR_id(rs.getInt("r_id"));
-				rdataVO.setR_date(rs.getDate("r_date"));
+				rdataVO.setR_date(rs.getTimestamp("r_date"));
 				rdataVO.setC_id(rs.getString("c_id"));
 				rdataVO.setM_id(rs.getInt("m_id"));
 				rdataVO.setP_summary(rs.getString("p_summary"));
@@ -189,7 +191,8 @@ public class RdataJDBCDAO implements RdataDAO_interface {
 				rdataVO.setS_name(rs.getString("s_name"));
 				rdataVO.setSa_rnote(rs.getString("sa_rnote"));
 				rdataVO.setD_id(rs.getInt("d_id"));
-			
+				rdataVO.setO_id(rs.getInt("o_id"));
+
 				
 			}
 		} catch (ClassNotFoundException e) {
@@ -241,7 +244,7 @@ public class RdataJDBCDAO implements RdataDAO_interface {
 			while (rs.next()) {
 				rdataVO = new RdataVO();
 				rdataVO.setR_id(rs.getInt("r_id"));
-				rdataVO.setR_date(rs.getDate("r_date"));
+				rdataVO.setR_date(rs.getTimestamp("r_date"));
 				rdataVO.setC_id(rs.getString("c_id"));
 				rdataVO.setM_id(rs.getInt("m_id"));
 				rdataVO.setP_summary(rs.getString("p_summary"));
@@ -249,6 +252,8 @@ public class RdataJDBCDAO implements RdataDAO_interface {
 				rdataVO.setS_name(rs.getString("s_name"));
 				rdataVO.setSa_rnote(rs.getString("sa_rnote"));
 				rdataVO.setD_id(rs.getInt("d_id"));
+				rdataVO.setO_id(rs.getInt("o_id"));
+
 				list.add(rdataVO);
 			}
 		} catch (ClassNotFoundException e) {
@@ -287,16 +292,16 @@ public class RdataJDBCDAO implements RdataDAO_interface {
 
 		/************************** 測試新增 ****************************/
 		RdataVO rdataVO = new RdataVO();
-		
-		rdataVO.setR_date(java.sql.Date.valueOf("2017-02-08"));
-		rdataVO.setC_id("1001");
-		rdataVO.setM_id(1001);
-		rdataVO.setP_summary("態度不佳");
-		rdataVO.setP_content("這個人會亂吐檳榔渣，還會罵髒話");
-		rdataVO.setS_name("m_pass");
-		rdataVO.setSa_rnote(null);
-		rdataVO.setD_id(6001);
-		dao.insert(rdataVO);
+//		
+//		rdataVO.setR_date(java.sql.Date.valueOf("2017-02-08"));
+//		rdataVO.setC_id("1001");
+//		rdataVO.setM_id(1001);
+//		rdataVO.setP_summary("態度不佳");
+//		rdataVO.setP_content("這個人會亂吐檳榔渣，還會罵髒話");
+//		rdataVO.setS_name("m_pass");
+//		rdataVO.setSa_rnote(null);
+//		rdataVO.setD_id(6001);
+//		dao.insert(rdataVO);
 
 		/************************** 測試修改 ****************************/
 
