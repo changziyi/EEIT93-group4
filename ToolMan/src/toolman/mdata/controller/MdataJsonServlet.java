@@ -41,12 +41,17 @@ public class MdataJsonServlet extends HttpServlet {
 			
 			MdataService mdataSvc = new MdataService();
 			
-			if ((m_pro.trim()).length() == 0 || m_pro == null){
-				out.println(mdataSvc.getMasterBySP(m_city, m_district, b_name));
+			if ("all".equals(m_city)) {
+				out.println(mdataSvc.getAllBySP());
 			} else {
-				out.println(mdataSvc.getMproBySP(m_pro, m_city, m_district, b_name));
+				if ((m_pro.trim()).length() == 0 || m_pro == null){
+					out.println(mdataSvc.getMasterBySP(m_city, m_district, b_name));
+				} else if((b_name.trim()).length() == 0 || b_name == null) {
+					out.println(mdataSvc.getMproBySP(m_pro, m_city, m_district, b_name));
+				} else {
+					out.println(mdataSvc.getMproBySP(m_pro, m_city, m_district, b_name));
+				}
 			}
-			
 			Long s2 = System.currentTimeMillis();
 			System.out.println("searchspjson：" + (s2-s1));
 			

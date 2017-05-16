@@ -66,16 +66,13 @@
 </script>
 
 
-<script>
 
-
-<!-- </script> -->
 </head>
 <body>
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12" style="background-color: #99ceff">
-				<H1 style="color: green" align="center">測試用頁面</H1>
+				<H1 style="color: green" align="center">Email</H1>
 			</div>
 		</div>
 		<br>
@@ -96,7 +93,7 @@
 					<div>
 						<c:forEach var="emailVO" items="${list}">
 							<div class="content_box">
-								id : ${emailVO.ms_id}		<br>						
+														
 								<span>收件人：${emailVO.mss_id}</span>
 								<br>
 								<span>寄件人：${emailVO.msr_id}</span>
@@ -124,9 +121,9 @@
 		<div class="modal-dialog">
 <form method="POST" action="Email.do">
 				<div class="modal-content">
-					<div class="modal-header">
+					<div class="modal-header" >
 						<H4 style="color: blue">
-							email
+						1111
 							<button type="button" class="close" data-dismiss="modal"
 								aria-label="Close">
 								<span aria-hidden="true">&times;</span>
@@ -143,7 +140,8 @@
 								<td>寄件人：${Onelist.msr_id}</td>
 							</tr>
 							<tr>
-								<td>主旨：${Onelist.ms_content}</td>
+								<td>主旨：${Onelist.ms_summary}</td>
+							</tr>
 							<tr>								
 								<td>內容：${Onelist.ms_content}</td>
 							</tr>
@@ -151,13 +149,7 @@
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">返回</button>
-<!-- 						<button class="btn btn-primary btn-lg" data-toggle="modal" -->
-<!-- 						data-target="#myModal01">回覆</button> -->
-<!-- 						<button type="button" class="btn btn-primary" data-target="#myModal01">回覆</button>		 -->
 
-					<button class="btn btn-primary btn-lg" data-toggle="modal"
-						id="#myModal01">回覆</button>
-						
 					</div>
 				</div>
 			</form>

@@ -205,14 +205,13 @@ public class MdataService {
 		List<Map> jList = new LinkedList<Map>();
 		for (Object[] aMata : mdatas) {
 			Map jContent = new HashMap();
-			jContent.put("pro", aMata[0]);
-			jContent.put("id",aMata[1]);
-			jContent.put("bname",aMata[2]);
-			jContent.put("mname",aMata[3]);
-			jContent.put("city",aMata[4]);
-			jContent.put("district",aMata[5]);
-			jContent.put("rating",aMata[7]);
-			jContent.put("finish",aMata[8]);
+			jContent.put("id",aMata[0]);
+			jContent.put("bname",aMata[1]);
+			jContent.put("mname",aMata[2]);
+			jContent.put("city",aMata[3]);
+			jContent.put("district",aMata[4]);
+			jContent.put("rating",aMata[6]);
+			jContent.put("finish",aMata[7]);
 			List<String> pList = new LinkedList<String>();
 			mpros = mproSvc.getByMidSp(new Integer((int) aMata[0]));
 			for (Object aMpro : mpros) {

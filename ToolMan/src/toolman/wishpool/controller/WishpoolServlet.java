@@ -38,7 +38,8 @@ public class WishpoolServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		
 		String type = req.getParameter("type");
-
+		
+		
 		if ("wishpool".equals(type)) {
 			String image = req.getParameter("image");
 			Integer img = new Integer(image);
@@ -73,10 +74,12 @@ public class WishpoolServlet extends HttpServlet {
 		// String action = req.getParameter("action");
 		// 設定文字編碼形式
 
-		
 		HttpSession session = req.getSession();
 		CdataVO cdataVO = (CdataVO)session.getAttribute("LoginOK");
+		System.out.println("cdataVO = " + cdataVO.getC_id());
 		String SendAccount = cdataVO.getC_id();
+		
+		
 		
 		//if ("Wishing".equals(action)) {
 		
@@ -145,6 +148,8 @@ public class WishpoolServlet extends HttpServlet {
 		return;
 		*/
 		WishpoolVO addform = new WishpoolVO();
+		
+		addform.setC_id(cdataVO.getC_id());
 		addform.setW_pro(w_pro);
 		addform.setW_city(w_city);
 		addform.setW_district(w_district);
@@ -182,6 +187,7 @@ public class WishpoolServlet extends HttpServlet {
 		
 		//測試用
 		System.out.println("確認表單上傳成功");
+		System.out.println("使用者帳號： "+ cdataVO.getC_id());
 		System.out.println("我想修 : " + w_pro);
 		System.out.println("位於： " + w_city + w_district);
 		System.out.println("示意圖： " + w_image);

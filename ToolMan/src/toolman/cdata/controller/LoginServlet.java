@@ -72,8 +72,12 @@ public class LoginServlet extends HttpServlet {
 		}
         if(verify == true){ 
 //        	 resp.sendRedirect(resp.encodeRedirectURL(req.getContextPath()+"/cdata/index.jsp"));//王修改
-       	 resp.sendRedirect(resp.encodeRedirectURL(req.getContextPath()+"/master/searchPage.jsp"));
+       	 	 resp.sendRedirect(resp.encodeRedirectURL(req.getContextPath()+"/master/searchPage.jsp"));
         	 System.out.println("C_id = " + cdataVO.getC_id());
+//       	 resp.sendRedirect(resp.encodeRedirectURL(req.getContextPath()+"/master/List.jsp"));
+//        	 resp.sendRedirect(resp.encodeRedirectURL(req.getContextPath()+"/wishpool/Wishing+waterfall.jsp"));
+        	 
+//        	 System.out.println("C_id = " + cdataVO.getC_id());
 //        	 System.out.println("cdataVO = " + cdataVO);
         }else{
         	errorMsgs.put("gRecaptchaResponse", "請驗證我不是機器人");

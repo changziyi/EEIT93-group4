@@ -354,20 +354,7 @@ public class MdataDAO implements MdataDAO_interface {
 //		
 		MdataDAO dao = new MdataDAO();
 		
-//		List<Object[]> list = dao.searchAll();
-//		for(Object[] alist : list) {
-//			System.out.print(alist[0] + ",");
-//			System.out.print(alist[1] + ",");
-//			System.out.print(alist[2] + ",");
-//			System.out.print(alist[3] + ",");
-//			System.out.print(alist[4] + ",");
-//			System.out.print(alist[5] + ",");
-//			System.out.print(alist[6] + ",");
-//			System.out.print(alist[7] + ",");
-//			System.out.println(alist[8]);
-//		}
-		
-		List<Object[]> list = dao.searchByMpro("地板地磚", "臺北市", "", "樹");
+		List<Object[]> list = dao.searchAll();
 		for(Object[] alist : list) {
 			System.out.print(alist[0] + ",");
 			System.out.print(alist[1] + ",");
@@ -379,6 +366,19 @@ public class MdataDAO implements MdataDAO_interface {
 			System.out.print(alist[7] + ",");
 			System.out.println(alist[8]);
 		}
+		
+//		List<Object[]> list = dao.searchByMpro("地板地磚", "臺北市", "", "樹");
+//		for(Object[] alist : list) {
+//			System.out.print(alist[0] + ",");
+//			System.out.print(alist[1] + ",");
+//			System.out.print(alist[2] + ",");
+//			System.out.print(alist[3] + ",");
+//			System.out.print(alist[4] + ",");
+//			System.out.print(alist[5] + ",");
+//			System.out.print(alist[6] + ",");
+//			System.out.print(alist[7] + ",");
+//			System.out.println(alist[8]);
+//		}
 		
 //		List<Object[]> list = dao.search("臺北市","","");
 //		for(Object[] alist :list) {

@@ -157,6 +157,12 @@
 	.labelstyle{
 		text-align:right;
 	}
+	.fc-event{
+		width:100px;
+		display:table;
+		margin:auto;
+		
+	}
 	</style>
 
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -187,43 +193,67 @@
         	 <!--  step1  -->
          <div id="step-1" class="">
                 <div id='wrap'>
-
-		<div id='external-events'>
-			<h4>Draggable Events</h4>
-			<div id='external-events2'>
-			<div class='fc-event' data-id="morning"data-start="01:00" data-end='08:00'>早上不可預約</div>
-			<div class='fc-event' data-id="noon"data-start="12:00" data-end='06:00'>下午不可預約</div>
-			<div class='fc-event' data-id="night"data-start="18:00" data-end='06:00'>晚上不可預約</div>
-			
-		</div>
-		<div class='fc-event' id="alldayevent" data-id="allday"data-start="00:00" data-end='24:00'>整天不可預約</div>
-<!-- 			<p> -->
+			<!-- draggable -->
+		<div id='external-events'  style="margin-top:46px;">
+			<h4 style="margin-left:20%;">預約時間</h4>
+			<div id='external-events2' style="margin-left:20%;">
+				<div class='fc-event' data-id="morning"data-start="01:00" data-end='08:00'>早上不可預約</div>
+				<div class='fc-event' data-id="noon"data-start="12:00" data-end='06:00'>下午不可預約</div>
+				<div class='fc-event' data-id="night"data-start="18:00" data-end='06:00'>晚上不可預約</div>
+				<div class='fc-event' id="alldayevent" data-id="allday"data-start="00:00" data-end='24:00'>整天不可預約</div>
+				
+			</div>
+		<!-- 			<p> -->
 <!-- 				<input type='checkbox' id='drop-remove' /> -->
 <!-- 				<label for='drop-remove'>remove after drop</label> -->
 <!-- 			</p> -->
 	
-			<div class='.repeatingevent'id="selectmenu" > 
-				
-					<input type="checkbox" name="repeatingbox" value="1" seleted="selected">週一</option>
-					<input type="checkbox" name="repeatingbox"value="2" seleted="selected">週二</option>
-					<input type="checkbox" name="repeatingbox" value="3" seleted="selected">週三</option>
-					<input type="checkbox" name="repeatingbox" value="4" seleted="selected">週四</option>
-					<input type="checkbox" name="repeatingbox" value="5" seleted="selected">週五</option>
-					<input type="checkbox" name="repeatingbox" value="6" seleted="selected">週六</option>
-					<input type="checkbox" name="repeatingbox" value="0" seleted="selected">週日</option>
-	<!-- 				<select id="selectmenu" multiple="multiple" size="6">	 -->
-	<!-- 				<option  value="2">週一</option> -->
-	<!-- 				<option  value="3">週二</option> -->
-	<!-- 				<option  value="4">週三</option> -->
-	<!-- 				<option  value="5">週四</option> -->
-	<!-- 				<option  value="6">週五</option> -->
-	<!-- 				<option  value="7">週六</option> -->
-	<!-- 				<option  value="1">週日</option> -->
-	<!-- 			</select> -->
-				
-			</div>
-			<div style="width:200px; border:2px solid blue;height:200px;">
-			    	垃圾桶
+			<div class='.repeatingevent'id="selectmenu" style="margin-left:20%;"> 
+				<table style="border-collapse: collapse; display: inline; ">
+<!-- 				beware that value is for dow, so it must be plain number-->
+					<tr><td colspan="4">每週一不可預約</td><td></td></tr>
+					<tr><td ><input type="checkbox" name="repeatingboxmorning" value="1" >早上</td>
+					<td><input type="checkbox" name="repeatingboxnoon" value="1" >下午</td>
+					<td><input type="checkbox" name="repeatingboxnight" value="1" >晚上</td>
+					<td><input type="checkbox" name="repeatingbox" value="1" >整天</td></tr>
+					
+					<tr><td colspan="4">每週二不可預約</td><td></td></tr>
+					<tr><td><input type="checkbox" name="repeatingboxmorning"value="2" >早上</td>
+					<td><input type="checkbox" name="repeatingboxnoon"value="2" >下午</td>
+					<td><input type="checkbox" name="repeatingboxnight"value="2" >晚上</td>
+					<td><input type="checkbox" name="repeatingbox"value="2" >整天</td></tr>
+					
+					<tr><td colspan="4">每週三不可預約</td><td></td></td>
+					<tr><td><input type="checkbox" name="repeatingboxmorning" value="3" >早上</td>
+					<td><input type="checkbox" name="repeatingboxnoon" value="3" >下午</td>
+					<td><input type="checkbox" name="repeatingboxnight" value="3" >晚上</td>
+					<td><input type="checkbox" name="repeatingbox" value="3" >整天</td></tr>
+					
+					<tr><td colspan="4">每週四不可預約</td><td></td></td>
+					<tr><td><input type="checkbox" name="repeatingboxmorning" value="4" >早上</td>
+					<td><input type="checkbox" name="repeatingboxnoon" value="4" >下午</td>
+					<td><input type="checkbox" name="repeatingboxnight" value="4" >晚上</td>
+					<td><input type="checkbox" name="repeatingbox" value="4" >整天</td></tr>
+					
+					<tr><td colspan="4">每週五不可預約</td><td></td></td>
+					<tr><td><input type="checkbox" name="repeatingboxmorning" value="5" >早上</td>
+					<td><input type="checkbox" name="repeatingboxnoon" value="5" >下午</td>
+					<td><input type="checkbox" name="repeatingboxnight" value="5" >晚上</td>
+					<td><input type="checkbox" name="repeatingbox" value="5" >整天</td></tr>
+					
+					<tr><td colspan="4">每週六不可預約</td><td></td></td>
+					<tr><td><input type="checkbox" name="repeatingboxmorning" value="6" >早上</td>
+					<td><input type="checkbox" name="repeatingboxnoon" value="6" >下午</td>
+					<td><input type="checkbox" name="repeatingboxnight" value="6" >晚上</td>
+					<td><input type="checkbox" name="repeatingbox" value="6" >整天</td></tr>
+					
+					<tr><td colspan="4">每週日不可預約</td><td></td></td>
+					<tr><td><input type="checkbox" name="repeatingboxmorning" value="0" >早上</td>
+					<td><input type="checkbox" name="repeatingboxnoon" value="0" >下午</td>
+					</td><td><input type="checkbox" name="repeatingboxnight" value="0" >晚上</td>
+					<td><input type="checkbox" name="repeatingbox" value="0" >整天</td></tr>
+					
+				</table>
 			</div>
 		</div>
 
@@ -457,7 +487,10 @@ var eventidglobe =null;
 		
 		$('#external-events2>div').on('click',assignrandom);
 		draggableevent();
-		$('#selectmenu>input').on('change',repeatingevent);// end select change
+		$('input[name="repeatingbox"]').on('change',repeatingevent);// end select change
+		$('input[name="repeatingboxmorning"]').on('change',repeatingeventmorning);// end select change
+		$('input[name="repeatingboxnoon"]').on('change',repeatingeventnoon);// end select change
+		$('input[name="repeatingboxnight"]').on('change',repeatingeventnight);// end select change
 		buildcalendar();
 		/* calendar
 		-----------------------------------------------------------------*/
@@ -661,7 +694,7 @@ var eventidglobe =null;
 			}//end draggable event
 			
 			function repeatingevent(){
-				$('#calendar').fullCalendar( 'removeEvents', 'repeatingitem');
+				$('#calendar').fullCalendar( 'removeEvents', 'repeateventeveryallday');
 				
 				selectmenu = [];
 				var checkedbox = $('input[name="repeatingbox"]:checked');
@@ -670,16 +703,94 @@ var eventidglobe =null;
 				});//end each
 //		 		console.log(checkedbox);
 //		 		console.log(selectmenu);
-				var repeatevent = 	{
-					
-					id:"repeatingitem",
-				    title:"programming",
+				var repeateventallday = 	{
+					//means delete all repeating items and rebuild new ones
+					id:"repeateventeveryallday",
+				    title:"每整天",
 				    start: '00:00', // a start time (10am in this example)				
 				    overlap: false,
 					end: '24:00', // an end time (2pm in this example)
 				    dow: selectmenu // Repeat monday and thursday
 				}
-				$('#calendar').fullCalendar( 'renderEvent', repeatevent);
+				$('#calendar').fullCalendar( 'renderEvent', repeateventallday);
+				
+				//	 $('#calendar').fullCalendar( 'destroy' );
+				//	 buildcalendar();
+			}//end repeating event
+			
+			function repeatingeventmorning(){
+				$('#calendar').fullCalendar( 'removeEvents', 'repeateventmorning');
+				
+				selectmenu = [];
+				var checkedbox = $('input[name="repeatingboxmorning"]:checked');
+				checkedbox.each(function () {
+					selectmenu.push($(this).val());
+				});//end each
+//		 		console.log(checkedbox);
+//		 		console.log(selectmenu);
+				var repeateventmorning = 	{
+					//means delete all repeating items and rebuild new ones
+					id:"repeateventmorning",
+				    title:"每早",
+				    start: '01:00', // a start time (10am in this example)				
+				    overlap: true,
+					end: '09:00', // an end time (2pm in this example)
+				    dow: selectmenu // Repeat monday and thursday
+				}
+				$('#calendar').fullCalendar( 'renderEvent', repeateventmorning);
+				
+				//	 $('#calendar').fullCalendar( 'destroy' );
+				//	 buildcalendar();
+			}//end repeating event
+			
+			function repeatingeventnoon(){
+				$('#calendar').fullCalendar( 'removeEvents', 'repeateventeverynoon');
+				
+				selectmenu = [];
+				var checkedbox = $('input[name="repeatingboxnoon"]:checked');
+				checkedbox.each(function () {
+					selectmenu.push($(this).val());
+				});//end each
+//		 		console.log(checkedbox);
+//		 		console.log(selectmenu);
+				var repeateventnoon = 	{
+					//means delete all repeating items and rebuild new ones
+					id:"repeateventeverynoon",
+					
+				    title:"每下午",
+				    start: '12:00', // a start time (10am in this example)				
+				    overlap: true,
+					end: '18:00', // an end time (2pm in this example)
+				    dow: selectmenu, // Repeat monday and thursday
+				    
+				}
+				$('#calendar').fullCalendar( 'renderEvent', repeateventnoon);
+				
+				//	 $('#calendar').fullCalendar( 'destroy' );
+				//	 buildcalendar();
+			}//end repeating event
+			
+			function repeatingeventnight(){
+				$('#calendar').fullCalendar( 'removeEvents', 'repeateventnight');
+				
+				selectmenu = [];
+				var checkedbox = $('input[name="repeatingboxnight"]:checked');
+				checkedbox.each(function () {
+					selectmenu.push($(this).val());
+				});//end each
+//		 		console.log(checkedbox);
+//		 		console.log(selectmenu);
+				var repeateventnight = 	{
+					//means delete all repeating items and rebuild new ones
+					id:"repeateventnight",
+				    title:"每晚",
+				    start: '18:00', // a start time (10am in this example)				
+				    overlap: true,
+					end: '24:00', // an end time (2pm in this example)
+				    dow: selectmenu // Repeat monday and thursday
+				}
+				
+				$('#calendar').fullCalendar( 'renderEvent', repeateventnight);
 				
 				//	 $('#calendar').fullCalendar( 'destroy' );
 				//	 buildcalendar();
@@ -696,7 +807,8 @@ var eventidglobe =null;
 						right: 'month,agendaWeek,agendaDay'
 					},
 					editable: true,
-					timezone:'local',
+					timezone:'UTC',
+					
 					droppable: true, // this allows things to be dropped onto the calendar
 					eventDrop: function(event, delta, revertFunc) {
 						checkoverlapping(event);
@@ -710,7 +822,7 @@ var eventidglobe =null;
 					eventDragStop: function(event,jsEvent) {
 						 
 					    alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
-					    if( (20 <= jsEvent.pageX) & (jsEvent.pageX <= 220) & (240 <= jsEvent.pageY) & (jsEvent.pageY <= 350)){
+					    if( ( 1293<= jsEvent.pageX) | (jsEvent.pageX <= 300) | (1293 <= jsEvent.pageY) | (jsEvent.pageY <=690)){
 					      alert('delete: '+ event.id);
 					      $('#calendar').fullCalendar('removeEvents', event.id);
 					    }
@@ -722,7 +834,8 @@ var eventidglobe =null;
 						eventidglobe =$(this).data('id')+randomnumber;
 						event._id =eventidglobe ;
 						event.id=eventidglobe;
-						event.eventOverlap = 'false'; 
+						event.eventOverlap = 'false';
+						
 //		 				event.start= $(this).data('start');
 						// is the "remove after drop" checkbox checked?
 						
@@ -732,9 +845,25 @@ var eventidglobe =null;
 						
 						}//end if
 					},//end drop
-
-					eventReceive:function( event ) {
+					eventRender:function( event ) {
+						// Timezone calculation
+						console.log(event);
+						var d = new Date();
+						var ds = new Date(event.start._d).getTime();
+						var n = d.getTimezoneOffset()*60*1000;
+						var s =new Date(ds+n);
 						
+						//event.start._d and event._start._d is not the same
+// 						console.log(s);
+// 						console.log(d);
+// 						event.start._d = s;
+						event._start._d = s;
+// 						console.log(event.start._d);
+// 						console.log(event._start._d);
+// 						console.log(event);
+					},
+					eventReceive:function( event ) {
+
 						event._id = eventidglobe;
 						event.id = eventidglobe;
 						console.log(event);
@@ -755,45 +884,58 @@ var eventidglobe =null;
 				});// end full calendar
 			}//end create calendar
 			
-			function checkoverlapping(event){
+			function checkoverlapping(event){// no event can exists twice in 1 day, and no event can be added under all day unavailable
 				
 				var events = $('#calendar').fullCalendar('clientEvents');
-				if(events.length!=1){
+					
+// 					var d = new Date();
+// 					var ds = new Date(event.start._d).getTime();
+// 					var n = d.getTimezoneOffset()*60*1000;
+// 					d=new Date(ds+n);
+// 					console.log(ds+n);
+// 					console.log(d);
+// 					event.start._d = d;
+// 					event._start._d = d;
+// 					console.log(event.start._d);
+// 					console.log(event._start._d);
+					console.log(event);
+				if(events.length!=0){
 				for(i=0;i<events.length-1;i++){
 				// start-time in between any of the events
-				console.log(event);
-				var eventid1 = event.id;
-				var eventid2 = event._id;
-				var eventitle = event.title;
-				var eventitle2 = events[i].title;
-				var end1 = event.end._d;
-				var start1 = event.start._d.toString();
-				var start2 = events[i].start._d.toString();
-				console.log(start1);
-				var end2 = events[i].end._d;
-				var start4 = events[i].duration;
-				var splitstring1 = start1.split(" ");
-				console.log(splitstring1);
-				
-				var splitstring2 = start2.split(" ");
-				console.log(splitstring2);
-				if((events[i].title == "整天不可預約")||(event.title =="整天不可預約")){
-				if((splitstring1[0]+splitstring1[1]+splitstring1[2]+splitstring1[3])==
-					(splitstring2[0]+splitstring2[1]+splitstring2[2]+splitstring2[3])){
-
-						$('#calendar').fullCalendar('removeEvents', event.id);
-						return true;
-						
-					}//end for
-				}//end if
-				if(start1 == start2 ){
-
+	
+					var eventid1 = event.id;
+					var eventid2 = event._id;
+					var eventitle = event.title;
+					var eventitle2 = events[i].title;
+					var end1 = event.end._d;
+					var start1 = event._start._d.toString();
+					var start2 = events[i]._start._d.toString();
+// 					console.log(start1);
+					var end2 = events[i].end._d;
+					var start4 = events[i].duration;
+					var splitstring1 = start1.split(" ");
+					console.log(splitstring1);
 					
-						$('#calendar').fullCalendar('removeEvents', event.id);
-					    return true;
+					var splitstring2 = start2.split(" ");
+					console.log(splitstring2);
+					if((events[i].title == "整天不可預約")||(event.title =="整天不可預約")){
+						if((splitstring1[0]+splitstring1[1]+splitstring1[2]+splitstring1[3])==
+							(splitstring2[0]+splitstring2[1]+splitstring2[2]+splitstring2[3])){
+		
+								$('#calendar').fullCalendar('removeEvents', event.id);
+								return true;
+								
+							}//end for
+						}//end if
+					else if((splitstring1[0]+splitstring1[1]+splitstring1[2]+splitstring1[3]+splitstring1[4])==
+						(splitstring2[0]+splitstring2[1]+splitstring2[2]+splitstring2[3]+splitstring2[4])){
+	
 						
-					}//end if
-				}//end if event!=1
+							$('#calendar').fullCalendar('removeEvents', event.id);
+						    return true;
+							
+						}//end if
+				}//end for 
 				//end-time in between any of the events
 //		 		if(event.start > events[i].start && event.start < events[i].end){
 //		 			$('#calendar').fullCalendar('removeEvents', event.id);
@@ -804,7 +946,7 @@ var eventidglobe =null;
 //		 			$('#calendar').fullCalendar('removeEvents', event.id);
 //		 		    return true;
 //		 		}
-			  }
+			  }//end if event!=0
 			}
 		
 	</script>
