@@ -10,20 +10,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <title>ToolMan找師傅平台</title>
-
+	<link rel="Shortcut Icon" href="${pageContext.servletContext.contextPath}/favicon.ico" />
     <!-- Bootstrap core CSS -->
-<%--     <link href="${pageContext.servletContext.contextPath}/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"> --%>
     <link rel="stylesheet" href="${pageContext.servletContext.contextPath}/css/bootstrap.min.css">
 
     <!-- Plugin CSS -->
     <link href="${pageContext.servletContext.contextPath}/css/index/magnific-popup.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-<%--     <link href="${pageContext.servletContext.contextPath}/css/creative.min.css" rel="stylesheet"> --%>
     <link href="${pageContext.servletContext.contextPath}/css/creative.css" rel="stylesheet">
     <link href="${pageContext.servletContext.contextPath}/css/index/expandsearch.css" rel="stylesheet">
 	<link href="${pageContext.servletContext.contextPath}/nav/nav.css" rel="stylesheet">
-    <!-- Temporary navbar container fix -->
     
     <style>
 	body {font-family:Microsoft JhengHei;}
@@ -72,8 +69,7 @@
                 <div class="col-lg-8 offset-lg-2 text-center">
                     <h2 class="section-heading title2">最有效率的修繕裝潢媒合平台</h2>
                     <hr class="light">
-                    <p class="title2">網路資訊雖然充足但混亂，消費者無法迅速尋找師傅，而師傅難以推廣業務量。<br>因此，我們建立一個公開、透明、操作容易的平台，統整市場資訊，<br>提供予消費者、師傅雙方最有效率的尋找與媒合。
-</p>
+                    <p class="title2">網路資訊雖然充足但混亂，消費者無法迅速尋找師傅，而師傅難以推廣業務量。<br>因此，我們建立一個公開、透明、操作容易的平台，統整市場資訊，<br/>提供予消費者、師傅雙方最有效率的尋找與媒合。</p>
                     <a class="btn btn-default btn-xl sr-button fontmicro" href="#services">了解更多</a>
                 </div>
             </div>
@@ -252,13 +248,13 @@
     <!-- Bootstrap core JavaScript -->
     
     <script src="${pageContext.servletContext.contextPath}/js/jquery-3.2.1.min.js"></script>
-    <script src="${pageContext.servletContext.contextPath}/vendor/tether/tether.min.js"></script>
+    <script src="${pageContext.servletContext.contextPath}/js/index/tether.min.js"></script>
 	<script src="${pageContext.servletContext.contextPath}/js/bootstrap.min.js"></script>    
 
     <!-- Plugin JavaScript -->
-    <script src="${pageContext.servletContext.contextPath}/vendor/jquery-easing/jquery.easing.min.js"></script>
-    <script src="${pageContext.servletContext.contextPath}/vendor/scrollreveal/scrollreveal.min.js"></script>
-    <script src="${pageContext.servletContext.contextPath}/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+    <script src="${pageContext.servletContext.contextPath}/js/index/jquery.easing.min.js"></script>
+    <script src="${pageContext.servletContext.contextPath}/js/index/scrollreveal.min.js"></script>
+    <script src="${pageContext.servletContext.contextPath}/js/index/jquery.magnific-popup.min.js"></script>
 	<script src="${pageContext.servletContext.contextPath}/js/jquery.search.twzipcode.min.js"></script>
 	
     <!-- Custom scripts for this template -->
@@ -298,7 +294,7 @@
 				data: {'city':'all','action':'SearchAll'},
 				type : 'POST',
 				success : function(returnData) {
-					$(location).attr('href','searchResult.jsp');
+					$(location).attr('href','${pageContext.servletContext.contextPath}/master/searchResult.jsp');
 				}
 			});
 		});

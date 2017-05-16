@@ -46,8 +46,6 @@ public class MdataJsonServlet extends HttpServlet {
 			} else {
 				if ((m_pro.trim()).length() == 0 || m_pro == null){
 					out.println(mdataSvc.getMasterBySP(m_city, m_district, b_name));
-				} else if((b_name.trim()).length() == 0 || b_name == null) {
-					out.println(mdataSvc.getMproBySP(m_pro, m_city, m_district, b_name));
 				} else {
 					out.println(mdataSvc.getMproBySP(m_pro, m_city, m_district, b_name));
 				}

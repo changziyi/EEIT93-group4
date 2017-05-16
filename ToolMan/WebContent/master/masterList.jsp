@@ -6,9 +6,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="Shortcut Icon" href="${pageContext.servletContext.contextPath}/favicon.ico" />
 <link rel="stylesheet" href="${pageContext.servletContext.contextPath}/css/bootstrap.min.css">
 <link rel="stylesheet" href="${pageContext.servletContext.contextPath}/css/bootstrap-theme.min.css">
 <link rel="stylesheet" href="${pageContext.servletContext.contextPath}/css/theme.min.css">
+<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/nav/nav.css">
 <script src="${pageContext.servletContext.contextPath}/js/jquery-3.2.1.min.js"></script>
 <script src="${pageContext.servletContext.contextPath}/js/bootstrap.min.js"></script>
 <script src="${pageContext.servletContext.contextPath}/js/jquery.search.twzipcode.min.js"></script>
@@ -18,7 +20,6 @@ body {font-family:Microsoft JhengHei;}
 .zipcode {display: none;}
 /* .district {display: none;} */
 /* .row {width:82%} */
-.mascontent {width:80%;}
 .proc {
 	width: 15px;
 	height: 3px;
@@ -36,28 +37,50 @@ body {font-family:Microsoft JhengHei;}
 	margin-left:0;
 	margin-bottom:8px;
 }
+.container {width:90%;}
+.myDiv {position:relative; top:100px}
 </style>
 </head>
 <body>
-		<form action="master.do" method="post">
-			<span id="twzipcode"></span><input type="text" name="input" value="${search.b_name}">
-			<button type="button" id="btn">ajax</button>
-			<input type="submit" value="找師傅">
-			<input type="hidden" name="action" value="SearchResult">
-			<input type="hidden" name="city" >
-			<input type="hidden" name="district" >
-		</form>
-		
-		<div>
-			city= ${search.m_city}
-			district = ${search.m_district}
-			pro= ${search.m_name}
-			input= ${search.b_name}
+<jsp:include page="/nav/navigation.jsp" />
+<!-- 		<form action="master.do" method="post"> -->
+<%-- 			<span id="twzipcode"></span><input type="text" name="input" value="${search.b_name}"> --%>
+<!-- 			<button type="button" id="btn">ajax</button> -->
+<!-- 			<input type="submit" value="找師傅"> -->
+<!-- 			<input type="hidden" name="action" value="SearchResult"> -->
+<!-- 			<input type="hidden" name="city" > -->
+<!-- 			<input type="hidden" name="district" > -->
+<!-- 		</form> -->
+<!-- 		<div> -->
+<%-- 			city= ${search.m_city} --%>
+<%-- 			district = ${search.m_district} --%>
+<%-- 			pro= ${search.m_name} --%>
+<%-- 			input= ${search.b_name} --%>
+<!-- 		</div> -->
+	<div class="container myDiv">
+		<div class="row">
+			<div class="col-xs-6 col-md-4">
+<!-- 					<h1 class="my-4">Shop Name</h1> -->
+					<div>
+						<form action="master.do" method="post">
+							<span id="twzipcode"></span><input type="text" name="input" value="${search.b_name}">
+							<button type="button" id="btn">ajax</button>
+							<input type="submit" value="找師傅">
+							<input type="hidden" name="action" value="SearchResult">
+							<input type="hidden" name="city" >
+							<input type="hidden" name="district" >
+						</form>
+					</div>
+	                <div class="list-group">
+	                    <a href="#" class="list-group-item">Category 1</a>
+	                    <a href="#" class="list-group-item">Category 2</a>
+	                    <a href="#" class="list-group-item">Category 3</a>
+	                </div>
+                </div>
+			<div class="col-xs-12 col-sm-6 col-md-8"><div id="show" class="row"></div></div>
 		</div>
-		
-<!-- 	<input id="input-4" name="input-4" value="3" class="rating rating-loading" data-show-clear="false" data-show-caption="false" data-readonly="true"> -->
-	<div id="show" class="row"></div>
-
+	</div>
+	
 <script>
 	
 // 	$(function() {
@@ -122,7 +145,7 @@ body {font-family:Microsoft JhengHei;}
 				}
 				divSpan.append([finish]);
 				var thumbnail = $('<div></div>').addClass('thumbnail').append([a,divSpan]);
-				var col = $('<div></div>').addClass('col-sm-6 col-md-4').append([thumbnail]);
+				var col = $('<div></div>').addClass('col-xs-6 col-sm-4').append([thumbnail]);
 				docFragment.append(col);
 			});
 			show.append(docFragment);
@@ -137,7 +160,7 @@ body {font-family:Microsoft JhengHei;}
 				data: {'city':'${search.m_city}','pro':link,'action':'SearchResult'},
 				type : 'POST',
 				success : function(returnData) {
-					$(location).attr('href','searchResult.jsp');
+					$(location).attr('href','masterList.jsp');
 				}
 			});
 		});
@@ -172,7 +195,7 @@ body {font-family:Microsoft JhengHei;}
 			data: {'city':city.val(),'district':disval,'input':input.val(),'action':'SearchResult'},
 			type : 'POST',
 			success : function(returnData) {
-				$(location).attr('href','searchResult.jsp');
+				$(location).attr('href','masterList.jsp');
 			}
 		});
 	});
