@@ -72,6 +72,7 @@ public class LoginServlet extends HttpServlet {
 		}
         if(verify == true){ 
 //        	 resp.sendRedirect(resp.encodeRedirectURL(req.getContextPath()+"/cdata/index.jsp"));//王修改
+       	 resp.sendRedirect(resp.encodeRedirectURL(req.getContextPath()+"/master/searchPage.jsp"));
         	 System.out.println("C_id = " + cdataVO.getC_id());
 //        	 System.out.println("cdataVO = " + cdataVO);
         }else{
