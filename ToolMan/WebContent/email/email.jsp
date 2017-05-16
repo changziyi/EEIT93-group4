@@ -66,7 +66,6 @@
 </script>
 
 
-
 </head>
 <body>
 	<div class="container">
@@ -123,7 +122,7 @@
 				<div class="modal-content">
 					<div class="modal-header" >
 						<H4 style="color: blue">
-						1111
+						Content
 							<button type="button" class="close" data-dismiss="modal"
 								aria-label="Close">
 								<span aria-hidden="true">&times;</span>

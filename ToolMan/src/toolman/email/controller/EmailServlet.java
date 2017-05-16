@@ -114,7 +114,7 @@ public class EmailServlet extends HttpServlet {
 		
 		System.out.println("msid: " + emailVO.getMs_id());
 		
-//		res.sendRedirect("email.jsp");
+		res.sendRedirect("email.jsp");
 		
 //		if (!errorMsgs.isEmpty()) {
 //			req.setAttribute("emailVO", emailVO);
