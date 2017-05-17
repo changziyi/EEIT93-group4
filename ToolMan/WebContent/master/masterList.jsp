@@ -22,34 +22,23 @@
 <link rel="stylesheet" href="${pageContext.servletContext.contextPath}/css/theme.min.css">
 <link rel="stylesheet" href="${pageContext.servletContext.contextPath}/nav/nav.css">
 <link rel="stylesheet" href="${pageContext.servletContext.contextPath}/css/index/expandsearch.css">
-<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/css/creative.css">
+<%-- <link rel="stylesheet" href="${pageContext.servletContext.contextPath}/css/creative.css"> --%>
 <style>
 body {font-family:Microsoft JhengHei;}
+a {color:White;}
 .county {width:80px;height:25px;vertical-align: top}
 .zipcode {display: none;}
 .form-control {margin:auto; width:120px; display:inline; font-family:Microsoft JhengHei; vertical-align: top}
-.proc {
-	padding: 5px;
-	margin-left: 0;
- 	margin-right: 5px;
- 	text-align: center;
-	border-radius: 3px;
-	color: #FFF5EE;
-	font-weight: bold;
-}
-.divpro {
-	margin-left: 0;
-  	margin-bottom: 10px;
-}
+.proc {padding:5px;margin-left: 0;margin-right: 5px;text-align: center;border-radius: 3px;color: #FFF5EE;font-weight: bold;}
+.divpro {margin-left: 0;margin-bottom: 10px;}
 .container {width: 80%;}
-.myDiv {position: relative; top: 12%}
+.myDiv {position:relative; top:90px;}
 .pad {padding-left: 3%;}
 .result {font-size:20px;}
 .resultcount {padding:5%;}
 .count {color: #00BFFF;}
 .list-group {margin-top: 15%;}
 .probtn {font-size: 16px;}
-a {color:White;}
 .searchinput {font-weight:bold;color:#00AFEA;}
 .btn-master {color: White; background-color: #00BFFF; font-size:14px}
 .btn-master:hover {background-color: #87CEFA;color: white}

@@ -8,39 +8,35 @@
 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
     <title>ToolMan</title>
+    
 	<link rel="shortcut icon" href="${pageContext.servletContext.contextPath}/favicon.ico" />
-    <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="${pageContext.servletContext.contextPath}/css/bootstrap.min.css">
-
-    <!-- Plugin CSS -->
     <link href="${pageContext.servletContext.contextPath}/css/index/magnific-popup.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
     <link href="${pageContext.servletContext.contextPath}/css/creative.css" rel="stylesheet">
     <link href="${pageContext.servletContext.contextPath}/css/index/expandsearch.css" rel="stylesheet">
 	<link href="${pageContext.servletContext.contextPath}/nav/nav.css" rel="stylesheet">
     
     <style>
-	body {font-family:Microsoft JhengHei;}
-    .zipcode {display: none;}
-	.district {display: none;}
-    .fontmicro {font-family:Microsoft JhengHei;}
-	.form-control {margin:auto; width:100px; display:inline; font-family:Microsoft JhengHei; vertical-align: top}
-    .bg-customer {background-color: #00BFFF;}
-    .navbar-brand {color:blue;}
-    .btn-master {color: White; background-color: #00BFFF;}
-    .btn-master:hover {background-color: #87CEFA;color: white}
-    .search-text {width: 300px;}
-    .proselect {width: 120px;}
-    .title2 {color:White;}
-    .bigtitle {font-size:50px;}
-    .searchbar {margin-top:45px;margin-bottom:30px}
-    #btn {font-family:Microsoft JhengHei;box-shadow:4px 4px 12px -2px rgba(20%,20%,40%,0.5);}
+		body {font-family:Microsoft JhengHei;}
+	    .zipcode {display: none;}
+		.district {display: none;}
+	    .fontmicro {font-family:Microsoft JhengHei;}
+		.form-control {margin:auto; width:100px; display:inline; font-family:Microsoft JhengHei; vertical-align: top}
+	    .bg-customer {background-color: #00BFFF;}
+	    .navbar-brand {color:blue;}
+	    .btn-master {color: White; background-color: #00BFFF;}
+	    .btn-master:hover {background-color: #87CEFA;color: white}
+	    .search-text {width: 300px;}
+	    .proselect {width: 120px;}
+	    .title2 {color:White;}
+	    .bigtitle {font-size:50px;}
+	    .searchbar {margin-top:45px;margin-bottom:30px}
+	    #btn {font-family:Microsoft JhengHei;box-shadow:4px 4px 12px -2px rgba(20%,20%,40%,0.5);}
     </style>
 
 </head>
+
 <body>
 <jsp:include page="/nav/navigation.jsp" />
     <header class="masthead">

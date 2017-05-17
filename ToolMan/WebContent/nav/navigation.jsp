@@ -19,21 +19,21 @@
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li><a href="${pageContext.servletContext.contextPath}/index.jsp" class="">首頁</a></li>
-						<li><a href="${pageContext.servletContext.contextPath}/master/master.do?city=all&action=SearchAll" class="">我要找師傅</a></li>          
-                        <li class=" dropdown"><a href="#" class="dropdown-toggle " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">我要開店  <span class="caret"></span></a>
+                        <li><a class="alist" href="${pageContext.servletContext.contextPath}/index.jsp" class="">首頁</a></li>
+						<li><a class="alist" href="${pageContext.servletContext.contextPath}/master/master.do?city=all&action=SearchAll" class="">我要找師傅</a></li>          
+                        <li class=" dropdown"><a class="alist" href="#" class="dropdown-toggle " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">我要開店  <span class="caret"></span></a>
                             <ul class="dropdown-menu">
   <%-----------------------------------------------訂單表-暫時先擺這------------------------------------------------------------------- --%>
                                 <li>
-                                <a href="${pageContext.servletContext.contextPath}/mdata/MdataOrderServlet.do?m_id=${LoginOK.m_id}&action=listOrder">師傅訂單</a>
+                                <a class="alist" href="${pageContext.servletContext.contextPath}/mdata/MdataOrderServlet.do?m_id=${LoginOK.m_id}&action=listOrder">師傅訂單</a>
                                 </li>
                                 
-                            <li><a href="${pageContext.servletContext.contextPath}/cdata/CdataOrderServlet.do?c_id=${LoginOK.c_id}&action=listOrder">消費者訂單</a> </li>
+                            <li><a class="alist" href="${pageContext.servletContext.contextPath}/cdata/CdataOrderServlet.do?c_id=${LoginOK.c_id}&action=listOrder">消費者訂單</a> </li>
    <%-----------------------------------------------墨西哥長城------------------------------------------------------------------- --%>
                             
                             </ul>
                         </li>
-                        <li><a href="${pageContext.servletContext.contextPath}/wishpool/Wishing+waterfall.jsp">許願池  </a></li>
+                        <li><a class="alist" href="${pageContext.servletContext.contextPath}/wishpool/Wishing+waterfall.jsp">許願池  </a></li>
                            </ul>
                          
                      <!----------- 搜尋列----- -->
@@ -47,9 +47,9 @@
 					</ul>
                      <!----------- 搜尋列----- -->
                     <ul class="nav navbar-nav pull-right">
-                        <li class=" dropdown"><a href="#" class="dropdown-toggle active" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">登入  <span class="caret"></span></a>
+                        <li class=" dropdown"><a class="alist" href="#" class="dropdown-toggle active" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">登入  <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="${pageContext.servletContext.contextPath}/cdata/login-in.jsp">ToolMan 帳號</a></li>
+                                <li><a class="alist" href="${pageContext.servletContext.contextPath}/cdata/login-in.jsp">ToolMan 帳號</a></li>
                                 
                                 <li><div style="text-align:center;">
                                  <div class="fb-login-button" onlogin="checkLoginState()" id="login" data-size="large"
@@ -57,7 +57,7 @@
 								 </div></li>
                             </ul>
                         </li>
-                        <li class=""><a href="${pageContext.servletContext.contextPath}/loginoutServlet">登出</a></li>
+                        <li class=""><a class="alist" href="${pageContext.servletContext.contextPath}/loginoutServlet">登出</a></li>
                     </ul>
                 </div>
            
