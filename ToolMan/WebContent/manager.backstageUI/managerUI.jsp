@@ -210,8 +210,8 @@ $(function(){
 		$('#functionrow>div>ul>li').on('click',functionrowfiltering);//filtering
 		$('input[name="samnote"],[name="saonote"],[name="sacnote"]').on('change',updatenote);// input note
  	  	$('#subfunctionrow>a').on('click',togglehyper);//verify the master direct to other pages
- 	  	$('#subfunctionrow>span:not(#messagespanm,#messagespanc,#messagespano)').on('click',togglegetmethod);//change m c o s_name//will return something when clicked, maill has it's own form action
- 	  	$('#messagespanm,#messagespanc,#messagespano').on('click',mail);//mail
+ 	  	$('#subfunctionrow>span:not(#messagespanm,#messagespanc,#messagespano,#messagespanr)').on('click',togglegetmethod);//change m c o s_name//will return something when clicked, maill has it's own form action
+ 	  	$('#messagespanm,#messagespanc,#messagespano,#messagespanr').on('click',mail);//mail
 		
  	  	loadProduct('m','allmaster','alldate');//build dynamic table
  	  	datastatus = $('#functionrow>div>ul>li[name="datastatus"][data-buttonstate="selected"]').data('statusvalue');
@@ -226,6 +226,7 @@ $(function(){
         var checkboxdatas = [];
 		var checkboxdatasmaster = [];
 		var checkboxdatacustomer = [];
+		// double mail effect---need to set c_id in mail servlet,or there will be only 1 time mail,because the quest has been forward to other place
 		 if(navagatorid=='o'){// mail to both side of the transaction//tested ok
 	     	 $(":checkbox:checked").each(function(){            	  
 	     		checkboxdatasmaster.push($(this).attr('data-receiver1'));
@@ -445,7 +446,24 @@ $(function(){
 			$('#functionrow').append(docFragfunction2);
 			$('#functionrow>div>ul>li').on('click',functionrowfiltering);//filtering
  		}// end else if 
-
+		else if(navagatorid== 'r'){
+			$('#functionrow').empty();
+			var buttongroupdiv ='<div class="btn-group">';
+			var dropdowntitlestate = 
+						'<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"aria-haspopup="true" aria-expanded="false">訂單狀態<span class="caret"></span></button>';
+			var dropdownmenucontentstate=
+						'<li data-statusvalue="allreport" data-buttonstate="selected" name="datastatus"><a href="#">所有檢舉</a></li><li role="separator" class="divider"></li>'
+						+'<li data-statusvalue="進行中" name="datastatus"><a href="#">未解決</a></li><li role="separator" class="divider"></li>'
+						+'<li data-statusvalue="已刪除" name="datastatus"><a href="#">已解決</a></li><li role="separator" class="divider"></li>'
+						+'<li data-statusvalue="一方未評分" name="datastatus"><a href="#">已刪除</a></li><li role="separator" class="divider"></li>';						
+			var dropdownmenustate = '<ul class="dropdown-menu">'+dropdownmenucontentstate +'</ul>';
+			var buttongroupdivend ='</div>';
+			var reportstatus = buttongroupdiv+dropdowntitlestate+dropdownmenustate+buttongroupdivend;		
+			var li1 = $(reportstatus);
+			docFragfunction2.append([li1]);
+			$('#functionrow').append(docFragfunction2);
+			$('#functionrow>div>ul>li').on('click',functionrowfiltering);//filtering
+		}
 	}//end functionrow
 	
 		function functionrowfiltering(){
@@ -497,8 +515,8 @@ $(function(){
 				
 				//rebinding
 			 	$('#subfunctionrow>a').on('click',togglehyper);//direct to other pages
-			 	$('#subfunctionrow>span:not(#messagespanm,#messagespanc,#messagespano)').on('click',togglegetmethod);//will return something when clicked, maill has it's own form action
-			 	$('#messagespanm,#messagespanc,#messagespano').on('click',mail);//will return something when clicked, maill has it's own form action
+			 	$('#subfunctionrow>span:not(#messagespanm,#messagespanc,#messagespano,#messagespanr)').on('click',togglegetmethod);//will return something when clicked, maill has it's own form action
+			 	$('#messagespanm,#messagespanc,#messagespano,#messagespanr').on('click',mail);//will return something when clicked, maill has it's own form action
 
 		   }//end else if
 			
@@ -515,14 +533,14 @@ $(function(){
 				
 					//rebinding
 			 	$('#subfunctionrow>a').on('click',togglehyper);//direct to other pages
-			 	$('span:not(#messagespanm,#messagespanc,#messagespano)').on('click',togglegetmethod);//will return something when clicked, maill has it's own form action
-			 	$('#messagespanm,#messagespanc,#messagespano').on('click',mail);//will return something when clicked, maill has it's own form action
+			 	$('span:not(#messagespanm,#messagespanc,#messagespano,#messagespanr)').on('click',togglegetmethod);//will return something when clicked, maill has it's own form action
+			 	$('#messagespanm,#messagespanc,#messagespano,#messagespanr').on('click',mail);//will return something when clicked, maill has it's own form action
 
 			}//end else if
 			
 			else if(navagatorid== 'o'){
 				$('#subfunctionrow').empty();
-				var sendmessageo = '<span id="messagespano" value="sendmessageo" name="functionaction" style="padding:0px; margin:0px;" ><input type="button" value="訊息" "/></span>';
+				var sendmessageo = '<span id="messagespano" value="sendmessageo" name="functionaction" style="padding:0px; margin:0px;" ><input type="button" value="訊息" /></span>';
 				var b1 = $(sendmessageo);
 				docFragsubfunction.append([b1]);
 				$('#subfunctionrow').append(docFragsubfunction);
@@ -530,10 +548,22 @@ $(function(){
 					//rebinding
 			 	$('#subfunctionrow>a').on('click',togglehyper);//direct to other pages
 // 			 	$('#subfunctionrow>span[id!="messagespanm"],#subfunctionrow>span[id!="messagespanc"],#subfunctionrow>span[id!="messagespano"]').on('click',mail);//will return something when clicked, maill has it's own form action
-			 	$('#messagespanm,#messagespanc,#messagespano').on('click',mail);//will return something when clicked, maill has it's own form action
+			 	$('#messagespanm,#messagespanc,#messagespano,#messagespanr').on('click',mail);//will return something when clicked, maill has it's own form action
 
 			}// end else if 
-	
+			else if(navagatorid== 'r'){
+				$('#subfunctionrow').empty();
+				var sendmessager = '<span id="messagespanr" value="sendmessager" name="functionaction" style="padding:0px; margin:0px;" ><input type="button" value="訊息" /></span>';
+				var b1 = $(sendmessager);
+				docFragsubfunction.append([b1]);
+				$('#subfunctionrow').append(docFragsubfunction);	
+					//rebinding
+			 	$('#subfunctionrow>a').on('click',togglehyper);//direct to other pages
+// 			 	$('#subfunctionrow>span[id!="messagespanm"],#subfunctionrow>span[id!="messagespanc"],#subfunctionrow>span[id!="messagespano"]').on('click',mail);//will return something when clicked, maill has it's own form action
+			 	$('#messagespanm,#messagespanc,#messagespano,#messagespanr').on('click',mail);//will return something when clicked, maill has it's own form action
+
+				
+			}
 		}//end functionrow
 		
 		
@@ -674,14 +704,14 @@ $(function(){
 				   }
 				   else if(id=="r"){
 					  	var thc0 = $('<th></th>').addClass('eventlistthreadtrth');
-					    var thc1 = $('<th></th>').text('檢舉日期').addClass('eventlistthreadtrth');
-						var thc2 = $('<th></th>').text('檢舉人').addClass('eventlistthreadtrth');
-						var thc3 = $('<th></th>').text('檢舉主旨').addClass('eventlistthreadtrth');
-						var thc4 = $('<th></th>').text('檢舉案件狀態').addClass('eventlistthreadtrth');
-						var thc5 = $('<th></th>').text('檢舉訂單').addClass('eventlistthreadtrth');
-						var thc6 = $('<th></th>').text('檢舉留言').addClass('eventlistthreadtrth');
-						var thc7 = $('<th></th>').text('管理者註記').addClass('eventlistthreadtrth');
-						var rowth = $('<tr></tr>').append([thc0,thc1,thc2,thc3,thc4,thc5,thc6,thc7]);
+					  	var thc1 = $('<th></th>').text('檢舉編號').addClass('eventlistthreadtrth');
+					  	var thc2 = $('<th></th>').text('檢舉日期').addClass('eventlistthreadtrth');
+						var thc3 = $('<th></th>').text('消費者').addClass('eventlistthreadtrth');
+						var thc4 = $('<th></th>').text('師傅').addClass('eventlistthreadtrth');
+						var thc5 = $('<th></th>').text('檢舉主旨').addClass('eventlistthreadtrth');
+						var thc6 = $('<th></th>').text('檢舉案件狀態').addClass('eventlistthreadtrth');
+						var thc9 = $('<th></th>').text('管理者註記').addClass('eventlistthreadtrth');
+						var rowth = $('<tr></tr>').append([thc0,thc1,thc2,thc3,thc4,thc5,thc6,thc7,thc8,,thc9]);
 						docFragth.append(rowth);					   
 				   }
 			   $.each(datas,function(i,data){
@@ -762,20 +792,23 @@ $(function(){
 						}// end if
 						
 					else if(id=="r"){
-						   var toggleword = $('<input type="checkbox" name="ctoggle" />').val(data.c_id).attr('data-receiver',data.c_id);
-						   var mid =  $('<input type="button" style="width:100px;word-break: keep-all"/> ').val(data.r_id).addClass('eventlisttbodytrtd');
-						   var a =  $('<a></a> ').attr('href',"${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIFunctionServlet.do?"+"functionaction=findcustomer&targetid="+data.c_id).append(mid);						  
-						   var midwordmid =  $('<span style="visibility: hidden;font-size:0px;margin:0pxlpadding:0px;"></span> ').text(data.c_id).addClass('eventlisttbodytrtd');
+						   var toggleword = $('<input type="checkbox" name="ctoggle" />').val(data.r_id).attr('data-receiver1',data.m_id).attr('data-receiver2',data.c_id);
+						   var mid =  $('<input type="button"/>').val(data.r_id).addClass('eventlisttbodytrtd');
+						   var a =  $('<a></a> ').attr('href',"${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIFunctionServlet.do?"+"functionaction=findcustomer&targetid="+data.r_id).append(mid);						  
+						   var midwordmid =  $('<span style="visibility: hidden;font-size:0px;margin:0pxlpadding:0px;"></span> ').text(data.r_id).addClass('eventlisttbodytrtd');
 						   var cell0 = $('<td></td>').addClass('eventlisttbodytrtd').append(toggleword);
-						   var cell1 = $('<td></td>').text(data.r_date).addClass('eventlisttbodytrtd');;
-						   var cell2 = $('<td></td>').html(a).addClass('eventlisttbodytrtd').append(midwordmid);
-						   var cell3 = $('<td></td>').text(data.c_id).addClass('eventlisttbodytrtd');;
-						   var cell4 = $('<td></td>').text(data.p_summary).addClass('eventlisttbodytrtd');;
-						   var cell5 = $('<td></td>').text(data.p_content).addClass('eventlisttbodytrtd');;
-						   var cell6 = $('<td></td>').text(data.s_name).addClass('eventlisttbodytrtd');;
+						   var cell1 = $('<td></td>').html(a).addClass('eventlisttbodytrtd').append(midwordmid);
+						   var cell2 = $('<td></td>').text(data.r_date).addClass('eventlisttbodytrtd');;			   
+						   var cell3 = $('<td></td>').text(data.c_id).addClass('eventlisttbodytrtd');
+						   var mid2 =  $('<input type="button"/> ').val(data.m_id).addClass('eventlisttbodytrtd');
+						   var a2 =  $('<a></a> ').attr('href',"${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIFunctionServlet.do?"+"functionaction=findmaster&targetid="+data.M_id).append(mid2);						  
+						   var midwordmid2 =  $('<span style="visibility: hidden;font-size:0px;margin:0pxlpadding:0px;"></span> ').text(data.m_id).addClass('eventlisttbodytrtd');
+						   var cell4 = $('<td></td>').html(a2).addClass('eventlisttbodytrtd').append(midwordmid2);
+						   var cell5 = $('<td></td>').text(data.p_summary).addClass('eventlisttbodytrtd');
+						   var cell6 = $('<td></td>').text(data.s_name).addClass('eventlisttbodytrtd');
 						   var wordsanote =  $('<span style="visibility: hidden;font-size:0px;margin:0pxlpadding:0px;"></span> ').text(data.sa_rnote).addClass('eventlisttbodytrtd');
 						   var sacnote =  $('<input type="text" name="sacnote" id= width="500px" /> ').val(data.sa_rnote).attr('data-noteid',data.r_id).addClass('eventlisttbodytrtd');
-						   var cell7 = $('<td></td>').html(sacnote).addClass('eventlisttbodytrtd').append(wordsanote);;
+						   var cell7 = $('<td></td>').html(sacnote).addClass('eventlisttbodytrtd').append(wordsanote);
 						   var row = $('<tr></tr>').append([cell0,cell1,cell2,cell3,cell4,cell5,cell6,cell7]);
 						   docFragtb.append(row);						
 					}
