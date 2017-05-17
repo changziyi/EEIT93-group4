@@ -5,10 +5,6 @@ import java.util.List;
 
 import java.sql.Timestamp;
 
-import toolman.cdata.model.CdataVO;
-import toolman.discussion.model.DiscussionVO;
-import toolman.mdata.model.MdataVO;
-import toolman.order.model.OrderVO;
 import toolman.rdata.model.RdataVO;
 
 public class RdataService {
@@ -27,30 +23,14 @@ public class RdataService {
 		RdataVO rdataVO = new RdataVO();
 
 		rdataVO.setR_date(r_date);
-		
-		
-
+		rdataVO.setC_id(c_id);
+		rdataVO.setM_id(m_id);
 		rdataVO.setP_summary(p_summary);
 		rdataVO.setP_content(p_content);
 		rdataVO.setS_name(s_name);
 		rdataVO.setSa_rnote(sa_rnote);
-		
-		
-		CdataVO cdataVO = new CdataVO();
-		cdataVO.setC_id(c_id);
-		rdataVO.setCdataVO(cdataVO);
-		
-		MdataVO mdataVO = new MdataVO();
-		mdataVO.setM_id(m_id);
-		rdataVO.setMdataVO(mdataVO);
-				
-		DiscussionVO discussionVO = new DiscussionVO();
-		discussionVO.setD_id(d_id);
-		rdataVO.setDiscussionVO(discussionVO);
-		
-		OrderVO orderVO = new OrderVO();
-		orderVO.setO_id(o_id);
-		rdataVO.setOrderVO(orderVO);
+		rdataVO.setD_id(d_id);
+		rdataVO.setO_id(o_id);
 
 		dao.insert(rdataVO);
 
@@ -64,28 +44,15 @@ public class RdataService {
 
 		rdataVO.setR_id(r_id);
 		rdataVO.setR_date(r_date);
-		DiscussionVO discussionVO = new DiscussionVO();
-		discussionVO.setD_id(d_id);
-		rdataVO.setDiscussionVO(discussionVO);
-		
-		
-		CdataVO cdataVO = new CdataVO();
-		cdataVO.setC_id(c_id);
-		rdataVO.setCdataVO(cdataVO);
-		
-		MdataVO mdataVO = new MdataVO();
-		mdataVO.setM_id(m_id);
-		rdataVO.setMdataVO(mdataVO);
-		
+		rdataVO.setC_id(c_id);
+		rdataVO.setM_id(m_id);
 		rdataVO.setP_summary(p_summary);
 		rdataVO.setP_content(p_content);
 		rdataVO.setS_name(s_name);
 		rdataVO.setSa_rnote(sa_rnote);
-	
-		
-		OrderVO orderVO = new OrderVO();
-		orderVO.setO_id(o_id);
-		rdataVO.setOrderVO(orderVO);
+		rdataVO.setD_id(d_id);
+		rdataVO.setO_id(o_id);
+
 		return dao.findByPrimaryKey(r_id);
 	}
 	public List<RdataVO> getAll() {

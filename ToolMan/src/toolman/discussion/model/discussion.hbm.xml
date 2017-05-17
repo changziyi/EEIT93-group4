@@ -24,12 +24,7 @@
 -->         
 
 
-  <set name="rdatas" table="rdata" lazy="false" cascade="all"  inverse="true"  order-by="r_id asc">																						
-			<key>
-				<column name="d_id" />
-			</key>
-			<one-to-many class="toolman.rdata.model.RdataVO" />
-		</set>	
+  
 
     </class>
 </hibernate-mapping>

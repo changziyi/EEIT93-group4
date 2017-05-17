@@ -17,10 +17,6 @@ import javax.servlet.http.HttpServletResponse;
 
 
 import toolman.blacklist.model.BlacklistService;
-import toolman.cdata.model.CdataVO;
-import toolman.discussion.model.DiscussionVO;
-import toolman.mdata.model.MdataVO;
-import toolman.order.model.OrderVO;
 import toolman.rdata.model.RdataService;
 import toolman.rdata.model.RdataVO;
 
@@ -66,28 +62,14 @@ public class RdataController extends HttpServlet {
 				RdataVO rdataVO = new RdataVO();
 	
 				rdataVO.setR_date(r_date);
-				
+				rdataVO.setC_id(c_id);
+				rdataVO.setM_id(m_id);
 				rdataVO.setP_summary(p_summary);
 				rdataVO.setP_content(p_content);
 				rdataVO.setS_name(s_name);
 				rdataVO.setSa_rnote(sa_rnote);
-			 
-				CdataVO cdataVO = new CdataVO();
-				cdataVO.setC_id(c_id);
-				rdataVO.setCdataVO(cdataVO);
-				
-				MdataVO mdataVO = new MdataVO();
-				mdataVO.setM_id(m_id);
-				rdataVO.setMdataVO(mdataVO);
-						
-				DiscussionVO discussionVO = new DiscussionVO();
-				discussionVO.setD_id(d_id);
-				rdataVO.setDiscussionVO(discussionVO);
-				
-				OrderVO orderVO = new OrderVO();
-				orderVO.setO_id(o_id);
-				rdataVO.setOrderVO(orderVO);
-
+				rdataVO.setD_id(d_id);
+				rdataVO.setO_id(o_id);
 				
 				RdataService rdataSvc = new RdataService();
 				rdataVO = rdataSvc.addRdata( r_date,  c_id, m_id,  p_summary,  p_content,

@@ -41,7 +41,6 @@
 		<mapping resource="toolman/favorite/model/favorite.hbm.xml" />
 		<mapping resource="toolman/blacklist/model/blacklist.hbm.xml" />
 		<mapping resource="toolman/workim/model/workim.hbm.xml" />
-		<mapping resource="toolman/rdata/model/rdata.hbm.xml" />
 
 	</session-factory>
 	
