@@ -39,7 +39,7 @@ public class AdDAO implements AdDAO_interface {
 	private static final String UPDATE = "UPDATE ad set m_id=?, ad_bdate=?, ad_enddate=?, s_name=?, where ad_id = ?";
 	private static final String GET_BY_SNAME = "SELECT ad_id,m_id,ad_bdate,ad_enddate,s_name FROM ad where s_name = ?";
 //	private static final String GET_ALL_BY_SNAME = "SELECT ad_id,m_id,ad_bdate,ad_enddate,s_name FROM ad where s_name = ? order by newid()";
-	private static final String GET_ALL_BY_SNAME = "SELECT m.m_id,m.m_city,m.m_district,m.b_name,a.ad_id,a.s_name,a.ad_bdate,a.ad_enddate FROM ad a inner join mdata m on a.m_id = m.m_id where a.s_name = ? order by newid()";
+	private static final String GET_ALL_BY_SNAME = "SELECT m.m_id,m.m_city,m.m_district,m.b_name,m.m_arating,m.o_finished,a.ad_id,a.s_name,a.ad_bdate,a.ad_enddate FROM ad a inner join mdata m on a.m_id = m.m_id where a.s_name = ? order by newid()";
 	private static final String GET_ALL_BY_SNAME_AND_DATE = "SELECT * FROM ad WHERE s_name = ? AND ad_bdate=?";
 	
 	@Override
@@ -365,6 +365,8 @@ public class AdDAO implements AdDAO_interface {
 				mdataVO.setB_name(rs.getString("b_name"));
 				mdataVO.setM_city(rs.getString("m_city"));
 				mdataVO.setM_district(rs.getString("m_district"));
+				mdataVO.setO_finished(rs.getInt("o_finished"));
+				mdataVO.setM_arating(rs.getInt("m_arating"));
 				adVO.setMdataVO(mdataVO);
 				list.add(adVO); // Store the row in the list
 			}

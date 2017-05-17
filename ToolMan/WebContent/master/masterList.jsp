@@ -7,8 +7,8 @@
 <%@ page import="toolman.ad.model.AdVO"%>
 <%
     AdService adSvc = new AdService();
-	List<AdVO> gabs = adSvc.getAllBySname("廣告進行中");
-	pageContext.setAttribute("allMid", gabs);
+	List<AdVO> ads = adSvc.getAllBySname("廣告進行中");
+	pageContext.setAttribute("allMid", ads);
 %>
 <!DOCTYPE html>
 <html>
@@ -117,7 +117,7 @@ a {color:White;}
 									</div>
 									<div class="col-md-5 md5">
 										<div>
-											<span style="font-size:20px">${aMaster.mdataVO.b_name}</span><br /><span>地點：${aMaster.mdataVO.m_city}${aMaster.mdataVO.m_district}</span><br />媒合紀錄：
+											<span style="font-size:20px">${aMaster.mdataVO.b_name}</span><br /><span>地點：${aMaster.mdataVO.m_city}${aMaster.mdataVO.m_district}</span><br />完成案件數：${aMaster.mdataVO.o_finished}
 										</div>
 									</div>
 								</div>
