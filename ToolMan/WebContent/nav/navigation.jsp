@@ -34,7 +34,8 @@
                             </ul>
                         </li>
                         <li><a href="${pageContext.servletContext.contextPath}/wishpool/Wishing+waterfall.jsp">許願池  </a></li>
-                       </ul>
+                           </ul>
+                         
                      <!----------- 搜尋列----- -->
                        <ul class="navbar-right">
 					    <form class="navbar-form">

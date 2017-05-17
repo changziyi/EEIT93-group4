@@ -210,8 +210,8 @@ $(function(){
 		$('#functionrow>div>ul>li').on('click',functionrowfiltering);//filtering
 		$('input[name="samnote"],[name="saonote"],[name="sacnote"]').on('change',updatenote);// input note
  	  	$('#subfunctionrow>a').on('click',togglehyper);//verify the master direct to other pages
- 	  	$('#subfunctionrow>span:not(#messagespanm,#messagespanc,#messagespano,#messagespanr,#messagespanad)').on('click',togglegetmethod);//change m c o s_name//will return something when clicked, maill has it's own form action
- 	  	$('#messagespanm,#messagespanc,#messagespano,#messagespanr,#messagespanad').on('click',mail);//mail
+ 	  	$('#subfunctionrow>span:not(#messagespanm,#messagespanc,#messagespano,#messagespanr)').on('click',togglegetmethod);//change m c o s_name//will return something when clicked, maill has it's own form action
+ 	  	$('#messagespanm,#messagespanc,#messagespano,#messagespanr').on('click',mail);//mail
 		
  	  	loadProduct('m','allmaster','alldate');//build dynamic table
  	  	datastatus = $('#functionrow>div>ul>li[name="datastatus"][data-buttonstate="selected"]').data('statusvalue');
@@ -227,41 +227,41 @@ $(function(){
 		var checkboxdatasmaster = [];
 		var checkboxdatacustomer = [];
 		// double mail effect---need to set c_id in mail servlet,or there will be only 1 time mail,because the quest has been forward to other place
-		 if((navagatorid=='o')||(navagatorid=='r')){// mail to both side of the transaction//tested ok
-		     	 $(":checkbox:checked").each(function(){            	  
-		     		checkboxdatasmaster.push($(this).attr('data-receiver1'));
-		     		checkboxdatacustomer.push($(this).attr('data-receiver2'));
-		         }) 
-		         if((checkboxdatasmaster.toString()=="")||(checkboxdatacustomer.toString()=="")){
-	 	     		 	alert("u forget to toggle the checkbox u dumb XD");
-	 	     	 }//end if
-	 	     	else{
-	 	     		 $('#btnsubmitmail').on('click',function(){
-	 	     			var hyperlinkstring = "${pageContext.servletContext.contextPath}/email/Email.do";
-	 	     			clickornot=!clickornot;
-	 					var mssid=$('#receiver').val();
-		 				var mssum=$('#messum').val();
-		 				var mscontent=$('#mescontent').val();
-						$.post(hyperlinkstring,{"mss_id":mssid,"ms_content":mscontent,"ms_summary":mssum},function(){
-							
-								$('#myModal01').modal("hide");
-						   
-							if (clickornot==true){
-				 	     		setTimeout(function () {
-				 	     		$('#receiver').val(checkboxdatacustomer.toString()).text(checkboxdatacustomer.toString());
-				 	     		$('#myModal01').modal('show');
-				 	     		 }, 300);
-				 	     			
-							}	
-						});//end get function
-	
-	 				});//end on clck
-	 				if(clickornot==false){
-		 				$('#receiver').val(checkboxdatasmaster.toString()).text(checkboxdatasmaster.toString());
-		 				$('#myModal01').modal('show');
-	 				}//end if				
-	
-	 	   		}//end else 
+		 if(navagatorid=='o'){// mail to both side of the transaction//tested ok
+	     	 $(":checkbox:checked").each(function(){            	  
+	     		checkboxdatasmaster.push($(this).attr('data-receiver1'));
+	     		checkboxdatacustomer.push($(this).attr('data-receiver2'));
+	         }) 
+	         if((checkboxdatasmaster.toString()=="")||(checkboxdatacustomer.toString()=="")){
+ 	     		 	alert("u forget to toggle the checkbox u dumb XD");
+ 	     	 }//end if
+ 	     	else{
+ 	     		 $('#btnsubmitmail').on('click',function(){
+ 	     			var hyperlinkstring = "${pageContext.servletContext.contextPath}/email/Email.do";
+ 	     			clickornot=!clickornot;
+ 					var mssid=$('#receiver').val();
+	 				var mssum=$('#messum').val();
+	 				var mscontent=$('#mescontent').val();
+					$.post(hyperlinkstring,{"mss_id":mssid,"ms_content":mscontent,"ms_summary":mssum},function(){
+						
+							$('#myModal01').modal("hide");
+					   
+						if (clickornot==true){
+			 	     		setTimeout(function () {
+			 	     		$('#receiver').val(checkboxdatacustomer.toString()).text(checkboxdatacustomer.toString());
+			 	     		$('#myModal01').modal('show');
+			 	     		 }, 300);
+			 	     			
+						}	
+					});//end get function
+
+ 				});//end on clck
+ 				if(clickornot==false){
+	 				$('#receiver').val(checkboxdatasmaster.toString()).text(checkboxdatasmaster.toString());
+	 				$('#myModal01').modal('show');
+ 				}//end if				
+
+ 	   		}//end else 
  		 }//end if o
  		 else{//mail to only one side//tested ok
  			$('#btnsubmitmail').unbind("click");
@@ -523,10 +523,12 @@ $(function(){
 				var applicationreviewm = '<a href="" id="applymasterlink" name="applicationreviewm"><input type="button" value="審核師傅" /></a>';
 				var suspensionm = '<span id="suspensionm" value="suspensionm" name="functionaction" style="padding:0px; margin:0px;" ><input type="button" value="停權" "/></span>';
 				var sendmessagem = '<span id="messagespanm" value="sendmessagem" name="functionaction" style="padding:0px; margin:0px;" ><input type="button"   value="傳送訊息" "/></span>';
+				var blacklistm = '<span value="blacklistm" name="functionaction" style="padding:0px; margin:0px;" ><input type="button" value="黑名單" "/></span>';
 				var b1 = $(applicationreviewm);
 				var b2 = $(suspensionm);
 				var b3 = $(sendmessagem);
-				docFragsubfunction.append([b1,b2,b3]);
+				var b4 = $(blacklistm);
+				docFragsubfunction.append([b1,b2,b3,b4]);
 				$('#subfunctionrow').append(docFragsubfunction);
 				
 				//rebinding
@@ -540,9 +542,11 @@ $(function(){
 				$('#subfunctionrow').empty();
 				var suspensionc = '<span id="suspensionc" value="suspensionc" name="functionaction" style=" padding:0px; margin:0px;" ><input type="button" value="停權"/></span>';
 				var sendmessagec = '<span id="messagespanc" value="sendmessagec" name="functionaction" style=" padding:0px; margin:0px;" ><input type="button" value="傳送訊息" /></span>';
+				var blacklistc = '<span value="blacklistc" name="functionaction" style=" padding:0px; margin:0px;" ><input type="button" value="黑名單" /></span>';
 				var b1 = $(suspensionc);
 				var b2 = $(sendmessagec);
-				docFragsubfunction.append([b1,b2]);
+				var b3 = $(blacklistc);
+				docFragsubfunction.append([b1,b2,b3]);
 				$('#subfunctionrow').append(docFragsubfunction);
 				
 					//rebinding
@@ -570,21 +574,6 @@ $(function(){
 				var sendmessager = '<span id="messagespanr" value="sendmessager" name="functionaction" style="padding:0px; margin:0px;" ><input type="button" value="訊息" /></span>';
 				var b1 = $(sendmessager);
 				docFragsubfunction.append([b1]);
-				$('#subfunctionrow').append(docFragsubfunction);	
-					//rebinding
-			 	$('#subfunctionrow>a').on('click',togglehyper);//direct to other pages
-// 			 	$('#subfunctionrow>span[id!="messagespanm"],#subfunctionrow>span[id!="messagespanc"],#subfunctionrow>span[id!="messagespano"]').on('click',mail);//will return something when clicked, maill has it's own form action
-			 	$('#messagespanm,#messagespanc,#messagespano,#messagespanr').on('click',mail);//will return something when clicked, maill has it's own form action
-
-				
-			}
-			else if(navagatorid== 'ad'){
-				$('#subfunctionrow').empty();
-				var sendmessager = '<span id="messagespanad" value="sendmessagead" name="functionaction" style="padding:0px; margin:0px;" ><input type="button" value="訊息" /></span>';
-				var stopad = '<span id="stopad" value="stopad" name="functionaction" style="padding:0px; margin:0px;" ><input type="button" value="終止廣告" "/></span>';
-				var b1 = $(sendmessager);
-				var b2 = $(stopad);
-				docFragsubfunction.append([b1,b2]);
 				$('#subfunctionrow').append(docFragsubfunction);	
 					//rebinding
 			 	$('#subfunctionrow>a').on('click',togglehyper);//direct to other pages
@@ -853,7 +842,7 @@ $(function(){
 					}
 					else if(id=="ad"){
 						
-						   var toggleword = $('<input type="checkbox" name="ctoggle" />').val(data.r_id).attr('data-receiver1',data.m_id);
+						   var toggleword = $('<input type="checkbox" name="ctoggle" />').val(data.r_id).attr('data-receiver1',data.m_id).attr('data-receiver2',data.ad_id);
 						   var mid =  $('<input type="button"/>').val(data.ad_id).addClass('eventlisttbodytrtd');
 						   var a =  $('<a></a> ').attr('href',"${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIFunctionServlet.do?"+"functionaction=findcustomer&targetid="+data.ad_id).append(mid);						  
 						   var midwordmid =  $('<span style="visibility: hidden;font-size:0px;margin:0pxlpadding:0px;"></span> ').text(data.ad_id).addClass('eventlisttbodytrtd');

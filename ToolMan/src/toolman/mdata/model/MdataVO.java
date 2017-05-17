@@ -37,6 +37,7 @@ public class MdataVO implements java.io.Serializable {
 	private Set<FavoriteVO> favorites = new HashSet<FavoriteVO>();//
 	private Set<BlacklistVO> blacklists = new HashSet<BlacklistVO>();//
 
+	
 	public Integer getM_id() {
 		return m_id;
 	}
