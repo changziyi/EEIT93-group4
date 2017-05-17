@@ -3,9 +3,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.List"%>
 <%@ page import="toolman.mdata.model.MdataService"%>
+<%@ page import="toolman.ad.model.AdService"%>
+<%@ page import="toolman.ad.model.AdVO"%>
 <%
-	MdataService mdataSvc = new MdataService();
-	pageContext.setAttribute("allMid",mdataSvc.getAllMidForAd());
+    AdService adSvc = new AdService();
+	List<AdVO> ads = adSvc.getAllBySname("廣告進行中");
+	pageContext.setAttribute("allMid", ads);
 %>
 <!DOCTYPE html>
 <html>
@@ -19,34 +22,23 @@
 <link rel="stylesheet" href="${pageContext.servletContext.contextPath}/css/theme.min.css">
 <link rel="stylesheet" href="${pageContext.servletContext.contextPath}/nav/nav.css">
 <link rel="stylesheet" href="${pageContext.servletContext.contextPath}/css/index/expandsearch.css">
-<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/css/creative.css">
+<%-- <link rel="stylesheet" href="${pageContext.servletContext.contextPath}/css/creative.css"> --%>
 <style>
 body {font-family:Microsoft JhengHei;}
+a {color:White;}
 .county {width:80px;height:25px;vertical-align: top}
 .zipcode {display: none;}
 .form-control {margin:auto; width:120px; display:inline; font-family:Microsoft JhengHei; vertical-align: top}
-.proc {
-	padding: 5px;
-	margin-left: 0;
- 	margin-right: 5px;
- 	text-align: center;
-	border-radius: 3px;
-	color: #FFF5EE;
-	font-weight: bold;
-}
-.divpro {
-	margin-left: 0;
-  	margin-bottom: 10px;
-}
+.proc {padding:5px;margin-left: 0;margin-right: 5px;text-align: center;border-radius: 3px;color: #FFF5EE;font-weight: bold;}
+.divpro {margin-left: 0;margin-bottom: 10px;}
 .container {width: 80%;}
-.myDiv {position: relative; top: 12%}
+.myDiv {position:relative; top:90px;}
 .pad {padding-left: 3%;}
 .result {font-size:20px;}
 .resultcount {padding:5%;}
 .count {color: #00BFFF;}
 .list-group {margin-top: 15%;}
 .probtn {font-size: 16px;}
-a {color:White;}
 .searchinput {font-weight:bold;color:#00AFEA;}
 .btn-master {color: White; background-color: #00BFFF; font-size:14px}
 .btn-master:hover {background-color: #87CEFA;color: white}
@@ -110,11 +102,11 @@ a {color:White;}
 							<c:forEach var="aMaster" end="3" items="${allMid}">
 								<div class="row thumbnail adrow">
 									 <div class="col-md-7 md7">
-										<a href='${pageContext.servletContext.contextPath}/master/masterPage.do?m_id=${aMaster.id}'><img width=200px src='${pageContext.servletContext.contextPath}/master/master.do?type=master&image=${aMaster.id}'/></a>
+										<a href='${pageContext.servletContext.contextPath}/master/masterPage.do?m_id=${aMaster.m_id}'><img width=200px class="img-responsive" src='${pageContext.servletContext.contextPath}/master/master.do?type=master&image=${aMaster.m_id}'/></a>
 									</div>
 									<div class="col-md-5 md5">
 										<div>
-											<span style="font-size:20px">${aMaster.bname}</span><br /><span>地點：${aMaster.city}${aMaster.district}</span><br />媒合紀錄：${aMaster.finish}
+											<span style="font-size:20px">${aMaster.mdataVO.b_name}</span><br /><span>地點：${aMaster.mdataVO.m_city}${aMaster.mdataVO.m_district}</span><br />完成案件數：${aMaster.mdataVO.o_finished}
 										</div>
 									</div>
 								</div>
@@ -135,7 +127,6 @@ a {color:White;}
 <script src="${pageContext.servletContext.contextPath}/js/jquery-3.2.1.min.js"></script>
 <script src="${pageContext.servletContext.contextPath}/js/bootstrap.min.js"></script>
 <script src="${pageContext.servletContext.contextPath}/js/jquery.search.twzipcode.min.js"></script>		
-<%-- <script src="${pageContext.servletContext.contextPath}/js/jquery.twbsPagination.min.js"></script>		 --%>
 <script>
 	
 // 	$(function() {
@@ -163,7 +154,7 @@ a {color:White;}
 			$.each(datas, function(i,master) {
 				console.log(countpage++);
 				var bImg = $('<img />').attr({'src':'${pageContext.servletContext.contextPath}/master/master.do?type=master&image=' + master.id,
-					'data-holder-rendered':'true'});
+					'data-holder-rendered':'true'}).addClass('img-responsive');
 				var a = $('<a></a>').attr('href','${pageContext.servletContext.contextPath}/master/masterPage.do?m_id='+ master.id).append(bImg);
 				var score = master.rating;
 				if (score == '0') {
