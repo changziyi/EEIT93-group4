@@ -9,8 +9,8 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>ToolMan找師傅平台</title>
-	<link rel="Shortcut Icon" href="${pageContext.servletContext.contextPath}/favicon.ico" />
+    <title>ToolMan</title>
+	<link rel="shortcut icon" href="${pageContext.servletContext.contextPath}/favicon.ico" />
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="${pageContext.servletContext.contextPath}/css/bootstrap.min.css">
 
@@ -36,17 +36,19 @@
     .search-text {width: 300px;}
     .proselect {width: 120px;}
     .title2 {color:White;}
+    .bigtitle {font-size:50px;}
+    .searchbar {margin-top:45px;margin-bottom:30px}
     #btn {font-family:Microsoft JhengHei;box-shadow:4px 4px 12px -2px rgba(20%,20%,40%,0.5);}
     </style>
 
 </head>
-<jsp:include page="/nav/navigation.jsp" />
 <body>
+<jsp:include page="/nav/navigation.jsp" />
     <header class="masthead">
         <div class="header-content">
-                <h1 id="homeHeading" class="title2">Tool Man</h1>
+            <h1 id="homeHeading" class="title2 bigtitle">Tool Man</h1>
             <div>
-                <div style="margin:20px">
+                <div class="searchbar">
 		            <form action="master.do" method="post">
 					<div class="form-group">
 <%-- 						<span id="twzipcode"></span><input type="text" class="form-control search-text" name="input" value="${search.b_name}"> --%>
@@ -278,11 +280,11 @@
 		$('#btn').click(function() {
 			
 			$.ajax({
-				url : 'master.do',
+				url : '${pageContext.servletContext.contextPath}/master/master.do',
 				data: {'city':city.val(), 'input':input.val(), 'pro':pro.val(), 'action':'SearchMaster'},
 				type : 'POST',
 				success : function(returnData) {
-					$(location).attr('href','searchResult.jsp');
+					$(location).attr('href','${pageContext.servletContext.contextPath}/master/masterList.jsp');
 				}
 			});
 		});
@@ -291,10 +293,10 @@
 			
 			$.ajax({
 				url : 'master.do',
-				data: {'city':'all','action':'SearchAll'},
+				data: {'action':'SearchAll'},
 				type : 'POST',
 				success : function(returnData) {
-					$(location).attr('href','${pageContext.servletContext.contextPath}/master/searchResult.jsp');
+					$(location).attr('href','${pageContext.servletContext.contextPath}/master/masterList.jsp');
 				}
 			});
 		});

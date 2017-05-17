@@ -38,13 +38,13 @@ import toolman.mdata.model.MdataVO;
  * Servlet implementation class CalendarController
  */
 @WebServlet("/toolman.calendar/CalendarController.do")
-public class CalendarController extends HttpServlet {
+public class CalendarControllerget extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CalendarController() {
+    public CalendarControllerget() {
         super();
 
     }
@@ -70,60 +70,26 @@ public class CalendarController extends HttpServlet {
 		 CalendarService calendarservice = new CalendarService();
 		 List list = new ArrayList();
 //--------------------------------insert---------------------------------------------		 
-		JSONArray jsonarray = new JSONArray(calendarjson);
-		for (int i = 0; i < jsonarray.length(); i++) {
-		    JSONObject jsonobject = jsonarray.getJSONObject(i);
-		    String id = jsonobject.getString("id");
-		    String title = jsonobject.getString("title");		    
-		    String start1 = jsonobject.getString("start");
-		    
-		    DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
-			Calendar calobj = Calendar.getInstance();
-			try {
-				calobj.setTime(df.parse(start1));
-			} catch (ParseException e) {
-				e.printStackTrace();
-			}
-			Timestamp start = new Timestamp(calobj.getTimeInMillis());		   
-		    String end1 = jsonobject.getString("end");
-			try {
-				calobj.setTime(df.parse(end1));
-			} catch (ParseException e) {
-				e.printStackTrace();
-			}
-			Timestamp end = new Timestamp(calobj.getTimeInMillis());
-		    
-		    String className = jsonobject.getJSONArray("className").toString();
-		    Boolean allDay = jsonobject.getBoolean("allDay");
-//		    Boolean overlap = jsonobject.getBoolean("overlap");
-		    
-		    calendarVO.setEvent_id(id);
-		    calendarVO.setEvent_start(start);
-		    calendarVO.setEvent_title(title);
-		    
-		    calendarVO.setEvent_end(end);
-		    calendarVO.setEvent_start(start);
-		    calendarVO.setEvent_allDay(allDay);
-		    calendarVO.setEvent_className(className);
-		    calendarVO.setM_id(m_id);
-		    list.add(calendarVO);
-		    
-		    System.out.println(start);
-		    System.out.println(id);
-		    System.out.println(title);
-		    System.out.println(end);
-		    System.out.println(className);
-		    System.out.println(allDay);
-		   
-		}
 		
-//		calendarservice.deleteByM(m_id);
-		calendarservice.InsertByM(list);
 //---------------------------------end insert---------------------------------------------		
 		
 		//---------------------------------get calendar---------------------------------------------
 		
+		List<CalendarVO> getlist = calendarservice.getByM(m_id);
 		
+		for(CalendarVO calendarVo:getlist){
+			Map map = new HashMap();
+			map.put("id", calendarVO.getEvent_id());
+			map.put("start", calendarVO.getEvent_start());
+			map.put("title", calendarVO.getEvent_title());
+			map.put("end", calendarVO.getEvent_end());
+			map.put("allDay", calendarVO.getEvent_allDay());
+			map.put("overlap", calendarVO.getEvent_overlap());
+			map.put("className", calendarVO.getEvent_className());
+			list.add(map);
+		}			
+			PrintWriter out = response.getWriter();
+			out.write(JSONValue.toJSONString(list));
 //		//---------------------------------end calendar---------------------------------------------
 //				
 	    }

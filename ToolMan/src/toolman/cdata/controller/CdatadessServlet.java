@@ -35,19 +35,25 @@ public class CdatadessServlet extends HttpServlet {
 		HttpSession session = request.getSession();	
 		CdataVO cdataVO = new CdataVO();
 		
+//		String action = request.getParameter("action");
+//		if ("chamge_img".equals(action)) {
+//			
+//		}
+		
+		
 		CdataService cs = new CdataService();
-		cdataVO = cs.cdata_des("PolarBear");
-		CdataVO cdataVO1 = cs.cdata_des("PolarBear");
+		cdataVO = cs.cdata_des("Snoopy");
+		CdataVO cdataVO1 = cs.cdata_des("Snoopy");
 		session.setAttribute("cdataVO", cdataVO1);
+		
 		cdataVOlist.add(cdataVO);
 		session.setAttribute("cdataVOlist", cdataVOlist);
-		System.out.println(cdataVOlist);
 		Set<OrderVO> orders = cdataVO.getOrders();
 				
-		for (OrderVO aOrder : orders) {
-			System.out.print(" 師傅 : "+ aOrder.getB_name()+" , ");
-			System.out.println(" 時間 : "+ aOrder.getO_edate());
-		}
+//		for (OrderVO aOrder : orders) {
+//			System.out.print(" 師傅 : "+ aOrder.getB_name()+" , ");
+//			System.out.println(" 時間 : "+ aOrder.getO_edate());
+//		}
 		request.setAttribute("orders", orders);
 		
 		RequestDispatcher failureView = request.getRequestDispatcher("test1.jsp");
