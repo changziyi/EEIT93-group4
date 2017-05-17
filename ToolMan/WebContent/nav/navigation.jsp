@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    <%@ page import="toolman.cdata.model.*"%>
+<%@ page import="toolman.order.model.*"%>
+ 	   <%@ page import=" java.util.*"%>
 <div class="navbar-wrapper">
     <div class="container-fluid">
         <nav class="navbar navbar-fixed-top">
@@ -19,8 +23,14 @@
 						<li><a href="${pageContext.servletContext.contextPath}/master/master.do?city=all&action=SearchAll" class="">我要找師傅</a></li>          
                         <li class=" dropdown"><a href="#" class="dropdown-toggle " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">我要開店  <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">New01</a></li>
-                                <li><a href="#">New02</a></li>
+  <%-----------------------------------------------訂單表-暫時先擺這------------------------------------------------------------------- --%>
+                                <li>
+                                <a href="${pageContext.servletContext.contextPath}/mdata/MdataOrderServlet.do?m_id=${LoginOK.m_id}&action=listOrder">師傅訂單</a>
+                                </li>
+                                
+                            <li><a href="${pageContext.servletContext.contextPath}/cdata/CdataOrderServlet.do?c_id=${LoginOK.c_id}&action=listOrder">消費者訂單</a> </li>
+   <%-----------------------------------------------墨西哥長城------------------------------------------------------------------- --%>
+                            
                             </ul>
                         </li>
                         <li><a href="${pageContext.servletContext.contextPath}/wishpool/Wishing+waterfall.jsp">許願池  </a></li>
