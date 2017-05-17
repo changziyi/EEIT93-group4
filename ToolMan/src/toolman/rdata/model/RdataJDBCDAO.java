@@ -28,6 +28,7 @@ public class RdataJDBCDAO implements RdataDAO_interface {
 	private static final String DELETE = "DELETE FROM rdata WHERE r_id = ?";
 	private static final String GETONE = "SELECT r_id, r_date, c_id, m_id, p_summary, p_content, s_name, sa_rnote, d_id FROM rdata WHERE r_id = ?";
 	private static final String GETALL = "SELECT r_id, r_date, c_id, m_id, p_summary, p_content, s_name, sa_rnote, d_id FROM rdata ORDER BY r_id";
+	private static final String GETBYSNAME = "SELECT r_id, r_date, c_id, m_id, p_summary, p_content, s_name, sa_rnote, d_id FROM rdata where s_name=?";
 
 	@Override
 	public void insert(RdataVO rdataVO) {
@@ -280,7 +281,66 @@ public class RdataJDBCDAO implements RdataDAO_interface {
 		}
 		return list;
 	}
+	
+	@Override
+	public List<RdataVO> getBySname(String s_name) {
+		// TODO Auto-generated method stub
+		List<RdataVO> list = new ArrayList<RdataVO>();
+		RdataVO rdataVO = null;
 
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(GETBYSNAME);
+			pstmt.setString(1, s_name);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				rdataVO = new RdataVO();
+				rdataVO.setR_id(rs.getInt("r_id"));
+				rdataVO.setR_date(rs.getTimestamp("r_date"));
+				rdataVO.setC_id(rs.getString("c_id"));
+				rdataVO.setM_id(rs.getInt("m_id"));
+				rdataVO.setP_summary(rs.getString("p_summary"));
+				rdataVO.setP_content(rs.getString("p_content"));
+				rdataVO.setS_name(rs.getString("s_name"));
+				rdataVO.setSa_rnote(rs.getString("sa_rnote"));
+				rdataVO.setD_id(rs.getInt("d_id"));
+				list.add(rdataVO);
+			}
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
+		} catch (SQLException se) {
+			throw new RuntimeException("Couldn't load database driver. " + se.getMessage());
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
 //	public static void main(String args[]) throws IOException {
 
 //		RdataJDBCDAO dao = new RdataJDBCDAO();
