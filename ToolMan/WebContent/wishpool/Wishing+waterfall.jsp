@@ -360,7 +360,7 @@ form.go-right input:focus+label, form.go-right textarea:focus+label {
 				
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+					<button type="button" class="btn btn-danger" data-dismiss="modal">取消</button>
 					<button type="submit" class="btn btn-primary">送出</button>
 					<input type="hidden" name="w_city"> <input type="hidden"
 						name="w_district">
@@ -398,7 +398,7 @@ form.go-right input:focus+label, form.go-right textarea:focus+label {
 						，都能夠自行接下單並盡速協助處理您的狀況。</p>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-danger" data-dismiss="modal">關閉</button>
 				</div>
 			</div>
 		</div>
