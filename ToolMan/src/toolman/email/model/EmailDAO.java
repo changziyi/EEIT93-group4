@@ -131,7 +131,7 @@ public class EmailDAO implements EmailDAO_interface {
 
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(DELETE);
-
+			pstmt.setInt(1, ms_id);
 			pstmt.executeUpdate();
 
 			// Handle any driver errors
@@ -338,11 +338,45 @@ public class EmailDAO implements EmailDAO_interface {
 				Onelist.add(emailVO);
 			}
 		} catch (SQLException se) {
-			System.out.println(123);
+			
 		}
 		return Onelist;
 	}
 
+	
+	
+	@Override
+	public List<EmailVO> deleteMail(Integer ms_id) {
+		List<EmailVO> DeleteList = new ArrayList<EmailVO>();
+		EmailVO emailVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(DELETE);
+			pstmt.setInt(1, ms_id);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				emailVO = new EmailVO();
+				emailVO.setMs_id(rs.getInt("ms_id"));
+				emailVO.setMss_id(rs.getString("mss_id"));
+				emailVO.setMsr_id(rs.getString("msr_id"));
+				emailVO.setMs_date(rs.getTimestamp("ms_date"));
+				emailVO.setMs_summary(rs.getString("ms_summary"));
+				emailVO.setMs_content(rs.getString("ms_content"));
+				emailVO.setS_name(rs.getBoolean("s_name"));
+				emailVO.setMs_trash(rs.getBoolean("ms_trash"));
+				DeleteList.add(emailVO);
+			}
+		} catch (SQLException se) {
+			
+		}
+		return DeleteList;
+	}
+
+	
 	// List<EmailVO> list = null;
 	// Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 	// try {
@@ -422,5 +456,6 @@ public class EmailDAO implements EmailDAO_interface {
 	public static void main(String[] args) {
 
 	}
+
 
 }

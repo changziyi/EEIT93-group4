@@ -21,7 +21,7 @@
 <link rel="Shortcut Icon" href="${pageContext.servletContext.contextPath}/favicon.ico" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>email Page</title>
-
+<link href="${pageContext.servletContext.contextPath}/nav/nav.css" rel="stylesheet">
 <link rel="stylesheet"
 	href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
 <script
@@ -69,11 +69,10 @@
 
 </head>
 <body>
+<jsp:include page="/nav/navigation.jsp" />
 	<div class="container">
-		<div class="row">
-			<div class="col-md-12" style="background-color: #99ceff">
-				<H1 style="color: green" align="center">Email</H1>
-			</div>
+		<div class="row page-header">		
+				<div class="row"></div>
 		</div>
 		<br>
 
@@ -110,6 +109,12 @@
 								<br> 
 								垃圾桶：${emailVO.ms_trash}
 								
+							<form action="Email.do" method="post">
+							<input type="submit" class="btn btn-default"  value="刪除" ><span aria-hidden="true"></span>
+							<input type="hidden" name="ms_id" value="${emailVO.ms_id}"></input>
+							<input type="hidden" name="action" value="del1"></input>
+							</form>
+							
 							</div>
 						</c:forEach>
 					</div>
@@ -204,18 +209,26 @@
 						<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
 						<button type="submit" class="btn btn-primary">送出</button>			
 					</div>
+					
+<!-- 					<form action="Email.do" method="post"> -->
+<!-- 					<input type="submit" class="btn btn-default"  value="送出" ><span aria-hidden="true"></span> -->
+<%-- 					<input type="hidden" name="ms_id" value="${emailVO.ms_id}"></input> --%>
+<!-- 					<input type="hidden" name="action" value="submit1"></input> -->
+<!-- 					</form> -->
+		
+					
 				</div>
 			</form>
 		</div>
 	</div>
 	<script type="text/javascript">
-// 	$('#selectbtn').click(function(){
-// 		var dataid = $(this).attr('data-id');
-// 		$.get('Email.do',{
-// 			'action':'findbypk',
-// 			'msid':dataid
-// 		});
-// 	})
+	$('#selectbtn').click(function(){
+		var dataid = $(this).attr('data-id');
+		$.get('Email.do',{
+			'action':'findbypk',
+			'msid':dataid
+		});
+	})
 	$('button.btn-primary').click(function(){
 		var divparent =  $(this).parent('div');
 		var receiveid = divparent.children('span:first').text();

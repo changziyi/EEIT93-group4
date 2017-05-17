@@ -3,6 +3,7 @@ package toolman.email.controller;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.PrintWriter;
 import java.sql.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -21,6 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
+import javax.transaction.SystemException;
 
 import toolman.cdata.model.CdataVO;
 import toolman.email.model.EmailDAO;
@@ -49,33 +51,41 @@ public class EmailServlet extends HttpServlet {
 			
 		}
 	}
-	
-//	//取得單筆mail
-//	HttpSession session = req.getSession();
-//	EmailVO emailVO = (EmailVO)session.getAttribute("");
-//	String Account = cdataVO.getC_id();
-//			
-//}
-	
-	// 取得信件流水編號
-//	String ms_id_str = req.getParameter("ms_id");
-//	Integer ms_id = new Integer(ms_id_str);
 
-	
+
 
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
 		req.setCharacterEncoding("UTF-8");
+		
+		//刪除Email
+		PrintWriter out = res.getWriter();
+		EmailService EmailServiceSVC = new EmailService();
+		String action2 = req.getParameter("action");
+		String ms_id = req.getParameter("ms_id");
+	
+		System.out.println(ms_id);
+		if("del1".equals(action2)){
+			System.out.println("ms_id");
+			EmailServiceSVC.deleteEmailService(new Integer(ms_id));
+			res.sendRedirect("email.jsp");
+			return;
+		}
+		
 		//取得登入的寄件人帳號
 		HttpSession session = req.getSession();
 		CdataVO cdataVO = (CdataVO)session.getAttribute("LoginOK");
 		String SendAccount = cdataVO.getC_id();
+		
+		
 //		String SendAccount = "sa";//benny test
+		
+		
 		// 宣告錯誤訊息的變數
 		Map<String, String> errorMsgs = new HashMap<String, String>();
 		req.setAttribute("errorMsgs", errorMsgs);
 		EmailVO emailVO = new EmailVO();
-				
+		
 		// 收件者帳號
 		String mss_id = req.getParameter("mss_id");
 		if (mss_id == null || mss_id.trim().length() == 0) {
@@ -87,6 +97,7 @@ public class EmailServlet extends HttpServlet {
 		String ms_summary = req.getParameter("ms_summary");
 		if (ms_summary == null || ms_summary.trim().length() == 0) {
 			errorMsgs.put("summary1", "請輸入主旨");
+			
 		}
 		
 
@@ -117,41 +128,44 @@ public class EmailServlet extends HttpServlet {
 		
 		res.sendRedirect("email.jsp");
 		
-//		if (!errorMsgs.isEmpty()) {
-//			req.setAttribute("emailVO", emailVO);
-//			RequestDispatcher failureView = req.getRequestDispatcher("/email/Email.jsp");
-//			failureView.forward(req, res);
-//			return;
-//		}
-////
-////		req.setAttribute("emailVO", emailservice.findByPrimaryKey(emailVO.getMs_id()));
-////		RequestDispatcher successView = req.getRequestDispatcher("/email/emailsucess.jsp");
-////		successView.forward(req, res);
-////		return;
-//		
-//		
-//		
-//		List<EmailVO> list = new ArrayList<EmailVO>();
-//		EmailVO email1 = new EmailVO();
+		if (!errorMsgs.isEmpty()) {
+			req.setAttribute("emailVO", emailVO);
+			RequestDispatcher failureView = req.getRequestDispatcher("/email/Email.jsp");
+			failureView.forward(req, res);
+			return;
+			
+		}
+		
+		
 //
-//		email1.setMss_id(mss_id);
-//		email1.setMs_summary(ms_summary);
-//		email1.setMs_content(ms_content);
-//		list.add(email1);
-//		emailservice.getAll();
-//		
-//		for (int i = 0 ; i < list.size() ; i++) {
-//			EmailVO vo = list.get(i);
-//		}	
-//		
-//		//測試用
-//		System.out.println("確認表單上傳成功");
-//
-//		System.out.println(mss_id);
-//		System.out.println(ms_summary);
-//		System.out.println(ms_content);
-//
-//		
+//		req.setAttribute("emailVO", emailservice.findByPrimaryKey(emailVO.getMs_id()));
+//		RequestDispatcher successView = req.getRequestDispatcher("/email/emailsucess.jsp");
+//		successView.forward(req, res);
+//		return;
+		
+		
+		
+		List<EmailVO> list = new ArrayList<EmailVO>();
+		EmailVO email1 = new EmailVO();
+
+		email1.setMss_id(mss_id);
+		email1.setMs_summary(ms_summary);
+		email1.setMs_content(ms_content);
+		list.add(email1);
+		emailservice.getAll();
+		
+		for (int i = 0 ; i < list.size() ; i++) {
+			EmailVO vo = list.get(i);
+		}	
+		
+		//測試用
+		System.out.println("確認表單上傳成功");
+
+		System.out.println(mss_id);
+		System.out.println(ms_summary);
+		System.out.println(ms_content);
+
+		
 		}
 	}
 

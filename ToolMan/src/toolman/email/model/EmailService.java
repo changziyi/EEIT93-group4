@@ -82,4 +82,12 @@ public String getOneMailJson(Integer ms_id) {
 public EmailVO findByPrimaryKey1(Integer ms_id) {
 	return dao.findByPrimaryKey1(ms_id);
 }
+
+public void deleteEmailService(Integer ms_id) {
+	dao.delete(ms_id);
+}
+
+public void deleteEmailServiceJson(Integer ms_id) {
+	List<EmailVO> DeleteEmailData = dao.deleteMail(ms_id);
+}
 }
