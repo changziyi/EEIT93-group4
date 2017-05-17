@@ -197,36 +197,39 @@ public class ManagerUIServlet extends HttpServlet {
 			RdataService rdataservice = new RdataService();
 			List<RdataVO> list = null;
 			
-			if("allcustomer".equals(datastatus)){				
-				list = rdataservice.getAll();		
+			if("allreport".equals(datastatus)){	
+				list = rdataservice.getAll();//need to add method in rdata
+					
 			}//end if		
 			else{
-//				list = rdataservice.getAll();//need to add method in rdata
+//				list = rdataservice.getBySname(datastatus);	
 			}//end else	
 
-			List list2 = new ArrayList();
+			List listr = new ArrayList();
 				for(RdataVO rdataVO:list){
 					Map map = new HashMap();
-					Timestamp c_jdatestamp = rdataVO.getR_date();
+					Timestamp getrdate = rdataVO.getR_date();
 					SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-					String c_jdate = df.format(c_jdatestamp);
-					String c_name =	rdataVO.getC_id();
-					String c_id	= rdataVO.getC_id();
+					String r_date = df.format(getrdate);
+					Integer r_id =rdataVO.getR_id();
+					String c_id =	rdataVO.getC_id();
 					Integer m_id	= rdataVO.getM_id();
-					String c_addr = rdataVO.getP_summary();	
+					String p_summary = rdataVO.getP_summary();	
 					String p_content = rdataVO.getP_content();
 					String s_name = rdataVO.getS_name();
 					String sa_cnote	=rdataVO.getSa_rnote();
 					System.out.println(c_id);
-					map.put("c_jdate",c_jdate);
-					map.put("c_name",c_name);
+					map.put("r_date",r_date);
+					map.put("r_id",r_id);
 					map.put("c_id",c_id);
-					map.put("s_name",s_name);
-
+					map.put("m_id",m_id);
+					map.put("p_summary",p_summary);
+					map.put("p_content",p_content);	
+					map.put("s_name",s_name);	
 					map.put("sa_cnote",sa_cnote);	
-					list2.add(map);
+					listr.add(map);
 				}//end for loop
-				String cjasonstring = JSONValue.toJSONString(list2);
+				String cjasonstring = JSONValue.toJSONString(listr);
 				System.out.println(cjasonstring);
 				out.write(cjasonstring);
 				out.flush();

@@ -9,6 +9,7 @@ public class EmailVO implements java.io.Serializable{
 	private String ms_summary;
 	private String ms_content;	
 	private Boolean s_name;
+	private Boolean ms_trash;
 	
 	public Integer getMs_id() {
 		return ms_id;
@@ -52,6 +53,13 @@ public class EmailVO implements java.io.Serializable{
 	}
 	public void setS_name(Boolean s_name) {
 		this.s_name = s_name;
+	}
+	
+	public Boolean getMs_trash() {
+		return ms_trash;
+	}
+	public void setMs_trash(Boolean ms_trash) {
+		this.ms_trash = ms_trash;
 	}
 		
 	
