@@ -58,4 +58,7 @@ public class RdataService {
 	public List<RdataVO> getAll() {
 		return dao.getAll();
 	}
+	public List<RdataVO> getBySname(String s_name) {		
+		return dao.getBySname(s_name);
+	}
 }

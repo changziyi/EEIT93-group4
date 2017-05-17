@@ -161,8 +161,7 @@ public class CdataServlet extends HttpServlet {
 			RequestDispatcher failureView = req.getRequestDispatcher("/cdata/login-up.jsp");
 			failureView.forward(req, resp);
 		}
-		
-		/******************************** 撈取評價紀錄 ***********************************/	
+			
 	
 		
 		

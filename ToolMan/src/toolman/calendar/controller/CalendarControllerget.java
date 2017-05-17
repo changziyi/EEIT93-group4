@@ -37,14 +37,14 @@ import toolman.mdata.model.MdataVO;
 /**
  * Servlet implementation class CalendarController
  */
-@WebServlet("/toolman.calendar/CalendarController.do")
-public class CalendarController extends HttpServlet {
+@WebServlet("/toolman.calendar/CalendarControllerget.do")
+public class CalendarControllerget extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CalendarController() {
+    public CalendarControllerget() {
         super();
 
     }
@@ -60,7 +60,8 @@ public class CalendarController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("application/json");
 	     String calendarjson = request.getParameter("calendarjson");
 		 
 //		 MdataVO mdataVO2 = (MdataVO) request.getAttribute("mdataVO");
@@ -70,70 +71,42 @@ public class CalendarController extends HttpServlet {
 		 CalendarService calendarservice = new CalendarService();
 		 List list = new ArrayList();
 //--------------------------------insert---------------------------------------------		 
-		 calendarservice.deleteByM(m_id);
-		 JSONArray jsonarray = new JSONArray(calendarjson);
-		for (int i = 0; i < jsonarray.length(); i++) {
-			CalendarVO calendarVO = new CalendarVO();
-		    JSONObject jsonobject = jsonarray.getJSONObject(i);
-		    String id = jsonobject.getString("id");
-		    String title = jsonobject.getString("title");		    
-		    String start1 = jsonobject.getString("start");
-		    DateFormat df=null;
-		    if(start1.endsWith("Z")){
-			     df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
-		    }else{ 
-		    	df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-		    }
-			    Calendar calobj = Calendar.getInstance();
-				try {
-					calobj.setTime(df.parse(start1));
-				} catch (ParseException e) {
-					e.printStackTrace();
-				}
-				Timestamp start = new Timestamp(calobj.getTimeInMillis());		   
-			    String end1 = jsonobject.getString("end");
-				try {
-					calobj.setTime(df.parse(end1));
-				} catch (ParseException e) {
-					e.printStackTrace();
-				}
-				Timestamp end = new Timestamp(calobj.getTimeInMillis());
-		   
-		    	
-		    	
-		    	
-		    	
-		   
-		    String className = jsonobject.getJSONArray("className").toString();
-		    Boolean allDay = jsonobject.getBoolean("allDay");
-//		    Boolean overlap = jsonobject.getBoolean("overlap");
-		    
-		    calendarVO.setEvent_id(id);
-		    calendarVO.setEvent_start(start);
-		    calendarVO.setEvent_title(title);
-		    
-		    calendarVO.setEvent_end(end);
-		    calendarVO.setEvent_start(start);
-		    calendarVO.setEvent_allDay(allDay);
-		    calendarVO.setEvent_className(className);
-		    calendarVO.setM_id(m_id);
-		    list.add(calendarVO);
-		    
-		    System.out.println(start);
-		    System.out.println(id);
-		    System.out.println(title);
-		    System.out.println(end);
-		    System.out.println(className);
-		    System.out.println(allDay);
-		}
 		
-		
-		calendarservice.InsertByM(list);
 //---------------------------------end insert---------------------------------------------		
 		
 		//---------------------------------get calendar---------------------------------------------
 		
+		List<CalendarVO> getlist = calendarservice.getByM(1000);
+		System.out.print(getlist);
+		JSONArray jsonarray = new JSONArray();
 		
+		for(CalendarVO calendarVO1:getlist){
+			Map map = new HashMap();
+			JSONObject jsonobj = new JSONObject();
+			jsonobj.put("id", calendarVO1.getEvent_id());
+			System.out.print(calendarVO1.getEvent_id());
+			jsonobj.put("start", calendarVO1.getEvent_start().toString());
+			String color = null;
+			if(calendarVO1.getEvent_title().equals("早上")){
+				color="green";
+			}else if(calendarVO1.getEvent_title().equals("下午")){
+				color="brown";
+			}else if(calendarVO1.getEvent_title().equals("晚上")){
+				color="blue";
+			}
+			
+			jsonobj.put("title", calendarVO1.getEvent_title());
+			jsonobj.put("end", calendarVO1.getEvent_end().toString());
+			jsonobj.put("allDay", false);
+			jsonobj.put("overlap", false);
+			jsonobj.put("editable",false);
+			jsonobj.put("color",color);
+//			map.put("className", calendarVO1.getEvent_className());
+			jsonarray.put(jsonobj);
+		}			
+			PrintWriter out = response.getWriter();
+			out.println(jsonarray);
+			System.out.println(JSONValue.toJSONString(list));
 //		//---------------------------------end calendar---------------------------------------------
 //				
 	    }
