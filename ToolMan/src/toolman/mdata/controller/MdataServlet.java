@@ -41,7 +41,7 @@ public class MdataServlet extends HttpServlet {
 		if ("SearchMaster".equals(action)) {
 			
 			String m_city = request.getParameter("city");
-			String m_district = "";
+			String m_district = request.getParameter("district");
 			String input = request.getParameter("input");
 			String m_pro = request.getParameter("pro");
 			
@@ -54,14 +54,14 @@ public class MdataServlet extends HttpServlet {
 			mdataVO.setM_name(m_pro);
 			
 			session.setAttribute("search", mdataVO);
-			response.sendRedirect("searchResult.jsp");
+			response.sendRedirect("masterList.jsp");
 			return;
 			
 		}
 		
 		if ("SearchAll".equals(action)) {
 			
-			String m_city = request.getParameter("city");
+			String m_city = "";
 			String m_district = "";
 			String m_pro = "";
 			String input = "";
@@ -74,7 +74,7 @@ public class MdataServlet extends HttpServlet {
 			mdataVO.setM_name(m_pro);
 			
 			session.setAttribute("search", mdataVO);
-			response.sendRedirect("searchResult.jsp");
+			response.sendRedirect("masterList.jsp");
 			return;
 			
 		}
@@ -99,7 +99,7 @@ public class MdataServlet extends HttpServlet {
 			mdataVO.setM_name(m_pro);
 			
 			session.setAttribute("search", mdataVO);
-			response.sendRedirect("searchResult.jsp");
+			response.sendRedirect("masterList.jsp");
 			return;
 			
 		}
@@ -243,7 +243,12 @@ public class MdataServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		String type = request.getParameter("type");
-
+		String action = request.getParameter("action");
+		
+		if ("SearchAll".equals(action)) {
+			doPost(request, response);
+		}
+		
 		if ("master".equals(type)) {
 			String image = request.getParameter("image");
 			Integer m_id = new Integer(image);

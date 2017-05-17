@@ -1,11 +1,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ page import="toolman.order.model.*"%>
     <%@ page import="java.util.*"%>
-    
+     <%@ page import="toolman.email.model.*"%>
+<%@ page import="toolman.cdata.model.*"%>
+
+
     <%@ page import="toolman.cdata.model.*"%>
-    
   
     
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -136,16 +137,17 @@ $(function(){
 <a href="login-up.jsp">註冊畫面</a><p/>
 <a href="forgotpwd.jsp">忘記密碼</a><p/>
 <a href="<c:url value='test1.jsp' />">測試登入1</a><p/>
-<a href="<c:url value='test2.jsp' />">測試登入2</a><p/>
-     
+ <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/cdata/CdatadessServlet.do" > 
+       <input type="submit" value="消費者頁面">
+     </FORM>    
 </div>
+
  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/cdata/CdataOrderServlet.do" >
- 
- 
        <input type="submit" value="消費者訂單">
         <input type="hidden" name="c_id" value="Snoopy">
         <input type="hidden" name="action" value="listOrder">
      </FORM>
+     
      <FORM METHOD="post" ACTION="../cdata/CdataOrderServlet.do />" >
         <input type="submit" value="登出">	
          </FORM>

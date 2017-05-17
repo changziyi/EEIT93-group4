@@ -3,6 +3,8 @@ package toolman.rdata.model;
 import java.sql.Date;
 import java.sql.Timestamp;
 
+import java.sql.Timestamp;
+
 public class RdataVO implements java.io.Serializable{
 	
 	private Integer r_id;
@@ -14,7 +16,8 @@ public class RdataVO implements java.io.Serializable{
 	private String s_name;
 	private String sa_rnote;
 	private Integer d_id;
-	
+	private Integer o_id;
+
 	
 	public Integer getR_id() {
 		return r_id;
@@ -69,5 +72,11 @@ public class RdataVO implements java.io.Serializable{
 	}
 	public void setD_id(Integer d_id) {
 		this.d_id = d_id;
+	}
+	public Integer getO_id() {
+		return o_id;
+	}
+	public void setO_id(Integer o_id) {
+		this.o_id = o_id;
 	}
 }

@@ -28,6 +28,7 @@
 
 <link rel="stylesheet"
 	href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+<link href="${pageContext.servletContext.contextPath}/nav/nav.css" rel="stylesheet">
 <script
 	src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
 <script
@@ -44,7 +45,7 @@
 <style>
 .content-box {
 	display: inline-block;
-	border: 2px dashed #66b5ff;
+	border: 3px dashed #66b5ff;
 	padding: 10px;
 	margin: 10px 10px 10px 0;
 	overflow: hidden;
@@ -53,7 +54,7 @@
 }
 
 .bgcolor {
-   background-color: #00BFFF;
+   background-color: #4dd2ff;
 
 }
 
@@ -71,10 +72,121 @@
 
 }
 
+.modal-content {
+    background-color: #ccffff;
+	border-radius: 23px;
+}
+
+.form-control {
+
+	background-color:white;
+}
+
+p {
+	font-family: Microsoft JhengHei;
+	font-weight: bold;
+	font-size: 17px;
+}
+
+h3 {
+	font-family: Microsoft JhengHei;
+	font-weight: bold;
+	font-size: 35px;
+	color:#357EBD;
+}
+
+
+form>div {
+	position: relative;
+	overflow: hidden;
+}
+
+form input, form textarea {
+	width: 100%;
+	border: 2px solid gray;
+	background: none;
+	position: relative;
+	top: 0;
+	left: 0;
+	z-index: 1;
+	padding: 8px 12px;
+	outline: 0;
+}
+
+form input:valid, form textarea:valid {
+	background: white;
+}
+
+form input:focus, form textarea:focus {
+	border-color: #357EBD;
+}
+
+form input:focus+label, form textarea:focus+label {
+	background: #357EBD;
+	color: white;
+	font-size:15px;
+	padding: 1px 6px;
+	z-index: 2;
+	text-align:center;
+}
+
+form label {
+	-webkit-transition: background 0.2s, color 0.2s, top 0.2s, bottom 0.2s,
+		right 0.2s, left 0.2s;
+	transition: background 0.2s, color 0.2s, top 0.2s, bottom 0.2s, right
+		0.2s, left 0.2s;
+	position: absolute;
+	color: #999;
+	padding: 7px 6px;
+	font-weight: normal;
+}
+
+form textarea {
+	display: block;
+	resize: vertical;
+}
+
+form.go-bottom input, form.go-bottom textarea {
+	padding: 12px 12px 12px 12px;
+}
+
+form.go-bottom label {
+	top: 0;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+}
+
+form.go-bottom input:focus, form.go-bottom textarea:focus {
+	padding: 4px 6px 20px 6px;
+}
+
+form.go-bottom input:focus+label, form.go-bottom textarea:focus+label {
+	top: 100%;
+	margin-top: -16px;
+}
+
+form.go-right label {
+	border-radius: 0 5px 5px 0;
+	height: 100%;
+	top: 0;
+	right: 100%;
+	width: 100%;
+	margin-right: -100%;
+}
+
+form.go-right input:focus+label, form.go-right textarea:focus+label {
+	right: 0;
+	margin-right: 0;
+	width: 35%;
+	padding-top: 5px;
+}
 
 </style>
 
 <script>
+      /*---------------瀑布流的關鍵CODE--------------------*/
+
 	$(function() {
 		$('#wishblock').imagesLoaded(function() {
 			$('#wishblock').masonry({
@@ -84,7 +196,7 @@
 			});
 		});
 
-		/*--------------------------方法分隔線--------------------------------*/
+		/*--------------------------表單送出自動判別縣市行政區--------------------------------*/
 
 		var city = $('input[name="w_city"]');
 		var district = $('input[name="w_district"]');
@@ -97,6 +209,8 @@
 				district.attr("value", this.value);
 			}
 		});
+		
+		/*---------------------------------限是篩選CODE----------------------------------------------*/
 		$('#bycity').twzipcode({
 			countyName:'searchCountry',
 			districtName:'searchDistrict',
@@ -118,11 +232,10 @@
 
 </head>
 <body>
+<jsp:include page="/nav/navigation.jsp" />
 	<div class="container">
 		<div class="page-header">
-			<h1>
-				許願池
-			</h1>
+			<div class="row"></div>
 		</div>
 		<div class="row">
 				<div class="pull-right search-condition">
@@ -172,11 +285,11 @@
 				</div>
 			</div>
 			
-			<div class="col-md-9">
+			<div class="col-md-9" id="wishblock">
 				
-				<div class="row well bgcolor">
+				
 					<c:forEach var="wishpoolVO" items="${new_date}">
-						<div class="col-md-4">
+						<div class="bgcolor">
 							<div class="content-box">
 								<div><label class="user-name">使用者：</label><span>${wishpoolVO.c_id}</span></div>
 								<div>位在地區：${wishpoolVO.w_city}${wishpoolVO.w_district}</div>
@@ -196,7 +309,7 @@
 							</div>
 						</div>
 					</c:forEach>
-				</div>
+				
 			</div>
 		</div>
 		
@@ -206,52 +319,59 @@
 	<div class="modal fade" id="myModal01" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
-			<form method="POST" action="wishpool.do"
-				enctype="multipart/form-data">
+		
+		
+			<div class="modal-content">
+				<div class="modal-header">
+					<h3>
+						我要許願
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
 
-				<div class="modal-content">
-					<div class="modal-header">
-						<H4 style="color: red">
-							我要許願
-							<button type="button" class="close" data-dismiss="modal"
-								aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-
-							</button>
-						</H4>
-					</div>
-					<div class="modal-body">
-						<table>
-							<tr>
-								<td><b>我想修 ：</b><br> <input type="text" name="w_pro"
-									required="true" value="${param.w_pro}" />${errorMsgs.pro1}${errorMsgs.pro2}
-								</td>
-							</tr>
-							<tr>
-								<td><b>位在地址：</b><div id="twzipcode"></div></td>
-							</tr>
-							<tr>
-								<td><b>維修項目的照片：</b> <input type="file" name="w_image"></td>
-							</tr>
-							<tr>
-								<td><label style="vertical-align: top"><b>問題描述：</b></label>
-									<textarea name="w_content" style="width: 400px; height: 120px"
-										placeholder="請描述問題原因"></textarea></td>
-							</tr>
-						</table>
-
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-						<button type="submit" class="btn btn-primary">送出</button>
-						<input type="hidden" name="w_city"> <input type="hidden"
-							name="w_district">
-					</div>
+						</button>
+					</h3>
 				</div>
-			</form>
+
+				<div class="modal-body">
+					<div class="container">
+						
+							<form role="form" class="col-md-5 go-right" method="POST" 
+							action="wishpool.do" enctype="multipart/form-data">
+								<p>我想修：</p>
+								<div class="form-group">
+									<input type="text" name="w_pro" class="form-control"
+										required="true"> <label for="name">想修什麼呢?</label>
+								</div>
+								<p>位在地址：</p>
+								<div id="twzipcode"></div>
+								
+								<p>維修項目的照片：</p>
+								<input type="file" name="w_image" class="form-control">
+								
+								<p>問題描述：</p>
+								<div class="form-group">
+									<textarea name="w_content" class="form-control" required="true"></textarea>
+									<label for="message">描述您的問題</label>
+								</div>
+							
+						
+				</div>
+				
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+					<button type="submit" class="btn btn-primary">送出</button>
+					<input type="hidden" name="w_city"> <input type="hidden"
+						name="w_district">
+				</div>
+				</form>
+				</div>
+			
+			
+			
 		</div>
 	</div>
-
 
 
 	<!--------------------------- 這裡是許願是什麼  ---------------------------------------------->
@@ -260,12 +380,12 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<H4 style="color: red" class="modal-title" id="myModalLabel">
+					<h3 class="modal-title" id="myModalLabel">
 						許願池的作用是什麼?
 						<button type="button" class="close" data-dismiss="modal"
 							aria-label="Close">
 							<span aria-hidden="true">&times;</span>
-					</H4>
+					</h3>
 					</button>
 				</div>
 				<div class="modal-body">
