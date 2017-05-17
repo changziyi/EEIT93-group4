@@ -38,11 +38,11 @@
                     <ul class="nav navbar-nav pull-right">
                         <li class=" dropdown"><a href="#" class="dropdown-toggle active" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">登入  <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="${pageContext.servletContext.contextPath}/wishpool/login-in.jsp">ToolMan 帳號</a></li>
+                                <li><a href="${pageContext.servletContext.contextPath}/cdata/login-in.jsp">ToolMan 帳號</a></li>
                                 <li><a href="#">Facebook 帳號</a></li>
                             </ul>
                         </li>
-                        <li class=""><a href="#">登出</a></li>
+                        <li class=""><a href="${pageContext.servletContext.contextPath}/loginoutServlet">登出</a></li>
                     </ul>
                 </div>
            

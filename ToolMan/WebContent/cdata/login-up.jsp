@@ -12,7 +12,7 @@
       <title>login-up</title>
       <style>
         body {
-          font-family: "微軟正黑體", sans-serif;
+          font-family:Microsoft JhengHei;
           margin: 0 auto;
           padding: 0 auto;
           background-color: #f9f9f9;
