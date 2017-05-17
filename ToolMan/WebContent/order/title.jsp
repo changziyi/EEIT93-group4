@@ -10,7 +10,7 @@
     <div class="navbar-header">
       <a class="navbar-brand" href="<%=request.getContextPath()%>/master/index1.jsp">ToolMan</a>
     </div>
-    <ul class="nav navbar-nav">
+    <ul class="nav navbar-nav" >
  <li><a href="${pageContext.servletContext.contextPath}/mdata/MdataOrderServlet.do?m_id=${LoginOK.m_id}&action=listOrder">師傅訂單</a></li>
  <li><a href="${pageContext.servletContext.contextPath}/cdata/CdataOrderServlet.do?c_id=${LoginOK.c_id}&action=listOrder">消費者訂單</a> </li>
  <li><a href="${pageContext.servletContext.contextPath}/cdata/CdataOrderServlet.do?c_id=${LoginOK.c_id}&action=myLike">我的最愛</a> </li>
