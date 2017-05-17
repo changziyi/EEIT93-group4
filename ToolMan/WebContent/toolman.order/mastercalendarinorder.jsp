@@ -333,10 +333,10 @@
 		<div id='external-events'  style="margin-top:46px;">
 			<h4 style="margin-left:20%;">預約時間</h4>
 			<div id='external-events2' style="margin-left:20%;">
-				<div class='fc-event' data-id="morning"data-start="01:00" data-end='08:00'>早上不可預約</div>
-				<div class='fc-event' data-id="noon"data-start="12:00" data-end='06:00'>下午不可預約</div>
-				<div class='fc-event' data-id="night"data-start="18:00" data-end='06:00'>晚上不可預約</div>
-				<div class='fc-event' id="alldayevent" data-id="allday"data-start="00:00" data-end='24:00'>整天不可預約</div>
+				<div class='fc-event' data-id="morning"data-start="01:00" data-end='08:00'>早上</div>
+				<div class='fc-event' data-id="noon"data-start="12:00" data-end='06:00'>下午</div>
+				<div class='fc-event' data-id="night"data-start="18:00" data-end='06:00'>晚上</div>
+				<div class='fc-event' id="alldayevent" data-id="allday"data-start="00:00" data-end='24:00'>整天</div>
 				
 			</div>
 		<!-- 			<p> -->
@@ -896,7 +896,7 @@ function calendarsubmit(){
 					
 					var splitstring2 = start2.split(" ");
 // 					console.log(splitstring2);
-					if((events[i].title == "整天不可預約")||(event.title =="整天不可預約")){
+					if((events[i].title == "整天")||(event.title =="整天")){
 						if((splitstring1[0]+splitstring1[1]+splitstring1[2]+splitstring1[3])==
 							(splitstring2[0]+splitstring2[1]+splitstring2[2]+splitstring2[3])){
 		

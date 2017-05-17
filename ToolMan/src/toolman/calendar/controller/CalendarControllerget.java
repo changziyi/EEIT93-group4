@@ -86,10 +86,21 @@ public class CalendarControllerget extends HttpServlet {
 			jsonobj.put("id", calendarVO1.getEvent_id());
 			System.out.print(calendarVO1.getEvent_id());
 			jsonobj.put("start", calendarVO1.getEvent_start().toString());
+			String color = null;
+			if(calendarVO1.getEvent_title().equals("早上")){
+				color="green";
+			}else if(calendarVO1.getEvent_title().equals("下午")){
+				color="brown";
+			}else if(calendarVO1.getEvent_title().equals("晚上")){
+				color="blue";
+			}
+			
 			jsonobj.put("title", calendarVO1.getEvent_title());
 			jsonobj.put("end", calendarVO1.getEvent_end().toString());
 			jsonobj.put("allDay", false);
 			jsonobj.put("overlap", false);
+			jsonobj.put("editable",false);
+			jsonobj.put("color",color);
 //			map.put("className", calendarVO1.getEvent_className());
 			jsonarray.put(jsonobj);
 		}			
