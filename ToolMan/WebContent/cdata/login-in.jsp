@@ -17,14 +17,12 @@ body {
 	padding: 0 auto;
 	background-color: #f9f9f9;
 }
-
 .content {
 	width: 400px;
 	margin: 30px auto;
 	padding: 0 auto;
 /* 	background-color: gray; /*sign in box model 測試用 */ 
 }
-
 .loginbox {
 	width: 400px;
 	height: 500px;
@@ -35,7 +33,6 @@ body {
 	background-color: white;
 	border-radius: 10px;
 }
-
 h1 {
 	font-size: 24px;
 	margin: 40px 0 15px 0;
@@ -43,7 +40,6 @@ h1 {
 	font-weight: 900;
 	text-align: center;
 }
-
 .memberphoto {
 	height: 44px;
 	width: 44px;
@@ -54,7 +50,6 @@ h1 {
 	background-size: contain;
 	border: solid 1px #a5a5a5;
 }
-
 .passwordphoto {
 	height: 44px;
 	width: 44px;
@@ -65,7 +60,6 @@ h1 {
 	background-image: url(../image/password.jpg);
 	border: solid 1px #a5a5a5;
 }
-
 .a {
 	height: 40px;
 	width: 250px;
@@ -74,14 +68,12 @@ h1 {
 	font-size: 20px;
 	margin-bottom: 5px;
 }
-
 hr {
 	width: 300px;
 	color: #a5a5a5;
 	margim-top: 10px;
 	margim-bottom: 10px;
 }
-
 span {
 	position: absolute;
 	font-size: 10px;
@@ -91,7 +83,6 @@ span {
 	color: #444444;
 	left: 195px;
 }
-
 .submit {
 	height: 30px;
 	width: 150px;
@@ -103,25 +94,20 @@ span {
 	border-radius: 6px;
 	margin-top: 10px;
 }
-
 .b {
 	margin-left: 125px;
 }
-
 .fb {
 	position: absolute;
 	margin-top: 90px;
 	margin-left: -128px;
 }
-
 .submit:hover {
 	background-color: #cc711f;
 }
-
 .signup:hover {
 	background-color: #cc711f;
 }
-
 h2 {
 	font-size: 16px;
 	position: absolute;
@@ -131,14 +117,12 @@ h2 {
 	font-weight: 900;
 	left: 149px;
 }
-
 .forgotmember {
 	font-size: 14px;
 	margin-left: 266px;
 	text-decoration: none; /*消除底線*/
 	color: #cc792e;
 }
-
 .forgot {
 	font-size: 14px;
 	margin-left: 266px;
@@ -199,7 +183,6 @@ h2 {
 		<!-- test photo-->
 		<div id="fb_photo"></div>
 <script>
-
 //fb
 	function statusChangeCallback(response) {
 		console.log('statusChangeCallback');
@@ -222,15 +205,12 @@ h2 {
 					+ 'into this app.';
 		} 
 	}
-
-
 	function checkLoginState() {
 		FB.getLoginStatus(function(response) {
 			console.log("Token : " + response.authResponse.accessToken);
 			statusChangeCallback(response);
 		});
 	}
-
 	window.fbAsyncInit = function() {
 		FB.init({
 			appId : '1893060910719956',
