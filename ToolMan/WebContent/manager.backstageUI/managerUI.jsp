@@ -659,9 +659,7 @@ $(function(){
 						var rowth = $('<tr></tr>').append([thc0,thc1,thc2,thc3,thc4,thc5,thc6,thc7,thc8]);
 						docFragth.append(rowth);
 				   }
-				   else if(id=="c"){
-					   
-					  
+				   else if(id=="c"){					   					  
 					    var thc0 = $('<th></th>').addClass('eventlistthreadtrth');
 					    var thc1 = $('<th></th>').text('下單日期').addClass('eventlistthreadtrth');
 						var thc2 = $('<th></th>').text('消費者名稱').addClass('eventlistthreadtrth');
@@ -673,6 +671,18 @@ $(function(){
 						var rowth = $('<tr></tr>').append([thc0,thc1,thc2,thc3,thc4,thc5,thc6,thc7]);
 						docFragth.append(rowth);
 					   
+				   }
+				   else if(id=="r"){
+					  	var thc0 = $('<th></th>').addClass('eventlistthreadtrth');
+					    var thc1 = $('<th></th>').text('檢舉日期').addClass('eventlistthreadtrth');
+						var thc2 = $('<th></th>').text('檢舉人').addClass('eventlistthreadtrth');
+						var thc3 = $('<th></th>').text('檢舉主旨').addClass('eventlistthreadtrth');
+						var thc4 = $('<th></th>').text('檢舉案件狀態').addClass('eventlistthreadtrth');
+						var thc5 = $('<th></th>').text('檢舉訂單').addClass('eventlistthreadtrth');
+						var thc6 = $('<th></th>').text('檢舉留言').addClass('eventlistthreadtrth');
+						var thc7 = $('<th></th>').text('管理者註記').addClass('eventlistthreadtrth');
+						var rowth = $('<tr></tr>').append([thc0,thc1,thc2,thc3,thc4,thc5,thc6,thc7]);
+						docFragth.append(rowth);					   
 				   }
 			   $.each(datas,function(i,data){
 				   console.log(data);//for test
@@ -750,9 +760,28 @@ $(function(){
 					   docFragtb.append(row);
 					   
 						}// end if
-					}// end each function
-// 			   	}//end for loop
-			   );//each
+						
+					else if(id=="r"){
+						   var toggleword = $('<input type="checkbox" name="ctoggle" />').val(data.c_id).attr('data-receiver',data.c_id);
+						   var mid =  $('<input type="button" style="width:100px;word-break: keep-all"/> ').val(data.r_id).addClass('eventlisttbodytrtd');
+						   var a =  $('<a></a> ').attr('href',"${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIFunctionServlet.do?"+"functionaction=findcustomer&targetid="+data.c_id).append(mid);						  
+						   var midwordmid =  $('<span style="visibility: hidden;font-size:0px;margin:0pxlpadding:0px;"></span> ').text(data.c_id).addClass('eventlisttbodytrtd');
+						   var cell0 = $('<td></td>').addClass('eventlisttbodytrtd').append(toggleword);
+						   var cell1 = $('<td></td>').text(data.r_date).addClass('eventlisttbodytrtd');;
+						   var cell2 = $('<td></td>').html(a).addClass('eventlisttbodytrtd').append(midwordmid);
+						   var cell3 = $('<td></td>').text(data.c_id).addClass('eventlisttbodytrtd');;
+						   var cell4 = $('<td></td>').text(data.p_summary).addClass('eventlisttbodytrtd');;
+						   var cell5 = $('<td></td>').text(data.p_content).addClass('eventlisttbodytrtd');;
+						   var cell6 = $('<td></td>').text(data.s_name).addClass('eventlisttbodytrtd');;
+						   var wordsanote =  $('<span style="visibility: hidden;font-size:0px;margin:0pxlpadding:0px;"></span> ').text(data.sa_rnote).addClass('eventlisttbodytrtd');
+						   var sacnote =  $('<input type="text" name="sacnote" id= width="500px" /> ').val(data.sa_rnote).attr('data-noteid',data.r_id).addClass('eventlisttbodytrtd');
+						   var cell7 = $('<td></td>').html(sacnote).addClass('eventlisttbodytrtd').append(wordsanote);;
+						   var row = $('<tr></tr>').append([cell0,cell1,cell2,cell3,cell4,cell5,cell6,cell7]);
+						   docFragtb.append(row);						
+					}
+				}// end each function
+// 			 }//end for loop
+		 );//each
 			   
 			   th.append(docFragth);
 			   tb.append(docFragtb);

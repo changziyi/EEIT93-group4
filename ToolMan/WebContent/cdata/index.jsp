@@ -1,9 +1,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ page import="toolman.order.model.*"%>
     <%@ page import="java.util.*"%>
-    
+     <%@ page import="toolman.email.model.*"%>
+<%@ page import="toolman.cdata.model.*"%>
+
+
     <%@ page import="toolman.cdata.model.*"%>
   
     
@@ -139,6 +141,7 @@ $(function(){
        <input type="submit" value="消費者頁面">
      </FORM>    
 </div>
+
  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/cdata/CdataOrderServlet.do" >
        <input type="submit" value="消費者訂單">
         <input type="hidden" name="c_id" value="Snoopy">

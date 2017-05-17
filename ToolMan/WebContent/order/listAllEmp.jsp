@@ -2,6 +2,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
 <%@ page import="toolman.order.model.*"%>
+<%@ page import="toolman.cdata.model.*"%>
+<%@ page import="toolman.rdata.model.*"%>
 
 
 
@@ -39,7 +41,6 @@
 	
 <body bgcolor='white'>
 
-
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -63,22 +64,18 @@
         <input type="hidden" name="action" value="listOrder">
      </FORM>
 
-     <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/cdata/CdataOrderServlet.do" >
+     <FORM METHOD="get" ACTION="<%=request.getContextPath()%>/cdata/CdataOrderServlet.do" >
+ 
        <input type="submit" value="消費者訂單">
         <input type="hidden" name="c_id" value="Snoopy">
         <input type="hidden" name="action" value="listOrder">
      </FORM>
      <%------------------------------------------------------------------- --%>
-     
-<b><font color=red></font></b>
-<table border='1' cellpadding='5' cellspacing='0' width='1200'>
-	<tr bgcolor='#CCCCFF' align='center' valign='middle' height='20'>
-		<td><h3>訂單 </h3>
-		         </td></tr></table>
 
-<table border='1' bordercolor='#CCCCFF' width='1200'>
+		<td><h3>訂單 </h3>
+
+  <table class="table table-bordered">
 	<tr>
-		<th>訂單編號</th>
 		<th>店家名稱</th>
 		<th>訂單完成時間</th>
 		<th>維修項目說明</th>
@@ -87,6 +84,7 @@
 		<th>分數</th>
 		<th>留言</th>
 		<th>評分</th>
+		<th>投訴</th>
 		
 	</tr>
  	
@@ -96,7 +94,6 @@
 <%-- 		<c:forEach var="orderVO" items="${listOrder}" >  --%>
 	
 		<tr align='center' valign='middle'>
-			<td>${orderVO.o_id}</td>
 			<td><a href='${pageContext.servletContext.contextPath}/master/masterPage.do?m_id=${orderVO.m_id.m_id}'>${orderVO.b_name}</a></td>
 			<td>${orderVO.o_edate}</td>
 			<td>${orderVO.o_des}</td>
@@ -142,46 +139,36 @@ ${orderVO.m_rating}
 				<td>
 ${orderVO.ca_des}
 			</td>
-			
-			<td>
-			
+							
  <%------------------------------------------bootstrap評分-------------------------------------------------------%>
+<td>
 
-
-  <FORM METHOD="post" ACTION="OrderController.do" name="form1">
+  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/order/OrderController.do" name="form1">
   
-  
-
-
-
  <div>
   <!-- Trigger the modal with a button -->
   
 
-<!--  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" >評分</button> -->
+ <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#${orderVO.o_id}" >評分</button> 
  
  
   <!-- Modal -->
   
-<!--   <div class="modal fade" id="myModal" role="dialog" > -->
-<!--     <div class="modal-dialog"> -->
+  <div class="modal fade" id="${orderVO.o_id}" role="dialog" > 
+    <div class="modal-dialog"> 
     
       <!-- Modal content-->
       
       <div class="modal-content">
-      
-     
-          
-          
-
-
+        <div class="modal-header">
+       <h4 class="modal-title">評分給鼓勵吧</h4>
+       
+       </div>
          <div class="modal-body">
          
          
-<h4 class="modal-title">評分給鼓勵吧</h4>
-         
-          
-    <label class="radio-inline">
+         <span>${orderVO.o_id}</span>
+      <label class="radio-inline">
       <input type="radio" name="m_rating" value="5">5分
     </label>
     <label class="radio-inline">
@@ -196,80 +183,92 @@ ${orderVO.ca_des}
      <label class="radio-inline">
       <input type="radio" name="m_rating" value="1">1分
     </label>
-          
-  
-         </div>
+          </div>
         <div class="container-fluid">
-
-  
-      <label for="comment">留言</label>
-      <textarea class="form-control" rows="2" id="comment" name="ca_des">金肉炫風</textarea>
+    <label for="comment">留言</label>
+      <textarea class="form-control" rows="5" id="comment" name="ca_des">金肉炫風</textarea>
     </div>
-
-  
-     
-         <div class="modal-footer">
-         
-         
-     
-			<input type="submit" value="送出" >
-			
-          	<input type="hidden" name="action" value="update">
-          	
-          	
+     <div class="modal-footer">
+        <input type="submit" value="送出" >
+		<input type="hidden" name="action" value="update">
           	<input type="hidden" name="c_rating" value="5">	
-          	
-         <input type="hidden" name="ma_des" value="再見"/>
+           <input type="hidden" name="ma_des" value="再見"/>
           <input type="hidden" name="o_id" value="${orderVO.o_id}">	   
           
         </div>
-        
-        
-        
-        	
-        
-        
-      </div>
+       </div>
   </div>
-<!--  </div> -->
-<!-- </div> -->
+  </div> 
+ </div> 
 
 </form>
- <%------------------------------------------------萬里長城----------------------------------------------------%>
+</td>
+ <%------------------------------------------------投訴----------------------------------------------------%>
+	<td>
+
+  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/order/Rdata.do" name="form2">
+  
+ <div>
+  <!-- Trigger the modal with a button -->
+  
+
+ <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#${orderVO.o_id}k" >投訴</button> 
+ 
+ 
+  <!-- Modal -->
+  
+  <div class="modal fade" id="${orderVO.o_id}k" role="dialog" > 
+    <div class="modal-dialog"> 
+    
+      <!-- Modal content-->
+      
+      <div class="modal-content">
+       <div class="modal-header">
+       <h4 class="modal-title">投訴</h4>
+       
+       </div>
+         <div class="modal-body">
+         
+         
+         <span>${orderVO.o_id}</span>
+      <label class="radio-inline">
+    <input type="text" name="p_summary" />
+    
+    
+    
+    </label>
+          </div>
+        <div class="container-fluid">
+    <label for="comment">內容</label>
+      <textarea class="form-control" rows="5" id="comment" name="p_content">這個人猥褻下流，還亂摸我的小白</textarea>
+    </div>
+     <div class="modal-footer">
+        <input type="submit" value="送出" >  
+              
+		<input type="hidden" name="action" value="addRdata">
+		
+          	<input type="hidden" name="s_name" value="m_pass">	
+           <input type="hidden" name="c_id" value="${orderVO.c_id.c_id}"/>
+           <input type="hidden" name="m_id" value="${orderVO.m_id.m_id}"/>
+          <input type="hidden" name="o_id" value="${orderVO.o_id}">	   
+          <input type="hidden" name="sa_rnote" value=null>	
+        <input type="hidden" name="d_id" value="6000">	
+          
+        </div>
+       </div>
+  </div>
+  </div> 
+ </div> 
+
+</form>
+</td>
+ <%------------------------------------------------萬里長城----------------------------------------------------%>		
 			
-			</td>
 			</tr>
-		
-			
-			<%--
-			<td>
-			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/order/order.do">
-			    <input type="submit" value="刪除">
-			    <input type="hidden" name="empno" value="${empVO.empno}">
-			    <input type="hidden" name="action"value="delete"></FORM>
-			</td>
-			
-		</tr>--%>
-		
 	</c:forEach>
 </table>
    <%@ include file="page2.file" %>  
- </div>
- 
-    <jsp:useBean id="mdataSvc" scope="page" class="toolman.mdata.model.MdataService" />
- 
- 
-    <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/mdata/MdataOrderServlet.do" >
-       <b><font color=orange>選擇部門:</font></b>
-       <select size="1" name="m_id">
-         <c:forEach var="mdataVO" items="${mdataSvc.all}" > 
-          <option value="${mdataVO.m_id}">${mdataVO.b_name}
-         </c:forEach>   
-       </select>
 
-   <input type="submit" value="送出">
-       <input type="hidden" name="action" value="listOrder">
-     </FORM>
  
  <%----- --------%>
 

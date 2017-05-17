@@ -62,7 +62,7 @@ public class CalendarController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 	     String calendarjson = request.getParameter("calendarjson");
-		 CalendarVO calendarVO = new CalendarVO();
+		 
 //		 MdataVO mdataVO2 = (MdataVO) request.getAttribute("mdataVO");
 //		 Integer m_id = mdataVO2.getM_id();
 		 Integer m_id = 1000;
@@ -70,29 +70,40 @@ public class CalendarController extends HttpServlet {
 		 CalendarService calendarservice = new CalendarService();
 		 List list = new ArrayList();
 //--------------------------------insert---------------------------------------------		 
-		JSONArray jsonarray = new JSONArray(calendarjson);
+		 calendarservice.deleteByM(m_id);
+		 JSONArray jsonarray = new JSONArray(calendarjson);
 		for (int i = 0; i < jsonarray.length(); i++) {
+			CalendarVO calendarVO = new CalendarVO();
 		    JSONObject jsonobject = jsonarray.getJSONObject(i);
 		    String id = jsonobject.getString("id");
 		    String title = jsonobject.getString("title");		    
 		    String start1 = jsonobject.getString("start");
-		    
-		    DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
-			Calendar calobj = Calendar.getInstance();
-			try {
-				calobj.setTime(df.parse(start1));
-			} catch (ParseException e) {
-				e.printStackTrace();
-			}
-			Timestamp start = new Timestamp(calobj.getTimeInMillis());		   
-		    String end1 = jsonobject.getString("end");
-			try {
-				calobj.setTime(df.parse(end1));
-			} catch (ParseException e) {
-				e.printStackTrace();
-			}
-			Timestamp end = new Timestamp(calobj.getTimeInMillis());
-		    
+		    DateFormat df=null;
+		    if(start1.endsWith("Z")){
+			     df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+		    }else{ 
+		    	df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+		    }
+			    Calendar calobj = Calendar.getInstance();
+				try {
+					calobj.setTime(df.parse(start1));
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+				Timestamp start = new Timestamp(calobj.getTimeInMillis());		   
+			    String end1 = jsonobject.getString("end");
+				try {
+					calobj.setTime(df.parse(end1));
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+				Timestamp end = new Timestamp(calobj.getTimeInMillis());
+		   
+		    	
+		    	
+		    	
+		    	
+		   
 		    String className = jsonobject.getJSONArray("className").toString();
 		    Boolean allDay = jsonobject.getBoolean("allDay");
 //		    Boolean overlap = jsonobject.getBoolean("overlap");
@@ -114,10 +125,9 @@ public class CalendarController extends HttpServlet {
 		    System.out.println(end);
 		    System.out.println(className);
 		    System.out.println(allDay);
-		   
 		}
 		
-//		calendarservice.deleteByM(m_id);
+		
 		calendarservice.InsertByM(list);
 //---------------------------------end insert---------------------------------------------		
 		
