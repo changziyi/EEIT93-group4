@@ -137,7 +137,7 @@
 	<input type="hidden" />
 	</article>
 	
-<!-- mail block from LIN DAN-->	
+<!-- ------------------------------------mail block from LIN DAN------------------------------->	
 
 	<div class="modal fade" id="myModal01" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel" aria-hidden="true">
@@ -186,8 +186,42 @@
 			</form>
 		</div>
 	</div>
-<!-- end mail block-->
-	
+<!-- ----------------------------------end mail block------------------------------------------------->
+<!-- -----------------------------Order and Report Modal---------------------------------------- -->
+<div class="modal fade" id="ormodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+      	
+        <div class="modal-title" style="margin-top:30px;">檢舉人</div><span  id="reporter"></span>
+		<br>       
+		<div class="modal-title">被檢舉人<div><span  id="reported"></span></span>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="recipient-name" class="form-control-label" >主旨:</label>
+            <textarea readonly class="form-control" id="reportextract"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="form-control-label" >檢舉內容:</label>
+            <textarea readonly class="form-control" id="reportcontent"></textarea>
+            
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        
+      </div>
+    </div>
+  </div>
+</div>	
+<!-- -----------------------------end Order and Report Modal---------------------------------------- -->
+
 <script>
 	var table ;//datatable variable not in use
 	var navagatorid = $('#navigator>ul>li.active').data('id');//top navigator
@@ -206,7 +240,7 @@ $(function(){
 		$('#navigator>ul>li').on('click',navigatorevent);//upon swithing tab
 		functionrow();// build functionrow
 		subfunctionrow();// build function buttons
-
+		$('input[data-reportevent="reportevent"]').on('click',showreport);
 		$('#functionrow>div>ul>li').on('click',functionrowfiltering);//filtering
 		$('input[name="samnote"],[name="saonote"],[name="sacnote"]').on('change',updatenote);// input note
  	  	$('#subfunctionrow>a').on('click',togglehyper);//verify the master direct to other pages
@@ -218,8 +252,21 @@ $(function(){
  	 	datatime = $('#functionrow>div>ul>li[name="datatime"][data-buttonstate="selected"]').data('statusvalue');
 
 		}// end ready function
-	); //end ready   
-
+	); //end ready  
+	
+	function showreport(){
+	 	
+				var receiver1 =	$(this).attr('data-receiver1');
+				var receiver2 =	$(this).attr('data-receiver2');
+				var extract =	$(this).attr('data-extract');
+				var datacontent =	$(this).attr('data-content');
+				$('#reporter').text(receiver1);
+				$('#reported').text( receiver2);
+				$('#reportextract').text(extract);				
+				$('#reportcontent').text(datacontent);
+				$('#ormodal').modal();
+	     				  				
+	}
 	function mail(){
 		var clickornot=false;
 		  //get all toggled checkboxes 
@@ -532,7 +579,7 @@ $(function(){
 				//rebinding
 			 	$('#subfunctionrow>a').on('click',togglehyper);//direct to other pages
 			 	$('#subfunctionrow>span:not(#messagespanm,#messagespanc,#messagespano,#messagespanr)').on('click',togglegetmethod);//will return something when clicked, maill has it's own form action
-			 	$('#messagespanm,#messagespanc,#messagespano,#messagespanr').on('click',mail);//will return something when clicked, maill has it's own form action
+			 	$('#messagespanm,#messagespanc,#messagespano,#messagespanr,#messagespanr,#messagespanad').on('click',mail);//will return something when clicked, maill has it's own form action
 
 		   }//end else if
 			
@@ -548,7 +595,7 @@ $(function(){
 					//rebinding
 			 	$('#subfunctionrow>a').on('click',togglehyper);//direct to other pages
 			 	$('span:not(#messagespanm,#messagespanc,#messagespano,#messagespanr)').on('click',togglegetmethod);//will return something when clicked, maill has it's own form action
-			 	$('#messagespanm,#messagespanc,#messagespano,#messagespanr').on('click',mail);//will return something when clicked, maill has it's own form action
+			 	$('#messagespanm,#messagespanc,#messagespano,#messagespanr,#messagespanr,#messagespanad').on('click',mail);//will return something when clicked, maill has it's own form action
 
 			}//end else if
 			
@@ -562,7 +609,7 @@ $(function(){
 					//rebinding
 			 	$('#subfunctionrow>a').on('click',togglehyper);//direct to other pages
 // 			 	$('#subfunctionrow>span[id!="messagespanm"],#subfunctionrow>span[id!="messagespanc"],#subfunctionrow>span[id!="messagespano"]').on('click',mail);//will return something when clicked, maill has it's own form action
-			 	$('#messagespanm,#messagespanc,#messagespano,#messagespanr').on('click',mail);//will return something when clicked, maill has it's own form action
+			 	$('#messagespanm,#messagespanc,#messagespano,#messagespanr,#messagespanr,#messagespanad').on('click',mail);//will return something when clicked, maill has it's own form action
 
 			}// end else if 
 			else if(navagatorid== 'r'){
@@ -574,7 +621,7 @@ $(function(){
 					//rebinding
 			 	$('#subfunctionrow>a').on('click',togglehyper);//direct to other pages
 // 			 	$('#subfunctionrow>span[id!="messagespanm"],#subfunctionrow>span[id!="messagespanc"],#subfunctionrow>span[id!="messagespano"]').on('click',mail);//will return something when clicked, maill has it's own form action
-			 	$('#messagespanm,#messagespanc,#messagespano,#messagespanr').on('click',mail);//will return something when clicked, maill has it's own form action
+			 	$('#messagespanm,#messagespanc,#messagespano,#messagespanr,#messagespanad').on('click',mail);//will return something when clicked, maill has it's own form action
 
 				
 			}
@@ -589,7 +636,7 @@ $(function(){
 					//rebinding
 			 	$('#subfunctionrow>a').on('click',togglehyper);//direct to other pages
 // 			 	$('#subfunctionrow>span[id!="messagespanm"],#subfunctionrow>span[id!="messagespanc"],#subfunctionrow>span[id!="messagespano"]').on('click',mail);//will return something when clicked, maill has it's own form action
-			 	$('#messagespanm,#messagespanc,#messagespano,#messagespanr').on('click',mail);//will return something when clicked, maill has it's own form action
+			 	$('#messagespanm,#messagespanc,#messagespano,#messagespanr,#messagespanad').on('click',mail);//will return something when clicked, maill has it's own form action
 
 				
 			}
@@ -831,12 +878,11 @@ $(function(){
 						}// end if
 						
 					else if(id=="r"){
-						   var toggleword = $('<input type="checkbox" name="ctoggle" />').val(data.r_id).attr('data-receiver1',data.m_id).attr('data-receiver2',data.c_id);
-						   var mid =  $('<input type="button"/>').val(data.r_id).addClass('eventlisttbodytrtd');
-						   var a =  $('<a></a> ').attr('href',"${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIFunctionServlet.do?"+"functionaction=findcustomer&targetid="+data.r_id).append(mid);						  
+						   var toggleword = $('<input type="checkbox" name="ctoggle" />').val(data.r_id).attr('data-receiver1',data.m_id).attr('data-receiver2',data.c_id).attr('data-extract',data.p_summary).attr('data-content',data.p_content);
+						   var mid =  $('<input type="button" class="btn btn-primary" name="reportevent"  />').val(data.r_id).addClass('eventlisttbodytrtd').attr('data-receiver1',data.m_id).attr('data-receiver2',data.c_id).attr('data-extract',data.p_summary).attr('data-content',data.p_content);
 						   var midwordmid =  $('<span style="visibility: hidden;font-size:0px;margin:0pxlpadding:0px;"></span> ').text(data.r_id).addClass('eventlisttbodytrtd');
 						   var cell0 = $('<td></td>').addClass('eventlisttbodytrtd').append(toggleword);
-						   var cell1 = $('<td></td>').html(a).addClass('eventlisttbodytrtd').append(midwordmid);
+						   var cell1 = $('<td name="reportevent"></td>').html(mid).addClass('eventlisttbodytrtd').append(midwordmid);
 						   var cell2 = $('<td></td>').text(data.r_date).addClass('eventlisttbodytrtd');;			   
 						   var cell3 = $('<td></td>').text(data.c_id).addClass('eventlisttbodytrtd');
 						   var mid2 =  $('<input type="button"/> ').val(data.m_id).addClass('eventlisttbodytrtd');
@@ -853,7 +899,7 @@ $(function(){
 					}
 					else if(id=="ad"){
 						
-						   var toggleword = $('<input type="checkbox" name="ctoggle" />').val(data.r_id).attr('data-receiver1',data.m_id);
+						   var toggleword = $('<input type="checkbox" name="ctoggle" />').val(data.ad_id).attr('data-receiver',data.m_id);
 						   var mid =  $('<input type="button"/>').val(data.ad_id).addClass('eventlisttbodytrtd');
 						   var a =  $('<a></a> ').attr('href',"${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIFunctionServlet.do?"+"functionaction=findcustomer&targetid="+data.ad_id).append(mid);						  
 						   var midwordmid =  $('<span style="visibility: hidden;font-size:0px;margin:0pxlpadding:0px;"></span> ').text(data.ad_id).addClass('eventlisttbodytrtd');
@@ -880,7 +926,7 @@ $(function(){
 			   table.append(tb);
 			   //rebinding tested ok
 			   $('input[name="samnote"],[name="saonote"],[name="sacnote"]').on('change',updatenote);// input note
-
+			   $('[name="reportevent"]').on('click',showreport);
 			   dfd.resolve();
 			   return dfd;
 // 			   datatableinit();// goes wrong often
