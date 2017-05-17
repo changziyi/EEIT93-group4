@@ -17,7 +17,7 @@ public class AdService {
 		return dao.findByPrimaryKey(ad_id);
 	}
 	
-	public AdVO findBySname(String s_name) {
+	public List<AdVO> findBySname(String s_name) {
 		return dao.findBySname(s_name);
 	}
 
