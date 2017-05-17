@@ -49,9 +49,11 @@
                         <li class=" dropdown"><a href="#" class="dropdown-toggle active" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">登入  <span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a href="${pageContext.servletContext.contextPath}/cdata/login-in.jsp">ToolMan 帳號</a></li>
-                                <li><div class="fb-login-button" onlogin="checkLoginState()" id="login" data-size="large"
-									data-max-rows="1" scope="public_profile,email" >						
-				   					</div></li>
+                                
+                                <li><div style="text-align:center;">
+                                 <div class="fb-login-button" onlogin="checkLoginState()" id="login" data-size="large"
+									data-max-rows="1" scope="public_profile,email" ></div>
+								 </div></li>
                             </ul>
                         </li>
                         <li class=""><a href="${pageContext.servletContext.contextPath}/loginoutServlet">登出</a></li>
@@ -62,18 +64,16 @@
             </div>
         </nav>
     </div>
-<!-- facebook -->
+<!------------------------------------- facebook 登入 ----------------------------------------->
    <div style="visibility:hidden" id="status"></div>         
     <script src="http://cdn.static.runoob.com/libs/jquery/1.10.2/jquery.min.js"></script>
     <script>
+    
+    //fb click
     $(document).ready(function(){
     	  $("#p").click(function(){
-    	    alert("click");
     	  });
     	});
-    
-    
-    
     
   //fb
 	function statusChangeCallback(response) {
@@ -87,9 +87,8 @@
     		if(v.innerHTML === 'We are connected.'){
     			testAPI();
     			console.log(v.innerHTML);
-//     			test
 //     			window.location.reload();
-<%--     			location.href="<%=request.getContextPath()%>/master/List.jsp"; --%>
+<%--     			location.href="<%=request.getContextPath()%>/index.jsp"; --%>
     		}			
 			
 		} else if (response.status === 'not_authorized') {
@@ -139,14 +138,10 @@
 		fjs.parentNode.insertBefore(js, fjs);
 	}(document, 'script', 'facebook-jssdk'));
 	
-	
+
 	function testAPI() {
 		console.log('Welcome!  Fetching your information.... ');
-		
-		FB.api('/me','GET', 
-				
-				
-				
+		FB.api('/me','GET', 			
 				{fields: 'first_name,last_name,name,id,email,picture.width(200).height(200)'}, 
 				function(response) {
 				console.log('Successful login!! '+ ' id:' + response.id + ', name:' + response.name + 
@@ -156,16 +151,14 @@
 			    console.log(JSON.stringify(response));
 			}
 		);
-	}
-	
+	}	
 	//picture
 // 	function getInfo() {
 // 		FB.api('/me', 'GET', {fields: 'first_name,last_name,name,id,picture.width(50).height(50)'}, function(response) {
 // 				document.getElementById('status').innerHTML = response.id;
 // 			document.getElementById('status').innerHTML = "<img src='" + response.picture.data.url +"'>";
 // 		});
-// 	}	
-	
+// 	}		
 	function loginNEMI(token) {
 	    // 把 access_token 傳至後端再做資料拿取
 	    console.log("Welcome!  Fetching your information.... ");
@@ -191,8 +184,5 @@
 			alert('已成功登出!');
 			window.location.reload();
 		});
-	}
-    
-    
-    
-    </script>
+	}   
+</script>
