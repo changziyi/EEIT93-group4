@@ -28,6 +28,7 @@
 
 <link rel="stylesheet"
 	href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+<link href="${pageContext.servletContext.contextPath}/nav/nav.css" rel="stylesheet">
 <script
 	src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
 <script
@@ -44,7 +45,7 @@
 <style>
 .content-box {
 	display: inline-block;
-	border: 2px dashed #66b5ff;
+	border: 3px dashed #66b5ff;
 	padding: 10px;
 	margin: 10px 10px 10px 0;
 	overflow: hidden;
@@ -53,7 +54,7 @@
 }
 
 .bgcolor {
-   background-color: #00BFFF;
+   background-color: #4dd2ff;
 
 }
 
@@ -71,10 +72,11 @@
 
 }
 
-
 </style>
 
 <script>
+      /*---------------瀑布流的關鍵CODE--------------------*/
+
 	$(function() {
 		$('#wishblock').imagesLoaded(function() {
 			$('#wishblock').masonry({
@@ -84,7 +86,7 @@
 			});
 		});
 
-		/*--------------------------方法分隔線--------------------------------*/
+		/*--------------------------表單送出自動判別縣市行政區--------------------------------*/
 
 		var city = $('input[name="w_city"]');
 		var district = $('input[name="w_district"]');
@@ -97,6 +99,8 @@
 				district.attr("value", this.value);
 			}
 		});
+		
+		/*---------------------------------限是篩選CODE----------------------------------------------*/
 		$('#bycity').twzipcode({
 			countyName:'searchCountry',
 			districtName:'searchDistrict',
@@ -118,6 +122,7 @@
 
 </head>
 <body>
+<jsp:include page="/nav/navigation.jsp" />
 	<div class="container">
 		<div class="page-header">
 			<h1>
@@ -172,11 +177,11 @@
 				</div>
 			</div>
 			
-			<div class="col-md-9">
+			<div class="col-md-9" id="wishblock">
 				
-				<div class="row well bgcolor">
+				
 					<c:forEach var="wishpoolVO" items="${new_date}">
-						<div class="col-md-4">
+						<div class="bgcolor">
 							<div class="content-box">
 								<div><label class="user-name">使用者：</label><span>${wishpoolVO.c_id}</span></div>
 								<div>位在地區：${wishpoolVO.w_city}${wishpoolVO.w_district}</div>
@@ -196,7 +201,7 @@
 							</div>
 						</div>
 					</c:forEach>
-				</div>
+				
 			</div>
 		</div>
 		
