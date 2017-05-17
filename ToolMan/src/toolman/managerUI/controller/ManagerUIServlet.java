@@ -204,7 +204,7 @@ public class ManagerUIServlet extends HttpServlet {
 					
 			}//end if		
 			else{
-//				list = rdataservice.getBySname(datastatus);	
+				list = rdataservice.getBySname(datastatus);	
 			}//end else	
 
 			List listr = new ArrayList();
