@@ -344,14 +344,12 @@ public class RdataJDBCDAO implements RdataDAO_interface {
 //	public static void main(String args[]) throws IOException {
 
 //		RdataJDBCDAO dao = new RdataJDBCDAO();
-//		RdataJDBCDAO dao = new RdataJDBCDAO();
 		
 //		List<RdataVO> list =dao.getAll();
 //		for(RdataVO rdataVO:list){
 //		String c_id =rdataVO.getC_id();
 //		System.out.println(c_id);
 //		}
-
 		/************************** 測試新增 ****************************/
 //		RdataVO rdataVO = new RdataVO();
 //		
