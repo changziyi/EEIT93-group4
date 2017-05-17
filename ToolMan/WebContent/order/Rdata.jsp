@@ -39,12 +39,11 @@
 	
 <body bgcolor='white'>
 
+
 <jsp:include page="/order/title.jsp" />
 
 <div class="alert alert-success">
-  <h2><strong>已刪除資料</strong></h2>
+  <h2><strong>已收到投訴，管理員會盡快處理</strong></h2>
   </div>
-
-
 </body>
 </html>
