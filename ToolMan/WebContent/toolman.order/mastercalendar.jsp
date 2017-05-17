@@ -1054,7 +1054,7 @@ var eventidglobe =null;
 						var ds = new Date(event.start._d).getTime();
 						var n = d.getTimezoneOffset()*60*1000;
 						var s =new Date(ds+n);
-						
+// 						$.fullCalendar.moment(event.start._d);
 						//event.start._d and event._start._d is not the same
 // 						console.log(s);
 // 						console.log(d);

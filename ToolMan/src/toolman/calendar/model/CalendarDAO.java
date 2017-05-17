@@ -52,7 +52,7 @@ public class CalendarDAO implements CalendarDAO_Interface {
 		try {
 			session.beginTransaction();
 			Query query = session.createQuery("delete from CalendarVO where m_id = ?");
-			query.setParameter(1, m_id);
+			query.setParameter(0, m_id);
 			count = query.executeUpdate();		
 			session.getTransaction().commit();
 		} catch (RuntimeException ex) {
