@@ -127,19 +127,19 @@ public class RdataDAO implements RdataDAO_interface {
 		Timestamp r_date = new Timestamp(calobj.getTimeInMillis());
 		
 		/************************** 測試新增 ****************************/
-		RdataVO rdataVO = new RdataVO();
-		
-		rdataVO.setR_date(r_date);
-		rdataVO.setC_id("1001");
-		rdataVO.setM_id(1001);
-		rdataVO.setP_summary("態度不佳");
-		rdataVO.setP_content("這個人會亂吐檳榔渣，還會罵髒話");
-		rdataVO.setS_name("m_pass");
-		rdataVO.setSa_rnote(null);
-		rdataVO.setD_id(6000);
-		rdataVO.setO_id(3007);
-
-		dao.insert(rdataVO);
+//		RdataVO rdataVO = new RdataVO();
+//		
+//		rdataVO.setR_date(r_date);
+//		rdataVO.setCdataVO("1001");
+//		rdataVO.setMdataVO(1001);
+//		rdataVO.setP_summary("態度不佳");
+//		rdataVO.setP_content("這個人會亂吐檳榔渣，還會罵髒話");
+//		rdataVO.setS_name("m_pass");
+//		rdataVO.setSa_rnote(null);
+//		rdataVO.setDiscussionVO(6000);
+//		rdataVO.setOrderVO(3007);
+//
+//		dao.insert(rdataVO);
 
 		/************************** 測試修改 ****************************/
 

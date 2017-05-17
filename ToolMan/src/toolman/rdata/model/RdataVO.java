@@ -3,21 +3,29 @@ package toolman.rdata.model;
 import java.sql.Date;
 import java.sql.Timestamp;
 
+import toolman.cdata.model.CdataVO;
+import toolman.discussion.model.DiscussionVO;
+import toolman.mdata.model.MdataVO;
+import toolman.order.model.OrderVO;
+
 import java.sql.Timestamp;
 
 public class RdataVO implements java.io.Serializable{
 	
 	private Integer r_id;
 	private Timestamp r_date;
-	private String c_id;
-	private Integer m_id;
+	
 	private String p_summary;
 	private String p_content;
 	private String s_name;
 	private String sa_rnote;
-	private Integer d_id;
-	private Integer o_id;
+	
 
+	private CdataVO cdataVO;
+	private MdataVO mdataVO;
+	private DiscussionVO discussionVO;
+	private OrderVO orderVO;
+	
 	
 	public Integer getR_id() {
 		return r_id;
@@ -31,17 +39,19 @@ public class RdataVO implements java.io.Serializable{
 	public void setR_date(Timestamp r_date) {
 		this.r_date = r_date;
 	}
-	public String getC_id() {
-		return c_id;
+	public CdataVO getCdataVO() {
+		return cdataVO;
 	}
-	public void setC_id(String c_id) {
-		this.c_id = c_id;
+	public void setCdataVO(CdataVO cdataVO) {
+		this.cdataVO = cdataVO;
+
 	}
-	public Integer getM_id() {
-		return m_id;
+	public MdataVO getMdataVO() {
+		return mdataVO;
 	}
-	public void setM_id(Integer m_id) {
-		this.m_id = m_id;
+	public void setMdataVO(MdataVO mdataVO) {
+		this.mdataVO = mdataVO;
+		
 	}
 	public String getP_summary() {
 		return p_summary;
@@ -67,16 +77,18 @@ public class RdataVO implements java.io.Serializable{
 	public void setSa_rnote(String sa_rnote) {
 		this.sa_rnote = sa_rnote;
 	}
-	public Integer getD_id() {
-		return d_id;
+	public DiscussionVO getDiscussionVO() {
+		return discussionVO;
 	}
-	public void setD_id(Integer d_id) {
-		this.d_id = d_id;
+	public void setDiscussionVO(DiscussionVO discussionVO) {
+		this.discussionVO = discussionVO;
+
 	}
-	public Integer getO_id() {
-		return o_id;
+	public OrderVO  getOrderVO() {
+		return orderVO;
 	}
-	public void setO_id(Integer o_id) {
-		this.o_id = o_id;
+	public void setOrderVO(OrderVO orderVO) {
+		this.orderVO = orderVO;
+		
 	}
 }
