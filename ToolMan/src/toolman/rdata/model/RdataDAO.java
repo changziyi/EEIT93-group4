@@ -1,8 +1,6 @@
 package toolman.rdata.model;
 
-import java.io.IOException;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -338,17 +336,17 @@ public class RdataDAO implements RdataDAO_interface {
 			}
 		}
 		return list;
-	}
+//	}
 //	public static void main(String args[]) throws IOException {
-
+//
 //		RdataJDBCDAO dao = new RdataJDBCDAO();
-		
+//		
 //		List<RdataVO> list =dao.getAll();
 //		for(RdataVO rdataVO:list){
 //		String c_id =rdataVO.getC_id();
-//		System.out.println(c_id);
-//		}
-		/************************** 測試新增 ****************************/
+////		System.out.println(c_id);
+////		}
+//		/************************** 測試新增 ****************************/
 //		RdataVO rdataVO = new RdataVO();
 //		
 //		rdataVO.setR_date(java.sql.Date.valueOf("2017-02-08"));
@@ -359,7 +357,7 @@ public class RdataDAO implements RdataDAO_interface {
 //		rdataVO.setS_name("m_pass");
 //		rdataVO.setSa_rnote(null);
 //		rdataVO.setD_id(6001);
-//		dao.insert(rdataVO);
+//	dao.insert(rdataVO);
 
 		/************************** 測試修改 ****************************/
 
@@ -414,6 +412,6 @@ public class RdataDAO implements RdataDAO_interface {
 //		 System.out.println("---------------------------------------------------------"
 //		 + "---------------------------------------------------------");
 //		 }
-
-//	}
+//
+	}
 }
