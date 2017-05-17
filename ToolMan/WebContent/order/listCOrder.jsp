@@ -227,6 +227,66 @@ ${orderVO.ca_des}
  <%------------------------------------------------萬里長城----------------------------------------------------%>
 			
 			</td>
+			
+ <%------------------------------------------------投訴----------------------------------------------------%>
+	<td>
+
+  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/order/Rdata.do" name="form2">
+  
+ <div>
+  <!-- Trigger the modal with a button -->
+  
+
+ <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#${orderVO.o_id}k" >投訴</button> 
+ 
+ 
+  <!-- Modal -->
+  
+  <div class="modal fade" id="${orderVO.o_id}k" role="dialog" > 
+    <div class="modal-dialog"> 
+    
+      <!-- Modal content-->
+      
+      <div class="modal-content">
+       <div class="modal-header">
+       <h4 class="modal-title">投訴</h4>
+       
+       </div>
+         <div class="modal-body">
+         
+         
+         <span>${orderVO.o_id}</span>
+      <label class="radio-inline">
+    <input type="text" name="p_summary" />
+    
+    
+    
+    </label>
+          </div>
+        <div class="container-fluid">
+    <label for="comment">內容</label>
+      <textarea class="form-control" rows="5" id="comment" name="p_content">這個人猥褻下流，還亂摸我的小白</textarea>
+    </div>
+     <div class="modal-footer">
+        <input type="submit" value="送出" >  
+              
+		<input type="hidden" name="action" value="insert">
+		
+          	<input type="hidden" name="s_name" value="m_pass">	
+           <input type="hidden" name="c_id" value="${orderVO.c_id.c_id}"/>
+           <input type="hidden" name="m_id" value="${orderVO.m_id.m_id}"/>
+          <input type="hidden" name="o_id" value="${orderVO.o_id}">	   
+          
+        </div>
+       </div>
+  </div>
+  </div> 
+ </div> 
+
+</form>
+</td>
+ <%------------------------------------------------萬里長城----------------------------------------------------%>		
+			
 			</tr>
 		
 			

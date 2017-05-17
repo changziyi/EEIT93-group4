@@ -18,11 +18,7 @@ public class RdataService {
 	
 	
 	public RdataVO addRdata(Timestamp r_date, String c_id, Integer m_id, String p_summary, String p_content,
-<<<<<<< HEAD
 			String s_name, String sa_rnote, Integer d_id , Integer o_id) {
-=======
-			String s_name, String sa_rnote, Integer d_id ) {
->>>>>>> branch 'master' of https://github.com/changziyi/EEIT93-group4.git
 
 		RdataVO rdataVO = new RdataVO();
 
@@ -41,13 +37,8 @@ public class RdataService {
 		return rdataVO;
 	}
 
-<<<<<<< HEAD
 	public RdataVO updateRdata(Integer r_id,java.sql.Timestamp r_date, String c_id, Integer m_id, String p_summary, String p_content,
 			String s_name, String sa_rnote, Integer d_id, Integer o_id  ) {
-=======
-	public RdataVO updateRdata(Integer r_id,Timestamp r_date, String c_id, Integer m_id, String p_summary, String p_content,
-			String s_name, String sa_rnote, Integer d_id ) {
->>>>>>> branch 'master' of https://github.com/changziyi/EEIT93-group4.git
 
 		RdataVO rdataVO = new RdataVO();
 

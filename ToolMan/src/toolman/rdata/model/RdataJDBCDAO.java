@@ -1,12 +1,6 @@
 package toolman.rdata.model;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -23,12 +17,13 @@ public class RdataJDBCDAO implements RdataDAO_interface {
 	String passwd = "sa123456";
 
 	private static final String INSERT_MANAGER = "INSERT INTO rdata (r_date, c_id, m_id, p_summary, p_content, s_name, sa_rnote, d_id, o_id) "
-			+ "VALUES (?,?,?,?,?,?,?,?)";
+			+ "VALUES (?,?,?,?,?,?,?,?,?)";
 	private static final String UPDATE = "UPDATE rdata set r_date=?, c_id=?, m_id=?, p_summary=?, p_content=?, s_name=?, sa_rnote=?, d_id=?, o_id=? WHERE r_id = ?";
 	private static final String DELETE = "DELETE FROM rdata WHERE r_id = ?";
 	private static final String GETONE = "SELECT r_id, r_date, c_id, m_id, p_summary, p_content, s_name, sa_rnote, d_id, o_id FROM rdata WHERE r_id = ?";
 	private static final String GETALL = "SELECT r_id, r_date, c_id, m_id, p_summary, p_content, s_name, sa_rnote, d_id, o_id FROM rdata ORDER BY r_id";
 
+	
 	@Override
 	public void insert(RdataVO rdataVO) {
 		// TODO Auto-generated method stub
@@ -48,7 +43,7 @@ public class RdataJDBCDAO implements RdataDAO_interface {
 			pstmt.setString(6, rdataVO.getS_name());
 			pstmt.setString(7, rdataVO.getSa_rnote());
 			pstmt.setInt(8, rdataVO.getD_id());
-			pstmt.setInt(8, rdataVO.getO_id());
+			pstmt.setInt(9, rdataVO.getO_id());
 
 
 			int num = pstmt.executeUpdate();
@@ -95,7 +90,7 @@ public class RdataJDBCDAO implements RdataDAO_interface {
 			pstmt.setString(6, rdataVO.getS_name());
 			pstmt.setString(7, rdataVO.getSa_rnote());
 			pstmt.setInt(8, rdataVO.getD_id());
-			pstmt.setInt(8, rdataVO.getO_id());
+			pstmt.setInt(9, rdataVO.getO_id());
 
 			int num = pstmt.executeUpdate();
 			System.out.println("已修改" + num + "筆資料");
@@ -286,26 +281,25 @@ public class RdataJDBCDAO implements RdataDAO_interface {
 		return list;
 	}
 
-//	public static void main(String args[]) throws IOException {
+	public static void main(String[] args) {
 
-//		RdataJDBCDAO dao = new RdataJDBCDAO();
+		RdataJDBCDAO dao = new RdataJDBCDAO();
 
 		/************************** 測試新增 ****************************/
-<<<<<<< HEAD
 		RdataVO rdataVO = new RdataVO();
-=======
-//		RdataVO rdataVO = new RdataVO();
->>>>>>> branch 'master' of https://github.com/changziyi/EEIT93-group4.git
-//		
-//		rdataVO.setR_date(java.sql.Date.valueOf("2017-02-08"));
-//		rdataVO.setC_id("1001");
-//		rdataVO.setM_id(1001);
-//		rdataVO.setP_summary("態度不佳");
-//		rdataVO.setP_content("這個人會亂吐檳榔渣，還會罵髒話");
-//		rdataVO.setS_name("m_pass");
-//		rdataVO.setSa_rnote(null);
-//		rdataVO.setD_id(6001);
-//		dao.insert(rdataVO);
+	
+		
+		//rdataVO.setR_date(java.sql.Date.valueOf("2017-02-08"));
+		rdataVO.setC_id("Snoopy");
+		rdataVO.setM_id(1001);
+		rdataVO.setP_summary("態度不佳");
+		rdataVO.setP_content("這個人會亂吐檳榔渣，還會罵髒話");
+		rdataVO.setS_name("m_pass");
+		rdataVO.setSa_rnote(null);
+		rdataVO.setD_id(6001);
+		rdataVO.setO_id(3007);
+
+		dao.insert(rdataVO);
 
 		/************************** 測試修改 ****************************/
 
@@ -361,5 +355,5 @@ public class RdataJDBCDAO implements RdataDAO_interface {
 //		 + "---------------------------------------------------------");
 //		 }
 
-//	}
+}
 }

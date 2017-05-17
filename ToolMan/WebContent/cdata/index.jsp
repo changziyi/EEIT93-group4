@@ -138,8 +138,7 @@ $(function(){
 <a href="<c:url value='test2.jsp' />">測試登入2</a><p/>
      
 </div>
-<<<<<<< HEAD
-=======
+
  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/cdata/CdataOrderServlet.do" >
  
  
@@ -150,6 +149,5 @@ $(function(){
      <FORM METHOD="post" ACTION="../cdata/CdataOrderServlet.do />" >
         <input type="submit" value="登出">	
          </FORM>
->>>>>>> branch 'master' of https://github.com/changziyi/EEIT93-group4.git
 </body>
 </html>
