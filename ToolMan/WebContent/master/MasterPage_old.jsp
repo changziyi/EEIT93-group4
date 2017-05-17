@@ -47,19 +47,14 @@ input[type="file"] {
 			<p>地區：${mdataVO.m_city}　${mdataVO.m_district}</p>
    			<input type="button" id="reservemaster" value="預約師傅" >
  <%--------------------------------------最愛與黑單--------------------------------------------------- --%>
-   			<FORM METHOD="get" action="/ToolMan/order/Favorite.do">
-			<input type="submit" value="加入最愛">
-			<input type="hidden" name="m_id" value="${mdataVO.m_id}">
-			<input type="hidden" name="c_id" value="Snoopy">
-			<input type="hidden" name="action"	value="addFavorite">
-			</FORM>
-			<FORM METHOD="get" action="/ToolMan/order/Dislike.do">
-			<input type="submit" value="黑名單">
-			<input type="hidden" name="m_id" value="${mdataVO.m_id}">
-			<input type="hidden" name="c_id" value="Snoopy">
-			<input type="hidden" name="action"	value="addDislike">
-			</FORM>
-			
+   		
+			<a href="${pageContext.servletContext.contextPath}/order/Favorite.do?c_id=${LoginOK.c_id}&m_id=${mdataVO.m_id}&action=addFavorite" class="btn btn-info ">
+          <span class="glyphicon glyphicon-heart-empty"></span>加入最愛
+        </a>
+        <a href="${pageContext.servletContext.contextPath}/order/Dislike.do?c_id=${LoginOK.c_id}&m_id=${mdataVO.m_id}&action=addDislike" class="btn btn-danger">
+          <span class="glyphicon glyphicon-remove-sign"></span> 加入黑名單
+        </a>
+		
   <%--------------------------------------萬里長城--------------------------------------------------- --%>
    			
 		</div>

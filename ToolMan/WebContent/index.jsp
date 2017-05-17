@@ -24,7 +24,6 @@
     
     <style>
 	body {font-family:Microsoft JhengHei;}
-    h3 {font-family:Microsoft JhengHei;}
     .zipcode {display: none;}
 	.district {display: none;}
     .fontmicro {font-family:Microsoft JhengHei;}
@@ -51,8 +50,6 @@
                 <div class="searchbar">
 		            <form action="master.do" method="post">
 					<div class="form-group">
-<%-- 						<span id="twzipcode"></span><input type="text" class="form-control search-text" name="input" value="${search.b_name}"> --%>
-<%-- 						<span id="twzipcode"></span><select class="form-control proselect"><option>類別</option><option>地板地磚</option></select><input type="text" class="form-control search-text" name="input" value="${search.b_name}"> --%>
 						<span id="twzipcode"></span><select class="form-control proselect" id="pro" name="pro"><option value="">類別</option><option value="地板地磚">地板地磚</option><option value="防水抓漏">防水抓漏</option><option value="室內裝潢">室內裝潢</option><option value="冷氣空調">冷氣空調</option><option value="水電工程">水電工程</option><option value="門窗工程">門窗工程</option><option value="木作工程">木作工程</option><option value="泥作工程">泥作工程</option><option value="照明工程">照明工程</option></select><input type="search" name="input" placeholder="or店家名稱">
 					</div>
 					<input type="hidden" name="action" value="SearchResult">
@@ -221,7 +218,6 @@
     <div class="call-to-action bg-customer">
         <div class="container text-center">
             <h2 class="title2">看看還有哪些師傅</h2>
-<!--             <button type="button" class="btnall" class="btn btn-default btn-xl sr-button">開始找師傅</button> -->
 			<a href="${pageContext.servletContext.contextPath}/master/master.do?city=all&action=SearchAll" class="btn btn-default btn-xl sr-button">我要找師傅</a>
         </div>
     </div>

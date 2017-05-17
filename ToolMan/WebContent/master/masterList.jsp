@@ -3,9 +3,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.List"%>
 <%@ page import="toolman.mdata.model.MdataService"%>
+<%@ page import="toolman.ad.model.AdService"%>
+<%@ page import="toolman.ad.model.AdVO"%>
 <%
-	MdataService mdataSvc = new MdataService();
-	pageContext.setAttribute("allMid",mdataSvc.getAllMidForAd());
+    AdService adSvc = new AdService();
+	List<AdVO> gabs = adSvc.getAllBySname("廣告進行中");
+	pageContext.setAttribute("allMid", gabs);
 %>
 <!DOCTYPE html>
 <html>
@@ -110,11 +113,11 @@ a {color:White;}
 							<c:forEach var="aMaster" end="3" items="${allMid}">
 								<div class="row thumbnail adrow">
 									 <div class="col-md-7 md7">
-										<a href='${pageContext.servletContext.contextPath}/master/masterPage.do?m_id=${aMaster.id}'><img width=200px src='${pageContext.servletContext.contextPath}/master/master.do?type=master&image=${aMaster.id}'/></a>
+										<a href='${pageContext.servletContext.contextPath}/master/masterPage.do?m_id=${aMaster.m_id}'><img width=200px class="img-responsive" src='${pageContext.servletContext.contextPath}/master/master.do?type=master&image=${aMaster.m_id}'/></a>
 									</div>
 									<div class="col-md-5 md5">
 										<div>
-											<span style="font-size:20px">${aMaster.bname}</span><br /><span>地點：${aMaster.city}${aMaster.district}</span><br />媒合紀錄：${aMaster.finish}
+											<span style="font-size:20px">${aMaster.mdataVO.b_name}</span><br /><span>地點：${aMaster.mdataVO.m_city}${aMaster.mdataVO.m_district}</span><br />媒合紀錄：
 										</div>
 									</div>
 								</div>
@@ -135,7 +138,6 @@ a {color:White;}
 <script src="${pageContext.servletContext.contextPath}/js/jquery-3.2.1.min.js"></script>
 <script src="${pageContext.servletContext.contextPath}/js/bootstrap.min.js"></script>
 <script src="${pageContext.servletContext.contextPath}/js/jquery.search.twzipcode.min.js"></script>		
-<%-- <script src="${pageContext.servletContext.contextPath}/js/jquery.twbsPagination.min.js"></script>		 --%>
 <script>
 	
 // 	$(function() {
@@ -163,7 +165,7 @@ a {color:White;}
 			$.each(datas, function(i,master) {
 				console.log(countpage++);
 				var bImg = $('<img />').attr({'src':'${pageContext.servletContext.contextPath}/master/master.do?type=master&image=' + master.id,
-					'data-holder-rendered':'true'});
+					'data-holder-rendered':'true'}).addClass('img-responsive');
 				var a = $('<a></a>').attr('href','${pageContext.servletContext.contextPath}/master/masterPage.do?m_id='+ master.id).append(bImg);
 				var score = master.rating;
 				if (score == '0') {
