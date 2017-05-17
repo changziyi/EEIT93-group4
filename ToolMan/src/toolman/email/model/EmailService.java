@@ -51,6 +51,7 @@ public class EmailService {
 			EmailContent.put("Ms_summary", aEmail.getMs_summary());
 			EmailContent.put("Ms_content", aEmail.getMs_content());
 			EmailContent.put("S_name", aEmail.getS_name());
+			EmailContent.put("Ms_trash", aEmail.getMs_trash());
 			MailList.add(EmailContent);
 		}
 		return JSONValue.toJSONString(MailList);
@@ -73,11 +74,20 @@ public String getOneMailJson(Integer ms_id) {
 		EmailContent.put("Ms_summary", aEmail.getMs_summary());
 		EmailContent.put("Ms_content", aEmail.getMs_content());
 		EmailContent.put("S_name", aEmail.getS_name());
+		EmailContent.put("Ms_trash", aEmail.getMs_trash());
 		OneMailList.add(EmailContent);
 	}
 	return JSONValue.toJSONString(OneMailList);
 }
 public EmailVO findByPrimaryKey1(Integer ms_id) {
 	return dao.findByPrimaryKey1(ms_id);
+}
+
+public void deleteEmailService(Integer ms_id) {
+	dao.delete(ms_id);
+}
+
+public void deleteEmailServiceJson(Integer ms_id) {
+	List<EmailVO> DeleteEmailData = dao.deleteMail(ms_id);
 }
 }
