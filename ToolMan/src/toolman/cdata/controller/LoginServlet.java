@@ -71,8 +71,8 @@ public class LoginServlet extends HttpServlet {
 			return;//中斷
 		}			//true
         if(verify == false){ 
-        	 resp.sendRedirect(resp.encodeRedirectURL(req.getContextPath()+"/index.jsp"));
-//        	 resp.sendRedirect(resp.encodeRedirectURL(req.getContextPath()+"/cdata/index.jsp"));//王修改
+//        	 resp.sendRedirect(resp.encodeRedirectURL(req.getContextPath()+"/index.jsp"));
+        	 resp.sendRedirect(resp.encodeRedirectURL(req.getContextPath()+"/cdata/index.jsp"));//王修改
 //       	 resp.sendRedirect(resp.encodeRedirectURL(req.getContextPath()+"/master/List.jsp"));
 //        	 resp.sendRedirect(resp.encodeRedirectURL(req.getContextPath()+"/wishpool/Wishing+waterfall.jsp"));
         	 

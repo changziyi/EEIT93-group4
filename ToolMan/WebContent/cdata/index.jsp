@@ -5,6 +5,11 @@
     <%@ page import="java.util.*"%>
     
     <%@ page import="toolman.cdata.model.*"%>
+    
+<%--           <c:if test="${empty LoginOK}"> --%>
+<%--     	<c:set var="target" value="${pageContext.request.servletPath}" scope="session"/> --%>
+<%--     	<c:redirect url="/cdata/login-in.jsp"/> --%>
+<%--    		</c:if> --%>
   
     
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -96,6 +101,21 @@ $(function(){
 				top:80px;
 				font-size:24px;
 				}
+				
+.bottom{
+	height: 25px;
+	width: 100px;
+	font-size: 18px;
+	color: white;
+	border: 0 none;
+	background-color: #ed9b4a;
+	border-radius: 10px;
+	cursor: pointer;
+	text-align:center;
+	}
+.bottom:hover {
+	background-color: #cc711f;
+}
 </style>		
 
 
@@ -135,18 +155,25 @@ $(function(){
 <a href="login-up.jsp">註冊畫面</a><p/>
 <a href="forgotpwd.jsp">忘記密碼</a><p/>
 <a href="<c:url value='test1.jsp' />">測試登入1</a><p/>
- <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/cdata/CdatadessServlet.do" > 
-       <input type="submit" value="消費者頁面">
-     </FORM>    
-</div>
- <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/cdata/CdataOrderServlet.do" >
-       <input type="submit" value="消費者訂單">
-        <input type="hidden" name="c_id" value="Snoopy">
-        <input type="hidden" name="action" value="listOrder">
-     </FORM>
+<%--  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/cdata/CdatadessServlet.do" >  --%>
+<!--        <input type="submit" value="消費者頁面"> -->
+<!--      </FORM>     -->
+<!-- </div> -->
+<%--  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/cdata/CdataOrderServlet.do" > --%>
+<!--        <input type="submit" value="消費者訂單"> -->
+<!--         <input type="hidden" name="c_id" value="Snoopy"> -->
+<!--         <input type="hidden" name="action" value="listOrder"> -->
+<!--      </FORM> -->
      
-     <FORM METHOD="post" ACTION="../cdata/CdataOrderServlet.do />" >
-        <input type="submit" value="登出">	
-         </FORM>
+     <a  href="${pageContext.servletContext.contextPath}/loginoutServlet">登出</a>	
 </body>
+<script type="text/javascript">
+
+// $(function(){
+// 	$("loginout").click(function(){
+		
+// 	})
+// })
+
+</script>
 </html>

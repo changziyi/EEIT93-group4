@@ -164,15 +164,17 @@ h2 {
 				<div>
 					<div class="memberphoto"></div>
 					<input type="text" class="a" placeholder="請輸入帳號" name="id">
-					<div class="error">${errorMsgs.c_id}</div>
 					<div class="passwordphoto"></div>
 					<input type="password" class="a" placeholder="請輸入密碼" name="pswd">
-					<div class="error">${errorMsgs.c_pwd}${errorMsgs.LoginError}</div>
-<!-- 					<div> -->
+					<div>
 <!-- 					<div class="g-recaptcha" id="recaptcha" -->
 <!-- 			         data-sitekey="6LfxUyAUAAAAAE-AozM5vAPmEzh5fM33D0B4u69c"></div> -->
-<%-- 			         </div><div class="error">${errorMsgs.gRecaptchaResponse}</div> --%>
-<!-- 				</div> -->
+<!-- 			         </div> -->
+					<div class="error">${errorMsgs.c_id}</div>
+					<div class="error">${errorMsgs.c_pwd}</div>
+					<div class="error">${errorMsgs.LoginError}</div>
+<%-- 					<div class="error">${errorMsgs.gRecaptchaResponse}</div> --%>			         
+				</div>
 				<a class="forgotmember" href="login-up.jsp">還不是會員嗎?</a>
 				<div>
 					<a class="forgot" href="forgotpwd.jsp">忘記密碼?</a>

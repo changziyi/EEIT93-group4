@@ -18,6 +18,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <link href="${pageContext.servletContext.contextPath}/nav/nav.css" rel="stylesheet">
+<link rel="Shortcut Icon" href="${pageContext.servletContext.contextPath}/favicon.ico" />
 <!---- dialog ---->
 <link href="http://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet">
 <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
@@ -105,10 +106,14 @@ tbody td:hover {
 }
 </style>
 <body>
-<div class="row">
 <jsp:include page="/nav/navigation.jsp" />
 <div>
 	<div class="container">
+	
+	<div class="page-header">
+			<div class="row">
+		</div>
+	
 		<div class="cdata_box">
 		<div>
 		<img height="30px" src='${pageContext.servletContext.contextPath}/image/btn_member.jpg'/>
