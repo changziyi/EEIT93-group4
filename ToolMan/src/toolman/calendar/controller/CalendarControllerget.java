@@ -60,9 +60,10 @@ public class CalendarControllerget extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("application/json");
 	     String calendarjson = request.getParameter("calendarjson");
-		 CalendarVO calendarVO = new CalendarVO();
+		 
 //		 MdataVO mdataVO2 = (MdataVO) request.getAttribute("mdataVO");
 //		 Integer m_id = mdataVO2.getM_id();
 		 Integer m_id = 1000;
@@ -75,21 +76,25 @@ public class CalendarControllerget extends HttpServlet {
 		
 		//---------------------------------get calendar---------------------------------------------
 		
-		List<CalendarVO> getlist = calendarservice.getByM(m_id);
-		
-		for(CalendarVO calendarVo:getlist){
+		List<CalendarVO> getlist = calendarservice.getByM(1000);
+		System.out.print(getlist);
+		JSONArray jsonarray = new JSONArray();
+		JSONObject jsonobj = new JSONObject();
+		for(CalendarVO calendarVO1:getlist){
 			Map map = new HashMap();
-			map.put("id", calendarVO.getEvent_id());
-			map.put("start", calendarVO.getEvent_start());
-			map.put("title", calendarVO.getEvent_title());
-			map.put("end", calendarVO.getEvent_end());
-			map.put("allDay", calendarVO.getEvent_allDay());
-			map.put("overlap", calendarVO.getEvent_overlap());
-			map.put("className", calendarVO.getEvent_className());
-			list.add(map);
+			jsonobj.put("id", calendarVO1.getEvent_id());
+			System.out.print(calendarVO1.getEvent_id());
+			jsonobj.put("start", calendarVO1.getEvent_start().toString());
+			jsonobj.put("title", calendarVO1.getEvent_title());
+			jsonobj.put("end", calendarVO1.getEvent_end().toString());
+			jsonobj.put("allDay", false);
+			jsonobj.put("overlap", false);
+//			map.put("className", calendarVO1.getEvent_className());
+			jsonarray.put(jsonobj);
 		}			
 			PrintWriter out = response.getWriter();
-			out.write(JSONValue.toJSONString(list));
+			out.println(jsonarray);
+			System.out.println(JSONValue.toJSONString(list));
 //		//---------------------------------end calendar---------------------------------------------
 //				
 	    }

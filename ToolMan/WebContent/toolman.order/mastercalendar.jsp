@@ -1008,6 +1008,7 @@ var eventidglobe =null;
 						right: 'month,agendaWeek,agendaDay'
 					},
 					editable: true,
+					
 					timezone:'UTC',
 // 					timezone = 'Asia/Taipei',
 					droppable: true, // this allows things to be dropped onto the calendar
@@ -1050,7 +1051,7 @@ var eventidglobe =null;
 					eventRender:function( event ) {
 						// Timezone calculation
 // 						console.log(event);
-						var d = new Date();
+						var d = new Date();					
 						var ds = new Date(event.start._d).getTime();
 						var n = d.getTimezoneOffset()*60*1000;
 						var s =new Date(ds+n);

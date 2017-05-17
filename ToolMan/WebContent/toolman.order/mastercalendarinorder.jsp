@@ -559,6 +559,7 @@
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	
 <script>
+var data =null;
 //calendar
 var selectmenu=null;
 var dragevent = null;
@@ -577,6 +578,7 @@ var eventidglobe =null;
 		$('#submitcalendar').on('click',calendarsubmit);
 		$('#external-events2>div').on('click',assignrandom);
 		draggableevent();
+		showjsonevent();
 		buildcalendar();
 		/* calendar
 		-----------------------------------------------------------------*/
@@ -764,7 +766,10 @@ function calendarsubmit(){
 					
 				});// end each
 			}//end draggable event
-			
+			function showjsonevent(){
+			 data = $.getJSON('${pageContext.servletContext.contextPath}/toolman.calendar/CalendarControllerget.do');
+				
+			}
 			function buildcalendar(){
 				
 				$('#calendar').fullCalendar({
@@ -822,13 +827,14 @@ function calendarsubmit(){
 						var ds = new Date(event.start._d).getTime();
 						var n = d.getTimezoneOffset()*60*1000;
 						var s =new Date(ds+n);
+// 						$.fullCalendar.formatDate( event.start._d, "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"  ) 
 // 						$.fullCalendar.moment(event.start._d);
 						//event.start._d and event._start._d is not the same
 // 						console.log(s);
 // 						console.log(d);
 // 						event.start._d = s;
 						event._start._d = s;
-						checkoverlapping2(event);
+// 						checkoverlapping2(event);
 // 						console.log(event.start._d);
 // 						console.log(event._start._d);
 // 						console.log(event);
@@ -844,13 +850,15 @@ function calendarsubmit(){
 						checkoverlapping(event); 
 						
 						},
-						 events: function(start, end, timezone, callback) {
-						       
-						            url: '${pageContext.servletContext.contextPath}/toolman.calendar/CalendarController.do',
-						            dataType: 'json',
-						            data: {},
-						        
-						    }
+					eventSources: [
+		                    {
+		                    	url:'${pageContext.servletContext.contextPath}/toolman.calendar/CalendarControllerget.do',		                        
+									
+
+		                    }                    
+		                ],
+						
+						
 				});// end full calendar
 			}//end create calendar
 			
