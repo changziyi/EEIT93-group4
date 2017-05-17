@@ -30,7 +30,7 @@ import toolman.mpro.model.MProVO;
 import toolman.opro.model.OproVO;
 import toolman.order.model.OrderService;
 import toolman.order.model.OrderVO;
-import toolman.rdata.model.RdataJDBCDAO;
+import toolman.rdata.model.RdataDAO;
 import toolman.rdata.model.RdataService;
 import toolman.rdata.model.RdataVO;
 

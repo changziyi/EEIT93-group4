@@ -11,7 +11,7 @@ public class RdataService {
 	private RdataDAO_interface dao;
 
 	public RdataService() {
-		dao = new RdataJDBCDAO();
+		dao = new RdataDAO();
 	}
 
 	

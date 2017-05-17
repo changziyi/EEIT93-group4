@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+    <class name="toolman.rdata.model.RdataVO" table="rdata" >
+        
+        <id name="r_id" column="r_id">
+            <generator class="identity"/>
+        </id>
+        
+
+        <property name="r_date" column="r_date" />
+        <property name="c_id" column="c_id" />
+        <property name="m_id" column="m_id" />
+        <property name="p_summary" column="p_summary" />
+        <property name="p_content" column="p_content" />
+        <property name="s_name" column="s_name" />
+        <property name="sa_rnote" column="sa_rnote" />
+        <property name="d_id" column="d_id" />
+        <property name="o_id" column="o_id" />
+        
+        <many-to-one name="mdataVO" class="toolman.mdata.model.MdataVO" lazy="false">
+            <column name="m_id" />
+        </many-to-one>
+         <many-to-one name="cdataVO" class="toolman.cdata.model.CdataVO" lazy="false">
+            <column name="c_id" />
+        </many-to-one>
+        
+       <many-to-one name="discussionVO" class="toolman.discussion.model.DiscussionVO" lazy="false">
+            <column name="d_id" />
+        </many-to-one>
+         <many-to-one name="orderVO" class="toolman.order.model.CdataVO" lazy="false">
+            <column name="c_id" />
+        </many-to-one>
+       
+        
+        
+    </class>
+</hibernate-mapping>
+
