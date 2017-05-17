@@ -79,9 +79,10 @@ public class CalendarControllerget extends HttpServlet {
 		List<CalendarVO> getlist = calendarservice.getByM(1000);
 		System.out.print(getlist);
 		JSONArray jsonarray = new JSONArray();
-		JSONObject jsonobj = new JSONObject();
+		
 		for(CalendarVO calendarVO1:getlist){
 			Map map = new HashMap();
+			JSONObject jsonobj = new JSONObject();
 			jsonobj.put("id", calendarVO1.getEvent_id());
 			System.out.print(calendarVO1.getEvent_id());
 			jsonobj.put("start", calendarVO1.getEvent_start().toString());
