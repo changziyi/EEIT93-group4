@@ -198,6 +198,21 @@ public class MdataService {
 		return JSONValue.toJSONString(jList);
 	}
 	
+	public List getAllMidForAd() {
+		List<Object[]> mids = dao.searchAllRandom();
+		List masterList = new LinkedList();
+		for (Object[] aMid : mids) {
+			Map mid = new HashMap();
+			mid.put("id",aMid[0]);
+			mid.put("bname",aMid[1]);
+			mid.put("city",aMid[3]);
+			mid.put("district",aMid[4]);
+			mid.put("finish",aMid[7]);
+			masterList.add(mid);
+		}
+		return masterList;
+	}
+	
 	public String getAllBySP() {
 		List<Object[]> mdatas = dao.searchAll();
 		MProService mproSvc = new MProService();
