@@ -14,11 +14,12 @@ public class CalendarDAO implements CalendarDAO_Interface {
 
 	@Override
 	public void InsertByM(Collection<CalendarVO> list) {
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();		
+				
 		for(CalendarVO calendarVO:list){
+			Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try {
 			session.beginTransaction();
-			session.saveOrUpdate(calendarVO);
+			session.save(calendarVO);
 			session.getTransaction().commit();
 		} catch (RuntimeException ex) {
 			session.getTransaction().rollback();
@@ -34,7 +35,8 @@ public class CalendarDAO implements CalendarDAO_Interface {
 		
 		try {
 			session.beginTransaction();
-			Query query = session.createQuery("from CalendarVO");
+			Query query = session.createQuery("from CalendarVO where m_id=:m");
+			query.setParameter("m", m_id);
 			querylist = query.list();			
 			session.getTransaction().commit();
 		} catch (RuntimeException ex) {
@@ -61,5 +63,14 @@ public class CalendarDAO implements CalendarDAO_Interface {
 		}
 	
 	}
-
+	public static void main(String[] args) { 
+		CalendarDAO dao = new CalendarDAO();
+		List<CalendarVO> getlist=dao.getByM(1000);
+		for(CalendarVO calendarVo:getlist){
+			System.out.print(calendarVo.getEvent_id());
+			System.out.print(calendarVo.getEvent_title());
+		}
+		
+		}
+	
 }

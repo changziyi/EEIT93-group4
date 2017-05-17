@@ -333,10 +333,10 @@
 		<div id='external-events'  style="margin-top:46px;">
 			<h4 style="margin-left:20%;">預約時間</h4>
 			<div id='external-events2' style="margin-left:20%;">
-				<div class='fc-event' data-id="morning"data-start="01:00" data-end='08:00'>早上不可預約</div>
-				<div class='fc-event' data-id="noon"data-start="12:00" data-end='06:00'>下午不可預約</div>
-				<div class='fc-event' data-id="night"data-start="18:00" data-end='06:00'>晚上不可預約</div>
-				<div class='fc-event' id="alldayevent" data-id="allday"data-start="00:00" data-end='24:00'>整天不可預約</div>
+				<div class='fc-event' data-id="morning"data-start="01:00" data-end='08:00'>早上</div>
+				<div class='fc-event' data-id="noon"data-start="12:00" data-end='06:00'>下午</div>
+				<div class='fc-event' data-id="night"data-start="18:00" data-end='06:00'>晚上</div>
+				<div class='fc-event' id="alldayevent" data-id="allday"data-start="00:00" data-end='24:00'>整天</div>
 				
 			</div>
 		<!-- 			<p> -->
@@ -559,6 +559,7 @@
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	
 <script>
+var data =null;
 //calendar
 var selectmenu=null;
 var dragevent = null;
@@ -577,6 +578,7 @@ var eventidglobe =null;
 		$('#submitcalendar').on('click',calendarsubmit);
 		$('#external-events2>div').on('click',assignrandom);
 		draggableevent();
+		showjsonevent();
 		buildcalendar();
 		/* calendar
 		-----------------------------------------------------------------*/
@@ -764,7 +766,10 @@ function calendarsubmit(){
 					
 				});// end each
 			}//end draggable event
-			
+			function showjsonevent(){
+			 data = $.getJSON('${pageContext.servletContext.contextPath}/toolman.calendar/CalendarControllerget.do');
+				
+			}
 			function buildcalendar(){
 				
 				$('#calendar').fullCalendar({
@@ -822,13 +827,14 @@ function calendarsubmit(){
 						var ds = new Date(event.start._d).getTime();
 						var n = d.getTimezoneOffset()*60*1000;
 						var s =new Date(ds+n);
+// 						$.fullCalendar.formatDate( event.start._d, "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"  ) 
 // 						$.fullCalendar.moment(event.start._d);
 						//event.start._d and event._start._d is not the same
 // 						console.log(s);
 // 						console.log(d);
 // 						event.start._d = s;
 						event._start._d = s;
-						checkoverlapping2(event);
+// 						checkoverlapping2(event);
 // 						console.log(event.start._d);
 // 						console.log(event._start._d);
 // 						console.log(event);
@@ -844,13 +850,15 @@ function calendarsubmit(){
 						checkoverlapping(event); 
 						
 						},
-						 events: function(start, end, timezone, callback) {
-						       
-						            url: '${pageContext.servletContext.contextPath}/toolman.calendar/CalendarController.do',
-						            dataType: 'json',
-						            data: {},
-						        
-						    }
+					eventSources: [
+		                    {
+		                    	url:'${pageContext.servletContext.contextPath}/toolman.calendar/CalendarControllerget.do',		                        
+									
+
+		                    }                    
+		                ],
+						
+						
 				});// end full calendar
 			}//end create calendar
 			
@@ -888,7 +896,7 @@ function calendarsubmit(){
 					
 					var splitstring2 = start2.split(" ");
 // 					console.log(splitstring2);
-					if((events[i].title == "整天不可預約")||(event.title =="整天不可預約")){
+					if((events[i].title == "整天")||(event.title =="整天")){
 						if((splitstring1[0]+splitstring1[1]+splitstring1[2]+splitstring1[3])==
 							(splitstring2[0]+splitstring2[1]+splitstring2[2]+splitstring2[3])){
 		
