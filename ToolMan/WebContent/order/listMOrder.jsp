@@ -25,7 +25,7 @@
 <html>
 
 <head>
-<title>cena</title>
+<title>師傅專頁</title>
 
 </head>
 
@@ -43,33 +43,13 @@
 <body bgcolor='white'>
 
 
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">WebSiteName</a>
-    </div>
-    <ul class="nav navbar-nav">
-      <li class="active"><a href="<%=request.getContextPath()%>/cdata/index.jsp">Home</a></li>
- <li><a href="<%=request.getContextPath()%>/order/listAllEmp.jsp">訂單</a></li>
-      <li><a href="<%=request.getContextPath()%>/order/like.jsp">收藏店家</a></li>
-      <li><a href="<%=request.getContextPath()%>/order/dislike.jsp">黑名單</a></li>
-      <li><a href="<%=request.getContextPath()%>/master/List.jsp">搜尋店家</a></li>
-      
-    </ul>
-  </div>
-</nav>
+<jsp:include page="/order/title.jsp" />
 
 
-<b><font color=red></font></b>
-<table border='1' cellpadding='5' cellspacing='0' width='1200'>
-	<tr bgcolor='#CCCCFF' align='center' valign='middle' height='20'>
-		<td><h3>師傅訂單 </h3>
-		         </td></tr></table>
 
-<table border='1' bordercolor='#CCCCFF' width='1200'>
+
+  <table class="table table-bordered">
 	<tr>
-		<th>訂單編號</th>
-		<th>店家編號</th>
 		<th>店家名稱</th>
 		<th>訂單完成時間</th>
 		<th>維修項目說明</th>
@@ -87,8 +67,6 @@
 	<c:forEach var="orderVO" items="${listOrder}" > 
 	
 		<tr align='center' valign='middle'>
-			<td>${orderVO.o_id}</td>
-			<td>${orderVO.m_id.m_id}</td>
 			<td><a href='${pageContext.servletContext.contextPath}/master/masterPage.do?m_id=${orderVO.m_id.m_id}'>${orderVO.b_name}</a></td>
 			<td>${orderVO.o_edate}</td>
 			<td>${orderVO.o_des}</td>
@@ -170,7 +148,6 @@ ${orderVO.ma_des}
          
          
 <h4 class="modal-title">評分給鼓勵吧</h4>
-         <span>${orderVO.o_id}</span>
           
           
     <label class="radio-inline">

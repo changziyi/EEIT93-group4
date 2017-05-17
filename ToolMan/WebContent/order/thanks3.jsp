@@ -40,23 +40,12 @@
 <body bgcolor='white'>
 
 
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">WebSiteName</a>
-    </div>
-    <ul class="nav navbar-nav">
-      <li class="active"><a href="<%=request.getContextPath()%>/cdata/index.jsp">Home</a></li>
- <li><a href="<%=request.getContextPath()%>/order/listAllEmp.jsp">訂單</a></li>
-      <li><a href="<%=request.getContextPath()%>/order/like.jsp">收藏店家</a></li>
-      <li><a href="<%=request.getContextPath()%>/order/dislike.jsp">黑名單</a></li>
-      <li><a href="<%=request.getContextPath()%>/master/List.jsp">搜尋店家</a></li>
-      
-    </ul>
-  </div>
-</nav>
+<jsp:include page="/order/title.jsp" />
 
-<h1>已加入黑名單</h1>
+<div class="alert alert-success">
+  <h2><strong>已加入黑名單</strong></h2>
+  </div>
+
 
 </body>
 </html>

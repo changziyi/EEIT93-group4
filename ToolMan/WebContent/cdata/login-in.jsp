@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -17,14 +17,12 @@ body {
 	padding: 0 auto;
 	background-color: #f9f9f9;
 }
-
 .content {
 	width: 400px;
 	margin: 30px auto;
 	padding: 0 auto;
 /* 	background-color: gray; /*sign in box model 測試用 */ 
 }
-
 .loginbox {
 	width: 400px;
 	height: 500px;
@@ -35,7 +33,6 @@ body {
 	background-color: white;
 	border-radius: 10px;
 }
-
 h1 {
 	font-size: 24px;
 	margin: 40px 0 15px 0;
@@ -43,7 +40,6 @@ h1 {
 	font-weight: 900;
 	text-align: center;
 }
-
 .memberphoto {
 	height: 44px;
 	width: 44px;
@@ -54,7 +50,6 @@ h1 {
 	background-size: contain;
 	border: solid 1px #a5a5a5;
 }
-
 .passwordphoto {
 	height: 44px;
 	width: 44px;
@@ -65,7 +60,6 @@ h1 {
 	background-image: url(../image/password.jpg);
 	border: solid 1px #a5a5a5;
 }
-
 .a {
 	height: 40px;
 	width: 250px;
@@ -74,14 +68,12 @@ h1 {
 	font-size: 20px;
 	margin-bottom: 5px;
 }
-
 hr {
 	width: 300px;
 	color: #a5a5a5;
 	margim-top: 10px;
 	margim-bottom: 10px;
 }
-
 span {
 	position: absolute;
 	font-size: 10px;
@@ -91,7 +83,6 @@ span {
 	color: #444444;
 	left: 195px;
 }
-
 .submit {
 	height: 30px;
 	width: 150px;
@@ -103,25 +94,20 @@ span {
 	border-radius: 6px;
 	margin-top: 10px;
 }
-
 .b {
 	margin-left: 125px;
 }
-
 .fb {
 	position: absolute;
 	margin-top: 90px;
 	margin-left: -128px;
 }
-
 .submit:hover {
 	background-color: #cc711f;
 }
-
 .signup:hover {
 	background-color: #cc711f;
 }
-
 h2 {
 	font-size: 16px;
 	position: absolute;
@@ -131,14 +117,12 @@ h2 {
 	font-weight: 900;
 	left: 149px;
 }
-
 .forgotmember {
 	font-size: 14px;
 	margin-left: 266px;
 	text-decoration: none; /*消除底線*/
 	color: #cc792e;
 }
-
 .forgot {
 	font-size: 14px;
 	margin-left: 266px;
@@ -168,19 +152,11 @@ h2 {
 					<div class="passwordphoto"></div>
 					<input type="password" class="a" placeholder="請輸入密碼" name="pswd">
 					<div class="error">${errorMsgs.c_pwd}${errorMsgs.LoginError}</div>
-<<<<<<< HEAD
-					<div>
-					<div class="g-recaptcha" id="recaptcha"
-			         data-sitekey="6LfxUyAUAAAAAE-AozM5vAPmEzh5fM33D0B4u69c"></div>
-			         </div>
-				</div>
-=======
 <!-- 					<div> -->
 <!-- 					<div class="g-recaptcha" id="recaptcha" -->
 <!-- 			         data-sitekey="6LfxUyAUAAAAAE-AozM5vAPmEzh5fM33D0B4u69c"></div> -->
 <%-- 			         </div><div class="error">${errorMsgs.gRecaptchaResponse}</div> --%>
 <!-- 				</div> -->
->>>>>>> branch 'master' of https://github.com/changziyi/EEIT93-group4.git
 				<a class="forgotmember" href="login-up.jsp">還不是會員嗎?</a>
 				<div>
 					<a class="forgot" href="forgotpwd.jsp">忘記密碼?</a>
@@ -190,24 +166,20 @@ h2 {
 					<input type="submit" class="submit" value="登入">
 				</div>
 				<hr>
+				<!--FB -->
 				<div class="fb">
 					<div class="fb-login-button" onlogin="checkLoginState()" id="login"
 						data-max-rows="1" data-size="large" data-button-type="login_with"
-						data-show-faces="false" data-auto-logout-link="false"
-						data-use-continue-as="false"></div>						
+						scope="public_profile,email"></div>						
 				   </div>
 				   	<div style="visibility:hidden" id="status"></div>
-<<<<<<< HEAD
-<!-- 				   <input type="button" id="btnLogout" value="Logout" onclick="Logout();"> -->
-=======
 				   	
 	</form>
->>>>>>> branch 'master' of https://github.com/changziyi/EEIT93-group4.git
 		</div>
-		</form>
 	</div>
+		<!-- test photo-->
+		<div id="fb_photo"></div>
 <script>
-
 //fb
 	function statusChangeCallback(response) {
 		console.log('statusChangeCallback');
@@ -218,24 +190,24 @@ h2 {
     		var v = document.getElementById('status');
     		v.innerHTML = 'We are connected.';
     		if(v.innerHTML === 'We are connected.'){
+    			testAPI();
     			console.log(v.innerHTML);
-    			window.location.reload();
-    			location.href="<%=request.getContextPath()%>/master/List.jsp";
+//     			test
+//     			window.location.reload();
+<%--     			location.href="<%=request.getContextPath()%>/master/List.jsp"; --%>
     		}			
-			testAPI();
+			
 		} else if (response.status === 'not_authorized') {
 			document.getElementById('status').innerHTML = 'Please log '
 					+ 'into this app.';
 		} 
 	}
-
-
 	function checkLoginState() {
 		FB.getLoginStatus(function(response) {
+			console.log("Token : " + response.authResponse.accessToken);
 			statusChangeCallback(response);
 		});
 	}
-
 	window.fbAsyncInit = function() {
 		FB.init({
 			appId : '1893060910719956',
@@ -269,14 +241,23 @@ h2 {
 		fjs.parentNode.insertBefore(js, fjs);
 	}(document, 'script', 'facebook-jssdk'));
 	
-	//0.2
+	
 	function testAPI() {
 		console.log('Welcome!  Fetching your information.... ');
-		FB.api('/me','GET', {fields: 'first_name,last_name,name,id,picture.width(50).height(50)'}, function(response) {
-				console.log('Successful login for: '+ response.name);
-				document.getElementById('status').innerHTML = 'Thanks for logging in, '
-				+ response.name + "," + response.id;				
-			});
+		
+		FB.api('/me','GET', 
+				
+				
+				
+				{fields: 'first_name,last_name,name,id,email,picture.width(200).height(200)'}, 
+				function(response) {
+				console.log('Successful login!! '+ ' id:' + response.id + ', name:' + response.name + 
+							', email:' + response.email);
+				document.getElementById('fb_photo').innerHTML = "<img src='" + response.picture.data.url +"'>";				
+			},function(response) {
+			    console.log(JSON.stringify(response));
+			}
+		);
 	}
 	
 	//picture

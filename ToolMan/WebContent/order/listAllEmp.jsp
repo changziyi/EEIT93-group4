@@ -41,7 +41,6 @@
 	
 <body bgcolor='white'>
 
-
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -65,23 +64,18 @@
         <input type="hidden" name="action" value="listOrder">
      </FORM>
 
-     <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/cdata/CdataOrderServlet.do" >
+     <FORM METHOD="get" ACTION="<%=request.getContextPath()%>/cdata/CdataOrderServlet.do" >
  
        <input type="submit" value="消費者訂單">
         <input type="hidden" name="c_id" value="Snoopy">
         <input type="hidden" name="action" value="listOrder">
      </FORM>
      <%------------------------------------------------------------------- --%>
-     
-<b><font color=red></font></b>
-<table border='1' cellpadding='5' cellspacing='0' width='1200'>
-	<tr bgcolor='#CCCCFF' align='center' valign='middle' height='20'>
-		<td><h3>訂單 </h3>
-		         </td></tr></table>
 
-<table border='1' bordercolor='#CCCCFF' width='1200'>
+		<td><h3>訂單 </h3>
+
+  <table class="table table-bordered">
 	<tr>
-		<th>訂單編號</th>
 		<th>店家名稱</th>
 		<th>訂單完成時間</th>
 		<th>維修項目說明</th>
@@ -100,7 +94,6 @@
 <%-- 		<c:forEach var="orderVO" items="${listOrder}" >  --%>
 	
 		<tr align='center' valign='middle'>
-			<td>${orderVO.o_id}</td>
 			<td><a href='${pageContext.servletContext.contextPath}/master/masterPage.do?m_id=${orderVO.m_id.m_id}'>${orderVO.b_name}</a></td>
 			<td>${orderVO.o_edate}</td>
 			<td>${orderVO.o_des}</td>
@@ -259,7 +252,7 @@ ${orderVO.ca_des}
            <input type="hidden" name="m_id" value="${orderVO.m_id.m_id}"/>
           <input type="hidden" name="o_id" value="${orderVO.o_id}">	   
           <input type="hidden" name="sa_rnote" value=null>	
-<!--         <input type="hidden" name="d_id" value="6000">	 -->
+        <input type="hidden" name="d_id" value="6000">	
           
         </div>
        </div>

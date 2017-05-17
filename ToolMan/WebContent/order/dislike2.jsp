@@ -12,7 +12,7 @@
 <html>
 
 <head>
-<title>cena</title>
+<title>我的最恨</title>
 
 </head>
 
@@ -30,31 +30,12 @@
 <body bgcolor='white'>
 
 
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">WebSiteName</a>
-    </div>
-    <ul class="nav navbar-nav">
-      <li class="active"><a href="#">Home</a></li>
- <li><a href="<%=request.getContextPath()%>/order/listAllEmp.jsp">訂單</a></li>
-      <li><a href="<%=request.getContextPath()%>/order/like.jsp">收藏店家</a></li>
-      <li><a href="<%=request.getContextPath()%>/order/dislike.jsp">黑名單</a></li>
-      <li><a href="<%=request.getContextPath()%>/master/List.jsp">搜尋店家</a></li>
-      
-      
-    </ul>
-  </div>
-</nav>
+<jsp:include page="/order/title.jsp" />
 
 
-<b><font color=red></font></b>
-<table border='1' cellpadding='5' cellspacing='0' width='1200'>
-	<tr bgcolor='gray' align='center' valign='middle' height='20'>
-		<td><h3>我的黑名單</h3>
-		         </td></tr></table>
 
-<table border='1' bordercolor='#CCCCFF' width='1200'>
+
+  <table class="table table-bordered">
 	<tr>
 	
 		<th>店家編號</th>

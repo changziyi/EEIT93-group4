@@ -1,7 +1,8 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
 <%@ page import="toolman.order.model.*"%>
+<%@ page import="toolman.cdata.model.*"%>
 
 
 
@@ -15,8 +16,19 @@
 // List<OrderVO> list = orderSvc.getAllOrder();
 // pageContext.setAttribute("list",list);
 
- %> --%>
+ %> 
 
+
+<%	
+	OrderService emailSvc = new OrderService();
+	HttpSession sessions = request.getSession();
+	CdataVO cdataVO = (CdataVO)sessions.getAttribute("LoginOK");
+	List<OrderVO> list = emailSvc.getOrderByC(cdataVO.getC_id());
+	pageContext.setAttribute("list", list);
+%>
+
+
+--%>
 
 
 <jsp:useBean id="listOrder" scope="request" type="java.util.Set" />
@@ -25,7 +37,13 @@
 <html>
 
 <head>
-<title>cena</title>
+<title>${LoginOK.c_id}的訂單</title>
+
+<style>
+	a {
+	color:White;
+}
+</style>
 
 </head>
 
@@ -43,33 +61,14 @@
 <body bgcolor='white'>
 
 
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">WebSiteName</a>
-    </div>
-    <ul class="nav navbar-nav">
-      <li class="active"><a href="<%=request.getContextPath()%>/cdata/index.jsp">Home</a></li>
-    <li><a href="<%=request.getContextPath()%>/order/listAllEmp.jsp">訂單</a></li>
-      <li><a href="<%=request.getContextPath()%>/order/like.jsp">收藏店家</a></li>
-      <li><a href="<%=request.getContextPath()%>/order/dislike.jsp">黑名單</a></li>
-      <li><a href="<%=request.getContextPath()%>/master/List.jsp">搜尋店家</a></li>
-      
-    </ul>
-  </div>
-</nav>
+<jsp:include page="/order/title.jsp" />
 
 
-<b><font color=red></font></b>
-<table border='1' cellpadding='5' cellspacing='0' width='1200'>
-	<tr bgcolor='#CCCCFF' align='center' valign='middle' height='20'>
-		<td><h3>我的訂單 </h3>
-		         </td></tr></table>
 
-<table border='1' bordercolor='#CCCCFF' width='1200'>
+
+
+  <table class="table table-bordered table-hover" >
 	<tr>
-		<th>訂單編號</th>
-		<th>店家編號</th>
 		<th>店家名稱</th>
 		<th>訂單完成時間</th>
 		<th>維修項目說明</th>
@@ -78,6 +77,7 @@
 		<th>分數</th>
 		<th>留言</th>
 		<th>評分</th>
+		<th>投訴</th>
 		
 	</tr>
  	
@@ -87,8 +87,6 @@
 	<c:forEach var="orderVO" items="${listOrder}" > 
 	
 		<tr align='center' valign='middle'>
-			<td>${orderVO.o_id}</td>
-			<td>${orderVO.m_id.m_id}</td>
 			<td><a href='${pageContext.servletContext.contextPath}/master/masterPage.do?m_id=${orderVO.m_id.m_id}'>${orderVO.b_name}</a></td>
 			<td>${orderVO.o_edate}</td>
 			<td>${orderVO.o_des}</td>
@@ -150,7 +148,7 @@ ${orderVO.ca_des}
   <!-- Trigger the modal with a button -->
   
 
- <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#${orderVO.o_id}" >評分</button> 
+ <button type="button" class="btn btn-info" data-toggle="modal" data-target="#${orderVO.o_id}" >評分</button> 
  
  
   <!-- Modal -->
@@ -169,10 +167,9 @@ ${orderVO.ca_des}
 
          <div class="modal-body">
          
-         
-<h4 class="modal-title">評分給鼓勵吧</h4>
-         <span>${orderVO.o_id}</span>
-          
+         <div class="modal-header">
+<h3 class="modal-title">評分給鼓勵吧</h3>
+        </div>  
           
     <label class="radio-inline">
       <input type="radio" name="m_rating" value="5">5分
@@ -237,7 +234,7 @@ ${orderVO.ca_des}
   <!-- Trigger the modal with a button -->
   
 
- <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#${orderVO.o_id}k" >投訴</button> 
+ <button type="button" class="btn btn-danger " data-toggle="modal" data-target="#${orderVO.o_id}k" >投訴</button> 
  
  
   <!-- Modal -->
@@ -249,13 +246,13 @@ ${orderVO.ca_des}
       
       <div class="modal-content">
        <div class="modal-header">
-       <h4 class="modal-title">投訴</h4>
+       <h3 class="modal-title">投訴</h3>
        
        </div>
          <div class="modal-body">
          
          
-         <span>${orderVO.o_id}</span>
+         <span>主旨</span>
       <label class="radio-inline">
     <input type="text" name="p_summary" />
     
@@ -265,17 +262,19 @@ ${orderVO.ca_des}
           </div>
         <div class="container-fluid">
     <label for="comment">內容</label>
-      <textarea class="form-control" rows="5" id="comment" name="p_content">這個人猥褻下流，還亂摸我的小白</textarea>
+      <textarea class="form-control" rows="5" id="comment" name="p_content"></textarea>
     </div>
      <div class="modal-footer">
         <input type="submit" value="送出" >  
               
-		<input type="hidden" name="action" value="insert">
+		<input type="hidden" name="action" value="addRdata">
 		
-          	<input type="hidden" name="s_name" value="m_pass">	
+       	<input type="hidden" name="s_name" value="m_pass">	
            <input type="hidden" name="c_id" value="${orderVO.c_id.c_id}"/>
            <input type="hidden" name="m_id" value="${orderVO.m_id.m_id}"/>
           <input type="hidden" name="o_id" value="${orderVO.o_id}">	   
+          <input type="hidden" name="sa_rnote" value=null>	
+        <input type="hidden" name="d_id" value="6000">		   
           
         </div>
        </div>

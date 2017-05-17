@@ -14,9 +14,6 @@
 	src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 <style>
-body {
-	background: #b3ffff;
-}
 
 .navbar, .dropdown-menu {
 	background: #00BFFF;

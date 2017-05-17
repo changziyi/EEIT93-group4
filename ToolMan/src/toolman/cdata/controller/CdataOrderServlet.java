@@ -9,9 +9,7 @@ import javax.servlet.http.*;
 
 import toolman.blacklist.model.BlacklistVO;
 import toolman.cdata.model.CdataService;
-import toolman.cdata.model.CdataVO;
 import toolman.favorite.model.FavoriteVO;
-import toolman.order.model.OrderService;
 import toolman.order.model.OrderVO;
 
 @WebServlet("/cdata/CdataOrderServlet.do")
