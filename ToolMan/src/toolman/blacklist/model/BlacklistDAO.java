@@ -4,8 +4,6 @@ import org.hibernate.*;
 
 
 import hibernate.util.HibernateUtil;
-import toolman.favorite.model.FavoriteVO;
-import toolman.order.model.OrderVO;
 
 import java.util.*;
 

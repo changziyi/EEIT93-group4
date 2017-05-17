@@ -10,6 +10,7 @@ public interface EmailDAO_interface {
           public void delete(Integer Ms_id);
           public List<EmailVO> getMail(String mss_id);
           public List<EmailVO> getOneMail(Integer ms_id);
+          public List<EmailVO> deleteMail(Integer ms_id);
           public EmailVO findByPrimaryKey(Integer Ms_id);
           public EmailVO findByPrimaryKey1(Integer Ms_id);
           public List<EmailVO> getAll();

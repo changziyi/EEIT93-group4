@@ -22,6 +22,10 @@
         	<column name="c_id" />
         </many-to-one>
 -->         
+
+
+  
+
     </class>
 </hibernate-mapping>
 

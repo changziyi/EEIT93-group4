@@ -79,6 +79,8 @@ public class WishpoolServlet extends HttpServlet {
 		System.out.println("cdataVO = " + cdataVO.getC_id());
 		String SendAccount = cdataVO.getC_id();
 		
+		
+		
 		//if ("Wishing".equals(action)) {
 		
 		Map<String, String> errorMsgs = new HashMap<String, String>();

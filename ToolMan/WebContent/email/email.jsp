@@ -18,9 +18,10 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<link rel="Shortcut Icon" href="${pageContext.servletContext.contextPath}/favicon.ico" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>email Page</title>
-
+<link href="${pageContext.servletContext.contextPath}/nav/nav.css" rel="stylesheet">
 <link rel="stylesheet"
 	href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
 <script
@@ -66,17 +67,12 @@
 </script>
 
 
-<script>
-
-
-<!-- </script> -->
 </head>
 <body>
+<jsp:include page="/nav/navigation.jsp" />
 	<div class="container">
-		<div class="row">
-			<div class="col-md-12" style="background-color: #99ceff">
-				<H1 style="color: green" align="center">測試用頁面</H1>
-			</div>
+		<div class="row page-header">		
+				<div class="row"></div>
 		</div>
 		<br>
 
@@ -96,7 +92,7 @@
 					<div>
 						<c:forEach var="emailVO" items="${list}">
 							<div class="content_box">
-								id : ${emailVO.ms_id}		<br>						
+														
 								<span>收件人：${emailVO.mss_id}</span>
 								<br>
 								<span>寄件人：${emailVO.msr_id}</span>
@@ -110,7 +106,15 @@
 								時間：${emailVO.ms_date}
 								<br> 
 								狀態：${emailVO.s_name}
+								<br> 
+								垃圾桶：${emailVO.ms_trash}
 								
+							<form action="Email.do" method="post">
+							<input type="submit" class="btn btn-default"  value="刪除" ><span aria-hidden="true"></span>
+							<input type="hidden" name="ms_id" value="${emailVO.ms_id}"></input>
+							<input type="hidden" name="action" value="del1"></input>
+							</form>
+							
 							</div>
 						</c:forEach>
 					</div>
@@ -124,9 +128,9 @@
 		<div class="modal-dialog">
 <form method="POST" action="Email.do">
 				<div class="modal-content">
-					<div class="modal-header">
+					<div class="modal-header" >
 						<H4 style="color: blue">
-							email
+						Content
 							<button type="button" class="close" data-dismiss="modal"
 								aria-label="Close">
 								<span aria-hidden="true">&times;</span>
@@ -143,7 +147,8 @@
 								<td>寄件人：${Onelist.msr_id}</td>
 							</tr>
 							<tr>
-								<td>主旨：${Onelist.ms_content}</td>
+								<td>主旨：${Onelist.ms_summary}</td>
+							</tr>
 							<tr>								
 								<td>內容：${Onelist.ms_content}</td>
 							</tr>
@@ -151,13 +156,7 @@
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">返回</button>
-<!-- 						<button class="btn btn-primary btn-lg" data-toggle="modal" -->
-<!-- 						data-target="#myModal01">回覆</button> -->
-<!-- 						<button type="button" class="btn btn-primary" data-target="#myModal01">回覆</button>		 -->
 
-					<button class="btn btn-primary btn-lg" data-toggle="modal"
-						id="#myModal01">回覆</button>
-						
 					</div>
 				</div>
 			</form>
@@ -210,18 +209,26 @@
 						<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
 						<button type="submit" class="btn btn-primary">送出</button>			
 					</div>
+					
+<!-- 					<form action="Email.do" method="post"> -->
+<!-- 					<input type="submit" class="btn btn-default"  value="送出" ><span aria-hidden="true"></span> -->
+<%-- 					<input type="hidden" name="ms_id" value="${emailVO.ms_id}"></input> --%>
+<!-- 					<input type="hidden" name="action" value="submit1"></input> -->
+<!-- 					</form> -->
+		
+					
 				</div>
 			</form>
 		</div>
 	</div>
 	<script type="text/javascript">
-// 	$('#selectbtn').click(function(){
-// 		var dataid = $(this).attr('data-id');
-// 		$.get('Email.do',{
-// 			'action':'findbypk',
-// 			'msid':dataid
-// 		});
-// 	})
+	$('#selectbtn').click(function(){
+		var dataid = $(this).attr('data-id');
+		$.get('Email.do',{
+			'action':'findbypk',
+			'msid':dataid
+		});
+	})
 	$('button.btn-primary').click(function(){
 		var divparent =  $(this).parent('div');
 		var receiveid = divparent.children('span:first').text();

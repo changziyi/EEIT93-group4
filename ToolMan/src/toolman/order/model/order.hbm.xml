@@ -43,6 +43,10 @@
         <many-to-one name="c_id" class="toolman.cdata.model.CdataVO" lazy="false">
             <column name="c_id" />
         </many-to-one>
+    
+    
+   
+    
     </class>
 </hibernate-mapping>
 

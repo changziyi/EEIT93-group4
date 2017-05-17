@@ -221,7 +221,8 @@
     <div class="call-to-action bg-customer">
         <div class="container text-center">
             <h2 class="title2">看看還有哪些師傅</h2>
-            <button type="button" id="btnall" class="btn btn-default btn-xl sr-button">開始找師傅</button>
+<!--             <button type="button" class="btnall" class="btn btn-default btn-xl sr-button">開始找師傅</button> -->
+			<a href="${pageContext.servletContext.contextPath}/master/master.do?city=all&action=SearchAll" class="btn btn-default btn-xl sr-button">我要找師傅</a>
         </div>
     </div>
 
@@ -289,18 +290,6 @@
 			});
 		});
 		
-		$('#btnall').click(function() {
-			
-			$.ajax({
-				url : 'master.do',
-				data: {'action':'SearchAll'},
-				type : 'POST',
-				success : function(returnData) {
-					$(location).attr('href','${pageContext.servletContext.contextPath}/master/masterList.jsp');
-				}
-			});
-		});
-	
 	</script>
 	
 </body>
