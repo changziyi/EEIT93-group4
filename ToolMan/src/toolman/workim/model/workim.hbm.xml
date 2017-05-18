@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="toolman.workim.model.WorkimVO" table="workim" >
+        
+        <id name="im_id" column="im_id">
+            <generator class="identity"/>
+        </id>
+        
+        <property name="im_show" column="im_show" />
+
+        <many-to-one name="workVO" class="toolman.work.model.WorkVO" lazy="false">
+            <column name="work_id" />
+        </many-to-one>
+        
+    </class>
+</hibernate-mapping>
+
