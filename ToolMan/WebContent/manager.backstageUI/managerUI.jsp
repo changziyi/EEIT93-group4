@@ -243,7 +243,6 @@ $(function(){
 		functionrow();// build functionrow
 		subfunctionrow();// build function buttons
 		
-		$('#functionrow>div>ul>li').on('click',functionrowfiltering);//filtering
 		$('input[name="samnote"],[name="saonote"],[name="sacnote"]').on('change',updatenote);// input note
  	  	$('#subfunctionrow>a').on('click',togglehyper);//verify the master direct to other pages
  	  	$('#subfunctionrow>span:not(#messagespanm,#messagespanc,#messagespano,#messagespanr,#messagespanad)').on('click',togglegetmethod);//change m c o s_name//will return something when clicked, maill has it's own form action
@@ -556,11 +555,12 @@ $(function(){
 			   }
 			   $('#eventlist').DataTable().destroy(); 
 // 				$('#eventlist').empty();
-			   loadProduct(id,datastatus,datatime);
+			   
 			   // $('#navigator>ul>li[data-id="' + id + '"]')
 			   
 			   //rebinding
-			$('#functionrow>div>ul>li').on('click',functionrowfiltering);//filtering
+			
+			loadProduct(id,datastatus,datatime);
 			
 		}//end table filtering
 	
@@ -709,13 +709,18 @@ $(function(){
 			
 					   
 			 $.getJSON('${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIServlet.do',{'navigatorid':id,"datastatus":datastatus,"datatime":datatime}, function(data){
-				 buildtable(id,data,datatime);
+				 buildtable(id,data);
 				 $.when(dfd)//super great
-// 				 .done(alert("first"))
-// 				 .done(alert("second"))
-				 .done(datatableinit);//super great
-// 				 .done($(".dataTables_wrapper").css("width","80%"));
+//				 .done(alert("first"))
+//				 .done(alert("second"))
+			 .done(datatableinit);//super great
+//				 .done($(".dataTables_wrapper").css("width","80%"));
 			 });//end get json
+// 			 setTimeout(function () {
+// 	 	     		$('#receiver').val(checkboxdatacustomer.toString()).text(checkboxdatacustomer.toString());
+// 	 	     		$('#myModal01').modal('show');
+// 	 	     		 }, 300);
+			
 	}//end loadproduct
 	
 	 function buildtable(id,datas){	
