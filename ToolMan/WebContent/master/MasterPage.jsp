@@ -7,6 +7,7 @@
 	<title>${mdataVO.b_name}</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="Shortcut Icon" href="${pageContext.servletContext.contextPath}/favicon.ico" />
 	<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/css/bootstrap.min.css">
 	<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/nav/nav.css">
 	<style>
@@ -16,8 +17,9 @@
 		#uploadTemp {line-height:normal;background-color:#fff;width:560px;}
 		.workImgArea {vertical-align:top;padding:5px;}
 		.myDiv {position:relative; top:85px;}
-/*  		.md8 {margin-left:2%;margin-right:0;padding:0} */
-/*  		.md4 {margin-right:5%} */
+		.outtermd8 {width:87%; margin-left:5%;}
+		.innermd8 {}
+		.md4 {padding-top:5%}
 	</style>
 </head>
 <body>
@@ -26,8 +28,8 @@
 <div class="container">
 
 	<div class="row">
-		<div class="col-md-8" style="width:90%; margin-left:3%">
-			<div class="col-md-8 md8">
+		<div class="col-md-8 outtermd8">
+			<div class="col-md-8 innermd8">
 				<img height="450px" src='${pageContext.servletContext.contextPath}/master/master.do?type=master&image=${mdataVO.m_id}'/>
 			</div>
 			<div class="col-md-4 md4">
