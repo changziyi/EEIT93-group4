@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import toolman.blacklist.model.BlacklistService;
 import toolman.blacklist.model.BlacklistVO;
+import toolman.cdata.model.CdataService;
 import toolman.cdata.model.CdataVO;
 import toolman.favorite.model.FavoriteService;
 import toolman.favorite.model.FavoriteVO;
@@ -116,6 +118,41 @@ public class BlacklistController extends HttpServlet {
 		
 		
 		}
+		if ("serchBlack".equals(action)) { // 來自listAllEmp.jsp 或  /dept/listEmps_ByDeptno.jsp 的請求
+
+			List<String> errorMsgs = new LinkedList<String>();
+			
+			request.setAttribute("errorMsgs", errorMsgs);
+			
+			
+			try {
+				/*************************** 1.接收請求參數 ****************************************/
+				String c_id = request.getParameter("c_id");	
+				Integer m_id = new Integer(request.getParameter("m_id").trim());
+
+				/*************************** 2.開始查詢資料 ****************************************/
+				BlacklistService orderSvc = new BlacklistService();
+				List<BlacklistVO> set = orderSvc.getBlackSerch(c_id , m_id);
+	
+
+				/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
+				request.setAttribute("Black", set);    // 資料庫取出的set物件,存入request
+				String url = "/master/MasterPage.jsp"; 
+				RequestDispatcher successView = request.getRequestDispatcher(url);   // 修改成功後,轉交回送出修改的來源網頁
+				successView.forward(request, response);
+				/*************************** 其他可能的錯誤處理 ***********************************/
+			} catch (Exception e) {
+				RequestDispatcher rd = request.getRequestDispatcher("/cdata/login-in.jsp");
+				rd.forward(request, response);
+				return;//中斷
+			}
+		}
+		
+		
+		
+		
+		
+		
 
 }
 
