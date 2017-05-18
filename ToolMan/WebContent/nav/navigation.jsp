@@ -23,20 +23,13 @@
 						<li><a class="alist" href="${pageContext.servletContext.contextPath}/master/master.do?city=all&action=SearchAll" class="">我要找師傅</a></li>          
                         <li class=" dropdown"><a class="alist" href="#" class="dropdown-toggle " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">我要開店  <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-  <%-----------------------------------------------訂單表-暫時先擺這------------------------------------------------------------------- --%>
-                                <li>
-                                <a class="alist" href="${pageContext.servletContext.contextPath}/mdata/MdataOrderServlet.do?m_id=${LoginOK.m_id}&action=listOrder">師傅訂單</a>
-                                </li>
-                                
-                            <li><a class="alist" href="${pageContext.servletContext.contextPath}/cdata/CdataOrderServlet.do?c_id=${LoginOK.c_id}&action=listOrder">消費者訂單</a> </li>
-   <%-----------------------------------------------墨西哥長城------------------------------------------------------------------- --%>
-                            
-                            </ul>
+                       <li><a href="#">改到</a></li>
+                       <li><a href="#">旁邊</a> </li>
+                        </ul>
                         </li>
                         <li><a class="alist" href="${pageContext.servletContext.contextPath}/wishpool/Wishing+waterfall.jsp">許願池  </a></li>
                            </ul>
-                         
-                     <!----------- 搜尋列----- -->
+                       <!----------- 搜尋列----- -->
                        <ul class="navbar-right">
 					    <form class="navbar-form">
 					        <div class="form-group">
@@ -58,6 +51,23 @@
                             </ul>
                         </li>
                         <li class=""><a class="alist" href="${pageContext.servletContext.contextPath}/loginoutServlet">登出</a></li>
+                    
+                 <li class=" dropdown"><a class="alist" href="#" class="dropdown-toggle " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span><span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+  <%-----------------------------------------------訂單表-就決定擺這------------------------------------------------------------------- --%>
+
+ <li><a href="${pageContext.servletContext.contextPath}/mdata/MdataOrderServlet.do?m_id=${LoginOK.m_id}&action=listOrder">師傅訂單</a></li>
+ <li><a href="${pageContext.servletContext.contextPath}/cdata/CdataOrderServlet.do?c_id=${LoginOK.c_id}&action=listOrder">消費者訂單</a> </li>
+ <li><a href="${pageContext.servletContext.contextPath}/cdata/CdataOrderServlet.do?c_id=${LoginOK.c_id}&action=myLike">我的最愛</a> </li>
+ <li><a href="${pageContext.servletContext.contextPath}/cdata/CdataOrderServlet.do?c_id=${LoginOK.c_id}&action=myHate">黑名單</a> </li>
+<li><a href="#">刊登廣告</a> </li>
+   
+   
+      <%-----------------------------------------------墨西哥長城------------------------------------------------------------------- --%>
+                            
+                            </ul>
+                        </li>    
+                    
                     </ul>
                 </div>
            
