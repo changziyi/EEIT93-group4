@@ -333,10 +333,10 @@
 		<div id='external-events'  style="margin-top:46px;">
 			<h4 style="margin-left:20%;">預約時間</h4>
 			<div id='external-events2' style="margin-left:20%;">
-				<div class='fc-event' data-id="morning"data-start="01:00" data-end='08:00'>早上</div>
-				<div class='fc-event' data-id="noon"data-start="12:00" data-end='06:00'>下午</div>
-				<div class='fc-event' data-id="night"data-start="18:00" data-end='06:00'>晚上</div>
-				<div class='fc-event' id="alldayevent" data-id="allday"data-start="00:00" data-end='24:00'>整天</div>
+				<div class='fc-event' data-id="orderevent"data-start="01:00" data-end='08:00'>早上</div>
+				<div class='fc-event' data-id="orderevent"data-start="12:00" data-end='06:00'>下午</div>
+				<div class='fc-event' data-id="orderevent"data-start="18:00" data-end='06:00'>晚上</div>
+				<div class='fc-event' id="allday" data-id="orderevent"data-start="00:00" data-end='24:00'>整天</div>
 				
 			</div>
 		<!-- 			<p> -->
@@ -431,7 +431,9 @@
 										</td>
 										<td>
 											<div id="datecalendar" >
-												<input type="text" class="inputstyle" id="datepicker" name="o_bdate" value="${orderVO.o_bdate}">
+												<input type="text" class="inputstyle" id="datepicker"  value="${orderVO.o_bdate}">
+												<input type="text" class="inputstyle" id="datepickersend" name="o_bdate" value="${orderVO.o_bdate}">
+												
 												<!-- 放jQuery的calendar -->
 											</div>
 										</td>
@@ -576,14 +578,14 @@ var eventidglobe =null;
         /* calendar
 		-----------------------------------------------------------------*/
 		$('#submitcalendar').on('click',calendarsubmit);
-		$('#external-events2>div').on('click',assignrandom);
+// 		$('#external-events2>div').on('click',assignrandom);
 		draggableevent();
 		showjsonevent();
 		buildcalendar();
 		/* calendar
 		-----------------------------------------------------------------*/
-
-	    $( "#datepicker" ).datepicker();
+		//jqueryUI datepicker
+// 	    $( "#datepicker" ).datepicker();
 	    
 	    //google map
 // 	    googlecoordinate = 'https://maps.googleapis.com/maps/api/geocode/json?'
@@ -648,6 +650,8 @@ var eventidglobe =null;
             $("#next-btn1").on("click", function() {
                 // Navigate next
                 $('#smartwizard').smartWizard("next");
+                
+                
                 return true;
             });
             
@@ -737,19 +741,19 @@ function calendarsubmit(){
 		 });//end post
 		
 	}//end calendarsubmit
-	 function assignrandom(event){
+// 	 function assignrandom(event){
 			
-			randomnumber = Math.random().toString();//not working after drop, because the real id is still the original
+// 			randomnumber = Math.random().toString();//not working after drop, because the real id is still the original
 			
-			eventstart = $(this).data('start');
-			eventend = $(this).data('end');
+// 			eventstart = $(this).data('start');
+// 			eventend = $(this).data('end');
 			
-			}
+// 			}
 			function draggableevent(){
 				//not being used				
 				$('#external-events .fc-event').each(function() {			
 					$(this).data('event', {						
-						id: $(this).data('id'),
+						id: 'orderevent',
 						title: $(this).text(), // use the element's text as the event title
 						duration: $(this).data('end'), // an end time (2pm in this example)
 					   	
@@ -785,16 +789,27 @@ function calendarsubmit(){
 // 					timezone = 'Asia/Taipei',
 					droppable: true, // this allows things to be dropped onto the calendar
 					eventDrop: function(event, delta, revertFunc) {
+							 
+						var d = new Date();
+							//to alter the time without altering the value of event.start._d
+							var ds = new Date(event.start._d).getTime();
+							var n = d.getTimezoneOffset()*60*1000;
+							var s =new Date(ds+n);
+							var datepick = moment(s).format('YYYY-MM-DD-HH:mm:ss');
+							var datepick2 = moment(s).format('YYYY-MM-DD');
+							$('#datepicker').val(datepick2+event.title);		
+							$('#datepickersend').val(datepick);
+							
 						checkoverlapping(event);
 				        alert(event.title + " was dropped on " + event.start.format());
 			
 				        if (!confirm("Are you sure about this change?")) {
 				            revertFunc();
 				        }
-				       
+				        checkoverlapping2();
 				    },
 					eventDragStop: function(event,jsEvent) {
-						 
+						
 					    alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
 // 					    if( ( 130<= jsEvent.pageX)  && (jsEvent.pageX <= 230) &&(700 <= jsEvent.pageY)&& (jsEvent.pageY <=840))
 					if( ( 1270<= jsEvent.pageX)  || (jsEvent.pageX <= 170) ||(928 <= jsEvent.pageY)|| (jsEvent.pageY <=160)){
@@ -803,10 +818,11 @@ function calendarsubmit(){
 					    }
 					},
 					drop: function(date,event) {
-			// 			$('#calendar').fullCalendar( 'renderEvent', dragevent);
+						
 //		 				console.log(event);
-						assignrandom(event);
-						eventidglobe =$(this).data('id')+randomnumber;
+// 						assignrandom(event);
+						eventidglobe =$(this).data('id');
+// 						+randomnumber
 						event._id =eventidglobe ;
 						event.id=eventidglobe;
 						event.eventOverlap = 'false';
@@ -824,6 +840,7 @@ function calendarsubmit(){
 						// Timezone calculation
 // 						console.log(event);
 						var d = new Date();
+// 						//to alter the time without altering the value of event.start._d
 						var ds = new Date(event.start._d).getTime();
 						var n = d.getTimezoneOffset()*60*1000;
 						var s =new Date(ds+n);
@@ -832,7 +849,23 @@ function calendarsubmit(){
 						//event.start._d and event._start._d is not the same
 // 						console.log(s);
 // 						console.log(d);
-// 						event.start._d = s;
+						//send to order form o_bdate
+
+// 						var dt = new Date('2013-03-10T02:00:00Z');    
+// 						var dd = dt.getDate();
+// 						var mm = dt.getMonth()+1; 
+// 						var yyyy = dt.getFullYear();
+// 						if(dd<10){
+// 						  dd='0'+dd;
+// 						  } 
+// 						if(mm<10){
+// 						    mm='0'+mm;
+// 						  } 
+// 						var datepick =   yyyy+'-'+mm+'-'+ dd+'-'+event.title;
+						//var datepick = s.toString().split(" ");
+// 						datepick[3]+datepick[4]+datepick[5]
+// 						datepick[1]+datepick[2]+datepick[3]+event.title
+
 						event._start._d = s;
 // 						checkoverlapping2(event);
 // 						console.log(event.start._d);
@@ -840,7 +873,15 @@ function calendarsubmit(){
 // 						console.log(event);
 					},
 					eventReceive:function( event ) {
-
+						 var d = new Date();
+							//to alter the time without altering the value of event.start._d
+							var ds = new Date(event.start._d).getTime();
+							var n = d.getTimezoneOffset()*60*1000;
+							var s =new Date(ds+n);
+							var datepick = moment(s).format('YYYY-MM-DD-HH:mm:ss');
+							var datepick2 = moment(s).format('YYYY-MM-DD');
+							$('#datepicker').val(datepick2+event.title);		
+							$('#datepickersend').val(datepick)
 						event._id = eventidglobe;
 						event.id = eventidglobe;
 // 						console.log(event);
@@ -865,7 +906,7 @@ function calendarsubmit(){
 			function checkoverlapping(event){// no event can exists twice in 1 day, and no event can be added under all day unavailable
 				
 				var events = $('#calendar').fullCalendar('clientEvents');
-					
+				
 // 					var d = new Date();
 // 					var ds = new Date(event.start._d).getTime();
 // 					var n = d.getTimezoneOffset()*60*1000;
@@ -878,11 +919,13 @@ function calendarsubmit(){
 // 					console.log(event._start._d);
 // 					console.log(event);
 				if(events.length>1){
+					
 				for(i=0;i<events.length-1;i++){
 				// start-time in between any of the events
-					
+					var k=0;
 					var eventid1 = event.id;
 					var eventid2 = event._id;
+					
 					var eventitle = event.title;
 					var eventitle2 = events[i].title;
 					var end1 = event.end._d;
@@ -895,11 +938,25 @@ function calendarsubmit(){
 // 					console.log(splitstring1);
 					
 					var splitstring2 = start2.split(" ");
+					
 // 					console.log(splitstring2);
+					//remove last event
+					if(events[i].id=='orderevent'){
+						k=k+1;
+						if(k==1){
+							events[i].id='lastevent';
+							events[i]._id='lastevent';
+							console.log(event);
+							//the id removed is event._id, not event.id in this case 
+							$('#calendar').fullCalendar('removeEvents', 'lastevent');
+						}
+					}
+					
+					
 					if((events[i].title == "整天")||(event.title =="整天")){
 						if((splitstring1[0]+splitstring1[1]+splitstring1[2]+splitstring1[3])==
 							(splitstring2[0]+splitstring2[1]+splitstring2[2]+splitstring2[3])){
-		
+				// I can remove with event.id because i have already given .id and ._id to the same value
 								$('#calendar').fullCalendar('removeEvents', event.id);
 								return true;
 								
@@ -908,12 +965,12 @@ function calendarsubmit(){
 						
 					else if((splitstring1[0]+splitstring1[1]+splitstring1[2]+splitstring1[3]+splitstring1[4])==
 						(splitstring2[0]+splitstring2[1]+splitstring2[2]+splitstring2[3]+splitstring2[4])){
-	
-						
+				// I can remove with event.id because i have already given .id and ._id to the same value
 							$('#calendar').fullCalendar('removeEvents', eventid1);
-						    return true;
-							
+						    return true;	
 						}//end if
+						
+					
 				}//end for 
 				//end-time in between any of the events
 //		 		if(event.start > events[i].start && event.start < events[i].end){
@@ -928,7 +985,7 @@ function calendarsubmit(){
 			  }//end if event!=0
 			}
 			//for checkbox
-			
+	
 	</script>
 <!-- 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAj-PEjC_YSdYGHEvhIKnyojxufjKYy6OE&callback=initMap"></script> -->
   
