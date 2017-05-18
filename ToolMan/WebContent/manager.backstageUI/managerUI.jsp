@@ -114,8 +114,9 @@
 	<div>
 		
 	</div>
-<!-- main content here -->		
+<!-------------------------------------- main content here -->		
 	<article>
+	<div id="tabletool" style="border:1px solid blue;width:600px;height:60px"></div>
 	<table id="eventlist" class="table table-striped table-bordered" style="word-break: keep-all;display:table;text-align:center" >
 <!-- 		<thead> -->
 <!-- 			<th>1</th> -->
@@ -947,14 +948,18 @@ $(function(){
 			   			   
 	   }//end loadtable function
 				function datatableinit(){
-					dom: 'Bfrtip', 
+					
 				table =	$('#eventlist').DataTable({
 					 "autoWidth": true,
 					buttons: [
 						'copy', 'csv', 'excel', 'pdf', 'print'
 				    ],
-				    
-			    select: true,
+// 				    "<'row'<'col-md-4'><'col-md-4'><'col-md-4'>>ftp<'bottom'<'col-md-4'l>><'clear'>",
+				    "sDom":
+				    "<'row'<'col-sm-6'l><'col-sm-6'f>>" +
+				    "<'row'<'col-sm-12'tr>>" +
+				    "<'row'<'col-sm-5'i><'col-sm-7'p>>",
+				    select: true,
 // 			        responsive: {
 // 			            details: {
 // 			                display: $.fn.dataTable.Responsive.display.modal( {
@@ -976,8 +981,21 @@ $(function(){
 			// 			"iDisplayLength": 10
 			//			  	destroy: true,
 						 	   
+			
 				   }//end datatableinit
-				);}	//end datable	
+				 );
+// 				$('#eventlist tbody tr td').on( 'click', 'tr', function () {
+// 			        if ( $(this).hasClass('selected') ) {
+// 			            $(this).removeClass('selected');
+// 			            $(this).find('input').prop('checked', false);
+// 			        }
+// 			        else {
+// 			            table.$('tr.selected').removeClass('selected');
+// 			            $(this).addClass('selected');
+// 			            $(this).find('input').prop('checked', true);
+// 			        }
+// 			    } );
+	   }	//end datable	
 				   
 				   
 </script>
