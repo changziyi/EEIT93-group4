@@ -41,17 +41,6 @@ public class MdataJsonServlet extends HttpServlet {
 			
 			MdataService mdataSvc = new MdataService();
 			
-//			if ("all".equals(m_city)) {
-//				out.println(mdataSvc.getAllBySP());
-//			} else {
-//				if ((m_pro.trim()).length() == 0 || m_pro == null){
-//					out.println(mdataSvc.getMasterBySP(m_city, m_district, b_name));
-//				} else {
-//					out.println(mdataSvc.getMproBySP(m_pro, m_city, m_district, b_name));
-//				}
-//			}
-
-			
 			if ((m_city.trim()).length() == 0 || m_city == null) {
 				if ((m_pro.trim()).length() == 0 || m_pro == null) {
 					out.println(mdataSvc.getAllBySP());
@@ -82,39 +71,15 @@ public class MdataJsonServlet extends HttpServlet {
 		
 		if("discussion".equals(action)) {
 			Integer master = new Integer(request.getParameter("master"));
-			System.out.println("master: " + master);
+			
+			Long s1 = System.currentTimeMillis();
 			
 			DiscussionService discussionSvc = new DiscussionService();
 			
-			out.print(discussionSvc.getByMidJson(master));
+			out.print(discussionSvc.getByMinSqlJson(master));
+			Long s2 = System.currentTimeMillis();
+			System.out.println("discussionjson：" + (s2-s1));
 		}
-		
-//		if("homepagejson".equals(action)) {
-//			String m_city = request.getParameter("city");
-//			String input = request.getParameter("input");
-//			
-//			Long s1 = System.currentTimeMillis();
-//			
-//			MdataService mdataSvc = new MdataService();
-//			out.println(mdataSvc.SearchByCityAndMproJson(m_city, input));
-//			
-//			Long s2 = System.currentTimeMillis();
-//			System.out.println("homepagejson：" + (s2-s1));
-//		}
-//		
-//		if("advjson".equals(action)) {
-//			String m_city = request.getParameter("city");
-//			String m_district = request.getParameter("district");
-//			String input = request.getParameter("input");
-//			
-//			Long s1 = System.currentTimeMillis();
-//			
-//			MdataService mdataSvc = new MdataService();
-//			out.println(mdataSvc.SeachByCityAndDistrictAndMpro(m_city, m_district, input));
-//			
-//			Long s2 = System.currentTimeMillis();
-//			System.out.println("advjson：" + (s2-s1));
-//		}
 		
 	}
 

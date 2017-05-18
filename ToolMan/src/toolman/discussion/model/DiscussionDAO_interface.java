@@ -9,4 +9,7 @@ public interface DiscussionDAO_interface {
 	public void delete(Integer d_id);
 	public List<DiscussionVO> getAll();
 	public List<DiscussionVO> getByMid(Integer m_id);
+	public List<Object[]> getByMidSql(Integer m_id);
+	public void insertSql(DiscussionVO discussionVO);
+	public void updateSql(Integer d_id, String d_reply);
 }
