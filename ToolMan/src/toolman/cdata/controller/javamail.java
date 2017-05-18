@@ -10,8 +10,11 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-
+//寄信
 //Eeit934
+//EEITTeam04
+//收信
+//Eeit93401
 //EEITTeam04
 public class javamail{
 	private static final String host = "smtp.gmail.com";
@@ -36,7 +39,7 @@ public class javamail{
 		try {
 			Message message = new MimeMessage(session);
 			message.setFrom(new InternetAddress(username));
-			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("vivi068520@gmail.com"));
+			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("Eeit93401@gmail.com"));
 			message.setSubject("ToolMan 找師傅 忘記密碼!! ");
 			message.setText("Dear Levin, \n\n 測試 測試 測試 測試 測試 測試 email !");
 
@@ -44,7 +47,7 @@ public class javamail{
 			transport.connect(host, port, username, password);
 
 			Transport.send(message);
-			System.out.println("寄送email結束.");
+			System.out.println("寄送email結束....");
 
 		} catch (MessagingException e) {
 			throw new RuntimeException(e);

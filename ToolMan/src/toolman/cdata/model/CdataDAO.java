@@ -34,7 +34,6 @@ public class CdataDAO implements CdataDAO_interface{
 		try {
 			session.beginTransaction();
 			Criteria query = session.createCriteria(CdataVO.class);
-//			query.setParameter("c", c_email);
 			query.addOrder( Order.asc("c_email") );
 			querylist = query.list();			
 			session.getTransaction().commit();
@@ -43,6 +42,23 @@ public class CdataDAO implements CdataDAO_interface{
 			throw ex;
 		}
 		return querylist;
+	}
+	//update password
+	public int updateMemberfwd(String c_pwd) {
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		Integer count = 0;
+		try {
+			session.beginTransaction();
+			Query query = session.createQuery("update CdataVO set c_pwd=? where c_id=?");
+			query.setParameter(0,c_pwd);
+//			query.setParameter(1,c_id);
+			count = query.executeUpdate();
+			session.getTransaction().commit();
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
+		return count;
 	}
 	
 	//login in 
@@ -247,17 +263,27 @@ public class CdataDAO implements CdataDAO_interface{
 //		}
 		
 		
+		/*********************** 修改密碼  *****************************/
+		
+		
+		
+		
+		/*********************** 修改消費者會員資料  *****************************/
+		
+		
+		
+		
+		
+		/*********************** 查詢所有email *****************************/		
 
-		String c_email = null;
-		List<CdataVO> list = dao.geteMailAll(c_email);
-		for (CdataVO aEmp : list) {
-			System.out.print(aEmp.getC_email() + ",");
-			System.out.println();
-		}
+//		String c_email = null;
+//		List<CdataVO> list = dao.geteMailAll(c_email);
+//		for (CdataVO aEmp : list) {
+//			System.out.print(aEmp.getC_email() + ",");
+//			System.out.println();
+//		}
+
 		
-		
-		
-//		
 //		/*********************** 查詢媒合  *****************************/
 //		
 //		CdataVO cdataVO = dao.cdata_des("PolarBear");
@@ -270,7 +296,7 @@ public class CdataDAO implements CdataDAO_interface{
 //			System.out.println(" 時間 : "+ aOrder.getO_edate());
 //		}
 //		
-		/*********************** 評價  *****************************/
+		/*********************** 查詢評價  *****************************/
 		//評價
 //		CdataVO cdataVO = dao.cdata_des("PolarBear");
 //		System.out.print(cdataVO.getC_id() + ",");
@@ -288,7 +314,7 @@ public class CdataDAO implements CdataDAO_interface{
 		
 		
 		
-		/*********************** 查詢登入帳號完成  *****************************/
+		/*********************** 查詢登入帳號  *****************************/
 		
 //		CdataVO cdataVO = dao.login_in("Micky");
 //		System.out.println("----------------------------------");
@@ -296,7 +322,7 @@ public class CdataDAO implements CdataDAO_interface{
 //		System.out.println("密碼 : " + cdataVO.getC_pwd());
 //		System.out.println("----------------------------------");
 		
-		/*********************** 新增註冊完成  *****************************/
+		/*********************** 新增註冊  *****************************/
 		
 //		CdataVO cdataVO = new CdataVO();
 //		cdataVO.setC_id("Bob");
@@ -308,7 +334,7 @@ public class CdataDAO implements CdataDAO_interface{
 //		cdataVO.setC_district("永和區");
 //		cdataVO.setC_addr("中和路125號3樓");
 //		cdataVO.setC_jdate(java.sql.Timestamp.valueOf("2017-02-08 01:01:01"));
-//		cdataVO.setC_rating(0);
+//		cdataVO.setC_averrating(0);
 //		cdataVO.setM_id(1001);
 //		cdataVO.setS_name("m_pass");
 //		cdataVO.setC_fb(null);
@@ -318,7 +344,7 @@ public class CdataDAO implements CdataDAO_interface{
 //		cdataVO.setC_finished(0);
 //		dao.insert(cdataVO);	
 		
-		/*********************** 新增修改完成  *****************************/
+		/*********************** 修改單筆資料  *****************************/
 		
 //		CdataVO cdataVO = new CdataVO();
 //		cdataVO.setC_id("Micky");
@@ -330,7 +356,7 @@ public class CdataDAO implements CdataDAO_interface{
 //		cdataVO.setC_district("永和區");
 //		cdataVO.setC_addr("中和路125號3樓");
 //		cdataVO.setC_jdate(java.sql.Timestamp.valueOf("2017-02-08 01:01:01.000"));
-//		cdataVO.setC_rating(0);
+//		cdataVO.setC_averrating(0);
 //		cdataVO.setM_id(1004);
 //		cdataVO.setS_name("m_pass");
 //		cdataVO.setC_fb(null);
@@ -340,7 +366,7 @@ public class CdataDAO implements CdataDAO_interface{
 //		cdataVO.setC_finished(0);
 //		dao.update(cdataVO);	
 		
-		/*********************** 新增刪除未完成  *****************************/	
+		/*********************** 刪除  *****************************/	
 		
 //		dao.delete("Snoopy");
 	}
