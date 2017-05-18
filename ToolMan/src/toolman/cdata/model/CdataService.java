@@ -29,34 +29,30 @@ public class CdataService {
 		return dao.geteMailAll(c_email);
 	}
 	
-	public void update(CdataVO cdataVO){
-		CdataDAO cdata = new CdataDAO();
-		cdata.update(cdataVO);
-		return;
+	//
+	public CdataVO updateCdataMember(String c_id,String c_pwd,String c_name,
+			String c_cel,String c_email, String c_city, String c_district,
+			String c_addr,Date c_birth){		
+		CdataVO cdataVO = new CdataVO();
+		cdataVO.setC_id(c_id);
+		cdataVO.setC_name(c_pwd);
+		cdataVO.setC_pwd(c_name);
+		cdataVO.setC_cel(c_cel);
+		cdataVO.setC_email(c_email);
+		cdataVO.setC_city(c_city);
+		cdataVO.setC_district(c_district);
+		cdataVO.setC_addr(c_addr);
+		cdataVO.setC_birth(c_birth);
+		dao.update(cdataVO);
+		return cdataVO;
 	}		
-		
-//		CdataVO cdataVO = new CdataVO();
-//		cdataVO.setC_id(c_id);
-//		cdataVO.setC_name(c_pwd);
-//		cdataVO.setC_pwd(c_name);
-//		cdataVO.setC_cel(c_cel);
-//		cdataVO.setC_email(c_email);
-//		cdataVO.setC_city(c_city);
-//		cdataVO.setC_district(c_district);
-//		cdataVO.setC_addr(c_addr);
-//		cdataVO.setC_jdate(java.sql.Timestamp.valueOf("2017-02-08 01:01:01.000"));
-//		cdataVO.setC_averrating(0);
-//		cdataVO.setM_id(1004);
-//		cdataVO.setS_name("m_pass");
-//		cdataVO.setC_birth(java.sql.Date.valueOf("1980-12-27"));
-//		cdataVO.setC_finished(0);
-//		dao.update(cdataVO);
-//				return null;
 		
 	
 	//註冊
-	public CdataVO addCdata(String c_id,String c_pwd,String c_name,String c_cel,String c_email, String c_city, 
-			String c_district, String c_addr,Date c_birth, Integer c_averrating, Integer c_finished, Timestamp c_jdate){
+	public CdataVO addCdata(String c_id,String c_pwd,String c_name,
+			String c_cel,String c_email, String c_city,String c_district, 
+			String c_addr,Date c_birth, Integer c_averrating, Integer c_finished, 
+			Timestamp c_jdate){
 
 		CdataVO cdataVO = new CdataVO();
 		cdataVO.setC_id(c_id);

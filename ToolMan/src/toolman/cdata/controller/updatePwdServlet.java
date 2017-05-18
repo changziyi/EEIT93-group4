@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import toolman.cdata.model.CdataDAO;
 import toolman.cdata.model.CdataService;
@@ -27,14 +28,16 @@ public class updatePwdServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) 
 			throws ServletException, IOException {
+		HttpSession session = req.getSession();
+		String c_email = (String)session.getAttribute("c_email");
+		System.out.println("c_email = " + c_email);
+		 
 	       String c_pwd = req.getParameter("newPassword");  
 	        String new_c_pwd = req.getParameter("newPassword2");  
-	        Map<String,String> errors = new HashMap<>();
-	        
+	        Map<String,String> errors = new HashMap<>();	        
 	        if (c_pwd == null || (c_pwd.trim()).length() == 0) {  
 	        	errors.put("newPassword", "新密碼不能為空白！"); 
-	        }  
-	          
+	        }     
 	        if (new_c_pwd == null || (new_c_pwd.trim()).length() == 0) {  
 	        	errors.put("newPassword2", "確認新密碼不能為空白！");  
 	        }  
@@ -42,11 +45,11 @@ public class updatePwdServlet extends HttpServlet {
 	        if (c_pwd.equals(new_c_pwd) == false) {  
 	        	errors.put("passwordError", "兩次輸入密碼不一致！");  
 	        }else{
-	        	CdataVO cdataVO = new CdataVO();
-	        	CdataService cs = new CdataService();	        	
-	        	cdataVO.getC_pwd();
-	        	cs.update(cdataVO);
-	        	System.out.println("Success");       	
+//	        	CdataVO cdataVO = new CdataVO();
+//	        	CdataService cs = new CdataService();	        	
+//	        	cdataVO.getC_pwd();
+//	        	cs.update(cdataVO);
+//	        	System.out.println("Success");       	
 	        }
 
 	        if (!errors.isEmpty()) {  
