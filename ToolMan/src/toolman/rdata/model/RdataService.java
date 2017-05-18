@@ -58,7 +58,10 @@ public class RdataService {
 	public List<RdataVO> getAll() {
 		return dao.getAll();
 	}
-	public List<RdataVO> getBySname(String s_name) {		
+	public List<RdataVO> getBySname(String s_name) {//by benny		
 		return dao.getBySname(s_name);
+	}
+	public int updateReportSarnote(Integer r_id, String sa_rname){//by benny
+		return dao.updateReportSarnote(r_id,sa_rname);
 	}
 }

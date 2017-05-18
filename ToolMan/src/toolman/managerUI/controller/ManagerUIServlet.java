@@ -217,7 +217,7 @@ public class ManagerUIServlet extends HttpServlet {
 					String p_summary = rdataVO.getP_summary();	
 					String p_content = rdataVO.getP_content();
 					String s_name = rdataVO.getS_name();
-					String sa_cnote	=rdataVO.getSa_rnote();
+					String sa_rnote	=rdataVO.getSa_rnote();
 					System.out.println(c_id);
 					map.put("r_date",r_date);
 					map.put("r_id",r_id);
@@ -226,7 +226,7 @@ public class ManagerUIServlet extends HttpServlet {
 					map.put("p_summary",p_summary);
 					map.put("p_content",p_content);	
 					map.put("s_name",s_name);	
-					map.put("sa_cnote",sa_cnote);	
+					map.put("sa_rnote",sa_rnote);	
 					listr.add(map);
 				}//end for loop
 				String cjasonstring = JSONValue.toJSONString(listr);
