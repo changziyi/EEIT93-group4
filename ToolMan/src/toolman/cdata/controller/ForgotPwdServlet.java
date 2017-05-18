@@ -13,11 +13,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.catalina.filters.CsrfPreventionFilter;
-
 import toolman.cdata.model.CdataService;
 import toolman.cdata.model.CdataVO;
-
+import toolman.cdata.controller.javamail;
 
 @WebServlet("/ForgotPwdServlet")
 public class ForgotPwdServlet extends HttpServlet {
@@ -43,6 +41,9 @@ public class ForgotPwdServlet extends HttpServlet {
 				System.out.println(email.getC_email() + ",");
 			if((c_email != null) && (c_email.equals(email.getC_email()))){//成功
 					checked = true;
+					req.setAttribute("email_ok", c_email);
+					javamail.getSession();
+//					javamail.sendmail(c_email);//test
 //					System.out.println("成功");
 //					System.out.println("email.getC_email() = "+email.getC_email());
 				}
@@ -51,8 +52,7 @@ public class ForgotPwdServlet extends HttpServlet {
 				System.out.println("錯誤");
 				errorMsgs.put("erroremail", "信箱錯誤");				
 				RequestDispatcher rd = req.getRequestDispatcher("/cdata/forgetpassword.jsp");
-				rd.forward(req, resp);
-				
+				rd.forward(req, resp);		
 			}else{
 				resp.sendRedirect(getServletContext().getContextPath()+"/cdata/updatepassword.jsp");
 			}									
