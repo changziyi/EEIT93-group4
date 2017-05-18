@@ -46,79 +46,6 @@
 <!-- login please -->
 	
 	<style>
-/*------------navigation bar--------------------------------*/
-/* 	body { */
-/* 	background: #b3ffff; */
-/* } */
-
-.navbar, .dropdown-menu {
-	background: #00BFFF;
-	border: none;
-}
-
-.nav>li>a, .dropdown-menu>li>a:focus, .dropdown-menu>li>a:hover,
-	.dropdown-menu>li>a, .dropdown-menu>li {
-	border-bottom: 3px solid transparent;
-}
-
-.nav>li>a:focus, .nav>li>a:hover, .nav .open>a, .nav .open>a:focus, .nav .open>a:hover,
-	.dropdown-menu>li>a:focus, .dropdown-menu>li>a:hover {
-	border-bottom: 3px solid transparent;
-	background: none;
-}
-
-.navbar a, .dropdown-menu>li>a, .dropdown-menu>li>a:focus,
-	.dropdown-menu>li>a:hover, .navbar-toggle {
-	color: #fff;
-}
-
-.dropdown-menu {
-	-webkit-box-shadow: none;
-	box-shadow: none;
-}
-
-.nav li:hover:nth-child(8n+1), .nav li.active:nth-child(8n+1) {
-	border-bottom: #C4E17F 3px solid;
-}
-
-.nav li:hover:nth-child(8n+2), .nav li.active:nth-child(8n+2) {
-	border-bottom: #F7FDCA 3px solid;
-}
-
-.nav li:hover:nth-child(8n+3), .nav li.active:nth-child(8n+3) {
-	border-bottom: #FECF71 3px solid;
-}
-
-.nav li:hover:nth-child(8n+4), .nav li.active:nth-child(8n+4) {
-	border-bottom: #F0776C 3px solid;
-}
-
-.nav li:hover:nth-child(8n+5), .nav li.active:nth-child(8n+5) {
-	border-bottom: #DB9DBE 3px solid;
-}
-
-.nav li:hover:nth-child(8n+6), .nav li.active:nth-child(8n+6) {
-	border-bottom: #C49CDE 3px solid;
-}
-
-.nav li:hover:nth-child(8n+7), .nav li.active:nth-child(8n+7) {
-	border-bottom: #669AE1 3px solid;
-}
-
-.nav li:hover:nth-child(8n+8), .nav li.active:nth-child(8n+8) {
-	border-bottom: #62C2E4 3px solid;
-}
-
-.navbar-toggle .icon-bar {
-	color: #fff;
-	background: #fff;
-}
-
-.navbar-brand {
-	font-size: 40px
-}
-/*------------navigation bar--------------------------------*/
-	
 /* calendar */
 		body {
 		margin-top: 40px;
@@ -184,7 +111,6 @@
 		border: 1px solid #ccc;
 
 	}
-/*------------end navigation bar--------------------------------*/	
 /* calendar */	
 		#map{
 		height:100px;
@@ -244,71 +170,10 @@
 	
 	<jsp:useBean id="mdataVO" class="toolman.mdata.model.MdataVO" scope="session"/>
 	<!-- retrieve MdataVO object from session-->
-<!-------------------------------- navigation bar---------------------------------->
-<div class="navbar-wrapper">
-    <div class="container-fluid">
-        <nav class="navbar navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="#">ToolMan</a>
-                </div>
-                <div id="navbar" class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li class="active"><a href="#" class="">首頁</a></li>
-                        <li class=" dropdown">
-                            <a href="#" class="dropdown-toggle " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">我要找師傅  <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li class=" dropdown">
-                                    <a href="#" class="dropdown-toggle " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">New01</a>
-                                </li>
-                                <li><a href="#">New02</a></li>
-                            </ul>
-                        </li>                   
-                        <li class=" dropdown"><a href="#" class="dropdown-toggle " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">我要開店  <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">New01</a></li>
-                                <li><a href="#">New02</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="${pageContext.servletContext.contextPath}/wishpool/Wishing+waterfall.jsp">許願池  </a></li>
-                       </ul>
-                     <!----------- 搜尋列----- -->
-                       <ul class="navbar-right">
-					    <form class="navbar-form">
-					        <div class="form-group">
-					          <input type="text" class="form-control" placeholder="Search">
-					        </div>
-					        <button type="submit" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
-					      </form>
-					</ul>
-                     <!----------- 搜尋列----- -->
-                    <ul class="nav navbar-nav pull-right">
-                        <li class=" dropdown"><a href="#" class="dropdown-toggle active" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">登入  <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="${pageContext.servletContext.contextPath}/wishpool/login-in.jsp">ToolMan 帳號</a></li>
-                                <li><a href="#">Facebook 帳號</a></li>
-                            </ul>
-                        </li>
-                        <li class=""><a href="#">登出</a></li>
-                    </ul>
-                </div>
-           
-                </div>
-            
-            </div>
-        </nav>
-    </div>
-<!--------------------------------end navigation bar---------------------------------->
+
 </head>
 <body>
-	
-<!----------------------------------- smart wizard head----------------------------- -->
+<!-- smart wizard head -->
 
         
 
@@ -318,25 +183,24 @@
      
         <div id="smartwizard">
             <ul class="stepstyle textstyle">
-            	<li><a href="#step-1" style="white-space: nowrap">步驟一<br /><small>建立預約日程</small></a></li>
-                <li><a href="#step-2">步驟一<br /><small>填寫申請表</small></a></li>
-                <li><a href="#step-3">步驟三<br /><small>送出審核</small></a></li>
+            	<li><a href="#step-1">步驟一<br /><small>預約時間</small></a></li>
+                <li><a href="#step-2">步驟一<br /><small>填寫預約表</small></a></li>
+                <li><a href="#step-3">步驟三<br /><small>預約完成</small></a></li>
                 
             </ul>
       
          <div>
         	 <!--  step1  -->
          <div id="step-1" class="">
-  <!--------------------------------calendar---------------------------------->  
-        <div id='wrap'>
+                <div id='wrap'>
 			<!-- draggable -->
 		<div id='external-events'  style="margin-top:46px;">
 			<h4 style="margin-left:20%;">預約時間</h4>
 			<div id='external-events2' style="margin-left:20%;">
-				<div class='fc-event' data-id="orderevent"data-start="01:00" data-end='08:00'>早上</div>
-				<div class='fc-event' data-id="orderevent"data-start="12:00" data-end='06:00'>下午</div>
-				<div class='fc-event' data-id="orderevent"data-start="18:00" data-end='06:00'>晚上</div>
-				<div class='fc-event' id="allday" data-id="orderevent"data-start="00:00" data-end='24:00'>整天</div>
+				<div class='fc-event' data-id="morning"data-start="01:00" data-end='08:00'>早上不可預約</div>
+				<div class='fc-event' data-id="noon"data-start="12:00" data-end='06:00'>下午不可預約</div>
+				<div class='fc-event' data-id="night"data-start="18:00" data-end='06:00'>晚上不可預約</div>
+				<div class='fc-event' id="alldayevent" data-id="allday"data-start="00:00" data-end='24:00'>整天不可預約</div>
 				
 			</div>
 		<!-- 			<p> -->
@@ -344,12 +208,58 @@
 <!-- 				<label for='drop-remove'>remove after drop</label> -->
 <!-- 			</p> -->
 	
-			
+			<div class='.repeatingevent'id="selectmenu" style="margin-left:20%;"> 
+				<table style="border-collapse: collapse; display: inline; ">
+<!-- 				beware that value is for dow, so it must be plain number-->
+					<tr><td colspan="4">每週一不可預約</td><td></td></tr>
+					<tr><td ><input type="checkbox" name="repeatingboxmorning" value="1" >早上</td>
+					<td><input type="checkbox" name="repeatingboxnoon" value="1" >下午</td>
+					<td><input type="checkbox" name="repeatingboxnight" value="1" >晚上</td>
+					<td><input type="checkbox" name="repeatingbox" value="1" >整天</td></tr>
+					
+					<tr><td colspan="4">每週二不可預約</td><td></td></tr>
+					<tr><td><input type="checkbox" name="repeatingboxmorning"value="2" >早上</td>
+					<td><input type="checkbox" name="repeatingboxnoon"value="2" >下午</td>
+					<td><input type="checkbox" name="repeatingboxnight"value="2" >晚上</td>
+					<td><input type="checkbox" name="repeatingbox"value="2" >整天</td></tr>
+					
+					<tr><td colspan="4">每週三不可預約</td><td></td></td>
+					<tr><td><input type="checkbox" name="repeatingboxmorning" value="3" >早上</td>
+					<td><input type="checkbox" name="repeatingboxnoon" value="3" >下午</td>
+					<td><input type="checkbox" name="repeatingboxnight" value="3" >晚上</td>
+					<td><input type="checkbox" name="repeatingbox" value="3" >整天</td></tr>
+					
+					<tr><td colspan="4">每週四不可預約</td><td></td></td>
+					<tr><td><input type="checkbox" name="repeatingboxmorning" value="4" >早上</td>
+					<td><input type="checkbox" name="repeatingboxnoon" value="4" >下午</td>
+					<td><input type="checkbox" name="repeatingboxnight" value="4" >晚上</td>
+					<td><input type="checkbox" name="repeatingbox" value="4" >整天</td></tr>
+					
+					<tr><td colspan="4">每週五不可預約</td><td></td></td>
+					<tr><td><input type="checkbox" name="repeatingboxmorning" value="5" >早上</td>
+					<td><input type="checkbox" name="repeatingboxnoon" value="5" >下午</td>
+					<td><input type="checkbox" name="repeatingboxnight" value="5" >晚上</td>
+					<td><input type="checkbox" name="repeatingbox" value="5" >整天</td></tr>
+					
+					<tr><td colspan="4">每週六不可預約</td><td></td></td>
+					<tr><td><input type="checkbox" name="repeatingboxmorning" value="6" >早上</td>
+					<td><input type="checkbox" name="repeatingboxnoon" value="6" >下午</td>
+					<td><input type="checkbox" name="repeatingboxnight" value="6" >晚上</td>
+					<td><input type="checkbox" name="repeatingbox" value="6" >整天</td></tr>
+					
+					<tr><td colspan="4">每週日不可預約</td><td></td></td>
+					<tr><td><input type="checkbox" name="repeatingboxmorning" value="0" >早上</td>
+					<td><input type="checkbox" name="repeatingboxnoon" value="0" >下午</td>
+					</td><td><input type="checkbox" name="repeatingboxnight" value="0" >晚上</td>
+					<td><input type="checkbox" name="repeatingbox" value="0" >整天</td></tr>
+					
+				</table>
+			</div>
 		</div>
 
 
-		<div id='calendar' style="float:left;width:800px;"></div>
-<!--------------------------------end calendar---------------------------------->
+		<div id='calendar' style="float:left;"></div>
+	
 		<div style='clear:both'></div>
 	</div>
                 <form class="form-inline">
@@ -367,7 +277,7 @@
 				            <div class="btn-group navbar-btn" role="group">
 				                <button class="btn btn-default" id="prev-btn1" type="button" disabled>上一步</button>
 				                <button class="btn btn-default" id="next-btn1" type="button">下一步</button>
-				                <button class="btn btn-primary" id="submitcalendar" type="button">完成日程表</button>
+				                
 				            </div>
 				        </form>
                 
@@ -431,9 +341,7 @@
 										</td>
 										<td>
 											<div id="datecalendar" >
-												<input type="text" class="inputstyle" id="datepicker"  value="${orderVO.o_bdate}">
-												<input type="text" class="inputstyle" id="datepickersend" name="o_bdate" value="${orderVO.o_bdate}">
-												
+												<input type="text" class="inputstyle" id="datepicker" name="o_bdate" value="${orderVO.o_bdate}">
 												<!-- 放jQuery的calendar -->
 											</div>
 										</td>
@@ -561,7 +469,6 @@
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	
 <script>
-var data =null;
 //calendar
 var selectmenu=null;
 var dragevent = null;
@@ -577,15 +484,18 @@ var eventidglobe =null;
 	$( function() {
         /* calendar
 		-----------------------------------------------------------------*/
-		$('#submitcalendar').on('click',calendarsubmit);
-// 		$('#external-events2>div').on('click',assignrandom);
+		
+		$('#external-events2>div').on('click',assignrandom);
 		draggableevent();
-		showjsonevent();
+		$('input[name="repeatingbox"]').on('change',repeatingevent);// end select change
+		$('input[name="repeatingboxmorning"]').on('change',repeatingeventmorning);// end select change
+		$('input[name="repeatingboxnoon"]').on('change',repeatingeventnoon);// end select change
+		$('input[name="repeatingboxnight"]').on('change',repeatingeventnight);// end select change
 		buildcalendar();
 		/* calendar
 		-----------------------------------------------------------------*/
-		//jqueryUI datepicker
-// 	    $( "#datepicker" ).datepicker();
+
+	    $( "#datepicker" ).datepicker();
 	    
 	    //google map
 // 	    googlecoordinate = 'https://maps.googleapis.com/maps/api/geocode/json?'
@@ -650,8 +560,6 @@ var eventidglobe =null;
             $("#next-btn1").on("click", function() {
                 // Navigate next
                 $('#smartwizard').smartWizard("next");
-                
-                
                 return true;
             });
             
@@ -680,8 +588,8 @@ var eventidglobe =null;
             })
  
 		//calendar
-	});//end ready
-
+	});	    
+	
 // 	function getCoordinate(){
 // 		var a1 = $('#o_city').val();
 // 		var a2 = $('#o_district').val();
@@ -719,41 +627,55 @@ var eventidglobe =null;
 // 	 	}
 	 
 	 /*-----------calendar---------*/
-function calendarsubmit(){
-	
-	var calendarjson = JSON.stringify($("#calendar").fullCalendar("clientEvents").map(function(e) {
-	    var rv = {};
-	    Object.keys(e)
-	        .filter(function(k) {
-	            return k != "source" && !k.startsWith("_");
-	         })
-	        .forEach(function(k) {
-	            rv[k] = e[k];
-	        });
-	    return rv;
-	}));
-	console.log(calendarjson);
-// 	console.log(rv);
-		console.log($('#calendar').fullCalendar('clientEvents').toString());
-// 		console.log(calendarjson);
-		$.post('${pageContext.servletContext.contextPath}/toolman.calendar/CalendarController.do',{'calendarjson':calendarjson}, function(data){
-			alert("ok");
-		 });//end post
-		
-	}//end calendarsubmit
-// 	 function assignrandom(event){
+	 function assignrandom(event){
 			
-// 			randomnumber = Math.random().toString();//not working after drop, because the real id is still the original
+			randomnumber = Math.random().toString();//not working after drop, because the real id is still the original
 			
-// 			eventstart = $(this).data('start');
-// 			eventend = $(this).data('end');
+			eventstart = $(this).data('start');
+			eventend = $(this).data('end');
 			
-// 			}
+			}
 			function draggableevent(){
-				//not being used				
-				$('#external-events .fc-event').each(function() {			
-					$(this).data('event', {						
-						id: 'orderevent',
+				
+				$('#alldayevent').each(function() {
+					
+					
+					// 		var dragevent = {
+									
+					// 				id: $(this).text(),	
+					// 				title: $(this).text(), // use the element's text as the event title
+					// 				start: $(this).data('start'), // a start time (10am in this example)
+					// 				time: $(this).data('endd'), // an end time (2pm in this example)
+					// 			    stick: true
+					// 		}
+							// store data so the calendar knows to render an event upon drop
+					
+							$(this).data('event', {
+								
+								id: $(this).data('id'),
+								title: $(this).text(), // use the element's text as the event title
+								duration: $(this).data('end'), // an end time (2pm in this example)
+							    
+							   	
+								start: $(this).data('start'), // a start time (10am in this example)
+							    stick: true // maintain when user navigates (see docs on the renderEvent method)
+							});
+					
+							// make the event draggable using jQuery UI
+							$(this).draggable({		
+								zIndex: 999,
+								revert: true,      // will cause the event to go back to its
+								revertDuration: 0  //  original position after the drag
+							});
+							
+						});
+				
+				$('#external-events .fc-event').each(function() {
+
+			
+					$(this).data('event', {
+						
+						id: $(this).data('id'),
 						title: $(this).text(), // use the element's text as the event title
 						duration: $(this).data('end'), // an end time (2pm in this example)
 					   	
@@ -770,10 +692,110 @@ function calendarsubmit(){
 					
 				});// end each
 			}//end draggable event
-			function showjsonevent(){
-			 data = $.getJSON('${pageContext.servletContext.contextPath}/toolman.calendar/CalendarControllerget.do');
+			
+			function repeatingevent(){
+				$('#calendar').fullCalendar( 'removeEvents', 'repeateventeveryallday');
 				
-			}
+				selectmenu = [];
+				var checkedbox = $('input[name="repeatingbox"]:checked');
+				checkedbox.each(function () {
+					selectmenu.push($(this).val());
+				});//end each
+//		 		console.log(checkedbox);
+//		 		console.log(selectmenu);
+				var repeateventallday = 	{
+					//means delete all repeating items and rebuild new ones
+					id:"repeateventeveryallday",
+				    title:"每整天",
+				    start: '00:00', // a start time (10am in this example)				
+				    overlap: false,
+					end: '24:00', // an end time (2pm in this example)
+				    dow: selectmenu // Repeat monday and thursday
+				}
+				$('#calendar').fullCalendar( 'renderEvent', repeateventallday);
+				
+				//	 $('#calendar').fullCalendar( 'destroy' );
+				//	 buildcalendar();
+			}//end repeating event
+			
+			function repeatingeventmorning(){
+				$('#calendar').fullCalendar( 'removeEvents', 'repeateventmorning');
+				
+				selectmenu = [];
+				var checkedbox = $('input[name="repeatingboxmorning"]:checked');
+				checkedbox.each(function () {
+					selectmenu.push($(this).val());
+				});//end each
+//		 		console.log(checkedbox);
+//		 		console.log(selectmenu);
+				var repeateventmorning = 	{
+					//means delete all repeating items and rebuild new ones
+					id:"repeateventmorning",
+				    title:"每早",
+				    start: '01:00', // a start time (10am in this example)				
+				    overlap: true,
+					end: '09:00', // an end time (2pm in this example)
+				    dow: selectmenu // Repeat monday and thursday
+				}
+				$('#calendar').fullCalendar( 'renderEvent', repeateventmorning);
+				
+				//	 $('#calendar').fullCalendar( 'destroy' );
+				//	 buildcalendar();
+			}//end repeating event
+			
+			function repeatingeventnoon(){
+				$('#calendar').fullCalendar( 'removeEvents', 'repeateventeverynoon');
+				
+				selectmenu = [];
+				var checkedbox = $('input[name="repeatingboxnoon"]:checked');
+				checkedbox.each(function () {
+					selectmenu.push($(this).val());
+				});//end each
+//		 		console.log(checkedbox);
+//		 		console.log(selectmenu);
+				var repeateventnoon = 	{
+					//means delete all repeating items and rebuild new ones
+					id:"repeateventeverynoon",
+					
+				    title:"每下午",
+				    start: '12:00', // a start time (10am in this example)				
+				    overlap: true,
+					end: '18:00', // an end time (2pm in this example)
+				    dow: selectmenu, // Repeat monday and thursday
+				    
+				}
+				$('#calendar').fullCalendar( 'renderEvent', repeateventnoon);
+				
+				//	 $('#calendar').fullCalendar( 'destroy' );
+				//	 buildcalendar();
+			}//end repeating event
+			
+			function repeatingeventnight(){
+				$('#calendar').fullCalendar( 'removeEvents', 'repeateventnight');
+				
+				selectmenu = [];
+				var checkedbox = $('input[name="repeatingboxnight"]:checked');
+				checkedbox.each(function () {
+					selectmenu.push($(this).val());
+				});//end each
+//		 		console.log(checkedbox);
+//		 		console.log(selectmenu);
+				var repeateventnight = 	{
+					//means delete all repeating items and rebuild new ones
+					id:"repeateventnight",
+				    title:"每晚",
+				    start: '18:00', // a start time (10am in this example)				
+				    overlap: true,
+					end: '24:00', // an end time (2pm in this example)
+				    dow: selectmenu // Repeat monday and thursday
+				}
+				
+				$('#calendar').fullCalendar( 'renderEvent', repeateventnight);
+				
+				//	 $('#calendar').fullCalendar( 'destroy' );
+				//	 buildcalendar();
+			}//end repeating event
+			
 			function buildcalendar(){
 				
 				$('#calendar').fullCalendar({
@@ -786,43 +808,30 @@ function calendarsubmit(){
 					},
 					editable: true,
 					timezone:'UTC',
-// 					timezone = 'Asia/Taipei',
+					
 					droppable: true, // this allows things to be dropped onto the calendar
 					eventDrop: function(event, delta, revertFunc) {
-							 
-						var d = new Date();
-							//to alter the time without altering the value of event.start._d
-							var ds = new Date(event.start._d).getTime();
-							var n = d.getTimezoneOffset()*60*1000;
-							var s =new Date(ds+n);
-							var datepick = moment(s).format('YYYY-MM-DD-HH:mm:ss');
-							var datepick2 = moment(s).format('YYYY-MM-DD');
-							$('#datepicker').val(datepick2+event.title);		
-							$('#datepickersend').val(datepick);
-							
 						checkoverlapping(event);
 				        alert(event.title + " was dropped on " + event.start.format());
 			
 				        if (!confirm("Are you sure about this change?")) {
 				            revertFunc();
 				        }
-				        checkoverlapping2();
+				       
 				    },
 					eventDragStop: function(event,jsEvent) {
-						
+						 
 					    alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
-// 					    if( ( 130<= jsEvent.pageX)  && (jsEvent.pageX <= 230) &&(700 <= jsEvent.pageY)&& (jsEvent.pageY <=840))
-					if( ( 1270<= jsEvent.pageX)  || (jsEvent.pageX <= 170) ||(928 <= jsEvent.pageY)|| (jsEvent.pageY <=160)){
+					    if( ( 1293<= jsEvent.pageX) | (jsEvent.pageX <= 300) | (1293 <= jsEvent.pageY) | (jsEvent.pageY <=690)){
 					      alert('delete: '+ event.id);
 					      $('#calendar').fullCalendar('removeEvents', event.id);
 					    }
 					},
 					drop: function(date,event) {
-						
+			// 			$('#calendar').fullCalendar( 'renderEvent', dragevent);
 //		 				console.log(event);
-// 						assignrandom(event);
-						eventidglobe =$(this).data('id');
-// 						+randomnumber
+						assignrandom(event);
+						eventidglobe =$(this).data('id')+randomnumber;
 						event._id =eventidglobe ;
 						event.id=eventidglobe;
 						event.eventOverlap = 'false';
@@ -838,75 +847,47 @@ function calendarsubmit(){
 					},//end drop
 					eventRender:function( event ) {
 						// Timezone calculation
-// 						console.log(event);
+						console.log(event);
 						var d = new Date();
-// 						//to alter the time without altering the value of event.start._d
 						var ds = new Date(event.start._d).getTime();
 						var n = d.getTimezoneOffset()*60*1000;
 						var s =new Date(ds+n);
-// 						$.fullCalendar.formatDate( event.start._d, "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"  ) 
-// 						$.fullCalendar.moment(event.start._d);
+						
 						//event.start._d and event._start._d is not the same
 // 						console.log(s);
 // 						console.log(d);
-						//send to order form o_bdate
-
-// 						var dt = new Date('2013-03-10T02:00:00Z');    
-// 						var dd = dt.getDate();
-// 						var mm = dt.getMonth()+1; 
-// 						var yyyy = dt.getFullYear();
-// 						if(dd<10){
-// 						  dd='0'+dd;
-// 						  } 
-// 						if(mm<10){
-// 						    mm='0'+mm;
-// 						  } 
-// 						var datepick =   yyyy+'-'+mm+'-'+ dd+'-'+event.title;
-						//var datepick = s.toString().split(" ");
-// 						datepick[3]+datepick[4]+datepick[5]
-// 						datepick[1]+datepick[2]+datepick[3]+event.title
-
+// 						event.start._d = s;
 						event._start._d = s;
-// 						checkoverlapping2(event);
 // 						console.log(event.start._d);
 // 						console.log(event._start._d);
 // 						console.log(event);
 					},
 					eventReceive:function( event ) {
-						 var d = new Date();
-							//to alter the time without altering the value of event.start._d
-							var ds = new Date(event.start._d).getTime();
-							var n = d.getTimezoneOffset()*60*1000;
-							var s =new Date(ds+n);
-							var datepick = moment(s).format('YYYY-MM-DD-HH:mm:ss');
-							var datepick2 = moment(s).format('YYYY-MM-DD');
-							$('#datepicker').val(datepick2+event.title);		
-							$('#datepickersend').val(datepick)
+
 						event._id = eventidglobe;
 						event.id = eventidglobe;
-// 						console.log(event);
+						console.log(event);
 //		 				var randomnumber =Math.random().toString();//not working after drop, because the real id is still the original
 						
 						$(this).attr('data-id',$(this).data('id')+randomnumber);
 						checkoverlapping(event); 
 						
 						},
-					eventSources: [
-		                    {
-		                    	url:'${pageContext.servletContext.contextPath}/toolman.calendar/CalendarControllerget.do',		                        
-									
-
-		                    }                    
-		                ],
+					events: [{
 						
-						
+						id:999,
+					    title:"programming",
+					    start: '00:00', // a start time (10am in this example)
+					    end: '24:00', // an end time (2pm in this example)
+					    dow: "\[" +selectmenu+" \]" // Repeat monday and thursday
+					}],//end repeating event
 				});// end full calendar
 			}//end create calendar
 			
 			function checkoverlapping(event){// no event can exists twice in 1 day, and no event can be added under all day unavailable
 				
 				var events = $('#calendar').fullCalendar('clientEvents');
-				
+					
 // 					var d = new Date();
 // 					var ds = new Date(event.start._d).getTime();
 // 					var n = d.getTimezoneOffset()*60*1000;
@@ -917,15 +898,13 @@ function calendarsubmit(){
 // 					event._start._d = d;
 // 					console.log(event.start._d);
 // 					console.log(event._start._d);
-// 					console.log(event);
-				if(events.length>1){
-					
+					console.log(event);
+				if(events.length!=0){
 				for(i=0;i<events.length-1;i++){
 				// start-time in between any of the events
-					var k=0;
+	
 					var eventid1 = event.id;
 					var eventid2 = event._id;
-					
 					var eventitle = event.title;
 					var eventitle2 = events[i].title;
 					var end1 = event.end._d;
@@ -935,42 +914,27 @@ function calendarsubmit(){
 					var end2 = events[i].end._d;
 					var start4 = events[i].duration;
 					var splitstring1 = start1.split(" ");
-// 					console.log(splitstring1);
+					console.log(splitstring1);
 					
 					var splitstring2 = start2.split(" ");
-					
-// 					console.log(splitstring2);
-					//remove last event
-					if(events[i].id=='orderevent'){
-						k=k+1;
-						if(k==1){
-							events[i].id='lastevent';
-							events[i]._id='lastevent';
-							console.log(event);
-							//the id removed is event._id, not event.id in this case 
-							$('#calendar').fullCalendar('removeEvents', 'lastevent');
-						}
-					}
-					
-					
-					if((events[i].title == "整天")||(event.title =="整天")){
+					console.log(splitstring2);
+					if((events[i].title == "整天不可預約")||(event.title =="整天不可預約")){
 						if((splitstring1[0]+splitstring1[1]+splitstring1[2]+splitstring1[3])==
 							(splitstring2[0]+splitstring2[1]+splitstring2[2]+splitstring2[3])){
-				// I can remove with event.id because i have already given .id and ._id to the same value
+		
 								$('#calendar').fullCalendar('removeEvents', event.id);
 								return true;
 								
 							}//end for
 						}//end if
-						
 					else if((splitstring1[0]+splitstring1[1]+splitstring1[2]+splitstring1[3]+splitstring1[4])==
 						(splitstring2[0]+splitstring2[1]+splitstring2[2]+splitstring2[3]+splitstring2[4])){
-				// I can remove with event.id because i have already given .id and ._id to the same value
-							$('#calendar').fullCalendar('removeEvents', eventid1);
-						    return true;	
-						}//end if
+	
 						
-					
+							$('#calendar').fullCalendar('removeEvents', event.id);
+						    return true;
+							
+						}//end if
 				}//end for 
 				//end-time in between any of the events
 //		 		if(event.start > events[i].start && event.start < events[i].end){
@@ -984,8 +948,7 @@ function calendarsubmit(){
 //		 		}
 			  }//end if event!=0
 			}
-			//for checkbox
-	
+		
 	</script>
 <!-- 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAj-PEjC_YSdYGHEvhIKnyojxufjKYy6OE&callback=initMap"></script> -->
   

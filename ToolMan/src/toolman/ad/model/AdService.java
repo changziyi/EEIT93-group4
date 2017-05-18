@@ -3,6 +3,7 @@ package toolman.ad.model;
 import java.util.List;
 
 import toolman.mdata.model.MdataVO;
+import toolman.wishpool.model.WishpoolVO;
 
 public class AdService {
 
@@ -12,6 +13,11 @@ public class AdService {
 		dao = new AdDAO();
 	
 }
+	public void insert(AdVO adVO) {
+		dao.insert(adVO);
+	}
+	
+	
 	
 	public AdVO findByPrimaryKey(Integer ad_id) {
 		return dao.findByPrimaryKey(ad_id);
