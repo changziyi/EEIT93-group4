@@ -4,6 +4,7 @@
     <%@ page import="toolman.cdata.model.*"%>
 <%@ page import="toolman.order.model.*"%>
  	   <%@ page import=" java.util.*"%>
+ 	   
 <div class="navbar-wrapper">
     <div class="container-fluid">
         <nav class="navbar navbar-fixed-top">
@@ -39,36 +40,40 @@
 					      </form>
 					</ul>
                      <!----------- 搜尋列----- -->
+  
                     <ul class="nav navbar-nav pull-right">
-                        <li class=" dropdown"><a class="alist" href="#" class="dropdown-toggle active" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">登入  <span class="caret"></span></a>
+   
+    <%  if(session.getAttribute("LoginOK") == null) {%>
+           <li class=" dropdown"><a class="alist" href="#" class="dropdown-toggle active" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">登入  <span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a class="alist" href="${pageContext.servletContext.contextPath}/cdata/login-in.jsp">ToolMan 帳號</a></li>
-                                
                                 <li><div style="text-align:center;">
-                                 <div class="fb-login-button" onlogin="checkLoginState()" id="login" data-size="large"
-									data-max-rows="1" scope="public_profile,email" ></div>
+                                <div class="fb-login-button" onlogin="checkLoginState()" id="login" data-size="large"
+								   	data-max-rows="1" scope="public_profile,email" ></div>
 								 </div></li>
                             </ul>
-                        </li>
-                        <li class=""><a class="alist" href="${pageContext.servletContext.contextPath}/loginoutServlet">登出</a></li>
-                    
-                 <li class=" dropdown"><a class="alist" href="#" class="dropdown-toggle " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span><span class="caret"></span></a>
+                        </li> 
+   <%     }else{ %>
+   
+ <%-----------------------------------------------訂單表------------------------------------------------------------------- --%>
+   
+<li class=" dropdown"><a class="alist" href="#" class="dropdown-toggle " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon">&#xe008;</span>
+<span class="caret"></span></a>
                             <ul class="dropdown-menu">
-  <%-----------------------------------------------訂單表-就決定擺這------------------------------------------------------------------- --%>
-
- <li><a href="${pageContext.servletContext.contextPath}/mdata/MdataOrderServlet.do?m_id=${LoginOK.m_id}&action=listOrder">師傅訂單</a></li>
- <li><a href="${pageContext.servletContext.contextPath}/cdata/CdataOrderServlet.do?c_id=${LoginOK.c_id}&action=listOrder">消費者訂單</a> </li>
+<li><a href="#">我的店家</a> </li>
+  <li><a href="${pageContext.servletContext.contextPath}/cdata/CdataOrderServlet.do?c_id=${LoginOK.c_id}&action=listOrder">我的訂單</a> </li>
+ <li><a href="${pageContext.servletContext.contextPath}/mdata/MdataOrderServlet.do?m_id=${LoginOK.m_id}&action=listOrder">我的工作</a></li>
  <li><a href="${pageContext.servletContext.contextPath}/cdata/CdataOrderServlet.do?c_id=${LoginOK.c_id}&action=myLike">我的最愛</a> </li>
  <li><a href="${pageContext.servletContext.contextPath}/cdata/CdataOrderServlet.do?c_id=${LoginOK.c_id}&action=myHate">黑名單</a> </li>
 <li><a href="#">刊登廣告</a> </li>
-   
-   
-      <%-----------------------------------------------墨西哥長城------------------------------------------------------------------- --%>
-                            
+ <li ><a href="${pageContext.servletContext.contextPath}/loginoutServlet">登出</a></li>
+
                             </ul>
-                        </li>    
-                    
-                    </ul>
+                        </li> 
+ <%----------------------------------------------墨西哥長城------------------------------------------------------------------- --%>
+                        
+ <% } %>
+       </ul>
                 </div>
            
                 </div>
@@ -78,8 +83,7 @@
 <!------------------------------------- facebook 登入 ----------------------------------------->
    <div style="visibility:hidden" id="status"></div>         
     <script src="http://cdn.static.runoob.com/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script>
-    
+   <script>
     //fb click
     $(document).ready(function(){
     	  $("#p").click(function(){
@@ -195,5 +199,5 @@
 			alert('已成功登出!');
 			window.location.reload();
 		});
-	}   
+	}
 </script>
