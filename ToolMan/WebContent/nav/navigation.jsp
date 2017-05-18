@@ -53,26 +53,10 @@
 
 					<ul class="nav navbar-nav pull-right">
 
-						<%
-							if (session.getAttribute("LoginOK") == null) {
-						%>
-						<li class=" dropdown"><a class="alist" href="#"
-							class="dropdown-toggle active" data-toggle="dropdown"
-							role="button" aria-haspopup="true" aria-expanded="false">登入 <span
-								class="caret"></span></a>
-							<ul class="dropdown-menu">
-								<li><a class="alist"
-									href="${pageContext.servletContext.contextPath}/cdata/login-in.jsp">ToolMan
-										帳號</a></li>
-								<li><div style="text-align: center;">
-										<div class="fb-login-button" onlogin="checkLoginState()"
-											id="login" data-size="large" data-max-rows="1"
-											scope="public_profile,email"></div>
-									</div></li>
-							</ul></li>
-						<%
-							} else {
-						%>
+						<%	if (session.getAttribute("LoginOK") == null) {%>
+						<li><a class="alist" href="${pageContext.servletContext.contextPath}/cdata/login-in.jsp">登入 </a>
+							</li>
+						<%	} else {%>
 
 						<%-----------------------------------------------訂單表------------------------------------------------------------------- --%>
 
@@ -113,7 +97,7 @@
 
 <!------------------------------------- facebook 登入 ----------------------------------------->
 <div style="visibility: hidden" id="status"></div>
-<!--     <script src="http://cdn.static.runoob.com/libs/jquery/1.10.2/jquery.min.js"></script> -->
+		
 <script>
     //fb click
     $(document).ready(function(){
