@@ -366,24 +366,81 @@ public class MdataDAO implements MdataDAO_interface {
 			}
 			return list;
 		}
-
+		
+		
+		public List<Object[]> searchOne(Integer m_id) {
+			List<Object[]> list = null;
+			Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+			try {
+				session.beginTransaction();
+				Query query = session.createSQLQuery("SELECT b_name, m_name, m_cel, m_email, m_city, m_district, m_addr, b_des, b_image, m_cer, s_name FROM mdata WHERE m_id=?");
+				list = query.list();
+				session.getTransaction().commit();
+			} catch (RuntimeException ex) {
+				session.getTransaction().rollback();
+				throw ex;
+			}
+			return list;
+		}
+		
+		public void updateSql(MdataVO mdataVO) {
+			Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+			try {
+				session.beginTransaction();
+				Query query = session.createSQLQuery("UPDATE mdata SET b_name=?, m_name=?, m_cel=?, m_email=?, m_city=?, m_district=?, m_addr=?, b_des=?, b_image=?, m_cer=? WHERE m_id = ?");
+				query.setParameter(0, mdataVO.getB_name());
+				query.setParameter(1, mdataVO.getM_name());
+				query.setParameter(2, mdataVO.getM_cel());
+				query.setParameter(3, mdataVO.getM_email());
+				query.setParameter(4, mdataVO.getM_city());
+				query.setParameter(5, mdataVO.getM_district());
+				query.setParameter(6, mdataVO.getM_addr());
+				query.setParameter(7, mdataVO.getB_des());
+				query.setParameter(8, mdataVO.getB_image());
+				query.setParameter(9, mdataVO.getM_cer());
+				query.setParameter(10, mdataVO.getM_id());
+				query.executeUpdate();
+				session.getTransaction().commit();
+			} catch (RuntimeException ex) {
+				session.getTransaction().rollback();
+				throw ex;
+			}
+		}
+		
 		
 	public static void main(String[] args) throws IOException {
 //		
 		MdataDAO dao = new MdataDAO();
 		
-		List<Object[]> list = dao.searchAll();
-		for(Object[] alist : list) {
-			System.out.print(alist[0] + ",");
-			System.out.print(alist[1] + ",");
-			System.out.print(alist[2] + ",");
-			System.out.print(alist[3] + ",");
-			System.out.print(alist[4] + ",");
-			System.out.print(alist[5] + ",");
-			System.out.print(alist[6] + ",");
-			System.out.print(alist[7] + ",");
-			System.out.println(alist[8]);
-		}
+		MdataVO mdataVO = new MdataVO();
+		
+		mdataVO.setM_id(1005);
+		mdataVO.setB_name("b_name");
+		mdataVO.setM_name("m_name");
+		mdataVO.setM_cel("cel");
+		mdataVO.setM_email("email");
+		mdataVO.setM_city("city");
+		mdataVO.setM_district("district");
+		mdataVO.setM_addr("addr");
+		mdataVO.setB_des("des");
+		mdataVO.setB_image(null);
+		mdataVO.setM_cer(null);
+		
+		dao.updateSql(mdataVO);
+		
+		
+//		List<Object[]> list = dao.searchAll();
+//		for(Object[] alist : list) {
+//			System.out.print(alist[0] + ",");
+//			System.out.print(alist[1] + ",");
+//			System.out.print(alist[2] + ",");
+//			System.out.print(alist[3] + ",");
+//			System.out.print(alist[4] + ",");
+//			System.out.print(alist[5] + ",");
+//			System.out.print(alist[6] + ",");
+//			System.out.print(alist[7] + ",");
+//			System.out.println(alist[8]);
+//		}
 		
 //		List<Object[]> list = dao.searchByMpro("地板地磚", "臺北市", "", "樹");
 //		for(Object[] alist : list) {
