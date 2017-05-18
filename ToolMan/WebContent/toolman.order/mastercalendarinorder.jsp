@@ -431,7 +431,9 @@
 										</td>
 										<td>
 											<div id="datecalendar" >
-												<input type="text" class="inputstyle" id="datepicker" name="o_bdate" value="${orderVO.o_bdate}">
+												<input type="text" class="inputstyle" id="datepicker"  value="${orderVO.o_bdate}">
+												<input type="text" class="inputstyle" id="datepickersend" name="o_bdate" value="${orderVO.o_bdate}">
+												
 												<!-- 放jQuery的calendar -->
 											</div>
 										</td>
@@ -582,8 +584,8 @@ var eventidglobe =null;
 		buildcalendar();
 		/* calendar
 		-----------------------------------------------------------------*/
-
-	    $( "#datepicker" ).datepicker();
+		//jqueryUI datepicker
+// 	    $( "#datepicker" ).datepicker();
 	    
 	    //google map
 // 	    googlecoordinate = 'https://maps.googleapis.com/maps/api/geocode/json?'
@@ -648,6 +650,8 @@ var eventidglobe =null;
             $("#next-btn1").on("click", function() {
                 // Navigate next
                 $('#smartwizard').smartWizard("next");
+                
+                
                 return true;
             });
             
@@ -824,6 +828,7 @@ function calendarsubmit(){
 						// Timezone calculation
 // 						console.log(event);
 						var d = new Date();
+						//to alter the time without altering the value of event.start._d
 						var ds = new Date(event.start._d).getTime();
 						var n = d.getTimezoneOffset()*60*1000;
 						var s =new Date(ds+n);
@@ -833,6 +838,23 @@ function calendarsubmit(){
 // 						console.log(s);
 // 						console.log(d);
 // 						event.start._d = s;
+						//send to order form o_bdate
+
+// 						var dt = new Date('2013-03-10T02:00:00Z');    
+// 						var dd = dt.getDate();
+// 						var mm = dt.getMonth()+1; 
+// 						var yyyy = dt.getFullYear();
+// 						if(dd<10){
+// 						  dd='0'+dd;
+// 						  } 
+// 						if(mm<10){
+// 						    mm='0'+mm;
+// 						  } 
+// 						var datepick =   yyyy+'-'+mm+'-'+ dd+'-'+event.title;
+						//var datepick = s.toString().split(" ");
+// 						datepick[3]+datepick[4]+datepick[5]
+// 						datepick[1]+datepick[2]+datepick[3]+event.title
+
 						event._start._d = s;
 // 						checkoverlapping2(event);
 // 						console.log(event.start._d);
@@ -840,7 +862,15 @@ function calendarsubmit(){
 // 						console.log(event);
 					},
 					eventReceive:function( event ) {
-
+						 var d = new Date();
+							//to alter the time without altering the value of event.start._d
+							var ds = new Date(event.start._d).getTime();
+							var n = d.getTimezoneOffset()*60*1000;
+							var s =new Date(ds+n);
+							var datepick = moment(s).format('YYYY-MM-DD-HH:mm:ss');
+							var datepick2 = moment(s).format('YYYY-MM-DD');
+							$('#datepicker').val(datepick2+event.title);		
+							$('#datepickersend').val(datepick)
 						event._id = eventidglobe;
 						event.id = eventidglobe;
 // 						console.log(event);
