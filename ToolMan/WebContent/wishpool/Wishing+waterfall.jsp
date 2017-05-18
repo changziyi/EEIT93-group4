@@ -29,6 +29,10 @@
 <link rel="stylesheet"
 	href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
 <link href="${pageContext.servletContext.contextPath}/nav/nav.css" rel="stylesheet">
+
+<link href="${pageContext.servletContext.contextPath}/wishpool/wish.css" rel="stylesheet">
+
+
 <script
 	src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
 <script
@@ -43,144 +47,6 @@
 	src="${pageContext.servletContext.contextPath}/js/jquery.twzipcode.min.js"></script>
 
 <style>
-.content-box {
-	display: inline-block;
-	border: 3px dashed #66b5ff;
-	padding: 10px;
-	margin: 10px 10px 10px 0;
-	overflow: hidden;
-	width: 260px;
-	background-color: #cce6ff;
-}
-
-.bgcolor {
-   background-color: #4dd2ff;
-
-}
-
-
- .search-condition {
-	margin: 10px 0;
-}
-
- .user-name {
-
-}
-
- .btn-lg{
-     font-size: 20px;
-
-}
-
-.modal-content {
-    background-color: #ccffff;
-	border-radius: 23px;
-}
-
-.form-control {
-
-	background-color:white;
-}
-
-p {
-	font-family: Microsoft JhengHei;
-	font-weight: bold;
-	font-size: 17px;
-}
-
-h3 {
-	font-family: Microsoft JhengHei;
-	font-weight: bold;
-	font-size: 35px;
-	color:#357EBD;
-}
-
-
-form>div {
-	position: relative;
-	overflow: hidden;
-}
-
-form input, form textarea {
-	width: 100%;
-	border: 2px solid gray;
-	background: none;
-	position: relative;
-	top: 0;
-	left: 0;
-	z-index: 1;
-	padding: 8px 12px;
-	outline: 0;
-}
-
-form input:valid, form textarea:valid {
-	background: white;
-}
-
-form input:focus, form textarea:focus {
-	border-color: #357EBD;
-}
-
-form input:focus+label, form textarea:focus+label {
-	background: #357EBD;
-	color: white;
-	font-size:15px;
-	padding: 1px 6px;
-	z-index: 2;
-	text-align:center;
-}
-
-form label {
-	-webkit-transition: background 0.2s, color 0.2s, top 0.2s, bottom 0.2s,
-		right 0.2s, left 0.2s;
-	transition: background 0.2s, color 0.2s, top 0.2s, bottom 0.2s, right
-		0.2s, left 0.2s;
-	position: absolute;
-	color: #999;
-	padding: 7px 6px;
-	font-weight: normal;
-}
-
-form textarea {
-	display: block;
-	resize: vertical;
-}
-
-form.go-bottom input, form.go-bottom textarea {
-	padding: 12px 12px 12px 12px;
-}
-
-form.go-bottom label {
-	top: 0;
-	bottom: 0;
-	left: 0;
-	width: 100%;
-}
-
-form.go-bottom input:focus, form.go-bottom textarea:focus {
-	padding: 4px 6px 20px 6px;
-}
-
-form.go-bottom input:focus+label, form.go-bottom textarea:focus+label {
-	top: 100%;
-	margin-top: -16px;
-}
-
-form.go-right label {
-	border-radius: 0 5px 5px 0;
-	height: 100%;
-	top: 0;
-	right: 100%;
-	width: 100%;
-	margin-right: -100%;
-}
-
-form.go-right input:focus+label, form.go-right textarea:focus+label {
-	right: 0;
-	margin-right: 0;
-	width: 35%;
-	padding-top: 5px;
-}
 
 </style>
 
@@ -289,9 +155,8 @@ form.go-right input:focus+label, form.go-right textarea:focus+label {
 				
 				
 					<c:forEach var="wishpoolVO" items="${new_date}">
-						<div class="bgcolor">
 							<div class="content-box">
-								<div><label class="user-name">使用者：</label><span>${wishpoolVO.c_id}</span></div>
+								<div><label class="user-name">會員帳號：</label><span>${wishpoolVO.c_id}</span></div>
 								<div>位在地區：${wishpoolVO.w_city}${wishpoolVO.w_district}</div>
 								<div>維修項目：${wishpoolVO.w_pro}</div>
 								<div>維修內容：${wishpoolVO.w_content}</div>
@@ -299,6 +164,7 @@ form.go-right input:focus+label, form.go-right textarea:focus+label {
 									<img src="${pageContext.servletContext.contextPath}/wishpool/wishpool.do?type=wishpool&image=${wishpoolVO.w_id}"
 									alt="示意圖" class="img-responsive">
 								</div>
+								<br>
 								<div align="center">
 								<button class="btn btn-primary btn-sm" data-toggle="modal"
 									data-target="#wishDetailModal${wishpoolVO.w_id}">
@@ -306,8 +172,7 @@ form.go-right input:focus+label, form.go-right textarea:focus+label {
 								<br>
 								<div class="pull-right">發送時間：${wishpoolVO.w_date}</div>
 								</div>
-							</div>
-						</div>
+							</div>	
 					</c:forEach>
 				
 			</div>
@@ -411,24 +276,24 @@ form.go-right input:focus+label, form.go-right textarea:focus+label {
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
-						<H4 style="color: red" class="modal-title" id="myModalLabel">
-							許願單
+						<h3 class="modal-title" id="myModalLabel">
+							確定要接下這個願望?
 							<button type="button" class="close" data-dismiss="modal"
 								aria-label="Close">
 								<span aria-hidden="true">&times;</span></button>
-						</H4>
+						</h3>
 					</div>
 					<div class="modal-body">
-								使用者：${wishpoolVO.c_id}<br>
-								位在地區：${wishpoolVO.w_city}${wishpoolVO.w_district} <br>
-								維修項目：${wishpoolVO.w_pro} <br> 
-								維修內容：${wishpoolVO.w_content} <br>
-								發送時間：${wishpoolVO.w_date} <br>
+								<p>會員帳號：${wishpoolVO.c_id} </p>
+								<p>位在地區：${wishpoolVO.w_city}${wishpoolVO.w_district} </p>
+								<p>維修項目：${wishpoolVO.w_pro} </p>
+								<p>維修內容：${wishpoolVO.w_content} </p>
+								<p>發送時間：${wishpoolVO.w_date} </p>
 								</div>
 								
 						<div class="modal-footer">
-							<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-							<button type="submit" class="btn btn-primary">確認接單</button>
+							<button type="button" class="btn btn-danger" data-dismiss="modal">取消</button>
+							<button type="submit" class="btn btn-primary">確定接單</button>
 							<input type="hidden" name="w_city"> <input type="hidden"
 								name="w_district">
 						</div>
