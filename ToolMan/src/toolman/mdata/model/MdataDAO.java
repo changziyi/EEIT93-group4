@@ -351,6 +351,7 @@ public class MdataDAO implements MdataDAO_interface {
 			return list;
 		}
 		
+		@Override
 		public List<Object[]> searchAllRandom() {
 			List<Object[]> list = null;
 			Session session = HibernateUtil.getSessionFactory().getCurrentSession();
@@ -365,7 +366,7 @@ public class MdataDAO implements MdataDAO_interface {
 			}
 			return list;
 		}
-		
+
 		
 	public static void main(String[] args) throws IOException {
 //		
