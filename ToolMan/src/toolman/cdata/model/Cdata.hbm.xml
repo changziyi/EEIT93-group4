@@ -53,6 +53,10 @@
 			</key>
 			<one-to-many class="toolman.blacklist.model.BlacklistVO" />
 		</set>	
+	
+		
+		 
+		
 	</class>
 </hibernate-mapping>
 

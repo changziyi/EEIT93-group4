@@ -102,11 +102,11 @@ public class WorkDAO implements WorkDAO_interface {
 //		System.out.print(workVO.getImg1() + ",");
 //		System.out.print(workVO.getImg2() + ",");
 //		System.out.println(workVO.getImg3());
-		Set<WorkimVO> workims = workVO.getWorkims();
-		for(WorkimVO aWorkim :workims) {
-			System.out.print(aWorkim.getIm_id() + ",");
-			System.out.println(aWorkim.getIm_show());
-		}
+//		Set<WorkimVO> workims = workVO.getWorkims();
+//		for(WorkimVO aWorkim :workims) {
+//			System.out.print(aWorkim.getIm_id() + ",");
+//			System.out.println(aWorkim.getIm_show());
+//		}
 		
 		// insert
 //		workVO.setMdataVO(mdataVO);

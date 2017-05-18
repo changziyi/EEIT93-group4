@@ -10,5 +10,5 @@ public interface RdataDAO_interface {
     public void delete(Integer R_id);
     public RdataVO findByPrimaryKey(Integer R_id);
     public List<RdataVO> getAll();
-
+    public List<RdataVO> getBySname(String s_name); 
 }

@@ -4,7 +4,6 @@ import org.hibernate.*;
 
 
 import hibernate.util.HibernateUtil;
-import toolman.favorite.model.FavoriteVO;
 import toolman.order.model.OrderVO;
 
 import java.util.*;
@@ -26,6 +25,27 @@ public class BlacklistDAO implements BlacklistDAO_interface {
 		}
 	}
 
+	@Override
+	public List<BlacklistVO> getBlackSerch(String c_id ,Integer m_id) {
+		List<BlacklistVO> querylist = null;
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		Integer count = 0;
+		
+		try {
+			session.beginTransaction();
+			Query query = session.createQuery("FROM OrderVO WHERE c_id = ? AND m_id = ?");
+			query.setParameter(1, c_id);
+			query.setParameter(2, m_id);
+            querylist = query.list();	
+			session.getTransaction().commit();
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
+		return querylist;
+	}
+	
+	
 	@Override
 	public void delete(Integer bk_id) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();

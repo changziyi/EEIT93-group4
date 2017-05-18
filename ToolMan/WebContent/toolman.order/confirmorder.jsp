@@ -151,7 +151,7 @@
 				                    <option value="dots">dots</option>
 				              </select>
 				            </div>           
-				              <span >
+				              <span>
 				            	  <button id="btntobackstage" href="${pageContext.servletContext.contextPath}/order/listCOrder.jsp" class="btn btn-primary putmiddle" >進行訂單管理</button>
 					    	</span>
 				        </form>

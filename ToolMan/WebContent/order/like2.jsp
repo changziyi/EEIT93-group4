@@ -11,7 +11,7 @@
 <html>
 
 <head>
-<title>cena</title>
+<title>我的最愛</title>
 
 </head>
 
@@ -24,35 +24,25 @@
 	
 	
 	
+	<link href="${pageContext.servletContext.contextPath}/nav/nav.css" rel="stylesheet">
+    
 	
 	
-<body bgcolor='white'>
+	
+<body >
+<jsp:include page="/nav/navigation.jsp" />
+<jsp:include page="/order/title.jsp" />
+
+<div>11111</div>
+<div>11111111</div>
+<div>11111111</div>
+
+<jsp:include page="/nav/navigation.jsp" />
 
 
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">WebSiteName</a>
-    </div>
-    <ul class="nav navbar-nav">
-      <li class="active"><a href="#">Home</a></li>
-      <li><a href="<%=request.getContextPath()%>/order/listAllEmp.jsp">訂單</a></li>
-      <li><a href="<%=request.getContextPath()%>/order/like.jsp">收藏店家</a></li>
-      <li><a href="<%=request.getContextPath()%>/order/dislike.jsp">黑名單</a></li>
-      <li><a href="<%=request.getContextPath()%>/master/List.jsp">搜尋店家</a></li>
-      
-    </ul>
-  </div>
-</nav>
 
 
-<b><font color=red></font></b>
-<table border='1' cellpadding='5' cellspacing='0' width='1200'>
-	<tr bgcolor='#CCCCFF' align='center' valign='middle' height='20'>
-		<td><h3>我的最愛</h3>
-		         </td></tr></table>
-
-<table border='1' bordercolor='#CCCCFF' width='1200'>
+  <table class="table table-bordered">
 	<tr>
 		<th>店家編號</th>
 		<th>消費者帳號</th>
@@ -74,12 +64,9 @@
 			
 			
 			<td>
-			
-			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/order/Favorite.do"> 
- 			    <input type="submit" value="刪除">
- 			    <input type="hidden" name="f_id" value="${favoriteVO.f_id}">
-		    <input type="hidden" name="action"value="delete"></FORM> 
-		  
+			  <a href="${pageContext.servletContext.contextPath}/order/Favorite.do?f_id=${favoriteVO.f_id}&action=delete" class="btn btn-info ">
+          <span class="glyphicon glyphicon-trash"></span> 刪除 
+        </a>
 			    
 			</td>
 			

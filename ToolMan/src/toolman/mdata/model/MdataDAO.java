@@ -340,6 +340,8 @@ public class MdataDAO implements MdataDAO_interface {
 			try {
 				session.beginTransaction();
 				Query query = session.createSQLQuery("SELECT m_id, b_name, m_name, m_city, m_district, b_des, m_arating, o_finished, s_name FROM mdata");
+//				query.setFirstResult(0);
+//				query.setMaxResults(3);
 				list = query.list();
 				session.getTransaction().commit();
 			} catch (RuntimeException ex) {
@@ -349,6 +351,22 @@ public class MdataDAO implements MdataDAO_interface {
 			return list;
 		}
 		
+		@Override
+		public List<Object[]> searchAllRandom() {
+			List<Object[]> list = null;
+			Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+			try {
+				session.beginTransaction();
+				Query query = session.createSQLQuery("SELECT m_id, b_name, m_name, m_city, m_district, b_des, m_arating, o_finished, s_name FROM mdata ORDER BY NEWID()");
+				list = query.list();
+				session.getTransaction().commit();
+			} catch (RuntimeException ex) {
+				session.getTransaction().rollback();
+				throw ex;
+			}
+			return list;
+		}
+
 		
 	public static void main(String[] args) throws IOException {
 //		

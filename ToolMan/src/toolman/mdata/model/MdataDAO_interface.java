@@ -22,14 +22,16 @@ public interface MdataDAO_interface {
 	public Integer updatemasterSname(Integer m_id,String s_name);//by Benny
     public int updatecustomerSamnote(Integer m_id, String s_name);//by Benny
 	public List<MdataVO> getBySname(String s_name);//by Benny
-    
 
 	public Set<OrderVO> getOrderByM(Integer m_id);//訂單
+	
 	//預存程序
 	public List<Object[]> search(String city, String district, String input);
 	public List<Object[]> searchByMpro(String pro, String city, String district, String bname);
 	
-	public List<Object[]> searchAll(); //C車getAll
-	public byte[] getImg(Integer m_id); //C車讀取圖片
+	//C車
+	public List<Object[]> searchAll(); //查全部
+	public List<Object[]> searchAllRandom();//亂數查全部
+	public byte[] getImg(Integer m_id); //讀取師傅圖片
 	
 }

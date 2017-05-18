@@ -60,6 +60,7 @@ public class LoginServlet extends HttpServlet {
         if (cdataVO != null && c_id.equals(cdataVO.getC_id()) 
         		&& c_pwd.equals(cdataVO.getC_pwd())){
         	session.setAttribute("LoginOK", cdataVO);//登入成功
+
         }else{
 			errorMsgs.put("LoginError", "該帳號不存在或密碼錯誤");
 			RequestDispatcher rd = req.getRequestDispatcher
@@ -71,13 +72,7 @@ public class LoginServlet extends HttpServlet {
 			return;//中斷
 		}			//true
         if(verify == false){ 
-        	 resp.sendRedirect(resp.encodeRedirectURL(req.getContextPath()+"/index.jsp"));
-//        	 resp.sendRedirect(resp.encodeRedirectURL(req.getContextPath()+"/cdata/index.jsp"));//王修改
-//       	 resp.sendRedirect(resp.encodeRedirectURL(req.getContextPath()+"/master/List.jsp"));
-//        	 resp.sendRedirect(resp.encodeRedirectURL(req.getContextPath()+"/wishpool/Wishing+waterfall.jsp"));
-        	 
-//        	 System.out.println("C_id = " + cdataVO.getC_id());
-//        	 System.out.println("cdataVO = " + cdataVO);
+        	 resp.sendRedirect(resp.encodeRedirectURL(req.getContextPath()+"/index.jsp"));	 
         }else{
         	errorMsgs.put("gRecaptchaResponse", "請驗證我不是機器人");
         	RequestDispatcher rd = req.getRequestDispatcher("/cdata/login-in.jsp");

@@ -54,11 +54,6 @@ public class OrderRatingController extends HttpServlet {
 		String action = request.getParameter("action");
 		
 		
-		
-	
-		
-		
-		
 
 		if ("getOne_For_Update".equals(action)) { 
 			List<String> errorMsgs = new LinkedList<String>();

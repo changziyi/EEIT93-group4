@@ -54,33 +54,25 @@ public class OrderService {
 			Timestamp o_tdatestamp = orderVO.getO_tdate();
 			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			String o_tdate = df.format(o_tdatestamp);
-			
-			String o_bname = orderVO.getB_name();
-			String c_id = orderVO.getC_id().getC_id();
-			Integer o_id  = orderVO.getO_id();
-			Set<OproVO> opros = orderVO.getOpros();
-			
-			String o_location = orderVO.getO_location().substring(0,6);
-			s_name = orderVO.getS_name();
-			Integer c_rating = orderVO.getC_rating();
-			Integer m_rating = orderVO.getM_rating();
-			String sa_onote = orderVO.getSa_onote();
-		
+			Set<OproVO> opros = orderVO.getOpros();						
+			//map outside opro, so only get the last 1 opro, just as what I want
 			Map map = new HashMap();
 			map.put("o_tdate", o_tdate);
-			map.put("o_bname", o_bname);
-			map.put("c_id", c_id);
-			map.put("o_id", o_id);
+			map.put("o_bname", orderVO.getB_name());
+			map.put("m_id", orderVO.getM_id().getM_id());
+			map.put("c_id", orderVO.getC_id().getC_id());
+			map.put("o_id", orderVO.getO_id());
+			
 			for(OproVO oproVO : opros){
 				String	opro = oproVO.getO_pro();	
 				map.put("opros", opro);
 				System.out.println(opro);
 			}
-			map.put("o_location", o_location);
-			map.put("s_name", s_name);
-			map.put("c_rating", c_rating);
-			map.put("m_rating", m_rating);
-			map.put("sa_onote",sa_onote);
+			map.put("o_location", orderVO.getO_location().substring(0,6));
+			map.put("s_name", orderVO.getS_name());
+			map.put("c_rating", orderVO.getC_rating());
+			map.put("m_rating",orderVO.getM_rating());
+			map.put("sa_onote",orderVO.getSa_onote());
 			list.add(map);
 			
 		}		
@@ -197,6 +189,7 @@ public class OrderService {
 			
 			String o_bname = orderVO.getB_name();
 			String c_id = orderVO.getC_id().getC_id();
+			Integer m_id = orderVO.getM_id().getM_id();
 			Integer o_id  = orderVO.getO_id();
 			Set<OproVO> opros = orderVO.getOpros();
 			
@@ -205,10 +198,11 @@ public class OrderService {
 			Integer c_rating = orderVO.getC_rating();
 			Integer m_rating = orderVO.getM_rating();
 			String sa_onote = orderVO.getSa_onote();
-		
+			//map outside opro, so only get the last 1 opro, just as what I want
 			Map map = new HashMap();
 			map.put("o_tdate", o_tdate);
 			map.put("o_bname", o_bname);
+			map.put("m_id", m_id);
 			map.put("c_id", c_id);
 			map.put("o_id", o_id);
 			for(OproVO oproVO : opros){
@@ -246,6 +240,7 @@ public class OrderService {
     			
     			String o_bname = orderVO.getB_name();
     			String c_id = orderVO.getC_id().getC_id();
+    			Integer m_id = orderVO.getM_id().getM_id();
     			Integer o_id  = orderVO.getO_id();
     			Set<OproVO> opros = orderVO.getOpros();
     			
@@ -254,10 +249,11 @@ public class OrderService {
     			Integer c_rating = orderVO.getC_rating();
     			Integer m_rating = orderVO.getM_rating();
     			String sa_onote = orderVO.getSa_onote();
-    		
+    			//map outside opro, so only get the last 1 opro, just as what I want
     			Map map = new HashMap();
     			map.put("o_tdate", o_tdate);
     			map.put("o_bname", o_bname);
+    			map.put("m_id", m_id);
     			map.put("c_id", c_id);
     			map.put("o_id", o_id);
     			for(OproVO oproVO : opros){

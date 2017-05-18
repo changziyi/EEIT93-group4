@@ -19,14 +19,6 @@ hr {
 hr.light {
   border-color: white; }
 
-a {
-  color: #00BFFF;
-  -webkit-transition: all .2s;
-  -moz-transition: all .2s;
-  transition: all .2s; }
-  a:hover, a:focus {
-    color: #00BFFF; }
-
 h1,
 h2,
 h3,

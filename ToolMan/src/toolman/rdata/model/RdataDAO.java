@@ -1,34 +1,38 @@
 package toolman.rdata.model;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RdataJDBCDAO implements RdataDAO_interface {
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
 
-	String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
-	String url = "jdbc:sqlserver://localhost:1433;DatabaseName=Toolman";
-	String userid = "sa";
-	String passwd = "sa123456";
+public class RdataDAO implements RdataDAO_interface {
 
-	private static final String INSERT_MANAGER = "INSERT INTO rdata (r_date, c_id, m_id, p_summary, p_content, s_name, sa_rnote, d_id) "
-			+ "VALUES (?,?,?,?,?,?,?,?)";
-	private static final String UPDATE = "UPDATE rdata set r_date=?, c_id=?, m_id=?, p_summary=?, p_content=?, s_name=?, sa_rnote=?, d_id=? WHERE r_id = ?";
+	private static DataSource ds = null;
+	static {
+		try {
+			Context ctx = new InitialContext();
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/ToolMan");
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private static final String INSERT_MANAGER = "INSERT INTO rdata (r_date, c_id, m_id, p_summary, p_content, s_name, sa_rnote, d_id, o_id) "
+			+ "VALUES (?,?,?,?,?,?,?,?,?)";
+	private static final String UPDATE = "UPDATE rdata set r_date=?, c_id=?, m_id=?, p_summary=?, p_content=?, s_name=?, sa_rnote=?, d_id=?, o_id=? WHERE r_id = ?";
 	private static final String DELETE = "DELETE FROM rdata WHERE r_id = ?";
-	private static final String GETONE = "SELECT r_id, r_date, c_id, m_id, p_summary, p_content, s_name, sa_rnote, d_id FROM rdata WHERE r_id = ?";
-	private static final String GETALL = "SELECT r_id, r_date, c_id, m_id, p_summary, p_content, s_name, sa_rnote, d_id FROM rdata ORDER BY r_id";
+	private static final String GETONE = "SELECT r_id, r_date, c_id, m_id, p_summary, p_content, s_name, sa_rnote, d_id, o_id FROM rdata WHERE r_id = ?";
+	private static final String GETALL = "SELECT r_id, r_date, c_id, m_id, p_summary, p_content, s_name, sa_rnote, d_id, o_id FROM rdata ORDER BY r_id";
+	private static final String GETBYSNAME = "SELECT r_id, r_date, c_id, m_id, p_summary, p_content, s_name, sa_rnote, d_id FROM rdata where s_name=?";
 
+	
 	@Override
 	public void insert(RdataVO rdataVO) {
 		// TODO Auto-generated method stub
@@ -36,8 +40,7 @@ public class RdataJDBCDAO implements RdataDAO_interface {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(INSERT_MANAGER);
 
 			pstmt.setTimestamp(1, rdataVO.getR_date());
@@ -48,13 +51,13 @@ public class RdataJDBCDAO implements RdataDAO_interface {
 			pstmt.setString(6, rdataVO.getS_name());
 			pstmt.setString(7, rdataVO.getSa_rnote());
 			pstmt.setInt(8, rdataVO.getD_id());
-			
+			pstmt.setInt(9, rdataVO.getO_id());
+
 
 			int num = pstmt.executeUpdate();
 			System.out.println("已新增" + num + "筆資料");
 
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
+		
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 		} finally {
@@ -82,8 +85,8 @@ public class RdataJDBCDAO implements RdataDAO_interface {
 		PreparedStatement pstmt = null;
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
+
 			pstmt = con.prepareStatement(UPDATE);
 
 			pstmt.setTimestamp(1, rdataVO.getR_date());
@@ -94,12 +97,12 @@ public class RdataJDBCDAO implements RdataDAO_interface {
 			pstmt.setString(6, rdataVO.getS_name());
 			pstmt.setString(7, rdataVO.getSa_rnote());
 			pstmt.setInt(8, rdataVO.getD_id());
+			pstmt.setInt(9, rdataVO.getO_id());
 
 			int num = pstmt.executeUpdate();
 			System.out.println("已修改" + num + "筆資料");
 
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
+		
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 		} finally {
@@ -127,8 +130,8 @@ public class RdataJDBCDAO implements RdataDAO_interface {
 		PreparedStatement pstmt = null;
 
 		try {
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
+
 			pstmt = con.prepareStatement(DELETE);
 
 			pstmt.setInt(1, R_id);
@@ -136,8 +139,6 @@ public class RdataJDBCDAO implements RdataDAO_interface {
 			int num = pstmt.executeUpdate();
 			System.out.println("已刪除" + num + "筆資料");
 
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 		} finally {
@@ -168,8 +169,8 @@ public class RdataJDBCDAO implements RdataDAO_interface {
 		ResultSet rs = null;
 
 		try {
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
+
 			pstmt = con.prepareStatement(GETONE);
 			pstmt.setInt(1, R_id);
 			rs = pstmt.executeQuery();
@@ -189,11 +190,10 @@ public class RdataJDBCDAO implements RdataDAO_interface {
 				rdataVO.setS_name(rs.getString("s_name"));
 				rdataVO.setSa_rnote(rs.getString("sa_rnote"));
 				rdataVO.setD_id(rs.getInt("d_id"));
-			
+				rdataVO.setO_id(rs.getInt("o_id"));
+
 				
 			}
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
 		} catch (SQLException se) {
 			throw new RuntimeException("Couldn't load database driver. " + se.getMessage());
 		} finally {
@@ -233,8 +233,8 @@ public class RdataJDBCDAO implements RdataDAO_interface {
 		ResultSet rs = null;
 
 		try {
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
+
 			pstmt = con.prepareStatement(GETALL);
 			rs = pstmt.executeQuery();
 
@@ -249,10 +249,10 @@ public class RdataJDBCDAO implements RdataDAO_interface {
 				rdataVO.setS_name(rs.getString("s_name"));
 				rdataVO.setSa_rnote(rs.getString("sa_rnote"));
 				rdataVO.setD_id(rs.getInt("d_id"));
+				rdataVO.setO_id(rs.getInt("o_id"));
+
 				list.add(rdataVO);
 			}
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
 		} catch (SQLException se) {
 			throw new RuntimeException("Couldn't load database driver. " + se.getMessage());
 		} finally {
@@ -280,12 +280,73 @@ public class RdataJDBCDAO implements RdataDAO_interface {
 		}
 		return list;
 	}
+	@Override
+	public List<RdataVO> getBySname(String s_name) {
+		// TODO Auto-generated method stub
+		List<RdataVO> list = new ArrayList<RdataVO>();
+		RdataVO rdataVO = null;
 
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			con = ds.getConnection();
+
+			pstmt = con.prepareStatement(GETBYSNAME);
+			pstmt.setString(1, s_name);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				rdataVO = new RdataVO();
+				rdataVO.setR_id(rs.getInt("r_id"));
+				rdataVO.setR_date(rs.getTimestamp("r_date"));
+				rdataVO.setC_id(rs.getString("c_id"));
+				rdataVO.setM_id(rs.getInt("m_id"));
+				rdataVO.setP_summary(rs.getString("p_summary"));
+				rdataVO.setP_content(rs.getString("p_content"));
+				rdataVO.setS_name(rs.getString("s_name"));
+				rdataVO.setSa_rnote(rs.getString("sa_rnote"));
+				rdataVO.setD_id(rs.getInt("d_id"));
+				list.add(rdataVO);
+			}
+		} catch (SQLException se) {
+			throw new RuntimeException("Couldn't load database driver. " + se.getMessage());
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+//	}
 //	public static void main(String args[]) throws IOException {
-
+//
 //		RdataJDBCDAO dao = new RdataJDBCDAO();
-
-		/************************** 測試新增 ****************************/
+//		
+//		List<RdataVO> list =dao.getAll();
+//		for(RdataVO rdataVO:list){
+//		String c_id =rdataVO.getC_id();
+////		System.out.println(c_id);
+////		}
+//		/************************** 測試新增 ****************************/
 //		RdataVO rdataVO = new RdataVO();
 //		
 //		rdataVO.setR_date(java.sql.Date.valueOf("2017-02-08"));
@@ -296,7 +357,7 @@ public class RdataJDBCDAO implements RdataDAO_interface {
 //		rdataVO.setS_name("m_pass");
 //		rdataVO.setSa_rnote(null);
 //		rdataVO.setD_id(6001);
-//		dao.insert(rdataVO);
+//	dao.insert(rdataVO);
 
 		/************************** 測試修改 ****************************/
 
@@ -351,6 +412,6 @@ public class RdataJDBCDAO implements RdataDAO_interface {
 //		 System.out.println("---------------------------------------------------------"
 //		 + "---------------------------------------------------------");
 //		 }
-
-//	}
+//
+	}
 }

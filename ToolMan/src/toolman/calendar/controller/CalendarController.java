@@ -62,46 +62,61 @@ public class CalendarController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 	     String calendarjson = request.getParameter("calendarjson");
-		 CalendarVO calendarVO = new CalendarVO();
-		 MdataVO mdataVO = (MdataVO) request.getAttribute("mdataVO");
-		 Integer m_id = mdataVO.getM_id();
+		 
+//		 MdataVO mdataVO2 = (MdataVO) request.getAttribute("mdataVO");
+//		 Integer m_id = mdataVO2.getM_id();
+		 Integer m_id = 1000;
 		 System.out.println(calendarjson);
 		 CalendarService calendarservice = new CalendarService();
 		 List list = new ArrayList();
 //--------------------------------insert---------------------------------------------		 
-		JSONArray jsonarray = new JSONArray(calendarjson);
+		 calendarservice.deleteByM(m_id);
+		 JSONArray jsonarray = new JSONArray(calendarjson);
 		for (int i = 0; i < jsonarray.length(); i++) {
+			CalendarVO calendarVO = new CalendarVO();
 		    JSONObject jsonobject = jsonarray.getJSONObject(i);
 		    String id = jsonobject.getString("id");
 		    String title = jsonobject.getString("title");		    
 		    String start1 = jsonobject.getString("start");
-		    DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			Calendar calobj = Calendar.getInstance();
-			try {
-				calobj.setTime(df.parse(start1));
-			} catch (ParseException e) {
-				e.printStackTrace();
-			}
-			Timestamp start = new Timestamp(calobj.getTimeInMillis());		   
-		    String end1 = jsonobject.getString("end");
-			try {
-				calobj.setTime(df.parse(end1));
-			} catch (ParseException e) {
-				e.printStackTrace();
-			}
-			Timestamp end = new Timestamp(calobj.getTimeInMillis());
-		    
+		    DateFormat df=null;
+		    if(start1.endsWith("Z")){
+			     df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+		    }else{ 
+		    	df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+		    }
+			    Calendar calobj = Calendar.getInstance();
+				try {
+					calobj.setTime(df.parse(start1));
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+				Timestamp start = new Timestamp(calobj.getTimeInMillis());		   
+			    String end1 = jsonobject.getString("end");
+				try {
+					calobj.setTime(df.parse(end1));
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+				Timestamp end = new Timestamp(calobj.getTimeInMillis());
+		   
+		    	
+		    	
+		    	
+		    	
+		   
 		    String className = jsonobject.getJSONArray("className").toString();
 		    Boolean allDay = jsonobject.getBoolean("allDay");
-		    Boolean overlap = jsonobject.getBoolean("overlap");
-
-		    calendarVO.setStart(start);
-		    calendarVO.setTitle(title);
-		    calendarVO.setOverlap(overlap);
-		    calendarVO.setEnd(end);
-		    calendarVO.setStart(start);
-		    calendarVO.setAllDay(allDay);
-		    calendarVO.setClassName(className);		    
+//		    Boolean overlap = jsonobject.getBoolean("overlap");
+		    
+		    calendarVO.setEvent_id(id);
+		    calendarVO.setEvent_start(start);
+		    calendarVO.setEvent_title(title);
+		    
+		    calendarVO.setEvent_end(end);
+		    calendarVO.setEvent_start(start);
+		    calendarVO.setEvent_allDay(allDay);
+		    calendarVO.setEvent_className(className);
+		    calendarVO.setM_id(m_id);
 		    list.add(calendarVO);
 		    
 		    System.out.println(start);
@@ -110,69 +125,17 @@ public class CalendarController extends HttpServlet {
 		    System.out.println(end);
 		    System.out.println(className);
 		    System.out.println(allDay);
-		    System.out.println(overlap);
 		}
-		calendarservice.deleteByM(m_id);
+		
+		
 		calendarservice.InsertByM(list);
 //---------------------------------end insert---------------------------------------------		
-//		Gson gson = new Gson();
-//		List list = new ArrayList();
-//		String [] jsonarray = calendarjson.replaceAll("\\[", "").replaceAll("\\]", "").split("\\}\\,\\{");
-//		System.out.println(jsonarray);
-//		for(int i=0;i<jsonarray.length;i++){
-//			System.out.println(jsonarray[i]);
-//--------calendarjson consists of multiple json object and can't be put in the same map-----------
-//			Map<String, Object> map = gson.fromJson(calendarjson, new TypeToken<Map<String, Object>>(){}.getType());
-//			System.out.println(map.get("id"));
-//			list.add(map);
-//		}
-//		
-		//		Map<String,String> map = new HashMap<String,String>();
-		
-//		JSONParser parser = new JSONParser();
-//		Integer arraylength = calendarjson.replaceAll("\\[", "").replaceAll("\\]", "").split(",").length;
-//		JsonArray jsonarray = calendarjson.replaceAll("\\[", "").replaceAll("\\]", "").split(",");
-//		//		Object obj = null;
-////		try {
-////			obj = parser.parse(calendarjson);
-////		} catch (ParseException e) {
-////	        System.out.println("position: " + e.getPosition());
-////	         System.out.println(e);
-////			e.printStackTrace();
-////		}
-//        JSONArray jsonarray = (JSONArray)obj;
-//		
-//		for(int i=0;i<arraylength;i++){
-//			 JsonObject jsonobj = ((Object) jsonarray.getJsonObject(0);
-//			System.out.println(jsonobj.start);
-//		}
-//		
-				
-//	    Iterator iter = menu.keys();
-//	    while(iter.hasNext()){
-//	        String key = (String)iter.next();
-//	        String value = menu.getString(key);
-//	        map.put(key,value);
 		
 		//---------------------------------get calendar---------------------------------------------
 		
-		List<CalendarVO> getlist = calendarservice.getByM(m_id);
 		
-		for(CalendarVO calendarVo:getlist){
-			Map map = new HashMap();
-			map.put("id", calendarVO.getId());
-			map.put("start", calendarVO.getStart());
-			map.put("title", calendarVO.getTitle());
-			map.put("end", calendarVO.getEnd());
-			map.put("allDay", calendarVO.getAllDay());
-			map.put("overlap", calendarVO.getOverlap());
-			map.put("className", calendarVO.getClassName());
-			list.add(map);
-		}			
-			PrintWriter out = response.getWriter();
-			out.write(JSONValue.toJSONString(list));
-		//---------------------------------end calendar---------------------------------------------
-				
+//		//---------------------------------end calendar---------------------------------------------
+//				
 	    }
 		
 	

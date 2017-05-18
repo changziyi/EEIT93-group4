@@ -20,6 +20,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.simple.JSONValue;
 
+import toolman.ad.model.AdService;
+import toolman.ad.model.AdVO;
 import toolman.cdata.model.CdataDAO;
 import toolman.cdata.model.CdataService;
 import toolman.cdata.model.CdataVO;
@@ -30,13 +32,11 @@ import toolman.mpro.model.MProVO;
 import toolman.opro.model.OproVO;
 import toolman.order.model.OrderService;
 import toolman.order.model.OrderVO;
-import toolman.rdata.model.RdataJDBCDAO;
+import toolman.rdata.model.RdataDAO;
 import toolman.rdata.model.RdataService;
 import toolman.rdata.model.RdataVO;
 
-/**
- * Servlet implementation class managerUIservlet
- */
+
 @WebServlet("/toolman.managerUI.controller/ManagerUIServlet.do")
 public class ManagerUIServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -197,36 +197,39 @@ public class ManagerUIServlet extends HttpServlet {
 			RdataService rdataservice = new RdataService();
 			List<RdataVO> list = null;
 			
-			if("allcustomer".equals(datastatus)){				
-				list = rdataservice.getAll();		
+			if("allreport".equals(datastatus)){	
+				list = rdataservice.getAll();//need to add method in rdata
+					
 			}//end if		
 			else{
-//				list = rdataservice.getAll();//need to add method in rdata
+				list = rdataservice.getBySname(datastatus);	
 			}//end else	
 
-			List list2 = new ArrayList();
+			List listr = new ArrayList();
 				for(RdataVO rdataVO:list){
 					Map map = new HashMap();
-					Timestamp c_jdatestamp = rdataVO.getR_date();
+					Timestamp getrdate = rdataVO.getR_date();
 					SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-					String c_jdate = df.format(c_jdatestamp);
-					String c_name =	rdataVO.getC_id();
-					String c_id	= rdataVO.getC_id();
+					String r_date = df.format(getrdate);
+					Integer r_id =rdataVO.getR_id();
+					String c_id =	rdataVO.getC_id();
 					Integer m_id	= rdataVO.getM_id();
-					String c_addr = rdataVO.getP_summary();	
+					String p_summary = rdataVO.getP_summary();	
 					String p_content = rdataVO.getP_content();
 					String s_name = rdataVO.getS_name();
 					String sa_cnote	=rdataVO.getSa_rnote();
 					System.out.println(c_id);
-					map.put("c_jdate",c_jdate);
-					map.put("c_name",c_name);
+					map.put("r_date",r_date);
+					map.put("r_id",r_id);
 					map.put("c_id",c_id);
-					map.put("s_name",s_name);
-
+					map.put("m_id",m_id);
+					map.put("p_summary",p_summary);
+					map.put("p_content",p_content);	
+					map.put("s_name",s_name);	
 					map.put("sa_cnote",sa_cnote);	
-					list2.add(map);
+					listr.add(map);
 				}//end for loop
-				String cjasonstring = JSONValue.toJSONString(list2);
+				String cjasonstring = JSONValue.toJSONString(listr);
 				System.out.println(cjasonstring);
 				out.write(cjasonstring);
 				out.flush();
@@ -242,9 +245,47 @@ public class ManagerUIServlet extends HttpServlet {
 		}
 		//get ad
 		if("ad".equals(topnavigatorid)){
+			AdService adservice = new AdService();
 			
+			List<AdVO> list = null;
 			
-			
+			if("allreport".equals(datastatus)){	
+				list = adservice.getAll();//need to add method in rdata
+					
+			}//end if		
+			else{
+				list = adservice.getBySname(datastatus);	
+			}//end else	
+
+			List listad = new ArrayList();
+				for(AdVO adVO:list){
+					
+					Map map = new HashMap();
+					Integer ad_id =adVO.getAd_id();
+					Timestamp getbdate = adVO.getAd_bdate();
+					Timestamp getenddate =adVO.getAd_enddate();
+					SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");										
+					String ad_bdate = df.format(getbdate);
+					String ad_enddate =df.format(getenddate);
+					
+					Integer m_id= adVO.getM_id();
+					String s_name = adVO.getS_name();
+					System.out.println(ad_id);
+					map.put("ad_bdate",ad_bdate);
+					map.put("ad_enddate",ad_enddate);
+					map.put("ad_id",ad_id);
+					map.put("m_id",m_id);
+					map.put("s_name",s_name);
+					
+					listad.add(map);
+					
+				}//end for loop
+				String cjasonstring = JSONValue.toJSONString(listad);
+				System.out.println(cjasonstring);
+				out.write(cjasonstring);
+				out.flush();
+				System.out.println(cjasonstring);
+						
 		}
 
 	}
