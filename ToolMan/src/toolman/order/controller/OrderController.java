@@ -39,6 +39,7 @@ import toolman.order.model.OrderVO;
 @WebServlet("/toolman.order/OrderController.do")
 
 public class OrderController extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
        
     public OrderController() {
@@ -78,23 +79,14 @@ public class OrderController extends HttpServlet {
 			
 			//open while merge with mdata servlet			
 			String b_name = mdataVO.getB_name();//automatically filled in			
-//			String c_id = cdataVO.getC_id(); //automatically filled in, but I don't need c_id, I just need cdataVO
-			
-
-			
+//			String c_id = cdataVO.getC_id(); //automatically filled in, but I don't need c_id, I just need cdataVO		
 			//test data
 //			String b_name ="如意棒裝潢";
 //			Integer m_id = 1001;
-//			String c_id = "Micky";
-			
-
-			
-					
+//			String c_id = "Micky";		
 //				Integer mproid = mproVO.getM_proid();
 //				oproVO.setM_proid(mproVO);//hibernate will find it's m_proid specified in the mapping for me
-
-			
-			
+	
 			//time to deal with main content
 			Calendar calobj = Calendar.getInstance();
 			Timestamp o_bdate = new Timestamp(calobj.getTimeInMillis());//automatically filled in

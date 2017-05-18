@@ -5,6 +5,7 @@ import java.util.List;
 import toolman.cdata.model.CdataVO;
 import toolman.favorite.model.FavoriteVO;
 import toolman.mdata.model.MdataVO;
+import toolman.order.model.OrderVO;
 
 public class BlacklistService {
 	private BlacklistDAO_interface dao;
@@ -20,7 +21,12 @@ public class BlacklistService {
 		dao.delete(bk_id);
 	}
 	
-	
+	 public List<BlacklistVO>  getBlackSerch(String c_id ,Integer m_id){
+		 List<BlacklistVO> orderlist = dao.getBlackSerch(c_id , m_id);
+	    	    	
+	    	return orderlist;
+	    }
+	 
 	public BlacklistVO addBlacklist(String c_id, Integer m_id) {
 
 		BlacklistVO blacklistVO = new BlacklistVO();
