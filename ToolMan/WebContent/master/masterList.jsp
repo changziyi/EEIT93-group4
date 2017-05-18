@@ -34,7 +34,7 @@ body {font-family:Microsoft JhengHei;}
 	margin-left: 0;
 	margin-bottom: 8px;
 }
-.container {width: 90%;}
+/* .container {width: 90%;} */
 .myDiv {position: relative; top: 100px}
 .pad {
 	padding-top: 15px; 
