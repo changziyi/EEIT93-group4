@@ -38,12 +38,21 @@
 	
 	
 	
+	<link href="${pageContext.servletContext.contextPath}/nav/nav.css" rel="stylesheet">
+    
 	
 	
-<body bgcolor='white'>
-
-
+	
+<body >
+<jsp:include page="/nav/navigation.jsp" />
 <jsp:include page="/order/title.jsp" />
+
+<div>11111</div>
+<div>11111111</div>
+<div>11111111</div>
+
+
+<jsp:include page="/nav/navigation.jsp" />
 
 
 
@@ -172,7 +181,7 @@ ${orderVO.ma_des}
 
   
       <label for="comment">留言</label>
-      <textarea class="form-control" rows="2" id="comment" name="ma_des">屋吼好男人</textarea>
+      <textarea class="form-control" rows="2" id="comment" name="ma_des"></textarea>
     </div>
 
   

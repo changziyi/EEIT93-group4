@@ -24,12 +24,20 @@
 	
 	
 	
+	<link href="${pageContext.servletContext.contextPath}/nav/nav.css" rel="stylesheet">
+    
 	
 	
-<body bgcolor='white'>
-
-
+	
+<body >
+<jsp:include page="/nav/navigation.jsp" />
 <jsp:include page="/order/title.jsp" />
+
+<div>11111</div>
+<div>11111111</div>
+<div>11111111</div>
+
+<jsp:include page="/nav/navigation.jsp" />
 
 
 
@@ -56,12 +64,9 @@
 			
 			
 			<td>
-			
-			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/order/Favorite.do"> 
- 			    <input type="submit" value="刪除">
- 			    <input type="hidden" name="f_id" value="${favoriteVO.f_id}">
-		    <input type="hidden" name="action"value="delete"></FORM> 
-		  
+			  <a href="${pageContext.servletContext.contextPath}/order/Favorite.do?f_id=${favoriteVO.f_id}&action=delete" class="btn btn-info ">
+          <span class="glyphicon glyphicon-trash"></span> 刪除 
+        </a>
 			    
 			</td>
 			
