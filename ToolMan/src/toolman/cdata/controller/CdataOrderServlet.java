@@ -37,10 +37,10 @@ public class CdataOrderServlet extends HttpServlet {
 			
 			request.setAttribute("errorMsgs", errorMsgs);
 			
+			
 			try {
 				/*************************** 1.接收請求參數 ****************************************/
 				String c_id = request.getParameter("c_id");	
-							
 				/*************************** 2.開始查詢資料 ****************************************/
 				CdataService orderSvc = new CdataService();
 				Set<OrderVO> set = orderSvc.getOrderByC(c_id);
@@ -56,7 +56,9 @@ public class CdataOrderServlet extends HttpServlet {
 				successView.forward(request, response);
 				/*************************** 其他可能的錯誤處理 ***********************************/
 			} catch (Exception e) {
-				throw new ServletException(e);
+				RequestDispatcher rd = request.getRequestDispatcher("/cdata/login-in.jsp");
+				rd.forward(request, response);
+				return;//中斷
 			}
 		}
 		
