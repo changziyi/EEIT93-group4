@@ -40,13 +40,13 @@ public class OproDAO implements OproDAO_Interface {
 	}
 	
 	@Override
-	public OproVO getOproByOId(Integer o_id) {
+	public OproVO getOproByOId(OrderVO o_id) {
 		OproVO  oproVO  = null;
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();	
 		try {
 			session.beginTransaction();
-			Query query  = session.createQuery("from OproVO where o_id=?");
-			query.setParameter(1, o_id);
+			Query query  = session.createQuery("from OproVO where o_id=:o");
+			query.setParameter("o", o_id);
 			oproVO = (OproVO)query.list().get(0);
 			session.getTransaction().commit();
 		} catch (RuntimeException ex) {

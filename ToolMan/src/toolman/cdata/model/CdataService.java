@@ -24,6 +24,10 @@ public class CdataService {
 		CdataVO cdataVO = cdata.login_in(c_id);
 		return cdataVO;
 	}
+	
+	public List<CdataVO> geteMailAll(String c_email){		
+		return dao.geteMailAll(c_email);
+	}
 
 	//註冊
 	public CdataVO addCdata(String c_id,String c_pwd,String c_name,String c_cel,String c_email, String c_city, 

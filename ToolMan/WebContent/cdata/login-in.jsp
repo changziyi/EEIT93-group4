@@ -180,7 +180,7 @@ h2 {
 				</div>
 				<a class="forgotmember" href="login-up.jsp">還不是會員嗎?</a>
 				<div>
-					<a class="forgot" href="forgotpwd.jsp">忘記密碼?</a>
+					<a class="forgot" href="forgetpassword.jsp">忘記密碼?</a>
 				</div>
 				<div class="b">
 					<input type="hidden" name="login_mumber" value="login_on_mumber">
