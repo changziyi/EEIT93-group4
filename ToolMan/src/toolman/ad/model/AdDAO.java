@@ -4,11 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-<<<<<<< HEAD
-=======
-import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
->>>>>>> branch 'master' of https://github.com/changziyi/EEIT93-group4.git
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
