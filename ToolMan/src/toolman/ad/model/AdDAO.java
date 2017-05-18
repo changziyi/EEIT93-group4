@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -277,7 +278,7 @@ public class AdDAO implements AdDAO_interface {
 	
 	// benny
 	@Override
-	public List<AdVO> findBySname(String s_name) {
+	public List<AdVO> getBySname(String s_name) {
 		List<AdVO> adVOlist = new ArrayList<AdVO>();
 		AdVO adVO = null;
 		Connection con = null;
@@ -333,9 +334,8 @@ public class AdDAO implements AdDAO_interface {
 		return adVOlist;
 	}
 
-	//
 	@Override
-	public List<AdVO> getAllBySname(String s_name) {
+	public List<AdVO> getAllBySname2(String s_name) {
 		
 		List<AdVO> list = new ArrayList<AdVO>();
 		AdVO adVO = null;
@@ -464,6 +464,11 @@ public class AdDAO implements AdDAO_interface {
 		}
 		
 		return list;
+	}
+	@Override
+	public AdVO findBySname(String s_name) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }
