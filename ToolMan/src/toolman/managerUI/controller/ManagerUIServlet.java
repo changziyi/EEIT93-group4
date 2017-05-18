@@ -36,9 +36,7 @@ import toolman.rdata.model.RdataDAO;
 import toolman.rdata.model.RdataService;
 import toolman.rdata.model.RdataVO;
 
-/**
- * Servlet implementation class managerUIservlet
- */
+
 @WebServlet("/toolman.managerUI.controller/ManagerUIServlet.do")
 public class ManagerUIServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -256,7 +254,7 @@ public class ManagerUIServlet extends HttpServlet {
 					
 			}//end if		
 			else{
-				list = adservice.findBySname(datastatus);	
+				list = adservice.getBySname(datastatus);	
 			}//end else	
 
 			List listad = new ArrayList();

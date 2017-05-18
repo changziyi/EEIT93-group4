@@ -1124,7 +1124,8 @@ var eventidglobe =null;
 					if((events[i].title == "整天")||(event.title =="整天")){
 						if((splitstring1[0]+splitstring1[1]+splitstring1[2]+splitstring1[3])==
 							(splitstring2[0]+splitstring2[1]+splitstring2[2]+splitstring2[3])){
-		
+							//the id removed should be event._id, not event.id 
+							// the reason I can remove with event.id is because i have already given .id and ._id to the same value							
 								$('#calendar').fullCalendar('removeEvents', event.id);
 								return true;
 								
@@ -1133,8 +1134,8 @@ var eventidglobe =null;
 						
 					else if((splitstring1[0]+splitstring1[1]+splitstring1[2]+splitstring1[3]+splitstring1[4])==
 						(splitstring2[0]+splitstring2[1]+splitstring2[2]+splitstring2[3]+splitstring2[4])){
-	
-						
+						//the id removed should be event._id, not event.id 
+						// the reason I can remove with event.id because i have already given .id and ._id to the same value						
 							$('#calendar').fullCalendar('removeEvents', eventid1);
 						    return true;
 							

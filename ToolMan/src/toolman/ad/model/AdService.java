@@ -3,6 +3,7 @@ package toolman.ad.model;
 import java.util.List;
 
 import toolman.mdata.model.MdataVO;
+import toolman.wishpool.model.WishpoolVO;
 
 public class AdService {
 
@@ -12,12 +13,17 @@ public class AdService {
 		dao = new AdDAO();
 	
 }
+	public void insert(AdVO adVO) {
+		dao.insert(adVO);
+	}
+	
+	
 	
 	public AdVO findByPrimaryKey(Integer ad_id) {
 		return dao.findByPrimaryKey(ad_id);
 	}
 	
-	public List<AdVO> findBySname(String s_name) {
+	public AdVO findBySname(String s_name) {
 		return dao.findBySname(s_name);
 	}
 
@@ -26,9 +32,11 @@ public class AdService {
 	}
 
 	public List<AdVO> getAllBySname(String s_name) {
-		return dao.getAllBySname(s_name);
+		return dao.getBySname(s_name);
 	}
 	
-	
+	public List<AdVO> getBySname(String s_name){
+		return dao.getBySname(s_name);
+	}
 	
 }

@@ -9,44 +9,23 @@
 <%-- 此頁採用 JSTL 與 EL 取值 --%>
 
 
-
-<%-- <%
-
-// OrderService orderSvc = new OrderService();
-// List<OrderVO> list = orderSvc.getAllOrder();
-// pageContext.setAttribute("list",list);
-
- %> 
-
-
-<%	
-	OrderService emailSvc = new OrderService();
-	HttpSession sessions = request.getSession();
-	CdataVO cdataVO = (CdataVO)sessions.getAttribute("LoginOK");
-	List<OrderVO> list = emailSvc.getOrderByC(cdataVO.getC_id());
-	pageContext.setAttribute("list", list);
-%>
-
-
---%>
+    	
+    	
 
 
 <jsp:useBean id="listOrder" scope="request" type="java.util.Set" />
 
-
+<!DOCTYPE html>
 <html>
 
 <head>
 <title>${LoginOK.c_id}的訂單</title>
 
-<style>
-	a {
-	color:White;
-}
-</style>
-
 </head>
-
+<style>
+		body {font-family:Microsoft JhengHei;}
+          
+</style>
 <link rel="stylesheet"
 	href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
 <script
@@ -54,18 +33,18 @@
 <script
 	src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	
+	<link href="${pageContext.servletContext.contextPath}/nav/nav.css" rel="stylesheet">
+    
 	
 	
 	
-	
-<body bgcolor='white'>
-
-
+<body >
+<jsp:include page="/nav/navigation.jsp" />
 <jsp:include page="/order/title.jsp" />
 
-
-
-
+<div>1</div>
+<div>1</div>
+<div>1</div>
 
   <table class="table table-bordered table-hover" >
 	<tr>
@@ -91,47 +70,9 @@
 			<td>${orderVO.o_edate}</td>
 			<td>${orderVO.o_des}</td>
 			<td>${orderVO.o_location}</td>
-	<%--	
-			<td>${rdataVO.p_content}</td>
-			
-		 
-			          <c:forEach var="deptVO" items="${deptSvc.all}">
-                             <c:if test="${empVO.deptno==deptVO.deptno}">
-	                                                                       【${deptVO.dname} - ${deptVO.loc}】
-                             </c:if>
-                      </c:forEach>
-                   --%>  
-                      
-			
-			<%-- 
-			<td>
-			
-			
-			
-			
-			  <FORM METHOD="post" action="OrderController.do">
-	
-			     <input type="submit" value="修改">
-			     <input type="hidden" name="o_id" value="${orderVO.o_id}">
-			     <input type="hidden" name="action"	value="getOne_For_Update">
-			     
-			     
-			     </FORM>
-			 
-			</td>
-			--%>
-			
-			<td>
-			
-			${orderVO.c_id.c_id}
-			
-			</td>
-			<td>
-${orderVO.m_rating}
-			</td>
-				<td>
-${orderVO.ca_des}
-			</td>
+	        <td>${orderVO.c_id.c_id}</td>
+			<td>${orderVO.m_rating}</td>
+			<td>${orderVO.ca_des}</td>
 			
 			<td>
 			
@@ -193,7 +134,7 @@ ${orderVO.ca_des}
 
   
       <label for="comment">留言</label>
-      <textarea class="form-control" rows="2" id="comment" name="ca_des">金肉炫風</textarea>
+      <textarea class="form-control" rows="2" id="comment" name="ca_des"></textarea>
     </div>
 
   

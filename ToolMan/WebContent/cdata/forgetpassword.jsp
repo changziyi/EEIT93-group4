@@ -9,9 +9,8 @@
 <body>
 	 
 <form action="${pageContext.request.contextPath}/ForgotPwdServlet" method="post">  
-    <span style="color: red">${requestScope.sendMailMsg}</span>  
         信箱：<input type="text" name="Email" />
-    <span style="color: red">${requestScope.errorMsg}</span><br/>  
+    <span style="color: red">${errorMsgs.erroremail}</span><br/>  
     <input type="submit" value="送出" /><a href=""></a> 
 </form>  
 </body>
