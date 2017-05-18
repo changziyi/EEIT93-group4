@@ -29,9 +29,7 @@
 <link rel="stylesheet"
 	href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
 <link href="${pageContext.servletContext.contextPath}/nav/nav.css" rel="stylesheet">
-
 <link href="${pageContext.servletContext.contextPath}/wishpool/wish.css" rel="stylesheet">
-
 
 <script
 	src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -48,12 +46,15 @@
 
 <style>
 
+
+
+
 </style>
 
 <script>
       /*---------------瀑布流的關鍵CODE--------------------*/
 
-	$(function() {
+ 	  $(function() {
 		$('#wishblock').imagesLoaded(function() {
 			$('#wishblock').masonry({
 				itemSelector : '.content-box',
@@ -61,7 +62,7 @@
 				animate : true
 			});
 		});
-
+ 
 		/*--------------------------表單送出自動判別縣市行政區--------------------------------*/
 
 		var city = $('input[name="w_city"]');
@@ -152,8 +153,7 @@
 			</div>
 			
 			<div class="col-md-9" id="wishblock">
-				
-				
+
 					<c:forEach var="wishpoolVO" items="${new_date}">
 							<div class="content-box">
 								<div><label class="user-name">會員帳號：</label><span>${wishpoolVO.c_id}</span></div>
@@ -301,8 +301,17 @@
 			</div>
 		</div>
 	</c:forEach>
+	<script>
 	
-	
-
+	  $(function() {
+		$('#wishblock').imagesLoaded(function() {
+			$('#wishblock').masonry({
+				itemSelector : '.content-box',
+				columnWidth : 282,
+				animate : true
+			});
+		});
+		
+		</script>
 </body>
 </html>

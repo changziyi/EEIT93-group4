@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -393,16 +392,6 @@ public class AdDAO implements AdDAO_interface {
 		}
 		
 		return list;
-	}
-	@Override
-	public List<AdVO> findBySname(String s_name) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
-	public List<AdVO> getByDate(String s_name, Timestamp ad_bdate) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 	
 	

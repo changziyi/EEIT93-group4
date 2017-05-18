@@ -1,84 +1,112 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-    <%@ page import="toolman.cdata.model.*"%>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="toolman.cdata.model.*"%>
 <%@ page import="toolman.order.model.*"%>
- 	   <%@ page import=" java.util.*"%>
+<%@ page import=" java.util.*"%>
 <div class="navbar-wrapper">
-    <div class="container-fluid">
-        <nav class="navbar navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="${pageContext.servletContext.contextPath}/index.jsp">ToolMan</a>
-                </div>
-                <div id="navbar" class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li><a class="alist" href="${pageContext.servletContext.contextPath}/index.jsp" class="">首頁</a></li>
-						<li><a class="alist" href="${pageContext.servletContext.contextPath}/master/master.do?city=all&action=SearchAll" class="">我要找師傅</a></li>          
-                        <li class=" dropdown"><a class="alist" href="#" class="dropdown-toggle " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">我要開店  <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                       <li><a href="#">改到</a></li>
-                       <li><a href="#">旁邊</a> </li>
-                        </ul>
-                        </li>
-                        <li><a class="alist" href="${pageContext.servletContext.contextPath}/wishpool/Wishing+waterfall.jsp">許願池  </a></li>
-                           </ul>
-                       <!----------- 搜尋列----- -->
-                       <ul class="navbar-right">
-					    <form class="navbar-form">
-					        <div class="form-group">
-					          <input type="text" class="form-control" placeholder="Search">
-					        </div>
-					        <button type="button" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
-					      </form>
+	<div class="container-fluid">
+		<nav class="navbar navbar-fixed-top">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed"
+						data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+						aria-controls="navbar">
+						<span class="sr-only">Toggle navigation</span> <span
+							class="icon-bar"></span> <span class="icon-bar"></span> <span
+							class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand"
+						href="${pageContext.servletContext.contextPath}/index.jsp">ToolMan</a>
+				</div>
+				<div id="navbar" class="navbar-collapse collapse">
+					<ul class="nav navbar-nav">
+						<li><a class="alist"
+							href="${pageContext.servletContext.contextPath}/index.jsp"
+							class="">首頁</a></li>
+						<li><a class="alist"
+							href="${pageContext.servletContext.contextPath}/master/master.do?city=all&action=SearchAll"
+							class="">我要找師傅</a></li>
+						<li class=" dropdown"><a class="alist" href="#"
+							class="dropdown-toggle " data-toggle="dropdown" role="button"
+							aria-haspopup="true" aria-expanded="false">我要開店 <span
+								class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li><a href="#">改到</a></li>
+								<li><a href="#">旁邊</a></li>
+							</ul></li>
+						<li><a class="alist"
+							href="${pageContext.servletContext.contextPath}/wishpool/Wishing+waterfall.jsp">許願池
+						</a></li>
 					</ul>
-                     <!----------- 搜尋列----- -->
-                    <ul class="nav navbar-nav pull-right">
-                        <li class=" dropdown"><a class="alist" href="#" class="dropdown-toggle active" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">登入  <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a class="alist" href="${pageContext.servletContext.contextPath}/cdata/login-in.jsp">ToolMan 帳號</a></li>
-                                
-                                <li><div style="text-align:center;">
-                                 <div class="fb-login-button" onlogin="checkLoginState()" id="login" data-size="large"
-									data-max-rows="1" scope="public_profile,email" ></div>
-								 </div></li>
-                            </ul>
-                        </li>
-                        <li class=""><a class="alist" href="${pageContext.servletContext.contextPath}/loginoutServlet">登出</a></li>
-                    
-                 <li class=" dropdown"><a class="alist" href="#" class="dropdown-toggle " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span><span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-  <%-----------------------------------------------訂單表-就決定擺這------------------------------------------------------------------- --%>
+					<!----------- 搜尋列----- -->
+					<ul class="navbar-right">
+						<form class="navbar-form">
+							<div class="form-group">
+								<input type="text" class="form-control" placeholder="Search">
+							</div>
+							<button type="button" class="btn btn-default btn-sm">
+								<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+							</button>
+							<button type="button" class="btn btn-default btn-sm">
+						    <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
+					         </button>
+						</form>
+					</ul>
+					<!----------- 搜尋列----- -->
+					<ul class="nav navbar-nav pull-right">
+						<li class=" dropdown"><a class="alist" href="#"
+							class="dropdown-toggle active" data-toggle="dropdown"
+							role="button" aria-haspopup="true" aria-expanded="false">登入 <span
+								class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li><a class="alist"
+									href="${pageContext.servletContext.contextPath}/cdata/login-in.jsp">ToolMan
+										帳號</a></li>
 
- <li><a href="${pageContext.servletContext.contextPath}/mdata/MdataOrderServlet.do?m_id=${LoginOK.m_id}&action=listOrder">師傅訂單</a></li>
- <li><a href="${pageContext.servletContext.contextPath}/cdata/CdataOrderServlet.do?c_id=${LoginOK.c_id}&action=listOrder">消費者訂單</a> </li>
- <li><a href="${pageContext.servletContext.contextPath}/cdata/CdataOrderServlet.do?c_id=${LoginOK.c_id}&action=myLike">我的最愛</a> </li>
- <li><a href="${pageContext.servletContext.contextPath}/cdata/CdataOrderServlet.do?c_id=${LoginOK.c_id}&action=myHate">黑名單</a> </li>
-<li><a href="#">刊登廣告</a> </li>
-   
-   
-      <%-----------------------------------------------墨西哥長城------------------------------------------------------------------- --%>
-                            
-                            </ul>
-                        </li>    
-                    
-                    </ul>
-                </div>
-           
-                </div>
-            </div>
-        </nav>
-    </div>
+								<li><div style="text-align: center;">
+										<div class="fb-login-button" onlogin="checkLoginState()"
+											id="login" data-size="large" data-max-rows="1"
+											scope="public_profile,email"></div>
+									</div></li>
+							</ul></li>
+						<li class=""><a class="alist"
+							href="${pageContext.servletContext.contextPath}/loginoutServlet">登出</a></li>
+
+						<li class=" dropdown"><a class="alist" href="#"
+							class="dropdown-toggle " data-toggle="dropdown" role="button"
+							aria-haspopup="true" aria-expanded="false"><span
+								class="glyphicon glyphicon-user"></span><span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<%-----------------------------------------------訂單表-就決定擺這------------------------------------------------------------------- --%>
+
+								<li><a
+									href="${pageContext.servletContext.contextPath}/mdata/MdataOrderServlet.do?m_id=${LoginOK.m_id}&action=listOrder">師傅訂單</a></li>
+								<li><a
+									href="${pageContext.servletContext.contextPath}/cdata/CdataOrderServlet.do?c_id=${LoginOK.c_id}&action=listOrder">消費者訂單</a>
+								</li>
+								<li><a
+									href="${pageContext.servletContext.contextPath}/cdata/CdataOrderServlet.do?c_id=${LoginOK.c_id}&action=myLike">我的最愛</a>
+								</li>
+								<li><a
+									href="${pageContext.servletContext.contextPath}/cdata/CdataOrderServlet.do?c_id=${LoginOK.c_id}&action=myHate">黑名單</a>
+								</li>
+								<li><a href="#">刊登廣告</a></li>
+							</ul></li>
+
+					</ul>
+					
+	<%-----------------------------------------------墨西哥長城------------------------------------------------------------------- --%>
+					
+				</div>
+			</div>
+	</div>
+	</nav>
+</div>
 <!------------------------------------- facebook 登入 ----------------------------------------->
-   <div style="visibility:hidden" id="status"></div>         
-    <script src="http://cdn.static.runoob.com/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script>
+<div style="visibility: hidden" id="status"></div>
+<!--     <script src="http://cdn.static.runoob.com/libs/jquery/1.10.2/jquery.min.js"></script> -->
+<script>
     
     //fb click
     $(document).ready(function(){
