@@ -35,6 +35,8 @@ public class AdService {
 		return dao.getBySname(s_name);
 	}
 	
-	
+	public List<AdVO> getBySname(String s_name){
+		return dao.getBySname(s_name);
+	}
 	
 }
