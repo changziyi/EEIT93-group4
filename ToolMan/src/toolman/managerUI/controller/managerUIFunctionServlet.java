@@ -16,7 +16,9 @@ import toolman.cdata.model.CdataService;
 import toolman.cdata.model.CdataVO;
 import toolman.mdata.model.MdataService;
 import toolman.mdata.model.MdataVO;
+import toolman.opro.model.OproDAO;
 import toolman.order.model.OrderService;
+import toolman.order.model.OrderVO;
 
 /**
  * Servlet implementation class managerUIFunctionServlet
@@ -107,14 +109,19 @@ public class managerUIFunctionServlet extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("/cdata/ShowCdata.jsp");
 			rd.forward(request, response);	
 		}
-		//tested ok
-		if("findorder".equals(functionaction)){
-			OrderService orderservice = new OrderService();
-			request.setAttribute("orderVO", orderservice.getById(new Integer(targetid)));
-			// maybe add if s_name.equals(完成或未完成) and direct to confirmorder.jsp step3 or 4
-			RequestDispatcher rd = request.getRequestDispatcher("/toolman.order/confirmorder.jsp");
-			rd.forward(request, response);	
-		}
+		//tested ok no purpose to use it
+//		if("findorder".equals(functionaction)){
+//			OrderService orderservice = new OrderService();
+//			OproDAO opro = new OproDAO();
+//			//Attributes set according to confirmorder.jsp
+//			OrderVO orderVO = orderservice.getById(new Integer(targetid));
+//			request.setAttribute("orderVO",orderVO );
+//			request.setAttribute("oproVOlist", opro.getOproByOId(orderVO));
+//			// maybe add if s_name.equals(完成或未完成) and direct to confirmorder.jsp step3 or 4
+//			RequestDispatcher rd = request.getRequestDispatcher("/manager.backstageUI/confirmordermanager.jsp");
+//			rd.forward(request, response);	
+//		}
+		
 //		if("sendmessagem".equals(functionaction)){
 //			List<MdataVO> list = new ArrayList<MdataVO>();
 //			for(String m_id:arraytoggled){

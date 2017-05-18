@@ -9,6 +9,8 @@ import java.util.Set;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 import hibernate.util.HibernateUtil;
@@ -21,7 +23,29 @@ public class CdataDAO implements CdataDAO_interface{
 	
 	private static final String GET_ALL_STMT = "from CdataVO order by c_id";
 
-	//登入
+	
+	
+	//send mail
+	@Override
+	public List<CdataVO> geteMailAll(String c_email) {
+		List<CdataVO> querylist = null;
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Transaction tx = session.beginTransaction();
+		try {
+			session.beginTransaction();
+			Criteria query = session.createCriteria(CdataVO.class);
+//			query.setParameter("c", c_email);
+			query.addOrder( Order.asc("c_email") );
+			querylist = query.list();			
+			session.getTransaction().commit();
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
+		return querylist;
+	}
+	
+	//login in 
 	@Override
 	public CdataVO login_in(String c_id) {
 		CdataVO cdataVO = null;
@@ -41,7 +65,7 @@ public class CdataDAO implements CdataDAO_interface{
 		}
 		return cdataVO;
 	}	
-	//註冊				
+	//login out				
 	@Override
 	public void insert(CdataVO cdataVO) {
 		// TODO Auto-generated method stub
@@ -203,24 +227,36 @@ public class CdataDAO implements CdataDAO_interface{
 	public static void main(String args[]){		
 		CdataDAO  dao = new CdataDAO();
 		
-		List<CdataVO> list= dao.getAll();
-		for(CdataVO cdataVO:list){
-			Timestamp c_jdatestamp = cdataVO.getC_jdate();
-			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			String c_jdate = df.format(c_jdatestamp);
-			String c_name =	cdataVO.getC_name();
-			String c_id	= cdataVO.getC_id();
-			String c_addr = cdataVO.getC_addr();
-			String c_district = cdataVO.getC_district();
-			String c_city = cdataVO.getC_city();
-			String c_location = c_city + c_district + c_addr;					
-			String s_name = cdataVO.getS_name();
-			Integer c_averrating = cdataVO.getC_averrating();
-			String sa_cnote	=cdataVO.getSa_cnote();
-			System.out.println(c_id);
-			System.out.println( c_jdatestamp);
-			System.out.println( c_jdate);
+//		List<CdataVO> list= dao.getAll();
+//		for(CdataVO cdataVO:list){
+//			Timestamp c_jdatestamp = cdataVO.getC_jdate();
+//			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//			String c_jdate = df.format(c_jdatestamp);
+//			String c_name =	cdataVO.getC_name();
+//			String c_id	= cdataVO.getC_id();
+//			String c_addr = cdataVO.getC_addr();
+//			String c_district = cdataVO.getC_district();
+//			String c_city = cdataVO.getC_city();
+//			String c_location = c_city + c_district + c_addr;					
+//			String s_name = cdataVO.getS_name();
+//			Integer c_averrating = cdataVO.getC_averrating();
+//			String sa_cnote	=cdataVO.getSa_cnote();
+//			System.out.println(c_id);
+//			System.out.println( c_jdatestamp);
+//			System.out.println( c_jdate);
+//		}
+		
+		
+
+		String c_email = null;
+		List<CdataVO> list = dao.geteMailAll(c_email);
+		for (CdataVO aEmp : list) {
+			System.out.print(aEmp.getC_email() + ",");
+			System.out.println();
 		}
+		
+		
+		
 //		
 //		/*********************** 查詢媒合  *****************************/
 //		

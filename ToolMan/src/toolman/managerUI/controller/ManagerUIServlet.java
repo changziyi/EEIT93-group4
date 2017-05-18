@@ -20,6 +20,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.simple.JSONValue;
 
+import toolman.ad.model.AdService;
+import toolman.ad.model.AdVO;
 import toolman.cdata.model.CdataDAO;
 import toolman.cdata.model.CdataService;
 import toolman.cdata.model.CdataVO;
@@ -30,7 +32,7 @@ import toolman.mpro.model.MProVO;
 import toolman.opro.model.OproVO;
 import toolman.order.model.OrderService;
 import toolman.order.model.OrderVO;
-import toolman.rdata.model.RdataJDBCDAO;
+import toolman.rdata.model.RdataDAO;
 import toolman.rdata.model.RdataService;
 import toolman.rdata.model.RdataVO;
 
@@ -202,7 +204,7 @@ public class ManagerUIServlet extends HttpServlet {
 					
 			}//end if		
 			else{
-//				list = rdataservice.getBySname(datastatus);	
+				list = rdataservice.getBySname(datastatus);	
 			}//end else	
 
 			List listr = new ArrayList();
@@ -245,9 +247,47 @@ public class ManagerUIServlet extends HttpServlet {
 		}
 		//get ad
 		if("ad".equals(topnavigatorid)){
+			AdService adservice = new AdService();
 			
+			List<AdVO> list = null;
 			
-			
+			if("allreport".equals(datastatus)){	
+				list = adservice.getAll();//need to add method in rdata
+					
+			}//end if		
+			else{
+				list = adservice.findBySname(datastatus);	
+			}//end else	
+
+			List listad = new ArrayList();
+				for(AdVO adVO:list){
+					
+					Map map = new HashMap();
+					Integer ad_id =adVO.getAd_id();
+					Timestamp getbdate = adVO.getAd_bdate();
+					Timestamp getenddate =adVO.getAd_enddate();
+					SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");										
+					String ad_bdate = df.format(getbdate);
+					String ad_enddate =df.format(getenddate);
+					
+					Integer m_id= adVO.getM_id();
+					String s_name = adVO.getS_name();
+					System.out.println(ad_id);
+					map.put("ad_bdate",ad_bdate);
+					map.put("ad_enddate",ad_enddate);
+					map.put("ad_id",ad_id);
+					map.put("m_id",m_id);
+					map.put("s_name",s_name);
+					
+					listad.add(map);
+					
+				}//end for loop
+				String cjasonstring = JSONValue.toJSONString(listad);
+				System.out.println(cjasonstring);
+				out.write(cjasonstring);
+				out.flush();
+				System.out.println(cjasonstring);
+						
 		}
 
 	}

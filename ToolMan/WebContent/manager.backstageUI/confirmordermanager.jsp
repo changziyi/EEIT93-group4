@@ -152,7 +152,7 @@
 				              </select>
 				            </div>           
 				              <span>
-				            	  <button id="btntobackstage" href="${pageContext.servletContext.contextPath}/order/listCOrder.jsp" class="btn btn-primary putmiddle" >進行訂單管理</button>
+				            	  <button id="btntobackstage" href="${pageContext.servletContext.contextPath}/order/listCOrder.jsp" class="btn btn-primary putmiddle" >回管理頁面</button>
 					    	</span>
 				        </form>
 		    	</div>     

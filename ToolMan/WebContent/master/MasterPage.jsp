@@ -4,61 +4,53 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>${mdataVO.b_name}</title>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<%-- <link rel="stylesheet" href="${pageContext.servletContext.contextPath}/css/jquery.fileuploader-theme-thumbnails.css" media="all"> --%>
-<%-- <link rel="stylesheet" href="${pageContext.servletContext.contextPath}/css/jquery.fileuploader.css" media="all"> --%>
-<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/css/bootstrap.min.css">
-<script src="${pageContext.servletContext.contextPath}/js/jquery-3.2.1.min.js"></script>
-<script src="${pageContext.servletContext.contextPath}/js/bootstrap.min.js"></script>
-<%-- <script src="${pageContext.servletContext.contextPath}/js/jquery.fileuploader.min.js"></script> --%>
-<%-- <script src="${pageContext.servletContext.contextPath}/js/custom.js"></script> --%>
-<style>
-.changeImg {
-	width: 200px;
-	padding: 10px;
-}
-#uploadTemp {
-	line-height: normal;
-	background-color: #fff;
-	width: 560px;
-}
-.workImgArea {
-	vertical-align: top;
-	padding: 5px;
-}
-input[type="file"] {
-	display: inline;
-}
-</style>
+	<title>${mdataVO.b_name}</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/css/bootstrap.min.css">
+	<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/nav/nav.css">
+	<style>
+		body {font-family:Microsoft JhengHei;}
+		input[type="file"] {display:inline;}
+		.changeImg {width:200px; padding:10px;}
+		#uploadTemp {line-height:normal;background-color:#fff;width:560px;}
+		.workImgArea {vertical-align:top;padding:5px;}
+		.myDiv {position:relative; top:85px;}
+/*  		.md8 {margin-left:2%;margin-right:0;padding:0} */
+/*  		.md4 {margin-right:5%} */
+	</style>
 </head>
 <body>
+<jsp:include page="/nav/navigation.jsp" />
+<div class="myDiv">
 <div class="container">
 
 	<div class="row">
-		<div class="col-md-8">
-			<img height="450px" src='${pageContext.servletContext.contextPath}/master/master.do?type=master&image=${mdataVO.m_id}'/>
-		</div>
-		<div class="col-md-4">
-			<H3>${mdataVO.b_name}</H3>
-			<p>專業：<c:forEach var="aMpro" items="${mdataVO.mpros}">${aMpro.m_pro}</c:forEach></p>
-			<p>師傅：${mdataVO.m_name}</p>
-			<p>地區：${mdataVO.m_city}　${mdataVO.m_district}</p>
-   			<input type="button" id="reservemaster" value="預約師傅" >
+		<div class="col-md-8" style="width:90%; margin-left:3%">
+			<div class="col-md-8 md8">
+				<img height="450px" src='${pageContext.servletContext.contextPath}/master/master.do?type=master&image=${mdataVO.m_id}'/>
+			</div>
+			<div class="col-md-4 md4">
+				<H3>${mdataVO.b_name}</H3>
+				<p>專業：<c:forEach var="aMpro" items="${mdataVO.mpros}">${aMpro.m_pro}</c:forEach></p>
+				<p>師傅：${mdataVO.m_name}</p>
+				<p>地區：${mdataVO.m_city}　${mdataVO.m_district}</p>
+	   	<a href="${pageContext.servletContext.contextPath}/toolman.order/NewOrder.jsp" class="btn btn-success ">
+          <span class="glyphicon glyphicon-earphone"></span> 預約師傅
+        </a>   
  <%--------------------------------------最愛與黑單--------------------------------------------------- --%>
-   		
-			<a href="${pageContext.servletContext.contextPath}/order/Favorite.do?c_id=${LoginOK.c_id}&m_id=${mdataVO.m_id}&action=addFavorite" class="btn btn-info ">
-          <span class="glyphicon glyphicon-heart-empty"></span>加入最愛
-        </a>
-        <a href="${pageContext.servletContext.contextPath}/order/Dislike.do?c_id=${LoginOK.c_id}&m_id=${mdataVO.m_id}&action=addDislike" class="btn btn-danger">
-          <span class="glyphicon glyphicon-remove-sign"></span> 加入黑名單
-        </a>
-		
+				<a href="${pageContext.servletContext.contextPath}/order/Favorite.do?c_id=${LoginOK.c_id}&m_id=${mdataVO.m_id}&action=addFavorite" class="btn btn-info ">
+					<span class="glyphicon glyphicon-heart-empty"></span>加入最愛
+				</a>
+        		<a href="${pageContext.servletContext.contextPath}/order/Dislike.do?c_id=${LoginOK.c_id}&m_id=${mdataVO.m_id}&action=addDislike" class="btn btn-danger">
+          			<span class="glyphicon glyphicon-remove-sign"></span> 加入黑名單
+        		</a>
   <%--------------------------------------萬里長城--------------------------------------------------- --%>
-   			
+			</div>
 		</div>
 	</div>
+</div> <!--container-->
+<div class="container">
 	<br />
 	<ul class="nav nav-tabs">
 		<li class="active"><a data-toggle="tab" href="#home">介紹</a></li>
@@ -134,8 +126,10 @@ input[type="file"] {
 			</c:forEach>
 		</div>
 	</div>
-	
-	
+</div>	
+</div>
+	<script src="${pageContext.servletContext.contextPath}/js/jquery-3.2.1.min.js"></script>
+	<script src="${pageContext.servletContext.contextPath}/js/bootstrap.min.js"></script>
 	<script>
 	
 // 		$(function() {
@@ -294,9 +288,7 @@ input[type="file"] {
 			
 // 		}); //outter function
 	</script>
-  
-	
-</div> <!--container-->
+
 <script>
 $("#reservemaster").on("click",function(){window.location='${pageContext.servletContext.contextPath}/toolman.order/NewOrder.jsp'});
 </script>

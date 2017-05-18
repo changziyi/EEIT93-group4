@@ -14,6 +14,7 @@ public interface CdataDAO_interface {
 	
 	public CdataVO login_in(String c_id);//登入
 	public void insert(CdataVO cdataVO);//註冊表單
+	List<CdataVO> geteMailAll(String c_email);//send mail
 	public void update(CdataVO cdataVO);
 	public void delete(String c_id);
 	public List<CdataVO> getAll();
