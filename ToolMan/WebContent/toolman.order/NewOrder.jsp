@@ -220,8 +220,14 @@
 	}
 	.table{
 	text-align:center;
-	
+	 vertical-align:middle;
 	}
+	#ordertable tbody tr td{
+	width:500px;
+	text-align:right;
+	 vertical-align:middle;
+	margin:0px;
+	} 
 	.putmiddle{
 		margin:0 auto;
 		display:table;
@@ -252,12 +258,7 @@
 		margin:auto;
 		
 	}
-	#ordertable tbody tr td{
-	width:500px;
-	text-align:right;
-	 vertical-align:middle;
-	
-	} 
+
 	</style>
 
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -461,7 +462,7 @@
 									</tr>
 									<tr>
 										<td>
-											<label class="labelstyle">維修項目說明</label><!-- 	ok -->
+											<label class="labelstyle" >維修項目說明</label><!-- 	ok -->
 										</td>
 		
 										<td>	
@@ -472,16 +473,16 @@
 									<tr>
 										<td>
 											
-											<label class="labelstyle">未回應請求失效時間</label>
+											<label class="labelstyle" style="padding:12px;">未回應請求失效時間</label>
 										</td>
-										<td>
+										<td style="">
 											<div style="width: 500px;"  >
-												<label class="radio-inline"><input type="radio" name="req_exp" value="5000" checked="checked">5秒測試用</label>
-												<label class="radio-inline"><input type="radio" name="req_exp" value="15000" >15秒測試用</label>
-												<label class="radio-inline"><input type="radio" name="req_exp" value="2400000" >2小時</label>
-												<label class="radio-inline"><input type="radio" name="req_exp" value="86400000">1天</label>
-												<label class="radio-inline"><input type="radio" name="req_exp" value="172800000">2天</label>
-												<label class="radio-inline"><input type="radio" name="req_exp" value="604800000">一週</label>
+												<label class="radio-inline"style="float:left"><input type="radio"  name="req_exp" value="5000" checked="checked">5秒測試用</label>
+												<label class="radio-inline" style="float:left"><input type="radio" name="req_exp" value="15000" >15秒測試用</label>
+												<label class="radio-inline" style="float:left"><input type="radio" name="req_exp" value="2400000" >2小時</label>
+												<label class="radio-inline" style="float:left"><input type="radio" name="req_exp" value="86400000">1天</label>
+												<label class="radio-inline" style="float:left"><input type="radio" name="req_exp" value="172800000">2天</label>
+												<label class="radio-inline" style="float:left"><input type="radio" name="req_exp" value="604800000">一週</label>
 											</div>
 											<span class="errormsg"  value=${errormsg.erroro_des}>${errormsg.errorreq_exp}</span>
 										</td>
