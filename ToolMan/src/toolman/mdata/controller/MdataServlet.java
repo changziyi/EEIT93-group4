@@ -255,7 +255,7 @@ public class MdataServlet extends HttpServlet {
 			String b_name = request.getParameter("b_name");
 			String b_des = request.getParameter("b_des");
 			Part partbim = request.getPart("b_image");
-
+			
 			InputStream incer = partcer.getInputStream();
 			byte[] m_cer = new byte[incer.available()];
 			incer.read(m_cer);
@@ -333,7 +333,7 @@ public class MdataServlet extends HttpServlet {
 			byte[] b_image = mdataSvc.getImg(m_id);
 
 			if (b_image == null || b_image.length == 0) {
-				InputStream in = getServletContext().getResourceAsStream("/image/jake.gif");
+				InputStream in = getServletContext().getResourceAsStream("/images/no_image.PNG");
 				b_image = new byte[in.available()];
 				in.read(b_image);
 				out.write(b_image);
@@ -368,7 +368,7 @@ public class MdataServlet extends HttpServlet {
 			byte[] m_cer = mdataVO.getM_cer();
 
 			if (m_cer == null || m_cer.length == 0) {
-				InputStream in = getServletContext().getResourceAsStream("/image/jake.gif");
+				InputStream in = getServletContext().getResourceAsStream("/images/no_image.PNG");
 				m_cer = new byte[in.available()];
 				in.read(m_cer);
 				out.write(m_cer);
