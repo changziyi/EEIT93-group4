@@ -33,7 +33,7 @@
 <%-- 	</c:if> --%>
 
 <!-- login please -->
-	
+	<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/nav/nav.css">
 	<style>
 		#map{
 		height:100px;
@@ -87,12 +87,13 @@
 
 </head>
 <body>
+<jsp:include page="/nav/navigation.jsp" />
 <!-- smart wizard head -->
 
         
 
         <br />
-     <div class="container containerstyle textstyle putmiddle">
+     <div class="container containerstyle textstyle putmiddle" style="margin-top:5%">
         <!-- SmartWizard html -->
         <div id="smartwizard">
             <ul class="textstyle">
@@ -152,7 +153,7 @@
 				              </select>
 				            </div>           
 				              <span>
-				            	  <button id="btntobackstage" href="${pageContext.servletContext.contextPath}/order/listCOrder.jsp" class="btn btn-primary putmiddle" >進行訂單管理</button>
+				            	 <a href="${pageContext.servletContext.contextPath}/order/listCOrder.jsp"><button id="btntobackstage"  class="btn btn-primary putmiddle" >進行訂單管理</button></a>;
 					    	</span>
 				        </form>
 		    	</div>     
