@@ -107,7 +107,7 @@ tbody td:hover {
 </style>
 <body>
 <jsp:include page="/nav/navigation.jsp" />
-<div>
+<div style="margin-top: 50px;">
 	<div class="container">
 	
 	<div class="page-header">
@@ -277,11 +277,11 @@ tbody td:hover {
 						<table border="0">    		
   						<%if (rowsPerPage<rowNumber) {%>
    						 <%if(pageIndex>=rowsPerPage){%>
-        				<a href="${pageContext.servletContext.contextPath}/cdata/CdatadessServlet.do?whichPage=1">至第一頁</a>&nbsp;
-        				<a href="${pageContext.servletContext.contextPath}/cdata/CdatadessServlet.do?whichPage=<%=whichPage-1%>">上一頁 </a>&nbsp;<%}%>
+        				<a href="${pageContext.servletContext.contextPath}/cdata/CdatadessServlet.do?c_id=${LoginOK.c_id}&whichPage=1">至第一頁</a>&nbsp;
+        				<a href="${pageContext.servletContext.contextPath}/cdata/CdatadessServlet.do?c_id=${LoginOK.c_id}&whichPage=<%=whichPage-1%>">上一頁 </a>&nbsp;<%}%>
    						 <%if(pageIndex<pageIndexArray[pageNumber-1]){%>
-         					<a href="${pageContext.servletContext.contextPath}/cdata/CdatadessServlet.do?whichPage=<%=whichPage+1%>">下一頁</a>&nbsp;
-         					<a href="${pageContext.servletContext.contextPath}/cdata/CdatadessServlet.do?whichPage=<%=pageNumber%>">至最後一頁</a>&nbsp; 
+         					<a href="${pageContext.servletContext.contextPath}/cdata/CdatadessServlet.do?c_id=${LoginOK.c_id}&whichPage=<%=whichPage+1%>">下一頁</a>&nbsp;
+         					<a href="${pageContext.servletContext.contextPath}/cdata/CdatadessServlet.do?c_id=${LoginOK.c_id}&whichPage=<%=pageNumber%>">至最後一頁</a>&nbsp; 
     						<%}%><%}%>  
  						</table>
 							<table border="0">    

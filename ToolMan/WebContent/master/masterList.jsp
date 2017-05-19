@@ -23,6 +23,8 @@
 	<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/nav/nav.css">
 	<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/css/index/expandsearch.css">
 	<%-- <link rel="stylesheet" href="${pageContext.servletContext.contextPath}/css/creative.css"> --%>
+	<script src="${pageContext.servletContext.contextPath}/js/jquery-3.2.1.min.js"></script>
+	<script src="${pageContext.servletContext.contextPath}/js/bootstrap.min.js"></script>
 	<style>
 		body {font-family:Microsoft JhengHei;}
 		a {color:White;}
@@ -124,8 +126,6 @@
 		</div> <!-- row -->
 	</div>
 	
-<script src="${pageContext.servletContext.contextPath}/js/jquery-3.2.1.min.js"></script>
-<script src="${pageContext.servletContext.contextPath}/js/bootstrap.min.js"></script>
 <script src="${pageContext.servletContext.contextPath}/js/jquery.search.twzipcode.min.js"></script>		
 <script>
 	
@@ -160,8 +160,8 @@
 				if (score == '0') {
 					score = '尚無評價';
 				}
-				var rating = $('<span></span>').attr('style','font-size:12px').text(score);
-				var bname = $('<h3></h3>').text(master.bname).append(rating);
+// 				var rating = $('<span></span>').attr('style','font-size:12px').text(score);
+				var bname = $('<h3></h3>').text(master.bname);
 				var city = $('<p></p>').addClass('boxtext').text('地點：' + master.city + ' ' + master.district);
 				var finish = $('<p></p>').addClass('boxtext').text('完成案件數：' + master.finish);
 				var divPro = $('<div></div>').addClass('divpro');

@@ -3,7 +3,11 @@
 
 <html>
 <head>
-<title>cena</title>
+<title>謝謝你</title>
+<script>
+
+
+</script>
 </head>
 <link rel="stylesheet"
 	href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -15,11 +19,12 @@
 <body >
 <jsp:include page="/nav/navigation.jsp" />
 <jsp:include page="/order/title.jsp" />
-<div>1</div>
-<div>1</div>
-<div>1</div>
+<br/>
+<br/>
+<br/>
 <div class="alert alert-success">
   <h2><strong>謝謝你的評價</strong></h2>
+  
   </div>
 
 </body>

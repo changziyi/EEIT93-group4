@@ -2,30 +2,41 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
 <%@ page import="toolman.order.model.*"%>
-
-
-
-<%-- 此頁採用 JSTL 與 EL 取值 --%>
-
-
-
-<%-- <%
-
-// OrderService orderSvc = new OrderService();
-// List<OrderVO> list = orderSvc.getAllOrder();
-// pageContext.setAttribute("list",list);
-
- %> --%>
-
-
-
 <jsp:useBean id="listOrder" scope="request" type="java.util.Set" />
-
-
 <html>
-
 <head>
 <title>師傅專頁</title>
+<script>        
+
+// function star() {
+//     var areas = document.getElementsByTagName("area");　
+//         //alert(areas.length);
+//         for (var i = 0; i < areas.length; i++) {
+//             areas[i].onmouseover = function () { mouseOver(this.id); };
+//             areas[i].onmouseout = mouseOut;
+//            areas[i].onclick = function () { Click(this.id); }
+        	 
+//         }
+        
+//     }     
+
+
+//         function mouseOver(areaid) {            
+//             //document.images[0].src = "images/MapTaipei.gif";
+<%--             document.images[0].src = "<%=request.getContextPath()%>/order/images/5star-"+areaid.substr(2)+".png"; --%>
+//         }
+
+
+//         function mouseOut() {            
+<%--             document.images[0].src = "<%=request.getContextPath()%>/order/images/5star.png"; --%>
+//              }
+
+
+//          function Click(areaid) {            
+//              document.getElementById("mapdiv1").innerHTML ="你給了"+areaid.substr(2)+"分";
+//              document.getElementById("mapdiv").innerHTML = '<input type="hidden" name="c_rating" value="'+areaid.substr(2)+'">'
+//          }
+    </script>
 
 </head>
 
@@ -47,9 +58,10 @@
 <jsp:include page="/nav/navigation.jsp" />
 <jsp:include page="/order/title.jsp" />
 
-<div>11111</div>
-<div>11111111</div>
-<div>11111111</div>
+<br/>
+<br/>
+<br/>
+
 
 
 <jsp:include page="/nav/navigation.jsp" />
@@ -60,10 +72,13 @@
   <table class="table table-bordered">
 	<tr>
 	    <th>消費者</th>
-		<th>訂單完成時間</th>
+	    <th>預約時間</th>
+	    <th>訂單完成時間</th>
 		<th>維修項目說明</th>
 		<th>施工地址</th>
 		<th>店家名稱</th>
+		<th>訂單狀態</th>
+		<th>回應訂單</th>
 		<th>分數</th>
 		<th>留言</th>
 		<th>評分</th>
@@ -82,11 +97,18 @@
 			${orderVO.c_id.c_id}
 			
 			</td>
+		<td>${orderVO.o_tdate}</td>
 			<td>${orderVO.o_edate}</td>
 			<td>${orderVO.o_des}</td>
 			<td>${orderVO.o_location}</td>
 				<td>${orderVO.b_name}</td>
-	
+			<td>${orderVO.s_name}</td>
+				
+	               <td>
+<a href="#" name="masterres" data-id="${orderVO.getO_id()}"class="btn btn-info ">
+          <span class="glyphicon glyphicon-send"></span> 回應 
+        </a>
+			         </td>
 			<td>
 ${orderVO.c_rating}
 			</td>
@@ -99,16 +121,11 @@ ${orderVO.ma_des}
  <%------------------------------------------bootstrap評分-------------------------------------------------------%>
 
   <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/order/OrderController.do" name="form1">
-  
-  
-
-
-
- <div>
+   <div>
   <!-- Trigger the modal with a button -->
   
 
- <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#${orderVO.o_id}" >評分</button> 
+ <button type="button" class="btn btn-info " data-toggle="modal" data-target="#${orderVO.o_id}" onclick="star()">評分</button> 
  
  
   <!-- Modal -->
@@ -119,65 +136,55 @@ ${orderVO.ma_des}
       <!-- Modal content-->
       
       <div class="modal-content">
-      
-     
-          
-          
-
-
-         <div class="modal-body">
+             <div class="modal-body">
          
          
 <h4 class="modal-title">評分給鼓勵吧</h4>
           
           
-    <label class="radio-inline">
-      <input type="radio" name="c_rating" value="5">5分
-    </label>
-    <label class="radio-inline">
-      <input type="radio" name="c_rating" value="4">4分
-    </label>
-    <label class="radio-inline">
-      <input type="radio" name="c_rating" value="3" checked="checked">3分
-    </label>
-     <label class="radio-inline">
-      <input type="radio" name="c_rating" value="2">2分
-    </label>
-     <label class="radio-inline">
-      <input type="radio" name="c_rating" value="1">1分
-    </label>
           
-  
-         </div>
+     <label class="radio-inline"> 
+       <input type="radio" name="c_rating" value="5" checked="checked">5分 
+     </label> 
+     <label class="radio-inline"> 
+       <input type="radio" name="c_rating" value="4">4分 
+     </label> 
+     <label class="radio-inline"> 
+       <input type="radio" name="c_rating" value="3">3分
+     </label> 
+      <label class="radio-inline"> 
+       <input type="radio" name="c_rating" value="2">2分 
+     </label> 
+      <label class="radio-inline"> 
+       <input type="radio" name="c_rating" value="1">1分
+     </label> 
+   
+<%--    <img src="<%=request.getContextPath()%>/order/images/5star.png" alt="" usemap="Map" /> --%>
+<!--    <map name="Map" id="Map"> -->
+<!--     <area id="id1" href="#" shape="poly" coords="3,2,4,93,97,93,98,4" /> -->
+<!--     <area id="id2"  href="#" shape="poly" coords="101,4,103,88,199,92,195,10" /> -->
+<!--     <area id="id3"  href="#" shape="poly" coords="202,6,205,89,296,93,295,7" /> -->
+<!--     <area id="id4"  href="#" shape="poly" coords="303,8,306,90,400,91,391,8" /> -->
+<!--     <area id="id5"  href="#" shape="poly" coords="400,6,406,91,484,91,485,6" /> -->
+<!-- </map> -->
+<!--  <div id="mapdiv1" ></div> -->
+      </div>
         <div class="container-fluid">
 
   
       <label for="comment">留言</label>
       <textarea class="form-control" rows="2" id="comment" name="ma_des"></textarea>
     </div>
-
-  
-     
-         <div class="modal-footer">
-         
-         
-     
-			<input type="submit" value="送出" >
-			
-          	<input type="hidden" name="action" value="updateByM">
-          	
-          	
-          	
-          <input type="hidden" name="o_id" value="${orderVO.o_id}">	   
-          
+    <div class="modal-footer">
+         	<input type="submit" name="masterres1" value="送出" >
+			<input type="hidden" name="action" value="updateByM">
+          	      <input type="hidden" name="o_id" value="${orderVO.o_id}">	   
+          <input type="hidden" name="action" value="getOne_For_Update">
+          	      
+<!--            <div id="mapdiv" ></div> -->
+           
         </div>
-        
-        
-        
-        	
-        
-        
-      </div>
+            </div>
   </div>
   </div>
  </div>
@@ -188,29 +195,36 @@ ${orderVO.ma_des}
 			</td>
 			</tr>
 		
-			
-			<%--
-			<td>
-			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/order/order.do">
-			    <input type="submit" value="刪除">
-			    <input type="hidden" name="empno" value="${empVO.empno}">
-			    <input type="hidden" name="action"value="delete"></FORM>
-			</td>
-			
-		</tr>--%>
-		
 	</c:forEach>
 </table>
-<%--    <%@ include file="page2.file" %>   --%>
  </div>
- 
- 
-
- 
- 
- <%----- --------%>
-
-
-
+ 	<script>
+		 $(function(){
+		 
+		 $('[name="masterres"]').on('click',masterresponse);
+				 })//end ready
+		 
+		 function masterresponse(){
+			 var hyperlinkstring = "${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIFunctionServlet.do";
+		 	 var attr = $(this).data('id');
+			 $.post(hyperlinkstring,{"functionaction":"orderresponse","o_id":attr},function(data){
+				 alert("data");
+				 history.go(0) ;
+			 });
+			 }
+		 
+		 $(function(){
+			 
+			 $('[name="masterres1"]').on('click',masterresponse1);
+					 })//end ready
+			 
+			 function masterresponse1(){
+				 var hyperlinkstring = "${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIFunctionServlet.do";
+			 	 var attr = $(this).data('id');
+				 $.post(hyperlinkstring,{"functionaction":"orderresponse1","o_id":attr},function(data){
+				 });
+				 }
+		 
+ 	</script>
 </body>
 </html>

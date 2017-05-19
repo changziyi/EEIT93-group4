@@ -10,12 +10,8 @@
 	<link rel="Shortcut Icon" href="${pageContext.servletContext.contextPath}/favicon.ico" />
 	<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/css/bootstrap.min.css">
 	<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/nav/nav.css">
-	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="${pageContext.servletContext.contextPath}/css/star-rating.css">
 	<script src="${pageContext.servletContext.contextPath}/js/jquery-3.2.1.min.js"></script>
 	<script src="${pageContext.servletContext.contextPath}/js/bootstrap.min.js"></script>
-	<script src="${pageContext.servletContext.contextPath}/js/star-rating.min.js"></script>
-	
 	<style>
 		body {font-family:Microsoft JhengHei;}
 		input[type="file"] {display:inline;}
@@ -27,10 +23,10 @@
 		.changeImg {width:200px; padding:10px;}
 		#uploadTemp {line-height:normal;background-color:#fff;width:560px;}
 		.workImgArea {vertical-align:top;padding:5px;}
-		.myDiv {position:relative; top:85px;} 
-		.outtermd8 {width:100%; margin-left:3%; margin-right:0}
-		.innermd8 {padding-right:0; margin-right:0;width:60%}
-		.md4 {padding-top:3%;padding-left:0}
+		.myDiv {position:relative; top:85px;}
+		.outtermd8 {width:87%; margin-left:3%;}
+		.innermd8 {}
+		.md4 {padding-top:3%;}
 		.commentbox {width:60%;height:20%;}
 		.commentarea {margin-top:2%;margin-left:18%;}
 		.onecomment {margin-bottom:2%}
@@ -48,8 +44,12 @@
 </head>
 <body>
 <jsp:include page="/nav/navigation.jsp" />
+
+
+
 <div class="myDiv">
 <div class="container">
+
 	<div class="row">
 		<div class="col-md-8 outtermd8">
 			<div class="col-md-8 innermd8">
@@ -145,11 +145,8 @@
 				<H2>${mdataVO.b_name}</H2>
 				<p>專業：<c:forEach var="aMpro" items="${mdataVO.mpros}">${aMpro.m_pro} </c:forEach></p>
 				<p>師傅：${mdataVO.m_name}</p>
-				<p>地區：${mdataVO.m_city} ${mdataVO.m_district}</p>
+				<p>地區：${mdataVO.m_city}　${mdataVO.m_district}</p>
  <%--------------------------------------最愛與黑單--------------------------------------------------- --%>
- 				<a href="${pageContext.servletContext.contextPath}/toolman.order/NewOrder.jsp" class="btn btn-success ">
-          			<span class="glyphicon glyphicon-earphone"></span> 預約師傅
-          		</a>
 				<a href="${pageContext.servletContext.contextPath}/order/Favorite.do?c_id=${LoginOK.c_id}&m_id=${mdataVO.m_id}&action=addFavorite" class="btn btn-info ">
 					<span class="glyphicon glyphicon-heart-empty"></span> 加入最愛
 				</a>
@@ -157,6 +154,11 @@
           			<span class="glyphicon glyphicon-remove-sign"></span> 加入黑名單
         		</a>
   <%--------------------------------------萬里長城--------------------------------------------------- --%>
+				<br />
+				<a href="${pageContext.servletContext.contextPath}/toolman.order/NewOrder.jsp" class="btn btn-success ">
+          		<span class="glyphicon glyphicon-earphone"></span> 預約師傅
+          		</a>   
+				
 			</div>
 		</div>
 	</div>
@@ -165,45 +167,16 @@
 	<br />
 	<ul class="nav nav-tabs">
 		<li class="active"><a data-toggle="tab" href="#home">介紹</a></li>
-		<li><a data-toggle="tab" href="#menu1">作品</a></li>
-		<li><a data-toggle="tab" href="#menu2">問與答</a></li>
-		<li><a data-toggle="tab" href="#menu3">評價</a></li>
-		<li><a data-toggle="tab" href="#menu4">媒合紀錄</a></li>
+		<li><a data-toggle="tab" href="#menu1">問與答</a></li>
+		<li><a data-toggle="tab" href="#menu2">評價</a></li>
+		<li><a data-toggle="tab" href="#menu3">媒合人次</a></li>
 	</ul>
 
 	<div class="tab-content">
 		<div id="home" class="tab-pane fade in active">
 			<p>${mdataVO.b_des}</p>
 		</div>
-		
 		<div id="menu1" class="tab-pane fade">
-			<c:if test="${LoginOK.m_id == mdataVO.m_id}">
-				<div id='div1'></div>
-				<form name="myData" action="TestFormData" enctype="multipart/form-data">
-					<div><input type="file" id="file" name="file[]" multiple="multiple"></div>
-					<div class="workImgArea">作品名稱　<input type="text" name="workname" required></div>
-					<div class="workImgArea">完工日期　<input type="text" name="worktime" required></div>
-					<div class="workImgArea">作品描述　<textarea name="workdes"></textarea></div>
-					<button type="button" id="buttonUpload">上傳</button>
-				</form>
-			</c:if>
-			<div class="form-group">
-				<table class="table">
-				<c:forEach var="aWork" items="${mdataVO.works}">
-						<tr>
-							<td>${aWork.work_name}
-							${aWork.work_des}
-							<c:forEach var="a" items="${aWork.workims}">
-								<img width="304" height="236" class="img-thumbnail workimsize" src='${pageContext.servletContext.contextPath}/master/master.do?type=work&image=${a.im_id}'/>
-							</c:forEach>
-							</td>
-						</tr>
-				</c:forEach>
-				</table>
-			</div>
-		</div>
-		
-		<div id="menu2" class="tab-pane fade">
 			<div>
 				<div>
 					<div id="show"></div>
@@ -219,8 +192,7 @@
 				</div>
 			</div>
 		</div>
-		<div id="menu3" class="tab-pane fade">
-			<input id="input-3" name="input-3" value="${mdataVO.m_arating}" class="rating-loading">
+		<div id="menu2" class="tab-pane fade">
 			<h3>評價: ${mdataVO.m_arating}</h3>
 			<c:forEach var="orderCid" items="${mdataVO.orders}">
 				${orderCid.c_id.c_id} ：
@@ -228,7 +200,7 @@
 				${orderCid.o_edate}<br>${orderCid.ca_des}
 			</c:forEach>
 		</div>
-		<div id="menu4" class="tab-pane fade">
+		<div id="menu3" class="tab-pane fade">
 			<h3>成功媒合人次:</h3>
 			<c:forEach var="orderCid" items="${mdataVO.orders}">
 				${orderCid.c_id.c_id} - 
@@ -243,7 +215,6 @@
 	
 // 		$(function() {
 			
-			$('#input-3').rating({displayOnly: true, step: 0.5});
 	
 			//編輯店家
 			var pro = $('input[name="m_pro"]');
@@ -280,7 +251,7 @@
 	
 			//點選問與答區塊，load問與答內容
 			var show = $('#show');
-			$('a[href="#menu2"]').one('click', function() {
+			$('a[href="#menu1"]').one('click', function() {
 				var docFragment = $(document.createDocumentFragment());
 				$.getJSON('MdataJsonServlet',{'master':'${mdataVO.m_id}','action':'discussion'},function(data){
 					$.each(data,function(i,dis){
@@ -294,7 +265,7 @@
 						} else {
 							var replyform = $('<form></form>').attr({'action':'masterPage.do','method':'post'})
 							if ("${LoginOK.m_id}" == "${mdataVO.m_id}") {
-								var replybtn = $('<input />').addClass('btn btn-success').attr({'type':'button','name':'replybtn','value':'回覆'});
+								var replybtn = $('<input />').addClass('btn btn-info').attr({'type':'button','name':'replybtn','value':'回覆'});
 								var reply = $('<textarea></textarea>').addClass('form-control masterreply').attr({'name':'reply','id':'reply','rows':'2'});
 								var hidid = $('<input />').attr({'type':'hidden','name':'did','value':dis.did});
 								var hidaction = $('<input />').attr({'type':'hidden','name':'action','value':'MasterPage_A'});
@@ -330,7 +301,7 @@
 							} else {
 								var replyform = $('<form></form>').attr({'action':'masterPage.do','method':'post'})
 								if ("${LoginOK.m_id}" == "${mdataVO.m_id}") {
-									var replybtn = $('<input />').addClass('btn btn-success').attr({'type':'button','name':'replybtn','value':'回覆'});
+									var replybtn = $('<input />').addClass('btn btn-info').attr({'type':'button','name':'replybtn','value':'回覆'});
 									var reply = $('<textarea></textarea>').addClass('form-control masterreply').attr({'name':'reply','id':'reply','rows':'2'});
 									var hidid = $('<input />').attr({'type':'hidden','name':'did','value':dis.did});
 									var hidaction = $('<input />').attr({'type':'hidden','name':'action','value':'MasterPage_A'});
@@ -373,7 +344,7 @@
 							} else {
 								var replyform = $('<form></form>').attr({'action':'masterPage.do','method':'post'})
 								if ("${LoginOK.m_id}" == "${mdataVO.m_id}") {
-									var replybtn = $('<input />').addClass('btn btn-success').attr({'type':'button','name':'replybtn','value':'回覆'});
+									var replybtn = $('<input />').addClass('btn btn-info').attr({'type':'button','name':'replybtn','value':'回覆'});
 									var reply = $('<textarea></textarea>').addClass('form-control masterreply').attr({'name':'reply','id':'reply','rows':'2'});
 									var hidid = $('<input />').attr({'type':'hidden','name':'did','value':dis.did});
 									var hidaction = $('<input />').attr({'type':'hidden','name':'action','value':'MasterPage_A'});

@@ -77,7 +77,7 @@
 			}
 		});
 		
-		/*---------------------------------限是篩選CODE----------------------------------------------*/
+		/*---------------------------------縣市篩選CODE(未完成)----------------------------------------------*/
 		$('#bycity').twzipcode({
 			countyName:'searchCountry',
 			districtName:'searchDistrict',
@@ -142,7 +142,7 @@
 					<br>
 					 <c:forEach var="sname" end="3" items="${get_sname}">
 						 	<div>
-						 	 ${sname.mdataVO.m_city} ${sname.mdataVO.b_name}
+						 	 ${sname.mdataVO.m_city}${sname.mdataVO.b_name}
 						 	<a href='${pageContext.servletContext.contextPath}/master/masterPage.do?m_id=${sname.m_id}'>
 						 		<img height="200px" class="img-responsive" src='${pageContext.servletContext.contextPath}/master/master.do?type=master&image=${sname.m_id}'/>
 						 	</a>

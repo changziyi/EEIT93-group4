@@ -29,6 +29,12 @@ public class CdataService {
 		return dao.geteMailAll(c_email);
 	}
 	
+	
+	public int updateMemberfwd(String c_email, String c_pwd){
+		return dao.updateMemberfwd(c_email, c_pwd);
+	}
+		
+	
 	//
 	public CdataVO updateCdataMember(String c_id,String c_pwd,String c_name,
 			String c_cel,String c_email, String c_city, String c_district,

@@ -25,6 +25,7 @@ public class loginoutServlet extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		session.removeAttribute("LoginOK");
+		System.out.println("------------- 登 出  -------------");
 		response.sendRedirect(getServletContext().getContextPath()+"/index.jsp");
 	}
 

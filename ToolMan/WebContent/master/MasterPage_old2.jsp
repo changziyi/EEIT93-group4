@@ -10,27 +10,21 @@
 	<link rel="Shortcut Icon" href="${pageContext.servletContext.contextPath}/favicon.ico" />
 	<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/css/bootstrap.min.css">
 	<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/nav/nav.css">
-	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="${pageContext.servletContext.contextPath}/css/star-rating.css">
 	<script src="${pageContext.servletContext.contextPath}/js/jquery-3.2.1.min.js"></script>
 	<script src="${pageContext.servletContext.contextPath}/js/bootstrap.min.js"></script>
-	<script src="${pageContext.servletContext.contextPath}/js/star-rating.min.js"></script>
-	
 	<style>
 		body {font-family:Microsoft JhengHei;}
 		input[type="file"] {display:inline;}
 		pre {white-space:pre-wrap;word-wrap:break-word;}
 		span {font-family:Microsoft JhengHei;}
-		td {font-size:15px;}
 		.zipcode {display: none;}
-		.zip {margin:auto; width:100px; display:inline; font-family:Microsoft JhengHei; vertical-align: top}
 		.changeImg {width:200px; padding:10px;}
 		#uploadTemp {line-height:normal;background-color:#fff;width:560px;}
 		.workImgArea {vertical-align:top;padding:5px;}
-		.myDiv {position:relative; top:85px;} 
-		.outtermd8 {width:100%; margin-left:3%; margin-right:0}
-		.innermd8 {padding-right:0; margin-right:0;width:60%}
-		.md4 {padding-top:3%;padding-left:0}
+		.myDiv {position:relative; top:85px;}
+		.outtermd8 {width:87%; margin-left:4%;}
+		.innermd8 {}
+		.md4 {padding-top:3%}
 		.commentbox {width:60%;height:20%;}
 		.commentarea {margin-top:2%;margin-left:18%;}
 		.onecomment {margin-bottom:2%}
@@ -42,18 +36,20 @@
 		.commentdiv {margin-top:2.5%;margin-left:12%;}
 		.masterreply {width:50%;height:10%}
 		.qbtncen {margin-left:21%;padding:1.6%;}
-		.bimgwidth {width:87%}
-		.popup {width:50%}
 	</style>
 </head>
 <body>
 <jsp:include page="/nav/navigation.jsp" />
+
+
+
 <div class="myDiv">
 <div class="container">
+
 	<div class="row">
 		<div class="col-md-8 outtermd8">
 			<div class="col-md-8 innermd8">
-				<img height="350px" class="img-thumbnail bimgwidth" src='${pageContext.servletContext.contextPath}/master/master.do?type=master&image=${mdataVO.m_id}'/>
+				<img height="450px" src='${pageContext.servletContext.contextPath}/master/master.do?type=master&image=${mdataVO.m_id}'/>
 			</div>
 			<div class="col-md-4 md4">
 				<c:if test="${LoginOK.m_id == mdataVO.m_id}">
@@ -62,66 +58,73 @@
 				</c:if>
 				<div class="container">
 					<div class="modal fade" id="myModal" role="dialog">
-						<div class="modal-dialog" style="width:43%">
+						<div class="modal-dialog">
 						      <!-- Modal content-->
 							<form method="post" action="master.do" enctype="multipart/form-data" name="updateform">
 							<div class="modal-content">
 								<div class="modal-header">
 									<button type="button" class="close" data-dismiss="modal">&times;</button>
-									<h4 class="modal-title">編輯店家資訊</h4>
+									<h4 class="modal-title">修改店家資訊</h4>
 								</div>
 								<div class="modal-body">
-									<div class="form-group">
-										<table class="table">
+									<div>
+										<table>
 											<tr>
-												<td>專業證照</td>
-												<td><div><img id="m_cer" class="img-thumbnail" width="350px" src="${pageContext.servletContext.contextPath}/master/master.do?type=cer&image=${mdataVO.m_id}"></div>
+												<td>專業證照:
+												<div><img id="m_cer" width="200px" src="${pageContext.servletContext.contextPath}/master/master.do?type=cer&image=${mdataVO.m_id}"></div>
 												<input type="file" name="m_cer" ></td>
 											</tr>
 											<tr>
-												<td>師傅姓名</td>
-												<td><input type="text" name="m_name" class="form-control" value="${mdataVO.m_name}"/></td>
+												<td>師傅姓名:
+												<input type="text" name="m_name" value="${mdataVO.m_name}"/></td>
 											</tr>
 											<tr>
-												<td>電話</td>
-												<td><input type="text" name="m_cel" class="form-control" value="${mdataVO.m_cel}"/></td>
+												<td>電話:
+												<input type="text" name="m_cel" value="${mdataVO.m_cel}"/></td>
 											<tr>
-												<td>信箱</td>
-												<td><input type="text" name="m_email" class="form-control" value="${mdataVO.m_email}"/></td>
+												<td>信箱:
+												<input type="text" name="m_email" value="${mdataVO.m_email}"/></td>
 											</tr>
 											<tr>
-												<td>地址</td>
-												<td><span id="twzipcode"></span>
-												<input type="text" name="m_addr" class="form-control" value="${mdataVO.m_addr}"/>
+												<td>地址:
+												<span id="twzipcode"></span>
+												<input type="text" name="m_addr" value="${mdataVO.m_addr}"/>
 												</td>
 											</tr>
 											<tr>
-												<td>維修類別</td>
-												<td>
-													<input type="checkbox" name="m_pro" value="地板地磚">地板地磚
-													<input type="checkbox" name="m_pro" value="防水抓漏">防水抓漏
-													<input type="checkbox" name="m_pro" value="室內裝潢">室內裝潢
-													<input type="checkbox" name="m_pro" value="冷氣空調">冷氣空調
-													<input type="checkbox" name="m_pro" value="水電工程">水電工程 <br>
-													<input type="checkbox" name="m_pro" value="門窗工程">門窗工程
-													<input type="checkbox" name="m_pro" value="油漆工程">油漆工程
-													<input type="checkbox" name="m_pro" value="木作工程">木作工程
-													<input type="checkbox" name="m_pro" value="泥作工程">泥作工程
-													<input type="checkbox" name="m_pro" value="照明工程">照明工程
+												<td>維修類別:<br >
+												<input type="checkbox" name="m_pro" value="地板地磚">地板地磚
+												<input type="checkbox" name="m_pro" value="防水抓漏">防水抓漏
+												<input type="checkbox" name="m_pro" value="室內裝潢">室內裝潢
+												<input type="checkbox" name="m_pro" value="冷氣空調">冷氣空調
+												<input type="checkbox" name="m_pro" value="水電工程">水電工程 <br>
+												<input type="checkbox" name="m_pro" value="門窗工程">門窗工程
+												<input type="checkbox" name="m_pro" value="油漆工程">油漆工程
+												<input type="checkbox" name="m_pro" value="木作工程">木作工程
+												<input type="checkbox" name="m_pro" value="泥作工程">泥作工程
+												<input type="checkbox" name="m_pro" value="照明工程">照明工程
 												</td>
 											</tr>
 											<tr>
-												<td>首頁圖片</td>
-												<td><div><img id="m_cer" width="350px" class="img-thumbnail" src="${pageContext.servletContext.contextPath}/master/master.do?type=master&image=${mdataVO.m_id}"></div>
-												<input type="file" name="b_image" ></td>
+											<td>首頁圖片:
+												<div><img id="b_image" width="200px" src="${pageContext.servletContext.contextPath}/master/master.do?type=master&image=${mdataVO.m_id}"></div>
+												<input type="file" name="b_image" /></td>
 											</tr>
 											<tr>
-												<td>店家名稱</td>
-												<td><input type="text" name="b_name" class="form-control" value="${mdataVO.b_name}" /></td>
+												<td>店家名稱:
+												<input type="text" name="b_name" value="${mdataVO.b_name}" /></td>
 											</tr>
 											<tr>
-												<td>店家介紹</td>
-												<td><textarea name="b_des" class="form-control" rows="8">${mdataVO.b_des}</textarea></td>
+												<td>店家介紹:
+												<textarea name="b_des">${mdataVO.b_des}</textarea></td>
+											</tr>
+											<tr>
+												<td><input type="hidden" name="action" value="updateMaster" ></td>
+												<td><input type="hidden" name="m_city" value="${mdataVO.m_city}" ></td>
+												<td><input type="hidden" name="m_district" value="${mdataVO.m_district}"></td>
+												<c:forEach var="aMpro" varStatus="count1" items="${mdataVO.mpros}">
+													<td class="prc"><input type="hidden" name="hidpro" value="${aMpro.m_pro}"></td>
+												</c:forEach>
 											</tr>
 										</table>
 									</div>
@@ -130,12 +133,6 @@
 						        	<button type="button" class="btn btn-default" data-dismiss="modal">返回</button>
 						        	<button type="button" class="btn btn-default" id="updatebtn">送出</button>
 						        </div>
-									<input type="hidden" name="action" value="updateMaster" >
-									<input type="hidden" name="m_city" value="${mdataVO.m_city}" >
-									<input type="hidden" name="m_district" value="${mdataVO.m_district}">
-									<c:forEach var="aMpro" varStatus="count1" items="${mdataVO.mpros}">
-									<div class="prc"><input type="hidden" name="hidpro" value="${aMpro.m_pro}"></div>
-								</c:forEach>
 						      </div>
 							</form>
 		</div>
@@ -145,11 +142,8 @@
 				<H2>${mdataVO.b_name}</H2>
 				<p>專業：<c:forEach var="aMpro" items="${mdataVO.mpros}">${aMpro.m_pro} </c:forEach></p>
 				<p>師傅：${mdataVO.m_name}</p>
-				<p>地區：${mdataVO.m_city} ${mdataVO.m_district}</p>
+				<p>地區：${mdataVO.m_city}　${mdataVO.m_district}</p>
  <%--------------------------------------最愛與黑單--------------------------------------------------- --%>
- 				<a href="${pageContext.servletContext.contextPath}/toolman.order/NewOrder.jsp" class="btn btn-success ">
-          			<span class="glyphicon glyphicon-earphone"></span> 預約師傅
-          		</a>
 				<a href="${pageContext.servletContext.contextPath}/order/Favorite.do?c_id=${LoginOK.c_id}&m_id=${mdataVO.m_id}&action=addFavorite" class="btn btn-info ">
 					<span class="glyphicon glyphicon-heart-empty"></span> 加入最愛
 				</a>
@@ -157,6 +151,11 @@
           			<span class="glyphicon glyphicon-remove-sign"></span> 加入黑名單
         		</a>
   <%--------------------------------------萬里長城--------------------------------------------------- --%>
+				<br />
+				<a href="${pageContext.servletContext.contextPath}/toolman.order/NewOrder.jsp" class="btn btn-success ">
+          		<span class="glyphicon glyphicon-earphone"></span> 預約師傅
+          		</a>   
+				
 			</div>
 		</div>
 	</div>
@@ -168,14 +167,13 @@
 		<li><a data-toggle="tab" href="#menu1">作品</a></li>
 		<li><a data-toggle="tab" href="#menu2">問與答</a></li>
 		<li><a data-toggle="tab" href="#menu3">評價</a></li>
-		<li><a data-toggle="tab" href="#menu4">媒合紀錄</a></li>
+		<li><a data-toggle="tab" href="#menu4">媒合人次</a></li>
 	</ul>
 
 	<div class="tab-content">
 		<div id="home" class="tab-pane fade in active">
 			<p>${mdataVO.b_des}</p>
 		</div>
-		
 		<div id="menu1" class="tab-pane fade">
 			<c:if test="${LoginOK.m_id == mdataVO.m_id}">
 				<div id='div1'></div>
@@ -187,22 +185,16 @@
 					<button type="button" id="buttonUpload">上傳</button>
 				</form>
 			</c:if>
-			<div class="form-group">
-				<table class="table">
+			<div>
 				<c:forEach var="aWork" items="${mdataVO.works}">
-						<tr>
-							<td>${aWork.work_name}
-							${aWork.work_des}
-							<c:forEach var="a" items="${aWork.workims}">
-								<img width="304" height="236" class="img-thumbnail workimsize" src='${pageContext.servletContext.contextPath}/master/master.do?type=work&image=${a.im_id}'/>
-							</c:forEach>
-							</td>
-						</tr>
+					<c:forEach var="a" items="${aWork.workims}">
+						<img height="350px" src='${pageContext.servletContext.contextPath}/master/master.do?type=work&image=${a.im_id}'/>
+						<p>${a.im_id}</p>
+					</c:forEach>
 				</c:forEach>
-				</table>
 			</div>
+    
 		</div>
-		
 		<div id="menu2" class="tab-pane fade">
 			<div>
 				<div>
@@ -218,14 +210,14 @@
 					</div>
 				</div>
 			</div>
+
 		</div>
 		<div id="menu3" class="tab-pane fade">
-			<input id="input-3" name="input-3" value="${mdataVO.m_arating}" class="rating-loading">
 			<h3>評價: ${mdataVO.m_arating}</h3>
 			<c:forEach var="orderCid" items="${mdataVO.orders}">
 				${orderCid.c_id.c_id} ：
 				${orderCid.c_rating} - 
-				${orderCid.o_edate}<br>${orderCid.ca_des}
+				${orderCid.o_edate}<br>
 			</c:forEach>
 		</div>
 		<div id="menu4" class="tab-pane fade">
@@ -243,7 +235,6 @@
 	
 // 		$(function() {
 			
-			$('#input-3').rating({displayOnly: true, step: 0.5});
 	
 			//編輯店家
 			var pro = $('input[name="m_pro"]');
@@ -294,7 +285,7 @@
 						} else {
 							var replyform = $('<form></form>').attr({'action':'masterPage.do','method':'post'})
 							if ("${LoginOK.m_id}" == "${mdataVO.m_id}") {
-								var replybtn = $('<input />').addClass('btn btn-success').attr({'type':'button','name':'replybtn','value':'回覆'});
+								var replybtn = $('<input />').addClass('btn btn-info').attr({'type':'button','name':'replybtn','value':'回覆'});
 								var reply = $('<textarea></textarea>').addClass('form-control masterreply').attr({'name':'reply','id':'reply','rows':'2'});
 								var hidid = $('<input />').attr({'type':'hidden','name':'did','value':dis.did});
 								var hidaction = $('<input />').attr({'type':'hidden','name':'action','value':'MasterPage_A'});
@@ -330,7 +321,7 @@
 							} else {
 								var replyform = $('<form></form>').attr({'action':'masterPage.do','method':'post'})
 								if ("${LoginOK.m_id}" == "${mdataVO.m_id}") {
-									var replybtn = $('<input />').addClass('btn btn-success').attr({'type':'button','name':'replybtn','value':'回覆'});
+									var replybtn = $('<input />').addClass('btn btn-info').attr({'type':'button','name':'replybtn','value':'回覆'});
 									var reply = $('<textarea></textarea>').addClass('form-control masterreply').attr({'name':'reply','id':'reply','rows':'2'});
 									var hidid = $('<input />').attr({'type':'hidden','name':'did','value':dis.did});
 									var hidaction = $('<input />').attr({'type':'hidden','name':'action','value':'MasterPage_A'});
@@ -373,7 +364,7 @@
 							} else {
 								var replyform = $('<form></form>').attr({'action':'masterPage.do','method':'post'})
 								if ("${LoginOK.m_id}" == "${mdataVO.m_id}") {
-									var replybtn = $('<input />').addClass('btn btn-success').attr({'type':'button','name':'replybtn','value':'回覆'});
+									var replybtn = $('<input />').addClass('btn btn-info').attr({'type':'button','name':'replybtn','value':'回覆'});
 									var reply = $('<textarea></textarea>').addClass('form-control masterreply').attr({'name':'reply','id':'reply','rows':'2'});
 									var hidid = $('<input />').attr({'type':'hidden','name':'did','value':dis.did});
 									var hidaction = $('<input />').attr({'type':'hidden','name':'action','value':'MasterPage_A'});
@@ -513,7 +504,7 @@
 			var district = $('input[name="m_district"]');
 
 			$('#twzipcode').twzipcode({
-				'css': ['form-control zip', 'form-control zip', 'zipcode'],
+				'css': ['county', 'district', 'zipcode'],
 			    'countySel'   : '${mdataVO.m_city}',
 			    'districtSel' : '${mdataVO.m_district}',
 			    'onCountySelect': function () {
