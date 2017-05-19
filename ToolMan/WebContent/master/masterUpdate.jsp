@@ -116,7 +116,6 @@
 		console.log(apro);
 		$("input[name=m_pro][value=" + apro + "]").prop('checked', true);
 	})
-	
 </script>
 </body>
 </html>
