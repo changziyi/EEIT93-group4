@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import toolman.ad.model.AdService;
+import toolman.ad.model.AdVO;
 import toolman.cdata.model.CdataService;
 import toolman.cdata.model.CdataVO;
 import toolman.mdata.model.MdataService;
@@ -19,6 +21,7 @@ import toolman.mdata.model.MdataVO;
 import toolman.opro.model.OproDAO;
 import toolman.order.model.OrderService;
 import toolman.order.model.OrderVO;
+import toolman.rdata.model.RdataService;
 
 /**
  * Servlet implementation class managerUIFunctionServlet
@@ -93,6 +96,15 @@ public class managerUIFunctionServlet extends HttpServlet {
 			out = response.getWriter();
 			System.out.print(count);
 			out.write(count);			
+		}
+		if("stopad".equals(functionaction)){
+			
+			int count=0;
+			for(String ad_id:arraytoggled){
+				AdService adservice = new AdService();
+			adservice.updateAsDeleted(Integer.parseInt(ad_id),"已終止");			
+			}
+			
 		}
 		//tested ok
 		if("findmaster".equals(functionaction)){
@@ -171,14 +183,19 @@ public class managerUIFunctionServlet extends HttpServlet {
 			System.out.print(count);
 			out.write(count);			
 		}
-		if("blacklistm".equals(functionaction)){
+		if("sarnote".equals(functionaction)){
 			
+			Integer count=0;
 			
+			RdataService rdataservice = new RdataService();
+			int	returnedcount = rdataservice.updateReportSarnote(Integer.parseInt(noteid),notevalue);
+			count= returnedcount;
+			System.out.println(noteid);
+			out = response.getWriter();
+			System.out.print(count);
+			out.write(count);			
 		}
-		if("blacklistm".equals(functionaction)){
-			
-			
-		}
+	
 
 		
 //		if(functionaction.equals("sendmessagec")){

@@ -20,7 +20,7 @@ public interface MdataDAO_interface {
 	public List<MdataVO> getCityAndDistrictAndMPro(String m_city, String m_district, String m_pro);
 	public List<MdataVO> getAll();
 	public Integer updatemasterSname(Integer m_id,String s_name);//by Benny
-    public int updatecustomerSamnote(Integer m_id, String s_name);//by Benny
+    public int updatecustomerSamnote(Integer m_id, String sa_mnote);//by Benny
 	public List<MdataVO> getBySname(String s_name);//by Benny
 
 	public Set<OrderVO> getOrderByM(Integer m_id);//訂單
@@ -33,5 +33,7 @@ public interface MdataDAO_interface {
 	public List<Object[]> searchAll(); //查全部
 	public List<Object[]> searchAllRandom();//亂數查全部
 	public byte[] getImg(Integer m_id); //讀取師傅圖片
+	public List<Object[]> searchOne(Integer m_id);
+	public void updateSql(MdataVO mdataVO);
 	
 }

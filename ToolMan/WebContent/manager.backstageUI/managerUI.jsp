@@ -42,16 +42,70 @@
 <!-- 	<link rel="stylesheet" href="../js/datatable/responsive/responsive.dataTables.min.css"> -->
 	<link rel="stylesheet" href="../js/datatable/responsive/responsive.bootstrap.min.css">
 	<link rel="stylesheet" href="../js/datatable/select/select.foundation.min.css">
+<!------------------------ flatui ------------------------------>	
+	<link href="../js/flatui/flat-ui.min.css" rel="stylesheet">
+<!-- 	<link href="../js/flatui/lato/*" rel="stylesheet"> -->
+<!-- 	<script src="../js/flatui/flat-ui.min.js"></script> -->
 
+<!-------------------- navigation for this application---------- -->
+<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/nav/nav.css">
 
-	
+<!-------------------------------- chart----------------- -->
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<!--------------------------------end chart----------------- -->	
 <style>
-	.dataTables_wrapper{
-		width:100%;
-		margin:auto;width:80%;  
-/* 		border: 2px solid blue; */
-		horizontal-align:center;
-		display:table;
+/* ---------------------charts------------------------ */
+#charts {
+	min-width: 310px;
+	max-width: 800px;
+	height: 400px;
+	margin: 0 auto
+}
+/* ---------------------end charts------------------------ */
+ 	.dataTables_wrapper{ 
+ 		padding:30px; 
+ 		width:100%; 
+ 		margin:auto;
+ 		  
+/*  	border: 2px solid blue;  */
+ 		horizontal-align:center; 
+ 		display:table; 
+/* 		background-color:#e7eae1;*/  
+/* 		color:white;  */
+/* 	} */
+/* 	.tablewrapper{ */
+/* 		padding:30px; */
+/* 		width:70%; */
+/* 		margin:auto;width:80%;   */
+/* /* 		border: 2px solid blue; */ */
+/* 		horizontal-align:center; */
+/* 		display:block; */
+
+/* 	} */
+/* 	#eventlist thead tr th { */
+/* 		background-color:blue; */
+/* 	} */
+/* 	#eventlist tbody tr { */
+		
+/* 		color:black; */
+/* 	} */
+/* 	#eventlist tbody tr:nth-child(even) { */
+/* 		background-color:#e7eae1; */
+/* 		color:black; */
+/* 	} */
+/* 	#eventlist tbody tr:hover { */
+/* 		background-color:#e4eff1; */
+/* 		color:white; */
+/* 	} */
+/* 	#eventlist tbody tr:selected { */
+/* 		background-color:#e4eff1; */
+/* 		color:white; */
+/* 	} */
+	.buttonstyle{
+		width:130px;
+		height:60px;
+		font-size:20px;
 	}
 	#navigator ul li {
 	　display:inline;
@@ -81,12 +135,13 @@
 </style>
 </head>
 <body>
+<jsp:include page="/nav/navigation.jsp" />
 <!-- navigator -->
 	<header >
-		<nav >
-			<div id="navigator" >
+		<nav style="margin-top:50px;">
+			<div id="navigator"  >
 			
-				<ul style="margin: auto;width:80%; horizontal-align:center;" class="nav nav-tabs nav-justified"  >
+				<ul style="margin: auto;width:100%; horizontal-align:center;" class="nav nav-tabs nav-justified"  >
 				
 					<li  data-toggle="tab" role="presentation"  id="masterlist" data-id="m" class="active"><a href="#"><div>師傅列表</div></a></li>
 					
@@ -96,7 +151,7 @@
 					
 					<li  data-toggle="tab" role="presentation" id="orderlist" data-id="o" ><a href="#" ><div>訂單列表</div></a></li>
 	
-					<li  data-toggle="tab" role="presentation" id="customeranalysis" data-id="a"><a href="#"><div>用戶分析</div></a></li>
+					<li  data-toggle="tab" role="presentation" id="managerchart" data-id="a"><a href="#"><div>統計圖表</div></a></li>
 										
 					<li  data-toggle="tab" role="presentation" id="adlist" data-id="ad"><a href="#"><div>廣告</div></a></li>
 							
@@ -110,24 +165,31 @@
 			<div id="subfunctionrow" style="margin: auto;width:80%; horizontal-align:center;" class="nav nav-tabs nav-justified">
 			</div>
 	</header>
+	
 <!-- Function button -->
 	<div>
 		
 	</div>
 <!-------------------------------------- main content here -->		
 	<article>
-	<div id="tabletool" style="border:1px solid blue;width:600px;height:60px"></div>
-	<table id="eventlist" class="table table-striped table-bordered" style="word-break: keep-all;display:table;text-align:center" >
-<!-- 		<thead> -->
-<!-- 			<th>1</th> -->
-<!-- 			<th>2</th> -->
-<!-- 	    </thead> -->
-<!-- 		<tbody> -->
-<!-- 			<tr><td>1</td><td>2</td></tr> -->
-<!-- 			<tr><td>1</td><td>2</td></tr> -->
-		</tbody>
-	
-	</table>
+	<div class="tablewrapper">
+		
+		<div id="tabletool" class="bg-info"style="width:100%; border:1px solid blue;margin:auto;padding:20px;display:table;text-align:left">
+			
+		</div>
+		
+		<table id="eventlist" class="table table-striped table-bordered table-hover" style="word-break: keep-all;display:table;text-align:center" >
+	<!-- 		<thead> -->
+	<!-- 			<th>1</th> -->
+	<!-- 			<th>2</th> -->
+	<!-- 	    </thead> -->
+	<!-- 		<tbody> -->
+	<!-- 			<tr><td>1</td><td>2</td></tr> -->
+	<!-- 			<tr><td>1</td><td>2</td></tr> -->
+	<!-- 		</tbody> -->
+		
+		</table>
+	</div>
 <!-- 	<div> -->
 <!-- 		<select id="pageselectid" name="pageselectname"> -->
 <!-- 			<option id="pagename" value="page1"/> -->
@@ -225,6 +287,10 @@
 <!-- -----------------------------Order Modal---------------------------------------- -->
 
 <!-- -----------------------------end Order and Report Modal---------------------------------------- -->
+
+<!-- ---------------------------chart--------- -->
+<div id="charts"></div>
+<!-- ---------------------------end chart--------- -->
 <script>
 	var table ;//datatable variable not in use
 	var navagatorid = $('#navigator>ul>li.active').data('id');//top navigator
@@ -255,7 +321,54 @@ $(function(){
 
 		}// end ready function
 	); //end ready  
-	
+	function chart(){
+		
+		Highcharts.chart('managerchart', {
+
+		    title: {
+		        text: 'Solar Employment Growth by Sector, 2010-2016'
+		    },
+
+		    subtitle: {
+		        text: 'Source: thesolarfoundation.com'
+		    },
+
+		    yAxis: {
+		        title: {
+		            text: 'Number of Employees'
+		        }
+		    },
+		    legend: {
+		        layout: 'vertical',
+		        align: 'right',
+		        verticalAlign: 'middle'
+		    },
+
+		    plotOptions: {
+		        series: {
+		            pointStart: 2010
+		        }
+		    },
+
+		    series: [{
+		        name: 'Installation',
+		        data: [43934, 52503, 57177, 69658, 97031, 119931, 137133, 154175]
+		    }, {
+		        name: 'Manufacturing',
+		        data: [24916, 24064, 29742, 29851, 32490, 30282, 38121, 40434]
+		    }, {
+		        name: 'Sales & Distribution',
+		        data: [11744, 17722, 16005, 19771, 20185, 24377, 32147, 39387]
+		    }, {
+		        name: 'Project Development',
+		        data: [null, null, 7988, 12169, 15112, 22452, 34400, 34227]
+		    }, {
+		        name: 'Other',
+		        data: [12908, 5948, 8105, 11248, 8989, 11816, 18274, 18111]
+		    }]
+
+		});
+	}
 	function showreport(){
 	 	
 				var receiver1 =	$(this).attr('data-receiver1');
@@ -418,7 +531,7 @@ $(function(){
  			$('#functionrow').empty();
 			var buttongroupdiv ='<div class="btn-group">'
 			var dropdowntitlestate = 
-				'<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"aria-haspopup="true" aria-expanded="false">師傅狀態<span class="caret"></span></button>';
+				'<button type="button" class="btn btn-primary dropdown-toggle" style="width:130px;height:50px" data-toggle="dropdown"aria-haspopup="true" aria-expanded="false">師傅狀態<span class="caret"></span></button>';
 			var dropdownmenucontent=
 				'<li data-statusvalue="allmaster" data-buttonstate="selected" name="datastatus"><a href="#">所有師傅</a></li><li role="separator" class="divider"></li>'
 				+'<li data-statusvalue="未審核" name="datastatus"><a href="#" >未審核</a></li><li role="separator" class="divider"></li>'
@@ -433,10 +546,9 @@ $(function(){
 			var showblacklistc = '<button type="button" data-id="showblacklistc" class="btn " style="background-color: #555555; color:white" >黑名單</button>';
 			
 			var li1 = $(masterstatus);
-			var li2 = $(showblacklistc);
-			docFragfunction2.append([li1,li2]);
-			$('#functionrow').append(docFragfunction2);
 			
+			docFragfunction2.append([li1]);			
+			$('#tabletool').append($('#functionrow').append(docFragfunction2));
 			$('#functionrow>div>ul>li').on('click',functionrowfiltering);//filtering
 		}//end else if
 		
@@ -457,8 +569,8 @@ $(function(){
 			var showblacklistc = '<button type="button" data-id="showblacklistc" class="btn " style="background-color: #555555; color:white" >黑名單</button>';				
 
 			var li1 = $(customerstatus);
-			var li2 = $(showblacklistc );
-			docFragfunction2.append([li1,li2]);
+			
+			docFragfunction2.append([li1]);
 			$('#functionrow').append(docFragfunction2);
 			$('#functionrow>div>ul>li').on('click',functionrowfiltering);//filtering
 		}//end else if
@@ -570,15 +682,15 @@ $(function(){
 			var docFragsubfunction = $(document.createDocumentFragment());
 		   if( navagatorid== 'm'){
 				$('#subfunctionrow').empty();
-				var applicationreviewm = '<a href="" id="applymasterlink" name="applicationreviewm"><input type="button" value="審核師傅" /></a>';
-				var suspensionm = '<span id="suspensionm" value="suspensionm" name="functionaction" style="padding:0px; margin:0px;" ><input type="button" value="停權" "/></span>';
-				var sendmessagem = '<span id="messagespanm" value="sendmessagem" name="functionaction" style="padding:0px; margin:0px;" ><input type="button"   value="傳送訊息" "/></span>';
+				var applicationreviewm = '<a href="" id="applymasterlink" name="applicationreviewm"><input type="button" class="btn btn-success"value="審核師傅" /></a>';
+				var suspensionm = '<span id="suspensionm" value="suspensionm" name="functionaction" style="padding:0px; margin:0px;" ><input type="button"class="btn btn-danger" value="停權" "/></span>';
+				var sendmessagem = '<span id="messagespanm" value="sendmessagem" name="functionaction" style="padding:0px; margin:0px;" ><input type="button" class="btn btn-info"  value="傳送訊息" "/></span>';
 				var b1 = $(applicationreviewm);
 				var b2 = $(suspensionm);
 				var b3 = $(sendmessagem);
 				docFragsubfunction.append([b1,b2,b3]);
-				$('#subfunctionrow').append(docFragsubfunction);
 				
+				$('#tabletool').append($('#subfunctionrow').append(docFragsubfunction));
 				//rebinding
 			 	$('#subfunctionrow>a').on('click',togglehyper);//direct to other pages
 			 	$('#subfunctionrow>span:not(#messagespanm,#messagespanc,#messagespano,#messagespanr)').on('click',togglegetmethod);//will return something when clicked, maill has it's own form action
@@ -593,8 +705,8 @@ $(function(){
 				var b1 = $(suspensionc);
 				var b2 = $(sendmessagec);
 				docFragsubfunction.append([b1,b2]);
-				$('#subfunctionrow').append(docFragsubfunction);
 				
+				$('#tabletool').append($('#subfunctionrow').append(docFragsubfunction));
 					//rebinding
 			 	$('#subfunctionrow>a').on('click',togglehyper);//direct to other pages
 			 	$('span:not(#messagespanm,#messagespanc,#messagespano,#messagespanr)').on('click',togglegetmethod);//will return something when clicked, maill has it's own form action
@@ -607,8 +719,8 @@ $(function(){
 				var sendmessageo = '<span id="messagespano" value="sendmessageo" name="functionaction" style="padding:0px; margin:0px;" ><input type="button" value="訊息" /></span>';
 				var b1 = $(sendmessageo);
 				docFragsubfunction.append([b1]);
-				$('#subfunctionrow').append(docFragsubfunction);
 				
+				$('#tabletool').append($('#subfunctionrow').append(docFragsubfunction));
 					//rebinding
 			 	$('#subfunctionrow>a').on('click',togglehyper);//direct to other pages
 // 			 	$('#subfunctionrow>span[id!="messagespanm"],#subfunctionrow>span[id!="messagespanc"],#subfunctionrow>span[id!="messagespano"]').on('click',mail);//will return something when clicked, maill has it's own form action
@@ -620,11 +732,11 @@ $(function(){
 				var sendmessager = '<span id="messagespanr" value="sendmessager" name="functionaction" style="padding:0px; margin:0px;" ><input type="button" value="訊息" /></span>';
 				var b1 = $(sendmessager);
 				docFragsubfunction.append([b1]);
-				$('#subfunctionrow').append(docFragsubfunction);	
+				
+				$('#tabletool').append($('#subfunctionrow').append(docFragsubfunction));
 					//rebinding
 			 	$('#subfunctionrow>a').on('click',togglehyper);//direct to other pages
-// 			 	$('#subfunctionrow>span[id!="messagespanm"],#subfunctionrow>span[id!="messagespanc"],#subfunctionrow>span[id!="messagespano"]').on('click',mail);//will return something when clicked, maill has it's own form action
-			 	$('#messagespanm,#messagespanc,#messagespano,#messagespanr,#messagespanad').on('click',mail);//will return something when clicked, maill has it's own form action
+ 			 	$('#messagespanm,#messagespanc,#messagespano,#messagespanr,#messagespanad').on('click',mail);//will return something when clicked, maill has it's own form action
 
 				
 			}
@@ -635,10 +747,11 @@ $(function(){
 				var b1 = $(sendmessager);
 				var b2 = $(stopad);
 				docFragsubfunction.append([b1,b2]);
-				$('#subfunctionrow').append(docFragsubfunction);	
+				
+				$('#tabletool').append($('#subfunctionrow').append(docFragsubfunction));
 					//rebinding
 			 	$('#subfunctionrow>a').on('click',togglehyper);//direct to other pages
-// 			 	$('#subfunctionrow>span[id!="messagespanm"],#subfunctionrow>span[id!="messagespanc"],#subfunctionrow>span[id!="messagespano"]').on('click',mail);//will return something when clicked, maill has it's own form action
+ 			 	$('span:not(#messagespanm,#messagespanc,#messagespano,#messagespanr,#messagespanad)').on('click',togglegetmethod);//will return something when clicked, maill has it's own form action
 			 	$('#messagespanm,#messagespanc,#messagespano,#messagespanr,#messagespanad').on('click',mail);//will return something when clicked, maill has it's own form action
 
 				
@@ -818,15 +931,15 @@ $(function(){
 						   
 						   	console.log(data);
 						   	
-						   	var toggleword = $('<input type="checkbox" name="otoggle" />').val(data.o_id).attr('data-receiver1',data.o_bname).attr('data-receiver2',data.c_id);
+						   	var toggleword = $('<input  type="checkbox" name="otoggle" />').val(data.o_id).attr('data-receiver1',data.o_bname).attr('data-receiver2',data.c_id);
 						   	
 						   	var cell0 = $('<td></td>').addClass('eventlisttbodytrtd').append(toggleword);
 						  	var cell1 = $('<td></td>').text(data.o_tdate).addClass('eventlisttbodytrtd');
-						  	var mid =  $('<input type="button"/> ').val("m"+data.m_id).addClass('eventlisttbodytrtd');
+						  	var mid =  $('<input type="button" class="btn btn-success"/> ').val("m"+data.m_id).addClass('eventlisttbodytrtd');
 							var a =  $('<a></a> ').attr('href',"${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIFunctionServlet.do?"+"functionaction=findmaster&targetid="+data.m_id).append(mid);						  
 							var midwordmid =  $('<span style="visibility: hidden;font-size:0px;margin:0pxlpadding:0px;"></span> ').text(data.o_bname).addClass('eventlisttbodytrtd');
 						  	var cell2 = $('<td></td>').text(data.o_bname).html(a).val(data.m_id).addClass('eventlisttbodytrtd').append(midwordmid);
-						  	var mid2 =  $('<input type="button" style="width:100px;word-break: keep-all"/> ').val(data.c_id).addClass('eventlisttbodytrtd');
+						  	var mid2 =  $('<input type="button" class="btn btn-info" style="width:100px;word-break: keep-all"/> ').val(data.c_id).addClass('eventlisttbodytrtd');
 							var a2 =  $('<a></a> ').attr('href',"${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIFunctionServlet.do?"+"functionaction=findcustomer&targetid="+data.c_id).append(mid2);						  
 							var midwordmid2 =  $('<span style="visibility: hidden;font-size:0px;margin:0pxlpadding:0px;"></span> ').text(data.c_id).addClass('eventlisttbodytrtd');
 						  	var cell3 = $('<td></td>').html(a2).addClass('eventlisttbodytrtd').append(midwordmid2);
@@ -847,8 +960,8 @@ $(function(){
 				  else if(id=="m"){				
 					  
 					  
-					   var toggleword =$('<input type="checkbox" name="mtoggle"/>').val(data.M_id).attr('data-receiver',data.B_name);;     
-					   var mid =  $('<input type="button"/> ').val("m"+data.M_id).addClass('eventlisttbodytrtd');
+					   var toggleword =$('<input type="checkbox"   name="mtoggle"/>').val(data.M_id).attr('data-receiver',data.B_name);;     
+					   var mid =  $('<input type="button" class="btn btn-success"/> ').val("m"+data.M_id).addClass('eventlisttbodytrtd');
 					   var a =  $('<a></a> ').attr('href',"${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIFunctionServlet.do?"+"functionaction=findmaster&targetid="+data.M_id).append(mid);						  
 					   var midwordmid =  $('<span style="visibility: hidden;font-size:0px;margin:0pxlpadding:0px;"></span> ').text(data.M_id).addClass('eventlisttbodytrtd');
 					   var cell0 = $('<td></td>').addClass('eventlisttbodytrtd').append(toggleword);  
@@ -871,7 +984,7 @@ $(function(){
 						
 						
 					   var toggleword = $('<input type="checkbox" name="ctoggle" />').val(data.c_id).attr('data-receiver',data.c_id);
-					   var mid =  $('<input type="button" style="width:100px;word-break: keep-all"/> ').val(data.c_id).addClass('eventlisttbodytrtd');
+					   var mid =  $('<input type="button" class="btn btn-info" style="width:100px;word-break: keep-all"/> ').val(data.c_id).addClass('eventlisttbodytrtd');
 					   var a =  $('<a></a> ').attr('href',"${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIFunctionServlet.do?"+"functionaction=findcustomer&targetid="+data.c_id).append(mid);						  
 					   var midwordmid =  $('<span style="visibility: hidden;font-size:0px;margin:0pxlpadding:0px;"></span> ').text(data.c_id).addClass('eventlisttbodytrtd');
 					   var cell0 = $('<td></td>').addClass('eventlisttbodytrtd').append(toggleword);
@@ -896,40 +1009,46 @@ $(function(){
 						   var cell0 = $('<td></td>').addClass('eventlisttbodytrtd').append(toggleword);
 						   var cell1 = $('<td name="reportevent"></td>').html(mid).addClass('eventlisttbodytrtd').append(midwordmid);
 						   var cell2 = $('<td></td>').text(data.r_date).addClass('eventlisttbodytrtd');;			   
-						   var mid3 =  $('<input type="button" style="width:100px;word-break: keep-all"/> ').val(data.c_id).addClass('eventlisttbodytrtd');
+						   var mid3 =  $('<input type="button" class="btn btn-info" style="width:100px;word-break: keep-all"/> ').val(data.c_id).addClass('eventlisttbodytrtd');
 						   var a3 =  $('<a></a> ').attr('href',"${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIFunctionServlet.do?"+"functionaction=findcustomer&targetid="+data.c_id).append(mid3);						  
 						   var midwordmid3 =  $('<span style="visibility: hidden;font-size:0px;margin:0pxlpadding:0px;"></span> ').text(data.c_id).addClass('eventlisttbodytrtd');
 						   var cell3 = $('<td></td>').html(a3).addClass('eventlisttbodytrtd').append(midwordmid3);
-						   var mid2 =  $('<input type="button"/> ').val(data.m_id).addClass('eventlisttbodytrtd');
+						   var mid2 =  $('<input type="button" class="btn btn-success"/> ').val(data.m_id).addClass('eventlisttbodytrtd');
 						   var a2 =  $('<a></a> ').attr('href',"${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIFunctionServlet.do?"+"functionaction=findmaster&targetid="+data.m_id).append(mid2);						  
 						   var midwordmid2 =  $('<span style="visibility: hidden;font-size:0px;margin:0pxlpadding:0px;"></span> ').text(data.m_id).addClass('eventlisttbodytrtd');
 						   var cell4 = $('<td></td>').html(a2).addClass('eventlisttbodytrtd').append(midwordmid2);
 						   var cell5 = $('<td></td>').text(data.p_summary).addClass('eventlisttbodytrtd');
 						   var cell6 = $('<td></td>').text(data.s_name).addClass('eventlisttbodytrtd');
 						   var wordsanote =  $('<span style="visibility: hidden;font-size:0px;margin:0pxlpadding:0px;"></span> ').text(data.sa_rnote).addClass('eventlisttbodytrtd');
-						   var sacnote =  $('<input type="text" name="sacnote" id= width="500px" /> ').val(data.sa_rnote).attr('data-noteid',data.r_id).addClass('eventlisttbodytrtd');
-						   var cell7 = $('<td></td>').html(sacnote).addClass('eventlisttbodytrtd').append(wordsanote);
+						   var sarnote =  $('<input type="text" name="sarnote" id= width="500px" /> ').val(data.sa_rnote).attr('data-noteid',data.r_id).addClass('eventlisttbodytrtd');
+						   var cell7 = $('<td></td>').html(sarnote).addClass('eventlisttbodytrtd').append(wordsanote);
 						   var row = $('<tr></tr>').append([cell0,cell1,cell2,cell3,cell4,cell5,cell6,cell7]);
 						   docFragtb.append(row);						
 					}
 					else if(id=="ad"){
 						
 						   var toggleword = $('<input type="checkbox" name="ctoggle" />').val(data.ad_id).attr('data-receiver',data.m_id);
-						   var mid =  $('<input type="button"/>').val(data.ad_id).addClass('eventlisttbodytrtd');
+						   var mid =  $('<input type="button" class="btn btn-warning"/>').val(data.ad_id).addClass('eventlisttbodytrtd');
 						   var a =  $('<a></a> ').attr('href',"${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIFunctionServlet.do?"+"functionaction=findcustomer&targetid="+data.ad_id).append(mid);						  
 						   var midwordmid =  $('<span style="visibility: hidden;font-size:0px;margin:0pxlpadding:0px;"></span> ').text(data.ad_id).addClass('eventlisttbodytrtd');
 						   var cell0 = $('<td></td>').addClass('eventlisttbodytrtd').append(toggleword);
 						   var cell1 = $('<td></td>').html(a).addClass('eventlisttbodytrtd').append(midwordmid);
 						   var cell2 = $('<td></td>').text(data.ad_bdate).addClass('eventlisttbodytrtd');;			   
 						   var cell3 = $('<td></td>').text(data.ad_enddate).addClass('eventlisttbodytrtd');
-						   var mid2 =  $('<input type="button"/>').val(data.m_id).addClass('eventlisttbodytrtd');
+						   var mid2 =  $('<input type="button" class="btn btn-success"/>').val(data.m_id).addClass('eventlisttbodytrtd');
 						   var a2 =  $('<a></a> ').attr('href',"${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIFunctionServlet.do?"+"functionaction=findmaster&targetid="+data.m_id).append(mid2);						  
 						   var midwordmid2 =  $('<span style="visibility: hidden;font-size:0px;margin:0pxlpadding:0px;"></span> ').text(data.m_id).addClass('eventlisttbodytrtd');
 						   var cell4 = $('<td></td>').html(a2).addClass('eventlisttbodytrtd').append(midwordmid2);				
 						   var cell5 = $('<td></td>').text(data.s_name).addClass('eventlisttbodytrtd');	
 						   var row = $('<tr></tr>').append([cell0,cell1,cell2,cell3,cell4,cell5]);
 						   docFragtb.append(row);	
-						   
+					}  
+					else if(id=="a"){
+						 var chardiv = $('<div id="managerchart"></div>');
+						 docFragtb3.append(chardiv);
+						 $('#charts').append(docFragtb3);
+						 chart();
+					 
 					}
 				}// end each function
 // 			 }//end for loop
@@ -939,8 +1058,9 @@ $(function(){
 			   tb.append(docFragtb);
 			   table.append(th);
 			   table.append(tb);
+			   
 			   //rebinding tested ok
-			   $('input[name="samnote"],[name="saonote"],[name="sacnote"]').on('change',updatenote);// input note
+			   $('input[name="samnote"],[name="saonote"],[name="sacnote"],[name="sarnote"]').on('change',updatenote);// input note
 			   $('[name="reportevent"]').on('click',showreport);
 			   dfd.resolve();
 			   return dfd;
@@ -955,11 +1075,19 @@ $(function(){
 						'copy', 'csv', 'excel', 'pdf', 'print'
 				    ],
 // 				    "<'row'<'col-md-4'><'col-md-4'><'col-md-4'>>ftp<'bottom'<'col-md-4'l>><'clear'>",
-				    "sDom":
+// 				    ' <"search"fl><"top">rt<"bottom"ip><"clear">'
+				    "dom":
 				    "<'row'<'col-sm-6'l><'col-sm-6'f>>" +
-				    "<'row'<'col-sm-12'tr>>" +
-				    "<'row'<'col-sm-5'i><'col-sm-7'p>>",
+				    "<'row'<'col-sm-12't>>" +
+				    "<'row'<'col-sm-5'><'col-sm-7'p>>",
 				    select: true,
+				    "language":{                    //Custom Message Setting
+                        "lengthMenu": "每頁 _MENU_ 筆資料",    //Customizing menu Text
+                        "zeroRecords": "查無資料 ",             //Customizing zero record text - filtered
+                        "info": "Showing page _PAGE_ of _PAGES_",           //Customizing showing record no
+                        "infoEmpty": "查無資料",                //Customizing zero record message - base
+                        "infoFiltered": "(filtered from _MAX_ total records)"   //Customizing filtered message
+                    },
 // 			        responsive: {
 // 			            details: {
 // 			                display: $.fn.dataTable.Responsive.display.modal( {
@@ -977,7 +1105,7 @@ $(function(){
 						destroy: true,
 // 						"pageLength": 1,
 // 						"dom": '<lf<t>ip>',
-						 "lengthMenu": [ [5, 10, 50, -1], [5, 10, 50, "All"] ]
+						 "lengthMenu": [ [5, 10, 50, -1], [5, 10, 50, "全部"] ]
 			// 			"iDisplayLength": 10
 			//			  	destroy: true,
 						 	   
