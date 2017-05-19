@@ -105,7 +105,7 @@
 			<td>${orderVO.s_name}</td>
 				
 	               <td>
-<a href="#" class="btn btn-info ">
+<a href="#" name="masterres" data-id="${orderVO.getO_id()}"class="btn btn-info ">
           <span class="glyphicon glyphicon-send"></span> 回應 
         </a>
 			         </td>
@@ -206,6 +206,27 @@ ${orderVO.ma_des}
 	</c:forEach>
 </table>
  </div>
- 
+ 	<script>
+		 $(function(){
+		 
+		 $('[name="masterres"]').on('click',masterresponse);
+		 
+		 
+		 
+		 
+		 
+		 
+		 })//end ready
+		 
+		 function masterresponse(){
+			 var hyperlinkstring = "${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIFunctionServlet.do";
+		 	 var attr = $(this).data('id');
+			 $.post(hyperlinkstring,{"functionaction":"orderresponse","o_id":attr},function(data){
+				 alert("data");
+			 });
+			 
+			 
+		 }
+ 	</script>
 </body>
 </html>

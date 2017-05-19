@@ -125,30 +125,34 @@ public class EmailServlet extends HttpServlet {
 		emailserv.insert(emailVO);
 		
 		System.out.println("msid: " + emailVO.getMs_id());
-		//打開會有錯誤訊息
-//		res.sendRedirect("email.jsp");
+		
 		
 		//之前因為如果有輸入null會讓管理者後端無法出現兩次，所以判斷來源為管理者後端就不處理。
 		if("http://localhost:8081/ToolMan/manager.backstageUI/managerUI.jsp".equals(req.getHeader("referer"))){
 			System.out.println("get null value");
+		}else{
+			res.sendRedirect("email.jsp");
 		}
-		else if (!errorMsgs.isEmpty()) {
+		//之前因為如果有輸入null會讓管理者後端無法出現兩次，所以判斷來源為管理者後端就不處理。
+		if("http://localhost:8081/ToolMan/manager.backstageUI/managerUI.jsp".equals(req.getHeader("referer"))){
+			System.out.println("get null value");
+		}else
+		 if (!errorMsgs.isEmpty()) {
 			req.setAttribute("emailVO", emailVO);
 			RequestDispatcher failureView = req.getRequestDispatcher("/email/Email.jsp");
 			failureView.forward(req, res);
-			return;
-			
+			return;		
 		}
 		
 		//之前因為如果有輸入null會讓管理者後端無法出現兩次，所以判斷來源為管理者後端就不處理。
-		System.out.println(req.getHeader("referer"));
-		if("http://localhost:8081/ToolMan/manager.backstageUI/managerUI.jsp".equals(req.getHeader("referer"))){
-			System.out.println("ok");
-		}else{
-			req.setAttribute("emailVO", emailservice.findByPrimaryKey(emailVO.getMs_id()));
-			RequestDispatcher successView = req.getRequestDispatcher("/email/emailsucess.jsp");
-			successView.forward(req, res);
-		}
+//		System.out.println(req.getHeader("referer"));
+//		if("http://localhost:8081/ToolMan/manager.backstageUI/managerUI.jsp".equals(req.getHeader("referer"))){
+//			System.out.println("ok");
+//		}else{
+//			req.setAttribute("emailVO", emailservice.findByPrimaryKey(emailVO.getMs_id()));
+//			RequestDispatcher successView = req.getRequestDispatcher("/email/emailsucess.jsp");
+//			successView.forward(req, res);
+//		}
 		
 		
 		
