@@ -3,7 +3,11 @@
 
 <html>
 <head>
-<title>cena</title>
+<title>謝謝你</title>
+<script>
+
+
+</script>
 </head>
 <link rel="stylesheet"
 	href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -20,6 +24,8 @@
 <br/>
 <div class="alert alert-success">
   <h2><strong>謝謝你的評價</strong></h2>
+    <h2><strong>${odata.o_id}</strong></h2>
+  
   </div>
 
 </body>

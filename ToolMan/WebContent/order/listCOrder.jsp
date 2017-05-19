@@ -47,7 +47,8 @@
   <table class="table table-bordered table-hover" >
 	<tr>
 		<th>店家名稱</th>
-		<th>訂單完成時間</th>
+		   <th>預約時間</th>
+	    <th>訂單完成時間</th>
 		<th>維修項目說明</th>
 		<th>施工地址</th>
 		<th>消費者</th>
@@ -65,6 +66,7 @@
 	
 		<tr align='center' valign='middle'>
 			<td><a href='${pageContext.servletContext.contextPath}/master/masterPage.do?m_id=${orderVO.m_id.m_id}'>${orderVO.b_name}</a></td>
+			<td>${orderVO.o_tdate}</td>
 			<td>${orderVO.o_edate}</td>
 			<td>${orderVO.o_des}</td>
 			<td>${orderVO.o_location}</td>

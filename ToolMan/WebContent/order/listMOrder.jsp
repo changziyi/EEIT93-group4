@@ -72,7 +72,8 @@
   <table class="table table-bordered">
 	<tr>
 	    <th>消費者</th>
-		<th>訂單完成時間</th>
+	    <th>預約時間</th>
+	    <th>訂單完成時間</th>
 		<th>維修項目說明</th>
 		<th>施工地址</th>
 		<th>店家名稱</th>
@@ -96,6 +97,7 @@
 			${orderVO.c_id.c_id}
 			
 			</td>
+		<td>${orderVO.o_tdate}</td>
 			<td>${orderVO.o_edate}</td>
 			<td>${orderVO.o_des}</td>
 			<td>${orderVO.o_location}</td>
@@ -185,6 +187,7 @@ ${orderVO.ma_des}
          	<input type="submit" value="送出" >
 			<input type="hidden" name="action" value="updateByM">
           	      <input type="hidden" name="o_id" value="${orderVO.o_id}">	   
+          <input type="hidden" name="action" value="getOne_For_Update">
           	      
 <!--            <div id="mapdiv" ></div> -->
            
