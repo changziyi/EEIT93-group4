@@ -131,56 +131,25 @@
 	 width:70px;
 	 text-align:center;
 	}
-	
-.box {
-  background: #666666;
-  color: #ffffff;
-  width: 250px;
-  padding: 10px;
-  margin: 1em auto;
-}
-p {
-  margin: 1.5em 0;
-  padding: 0;
-}
-input[type="checkbox"] {
-  display: none;
-}
-label {
-  cursor: pointer;
-}
-input[type="checkbox"] + label:before {
-  border: 1px solid #333;
-  content: "\00a0";
-  display: inline-block;
-  font: 16px/1em sans-serif;
-  height: 16px;
-  margin: 0 .25em 0 0;
-  padding: 0;
-  vertical-align: top;
-  width: 16px;
-}
-input[type="checkbox"]:checked + label:before {
-  background: #fff;
-  color: #333;
-  content: "\2713";
-  text-align: center;
-}
-input[type="checkbox"]:checked + label:after {
-  font-weight: bold;
-}
+.textstyle{
+		font-family: Arial, "Microsoft Jhenghei",  
+		"WenQuanYi Zen Hei", "儷黑 Pro", 
+		"LiHei Pro","文泉驛正黑", 
+		"DFKai-sb", DFKai-SB, 
+		sans-serif;
+	}
 </style>
 </head>
 <body>
 <jsp:include page="/nav/navigation.jsp" />
 <!-- navigator -->
 	<header >
-		<nav style="margin-top:50px;">
-			<div id="navigator"  >
+		<nav style="margin-top:50px;" >
+			<div id="navigator" class="textstyle" >
 			
-				<ul style="margin: auto;width:100%; horizontal-align:center;" class="nav nav-tabs nav-justified"  >
+				<ul style="margin: auto;width:100%; horizontal-align:center;" class="nav nav-tabs nav-justified "  >
 				
-					<li  data-toggle="tab" role="presentation"  id="masterlist" data-id="m" class="active"><a href="#"><div>師傅列表</div></a></li>
+					<li  data-toggle="tab" role="presentation"  id="masterlist" data-id="m" class="active"><a href="#"><div >師傅列表</div></a></li>
 					
 					<li  data-toggle="tab" role="presentation" id="customerlist" data-id="c"><a href="#"><div >消費者列表</div></a></li>
 					
@@ -188,7 +157,7 @@ input[type="checkbox"]:checked + label:after {
 					
 					<li  data-toggle="tab" role="presentation" id="orderlist" data-id="o" ><a href="#" ><div>訂單列表</div></a></li>
 	
-					<li  data-toggle="tab" role="presentation" id="managerchart" data-id="a"><a href="#"><div>統計圖表</div></a></li>
+<!-- 					<li  data-toggle="tab" role="presentation" id="managerchart" data-id="a"><a href="#"><div>統計圖表</div></a></li> -->
 										
 					<li  data-toggle="tab" role="presentation" id="adlist" data-id="ad"><a href="#"><div>廣告</div></a></li>
 							
@@ -196,10 +165,10 @@ input[type="checkbox"]:checked + label:after {
 			</div>
 
 		</nav>
-			<div id="functionrow" style="margin: auto;width:80%; horizontal-align:center;" class="nav nav-tabs nav-justified">
+			<div  id="functionrow"  class="nav nav-tabs nav-justified textstyle" style="margin-top:10px;margin-left:40%;width:80%; vertical-align:center;">
 			</div>
 			
-			<div id="subfunctionrow" style="margin: auto;width:80%; horizontal-align:center;" class="nav nav-tabs nav-justified">
+			<div id="subfunctionrow" style="margin-top:10px;margin-left:30%;width:80%; horizontal-align:center;" class="nav nav-tabs nav-justified textstyle">
 			</div>
 	</header>
 	
@@ -208,15 +177,15 @@ input[type="checkbox"]:checked + label:after {
 		
 	</div>
 <!-------------------------------------- main content here -->		
-	<article>
+	<article >
 	<div class="tablewrapper">
 		
-		<div id="tabletool" class="bg-info" style="width:100%; border:1px solid blue;margin:auto;padding:20px;display:table;text-align:left">
-			<span id="tabletoo2" style="width:50%; border:1px solid blue;margin:0px;padding:0px;text-align:left;float:left;"></span>
-			<span id="tabletoo3" style="width:50%; border:1px solid blue;margin:0px;padding:0px;text-align:left;float:left;"></span>
+		<div id="tabletool" class="bg-info" style=" padding:0px;width:100%; margin:auto;display:table;text-align:left">
+			<span id="tabletoo2" style="background-color:#5ea2fd;width:50%;height:70px;margin:0px;padding:0px;text-align:left;float:left;"></span>
+			<span id="tabletoo3" style="background-color:#4091fd;width:50%; height:70px;margin:0px;padding:0px;text-align:left;float:left;"></span>
 		</div>
 		
-		<table id="eventlist" class="table table-striped table-bordered table-hover" style="word-break: keep-all;display:table;text-align:center" >
+		<table id="eventlist" class="table table-striped table-bordered table-hover textstyle" style="word-break: keep-all;display:table;text-align:center" >
 	<!-- 		<thead> -->
 	<!-- 			<th>1</th> -->
 	<!-- 			<th>2</th> -->
@@ -240,7 +209,7 @@ input[type="checkbox"]:checked + label:after {
 	
 <!-- ------------------------------------mail block from LIN DAN------------------------------->	
 
-	<div class="modal fade" id="myModal01" tabindex="-1" role="dialog"
+	<div class="modal fade textstyle"  id="myModal01" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<form method="POST" action="${pageContext.servletContext.contextPath}/email/Email.do"
@@ -260,21 +229,25 @@ input[type="checkbox"]:checked + label:after {
 					<div class="modal-body">
 						<table>
 							<tr>
-								<td>收件人 ： <input type="text" id="receiver" name="mss_id" required="true"
+								<td>收件人 ： </td>
+								<td>
+								<input type="text" id="receiver" name="mss_id" required="true"
 									/>
 								</td>
 							</tr>
 						
 							<tr>
-								<td>主旨 ： <input type="text" id="messum" name="ms_summary" required="true"
+								<td>主旨 ：</td>
+								<td>
+								 <input type="text" id="messum" name="ms_summary" required="true"
 									value="${param.ms_summary}" />${errorMsgs.email1}${errorMsgs.email2}
 								</td>
 							</tr>
 						
 							<tr>
-								<td><label style="vertical-align: top">內容：
+								<td><label style="vertical-align: top;font-size:18px">內容：</td>
 								
-								<textarea name="ms_content" id="mescontent" style="width: 400px; height: 120px"
+								<td><textarea name="ms_content" id="mescontent" style="width: 400px; height: 120px"
 								placeholder="請輸入內容"></textarea></td>
 							</tr>
 						</table>
@@ -293,23 +266,25 @@ input[type="checkbox"]:checked + label:after {
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-      	
-        <div class="modal-title" style="margin-top:30px;">檢舉人</div><span  id="reporter"></span>
-		<br>       
-		<div class="modal-title">被檢舉人<div><span  id="reported"></span></span>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+      	<table>
+      	<tbody>
+	        <tr><td><div class="modal-title" style="width:100px;">檢舉人:</div></td>
+	        <td><span  id="reporter"></span></td></tr> 
+	             
+			<tr><td><div class="modal-title" style="width:100px;">被檢舉人:</div></td>
+			<td><span  id="reported"></span></td></tr>
+        </tbody>
+        </table>
       </div>
       <div class="modal-body">
         <form>
           <div class="form-group">
             <label for="recipient-name" class="form-control-label" >主旨:</label>
-            <textarea readonly class="form-control" id="reportextract"></textarea>
+            <textarea readonly class="form-control" style=" background-color:white;color:black"id="reportextract"></textarea>
           </div>
           <div class="form-group">
             <label for="message-text" class="form-control-label" >檢舉內容:</label>
-            <textarea readonly class="form-control" id="reportcontent"></textarea>
+            <textarea readonly class="form-control" style=" background-color:white;color:black" id="reportcontent"></textarea>
             
           </div>
         </form>
@@ -407,7 +382,7 @@ $(function(){
 	}
 	function showreport(){
 	 	
-				var receiver1 =	$(this).attr('data-receiver1');
+				var receiver1 =	"m"+$(this).attr('data-receiver1').toString();
 				var receiver2 =	$(this).attr('data-receiver2');
 				var extract =	$(this).attr('data-extract');
 				var datacontent =	$(this).attr('data-content');
@@ -567,7 +542,7 @@ $(function(){
  			$('#functionrow').empty();
 			var buttongroupdiv ='<div class="btn-group">'
 			var dropdowntitlestate = 
-				'<button type="button" class="btn btn-primary dropdown-toggle" style="width:130px;height:50px;font-size:20px;" data-toggle="dropdown"aria-haspopup="true" aria-expanded="false">師傅狀態<span class="caret"></span></button>';
+				'<button type="button" class="btn btn-primary dropdown-toggle" style="width:130px;height:50px;font-size:20px;" data-toggle="dropdown"aria-haspopup="true" aria-expanded="false">狀態<span class="caret"></span></button>';
 			var dropdownmenucontent=
 				'<li data-statusvalue="allmaster" data-buttonstate="selected" name="datastatus"><a href="#">所有師傅</a></li><li role="separator" class="divider"></li>'
 				+'<li data-statusvalue="未審核" name="datastatus"><a href="#" >未審核</a></li><li role="separator" class="divider"></li>'
@@ -593,7 +568,7 @@ $(function(){
 			$('#functionrow').empty();
 			var buttongroupdiv ='<div class="btn-group">'
 			var dropdowntitlestate = 
-					'<button type="button" class="btn btn-primary dropdown-toggle"  style="width:130px;height:50px;font-size:18px;" data-toggle="dropdown"aria-haspopup="true" aria-expanded="false">消費者狀態<span class="caret"></span></button>';
+					'<button type="button" class="btn btn-primary dropdown-toggle"  style="width:130px;height:50px;font-size:20px;" data-toggle="dropdown"aria-haspopup="true" aria-expanded="false">狀態<span class="caret"></span></button>';
 			var dropdownmenucontentstate=
 					'<li data-statusvalue="allcustomer" data-buttonstate="selected" name="datastatus"><a href="#">所有消費者</a></li><li role="separator" class="divider"></li>'
 					+'<li data-statusvalue="停權中" name="datastatus"><a href="#">停權中</a></li>';
@@ -616,7 +591,7 @@ $(function(){
 			$('#functionrow').empty();
 			var buttongroupdiv ='<div class="btn-group">';
 			var dropdowntitlestate = 
-						'<button type="button" class="btn btn-primary dropdown-toggle" style="width:130px;height:50px;font-size:20px;" data-toggle="dropdown"aria-haspopup="true" aria-expanded="false">訂單狀態<span class="caret"></span></button>';
+						'<button type="button" class="btn btn-primary dropdown-toggle" style="width:130px;height:50px;font-size:20px;" data-toggle="dropdown"aria-haspopup="true" aria-expanded="false">狀態<span class="caret"></span></button>';
 			var dropdownmenucontentstate=
 						'<li data-statusvalue="allorder" data-buttonstate="selected" name="datastatus"><a href="#">所有訂單</a></li><li role="separator" class="divider"></li>'
 						+'<li data-statusvalue="進行中" name="datastatus"><a href="#">進行中</a></li><li role="separator" class="divider"></li>'
@@ -647,7 +622,7 @@ $(function(){
 			$('#functionrow').empty();
 			var buttongroupdiv ='<div class="btn-group">';
 			var dropdowntitlestate = 
-						'<button type="button" class="btn btn-primary dropdown-toggle" style="width:130px;height:50px;font-size:20px;" data-toggle="dropdown"aria-haspopup="true" aria-expanded="false">訂單狀態<span class="caret"></span></button>';
+						'<button type="button" class="btn btn-primary dropdown-toggle" style="width:130px;height:50px;font-size:20px;" data-toggle="dropdown"aria-haspopup="true" aria-expanded="false">狀態<span class="caret"></span></button>';
 			var dropdownmenucontentstate=
 						'<li data-statusvalue="allreport" data-buttonstate="selected" name="datastatus"><a href="#">所有檢舉</a></li><li role="separator" class="divider"></li>'
 						+'<li data-statusvalue="進行中" name="datastatus"><a href="#">未解決</a></li><li role="separator" class="divider"></li>'
@@ -665,7 +640,7 @@ $(function(){
 			$('#functionrow').empty();
 			var buttongroupdiv ='<div class="btn-group">';
 			var dropdowntitlestate = 
-						'<button type="button" class="btn btn-primary dropdown-toggle" style="width:130px;height:50px;font-size:20px; data-toggle="dropdown"aria-haspopup="true" aria-expanded="false">廣告狀態<span class="caret"></span></button>';
+						'<button type="button" class="btn btn-primary dropdown-toggle" style="width:130px;height:50px;font-size:20px; data-toggle="dropdown"aria-haspopup="true" aria-expanded="false">狀態<span class="caret"></span></button>';
 			var dropdownmenucontentstate=
 						'<li data-statusvalue="allad" data-buttonstate="selected"  name="datastatus"><a href="#">所有廣告</a></li><li role="separator" class="divider"></li>'
 						+'<li data-statusvalue="進行中" name="datastatus"><a href="#">未解決</a></li><li role="separator" class="divider"></li>'
@@ -986,8 +961,8 @@ $(function(){
 							var cell8 = $('<td></td>').text(data.m_rating).addClass('eventlisttbodytrtd');
 							var cell9 = $('<td></td>').text(data.c_rating).addClass('eventlisttbodytrtd');
 							var wordsanote =  $('<span style="visibility: hidden;font-size:0px;margin:0pxlpadding:0px;"></span> ').text(data.sa_onote).addClass('eventlisttbodytrtd');
-							var saonote =  $('<input type="text"name="saonote" width="500px" /> ').val(data.sa_onote).attr('data-noteid',data.o_id).addClass('eventlisttbodytrtd');
-							var cell10 = $('<td></td>').html(saonote).addClass('eventlisttbodytrtd').append(wordsanote);
+							var saonote =  $('<input type="text" name="saonote" style="width:180px;"/> ').val(data.sa_onote).attr('data-noteid',data.o_id);
+							var cell10 = $('<td ></td>').html(saonote).addClass('eventlisttbodytrtd').append(wordsanote);
 	 						var rowtb = $('<tr></tr>').append([cell0,cell1,cell2,cell3,cell4,cell5,cell6,cell7,cell8,cell9,cell10]);
 	 						docFragtb.append(rowtb);
 	 						
@@ -1011,7 +986,7 @@ $(function(){
 					   var wordsanote =  $('<span style="visibility: hidden;font-size:0px;margin:0pxlpadding:3px;"></span> ').text(data.Sa_mnote).addClass('eventlisttbodytrtd');
 					   var samnote =  $('<input type="text" name="samnote" width="500px" /> ').val(data.Sa_mnote).attr('data-noteid',data.M_id).addClass('eventlisttbodytrtd');
 					   var cell8 = $('<td></td>').html(samnote).addClass('eventlisttbodytrtd').append(wordsanote);
-					   var rowtb = $('<tr></tr>').append([cell0,cell1,cell2,cell3,cell4,cell5,cell6,cell7,cell8]).addClass('eventlisttbodytrtd');				   
+					   var rowtb = $('<tr ></tr>').append([cell0,cell1,cell2,cell3,cell4,cell5,cell6,cell7,cell8]).addClass('eventlisttbodytrtd');				   
 	  				   docFragtb.append(rowtb);
 	  				   
 					}//end if
@@ -1031,9 +1006,9 @@ $(function(){
 					   var cell5 = $('<td></td>').text(data.s_name).addClass('eventlisttbodytrtd');;
 					   var cell6 = $('<td></td>').text(data.c_averrating).addClass('eventlisttbodytrtd');;
 					   var wordsanote =  $('<span style="visibility: hidden;font-size:0px;margin:0pxlpadding:0px;"></span> ').text(data.sa_cnote).addClass('eventlisttbodytrtd');
-					   var sacnote =  $('<input type="text" name="sacnote" id= width="500px" /> ').val(data.sa_cnote).attr('data-noteid',data.c_id).addClass('eventlisttbodytrtd');
+					   var sacnote =  $('<input type="text" name="sacnote"  width="500px" /> ').val(data.sa_cnote).attr('data-noteid',data.c_id).addClass('eventlisttbodytrtd');
 					   var cell7 = $('<td></td>').html(sacnote).addClass('eventlisttbodytrtd').append(wordsanote);;
-					   var row = $('<tr></tr>').append([cell0,cell1,cell2,cell3,cell4,cell5,cell6,cell7]);
+					   var row = $('<tr ></tr>').append([cell0,cell1,cell2,cell3,cell4,cell5,cell6,cell7]);
 					   docFragtb.append(row);
 					   
 						}// end if
@@ -1049,14 +1024,14 @@ $(function(){
 						   var a3 =  $('<a></a> ').attr('href',"${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIFunctionServlet.do?"+"functionaction=findcustomer&targetid="+data.c_id).append(mid3);						  
 						   var midwordmid3 =  $('<span style="visibility: hidden;font-size:0px;margin:0pxlpadding:0px;"></span> ').text(data.c_id).addClass('eventlisttbodytrtd');
 						   var cell3 = $('<td></td>').html(a3).addClass('eventlisttbodytrtd').append(midwordmid3);
-						   var mid2 =  $('<input type="button" class="btn btn-success"/> ').val(data.m_id).addClass('eventlisttbodytrtd');
+						   var mid2 =  $('<input type="button" class="btn btn-success"/> ').val("m"+data.m_id).addClass('eventlisttbodytrtd');
 						   var a2 =  $('<a></a> ').attr('href',"${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIFunctionServlet.do?"+"functionaction=findmaster&targetid="+data.m_id).append(mid2);						  
 						   var midwordmid2 =  $('<span style="visibility: hidden;font-size:0px;margin:0pxlpadding:0px;"></span> ').text(data.m_id).addClass('eventlisttbodytrtd');
 						   var cell4 = $('<td></td>').html(a2).addClass('eventlisttbodytrtd').append(midwordmid2);
 						   var cell5 = $('<td></td>').text(data.p_summary).addClass('eventlisttbodytrtd');
 						   var cell6 = $('<td></td>').text(data.s_name).addClass('eventlisttbodytrtd');
 						   var wordsanote =  $('<span style="visibility: hidden;font-size:0px;margin:0pxlpadding:0px;"></span> ').text(data.sa_rnote).addClass('eventlisttbodytrtd');
-						   var sarnote =  $('<input type="text" name="sarnote" id= width="500px" /> ').val(data.sa_rnote).attr('data-noteid',data.r_id).addClass('eventlisttbodytrtd');
+						   var sarnote =  $('<input type="text" name="sarnote"  width="500px" /> ').val(data.sa_rnote).attr('data-noteid',data.r_id).addClass('eventlisttbodytrtd');
 						   var cell7 = $('<td></td>').html(sarnote).addClass('eventlisttbodytrtd').append(wordsanote);
 						   var row = $('<tr></tr>').append([cell0,cell1,cell2,cell3,cell4,cell5,cell6,cell7]);
 						   docFragtb.append(row);						
@@ -1214,7 +1189,13 @@ input[type='checkbox']:checked:after {
 	color: #fff;
 	width:20px;height:20px
 }
-
+.textstyle{
+		font-family: Arial, "Microsoft Jhenghei",  
+		"WenQuanYi Zen Hei", "儷黑 Pro", 
+		"LiHei Pro","文泉驛正黑", 
+		"DFKai-sb", DFKai-SB, 
+		sans-serif;
+	}
 </style>
 
 </body>
