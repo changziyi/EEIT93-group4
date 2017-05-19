@@ -71,7 +71,7 @@
 										<table>
 											<tr>
 												<td>專業證照:
-												<div><img id="m_cer"></div>
+												<div><img id="m_cer" width="200px" src="${pageContext.servletContext.contextPath}/master/master.do?type=cer&image=${mdataVO.m_id}"></div>
 												<input type="file" name="m_cer" ></td>
 											</tr>
 											<tr>
@@ -107,7 +107,7 @@
 											</tr>
 											<tr>
 											<td>首頁圖片:
-												<div><img id="b_image"></div>
+												<div><img id="b_image" width="200px" src="${pageContext.servletContext.contextPath}/master/master.do?type=master&image=${mdataVO.m_id}"></div>
 												<input type="file" name="b_image" /></td>
 											</tr>
 											<tr>
@@ -241,8 +241,8 @@
 			$('#updatebtn').click(function(){
 				
 				var updatedata = $('form[name="updateform"]').serializeArray();
-				var cerpho = $('input[name="m_cer"]')[0].files;
-				var bpho = $('input[name="b_image"]')[0].files;
+				var cerpho = $('input[name="m_cer"]')[0].files[0];
+				var bpho = $('input[name="b_image"]')[0].files[0];
 				var formData = new FormData();
 				
 				$.each(updatedata, function(index, input) {

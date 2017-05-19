@@ -288,4 +288,9 @@ public class MdataService {
 	public int updatecustomerSamnote(Integer m_id, String sa_mnote){//by Benny
 		return dao.updatecustomerSamnote(m_id,sa_mnote);
 	}
+	
+	public void updateSql(MdataVO mdataVO) {
+		dao.updateSql(mdataVO);
+	}
+	
 }

@@ -21,6 +21,7 @@ import javax.servlet.http.Part;
 
 import toolman.mdata.model.MdataService;
 import toolman.mdata.model.MdataVO;
+import toolman.mpro.model.MProService;
 import toolman.mpro.model.MProVO;
 import toolman.work.model.WorkService;
 import toolman.work.model.WorkVO;
@@ -266,6 +267,30 @@ public class MdataServlet extends HttpServlet {
 			inbimg.close();
 			
 			MdataVO mdataVO = (MdataVO)session.getAttribute("mdataVO");
+			Integer m_id = mdataVO.getM_id();
+			
+			mdataVO.setM_name(m_name);
+			mdataVO.setM_cel(m_cel);
+			mdataVO.setM_email(m_email);
+			mdataVO.setM_city(m_city);
+			mdataVO.setM_district(m_district);
+			mdataVO.setM_addr(m_addr);
+			mdataVO.setM_cer(m_cer);
+			mdataVO.setB_name(b_name);
+			mdataVO.setB_des(b_des);
+			mdataVO.setB_image(b_image);
+			
+			MdataService mdataSvc = new MdataService();
+			mdataSvc.updateSql(mdataVO);
+			
+			MProService mproSvc = new MProService();
+			mproSvc.deleteSql(m_id);
+			
+			if (m_pro != null) {
+				for (int i = 0; i < m_pro.length; i++) {
+					mproSvc.insertSql(m_id, m_pro[i]);
+				}
+			}
 			
 			Set<MProVO> set = null;
 			if (m_pro != null) {
@@ -278,24 +303,9 @@ public class MdataServlet extends HttpServlet {
 				}
 			}
 			
-			mdataVO.setM_name(m_name);
-			mdataVO.setM_cel(m_cel);
-			mdataVO.setM_email(m_email);
-			mdataVO.setM_city(m_city);
-			mdataVO.setM_district(m_district);
-			mdataVO.setM_addr(m_addr);
 			mdataVO.setMpros(set);
-			mdataVO.setM_cer(m_cer);
-			mdataVO.setB_name(b_name);
-			mdataVO.setB_des(b_des);
-			mdataVO.setB_image(b_image);
-			
-			MdataService mdataSvc = new MdataService();
-			mdataSvc.update(mdataVO);
-			
 			session.setAttribute("mdataVO", mdataVO);
-//			response.sendRedirect("OpenStoreDesc.jsp");
-//			return;
+			
 		}
 		
 
