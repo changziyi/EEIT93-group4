@@ -11,7 +11,15 @@
 <form action="${pageContext.request.contextPath}/ForgotPwdServlet" method="post">  
         信箱：<input type="text" name="Email" />
     <span style="color: red">${errorMsgs.erroremail}</span><br/>  
-    <input type="submit" value="送出" /><a href=""></a> 
+    <input type="submit" id="inputout" value="送出" /><a href=""></a> 
 </form>  
 </body>
+<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+<script>
+// 	$(function(){
+// 		$("#inputout").click(function(){
+// 			swal("Good job!", "You clicked the button!", "success")
+// 		});	
+// 	});
+</script>
 </html>

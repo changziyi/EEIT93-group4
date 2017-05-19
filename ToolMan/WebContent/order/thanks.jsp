@@ -15,9 +15,9 @@
 <body >
 <jsp:include page="/nav/navigation.jsp" />
 <jsp:include page="/order/title.jsp" />
-<div>1</div>
-<div>1</div>
-<div>1</div>
+<br/>
+<br/>
+<br/>
 <div class="alert alert-success">
   <h2><strong>謝謝你的評價</strong></h2>
   </div>
