@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import antlr.collections.List;
 import toolman.cdata.model.CdataService;
 import toolman.cdata.model.CdataVO;
 import toolman.order.model.OrderVO;
@@ -22,19 +21,27 @@ public class CdatadessServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
-			throws ServletException, IOException {
-		
+			throws ServletException, IOException {		
 			doPost(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
-
-		request.setCharacterEncoding("UTF-8");
-		ArrayList<CdataVO> cdataVOlist =  new ArrayList<CdataVO>();
-		String c_id = null;
 		HttpSession session = request.getSession();	
-		CdataVO cdataVO = new CdataVO();
+		CdataVO cdataVO = new CdataVO();	
+		String c_id = null;
+		
+			CdataVO cdata =(CdataVO)session.getAttribute("LoginOK");
+//			c_id=cdata.getC_id(); 
+			c_id = request.getParameter("c_id");
+			System.out.println("c_id = "+c_id);
+			
+			
+			request.setCharacterEncoding("UTF-8");
+			ArrayList<CdataVO> cdataVOlist =  new ArrayList<CdataVO>();
+		 
+		 
+		 
 		
 //		String action = request.getParameter("action");
 //		if ("chamge_img".equals(action)) {
@@ -57,7 +64,7 @@ public class CdatadessServlet extends HttpServlet {
 //		}
 		request.setAttribute("orders", orders);
 		
-		RequestDispatcher failureView = request.getRequestDispatcher("test1.jsp");
+		RequestDispatcher failureView = request.getRequestDispatcher("/cdata/test1.jsp");
 		failureView.forward(request,response);	
 	}
 	
