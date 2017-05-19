@@ -249,7 +249,7 @@ public class ManagerUIServlet extends HttpServlet {
 			
 			List<AdVO> list = null;
 			
-			if("allreport".equals(datastatus)){	
+			if("allad".equals(datastatus)){	
 				list = adservice.getAll();//need to add method in rdata
 					
 			}//end if		

@@ -132,6 +132,43 @@
 	 text-align:center;
 	}
 	
+.box {
+  background: #666666;
+  color: #ffffff;
+  width: 250px;
+  padding: 10px;
+  margin: 1em auto;
+}
+p {
+  margin: 1.5em 0;
+  padding: 0;
+}
+input[type="checkbox"] {
+  display: none;
+}
+label {
+  cursor: pointer;
+}
+input[type="checkbox"] + label:before {
+  border: 1px solid #333;
+  content: "\00a0";
+  display: inline-block;
+  font: 16px/1em sans-serif;
+  height: 16px;
+  margin: 0 .25em 0 0;
+  padding: 0;
+  vertical-align: top;
+  width: 16px;
+}
+input[type="checkbox"]:checked + label:before {
+  background: #fff;
+  color: #333;
+  content: "\2713";
+  text-align: center;
+}
+input[type="checkbox"]:checked + label:after {
+  font-weight: bold;
+}
 </style>
 </head>
 <body>
@@ -174,8 +211,9 @@
 	<article>
 	<div class="tablewrapper">
 		
-		<div id="tabletool" class="bg-info"style="width:100%; border:1px solid blue;margin:auto;padding:20px;display:table;text-align:left">
-			
+		<div id="tabletool" class="bg-info" style="width:100%; border:1px solid blue;margin:auto;padding:20px;display:table;text-align:left">
+			<span id="tabletoo2" style="width:50%; border:1px solid blue;margin:0px;padding:0px;text-align:left;float:left;"></span>
+			<span id="tabletoo3" style="width:50%; border:1px solid blue;margin:0px;padding:0px;text-align:left;float:left;"></span>
 		</div>
 		
 		<table id="eventlist" class="table table-striped table-bordered table-hover" style="word-break: keep-all;display:table;text-align:center" >
@@ -288,9 +326,7 @@
 
 <!-- -----------------------------end Order and Report Modal---------------------------------------- -->
 
-<!-- ---------------------------chart--------- -->
-<div id="charts"></div>
-<!-- ---------------------------end chart--------- -->
+
 <script>
 	var table ;//datatable variable not in use
 	var navagatorid = $('#navigator>ul>li.active').data('id');//top navigator
@@ -531,7 +567,7 @@ $(function(){
  			$('#functionrow').empty();
 			var buttongroupdiv ='<div class="btn-group">'
 			var dropdowntitlestate = 
-				'<button type="button" class="btn btn-primary dropdown-toggle" style="width:130px;height:50px" data-toggle="dropdown"aria-haspopup="true" aria-expanded="false">師傅狀態<span class="caret"></span></button>';
+				'<button type="button" class="btn btn-primary dropdown-toggle" style="width:130px;height:50px;font-size:20px;" data-toggle="dropdown"aria-haspopup="true" aria-expanded="false">師傅狀態<span class="caret"></span></button>';
 			var dropdownmenucontent=
 				'<li data-statusvalue="allmaster" data-buttonstate="selected" name="datastatus"><a href="#">所有師傅</a></li><li role="separator" class="divider"></li>'
 				+'<li data-statusvalue="未審核" name="datastatus"><a href="#" >未審核</a></li><li role="separator" class="divider"></li>'
@@ -548,7 +584,7 @@ $(function(){
 			var li1 = $(masterstatus);
 			
 			docFragfunction2.append([li1]);			
-			$('#tabletool').append($('#functionrow').append(docFragfunction2));
+			$('#tabletoo2').append($('#functionrow').append(docFragfunction2));
 			$('#functionrow>div>ul>li').on('click',functionrowfiltering);//filtering
 		}//end else if
 		
@@ -557,7 +593,7 @@ $(function(){
 			$('#functionrow').empty();
 			var buttongroupdiv ='<div class="btn-group">'
 			var dropdowntitlestate = 
-					'<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"aria-haspopup="true" aria-expanded="false">消費者狀態<span class="caret"></span></button>';
+					'<button type="button" class="btn btn-primary dropdown-toggle"  style="width:130px;height:50px;font-size:18px;" data-toggle="dropdown"aria-haspopup="true" aria-expanded="false">消費者狀態<span class="caret"></span></button>';
 			var dropdownmenucontentstate=
 					'<li data-statusvalue="allcustomer" data-buttonstate="selected" name="datastatus"><a href="#">所有消費者</a></li><li role="separator" class="divider"></li>'
 					+'<li data-statusvalue="停權中" name="datastatus"><a href="#">停權中</a></li>';
@@ -566,12 +602,12 @@ $(function(){
 			var buttongroupdivend ='</div>';		
 			var customerstatus = buttongroupdiv+dropdowntitlestate+dropdownmenustate+buttongroupdivend;
 							
-			var showblacklistc = '<button type="button" data-id="showblacklistc" class="btn " style="background-color: #555555; color:white" >黑名單</button>';				
+// 			var showblacklistc = '<button type="button" data-id="showblacklistc" class="btn " style="background-color: #555555; color:white" >黑名單</button>';				
 
 			var li1 = $(customerstatus);
 			
 			docFragfunction2.append([li1]);
-			$('#functionrow').append(docFragfunction2);
+			$('#tabletoo2').append($('#functionrow').append(docFragfunction2));
 			$('#functionrow>div>ul>li').on('click',functionrowfiltering);//filtering
 		}//end else if
 		
@@ -580,7 +616,7 @@ $(function(){
 			$('#functionrow').empty();
 			var buttongroupdiv ='<div class="btn-group">';
 			var dropdowntitlestate = 
-						'<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"aria-haspopup="true" aria-expanded="false">訂單狀態<span class="caret"></span></button>';
+						'<button type="button" class="btn btn-primary dropdown-toggle" style="width:130px;height:50px;font-size:20px;" data-toggle="dropdown"aria-haspopup="true" aria-expanded="false">訂單狀態<span class="caret"></span></button>';
 			var dropdownmenucontentstate=
 						'<li data-statusvalue="allorder" data-buttonstate="selected" name="datastatus"><a href="#">所有訂單</a></li><li role="separator" class="divider"></li>'
 						+'<li data-statusvalue="進行中" name="datastatus"><a href="#">進行中</a></li><li role="separator" class="divider"></li>'
@@ -592,7 +628,7 @@ $(function(){
 			var orderstatus = buttongroupdiv+dropdowntitlestate+dropdownmenustate+buttongroupdivend;
 				
 			var dropdowntitletime = 
-				'<button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown"aria-haspopup="true" aria-expanded="false">日期篩選<span class="caret"></span></button>';
+				'<button type="button" class="btn btn-info dropdown-toggle" style="width:130px;height:50px;font-size:20px;" data-toggle="dropdown"aria-haspopup="true" aria-expanded="false">日期篩選<span class="caret"></span></button>';
 			var dropdownmenucontenttime=
 				'<li  data-statusvalue="halfyear" name="datatime"><a href="#">最近半年</a></li><li role="separator" class="divider"></li>'
 				+'<li data-statusvalue="oneyear" name="datatime"><a href="#">最近一年</a></li><li role="separator" class="divider"></li>'
@@ -604,14 +640,14 @@ $(function(){
 			var li1 = $(orderstatus);
 			var li2 = $(mastertime);
 			docFragfunction2.append([li1,li2]);
-			$('#functionrow').append(docFragfunction2);
+			$('#tabletoo2').append($('#functionrow').append(docFragfunction2));
 			$('#functionrow>div>ul>li').on('click',functionrowfiltering);//filtering
  		}// end else if 
 		else if(navagatorid== 'r'){
 			$('#functionrow').empty();
 			var buttongroupdiv ='<div class="btn-group">';
 			var dropdowntitlestate = 
-						'<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"aria-haspopup="true" aria-expanded="false">訂單狀態<span class="caret"></span></button>';
+						'<button type="button" class="btn btn-primary dropdown-toggle" style="width:130px;height:50px;font-size:20px;" data-toggle="dropdown"aria-haspopup="true" aria-expanded="false">訂單狀態<span class="caret"></span></button>';
 			var dropdownmenucontentstate=
 						'<li data-statusvalue="allreport" data-buttonstate="selected" name="datastatus"><a href="#">所有檢舉</a></li><li role="separator" class="divider"></li>'
 						+'<li data-statusvalue="進行中" name="datastatus"><a href="#">未解決</a></li><li role="separator" class="divider"></li>'
@@ -622,16 +658,16 @@ $(function(){
 			var reportstatus = buttongroupdiv+dropdowntitlestate+dropdownmenustate+buttongroupdivend;		
 			var li1 = $(reportstatus);
 			docFragfunction2.append([li1]);
-			$('#functionrow').append(docFragfunction2);
+			$('#tabletoo2').append($('#functionrow').append(docFragfunction2));
 			$('#functionrow>div>ul>li').on('click',functionrowfiltering);//filtering
 		}
 		else if(navagatorid== 'ad'){
 			$('#functionrow').empty();
 			var buttongroupdiv ='<div class="btn-group">';
 			var dropdowntitlestate = 
-						'<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"aria-haspopup="true" aria-expanded="false">訂單狀態<span class="caret"></span></button>';
+						'<button type="button" class="btn btn-primary dropdown-toggle" style="width:130px;height:50px;font-size:20px; data-toggle="dropdown"aria-haspopup="true" aria-expanded="false">廣告狀態<span class="caret"></span></button>';
 			var dropdownmenucontentstate=
-						'<li data-statusvalue="allreport" data-buttonstate="selected" name="datastatus"><a href="#">所有廣告</a></li><li role="separator" class="divider"></li>'
+						'<li data-statusvalue="allad" data-buttonstate="selected"  name="datastatus"><a href="#">所有廣告</a></li><li role="separator" class="divider"></li>'
 						+'<li data-statusvalue="進行中" name="datastatus"><a href="#">未解決</a></li><li role="separator" class="divider"></li>'
 						+'<li data-statusvalue="已結束" name="datastatus"><a href="#">已解決</a></li><li role="separator" class="divider"></li>';
 												
@@ -640,7 +676,7 @@ $(function(){
 			var reportstatus = buttongroupdiv+dropdowntitlestate+dropdownmenustate+buttongroupdivend;		
 			var li1 = $(reportstatus);
 			docFragfunction2.append([li1]);
-			$('#functionrow').append(docFragfunction2);
+			$('#tabletoo2').append($('#functionrow').append(docFragfunction2));
 			$('#functionrow>div>ul>li').on('click',functionrowfiltering);//filtering
 		}
 	}//end functionrow
@@ -682,15 +718,15 @@ $(function(){
 			var docFragsubfunction = $(document.createDocumentFragment());
 		   if( navagatorid== 'm'){
 				$('#subfunctionrow').empty();
-				var applicationreviewm = '<a href="" id="applymasterlink" name="applicationreviewm"><input type="button" class="btn btn-success"value="審核師傅" /></a>';
-				var suspensionm = '<span id="suspensionm" value="suspensionm" name="functionaction" style="padding:0px; margin:0px;" ><input type="button"class="btn btn-danger" value="停權" "/></span>';
-				var sendmessagem = '<span id="messagespanm" value="sendmessagem" name="functionaction" style="padding:0px; margin:0px;" ><input type="button" class="btn btn-info"  value="傳送訊息" "/></span>';
+				var applicationreviewm = '<a href="" id="applymasterlink" name="applicationreviewm"><input type="button"style="width:130px;height:50px;font-size:20px;" class="btn btn-success"value="審核師傅" /></a>';
+				var suspensionm = '<span id="suspensionm" value="suspensionm" name="functionaction" style="padding:0px; margin:0px;" ><input type="button" class="btn btn-danger" style="width:130px;height:50px;font-size:20px;" value="停權" "/></span>';
+				var sendmessagem = '<span id="messagespanm" value="sendmessagem" name="functionaction" style="padding:0px; margin:0px;" ><input type="button" class="btn btn-info"  style="width:130px;height:50px;font-size:20px;" value="傳送訊息" "/></span>';
 				var b1 = $(applicationreviewm);
 				var b2 = $(suspensionm);
 				var b3 = $(sendmessagem);
 				docFragsubfunction.append([b1,b2,b3]);
 				
-				$('#tabletool').append($('#subfunctionrow').append(docFragsubfunction));
+				$('#tabletoo3').append($('#subfunctionrow').append(docFragsubfunction));
 				//rebinding
 			 	$('#subfunctionrow>a').on('click',togglehyper);//direct to other pages
 			 	$('#subfunctionrow>span:not(#messagespanm,#messagespanc,#messagespano,#messagespanr)').on('click',togglegetmethod);//will return something when clicked, maill has it's own form action
@@ -700,27 +736,27 @@ $(function(){
 			
 			else if(navagatorid== 'c'){
 				$('#subfunctionrow').empty();
-				var suspensionc = '<span id="suspensionc" value="suspensionc" name="functionaction" style=" padding:0px; margin:0px;" ><input type="button" value="停權"/></span>';
-				var sendmessagec = '<span id="messagespanc" value="sendmessagec" name="functionaction" style=" padding:0px; margin:0px;" ><input type="button" value="傳送訊息" /></span>';
+				var suspensionc = '<span id="suspensionc" value="suspensionc" name="functionaction" style=" padding:0px; margin:0px;" ><input type="button" class="btn btn-danger" style="width:130px;height:50px;font-size:20px;" value="停權"/></span>';
+				var sendmessagec = '<span id="messagespanc" value="sendmessagec" name="functionaction" style=" padding:0px; margin:0px;" ><input type="button" class="btn btn-info" style="width:130px;height:50px;font-size:20px;"  value="傳送訊息" /></span>';
 				var b1 = $(suspensionc);
 				var b2 = $(sendmessagec);
 				docFragsubfunction.append([b1,b2]);
 				
-				$('#tabletool').append($('#subfunctionrow').append(docFragsubfunction));
+				$('#tabletoo3').append($('#subfunctionrow').append(docFragsubfunction));
 					//rebinding
 			 	$('#subfunctionrow>a').on('click',togglehyper);//direct to other pages
-			 	$('span:not(#messagespanm,#messagespanc,#messagespano,#messagespanr)').on('click',togglegetmethod);//will return something when clicked, maill has it's own form action
+			 	$('#subfunctionrow>span:not(#messagespanm,#messagespanc,#messagespano,#messagespanr)').on('click',togglegetmethod);//will return something when clicked, maill has it's own form action
 			 	$('#messagespanm,#messagespanc,#messagespano,#messagespanr,#messagespanr,#messagespanad').on('click',mail);//will return something when clicked, maill has it's own form action
 
 			}//end else if
 			
 			else if(navagatorid== 'o'){
 				$('#subfunctionrow').empty();
-				var sendmessageo = '<span id="messagespano" value="sendmessageo" name="functionaction" style="padding:0px; margin:0px;" ><input type="button" value="訊息" /></span>';
+				var sendmessageo = '<span id="messagespano" value="sendmessageo" name="functionaction" style="padding:0px; margin:0px;" ><input type="button" class="btn btn-info" style="width:130px;height:50px;font-size:20px;" value="訊息" /></span>';
 				var b1 = $(sendmessageo);
 				docFragsubfunction.append([b1]);
 				
-				$('#tabletool').append($('#subfunctionrow').append(docFragsubfunction));
+				$('#tabletoo3').append($('#subfunctionrow').append(docFragsubfunction));
 					//rebinding
 			 	$('#subfunctionrow>a').on('click',togglehyper);//direct to other pages
 // 			 	$('#subfunctionrow>span[id!="messagespanm"],#subfunctionrow>span[id!="messagespanc"],#subfunctionrow>span[id!="messagespano"]').on('click',mail);//will return something when clicked, maill has it's own form action
@@ -729,11 +765,11 @@ $(function(){
 			}// end else if 
 			else if(navagatorid== 'r'){
 				$('#subfunctionrow').empty();
-				var sendmessager = '<span id="messagespanr" value="sendmessager" name="functionaction" style="padding:0px; margin:0px;" ><input type="button" value="訊息" /></span>';
+				var sendmessager = '<span id="messagespanr" value="sendmessager" name="functionaction" style="padding:0px; margin:0px;" ><input type="button" class="btn btn-info" style="width:130px;height:50px;font-size:20px;" value="訊息" /></span>';
 				var b1 = $(sendmessager);
 				docFragsubfunction.append([b1]);
 				
-				$('#tabletool').append($('#subfunctionrow').append(docFragsubfunction));
+				$('#tabletoo3').append($('#subfunctionrow').append(docFragsubfunction));
 					//rebinding
 			 	$('#subfunctionrow>a').on('click',togglehyper);//direct to other pages
  			 	$('#messagespanm,#messagespanc,#messagespano,#messagespanr,#messagespanad').on('click',mail);//will return something when clicked, maill has it's own form action
@@ -742,16 +778,16 @@ $(function(){
 			}
 			else if(navagatorid== 'ad'){
 				$('#subfunctionrow').empty();
-				var sendmessager = '<span id="messagespanad" value="sendmessagead" name="functionaction" style="padding:0px; margin:0px;" ><input type="button" value="訊息" /></span>';
-				var stopad = '<span id="stopad" value="stopad" name="functionaction" style="padding:0px; margin:0px;" ><input type="button" value="終止廣告" "/></span>';
+				var sendmessager = '<span id="messagespanad" value="sendmessagead" name="functionaction" style="padding:0px; margin:0px;" ><input type="button" class="btn btn-info" style="width:130px;height:50px;font-size:20px;"  value="訊息" /></span>';
+				var stopad = '<span id="stopad" value="stopad" name="functionaction" style="padding:0px; margin:0px;" ><input type="button" class="btn btn-danger" style="width:130px;height:50px;font-size:20px;"  value="終止廣告"/></span>';
 				var b1 = $(sendmessager);
 				var b2 = $(stopad);
 				docFragsubfunction.append([b1,b2]);
 				
-				$('#tabletool').append($('#subfunctionrow').append(docFragsubfunction));
+				$('#tabletoo3').append($('#subfunctionrow').append(docFragsubfunction));
 					//rebinding
 			 	$('#subfunctionrow>a').on('click',togglehyper);//direct to other pages
- 			 	$('span:not(#messagespanm,#messagespanc,#messagespano,#messagespanr,#messagespanad)').on('click',togglegetmethod);//will return something when clicked, maill has it's own form action
+ 			 	$('#subfunctionrow>span:not(#messagespanm,#messagespanc,#messagespano,#messagespanr,#messagespanad)').on('click',togglegetmethod);//will return something when clicked, maill has it's own form action
 			 	$('#messagespanm,#messagespanc,#messagespano,#messagespanr,#messagespanad').on('click',mail);//will return something when clicked, maill has it's own form action
 
 				
@@ -931,7 +967,7 @@ $(function(){
 						   
 						   	console.log(data);
 						   	
-						   	var toggleword = $('<input  type="checkbox" name="otoggle" />').val(data.o_id).attr('data-receiver1',data.o_bname).attr('data-receiver2',data.c_id);
+						   	var toggleword = $('<input  type="checkbox" style="width:20px;height:20px"name="otoggle" />').val(data.o_id).attr('data-receiver1',data.o_bname).attr('data-receiver2',data.c_id);
 						   	
 						   	var cell0 = $('<td></td>').addClass('eventlisttbodytrtd').append(toggleword);
 						  	var cell1 = $('<td></td>').text(data.o_tdate).addClass('eventlisttbodytrtd');
@@ -960,11 +996,11 @@ $(function(){
 				  else if(id=="m"){				
 					  
 					  
-					   var toggleword =$('<input type="checkbox"   name="mtoggle"/>').val(data.M_id).attr('data-receiver',data.B_name);;     
+					   var toggleword =$('<input type="checkbox" class="cb" style="width:20px;height:20px"  name="mtoggle"/>').val(data.M_id).attr('data-receiver',data.B_name);;     
 					   var mid =  $('<input type="button" class="btn btn-success"/> ').val("m"+data.M_id).addClass('eventlisttbodytrtd');
 					   var a =  $('<a></a> ').attr('href',"${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIFunctionServlet.do?"+"functionaction=findmaster&targetid="+data.M_id).append(mid);						  
 					   var midwordmid =  $('<span style="visibility: hidden;font-size:0px;margin:0pxlpadding:0px;"></span> ').text(data.M_id).addClass('eventlisttbodytrtd');
-					   var cell0 = $('<td></td>').addClass('eventlisttbodytrtd').append(toggleword);  
+					   var cell0 = $('<td ></td>').addClass('eventlisttbodytrtd').append(toggleword);  
 					   var cell1 = $('<td></td>').html(a).addClass('eventlisttbodytrtd').append(midwordmid);
 					   var cell2 = $('<td></td>').text(data.B_name).addClass('eventlisttbodytrtd');
 					   var cell3 = $('<td></td>').text(data.M_name).addClass('eventlisttbodytrtd');
@@ -983,7 +1019,7 @@ $(function(){
 					else if(id=="c"){
 						
 						
-					   var toggleword = $('<input type="checkbox" name="ctoggle" />').val(data.c_id).attr('data-receiver',data.c_id);
+					   var toggleword = $('<input type="checkbox" style="width:20px;height:20px" name="ctoggle" />').val(data.c_id).attr('data-receiver',data.c_id);
 					   var mid =  $('<input type="button" class="btn btn-info" style="width:100px;word-break: keep-all"/> ').val(data.c_id).addClass('eventlisttbodytrtd');
 					   var a =  $('<a></a> ').attr('href',"${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIFunctionServlet.do?"+"functionaction=findcustomer&targetid="+data.c_id).append(mid);						  
 					   var midwordmid =  $('<span style="visibility: hidden;font-size:0px;margin:0pxlpadding:0px;"></span> ').text(data.c_id).addClass('eventlisttbodytrtd');
@@ -1003,7 +1039,7 @@ $(function(){
 						}// end if
 						
 					else if(id=="r"){
-						   var toggleword = $('<input type="checkbox" name="ctoggle" />').val(data.r_id).attr('data-receiver1',data.m_id).attr('data-receiver2',data.c_id).attr('data-extract',data.p_summary).attr('data-content',data.p_content);
+						   var toggleword = $('<input type="checkbox" style="width:20px;height:20px" name="ctoggle" />').val(data.r_id).attr('data-receiver1',data.m_id).attr('data-receiver2',data.c_id).attr('data-extract',data.p_summary).attr('data-content',data.p_content);
 						   var mid =  $('<input type="button" class="btn btn-primary" name="reportevent"  />').val(data.r_id).addClass('eventlisttbodytrtd').attr('data-receiver1',data.m_id).attr('data-receiver2',data.c_id).attr('data-extract',data.p_summary).attr('data-content',data.p_content);
 						   var midwordmid =  $('<span style="visibility: hidden;font-size:0px;margin:0pxlpadding:0px;"></span> ').text(data.r_id).addClass('eventlisttbodytrtd');
 						   var cell0 = $('<td></td>').addClass('eventlisttbodytrtd').append(toggleword);
@@ -1027,7 +1063,7 @@ $(function(){
 					}
 					else if(id=="ad"){
 						
-						   var toggleword = $('<input type="checkbox" name="ctoggle" />').val(data.ad_id).attr('data-receiver',data.m_id);
+						   var toggleword = $('<input type="checkbox" style="width:20px;height:20px" name="ctoggle" />').val(data.ad_id).attr('data-receiver',data.m_id);
 						   var mid =  $('<input type="button" class="btn btn-warning"/>').val(data.ad_id).addClass('eventlisttbodytrtd');
 						   var a =  $('<a></a> ').attr('href',"${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIFunctionServlet.do?"+"functionaction=findcustomer&targetid="+data.ad_id).append(mid);						  
 						   var midwordmid =  $('<span style="visibility: hidden;font-size:0px;margin:0pxlpadding:0px;"></span> ').text(data.ad_id).addClass('eventlisttbodytrtd');
@@ -1080,7 +1116,7 @@ $(function(){
 				    "<'row'<'col-sm-6'l><'col-sm-6'f>>" +
 				    "<'row'<'col-sm-12't>>" +
 				    "<'row'<'col-sm-5'><'col-sm-7'p>>",
-				    select: true,
+				    select: false,
 				    "language":{                    //Custom Message Setting
                         "lengthMenu": "每頁 _MENU_ 筆資料",    //Customizing menu Text
                         "zeroRecords": "查無資料 ",             //Customizing zero record text - filtered
@@ -1127,7 +1163,59 @@ $(function(){
 				   
 				   
 </script>
+<style>   
+input[type='checkbox'] {
+	
+	width:20px;height:20px;
+}
 
+input[type='checkbox'] {
+	-webkit-font-smoothing: antialiased;
+	text-rendering: optimizeSpeed;
+	margin: 10px;
+	margin-right: 1px;
+	display: block;
+	float: left;
+	position: relative;
+	cursor: pointer;
+	width:20px;
+	height:20px
+}
+
+input[type='checkbox']:after {
+	content: "";
+	vertical-align: middle;
+	text-align: center;
+	line-height: 13px;
+	position: absolute;
+	cursor: pointer;
+	height: 13px;
+	width: 13px;
+	left: 0;
+	top: 0;
+	font-size: 10px;
+	-webkit-box-shadow: inset 0 1px 1px #5F95FC, 0 1px 0 #5F95FC;
+	-moz-box-shadow: inset 0 1px 1px #5F95FC, 0 1px 0 #5F95FC;
+	box-shadow: inset 0 1px 1px #5F95FC, 0 1px 0 #5F95FC;
+	background: #5F95FC;
+	width:20px;height:20px
+}
+
+input[type='checkbox']:hover:after, input[type='checkbox']:checked:hover:after {
+	background: #5F95FC;
+	content: '\2714';
+	color: #fff;
+	width:20px;height:20px
+}
+
+input[type='checkbox']:checked:after {
+	background: #5F95FC;
+	content: '\2714';
+	color: #fff;
+	width:20px;height:20px
+}
+
+</style>
 
 </body>
 </html>
