@@ -335,7 +335,7 @@ public class AdDAO implements AdDAO_interface {
 	}
 
 	@Override
-	public List<AdVO> getAllBySname2(String s_name) {
+	public List<AdVO> getAllBySname(String s_name) {
 		
 		List<AdVO> list = new ArrayList<AdVO>();
 		AdVO adVO = null;

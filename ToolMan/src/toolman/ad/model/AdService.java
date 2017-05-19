@@ -32,7 +32,7 @@ public class AdService {
 	}
 
 	public List<AdVO> getAllBySname(String s_name) {
-		return dao.getBySname(s_name);
+		return dao.getAllBySname(s_name);
 	}
 	
 	
