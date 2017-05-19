@@ -105,7 +105,7 @@ public class CalendarController extends HttpServlet {
 		    	
 		   
 		    String className = jsonobject.getJSONArray("className").toString();
-		    Boolean allDay = jsonobject.getBoolean("allDay");
+//		    Boolean allDay = jsonobject.getBoolean("allDay");
 //		    Boolean overlap = jsonobject.getBoolean("overlap");
 		    
 		    calendarVO.setEvent_id(id);
@@ -114,7 +114,7 @@ public class CalendarController extends HttpServlet {
 		    
 		    calendarVO.setEvent_end(end);
 		    calendarVO.setEvent_start(start);
-		    calendarVO.setEvent_allDay(allDay);
+//		    calendarVO.setEvent_allDay(allDay);
 		    calendarVO.setEvent_className(className);
 		    calendarVO.setM_id(m_id);
 		    list.add(calendarVO);
@@ -124,10 +124,11 @@ public class CalendarController extends HttpServlet {
 		    System.out.println(title);
 		    System.out.println(end);
 		    System.out.println(className);
-		    System.out.println(allDay);
+//		    System.out.println(allDay);
 		}
-		
-		
+		if(calendarservice.getByM(m_id)!=null){
+			calendarservice.deleteByM(m_id);
+		}
 		calendarservice.InsertByM(list);
 //---------------------------------end insert---------------------------------------------		
 		

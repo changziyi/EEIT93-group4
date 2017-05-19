@@ -40,7 +40,8 @@ public class AdDAO implements AdDAO_interface {
 //	private static final String GET_ALL_BY_SNAME = "SELECT ad_id,m_id,ad_bdate,ad_enddate,s_name FROM ad where s_name = ? order by newid()";
 	private static final String GET_ALL_BY_SNAME = "SELECT m.m_id,m.m_city,m.m_district,m.b_name,m.m_arating,m.o_finished,a.ad_id,a.s_name,a.ad_bdate,a.ad_enddate FROM ad a inner join mdata m on a.m_id = m.m_id where a.s_name = ? order by newid()";
 	private static final String GET_ALL_BY_SNAME_AND_DATE = "SELECT * FROM ad WHERE s_name = ? AND ad_bdate=?";
-	
+	private static final String UPDATE_AS_DELETED = "UPDATE ad set s_name=? where ad_id = ?";//tested ok
+
 	@Override
 	public void insert(AdVO adVO) {
 		
@@ -470,5 +471,41 @@ public class AdDAO implements AdDAO_interface {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+	//by benny tested ok
+	@Override
+	public void updateAsDeleted(Integer ad_id, String s_name) {//by benny
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+
+		try {
+
+				con = ds.getConnection();
+				pstmt = con.prepareStatement(UPDATE_AS_DELETED);				
+				pstmt.setString(1, s_name);
+				pstmt.setInt(2, ad_id);			
+				pstmt.executeUpdate();
+			
+			// Handle any driver errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+
+	}
 }

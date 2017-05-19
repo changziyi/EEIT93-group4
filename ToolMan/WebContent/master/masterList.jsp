@@ -15,43 +15,45 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>ToolMan</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="Shortcut Icon" href="${pageContext.servletContext.contextPath}/favicon.ico" />
-<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/css/bootstrap.min.css">
-<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/css/bootstrap-theme.min.css">
-<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/css/theme.min.css">
-<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/nav/nav.css">
-<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/css/index/expandsearch.css">
-<%-- <link rel="stylesheet" href="${pageContext.servletContext.contextPath}/css/creative.css"> --%>
-<style>
-body {font-family:Microsoft JhengHei;}
-a {color:White;}
-.county {width:80px;height:25px;vertical-align: top}
-.zipcode {display: none;}
-.form-control {margin:auto; width:120px; display:inline; font-family:Microsoft JhengHei; vertical-align: top}
-.proc {padding:5px;margin-left: 0;margin-right: 5px;text-align: center;border-radius: 3px;color: #FFF5EE;font-weight: bold;}
-.divpro {margin-left: 0;margin-bottom: 10px;}
-.container {width: 80%;}
-.myDiv {position:relative; top:90px;}
-.pad {padding-left: 3%;}
-.result {font-size:20px;}
-.resultcount {padding:5%;}
-.count {color: #00BFFF;}
-.list-group {margin-top: 15%;}
-.probtn {font-size: 16px;}
-.searchinput {font-weight:bold;color:#00AFEA;}
-.btn-master {color: White; background-color: #00BFFF; font-size:14px}
-.btn-master:hover {background-color: #87CEFA;color: white}
-.thumbnailformaster {height:410px}
-.bar {width:30%;}
-.boxtext {font-size:15px; margin-bottom:10px; margin-bottom:10px}
-.bartext {font-size:20px; margin-bottom:8px}
-.bardiv {margin-left:5%}
-.addiv {margin-top:15%}
-.adrow {margin-top:3% ;margin-bottom:3%; margin-left:0.5%; margin-right:0.5%; padding:5% 4% 4% 2%}
-.md7 {padding-left:0.5%}
-.md5 {padding-left:0.2%;padding-top:10%;padding-right:0.2%}
-</style>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="Shortcut Icon" href="${pageContext.servletContext.contextPath}/favicon.ico" />
+	<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/css/bootstrap.min.css">
+	<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/css/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/css/theme.min.css">
+	<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/nav/nav.css">
+	<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/css/index/expandsearch.css">
+	<%-- <link rel="stylesheet" href="${pageContext.servletContext.contextPath}/css/creative.css"> --%>
+	<script src="${pageContext.servletContext.contextPath}/js/jquery-3.2.1.min.js"></script>
+	<script src="${pageContext.servletContext.contextPath}/js/bootstrap.min.js"></script>
+	<style>
+		body {font-family:Microsoft JhengHei;}
+		a {color:White;}
+		.county {width:80px;height:25px;vertical-align: top}
+		.zipcode {display: none;}
+		.form-control {margin:auto; width:120px; display:inline; font-family:Microsoft JhengHei; vertical-align: top}
+		.proc {padding:5px;margin-left: 0;margin-right: 5px;text-align: center;border-radius: 3px;color: #FFF5EE;font-weight: bold;}
+		.divpro {margin-left: 0;margin-bottom: 10px;}
+		.container {width: 80%;}
+		.myDiv {position:relative; top:90px;}
+		.pad {padding-left: 3%;}
+		.result {font-size:20px;}
+		.resultcount {padding:5%;}
+		.count {color: #00BFFF;}
+		.list-group {margin-top: 15%;}
+		.probtn {font-size: 16px;}
+		.searchinput {font-weight:bold;color:#00AFEA;}
+		.btn-master {color: White; background-color: #00BFFF; font-size:14px}
+		.btn-master:hover {background-color: #87CEFA;color: white}
+		.thumbnailformaster {height:410px}
+		.bar {width:30%;}
+		.boxtext {font-size:15px; margin-bottom:10px; margin-bottom:10px}
+		.bartext {font-size:20px; margin-bottom:8px}
+		.bardiv {margin-left:5%}
+		.addiv {margin-top:15%}
+		.adrow {margin-top:3% ;margin-bottom:3%; margin-left:0.5%; margin-right:0.5%; padding:5% 4% 4% 2%}
+		.md7 {padding-left:0.5%}
+		.md5 {padding-left:0.2%;padding-top:10%;padding-right:0.2%}
+	</style>
 </head>
 
 <body>
@@ -124,8 +126,6 @@ a {color:White;}
 		</div> <!-- row -->
 	</div>
 	
-<script src="${pageContext.servletContext.contextPath}/js/jquery-3.2.1.min.js"></script>
-<script src="${pageContext.servletContext.contextPath}/js/bootstrap.min.js"></script>
 <script src="${pageContext.servletContext.contextPath}/js/jquery.search.twzipcode.min.js"></script>		
 <script>
 	

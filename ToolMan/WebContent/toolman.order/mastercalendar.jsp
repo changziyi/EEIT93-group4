@@ -237,6 +237,19 @@
 		margin:auto;
 		
 	}
+	.repeattable tr td{
+		width:100px;
+		margin-left:30px;
+		border:1px solid blue;
+		text-align:center;
+	}
+	.repeattable tr:nth-child(even){
+		background-color:#EFF5FB;
+	}
+	.repeattable tr:nth-child(odd){
+		background-color:#4E79D5;
+		color:white;
+	}
 	</style>
 
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -330,13 +343,13 @@
   <!--------------------------------calendar---------------------------------->  
         <div id='wrap'>
 			<!-- draggable -->
-		<div id='external-events'  style="margin-top:46px;">
-			<h4 style="margin-left:20%;">預約時間</h4>
-			<div id='external-events2' style="margin-left:20%;text-align:center">
-				<div class='fc-event' data-id="morning"data-start="01:00" data-end='08:00'>早上</div>
-				<div class='fc-event' data-id="noon"data-start="12:00" data-end='06:00'>下午</div>
-				<div class='fc-event' data-id="night"data-start="18:00" data-end='06:00'>晚上</div>
-				<div class='fc-event' id="alldayevent" data-id="allday"data-start="00:00" data-end='24:00'>整天</div>
+		<div id='external-events'  style=" border:1px solid blue;width:200px;margin-top:46px;margin-left:13%;">
+			<h4 style="margin-left:30%;">預約時間</h4>
+			<div id='external-events2' style="margin-left:25%;text-align:center">
+				<div class='fc-event' style="background-color:#C6E8EA" data-color="#C6E8EA" data-id="morning"data-start="01:00" data-end='08:00'>早上</div>
+				<div class='fc-event' style="background-color:#48AE59" data-color="#48AE59" data-id="noon"data-start="12:00" data-end='06:00'>下午</div>
+				<div class='fc-event' style="background-color:#7BAFF8" data-color="#7BAFF8" data-id="night"data-start="18:00" data-end='06:00'>晚上</div>
+				<div class='fc-event' style="background-color:#A5B4B5" data-color="#A5B4B5" id="alldayevent" data-id="allday"data-start="00:00" data-end='24:00'>整天</div>
 				
 			</div>
 		<!-- 			<p> -->
@@ -344,46 +357,46 @@
 <!-- 				<label for='drop-remove'>remove after drop</label> -->
 <!-- 			</p> -->
 	
-			<div class='.repeatingevent'id="selectmenu" style="margin-left:20%;"> 
-				<table style="border-collapse: collapse; display: inline; ">
+			<div class='.repeatingevent'id="selectmenu" style="margin-left:1.5%;"> 
+				<table id="repeattable" class="repeattable"style="border-collapse: collapse; display: inline; ">
 <!-- 				beware that value is for dow, so it must be plain number-->
-					<tr><td colspan="4">每週一不可預約</td><td></td></tr>
-					<tr><td ><input type="checkbox" name="repeatingboxmorning" value="1" >早上</td>
+					<tr><td colspan="3" style="text-align:center">每週一不可預約</td></tr>
+					<tr><td><input type="checkbox" name="repeatingboxmorning" value="1" >早上</td>
 					<td><input type="checkbox" name="repeatingboxnoon" value="1" >下午</td>
 					<td><input type="checkbox" name="repeatingboxnight" value="1" >晚上</td></tr>
 <!-- 					<td><input type="checkbox" name="repeatingbox" value="1" >整天</td></tr> -->
 					
-					<tr><td colspan="4">每週二不可預約</td><td></td></tr>
+					<tr><td colspan="3" style="text-align:center">每週二不可預約</td></tr>
 					<tr><td><input type="checkbox" name="repeatingboxmorning"value="2" >早上</td>
 					<td><input type="checkbox" name="repeatingboxnoon"value="2" >下午</td>
 					<td><input type="checkbox" name="repeatingboxnight"value="2" >晚上</td>
 <!-- 					<td><input type="checkbox" name="repeatingbox"value="2" >整天</td></tr></tr> -->
 					
-					<tr><td colspan="4">每週三不可預約</td><td></td></td>
+					<tr><td colspan="3" style="text-align:center">每週三不可預約</td></tr>
 					<tr><td><input type="checkbox" name="repeatingboxmorning" value="3" >早上</td>
 					<td><input type="checkbox" name="repeatingboxnoon" value="3" >下午</td>
 					<td><input type="checkbox" name="repeatingboxnight" value="3" >晚上</td></tr>
 <!-- 					<td><input type="checkbox" name="repeatingbox" value="3" >整天</td></tr> -->
 					
-					<tr><td colspan="4">每週四不可預約</td><td></td></td>
+					<tr><td colspan="3" style="text-align:center">每週四不可預約</td></tr>
 					<tr><td><input type="checkbox" name="repeatingboxmorning" value="4" >早上</td>
 					<td><input type="checkbox" name="repeatingboxnoon" value="4" >下午</td>
 					<td><input type="checkbox" name="repeatingboxnight" value="4" >晚上</td></tr>
 <!-- 					<td><input type="checkbox" name="repeatingbox" value="4" >整天</td></tr> -->
 					
-					<tr><td colspan="4">每週五不可預約</td><td></td></td>
+					<tr><td colspan="3" style="text-align:center">每週五不可預約</td></tr>
 					<tr><td><input type="checkbox" name="repeatingboxmorning" value="5" >早上</td>
 					<td><input type="checkbox" name="repeatingboxnoon" value="5" >下午</td>
 					<td><input type="checkbox" name="repeatingboxnight" value="5" >晚上</td></tr>
 <!-- 					<td><input type="checkbox" name="repeatingbox" value="5" >整天</td></tr> -->
 					
-					<tr><td colspan="4">每週六不可預約</td><td></td></td>
+					<tr><td colspan="3" style="text-align:center">每週六不可預約</td></tr>
 					<tr><td><input type="checkbox" name="repeatingboxmorning" value="6" >早上</td>
 					<td><input type="checkbox" name="repeatingboxnoon" value="6" >下午</td>
 					<td><input type="checkbox" name="repeatingboxnight" value="6" >晚上</td></tr>
 <!-- 					<td><input type="checkbox" name="repeatingbox" value="6" >整天</td></tr> -->
 					
-					<tr><td colspan="4">每週日不可預約</td><td></td></td>
+					<tr><td colspan="3" style="text-align:center">每週日不可預約</td></tr>
 					<tr><td><input type="checkbox" name="repeatingboxmorning" value="0" >早上</td>
 					<td><input type="checkbox" name="repeatingboxnoon" value="0" >下午</td>
 					</td><td><input type="checkbox" name="repeatingboxnight" value="0" >晚上</td></tr>
@@ -398,7 +411,7 @@
 <!--------------------------------end calendar---------------------------------->
 		<div style='clear:both'></div>
 	</div>
-                <form class="form-inline">
+                <form class="form-inline" style="display:table;margin:auto">
 				             <div class="form-group" >
 				              <label >Choose Theme:</label>
 				              <select id="theme_selector1" class="form-control">
@@ -422,148 +435,7 @@
      		<!--  step2  -->
      	
                 <div id="step-2" class="">
-                    <form id="bookform"name="orderform" role="form" action="OrderController.do" class="form-inline">
-						<div class="panel panel-default">
-							<div class="panel-heading">預約表</div>
-								<table class="table">
-                        		
 
-							<thead>
-
-							</thead>
-							<tbody>
-									<tr>
-										<td>
-										
-											<label class="labelstyle">服務公司名稱:</label>
-										</td>
-										<td>
-											<div>
-												<span class="inputstyle" >${mdataVO.b_name}</span>
-										<!--  for test <span>TOOL KING</span>  -->
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											
-											<label class="labelstyle">服務類別</label>
-											
-										</td>
-										<td>
-										<div id="pro" name="opro_id" class="inputstyle">
-								<!-- 	parameters come directly from servlet , so the Ajax may not be needed-->	
-										<c:forEach var="oproset"  varStatus="stat" items="${mdataVO.mpros}">
-										
-								<!-- 	retrieve Collection object  mproset  from session.setAttribute("mproset",mproset)								 -->
-												<input type="checkbox" class="inputstyle"   value=${oproset.m_pro} checked="checked" name="o_pro"/>${oproset.m_pro}
-															
-										</c:forEach>
-								
-								<!-- 		for test -->
-										
-								<%-- 			<c:forEach var="i" begin="1" end="5"> --%>
-								<!-- 			<input type="checkbox" value="oprotest" name="o_proid"/>oprotest1 -->
-								<%-- 			</c:forEach> --%>
-								<!-- 		</div><span value=${param.erroropro}>${param.erroropro}</span> -->
-										<span class="errormsg" value=${errormsg.erroro_pro}>${errormsg.erroro_pro}</span>
-										</div>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											
-												<label class="labelstyle">預約日期</label>
-										</td>
-										<td>
-											<div id="datecalendar" >
-												<input type="text" class="inputstyle" id="datepicker" name="o_bdate" value="${orderVO.o_bdate}">
-												<!-- 放jQuery的calendar -->
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<label class="labelstyle">維修項目說明</label><!-- 	ok -->
-										</td>
-		
-										<td>	
-											<textarea   Style="width:200px;float:left;height:50px;" name="o_des" maxlength="50"></textarea>
-											<span class="errormsg" value=${errormsg.erroro_des}>${errormsg.erroro_des}</span>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											
-											<label class="labelstyle">未回應請求失效時間</label>
-										</td>
-										<td>
-											<div style="width: 400px;">
-												<input type="radio" style="margin-left:0px;" name="req_exp" value="5000" checked="checked">5秒測試用
-												<input type="radio" name="req_exp" value="15000" >15秒測試用
-												<input type="radio" name="req_exp" value="2400000" >2小時
-												<input type="radio" name="req_exp" value="86400000">1天
-												<input type="radio" name="req_exp" value="172800000">2天
-												<input type="radio" name="req_exp" value="604800000">一週
-											</div>
-											<span class="errormsg"  value=${errormsg.erroro_des}>${errormsg.errorreq_exp}</span>
-										</td>
-									</tr>
-									<tr>	
-										<td>																
-										
-											<label class="labelstyle">建築物型態</label>	
-										</td>
-										<td>	
-											<div>
-											    <select class="inputstyle" name="h_type" value=${orderVO.h_type}>
-												    <option value="1" selected="selected">公寓</option>
-												    <option value="2">三合院</option>
-												    <option value="3">透天屋</option>
-												    <option value="4">冰屋</option>
-												    <option value="5">狗屋</option>
-											    </select>
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											
-												<label class="labelstyle">施工地址</label><!-- 	ok -->
-										</td>
-										<td>
-											<div>
-												<input type="text" class="inputstyle" style="width:100px;" id=" o_city" name="o_city" value=${addrlist.o_city}/>
-												<input type="text" class="inputstyle" style="width:100px;" id="o_district" name="o_district" value=${addrlist.o_district}/>
-												<input type="text" class="inputstyle" id="  id="o_addr" name="o_addr" value=${addrlist.o_addr}/>
-												<span class="errormsg"  value=${errormsg.erroro_location}>${errormsg.erroro_location}</span>
-											</div>
-										</td>
-										</tr>
-<!-- 									<tr> -->
-<!-- 										<td> -->
-<!-- 											<div id='map'></div> -->
-<!-- 										</td> -->
-<!-- 									</tr>	 -->
-									<tr>
-										<td>
-										
-											<label class="labelstyle">備註</label><!-- 	ok -->
-										</td>
-										<td>
-												<div>
-													<textarea Style="width:200px;float:left;height:50px;" name="o_note" maxlength="100"></textarea>
-												</div>
-												<span class="errormsg" value=${errormsg.erroro_note}></span>
-										</td>
-									</tr>	
-										<input type="hidden" name="action" value="insert"/>
-<!-- 									<input type="submit"  value="submit"/> -->
-								</tbody>
-								
-						</table>
-						</div>
-					</form>
 						<form class="form-inline">
 				             <div class="form-group" >
 				              <label >Choose Theme:</label>
@@ -862,7 +734,7 @@ var eventidglobe =null;
 						id: $(this).data('id'),
 						title: $(this).text(), // use the element's text as the event title
 						duration: $(this).data('end'), // an end time (2pm in this example)
-					   	
+					   	color:$(this).data('color'),
 						start: $(this).data('start'), // a start time (10am in this example)
 					    stick: true // maintain when user navigates (see docs on the renderEvent method)
 					});
@@ -934,6 +806,7 @@ var eventidglobe =null;
 				    title:"早上",
 				    start: '01:00', // a start time (10am in this example)				
 				    overlap: true,
+				    color:'#C6E8EA',
 					end: '09:00', // an end time (2pm in this example)
 				    dow: selectmenu // Repeat monday and thursday
 				}
@@ -960,6 +833,7 @@ var eventidglobe =null;
 				    title:"下午",
 				    start: '12:00', // a start time (10am in this example)				
 				    overlap: true,
+				    color:'#48AE59',
 					end: '18:00', // an end time (2pm in this example)
 				    dow: selectmenu, // Repeat monday and thursday
 				    
@@ -986,6 +860,7 @@ var eventidglobe =null;
 				    title:"晚上",
 				    start: '18:00', // a start time (10am in this example)				
 				    overlap: true,
+				    color:'#7BAFF8',
 					end: '24:00', // an end time (2pm in this example)
 				    dow: selectmenu // Repeat monday and thursday
 				}
@@ -1004,7 +879,8 @@ var eventidglobe =null;
 					header: {
 						left: 'prev,next today',
 						center: 'title',
-						right: 'month,agendaWeek,agendaDay'
+						right: 'month'
+// 							,agendaWeek,agendaDay
 					},
 					editable: true,
 					

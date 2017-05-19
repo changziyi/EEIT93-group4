@@ -35,6 +35,11 @@ public class AdService {
 		return dao.getAllBySname(s_name);
 	}
 	
-	
-	
+	public List<AdVO> getBySname(String s_name){
+		return dao.getBySname(s_name);
+	}
+	//by benny tested ok
+	public void updateAsDeleted(Integer ad_id, String s_name){
+		dao.updateAsDeleted(ad_id, s_name);
+	}
 }

@@ -38,14 +38,15 @@ public class ForgotPwdServlet extends HttpServlet {
 		 List<CdataVO> list = cs.geteMailAll(c_email);
 		 Boolean checked = false;
 			for (CdataVO email : list) {
-				System.out.println(email.getC_email() + ",");
+//				System.out.print(email.getC_email() + ",");
+//				System.out.print(email.getC_id()+ ",");
+//				System.out.println(email.getC_pwd());
+//				System.out.println("-----------------------");
 			if((c_email != null) && (c_email.equals(email.getC_email()))){//成功
 					checked = true;
-					req.setAttribute("email_ok", c_email);
+					session.setAttribute("c_email", c_email);
 					javamail.getSession();
 //					javamail.sendmail(c_email);//test
-//					System.out.println("成功");
-//					System.out.println("email.getC_email() = "+email.getC_email());
 				}
 			}
 			if(checked == false){
