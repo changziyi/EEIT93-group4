@@ -62,7 +62,7 @@ public class CalendarController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 	     String calendarjson = request.getParameter("calendarjson");
-		 
+//		 
 //		 MdataVO mdataVO2 = (MdataVO) request.getAttribute("mdataVO");
 //		 Integer m_id = mdataVO2.getM_id();
 		 Integer m_id = 1000;
