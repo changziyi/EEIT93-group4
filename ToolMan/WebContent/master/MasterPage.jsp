@@ -10,10 +10,13 @@
 	<link rel="Shortcut Icon" href="${pageContext.servletContext.contextPath}/favicon.ico" />
 	<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/css/bootstrap.min.css">
 	<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/nav/nav.css">
+	<script src="${pageContext.servletContext.contextPath}/js/jquery-3.2.1.min.js"></script>
+	<script src="${pageContext.servletContext.contextPath}/js/bootstrap.min.js"></script>
 	<style>
 		body {font-family:Microsoft JhengHei;}
 		input[type="file"] {display:inline;}
 		pre {white-space:pre-wrap;word-wrap:break-word;}
+		span {font-family:Microsoft JhengHei;}
 		.changeImg {width:200px; padding:10px;}
 		#uploadTemp {line-height:normal;background-color:#fff;width:560px;}
 		.workImgArea {vertical-align:top;padding:5px;}
@@ -36,6 +39,9 @@
 </head>
 <body>
 <jsp:include page="/nav/navigation.jsp" />
+
+
+
 <div class="myDiv">
 <div class="container">
 
@@ -45,8 +51,11 @@
 				<img height="450px" src='${pageContext.servletContext.contextPath}/master/master.do?type=master&image=${mdataVO.m_id}'/>
 			</div>
 			<div class="col-md-4 md4">
+				<c:if test="${LoginOK.m_id == mdataVO.m_id}">
+					<a class="btn btn-default" id="updatebtn"><span class="glyphicon glyphicon-pencil"></span> 編輯店家</a>
+				</c:if>
 				<H2>${mdataVO.b_name}</H2>
-				<p>專業：<c:forEach var="aMpro" items="${mdataVO.mpros}">${aMpro.m_pro}</c:forEach></p>
+				<p>專業：<c:forEach var="aMpro" items="${mdataVO.mpros}">${aMpro.m_pro} </c:forEach></p>
 				<p>師傅：${mdataVO.m_name}</p>
 				<p>地區：${mdataVO.m_city}　${mdataVO.m_district}</p>
 	   	<a href="${pageContext.servletContext.contextPath}/toolman.order/NewOrder.jsp" class="btn btn-success ">
@@ -54,7 +63,7 @@
         </a>   
  <%--------------------------------------最愛與黑單--------------------------------------------------- --%>
 				<a href="${pageContext.servletContext.contextPath}/order/Favorite.do?c_id=${LoginOK.c_id}&m_id=${mdataVO.m_id}&action=addFavorite" class="btn btn-info ">
-					<span class="glyphicon glyphicon-heart-empty"></span>加入最愛
+					<span class="glyphicon glyphicon-heart-empty"></span> 加入最愛
 				</a>
         		<a href="${pageContext.servletContext.contextPath}/order/Dislike.do?c_id=${LoginOK.c_id}&m_id=${mdataVO.m_id}&action=addDislike" class="btn btn-danger">
           			<span class="glyphicon glyphicon-remove-sign"></span> 加入黑名單
@@ -135,8 +144,6 @@
 	</div>
 </div>	
 </div>
-	<script src="${pageContext.servletContext.contextPath}/js/jquery-3.2.1.min.js"></script>
-	<script src="${pageContext.servletContext.contextPath}/js/bootstrap.min.js"></script>
 	<script>
 	
 // 		$(function() {
@@ -257,6 +264,15 @@
 				});
 				
 			});
+			
+			
+			//編輯店家
+			var updatebtn = $('#updatebtn');
+			updatebtn.click(function(){
+				$(location).attr('href','${pageContext.servletContext.contextPath}/master/masterUpdate.jsp');
+			});
+			
+			
 			
 			var btn = $('#buttonUpload');
 			var upload = $('input[type="file"]');
