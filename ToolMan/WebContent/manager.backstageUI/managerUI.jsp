@@ -231,7 +231,9 @@
 							<tr>
 								<td>收件人 ： </td>
 								<td>
-								<input type="text" id="receiver" name="mss_id" required="true"
+								<input type="text" id="receiver"  required="true"
+									/>
+								<input type="hidden" id="receiver2" name="mss_id" 
 									/>
 								</td>
 							</tr>
@@ -239,16 +241,20 @@
 							<tr>
 								<td>主旨 ：</td>
 								<td>
-								 <input type="text" id="messum" name="ms_summary" required="true"
+								 <input type="text" id="messum"  required="true"
 									value="${param.ms_summary}" />${errorMsgs.email1}${errorMsgs.email2}
+								<input type="hidden" id="messum2" name="ms_summary" 
+									/>
 								</td>
 							</tr>
 						
 							<tr>
 								<td><label style="vertical-align: top;font-size:18px">內容：</td>
 								
-								<td><textarea name="ms_content" id="mescontent" style="width: 400px; height: 120px"
+								<td><textarea id="mescontent" style="width: 400px; height: 120px"
 								placeholder="請輸入內容"></textarea></td>
+								<td><input type="hidden" name="ms_content" id="mescontent2" 
+								></textarea></td>
 							</tr>
 						</table>
 					</div>
@@ -640,7 +646,7 @@ $(function(){
 			$('#functionrow').empty();
 			var buttongroupdiv ='<div class="btn-group">';
 			var dropdowntitlestate = 
-						'<button type="button" class="btn btn-primary dropdown-toggle" style="width:130px;height:50px;font-size:20px; data-toggle="dropdown"aria-haspopup="true" aria-expanded="false">狀態<span class="caret"></span></button>';
+						'<button type="button" class="btn btn-primary dropdown-toggle" style="width:130px;height:50px;font-size:20px;" data-toggle="dropdown"aria-haspopup="true" aria-expanded="false">狀態<span class="caret"></span></button>';
 			var dropdownmenucontentstate=
 						'<li data-statusvalue="allad" data-buttonstate="selected"  name="datastatus"><a href="#">所有廣告</a></li><li role="separator" class="divider"></li>'
 						+'<li data-statusvalue="進行中" name="datastatus"><a href="#">未解決</a></li><li role="separator" class="divider"></li>'
