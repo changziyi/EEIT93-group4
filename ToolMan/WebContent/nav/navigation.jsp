@@ -65,6 +65,9 @@
 							aria-haspopup="true" aria-expanded="false"><span
 								class="glyphicon">&#xe008;</span> <span class="caret"></span></a>
 							<ul class="dropdown-menu">
+								<li><a
+									href="${pageContext.servletContext.contextPath}/cdata/CdatadessServlet.do?c_id=${LoginOK.c_id}">我的資料</a>
+								</li>
 								<li><a href="#">我的店家</a></li>
 								<li><a
 									href="${pageContext.servletContext.contextPath}/cdata/CdataOrderServlet.do?c_id=${LoginOK.c_id}&action=listOrder">我的訂單</a>

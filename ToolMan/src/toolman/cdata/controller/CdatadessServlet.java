@@ -23,6 +23,7 @@ public class CdatadessServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
+		
 			doPost(request, response);
 	}
 
@@ -42,8 +43,8 @@ public class CdatadessServlet extends HttpServlet {
 		
 		
 		CdataService cs = new CdataService();
-		cdataVO = cs.cdata_des("Snoopy");
-		CdataVO cdataVO1 = cs.cdata_des("Snoopy");
+		cdataVO = cs.cdata_des(c_id);
+		CdataVO cdataVO1 = cs.cdata_des(c_id);
 		session.setAttribute("cdataVO", cdataVO1);
 		
 		cdataVOlist.add(cdataVO);
@@ -56,8 +57,8 @@ public class CdatadessServlet extends HttpServlet {
 //		}
 		request.setAttribute("orders", orders);
 		
-		RequestDispatcher failureView = request.getRequestDispatcher("test1.jsp");
-		failureView.forward(request,response);	
+//		RequestDispatcher failureView = request.getRequestDispatcher("test1.jsp");
+//		failureView.forward(request,response);	
 	}
 	
 	
