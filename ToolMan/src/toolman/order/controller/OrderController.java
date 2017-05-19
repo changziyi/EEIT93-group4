@@ -59,7 +59,7 @@ public class OrderController extends HttpServlet {
 		HttpSession session = request.getSession();// placed in jsp instead
 		MdataVO mdataVO = (MdataVO) session.getAttribute("mdataVO");
 		Collection<MProVO> mproVOset = (Collection<MProVO>) session.getAttribute("mproVOset");
-		CdataVO cdataVO = (CdataVO) session.getAttribute("cdata");
+		CdataVO cdataVO = (CdataVO) session.getAttribute("LoginOK");
 		
 		//test
 //		String action = request.getParameter("action");
@@ -151,7 +151,7 @@ public class OrderController extends HttpServlet {
 				orderVO.setReq_exp(req_exp);
 				orderVO.setH_type(h_type);
 				orderVO.setO_location(o_location);
-				orderVO.setS_name("o_notresponded");
+				orderVO.setS_name("未回應");
 				orderVO.setO_tdate(o_tdate);
 				
 				for(int i=0;i<o_pro.length;i++){
@@ -189,11 +189,7 @@ public class OrderController extends HttpServlet {
 			}
 			
 			// order confirmed and insert the data
-			if("confirmorder".equals(action)){
-
-				RequestDispatcher rd = request.getRequestDispatcher("/toolman.order/OrderRecommendation.do");
-				rd.forward(request, response);
-			}
+			
 //			else if("alterorder".equals(action)){
 //				
 //				RequestDispatcher rd = request.getRequestDispatcher("NewOrder.jsp");

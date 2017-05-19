@@ -41,11 +41,9 @@
 <body >
 <jsp:include page="/nav/navigation.jsp" />
 <jsp:include page="/order/title.jsp" />
-
-<div>1</div>
-<div>1</div>
-<div>1</div>
-
+<br/>
+<br/>
+<br/>
   <table class="table table-bordered table-hover" >
 	<tr>
 		<th>店家名稱</th>
@@ -80,46 +78,23 @@
 
 
   <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/order/OrderController.do" name="form1">
-  
-  
-
-
-
- <div>
-  <!-- Trigger the modal with a button -->
-  
-
+   <div>
  <button type="button" class="btn btn-info" data-toggle="modal" data-target="#${orderVO.o_id}" >評分</button> 
- 
- 
-  <!-- Modal -->
-  
-  <div class="modal fade" id="${orderVO.o_id}" role="dialog" > 
+   <div class="modal fade" id="${orderVO.o_id}" role="dialog" > 
     <div class="modal-dialog"> 
-    
-      <!-- Modal content-->
-      
-      <div class="modal-content">
-      
-     
-          
-          
-
-
-         <div class="modal-body">
-         
-         <div class="modal-header">
+       <div class="modal-content">
+             <div class="modal-body">
+           <div class="modal-header">
 <h3 class="modal-title">評分給鼓勵吧</h3>
         </div>  
-          
-    <label class="radio-inline">
-      <input type="radio" name="m_rating" value="5">5分
+       <label class="radio-inline">
+      <input type="radio" name="m_rating" value="5" checked="checked">5分
     </label>
     <label class="radio-inline">
       <input type="radio" name="m_rating" value="4">4分
     </label>
     <label class="radio-inline">
-      <input type="radio" name="m_rating" value="3" checked="checked">3分
+      <input type="radio" name="m_rating" value="3" >3分
     </label>
      <label class="radio-inline">
       <input type="radio" name="m_rating" value="2">2分
@@ -127,36 +102,17 @@
      <label class="radio-inline">
       <input type="radio" name="m_rating" value="1">1分
     </label>
-          
-  
-         </div>
+           </div>
         <div class="container-fluid">
-
-  
       <label for="comment">留言</label>
       <textarea class="form-control" rows="2" id="comment" name="ca_des"></textarea>
     </div>
-
-  
-     
          <div class="modal-footer">
-         
-         
-     
-			<input type="submit" value="送出" >
-			
-          	<input type="hidden" name="action" value="updateByC">
-          	        	
-          <input type="hidden" name="o_id" value="${orderVO.o_id}">	   
-          
+    			<input type="submit" value="送出" >
+	         	<input type="hidden" name="action" value="updateByC">
+           <input type="hidden" name="o_id" value="${orderVO.o_id}">	   
         </div>
-        
-        
-        
-        	
-        
-        
-      </div>
+         </div>
   </div>
  </div>
  </div> 
@@ -172,34 +128,18 @@
   <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/order/Rdata.do" name="form2">
   
  <div>
-  <!-- Trigger the modal with a button -->
-  
-
- <button type="button" class="btn btn-danger " data-toggle="modal" data-target="#${orderVO.o_id}k" >投訴</button> 
- 
- 
-  <!-- Modal -->
-  
-  <div class="modal fade" id="${orderVO.o_id}k" role="dialog" > 
+   <button type="button" class="btn btn-danger " data-toggle="modal" data-target="#${orderVO.o_id}k" >投訴</button> 
+   <div class="modal fade" id="${orderVO.o_id}k" role="dialog" > 
     <div class="modal-dialog"> 
-    
-      <!-- Modal content-->
-      
-      <div class="modal-content">
+          <div class="modal-content">
        <div class="modal-header">
        <h3 class="modal-title">投訴</h3>
-       
-       </div>
+         </div>
          <div class="modal-body">
-         
-         
-         <span>主旨</span>
+    <label for="comment">主旨</label>
       <label class="radio-inline">
     <input type="text" name="p_summary" />
-    
-    
-    
-    </label>
+        </label>
           </div>
         <div class="container-fluid">
     <label for="comment">內容</label>
@@ -207,7 +147,7 @@
     </div>
      <div class="modal-footer">
         <input type="submit" value="送出" >  
-              
+             
 		<input type="hidden" name="action" value="addRdata">
 		
        	<input type="hidden" name="s_name" value="m_pass">	

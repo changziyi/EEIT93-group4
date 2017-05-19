@@ -18,9 +18,9 @@
 <body >
 <jsp:include page="/nav/navigation.jsp" />
 <jsp:include page="/order/title.jsp" />
-<div>1</div>
-<div>1</div>
-<div>1</div>
+<br/>
+<br/>
+<br/>
 <div class="alert alert-success">
   <h2><strong>已加入最愛</strong></h2>
   </div>

@@ -116,63 +116,33 @@
 	}
 /*------------end navigation bar--------------------------------*/	
 
-		#map{
-		height:100px;
-		width:100px;
-	}
-	.containerstyle{
-		text-align:center;
-		width:800px;
-		margin:auto;
-		horizontal-align:center;
-/* 		border:1px solid blue; */
-	}
-	.stepstyle{
-		text-align:center;
-		width:800px;
-		margin:auto;
-		display:table;
-	}
-	.table{
-	text-align:center;
-	 vertical-align:middle;
-	}
-	#ordertable tbody tr td{
-	width:500px;
-	text-align:right;
-	 vertical-align:middle;
-	margin:0px;
-	} 
-	.putmiddle{
-		margin:0 auto;
-		display:table;
+#calendar {
+    width: 200px;
+    margin: 0 auto;
+    font-size: 10px;
+}
+.fc-header-title h2 {
+    font-size: .9em;
+    white-space: normal !important;
+}
+.fc-view-month .fc-event, .fc-view-agendaWeek .fc-event {
+    font-size: 0;
+    overflow: hidden;
+    height: 2px;
+}
+.fc-view-agendaWeek .fc-event-vert {
+    font-size: 0;
+    overflow: hidden;
+    width: 2px !important;
+}
+.fc-agenda-axis {
+    width: 20px !important;
+    font-size: .7em;
+}
 
-	}
-	.inputstyle{
-		width:200px;
-		float:left;
-	}
-	.errormsg{
-		width:150px;
-		float:left;
-	}
-	.textstyle{
-		font-family: Arial, "Microsoft Jhenghei",  
-		"WenQuanYi Zen Hei", "儷黑 Pro", 
-		"LiHei Pro","文泉驛正黑", 
-		"Microsoft JhengHei", 
-		"DFKai-sb", DFKai-SB, 
-		sans-serif;
-	}
-	.labelstyle{
-		text-align:right;
-	}
-	.fc-event{
-		width:100px;
-		display:table;
-		margin:auto;
-		
-	}
+.fc-button-content {
+    padding:0;
+    }
 
 	</style>
 
@@ -188,9 +158,9 @@
 
   <!--------------------------------calendar---------------------------------->  
        
-<div style="background-color:#7BAFF8;border:1px solid blue;">
-		<div id='calendar' style="float:left;width:400px; height:400px"></div>
-</div>
+
+		<div id='calendar' style="float:left;width:300px; height:200px"></div>
+
 <!--------------------------------end calendar---------------------------------->
 	
 
@@ -364,7 +334,7 @@ function calendarsubmit(){
 					header: {
 						left: 'prev,next today',
 						center: 'title',
-						right: 'month,agendaWeek,agendaDay'
+						right: 'month',
 					},
 					editable: false,
 					timezone:'UTC',

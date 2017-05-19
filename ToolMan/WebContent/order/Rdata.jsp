@@ -17,9 +17,9 @@
 <body >
 <jsp:include page="/nav/navigation.jsp" />
 <jsp:include page="/order/title.jsp" />
-<div>1</div>
-<div>1</div>
-<div>1</div>
+<br/>
+<br/>
+<br/>
 <div class="alert alert-success">
   <h2><strong>已收到投訴，管理員會盡快處理</strong></h2>
   </div>
