@@ -339,7 +339,7 @@ public class MdataDAO implements MdataDAO_interface {
 			Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 			try {
 				session.beginTransaction();
-				Query query = session.createSQLQuery("SELECT m_id, b_name, m_name, m_city, m_district, b_des, m_arating, o_finished, s_name FROM mdata");
+				Query query = session.createSQLQuery("SELECT m_id, b_name, m_name, m_city, m_district, b_des, m_arating, o_finished, s_name FROM mdata WHERE s_name = '審核通過'");
 //				query.setFirstResult(0);
 //				query.setMaxResults(3);
 				list = query.list();
