@@ -146,6 +146,9 @@ public class OrderService {
 			}
 		 }
     }
+    public void updateOrderSnameToInProgressById(Integer o_id){
+    	dao.updateOrderSnameToInProgressById(o_id);	
+    }
     public void updateOrderSnameToUnfinishedReviewById(){
     	dao = new OrderDAO();
 		List<OrderVO> orders = dao.getAllOrder();
