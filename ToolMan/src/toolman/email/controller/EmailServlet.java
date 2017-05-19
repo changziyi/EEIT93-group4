@@ -75,10 +75,10 @@ public class EmailServlet extends HttpServlet {
 		//取得登入的寄件人帳號
 		HttpSession session = req.getSession();
 		CdataVO cdataVO = (CdataVO)session.getAttribute("LoginOK");
-		String SendAccount = cdataVO.getC_id();
+//		String SendAccount = cdataVO.getC_id();
 		
 		
-//		String SendAccount = "sa";//benny test
+		String SendAccount = "sa";//benny test
 		
 		
 		// 宣告錯誤訊息的變數
@@ -125,10 +125,14 @@ public class EmailServlet extends HttpServlet {
 		emailserv.insert(emailVO);
 		
 		System.out.println("msid: " + emailVO.getMs_id());
+		//打開會有錯誤訊息
+//		res.sendRedirect("email.jsp");
 		
-		res.sendRedirect("email.jsp");
-		
-		if (!errorMsgs.isEmpty()) {
+		//之前因為如果有輸入null會讓管理者後端無法出現兩次，所以判斷來源為管理者後端就不處理。
+		if("http://localhost:8081/ToolMan/manager.backstageUI/managerUI.jsp".equals(req.getHeader("referer"))){
+			System.out.println("get null value");
+		}
+		else if (!errorMsgs.isEmpty()) {
 			req.setAttribute("emailVO", emailVO);
 			RequestDispatcher failureView = req.getRequestDispatcher("/email/Email.jsp");
 			failureView.forward(req, res);
@@ -136,12 +140,15 @@ public class EmailServlet extends HttpServlet {
 			
 		}
 		
-		
-//
-//		req.setAttribute("emailVO", emailservice.findByPrimaryKey(emailVO.getMs_id()));
-//		RequestDispatcher successView = req.getRequestDispatcher("/email/emailsucess.jsp");
-//		successView.forward(req, res);
-//		return;
+		//之前因為如果有輸入null會讓管理者後端無法出現兩次，所以判斷來源為管理者後端就不處理。
+		System.out.println(req.getHeader("referer"));
+		if("http://localhost:8081/ToolMan/manager.backstageUI/managerUI.jsp".equals(req.getHeader("referer"))){
+			System.out.println("ok");
+		}else{
+			req.setAttribute("emailVO", emailservice.findByPrimaryKey(emailVO.getMs_id()));
+			RequestDispatcher successView = req.getRequestDispatcher("/email/emailsucess.jsp");
+			successView.forward(req, res);
+		}
 		
 		
 		
@@ -160,7 +167,6 @@ public class EmailServlet extends HttpServlet {
 		
 		//測試用
 		System.out.println("確認表單上傳成功");
-
 		System.out.println(mss_id);
 		System.out.println(ms_summary);
 		System.out.println(ms_content);

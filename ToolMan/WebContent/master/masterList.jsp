@@ -23,6 +23,8 @@
 	<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/nav/nav.css">
 	<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/css/index/expandsearch.css">
 	<%-- <link rel="stylesheet" href="${pageContext.servletContext.contextPath}/css/creative.css"> --%>
+	<script src="${pageContext.servletContext.contextPath}/js/jquery-3.2.1.min.js"></script>
+	<script src="${pageContext.servletContext.contextPath}/js/bootstrap.min.js"></script>
 	<style>
 		body {font-family:Microsoft JhengHei;}
 		a {color:White;}
@@ -124,8 +126,6 @@
 		</div> <!-- row -->
 	</div>
 	
-<script src="${pageContext.servletContext.contextPath}/js/jquery-3.2.1.min.js"></script>
-<script src="${pageContext.servletContext.contextPath}/js/bootstrap.min.js"></script>
 <script src="${pageContext.servletContext.contextPath}/js/jquery.search.twzipcode.min.js"></script>		
 <script>
 	

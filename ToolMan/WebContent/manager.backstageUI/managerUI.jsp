@@ -44,8 +44,8 @@
 	<link rel="stylesheet" href="../js/datatable/select/select.foundation.min.css">
 <!------------------------ flatui ------------------------------>	
 	<link href="../js/flatui/flat-ui.min.css" rel="stylesheet">
-<!-- 	<link href="../js/flatui/lato/*" rel="stylesheet"> -->
-<!-- 	<script src="../js/flatui/flat-ui.min.js"></script> -->
+	<link href="../js/flatui/lato/*" rel="stylesheet">
+	<script src="../js/flatui/flat-ui.min.js"></script>
 
 <!-------------------- navigation for this application---------- -->
 <link rel="stylesheet" href="${pageContext.servletContext.contextPath}/nav/nav.css">
@@ -131,6 +131,11 @@
 	 width:70px;
 	 text-align:center;
 	}
+	
+	$('#eventlist').dataTable tbody tr td:selected {
+    color: black;
+    background-color: #9AAAE1;
+}
 	
 </style>
 </head>
@@ -845,7 +850,14 @@ $(function(){
 		 var tb = $('<tbody></tbody>'); 
 		   var docFragth = $(document.createDocumentFragment());
 		   var docFragtb = $(document.createDocumentFragment());
+		   var docFrag3 = $(document.createDocumentFragment());
 		   
+		   if(id=="a"){
+				 var chardiv = $('<div id="managerchart"></div>');
+				 docFrag3.append(chardiv);
+				 $('#charts').append(docFrag3);
+				 chart();			 
+			}
 			   if(id=="o"){   					  
 					   	var thc0 = $('<th></th>').addClass('eventlistthreadtrth');
 					   	var thc1 = $('<th></th>').text('師傅編號').addClass('eventlistthreadtrth');
@@ -1043,13 +1055,7 @@ $(function(){
 						   var row = $('<tr></tr>').append([cell0,cell1,cell2,cell3,cell4,cell5]);
 						   docFragtb.append(row);	
 					}  
-					else if(id=="a"){
-						 var chardiv = $('<div id="managerchart"></div>');
-						 docFragtb3.append(chardiv);
-						 $('#charts').append(docFragtb3);
-						 chart();
-					 
-					}
+					
 				}// end each function
 // 			 }//end for loop
 		 );//each
