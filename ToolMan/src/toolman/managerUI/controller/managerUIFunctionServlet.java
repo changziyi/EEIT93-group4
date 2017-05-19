@@ -210,7 +210,20 @@ public class managerUIFunctionServlet extends HttpServlet {
 		System.out.print(count);
 		out.write("您已回應成功");		
 	}
+	
+	
+	if("orderresponse1".equals(functionaction)){	
+		List<CdataVO> list = new ArrayList<CdataVO>();
+		int count=0;
+	
+		OrderService orderservice = new OrderService();
+		orderservice.updateOrderSnameToUnfinishedReviewById();
+	out = response.getWriter();
+		System.out.print(count);
+		out.write("您已回應成功");		
+	}
 		
+	
 //		if(functionaction.equals("sendmessagec")){
 //			
 //			

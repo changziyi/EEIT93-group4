@@ -24,7 +24,6 @@
 <br/>
 <div class="alert alert-success">
   <h2><strong>謝謝你的評價</strong></h2>
-    <h2><strong>${odata.o_id}</strong></h2>
   
   </div>
 
