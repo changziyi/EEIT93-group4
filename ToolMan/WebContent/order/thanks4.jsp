@@ -6,7 +6,7 @@
 <html>
 
 <head>
-<title>cena</title>
+<title>刪除資料</title>
 
 </head>
 

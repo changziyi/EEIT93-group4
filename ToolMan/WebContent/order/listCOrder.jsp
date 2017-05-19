@@ -22,10 +22,7 @@
 <title>${LoginOK.c_id}的訂單</title>
 
 </head>
-<style>
-		body {font-family:Microsoft JhengHei;}
-          
-</style>
+
 <link rel="stylesheet"
 	href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
 <script
@@ -47,10 +44,12 @@
   <table class="table table-bordered table-hover" >
 	<tr>
 		<th>店家名稱</th>
-		<th>訂單完成時間</th>
+		   <th>預約時間</th>
+	    <th>訂單完成時間</th>
 		<th>維修項目說明</th>
 		<th>施工地址</th>
 		<th>消費者</th>
+	<th>訂單狀況</th>
 		<th>分數</th>
 		<th>留言</th>
 		<th>評分</th>
@@ -65,10 +64,12 @@
 	
 		<tr align='center' valign='middle'>
 			<td><a href='${pageContext.servletContext.contextPath}/master/masterPage.do?m_id=${orderVO.m_id.m_id}'>${orderVO.b_name}</a></td>
+			<td>${orderVO.o_tdate}</td>
 			<td>${orderVO.o_edate}</td>
 			<td>${orderVO.o_des}</td>
 			<td>${orderVO.o_location}</td>
 	        <td>${orderVO.c_id.c_id}</td>
+	        <td>${orderVO.s_name}</td>
 			<td>${orderVO.m_rating}</td>
 			<td>${orderVO.ca_des}</td>
 			
@@ -108,7 +109,8 @@
       <textarea class="form-control" rows="2" id="comment" name="ca_des"></textarea>
     </div>
          <div class="modal-footer">
-    			<input type="submit" value="送出" >
+    			<input type="submit" name="masterres1" value="送出" >
+    			
 	         	<input type="hidden" name="action" value="updateByC">
            <input type="hidden" name="o_id" value="${orderVO.o_id}">	   
         </div>
@@ -185,9 +187,21 @@
 <%--    <%@ include file="page2.file" %>   --%>
  </div>
  
- 
+  	<script>
 
- 
+  $(function(){
+			 
+			 $('[name="masterres1"]').on('click',masterresponse1);
+					 })//end ready
+			 
+			 function masterresponse1(){
+				 var hyperlinkstring = "${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIFunctionServlet.do";
+			 	 var attr = $(this).data('id');
+				 $.post(hyperlinkstring,{"functionaction":"orderresponse1","o_id":attr},function(data){
+				 });
+				 }
+		 
+ 	</script>
  
  <%----- --------%>
 

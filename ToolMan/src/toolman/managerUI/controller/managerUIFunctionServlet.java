@@ -55,11 +55,15 @@ public class managerUIFunctionServlet extends HttpServlet {
 		System.out.println(noteid);
 //		int lastindex = toggledcheckbox.lastIndexOf("\""); 
 		String[] arraytoggled ={};
+		
 		if(request.getParameter("toggledcheckbox")!=null){
 		String toggledcheckbox = request.getParameter("toggledcheckbox");
 		arraytoggled = toggledcheckbox.split("\\,");
 		System.out.println(arraytoggled);
 		}
+		//for致衡訂單回應
+		String o_id = request.getParameter("o_id");
+		
 		if("applicationreviewm".equals(functionaction)){
 			List<MdataVO> list = new ArrayList<MdataVO>();
 			for(String m_id:arraytoggled){
@@ -195,9 +199,31 @@ public class managerUIFunctionServlet extends HttpServlet {
 			System.out.print(count);
 			out.write(count);			
 		}
-	
-
+	//for 致衡訂單回應
+	if("orderresponse".equals(functionaction)){	
+		List<CdataVO> list = new ArrayList<CdataVO>();
+		int count=0;
 		
+		OrderService orderservice = new OrderService();
+		orderservice.updateOrderSnameToInProgressById(Integer.parseInt(o_id));
+		out = response.getWriter();
+		System.out.print(count);
+		out.write("您已回應成功");		
+	}
+	
+	
+	if("orderresponse1".equals(functionaction)){	
+		List<CdataVO> list = new ArrayList<CdataVO>();
+		int count=0;
+	
+		OrderService orderservice = new OrderService();
+		orderservice.updateOrderSnameToUnfinishedReviewById();
+	out = response.getWriter();
+		System.out.print(count);
+		out.write("您已回應成功");		
+	}
+		
+	
 //		if(functionaction.equals("sendmessagec")){
 //			
 //			

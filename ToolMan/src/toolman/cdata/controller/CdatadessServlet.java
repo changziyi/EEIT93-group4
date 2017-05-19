@@ -32,9 +32,9 @@ public class CdatadessServlet extends HttpServlet {
 		String c_id = null;
 		
 			CdataVO cdata =(CdataVO)session.getAttribute("LoginOK");
-//			c_id=cdata.getC_id(); 
-			c_id = request.getParameter("c_id");
+			c_id=cdata.getC_id(); 
 			System.out.println("c_id = "+c_id);
+			c_id = request.getParameter("c_id");
 			
 			
 			request.setCharacterEncoding("UTF-8");
