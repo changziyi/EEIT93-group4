@@ -10,10 +10,14 @@
 	<link rel="Shortcut Icon" href="${pageContext.servletContext.contextPath}/favicon.ico" />
 	<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/css/bootstrap.min.css">
 	<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/nav/nav.css">
+	<script src="${pageContext.servletContext.contextPath}/js/jquery-3.2.1.min.js"></script>
+	<script src="${pageContext.servletContext.contextPath}/js/bootstrap.min.js"></script>
 	<style>
 		body {font-family:Microsoft JhengHei;}
 		input[type="file"] {display:inline;}
 		pre {white-space:pre-wrap;word-wrap:break-word;}
+		span {font-family:Microsoft JhengHei;}
+		.zipcode {display: none;}
 		.changeImg {width:200px; padding:10px;}
 		#uploadTemp {line-height:normal;background-color:#fff;width:560px;}
 		.workImgArea {vertical-align:top;padding:5px;}
@@ -36,6 +40,9 @@
 </head>
 <body>
 <jsp:include page="/nav/navigation.jsp" />
+
+
+
 <div class="myDiv">
 <div class="container">
 
@@ -45,8 +52,95 @@
 				<img height="450px" src='${pageContext.servletContext.contextPath}/master/master.do?type=master&image=${mdataVO.m_id}'/>
 			</div>
 			<div class="col-md-4 md4">
+				<c:if test="${LoginOK.m_id == mdataVO.m_id}">
+  					<!-- 修改店家資料按鈕 -->
+					<a class="btn btn-default" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-pencil"></span> 編輯店家</a>
+				</c:if>
+				<div class="container">
+					<div class="modal fade" id="myModal" role="dialog">
+						<div class="modal-dialog">
+						      <!-- Modal content-->
+							<form method="post" action="master.do" enctype="multipart/form-data" name="updateform">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal">&times;</button>
+									<h4 class="modal-title">修改店家資訊</h4>
+								</div>
+								<div class="modal-body">
+									<div>
+										<table>
+											<tr>
+												<td>專業證照:
+												<div><img id="m_cer" width="200px" src="${pageContext.servletContext.contextPath}/master/master.do?type=cer&image=${mdataVO.m_id}"></div>
+												<input type="file" name="m_cer" ></td>
+											</tr>
+											<tr>
+												<td>師傅姓名:
+												<input type="text" name="m_name" value="${mdataVO.m_name}"/></td>
+											</tr>
+											<tr>
+												<td>電話:
+												<input type="text" name="m_cel" value="${mdataVO.m_cel}"/></td>
+											<tr>
+												<td>信箱:
+												<input type="text" name="m_email" value="${mdataVO.m_email}"/></td>
+											</tr>
+											<tr>
+												<td>地址:
+												<span id="twzipcode"></span>
+												<input type="text" name="m_addr" value="${mdataVO.m_addr}"/>
+												</td>
+											</tr>
+											<tr>
+												<td>維修類別:<br >
+												<input type="checkbox" name="m_pro" value="地板地磚">地板地磚
+												<input type="checkbox" name="m_pro" value="防水抓漏">防水抓漏
+												<input type="checkbox" name="m_pro" value="室內裝潢">室內裝潢
+												<input type="checkbox" name="m_pro" value="冷氣空調">冷氣空調
+												<input type="checkbox" name="m_pro" value="水電工程">水電工程 <br>
+												<input type="checkbox" name="m_pro" value="門窗工程">門窗工程
+												<input type="checkbox" name="m_pro" value="油漆工程">油漆工程
+												<input type="checkbox" name="m_pro" value="木作工程">木作工程
+												<input type="checkbox" name="m_pro" value="泥作工程">泥作工程
+												<input type="checkbox" name="m_pro" value="照明工程">照明工程
+												</td>
+											</tr>
+											<tr>
+											<td>首頁圖片:
+												<div><img id="b_image" width="200px" src="${pageContext.servletContext.contextPath}/master/master.do?type=master&image=${mdataVO.m_id}"></div>
+												<input type="file" name="b_image" /></td>
+											</tr>
+											<tr>
+												<td>店家名稱:
+												<input type="text" name="b_name" value="${mdataVO.b_name}" /></td>
+											</tr>
+											<tr>
+												<td>店家介紹:
+												<textarea name="b_des">${mdataVO.b_des}</textarea></td>
+											</tr>
+											<tr>
+												<td><input type="hidden" name="action" value="updateMaster" ></td>
+												<td><input type="hidden" name="m_city" value="${mdataVO.m_city}" ></td>
+												<td><input type="hidden" name="m_district" value="${mdataVO.m_district}"></td>
+												<c:forEach var="aMpro" varStatus="count1" items="${mdataVO.mpros}">
+													<td class="prc"><input type="hidden" name="hidpro" value="${aMpro.m_pro}"></td>
+												</c:forEach>
+											</tr>
+										</table>
+									</div>
+						        </div>
+						        <div class="modal-footer">
+						        	<button type="button" class="btn btn-default" data-dismiss="modal">返回</button>
+						        	<button type="button" class="btn btn-default" id="updatebtn">送出</button>
+						        </div>
+						      </div>
+							</form>
+		</div>
+	</div>
+	
+</div>
 				<H2>${mdataVO.b_name}</H2>
-				<p>專業：<c:forEach var="aMpro" items="${mdataVO.mpros}">${aMpro.m_pro}</c:forEach></p>
+				<p>專業：<c:forEach var="aMpro" items="${mdataVO.mpros}">${aMpro.m_pro} </c:forEach></p>
 				<p>師傅：${mdataVO.m_name}</p>
 				<p>地區：${mdataVO.m_city}　${mdataVO.m_district}</p>
 	   	<a href="${pageContext.servletContext.contextPath}/toolman.order/NewOrder.jsp" class="btn btn-success ">
@@ -54,7 +148,7 @@
         </a>   
  <%--------------------------------------最愛與黑單--------------------------------------------------- --%>
 				<a href="${pageContext.servletContext.contextPath}/order/Favorite.do?c_id=${LoginOK.c_id}&m_id=${mdataVO.m_id}&action=addFavorite" class="btn btn-info ">
-					<span class="glyphicon glyphicon-heart-empty"></span>加入最愛
+					<span class="glyphicon glyphicon-heart-empty"></span> 加入最愛
 				</a>
         		<a href="${pageContext.servletContext.contextPath}/order/Dislike.do?c_id=${LoginOK.c_id}&m_id=${mdataVO.m_id}&action=addDislike" class="btn btn-danger">
           			<span class="glyphicon glyphicon-remove-sign"></span> 加入黑名單
@@ -134,12 +228,45 @@
 	</div>
 </div>	
 </div>
-	<script src="${pageContext.servletContext.contextPath}/js/jquery-3.2.1.min.js"></script>
-	<script src="${pageContext.servletContext.contextPath}/js/bootstrap.min.js"></script>
+	<script src="${pageContext.servletContext.contextPath}/js/jquery.twzipcode.min.js"></script>
 	<script>
 	
 // 		$(function() {
 			
+	
+			//編輯店家
+			var pro = $('input[name="m_pro"]');
+			
+			$('#updatebtn').click(function(){
+				
+				var updatedata = $('form[name="updateform"]').serializeArray();
+				var cerpho = $('input[name="m_cer"]')[0].files[0];
+				var bpho = $('input[name="b_image"]')[0].files[0];
+				var formData = new FormData();
+				
+				$.each(updatedata, function(index, input) {
+					formData.append(input.name, input.value);
+					console.log('name: ' + input.name);
+					console.log('value: ' + input.value);
+				});
+				
+				formData.append('m_cer', cerpho);
+				formData.append('b_image', bpho);
+				
+				$.ajax({
+					url : 'master.do',
+					data : formData,
+					cache : false,
+					contentType : false,
+					processData : false,
+					type : 'POST',
+	 				success : function(reutrnData) {
+	 					$(location).attr('href','MasterPage.jsp');
+	 				}
+				});
+			});
+	
+	
 			//點選問與答區塊，load問與答內容
 			var show = $('#show');
 			$('a[href="#menu2"]').one('click', function() {
@@ -257,8 +384,9 @@
 				
 			});
 			
+			
 			var btn = $('#buttonUpload');
-			var upload = $('input[type="file"]');
+			var upload = $('input[name="file[]"]');
 			var myDiv = $('#div1');
 			
 			//上傳圖片限制三張
@@ -368,6 +496,32 @@
 		 			
 				});
 			});
+			
+			
+			var city = $('input[name="m_city"]');
+			var district = $('input[name="m_district"]');
+
+			$('#twzipcode').twzipcode({
+				'css': ['county', 'district', 'zipcode'],
+			    'countySel'   : '${mdataVO.m_city}',
+			    'districtSel' : '${mdataVO.m_district}',
+			    'onCountySelect': function () {
+			    	city.attr("value", this.value);
+			    },
+				'onDistrictSelect': function () {
+					district.attr("value", this.value);
+			    }
+			});
+			
+			//預設勾選專業 
+			var hpros = $('input[name="hidpro"]');
+
+			$.each(hpros, function() {
+				var parentd = $(this).parent('.prc');
+				var apro = parentd.find('input[name="hidpro"]').val();
+				console.log(apro);
+				$("input[name=m_pro][value=" + apro + "]").prop('checked', true);
+			})
 			
 // 		}); //outter function
 	</script>

@@ -44,14 +44,14 @@ public class CdataDAO implements CdataDAO_interface{
 		return querylist;
 	}
 	//update password
-	public int updateMemberfwd(String c_pwd) {
+	public int updateMemberfwd(String c_email, String c_pwd) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Integer count = 0;
 		try {
 			session.beginTransaction();
-			Query query = session.createQuery("update CdataVO set c_pwd=? where c_id=?");
-			query.setParameter(0,c_pwd);
-//			query.setParameter(1,c_id);
+			Query query = session.createQuery("update CdataVO set c_pwd=:p where c_email=:e");
+			query.setParameter("e",c_email);
+			query.setParameter("p",c_pwd);
 			count = query.executeUpdate();
 			session.getTransaction().commit();
 		} catch (RuntimeException ex) {
@@ -61,6 +61,23 @@ public class CdataDAO implements CdataDAO_interface{
 		return count;
 	}
 	
+	//update member
+	public int updateMembr(String c_pwd, String c_email) {
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		Integer count = 0;
+		try {
+			session.beginTransaction();
+			Query query = session.createQuery("update CdataVO set c_pwd=:p where c_email=:e");
+			query.setParameter("p",c_pwd);
+			query.setParameter("e",c_email);
+			count = query.executeUpdate();
+			session.getTransaction().commit();
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
+		return count;
+	}
 	//login in 
 	@Override
 	public CdataVO login_in(String c_id) {
@@ -262,8 +279,16 @@ public class CdataDAO implements CdataDAO_interface{
 //			System.out.println( c_jdate);
 //		}
 		
-		
 		/*********************** 修改密碼  *****************************/
+//		CdataService cs = new CdataService();
+//		String c_pwd = null;
+//		String c_email ="cccc@gmail.com";
+//		CdataVO cdataVO =new CdataVO();		
+//		int cdataVO1 = cs.updateMemberfwd(c_pwd, c_email);
+//		
+////		System.out.println("c_pwd = "+cdataVO1);
+//		dao.update(cdataVO);
+//		
 		
 		
 		

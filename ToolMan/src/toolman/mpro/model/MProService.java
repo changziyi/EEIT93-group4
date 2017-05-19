@@ -14,4 +14,12 @@ public class MProService {
 		return dao.getByMidSp(m_id);
 	}
 	
+	public void insertSql(Integer m_id, String m_pro) {
+		dao.insertSql(m_id, m_pro);
+	}
+	
+	public void deleteSql(Integer m_id) {
+		dao.deleteSql(m_id);
+	}
+	
 }

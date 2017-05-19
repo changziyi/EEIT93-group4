@@ -16,6 +16,9 @@
     <link href="${pageContext.servletContext.contextPath}/css/creative.css" rel="stylesheet">
     <link href="${pageContext.servletContext.contextPath}/css/index/expandsearch.css" rel="stylesheet">
 	<link href="${pageContext.servletContext.contextPath}/nav/nav.css" rel="stylesheet">
+	<script src="${pageContext.servletContext.contextPath}/js/jquery-3.2.1.min.js"></script>
+    <script src="${pageContext.servletContext.contextPath}/js/index/tether.min.js"></script>
+	<script src="${pageContext.servletContext.contextPath}/js/bootstrap.min.js"></script>    
     
     <style>
 		body {font-family:Microsoft JhengHei;}
@@ -240,12 +243,6 @@
             </div>
         </div>
     </section>
-
-    <!-- Bootstrap core JavaScript -->
-    
-    <script src="${pageContext.servletContext.contextPath}/js/jquery-3.2.1.min.js"></script>
-    <script src="${pageContext.servletContext.contextPath}/js/index/tether.min.js"></script>
-	<script src="${pageContext.servletContext.contextPath}/js/bootstrap.min.js"></script>    
 
     <!-- Plugin JavaScript -->
     <script src="${pageContext.servletContext.contextPath}/js/index/jquery.easing.min.js"></script>
