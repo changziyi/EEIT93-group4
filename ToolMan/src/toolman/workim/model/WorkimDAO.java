@@ -58,6 +58,8 @@ public class WorkimDAO implements WorkimDAO_interface {
 			session.getTransaction().rollback();
 			throw ex;
 		}
+		return count;
+	}	
 		
 //		Integer count = 0;
 //		for (Integer deleteid : im_idlist) {
@@ -74,9 +76,27 @@ public class WorkimDAO implements WorkimDAO_interface {
 //				throw ex;
 //			}
 //		}
+		
+
+	@Override
+	public Integer deleteByWork(WorkVO workVO) {
+		
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		Integer count = 0;
+		try {
+			session.beginTransaction();
+			Query query = session.createQuery("delete from WorkimVO where work_id = ?");
+			
+				query.setParameter(0, workVO);
+				count = query.executeUpdate();
+			
+			session.getTransaction().commit();
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
 		return count;
 	}
-	
 	@Override
 	public Collection<WorkimVO> getByWorkid(Integer work_id) {
 		List<WorkimVO> querylist = null;

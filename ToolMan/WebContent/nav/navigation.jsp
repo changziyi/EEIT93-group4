@@ -28,7 +28,12 @@
 						<li><a class="alist"
 							href="${pageContext.servletContext.contextPath}/master/master.do?city=all&action=SearchAll"
 							class="">我要找師傅</a></li>
-						<li><a class="alist" href="#">我要開店 </a></li>
+							
+							
+							
+							<c:if test="${not empty LoginOK }">
+						<li><a class="alist" href="${pageContext.servletContext.contextPath}/master/OpenStoreInfo.jsp">我要開店 </a></li>
+						</c:if>
 						<li><a class="alist"
 							href="${pageContext.servletContext.contextPath}/wishpool/Wishing+waterfall.jsp">許願池
 						</a></li>
@@ -56,7 +61,23 @@
 						<%	if (session.getAttribute("LoginOK") == null) {%>
 						<li><a class="alist" href="${pageContext.servletContext.contextPath}/cdata/login-in.jsp">登入 </a>
 							</li>
-						<%	} else {%>
+						
+						<%	} else if(session.getAttribute("LoginOK") != null && session.getAttribute("LoginOK2").equals("sa")){%>
+						
+						<li class=" dropdown"><a class="alist" href="#"
+							class="dropdown-toggle " data-toggle="dropdown" role="button"
+							aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-king"></span> 管理者<span class="caret"></span> </a>        
+							<ul class="dropdown-menu">
+								
+								<li><a
+									href="${pageContext.servletContext.contextPath}/manager.backstageUI/managerUI.jsp">管理員後台</a></li>
+								
+								<li><a
+									href="${pageContext.servletContext.contextPath}/loginoutServlet">登出</a></li>
+
+							</ul></li>
+						
+						<%	} else { %>
 
 						<%-----------------------------------------------訂單表------------------------------------------------------------------- --%>
 
@@ -87,6 +108,11 @@
 									href="${pageContext.servletContext.contextPath}/loginoutServlet">登出</a></li>
 
 							</ul></li>
+							
+							
+							
+							
+							
 						<%----------------------------------------------墨西哥長城------------------------------------------------------------------- --%>
 
 						<%

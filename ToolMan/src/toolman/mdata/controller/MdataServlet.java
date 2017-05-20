@@ -3,6 +3,7 @@ package toolman.mdata.controller;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Timestamp;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -21,6 +22,7 @@ import javax.servlet.http.Part;
 
 import toolman.mdata.model.MdataService;
 import toolman.mdata.model.MdataVO;
+import toolman.mpro.model.MProService;
 import toolman.mpro.model.MProVO;
 import toolman.work.model.WorkService;
 import toolman.work.model.WorkVO;
@@ -236,6 +238,174 @@ public class MdataServlet extends HttpServlet {
 			return;
 
 		}
+		
+		if ("updateMaster".equals(action)) {
+			
+			Map<String, String> errorMsgs = new HashMap<String, String>();
+			HttpSession session = request.getSession();
+			session.setAttribute("errorMsgs", errorMsgs);
+			
+			String m_name = request.getParameter("m_name");
+			String m_cel = request.getParameter("m_cel");
+			String m_email = request.getParameter("m_email");
+			String m_city = request.getParameter("m_city");
+			String m_district = request.getParameter("m_district");
+			String m_addr = request.getParameter("m_addr");
+			Part partcer = request.getPart("m_cer");
+			String[] m_pro = request.getParameterValues("m_pro");
+			String b_name = request.getParameter("b_name");
+			String b_des = request.getParameter("b_des");
+			Part partbim = request.getPart("b_image");
+			
+			InputStream incer = partcer.getInputStream();
+			byte[] m_cer = new byte[incer.available()];
+			incer.read(m_cer);
+			incer.close();
+			
+			InputStream inbimg = partbim.getInputStream();
+			byte[] b_image = new byte[inbimg.available()];
+			inbimg.read(b_image);
+			inbimg.close();
+			
+			MdataVO mdataVO = (MdataVO)session.getAttribute("mdataVO");
+			Integer m_id = mdataVO.getM_id();
+			
+			mdataVO.setM_name(m_name);
+			mdataVO.setM_cel(m_cel);
+			mdataVO.setM_email(m_email);
+			mdataVO.setM_city(m_city);
+			mdataVO.setM_district(m_district);
+			mdataVO.setM_addr(m_addr);
+			mdataVO.setM_cer(m_cer);
+			mdataVO.setB_name(b_name);
+			mdataVO.setB_des(b_des);
+			mdataVO.setB_image(b_image);
+			
+			MdataService mdataSvc = new MdataService();
+			mdataSvc.updateSql(mdataVO);
+			
+			MProService mproSvc = new MProService();
+			mproSvc.deleteSql(m_id);
+			
+			if (m_pro != null) {
+				for (int i = 0; i < m_pro.length; i++) {
+					mproSvc.insertSql(m_id, m_pro[i]);
+				}
+			}
+			
+			Set<MProVO> set = null;
+			if (m_pro != null) {
+				set = new HashSet<MProVO>();
+				for (int i = 0; i < m_pro.length; i++) {
+					MProVO m_proVO = new MProVO();
+					m_proVO.setMdataVO(mdataVO);
+					m_proVO.setM_pro(m_pro[i]);
+					set.add(m_proVO);
+				}
+			}
+			
+			mdataVO.setMpros(set);
+			session.setAttribute("mdataVO", mdataVO);
+			
+		}
+		
+		if ("uploadwork".equals(action)) {
+			
+			HttpSession session = request.getSession();
+			MdataVO mdataVO = (MdataVO)session.getAttribute("mdataVO");
+			
+			byte[] img1 = null;
+			byte[] img2 = null;
+			byte[] img3 = null;
+			String work_name = "";
+			String work_des = "";
+			
+			Collection<Part> parts = request.getParts();
+			for (Part part : parts) {
+				String pName = part.getName();
+				if (part.getContentType() != null) {
+					if ("file0".equals(pName)) {
+						InputStream in0 = part.getInputStream();
+						img1 = new byte[in0.available()];
+						in0.read(img1);
+						in0.close();
+					}
+					if ("file1".equals(pName)) {
+						InputStream in1 = part.getInputStream();
+						img2 = new byte[in1.available()];
+						in1.read(img2);
+						in1.close();
+					}
+					if ("file2".equals(pName)) {
+						InputStream in2 = part.getInputStream();
+						img3 = new byte[in2.available()];
+						in2.read(img3);
+						in2.close();
+					}
+				} else {
+					String fldName = part.getName();
+					String value = request.getParameter(fldName);
+					if ("workname".equals(fldName)) {
+						work_name = value;
+					} else if ("workdes".equals(fldName)) {
+						work_des = value;
+					}
+				}
+			}
+			
+			System.out.println("work_name:" + work_name);
+			System.out.println("work_des:" + work_des);
+			System.out.println("img1:" + img1);
+			System.out.println("img2:" + img2);
+			System.out.println("img3:" + img3);
+			
+			WorkVO workVO = new WorkVO();
+			workVO.setMdataVO(mdataVO);
+			workVO.setWork_name(work_name);
+			workVO.setWork_des(work_des);
+			workVO.setImg1(img1);
+			workVO.setImg2(img2);
+			workVO.setImg3(img3);
+			
+			WorkimVO workimVO1 = new WorkimVO();
+
+			
+			Set<WorkimVO> workims = new HashSet<WorkimVO>();
+			
+			if (img1 != null) {
+				workimVO1.setWorkVO(workVO);
+				workimVO1.setIm_show(img1);
+				workims.add(workimVO1);
+			}
+			else if (img2 != null) {
+				WorkimVO workimVO2 = new WorkimVO();
+				workimVO2.setWorkVO(workVO);
+				workimVO2.setIm_show(img2);
+				workims.add(workimVO2);
+			}
+			else if (img3 != null) {
+				WorkimVO workimVO3 = new WorkimVO();
+				workimVO3.setWorkVO(workVO);
+				workimVO3.setIm_show(img3);
+				workims.add(workimVO3);
+			}
+			
+			workVO.setWorkims(workims);
+			
+			WorkService workSvc = new WorkService();
+			workSvc.insert(workVO);
+			
+		}
+		
+		
+		if ("deleteworkim".equals(action)) {
+			
+			Integer work_id = new Integer(request.getParameter("work_id"));
+			WorkService workSvc = new WorkService();
+			workSvc.delete(work_id);
+			
+		}
+		
 
 	} // doPost
 
@@ -261,7 +431,7 @@ public class MdataServlet extends HttpServlet {
 			byte[] b_image = mdataSvc.getImg(m_id);
 
 			if (b_image == null || b_image.length == 0) {
-				InputStream in = getServletContext().getResourceAsStream("/image/jake.gif");
+				InputStream in = getServletContext().getResourceAsStream("/images/no_image.PNG");
 				b_image = new byte[in.available()];
 				in.read(b_image);
 				out.write(b_image);
@@ -296,7 +466,7 @@ public class MdataServlet extends HttpServlet {
 			byte[] m_cer = mdataVO.getM_cer();
 
 			if (m_cer == null || m_cer.length == 0) {
-				InputStream in = getServletContext().getResourceAsStream("/image/jake.gif");
+				InputStream in = getServletContext().getResourceAsStream("/images/no_image.PNG");
 				m_cer = new byte[in.available()];
 				in.read(m_cer);
 				out.write(m_cer);

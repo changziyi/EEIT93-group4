@@ -2,6 +2,7 @@ package toolman.cdata.controller;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
@@ -31,6 +32,8 @@ public class updatePwdServlet extends HttpServlet {
 		HttpSession session = req.getSession();
 		String c_email = (String)session.getAttribute("c_email");
 		System.out.println("c_email = " + c_email);
+//		CdataService cs = new CdataService();
+//		List<CdataVO> i = cs.getAll();
 		 
 	       String c_pwd = req.getParameter("newPassword");  
 	        String new_c_pwd = req.getParameter("newPassword2");  
@@ -44,24 +47,20 @@ public class updatePwdServlet extends HttpServlet {
 	        
 	        if (c_pwd.equals(new_c_pwd) == false) {  
 	        	errors.put("passwordError", "兩次輸入密碼不一致！");  
-	        }else{
-//	        	CdataVO cdataVO = new CdataVO();
-//	        	CdataService cs = new CdataService();	        	
-//	        	cdataVO.getC_pwd();
-//	        	cs.update(cdataVO);
-//	        	System.out.println("Success");       	
+	        }else{	        	
+	        	CdataService cs = new CdataService();	        	
+	        	cs.updateMemberfwd(c_email, c_pwd);
+	        	System.out.println("c_pwd = " + c_pwd);
+	        	System.out.println("Success");       	
 	        }
-
 	        if (!errors.isEmpty()) {  
 	            req.setAttribute("errors", errors);  	           
 	            RequestDispatcher rd = req.getRequestDispatcher(
-	            		getServletContext().getContextPath()+"/updatepassword.jsp");
+	            		"/cdata/updatepassword.jsp");
 	            rd.forward(req, resp);
 	            return;  
 	        }  
-	        RequestDispatcher rd = req.getRequestDispatcher(
-	        		getServletContext().getContextPath()+"/resetPasswordSuccess.jsp");
-	         rd.forward(req, resp);  
+	        resp.sendRedirect(getServletContext().getContextPath()+"/cdata/success.jsp");
 	}
 
 }

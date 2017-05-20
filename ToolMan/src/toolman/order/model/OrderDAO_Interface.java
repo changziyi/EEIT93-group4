@@ -38,6 +38,7 @@ public interface OrderDAO_Interface {
     public Integer updateOrderRate(Integer m_rating, Integer c_rating,String ca_des, String ma_des,Integer o_id);
     public Integer updateOrderRateByC(Integer m_rating, String ca_des, Integer o_id);
     public Integer updateOrderRateByM( Integer c_rating, String ma_des,Integer o_id);
+	void updateOrderSnameToInProgressById(Integer o_id);
 
   //----------------------------ratting 
 

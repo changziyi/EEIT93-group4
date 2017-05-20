@@ -36,16 +36,9 @@ public class MdataOrderServlet extends HttpServlet {
 			try {
 				/*************************** 1.接收請求參數 ****************************************/
 				Integer m_id = new Integer(request.getParameter("m_id"));
-				
-				
-				
 				/*************************** 2.開始查詢資料 ****************************************/
 				MdataService orderSvc = new MdataService();
 				Set<OrderVO> set = orderSvc.getOrderByM(m_id);
-
-				
-				
-				
 				/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
 				request.setAttribute("listOrder", set);    // 資料庫取出的set物件,存入request
 

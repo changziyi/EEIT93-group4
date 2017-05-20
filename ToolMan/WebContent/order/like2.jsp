@@ -32,11 +32,9 @@
 <body >
 <jsp:include page="/nav/navigation.jsp" />
 <jsp:include page="/order/title.jsp" />
-
-<div>11111</div>
-<div>11111111</div>
-<div>11111111</div>
-
+<br/>
+<br/>
+<br/>
 <jsp:include page="/nav/navigation.jsp" />
 
 

@@ -276,6 +276,23 @@ public class MdataDAO implements MdataDAO_interface {
 			}
 			return list;
 		}
+		//BY BENNY--for manager backstage
+		public List<MdataVO> getMasterByB(String b_name){
+			List<MdataVO> list = null;
+			Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+			try {
+				session.beginTransaction();
+				Query query = session.createQuery("from MdataVO where b_name=:b ");
+				query.setString("b",b_name);
+				list = query.list();
+				session.getTransaction().commit();
+			} catch (RuntimeException ex) {
+				session.getTransaction().rollback();
+				throw ex;
+			}
+			return list;
+			
+		}//by Benny
 		
 		@Override
 		public List<Object[]> search(String city, String district, String input) {
@@ -339,7 +356,7 @@ public class MdataDAO implements MdataDAO_interface {
 			Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 			try {
 				session.beginTransaction();
-				Query query = session.createSQLQuery("SELECT m_id, b_name, m_name, m_city, m_district, b_des, m_arating, o_finished, s_name FROM mdata");
+				Query query = session.createSQLQuery("SELECT m_id, b_name, m_name, m_city, m_district, b_des, m_arating, o_finished, s_name FROM mdata WHERE s_name = '審核通過'");
 //				query.setFirstResult(0);
 //				query.setMaxResults(3);
 				list = query.list();
@@ -367,13 +384,14 @@ public class MdataDAO implements MdataDAO_interface {
 			return list;
 		}
 		
-		
+		@Override
 		public List<Object[]> searchOne(Integer m_id) {
 			List<Object[]> list = null;
 			Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 			try {
 				session.beginTransaction();
 				Query query = session.createSQLQuery("SELECT b_name, m_name, m_cel, m_email, m_city, m_district, m_addr, b_des, b_image, m_cer, s_name FROM mdata WHERE m_id=?");
+				query.setParameter(0, m_id);
 				list = query.list();
 				session.getTransaction().commit();
 			} catch (RuntimeException ex) {
@@ -383,6 +401,7 @@ public class MdataDAO implements MdataDAO_interface {
 			return list;
 		}
 		
+		@Override
 		public void updateSql(MdataVO mdataVO) {
 			Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 			try {

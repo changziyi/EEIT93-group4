@@ -53,7 +53,8 @@ public class OrderRatingController extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		String action = request.getParameter("action");
 		
-		
+		HttpSession session =request.getSession();
+
 
 		if ("getOne_For_Update".equals(action)) { 
 			List<String> errorMsgs = new LinkedList<String>();
@@ -70,8 +71,8 @@ public class OrderRatingController extends HttpServlet {
 				OrderVO orderVO = orderSvc.getRate(o_id);
 								
 				/***************************3.查詢完成,準備轉交(Send the Success view)************/
-				request.setAttribute("orderVO", orderVO); // 資料庫取出的empVO物件,存入req
-			String url = "update_emp_input.jsp";
+				session.setAttribute("odata", orderVO); // 資料庫取出的empVO物件,存入req
+			String url = "/order/thanks.jsp";
 				RequestDispatcher successView = request.getRequestDispatcher(url); // 成功轉交update_emp_input.jsp
 				successView.forward(request, response);
 
@@ -253,7 +254,7 @@ if ("updateByM".equals(action)) { // 來自update_emp_input.jsp的請求
 //		DeptService deptSvc = new DeptService();
 		
 	request.setAttribute("orderVO", orderVO2);
-    String url =  "/order/thanks.jsp";
+    String url =  "/order/thanks1.jsp";
 		RequestDispatcher successView = request.getRequestDispatcher(url);   // 修改成功後,轉交回送出修改的來源網頁
 		successView.forward(request, response);
 //	

@@ -181,6 +181,22 @@ public class OrderDAO implements OrderDAO_Interface {
 		}
 		return count;
 	}
+	@Override
+	public void updateOrderSnameToInProgressById(Integer o_id) {
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		Integer count = 0;
+		
+		try {
+			session.beginTransaction();				
+			Query query = session.createQuery("Update OrderVO set s_name='進行中' where o_id=?");
+			query.setParameter(0,o_id);
+			query.executeUpdate();
+			session.getTransaction().commit();
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}	
+	}
 @Override
 	public void updateOrderSnameToUnfinishedReviewById(Integer o_id) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
@@ -188,7 +204,7 @@ public class OrderDAO implements OrderDAO_Interface {
 		
 		try {
 			session.beginTransaction();				
-			Query query = session.createQuery("Update OrderVO set s_name='一方未完成' where o_id=?");
+			Query query = session.createQuery("Update OrderVO set s_name='一方未完成評分' where o_id=?");
 			query.setParameter(0,o_id);
 			query.executeUpdate();
 			session.getTransaction().commit();
@@ -205,8 +221,12 @@ public class OrderDAO implements OrderDAO_Interface {
 		
 		try {
 			session.beginTransaction();				
-			Query query = session.createQuery("Update OrderVO set s_name='已完成' where o_id=?");
-			query.setParameter(0,o_id);
+			Query query = session.createQuery("Update OrderVO set s_name='已完成', o_edate=:ed where o_id=:id");
+			Calendar calobj = Calendar.getInstance();
+			Timestamp o_edate = new Timestamp(calobj.getTimeInMillis());
+			query.setParameter("ed", o_edate);
+			query.setParameter("id",o_id);
+			
 			query.executeUpdate();
 			session.getTransaction().commit();
 		} catch (RuntimeException ex) {
@@ -530,13 +550,13 @@ public class OrderDAO implements OrderDAO_Interface {
 //			Timestamp o_bdatetest2 = new Timestamp(calobj2.getTimeInMillis());
 //			orderdao.getOrderByDate(o_bdatetest,o_bdatetest2);
 //		
-		//getOrderByM
-		List<OrderVO> list = orderdao.getOrderByM(1001);
-		for(OrderVO alist : list) {
-			System.out.print(alist.getM_id().getM_id() + ",");
-			System.out.print(alist.getM_id().getB_name() + ",");
-			System.out.println(alist.getC_id().getC_id());
-		}
+//		//getOrderByM
+//		List<OrderVO> list = orderdao.getOrderByM(1001);
+//		for(OrderVO alist : list) {
+//			System.out.print(alist.getM_id().getM_id() + ",");
+//			System.out.print(alist.getM_id().getB_name() + ",");
+//			System.out.println(alist.getC_id().getC_id());
+//		}
 			
 //		
 //		//getAllOrderByMAndDate tested ok
@@ -580,7 +600,7 @@ public class OrderDAO implements OrderDAO_Interface {
 //			orderdao.getOrderByCAndDate("testcustomer", o_bdatetest, o_bdatetest2);
 //		
 //		//deleteById
-//		orderdao.deleteById(3001);
+		orderdao.deleteById(3006);
 //		
 //		//updateOrder
 

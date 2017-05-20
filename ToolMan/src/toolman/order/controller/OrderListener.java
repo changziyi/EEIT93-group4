@@ -34,7 +34,7 @@
 //	            	orderService.updateOrderSnameToUnfinishedReviewById();
 //	            	orderService.updateOrderSnameToFishedById();
 //	            }
-//	        }, 0, 1000l*5); // execute the task every 5 seconds for test
+//	        }, 0, 1000l*120); // execute the task every 120 seconds for test
 //    }// execute the task every 2 hours
 //         
 //   
@@ -45,4 +45,4 @@
 //   
 //  }
 //	
-//
+////

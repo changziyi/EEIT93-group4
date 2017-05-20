@@ -1069,7 +1069,7 @@ var eventidglobe =null;
 					if((events[i].title == "整天")||(event.title =="整天")){
 						if((splitstring1[0]+splitstring1[1]+splitstring1[2]+splitstring1[3])==
 							(splitstring2[0]+splitstring2[1]+splitstring2[2]+splitstring2[3])&&(eventid1!=eventid3)){
-								
+								console.log("all"+eventid1+eventid3);
 								$('#calendar').fullCalendar('removeEvents', event.id);
 								return true;
 								
@@ -1078,8 +1078,13 @@ var eventidglobe =null;
 						
 					else if(((splitstring1[0]+splitstring1[1]+splitstring1[2]+splitstring1[3]+splitstring1[4])==
 						(splitstring2[0]+splitstring2[1]+splitstring2[2]+splitstring2[3]+splitstring2[4]))&&(eventid1!=eventid3)){							
-							$('#calendar').fullCalendar('removeEvents', eventid3);
-// 							$('#calendar').fullCalendar('removeEvents', eventid1);
+						console.log("notall"+eventid1+eventid3);
+							if((eventid1.substring(5)=="repeat")){
+								$('#calendar').fullCalendar('removeEvents', eventid1);//beware, drag after repeating will remove entire repeating events
+							}else if((eventid3.substring(5)=="repeat")){
+								$('#calendar').fullCalendar('removeEvents', eventid3);
+							}
+								// 							$('#calendar').fullCalendar('removeEvents', eventid1);
 // 							$('#calendar').fullCalendar('renderEvents', eventid1);
 						    return true;
 						}//end if

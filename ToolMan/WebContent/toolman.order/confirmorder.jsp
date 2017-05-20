@@ -33,7 +33,7 @@
 <%-- 	</c:if> --%>
 
 <!-- login please -->
-	
+	<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/nav/nav.css">
 	<style>
 		#map{
 		height:100px;
@@ -87,12 +87,13 @@
 
 </head>
 <body>
+<jsp:include page="/nav/navigation.jsp" />
 <!-- smart wizard head -->
 
         
 
         <br />
-     <div class="container containerstyle textstyle putmiddle">
+     <div class="container containerstyle textstyle putmiddle" style="margin-top:5%">
         <!-- SmartWizard html -->
         <div id="smartwizard">
             <ul class="textstyle">
@@ -118,7 +119,7 @@
 
 						<table class="table textstyle" >
 						<tr><td>店家名稱</td><td>${orderVO.getB_name()}</td></tr>
-							<tr><td>消費者名稱</td><td>${orderVO.getC_id()}</td></tr>	
+							<tr><td>消費者名稱</td><td>${orderVO.getC_id().getC_id()}</td></tr>	
 							<tr><td>預約時間</td><td>${orderVO.getO_bdate()}</td></tr>	
 							<tr><td>工程類別</td><td id="oprolist"></tr>	
 							<tr><td>工程描述</td><td>${orderVO.getO_des()}</tr>
@@ -151,10 +152,13 @@
 				                    <option value="dots">dots</option>
 				              </select>
 				            </div>           
-				              <span>
-				            	  <button id="btntobackstage" href="${pageContext.servletContext.contextPath}/order/listCOrder.jsp" class="btn btn-primary putmiddle" >進行訂單管理</button>
-					    	</span>
+				              
 				        </form>
+				        <span>
+<!-- -------------------------------------// hyper links need to be put outside the steps------------------------>
+				           <a href="${pageContext.servletContext.contextPath}/cdata/CdataOrderServlet.do?c_id=${orderVO.getC_id().getC_id()}&action=listOrder"><button  class="btn btn-primary putmiddle" >進行訂單管理</button></a>;
+<!-- -------------------------------------// need to be put outside ------------------------>					    	
+					   </span>
 		    	</div>     
 			<!--  endstep3  --> 
  

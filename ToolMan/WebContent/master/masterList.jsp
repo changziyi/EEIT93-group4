@@ -160,8 +160,8 @@
 				if (score == '0') {
 					score = '尚無評價';
 				}
-				var rating = $('<span></span>').attr('style','font-size:12px').text(score);
-				var bname = $('<h3></h3>').text(master.bname).append(rating);
+// 				var rating = $('<span></span>').attr('style','font-size:12px').text(score);
+				var bname = $('<h3></h3>').text(master.bname);
 				var city = $('<p></p>').addClass('boxtext').text('地點：' + master.city + ' ' + master.district);
 				var finish = $('<p></p>').addClass('boxtext').text('完成案件數：' + master.finish);
 				var divPro = $('<div></div>').addClass('divpro');
