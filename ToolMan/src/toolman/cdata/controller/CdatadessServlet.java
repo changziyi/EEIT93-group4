@@ -1,6 +1,7 @@
 package toolman.cdata.controller;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Set;
 
@@ -21,8 +22,27 @@ public class CdatadessServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
-			throws ServletException, IOException {		
-			doPost(request, response);
+			throws ServletException, IOException {
+		
+		HttpSession session = request.getSession();
+		CdataVO cdata =(CdataVO)session.getAttribute("LoginOK");
+		String action = request.getParameter("action");
+		String c_id = cdata.getC_id(); 
+		System.out.println(c_id);
+		if("submitdialog".equals(action)){
+		 String c_name = request.getParameter("c_name");
+		 System.out.println(c_name);
+		 String c_pwd = request.getParameter("c_pswd");
+		 Date c_birth = java.sql.Date.valueOf(request.getParameter("c_birth").trim());
+		 String c_cel = request.getParameter("c_cel"); 
+		 String c_email = request.getParameter("c_email");
+		 String c_addr = request.getParameter("c_addr");
+		 CdataService cs = new CdataService();
+		  cs.updateMember(c_name, c_pwd ,c_birth, c_cel, c_email, c_addr, c_id);
+    	System.out.println("all = " + c_name + c_pwd + c_birth + c_cel + c_email + c_addr + c_id);
+		
+		}
+		doPost(request,response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
@@ -56,22 +76,17 @@ public class CdatadessServlet extends HttpServlet {
 		
 		cdataVOlist.add(cdataVO);
 		session.setAttribute("cdataVOlist", cdataVOlist);
-		Set<OrderVO> orders = cdataVO.getOrders();
-				
+		Set<OrderVO> orders = cdataVO.getOrders();				
 //		for (OrderVO aOrder : orders) {
 //			System.out.print(" 師傅 : "+ aOrder.getB_name()+" , ");
 //			System.out.println(" 時間 : "+ aOrder.getO_edate());
-//		}
-		
-		
+//		}	
 		request.setAttribute("orders", orders);
-		
+
 		RequestDispatcher failureView = request.getRequestDispatcher("/cdata/test1.jsp");
 		failureView.forward(request,response);	
+
 	}
-	
-	
-	
 
 }
 

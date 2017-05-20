@@ -1,6 +1,7 @@
 package toolman.cdata.model;
 
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -17,8 +18,10 @@ public interface CdataDAO_interface {
 	List<CdataVO> geteMailAll(String c_email);//send mail
 	public int updateMemberfwd(String c_pwd, String c_email);//	update forget password
 	public int updateMemberpwd(String c_id, String c_pwd);//Member update password
-	public int updateMember(String c_name, String c_birth, String c_cel, 
+	public int updateMember(String c_name,String c_pwd, Date c_birth, String c_cel, 
 			String c_email, String c_addr, String c_id);//update member
+	
+	
 	
 	
 	public void update(CdataVO cdataVO);

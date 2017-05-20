@@ -3,6 +3,7 @@ package toolman.cdata.model;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -77,21 +78,23 @@ public class CdataDAO implements CdataDAO_interface{
 		}
 		return count;
 	}
+	
 	//update member
-	public int updateMember(String c_name, String c_birth, String c_cel, 
+	public int updateMember(String c_name,String c_pwd, Date c_birth, String c_cel, 
 							String c_email, String c_addr, String c_id) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Integer count = 0;
 		try {
 			session.beginTransaction();
 			Query query = session.createQuery(
-					"update CdataVO set c_name = ? , c_birth = ? , c_cel = ? , c_email = ? , c_addr = ? where c_id = ?");
+					"update CdataVO set c_name = ? , c_pwd = ? , c_birth = ? , c_cel = ? , c_email = ? , c_addr = ? where c_id = ?");
 			query.setParameter(0,c_name);
-			query.setParameter(1,c_birth);
-			query.setParameter(2,c_cel);
-			query.setParameter(3,c_email);
-			query.setParameter(4,c_addr);
-			query.setParameter(5,c_id);
+			query.setParameter(1,c_pwd);
+			query.setParameter(2,c_birth);
+			query.setParameter(3,c_cel);
+			query.setParameter(4,c_email);
+			query.setParameter(5,c_addr);
+			query.setParameter(6,c_id);
 			count = query.executeUpdate();
 			session.getTransaction().commit();
 		} catch (RuntimeException ex) {
