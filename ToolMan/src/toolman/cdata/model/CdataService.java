@@ -29,30 +29,11 @@ public class CdataService {
 		return dao.geteMailAll(c_email);
 	}
 	
-	
+//	update forget password
 	public int updateMemberfwd(String c_email, String c_pwd){
 		return dao.updateMemberfwd(c_email, c_pwd);
 	}
-		
-	
-	//
-	public CdataVO updateCdataMember(String c_id,String c_pwd,String c_name,
-			String c_cel,String c_email, String c_city, String c_district,
-			String c_addr,Date c_birth){		
-		CdataVO cdataVO = new CdataVO();
-		cdataVO.setC_id(c_id);
-		cdataVO.setC_name(c_pwd);
-		cdataVO.setC_pwd(c_name);
-		cdataVO.setC_cel(c_cel);
-		cdataVO.setC_email(c_email);
-		cdataVO.setC_city(c_city);
-		cdataVO.setC_district(c_district);
-		cdataVO.setC_addr(c_addr);
-		cdataVO.setC_birth(c_birth);
-		dao.update(cdataVO);
-		return cdataVO;
-	}		
-		
+					
 	
 	//註冊
 	public CdataVO addCdata(String c_id,String c_pwd,String c_name,
@@ -80,6 +61,30 @@ public class CdataService {
 		return  dao.cdata_des(c_id); 
 		
 	}
+	
+	
+	//Member update password
+	public int updateMemberpwd(String c_id, String c_pwd){
+		return dao.updateMemberpwd(c_id, c_pwd);
+		
+	}
+	
+	//update member
+	public int updateMember(String c_name, String c_birth, String c_cel, 
+			String c_email, String c_addr, String c_id){
+		return dao.updateMember(c_name, c_birth, c_cel, c_email, c_addr, c_id);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	public List<CdataVO> getAll() {//benny	
 		return dao.getAll();
