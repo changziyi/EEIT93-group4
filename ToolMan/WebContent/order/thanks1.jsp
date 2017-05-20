@@ -31,7 +31,7 @@ top: 30%;
 left: 40%;      
 }
 </style>
-<meta http-equiv="refresh" content="3;url=${pageContext.servletContext.contextPath}/cdata/CdataOrderServlet.do?c_id=${LoginOK.c_id}&action=listOrder">
+<meta http-equiv="refresh" content="3;url=${pageContext.servletContext.contextPath}/mdata/MdataOrderServlet.do?m_id=${LoginOK.m_id}&action=listOrder">
 
 
 
@@ -65,7 +65,7 @@ $.post(hyperlinkstring,{"functionaction":"orderresponse2","o_id":attr},function(
 
 <div class="alert alert-success kk">
   <h1><strong>謝謝你的評價</strong></h1>
-      <h1>幾秒回訂單頁</h1>
+    <h1>幾秒回訂單頁</h1>
   
   </div>
   

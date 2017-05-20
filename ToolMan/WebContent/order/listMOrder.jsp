@@ -224,6 +224,17 @@ ${orderVO.ma_des}
 				 $.post(hyperlinkstring,{"functionaction":"orderresponse1","o_id":attr},function(data){
 				 });
 				 }
+
+			 
+// 		 window.onload = masterresponse2;
+				 
+				 
+// 				 function masterresponse2(){
+// 				 var hyperlinkstring = "${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIFunctionServlet.do";
+// 			 	 var attr = $(this).data('id');
+// 				 $.post(hyperlinkstring,{"functionaction":"orderresponse2","o_id":attr},function(data){
+// 				 });
+// 				 }
 		 
  	</script>
 </body>

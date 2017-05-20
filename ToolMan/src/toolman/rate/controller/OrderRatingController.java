@@ -254,7 +254,7 @@ if ("updateByM".equals(action)) { // 來自update_emp_input.jsp的請求
 //		DeptService deptSvc = new DeptService();
 		
 	request.setAttribute("orderVO", orderVO2);
-    String url =  "/order/thanks.jsp";
+    String url =  "/order/thanks1.jsp";
 		RequestDispatcher successView = request.getRequestDispatcher(url);   // 修改成功後,轉交回送出修改的來源網頁
 		successView.forward(request, response);
 //	

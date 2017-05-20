@@ -221,8 +221,12 @@ public class OrderDAO implements OrderDAO_Interface {
 		
 		try {
 			session.beginTransaction();				
-			Query query = session.createQuery("Update OrderVO set s_name='已完成' where o_id=?");
-			query.setParameter(0,o_id);
+			Query query = session.createQuery("Update OrderVO set s_name='已完成', o_edate=:ed where o_id=:id");
+			Calendar calobj = Calendar.getInstance();
+			Timestamp o_edate = new Timestamp(calobj.getTimeInMillis());
+			query.setParameter("ed", o_edate);
+			query.setParameter("id",o_id);
+			
 			query.executeUpdate();
 			session.getTransaction().commit();
 		} catch (RuntimeException ex) {
