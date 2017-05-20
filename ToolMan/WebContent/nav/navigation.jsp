@@ -28,7 +28,7 @@
 						<li><a class="alist"
 							href="${pageContext.servletContext.contextPath}/master/master.do?city=all&action=SearchAll"
 							class="">我要找師傅</a></li>
-						<li><a class="alist" href="#">我要開店 </a></li>
+						<li><a class="alist" href="${pageContext.servletContext.contextPath}/master/OpenStoreInfo.jsp">我要開店 </a></li>
 						<li><a class="alist"
 							href="${pageContext.servletContext.contextPath}/wishpool/Wishing+waterfall.jsp">許願池
 						</a></li>
@@ -86,7 +86,21 @@
 								<li><a
 									href="${pageContext.servletContext.contextPath}/loginoutServlet">登出</a></li>
 
+
+
+
+<%-- 	<%	if (c_id.equals("sa")) {%> --%>
+<!-- 								<li><a -->
+<%-- 								  href="${pageContext.servletContext.contextPath}/loginoutServlet">登出</a></li> --%>
+
+<%--                             <%} %> --%>
+
+
 							</ul></li>
+							
+							
+							
+							
 						<%----------------------------------------------墨西哥長城------------------------------------------------------------------- --%>
 
 						<%
