@@ -276,6 +276,23 @@ public class MdataDAO implements MdataDAO_interface {
 			}
 			return list;
 		}
+		//BY BENNY--for manager backstage
+		public List<MdataVO> getMasterByB(String b_name){
+			List<MdataVO> list = null;
+			Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+			try {
+				session.beginTransaction();
+				Query query = session.createQuery("from MdataVO where b_name=:b ");
+				query.setString("b",b_name);
+				list = query.list();
+				session.getTransaction().commit();
+			} catch (RuntimeException ex) {
+				session.getTransaction().rollback();
+				throw ex;
+			}
+			return list;
+			
+		}//by Benny
 		
 		@Override
 		public List<Object[]> search(String city, String district, String input) {
