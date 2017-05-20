@@ -7,17 +7,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Insert title here</title>
 <!-- jquery -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>	
-	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+	<script src="${pageContext.servletContext.contextPath}/js/jquery-3.2.1.min.js"></script>
+	<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/js/jqueryui/jquery-ui.min.css">
+	<script src="${pageContext.servletContext.contextPath}/js/jqueryui/jquery-ui.min.js"></script>
 <!-- jquery -->
 <!-- bootstrap -->
 	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/js/bootstrap.min.css" >
 	<!-- Optional theme -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+	<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/js/bootstrap-theme.min.css" >
 	<!-- Latest compiled and minified JavaScript -->
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	<script src="${pageContext.servletContext.contextPath}/js/bootstrap.min.js" ></script>
 	
 <!-- bootstrap -->
 <!-- datatable-->
@@ -43,9 +43,9 @@
 	<link rel="stylesheet" href="../js/datatable/responsive/responsive.bootstrap.min.css">
 	<link rel="stylesheet" href="../js/datatable/select/select.foundation.min.css">
 <!------------------------ flatui ------------------------------>	
-	<link href="../js/flatui/flat-ui.min.css" rel="stylesheet">
-<!-- 	<link href="../js/flatui/lato/*" rel="stylesheet"> -->
-<!-- 	<script src="../js/flatui/flat-ui.min.js"></script> -->
+	<link rel="stylesheet" href="../js/flatui/dist/css/flat-ui.min.css" rel="stylesheet">
+<!-- --------when open js, the filtering won't work ----------------->
+<%-- 	<script src="${pageContext.servletContext.contextPath}/js/flatui/dist/js/flat-ui.min.js"></script> --%>
 
 <!-------------------- navigation for this application---------- -->
 <link rel="stylesheet" href="${pageContext.servletContext.contextPath}/nav/nav.css">

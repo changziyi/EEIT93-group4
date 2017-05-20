@@ -62,6 +62,8 @@ public class CdatadessServlet extends HttpServlet {
 //			System.out.print(" 師傅 : "+ aOrder.getB_name()+" , ");
 //			System.out.println(" 時間 : "+ aOrder.getO_edate());
 //		}
+		
+		
 		request.setAttribute("orders", orders);
 		
 		RequestDispatcher failureView = request.getRequestDispatcher("/cdata/test1.jsp");

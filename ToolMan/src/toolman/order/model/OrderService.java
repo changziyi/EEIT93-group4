@@ -143,6 +143,7 @@ public class OrderService {
 			if(orderVO2.getM_rating()!=null && orderVO2.getC_rating()!=null){
 	        dao = new OrderDAO();  
 	    	dao.updateOrderSnameToFishedById(orderVO2.getO_id());
+	    	
 			}
 		 }
     }
@@ -154,10 +155,12 @@ public class OrderService {
 		List<OrderVO> orders = dao.getAllOrder();
 		for(OrderVO orderVO2 : orders) {
 			
-			if((orderVO2.getM_rating()==null&orderVO2.getC_rating()!=null)||(orderVO2.getM_rating()!=null&orderVO2.getC_rating()==null )){
+			if((orderVO2.getM_rating()==null&orderVO2.getC_rating()!=null)||(orderVO2.getM_rating()!=null&orderVO2.getC_rating()==null
+					||orderVO2.getM_rating()==null && orderVO2.getC_rating()==null)){
 		        dao = new OrderDAO();  
 		    	dao.updateOrderSnameToUnfinishedReviewById(orderVO2.getO_id());
-		    	 	}
+		    					}
+			
 		    		
 						
 	 }

@@ -10,8 +10,14 @@
 	EmailService emailSvc = new EmailService();
 	HttpSession sessions = request.getSession();
 	CdataVO cdataVO = (CdataVO)sessions.getAttribute("LoginOK");
+	//by Benny
 	List<EmailVO> list = emailSvc.getMail(cdataVO.getC_id());
-	pageContext.setAttribute("list", list);
+	Integer m_id = cdataVO.getM_id();
+	List<EmailVO> list2 =  emailSvc.getMailByM(m_id);
+	List<EmailVO> list3 = emailSvc.getMailByB(m_id);
+	list3.addAll(list);
+	list3.addAll(list2);
+	pageContext.setAttribute("list", list3);
 %>
 
 

@@ -43,7 +43,7 @@ public class CdataDAO implements CdataDAO_interface{
 		}
 		return querylist;
 	}
-	//update password
+	//update forget password
 	public int updateMemberfwd(String c_email, String c_pwd) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Integer count = 0;
@@ -60,16 +60,38 @@ public class CdataDAO implements CdataDAO_interface{
 		}
 		return count;
 	}
-	
-	//update member
-	public int updateMembr(String c_pwd, String c_email) {
+	//Member update password
+	public int updateMemberpwd(String c_id, String c_pwd) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Integer count = 0;
 		try {
 			session.beginTransaction();
-			Query query = session.createQuery("update CdataVO set c_pwd=:p where c_email=:e");
+			Query query = session.createQuery("update CdataVO set c_pwd=:p where c_id=:c");
+			query.setParameter("c",c_id);
 			query.setParameter("p",c_pwd);
-			query.setParameter("e",c_email);
+			count = query.executeUpdate();
+			session.getTransaction().commit();
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
+		return count;
+	}
+	//update member
+	public int updateMember(String c_name, String c_birth, String c_cel, 
+							String c_email, String c_addr, String c_id) {
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		Integer count = 0;
+		try {
+			session.beginTransaction();
+			Query query = session.createQuery(
+					"update CdataVO set c_name = ? , c_birth = ? , c_cel = ? , c_email = ? , c_addr = ? where c_id = ?");
+			query.setParameter(0,c_name);
+			query.setParameter(1,c_birth);
+			query.setParameter(2,c_cel);
+			query.setParameter(3,c_email);
+			query.setParameter(4,c_addr);
+			query.setParameter(5,c_id);
 			count = query.executeUpdate();
 			session.getTransaction().commit();
 		} catch (RuntimeException ex) {
