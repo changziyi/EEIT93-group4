@@ -30,7 +30,7 @@
 	href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
 <link href="${pageContext.servletContext.contextPath}/nav/nav.css" rel="stylesheet">
 <link href="${pageContext.servletContext.contextPath}/wishpool/wish.css" rel="stylesheet">
-
+<link rel="Shortcut Icon" href="${pageContext.servletContext.contextPath}/favicon.ico" />
 <script
 	src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
 <script
@@ -239,7 +239,7 @@
 	</div>
 
 
-	<!--------------------------- 這裡是許願是什麼  ---------------------------------------------->
+	<!--------------------------- 許願能做什麼?  ---------------------------------------------->
 	<div class="modal fade" id="myModal02" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
