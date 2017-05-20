@@ -44,6 +44,8 @@
 		.qbtncen {margin-left:21%;padding:1.6%;}
 		.bimgwidth {width:87%}
 		.popup {width:50%}
+		.ratediv {margin-left:10%}
+		.ratstardiv {margin-top:3%;margin-bottom:3%;margin-left:28%}
 	</style>
 </head>
 <body>
@@ -187,21 +189,42 @@
 <!-- 					<button type="button" id="buttonUpload">上傳</button> -->
 <!-- 				</form> -->
 				
-				<button type="button" class="btn btn-info btn" data-toggle="modal" data-target="#workpopup">新增作品</button>
-
+<!-- 				<button type="button" class="btn btn-info btn" data-toggle="modal" data-target="#workpopup">新增作品</button> -->
+				<a href="" class="btn btn-info btn" data-toggle="modal" data-target="#workpopup">
+          			<span class="glyphicon glyphicon-plus"></span> 新增作品
+          		</a>
+				
+				
 				<div id="workpopup" class="modal fade" role="dialog" style="margin-top:10%">
 				  <div class="modal-dialog">
 					<form name="myData" action="TestFormData" enctype="multipart/form-data">
 					    <div class="modal-content">
 					      <div class="modal-header">
 					        <button type="button" class="close" data-dismiss="modal">&times;</button>
-					        <h4 class="modal-title">Modal Header</h4>
+					        <h4 class="modal-title">新增作品集</h4>
 					      </div>
 					      <div class="modal-body">
 					        <div id='div1'></div>
-									<div><input type="file" id="file" name="file[]" multiple="multiple"></div>
-									<div class="workImgArea">作品名稱　<input type="text" name="workname" required></div>
-									<div class="workImgArea">作品描述　<textarea name="workdes" id="workdes"></textarea></div>
+					        
+					        <div class="form-group">
+								<table class="table">
+									<tr>
+										<td><input type="file" id="file" name="file[]" class="custom-file-input" multiple="multiple"><span class="custom-file-control"></span></td>
+										<td></td>
+									</tr>
+									<tr>
+										<td>作品名稱</td>
+										<td><input type="text" name="workname" required></td>
+									</tr>
+									<tr>
+										<td>作品描述</td>
+										<td><textarea name="workdes" id="workdes"></textarea></td>
+									</tr>
+<!-- 									<div><input type="file" id="file" name="file[]" multiple="multiple"></div> -->
+<!-- 									<div class="workImgArea">作品名稱　<input type="text" name="workname" required></div> -->
+<!-- 									<div class="workImgArea">作品描述　<textarea name="workdes" id="workdes"></textarea></div> -->
+								</table>
+							</div>
 					      </div>
 					      <div class="modal-footer">
 					        <button type="button" class="btn btn-default" data-dismiss="modal">返回</button>
@@ -212,13 +235,17 @@
 				  </div>
 				</div>
 				
-				
 			</c:if>
+			
 			<div class="form-group workdiv">
 				<table class="table worktable">
 				<c:forEach var="aWork" items="${mdataVO.works}">
 						<tr>
-							<td class="aWork"><button type="button" class="btn btn-danger deleteworkim" id="deleteworkim">刪除</button>
+							<td class="aWork">
+								<c:if test="${LoginOK.m_id == mdataVO.m_id}">
+									<a href="" class="btn btn-danger deleteworkim" id="deleteworkim"><span class="glyphicon glyphicon-trash"></span> 刪除</a>
+	<!-- 							<button type="button" class="btn btn-danger deleteworkim" id="deleteworkim">刪除</button> -->
+								</c:if>
 								${aWork.work_name}
 								${aWork.work_des}
 								<c:forEach var="a" items="${aWork.workims}">
@@ -250,14 +277,30 @@
 			</div>
 		</div>
 		<div id="menu3" class="tab-pane fade">
-			<input id="input-3" name="input-3" value="${mdataVO.m_arating}" class="rating-loading">
-			<h3>評價: ${mdataVO.m_arating}</h3>
-			<c:forEach var="orderCid" items="${mdataVO.orders}">
-				${orderCid.c_id.c_id} ：
-				${orderCid.c_rating} - 
-				${orderCid.o_edate}<br>${orderCid.ca_des}
-			</c:forEach>
+				<div class="ratstardiv">
+					<input id="input-3" name="input-3" value="${mdataVO.m_arating}" class="rating-loading">
+				</div>
+				<div class="ratediv">
+					<table class="table table-hover" style="width:70%">
+						<tr>
+							<th>會員</th>
+							<th>評分</th>
+							<th>日期</th>
+							<th>評價</th>
+						</tr>
+						<c:forEach var="orderCid" items="${mdataVO.orders}" varStatus="loop">
+							${loop.index + 1}
+							<tr>
+								<td><a href="${pageContext.servletContext.contextPath}/cdata/CdatadessServlet.do?c_id=${orderCid.c_id.c_id}">${orderCid.c_id.c_id}</a></td>
+								<td>${orderCid.c_rating}顆星</td>
+								<td>${orderCid.o_edate}</td>
+								<td style="width:50%">${orderCid.ca_des}</td>
+							</tr>
+						</c:forEach>
+					</table>
+				</div>
 		</div>
+		
 		<div id="menu4" class="tab-pane fade">
 			<h3>成功媒合人次:</h3>
 			<c:forEach var="orderCid" items="${mdataVO.orders}">
@@ -547,15 +590,41 @@
 						$('#img1').removeAttr('src').removeAttr('class');
 						$('#img2').removeAttr('src').removeAttr('class');
 						myDiv.find('#loading').remove();
+// 						$('.workdiv').empty();
 // 		 				alert(reutrnData);
 // 						var successImg = $('<img />').attr('src','${pageContext.servletContext.contextPath}/image/jake.gif');
 // 						myDiv.append(successImg);
 						upload.val(null);
 						workname.val(null);
 						workdes.val(null);
-						$('.worktable').empty();
-						var t = $('.worktable').html('<c:forEach var="aWork" items="${mdataVO.works}"><tr><td class="aWork"><button type="button" class="btn btn-danger deleteworkim" id="deleteworkim">刪除</button>${aWork.work_name}${aWork.work_des}<c:forEach var="a" items="${aWork.workims}"><img width="304" height="236" class="img-thumbnail workimsize" src="${pageContext.servletContext.contextPath}/master/master.do?type=work&image=${a.im_id}"/></c:forEach><input type="hidden" name="action" value="deleteworkim"><input type="hidden" name="work_id" value="${aWork.work_id}"></td></tr></c:forEach>');
-						$('.workdiv').append(t);
+						
+						location.reload();
+						
+// 						$('.workdiv').empty();
+						
+// 						var works = [<c:forEach var="aWork" items="${mdataVO.works}">{"work_name":"${aWork.work_name}","work_des":"${aWork.work_des}","im_id":[<c:forEach var="a" items="${aWork.workims}">${a.im_id},</c:forEach>]},</c:forEach>];
+						
+// 						var docFragment = $(document.createDocumentFragment());
+// 						$.each(works,function(key,val) {
+// 							console.log(val.work_name);
+// 							console.log(val.work_des);
+// 							var work_name = val.work_name;
+// 							var work_des = val.work_des;
+// //		 					var dbtn = $('button').attr({'type':'button','id':'deleteworkim'}).addClass('btn').addClass('btn-danger').addClass('deleteworkim');
+// 							var td = $('<td></td>').addClass('aWork');
+// 							if (val.im_id.length != 'undefined' || val.im_id.length != null) {
+// 								for (var i = 0; i < val.im_id.length; i++) {
+// 									console.log(val.im_id[i]);
+// 									var img = $('<img />').attr('src','${pageContext.servletContext.contextPath}/master/master.do?type=work&image='+val.im_id[i]);
+// 									td.append(img);
+// 								}
+// 							}
+// 							var tr = $('<tr></tr>').append(td);
+// 							var table = $('<table></table>').addClass('table worktable').append(tr);
+// 							var div = $('<div></div>').append(table);
+// 							docFragment.append(div);
+// 						});
+// 						$('.workdiv').append(docFragment);
 		 			},
 		 			beforeSend : function() {
 		 			},
@@ -566,21 +635,37 @@
 			});
 			
 			
+// 			var works = [<c:forEach var="aWork" items="${mdataVO.works}">{"work_name":"${aWork.work_name}","work_des":"${aWork.work_des}","im_id":[<c:forEach var="a" items="${aWork.workims}">${a.im_id},</c:forEach>]},</c:forEach>];
+
+// 			$.each(works,function(key,val) {
+// 				console.log(val.work_name);
+// 				console.log(val.work_des);
+// 				var work_name = val.work_name;
+// 				var work_des = val.work_des;
+				
+// 				if (val.im_id.length != 'undefined' || val.im_id.length != null) {
+// 					for (var i = 0; i < val.im_id.length; i++) {
+// 						console.log(val.im_id[i]);
+// 					}
+// 				}
+// 			});
+			
+			
 			//刪除作品
 			var deleteworkimbtn = $('.deleteworkim');
 			deleteworkimbtn.click(function() {
 				var tdparent = $(this).parent('.aWork');
 				var workid = tdparent.children('input[name="work_id"]');
 				console.log(workid.val());
-				
+				alert("確認刪除？");
 				$.ajax({
 					url : 'master.do',
 					data: {'work_id':workid.val(),'action':'deleteworkim'},
 					type : 'POST',
 					success : function(returnData) {
+						tdparent.remove();
 					}
 				});
-				
 			});
 			
 			

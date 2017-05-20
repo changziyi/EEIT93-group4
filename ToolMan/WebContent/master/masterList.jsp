@@ -169,6 +169,7 @@
 				var caption = divSpan.addClass('caption').append([bname,city,divPro]);
 				var prodes = $('<span></span>').addClass('boxtext').text('專業：');
 				divPro.append(prodes);
+				if (master.pro.length != 'undefined' || master.pro.length != null) {
 				for (var i = 0; i < master.pro.length; i++) {
 					var pro = master.pro[i];
 					var pa = $('<a href=""></a>');
@@ -206,6 +207,7 @@
 					}
 					divPro.append(pa.text(master.pro[i]));
 					divSpan.append(divPro);
+				}
 				}
 				divSpan.append([finish]);
 				var thumbnail = $('<div></div>').addClass('thumbnail').addClass('thumbnailformaster').append([a,divSpan]);
