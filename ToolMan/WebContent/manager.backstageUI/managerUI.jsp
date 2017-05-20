@@ -24,8 +24,8 @@
 	<script src="../js/datatable/datatable/jquery.dataTables.min.js"></script>
 	<script src="../js/datatable/jszip/jszip.min.js"></script>
 	<script src="../js/datatable/pdf/pdfmake.min.js"></script>
-	<script src="../js/datatable/button/buttons.html5.min.js"></script>
-	<script src="../js/datatable/button/dataTables.buttons.min.js"></script>
+<!-- 	<script src="../js/datatable/button/buttons.html5.min.js"></script> -->
+<!-- 	<script src="../js/datatable/button/dataTables.buttons.min.js"></script> -->
 <!-- 	<script src="../js/datatable/datatable/buttons.bootstrap.min.js"></script> -->
 	<script src="../js/datatable/datatable/jquery.dataTables.min.js"></script>
 	<script src="../js/datatable/datatable/dataTables.bootstrap.min.js"></script>
