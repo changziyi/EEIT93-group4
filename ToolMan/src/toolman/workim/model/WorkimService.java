@@ -2,6 +2,8 @@ package toolman.workim.model;
 
 import java.util.Collection;
 
+import toolman.work.model.WorkVO;
+
 public class WorkimService {
 	
 	private WorkimDAO_interface dao;
@@ -20,6 +22,9 @@ public class WorkimService {
 	
 	public byte[] getImg(Integer im_id) {
 		return dao.getImg(im_id);
+	}
+	public Integer deleteByWork(WorkVO workVO){
+	 return	dao.deleteByWork(workVO);
 	}
 
 }
