@@ -310,7 +310,7 @@
 				columnWidth : 282,
 				animate : true
 			});
-		});
+		})
 		
 		</script>
 </body>
