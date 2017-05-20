@@ -60,7 +60,8 @@ public class LoginServlet extends HttpServlet {
         if (cdataVO != null && c_id.equals(cdataVO.getC_id()) 
         		&& c_pwd.equals(cdataVO.getC_pwd())){
         	session.setAttribute("LoginOK", cdataVO);//登入成功
-        
+        	session.setAttribute("LoginOK2", c_id);//登入成功
+
 	
            
         }else{
