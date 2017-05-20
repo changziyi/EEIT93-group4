@@ -10,6 +10,7 @@ import java.util.Map;
 
 import org.json.simple.JSONValue;
 
+import toolman.mdata.model.MdataDAO;
 import toolman.mdata.model.MdataVO;
 
 
@@ -91,7 +92,15 @@ public void deleteEmailService(Integer ms_id) {
 public void deleteEmailServiceJson(Integer ms_id) {
 	List<EmailVO> DeleteEmailData = dao.deleteMail(ms_id);
 	}
+//By Benny
 public List<EmailVO> getMailByM(Integer m_id) {
-	return dao.getMailByM(m_id);
-}
+		return dao.getMailByM(m_id);
+	}
+//By Benny	
+public List<EmailVO> getMailByB(Integer m_id) {
+		MdataDAO mdatadao = new MdataDAO();	
+		MdataVO mdataVO = mdatadao.findByPrimaryKey(m_id);		
+		List<EmailVO> list =  dao.getMail(mdataVO.getB_name());
+		return list;
+	}
 }
