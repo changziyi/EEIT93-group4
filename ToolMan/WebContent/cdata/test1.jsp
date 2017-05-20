@@ -21,6 +21,7 @@
 <link rel="Shortcut Icon" href="${pageContext.servletContext.contextPath}/favicon.ico" />
 <!---- dialog ---->
 <link href="http://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet">
+<link type="text/css" href="css/jquery-ui-1.8.11.custom.css" rel="Stylesheet">
 <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
 <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 </head>
@@ -145,7 +146,7 @@ tbody td:hover {
 		</table>
 		<!--------------------------------------------------------- dialog 修改 ------------------------------------------------------------>
 			<div id="dialog" title="Dialog">
-    		<form >  
+    		<form id="message_form" method="POST" >  
     			<fieldset>  
     			<label for="name">姓名:</label>  
     			<input type="text" name="name" id="c_name" value="${cdataVO.c_name}" class="text ui-widget-content ui-corner-all" />
@@ -331,34 +332,62 @@ tbody td:hover {
 	</div>
   </div>
 </div>	
-	<script>
-	var name = $( "#name" ),   
-    email = $( "#email" );   
- $( "#dialog" ).dialog({   
-        autoOpen: false,     
-        width: 300,   
-        modal: true, 
-        resizable: false,//無法更改視窗大小
-        draggable: false,//無法拖曳
-        buttons: {   
-            "Ok": function() {   
-            	$( this ).dialog( "close" );  
-            },     
-            Cancel: function() {   
-                $( this ).dialog( "close" );   
-            }   
+<script>
+
+var name = $( "#name" ),   
+email = $( "#email" );   
+$( "#dialog" ).dialog({   
+    autoOpen: false,   
+    height: 300,   
+    width: 350,   
+    modal: true,   
+    buttons: {   
+        "Ok": function() {   
+            alert("name: "+name.val()+", email: "+email.val());   
         },   
-        close: function() {   
-            allFields.val( "" ).removeClass( "ui-state-error" );   
+        Cancel: function() {   
+            $( this ).dialog( "close" );   
         }   
-}); 
- 
- $( "#create-user" )   
- .button()   
- .click(function() {   
- $( "#dialog" ).dialog( "open" );   
+    },   
+    close: function() {   
+        allFields.val( "" ).removeClass( "ui-state-error" );   
+    }   
 });  
+
+$( "#create-user" )   
+.button()   
+.click(function() {   
+$( "#dialog" ).dialog( "open" );   
+});  
+
+
+// 	var name = $( "#name" ),   
+//     email = $( "#email" );   
+//  $( "#dialog" ).dialog({   
+//         autoOpen: false,     
+//         width: 300,   
+//         modal: true, 
+//         resizable: false,//無法更改視窗大小
+//         draggable: false,//無法拖曳
+//         buttons: {   
+//             "送出": function() {   
+//             	$( this ).dialog( "close" );  
+//             },     
+//             Cancel: function() {   
+//                 $( this ).dialog( "close" );   
+//             }   
+//         },   
+//         close: function() {   
+//             allFields.val( "" ).removeClass( "ui-state-error" );   
+//         }   
+// }); 
+ 
+//  $( "#create-user" )   
+//  .button()   
+//  .click(function() {   
+//  $( "#dialog" ).dialog( "open" );   
+// });  
 	
-	</script>
+</script>
 </body>
 </html>
