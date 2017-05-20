@@ -89,12 +89,38 @@ public class managerUIFunctionServlet extends HttpServlet {
 			out.write(count);
 			
 		}
+		if("recoverm".equals(functionaction)){
+			List<MdataVO> list = new ArrayList<MdataVO>();
+			int count=0;
+			for(String m_id:arraytoggled){
+				MdataService mdataservice = new MdataService();
+				System.out.println(m_id);
+				int	returnedcount = mdataservice.updatemasterSname(Integer.parseInt(m_id),"審核通過");
+			count= returnedcount+count;
+			}	
+			
+			System.out.print(count);
+			out.write("success");
+			
+		}
 		if("suspensionc".equals(functionaction)){
 			List<CdataVO> list = new ArrayList<CdataVO>();
 			int count=0;
 			for(String c_id:arraytoggled){
 				CdataService cdataservice = new CdataService();
 			int	returnedcount = cdataservice.updatecustomerSname(c_id,"停權中");
+			count= returnedcount+count;
+			}
+			out = response.getWriter();
+			System.out.print(count);
+			out.write(count);			
+		}
+		if("recoverc".equals(functionaction)){
+			List<CdataVO> list = new ArrayList<CdataVO>();
+			int count=0;
+			for(String c_id:arraytoggled){
+				CdataService cdataservice = new CdataService();
+			int	returnedcount = cdataservice.updatecustomerSname(c_id,"一般");
 			count= returnedcount+count;
 			}
 			out = response.getWriter();
@@ -110,6 +136,16 @@ public class managerUIFunctionServlet extends HttpServlet {
 			}
 			
 		}
+		if("endr".equals(functionaction)){
+			
+			int count=0;
+			for(String r_id:arraytoggled){
+				RdataService rdataservice = new RdataService();
+				rdataservice.updateSname(Integer.parseInt(r_id),"已結案");			
+			}
+			
+		}
+		
 		//tested ok
 		if("findmaster".equals(functionaction)){
 			MdataService mdataservice = new MdataService();
