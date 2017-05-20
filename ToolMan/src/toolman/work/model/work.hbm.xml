@@ -22,7 +22,7 @@
         </many-to-one>
         
         <!--作品圖片*-作品1-->
-		<set name="workims" table="workim" lazy="false" inverse="true" cascade="all-delete-orphan" order-by="im_id asc">			
+		<set name="workims" table="workim" cascade="all-delete-orphan" lazy="false" inverse="true"  order-by="im_id asc">			
 			<key>
 				<column name="work_id" />
 			</key>

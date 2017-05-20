@@ -10,6 +10,7 @@ import org.hibernate.SessionFactory;
 
 import hibernate.util.HibernateUtil;
 import toolman.mdata.model.MdataVO;
+import toolman.workim.model.WorkimService;
 import toolman.workim.model.WorkimVO;
 
 public class WorkDAO implements WorkDAO_interface {
@@ -80,7 +81,10 @@ public class WorkDAO implements WorkDAO_interface {
 		try {
 			session.beginTransaction();
 			WorkVO workVO = (WorkVO) session.get(WorkVO.class, work_id);
+			session.clear();
 			session.delete(workVO);
+
+			
 //			WorkVO workVO = (WorkVO) session.get(WorkVO.class, work_id);
 //			workVO.getWorkims().remove(workVO);
 //			workVO.setWorkims(null);
@@ -133,7 +137,11 @@ public class WorkDAO implements WorkDAO_interface {
 		
 		
 		//deleteByWork
-		 workdao.delete(5003);
+		
+		WorkimService workimservice = new WorkimService();
+		workimservice.deleteByWork(workdao.findByPrimaryKey(5003));
+		workdao.delete(5003);
+//		 workdao.delete(5003);
 	}
 
 }
