@@ -649,8 +649,9 @@ $(function(){
 						'<button type="button" class="btn btn-primary dropdown-toggle" style="width:130px;height:50px;font-size:20px;" data-toggle="dropdown"aria-haspopup="true" aria-expanded="false">狀態<span class="caret"></span></button>';
 			var dropdownmenucontentstate=
 						'<li data-statusvalue="allad" data-buttonstate="selected"  name="datastatus"><a href="#">所有廣告</a></li><li role="separator" class="divider"></li>'
-						+'<li data-statusvalue="進行中" name="datastatus"><a href="#">未解決</a></li><li role="separator" class="divider"></li>'
-						+'<li data-statusvalue="已結束" name="datastatus"><a href="#">已解決</a></li><li role="separator" class="divider"></li>';
+						+'<li data-statusvalue="已結束" name="datastatus"><a href="#">尚未進行</a></li><li role="separator" class="divider"></li>'
+						+'<li data-statusvalue="進行中" name="datastatus"><a href="#">進行中</a></li><li role="separator" class="divider"></li>'
+						+'<li data-statusvalue="已結束" name="datastatus"><a href="#">已中止</a></li><li role="separator" class="divider"></li>';
 												
 			var dropdownmenustate = '<ul class="dropdown-menu">'+dropdownmenucontentstate +'</ul>';
 			var buttongroupdivend ='</div>';
@@ -1048,7 +1049,7 @@ $(function(){
 						   var mid =  $('<input type="button" class="btn btn-warning"/>').val(data.ad_id).addClass('eventlisttbodytrtd');
 						   var a =  $('<a></a> ').attr('href',"${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIFunctionServlet.do?"+"functionaction=findcustomer&targetid="+data.ad_id).append(mid);						  
 						   var midwordmid =  $('<span style="visibility: hidden;font-size:0px;margin:0pxlpadding:0px;"></span> ').text(data.ad_id).addClass('eventlisttbodytrtd');
-						   var cell0 = $('<td></td>').addClass('eventlisttbodytrtd').append(toggleword);
+						   var cell0 = $('<td style="text-align:center;"></td>').addClass('eventlisttbodytrtd').append(toggleword);
 						   var cell1 = $('<td></td>').html(a).addClass('eventlisttbodytrtd').append(midwordmid);
 						   var cell2 = $('<td></td>').text(data.ad_bdate).addClass('eventlisttbodytrtd');;			   
 						   var cell3 = $('<td></td>').text(data.ad_enddate).addClass('eventlisttbodytrtd');
@@ -1146,21 +1147,24 @@ $(function(){
 </script>
 <style>   
 input[type='checkbox'] {
-	
+margin: 0 auto;
+display: block;
 	width:20px;height:20px;
 }
 
 input[type='checkbox'] {
 	-webkit-font-smoothing: antialiased;
 	text-rendering: optimizeSpeed;
-	margin: 10px;
-	margin-right: 1px;
+	
+	
 	display: block;
 	float: left;
 	position: relative;
 	cursor: pointer;
 	width:20px;
-	height:20px
+	height:20px;
+	horizontal-align:middle;
+	vertical-align:middle;
 }
 
 input[type='checkbox']:after {
