@@ -214,8 +214,8 @@
 				
 				
 			</c:if>
-			<div class="form-group">
-				<table class="table">
+			<div class="form-group workdiv">
+				<table class="table worktable">
 				<c:forEach var="aWork" items="${mdataVO.works}">
 						<tr>
 							<td class="aWork"><button type="button" class="btn btn-danger deleteworkim" id="deleteworkim">刪除</button>
@@ -553,11 +553,13 @@
 						upload.val(null);
 						workname.val(null);
 						workdes.val(null);
+						$('.worktable').empty();
+						var t = $('.worktable').html('<c:forEach var="aWork" items="${mdataVO.works}"><tr><td class="aWork"><button type="button" class="btn btn-danger deleteworkim" id="deleteworkim">刪除</button>${aWork.work_name}${aWork.work_des}<c:forEach var="a" items="${aWork.workims}"><img width="304" height="236" class="img-thumbnail workimsize" src="${pageContext.servletContext.contextPath}/master/master.do?type=work&image=${a.im_id}"/></c:forEach><input type="hidden" name="action" value="deleteworkim"><input type="hidden" name="work_id" value="${aWork.work_id}"></td></tr></c:forEach>');
+						$('.workdiv').append(t);
 		 			},
 		 			beforeSend : function() {
 		 			},
 		 			complete : function() {
-		 				
 		 			}
 		 			
 				});
@@ -571,7 +573,13 @@
 				var workid = tdparent.children('input[name="work_id"]');
 				console.log(workid.val());
 				
-				$.post('master.do', {'work_id':workid.val(),'action':'deleteworkim'}, function(datas) {});
+				$.ajax({
+					url : 'master.do',
+					data: {'work_id':workid.val(),'action':'deleteworkim'},
+					type : 'POST',
+					success : function(returnData) {
+					}
+				});
 				
 			});
 			
