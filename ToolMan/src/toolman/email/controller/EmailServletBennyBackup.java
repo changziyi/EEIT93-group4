@@ -30,7 +30,7 @@ import toolman.email.model.EmailService;
 import toolman.email.model.EmailVO;
 import toolman.email.model.EmailVO;
 
-@WebServlet("/email/Email.do")
+@WebServlet("/email/Emailbackup.do")
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 5 * 1024 * 1024, maxRequestSize = 5 * 5 * 1024 * 1024)
 public class EmailServletBennyBackup extends HttpServlet {
 	private static final long serialVersionUID = 1L;

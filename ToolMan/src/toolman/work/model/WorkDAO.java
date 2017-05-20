@@ -10,6 +10,7 @@ import org.hibernate.SessionFactory;
 
 import hibernate.util.HibernateUtil;
 import toolman.mdata.model.MdataVO;
+import toolman.workim.model.WorkimService;
 import toolman.workim.model.WorkimVO;
 
 public class WorkDAO implements WorkDAO_interface {
@@ -79,9 +80,16 @@ public class WorkDAO implements WorkDAO_interface {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try {
 			session.beginTransaction();
-			Query query = session.createQuery("delete from WorkVO where work_id = ?");
-			query.setParameter(0, work_id);
-			query.executeUpdate();
+			WorkVO workVO = (WorkVO) session.get(WorkVO.class, work_id);
+			session.clear();
+			session.delete(workVO);
+
+			
+//			WorkVO workVO = (WorkVO) session.get(WorkVO.class, work_id);
+//			workVO.getWorkims().remove(workVO);
+//			workVO.setWorkims(null);
+//			session.delete(workVO);
+			
 			session.getTransaction().commit();
 		} catch (RuntimeException ex) {
 			session.getTransaction().rollback();
@@ -96,9 +104,9 @@ public class WorkDAO implements WorkDAO_interface {
 //		mdataVO.setM_id(1004);
 		
 		//findByPrimaryKey
-		WorkVO workVO = workdao.findByPrimaryKey(5001);
-		System.out.print(workVO.getWork_name() + ",");
-		System.out.print(workVO.getWork_des() + ",");
+//		WorkVO workVO = workdao.findByPrimaryKey(5001);
+//		System.out.print(workVO.getWork_name() + ",");
+//		System.out.print(workVO.getWork_des() + ",");
 //		System.out.print(workVO.getImg1() + ",");
 //		System.out.print(workVO.getImg2() + ",");
 //		System.out.println(workVO.getImg3());
@@ -129,7 +137,11 @@ public class WorkDAO implements WorkDAO_interface {
 		
 		
 		//deleteByWork
-//		 workdao.delete(5001);
+		
+		WorkimService workimservice = new WorkimService();
+		workimservice.deleteByWork(workdao.findByPrimaryKey(5003));
+		workdao.delete(5003);
+//		 workdao.delete(5003);
 	}
 
 }
