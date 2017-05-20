@@ -32,6 +32,7 @@ public class EmailService {
 	}
 	
 	public List<EmailVO> getMail(String mss_id) {
+		
 		return dao.getMail(mss_id);
 	}
 	
@@ -89,5 +90,8 @@ public void deleteEmailService(Integer ms_id) {
 
 public void deleteEmailServiceJson(Integer ms_id) {
 	List<EmailVO> DeleteEmailData = dao.deleteMail(ms_id);
+	}
+public List<EmailVO> getMailByM(Integer m_id) {
+	return dao.getMailByM(m_id);
 }
 }

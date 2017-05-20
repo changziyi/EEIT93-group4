@@ -11,7 +11,11 @@
 	HttpSession sessions = request.getSession();
 	CdataVO cdataVO = (CdataVO)sessions.getAttribute("LoginOK");
 	List<EmailVO> list = emailSvc.getMail(cdataVO.getC_id());
-	pageContext.setAttribute("list", list);
+	Integer m_id = cdataVO.getM_id();
+	List<EmailVO> list2 =  emailSvc.getMailByM(m_id);
+	list2.addAll(list);
+
+	pageContext.setAttribute("list", list2);
 %>
 
 

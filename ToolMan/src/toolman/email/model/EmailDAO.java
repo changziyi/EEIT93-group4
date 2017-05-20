@@ -34,6 +34,9 @@ public class EmailDAO implements EmailDAO_interface {
 	private static final String GET_ONE_STMT_BY_KEY = "SELECT ms_id,mss_id,msr_id,ms_date,ms_summary,ms_content,s_name,ms_trash FROM mes  where ms_id = ?";
 	private static final String DELETE = "DELETE FROM mes where ms_id = ?";
 	private static final String UPDATE = "UPDATE mes set mss_id=?, msr_id=?, ms_date=?, ms_summary=?, ms_content=?, s_name=? ms_trash=? where ms_id = ?";
+	
+	//by Benny
+	private static final String GET_ONE_MSRID = "SELECT * FROM mes  where msr_id = ?";
 
 	@Override
 	public void insert(EmailVO emailVO) {
@@ -452,10 +455,41 @@ public class EmailDAO implements EmailDAO_interface {
 		}
 		return list;
 	}
+	
+	//By Benny
+	public List<EmailVO> getMailByM(Integer m_id){
+		List<EmailVO> Onelist = new ArrayList<EmailVO>();
+		EmailVO emailVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_ONE_STMT);
+			pstmt.setInt(1, m_id);
+			rs = pstmt.executeQuery();
 
+			while (rs.next()) {
+				emailVO = new EmailVO();
+				emailVO.setMs_id(rs.getInt("ms_id"));
+				emailVO.setMss_id(rs.getString("mss_id"));
+				emailVO.setMsr_id(rs.getString("msr_id"));
+				emailVO.setMs_date(rs.getTimestamp("ms_date"));
+				emailVO.setMs_summary(rs.getString("ms_summary"));
+				emailVO.setMs_content(rs.getString("ms_content"));
+				emailVO.setS_name(rs.getBoolean("s_name"));
+				emailVO.setMs_trash(rs.getBoolean("ms_trash"));
+				Onelist.add(emailVO);
+			}
+		} catch (SQLException se) {
+			
+		}
+		return Onelist;	
+	}	
 	public static void main(String[] args) {
 
+	
+		
 	}
-
 
 }

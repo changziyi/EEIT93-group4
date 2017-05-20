@@ -24,10 +24,12 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 import javax.transaction.SystemException;
 
+import toolman.cdata.model.CdataService;
 import toolman.cdata.model.CdataVO;
 import toolman.email.model.EmailDAO;
 import toolman.email.model.EmailService;
 import toolman.email.model.EmailVO;
+import toolman.mdata.model.MdataVO;
 import toolman.email.model.EmailVO;
 
 @WebServlet("/email/Emailbackup.do")
@@ -42,11 +44,15 @@ public class EmailServletBennyBackup extends HttpServlet {
 		//取得登入的收件人帳號
 		HttpSession session = req.getSession();
 		String action = req.getParameter("action");
-		String msid = req.getParameter("msid");
+		String c_id = req.getParameter("msid");
+		
+		
+		
 		
 		if("findbypk".equals(action)){
 			EmailService emailSvc1 = new EmailService();
-			EmailVO emailVO = emailSvc1.getOneMail(new Integer(msid));
+			EmailVO emailVO = emailSvc1.getOneMail(new Integer(c_id));
+			
 			req.setAttribute("Onelist", emailVO);
 			
 		}
@@ -75,10 +81,10 @@ public class EmailServletBennyBackup extends HttpServlet {
 		//取得登入的寄件人帳號
 		HttpSession session = req.getSession();
 		CdataVO cdataVO = (CdataVO)session.getAttribute("LoginOK");
-//		String SendAccount = cdataVO.getC_id();
+		String SendAccount = cdataVO.getC_id();
 		
 		
-		String SendAccount = "sa";//benny test
+//		String SendAccount = "sa";//benny test
 		
 		
 		// 宣告錯誤訊息的變數
