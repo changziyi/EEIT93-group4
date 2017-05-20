@@ -3,6 +3,7 @@ package toolman.mdata.controller;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Timestamp;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -305,6 +306,103 @@ public class MdataServlet extends HttpServlet {
 			
 			mdataVO.setMpros(set);
 			session.setAttribute("mdataVO", mdataVO);
+			
+		}
+		
+		if ("uploadwork".equals(action)) {
+			
+			HttpSession session = request.getSession();
+			MdataVO mdataVO = (MdataVO)session.getAttribute("mdataVO");
+			
+			byte[] img1 = null;
+			byte[] img2 = null;
+			byte[] img3 = null;
+			String work_name = "";
+			String work_des = "";
+			
+			Collection<Part> parts = request.getParts();
+			for (Part part : parts) {
+				String pName = part.getName();
+				if (part.getContentType() != null) {
+					if ("file0".equals(pName)) {
+						InputStream in0 = part.getInputStream();
+						img1 = new byte[in0.available()];
+						in0.read(img1);
+						in0.close();
+					}
+					if ("file1".equals(pName)) {
+						InputStream in1 = part.getInputStream();
+						img2 = new byte[in1.available()];
+						in1.read(img2);
+						in1.close();
+					}
+					if ("file2".equals(pName)) {
+						InputStream in2 = part.getInputStream();
+						img3 = new byte[in2.available()];
+						in2.read(img3);
+						in2.close();
+					}
+				} else {
+					String fldName = part.getName();
+					String value = request.getParameter(fldName);
+					if ("workname".equals(fldName)) {
+						work_name = value;
+					} else if ("workdes".equals(fldName)) {
+						work_des = value;
+					}
+				}
+			}
+			
+			System.out.println("work_name:" + work_name);
+			System.out.println("work_des:" + work_des);
+			System.out.println("img1:" + img1);
+			System.out.println("img2:" + img2);
+			System.out.println("img3:" + img3);
+			
+			WorkVO workVO = new WorkVO();
+			workVO.setMdataVO(mdataVO);
+			workVO.setWork_name(work_name);
+			workVO.setWork_des(work_des);
+			workVO.setImg1(img1);
+			workVO.setImg2(img2);
+			workVO.setImg3(img3);
+			
+			WorkimVO workimVO1 = new WorkimVO();
+
+			
+			Set<WorkimVO> workims = new HashSet<WorkimVO>();
+			
+			if (img1 != null) {
+				workimVO1.setWorkVO(workVO);
+				workimVO1.setIm_show(img1);
+				workims.add(workimVO1);
+			}
+			else if (img2 != null) {
+				WorkimVO workimVO2 = new WorkimVO();
+				workimVO2.setWorkVO(workVO);
+				workimVO2.setIm_show(img2);
+				workims.add(workimVO2);
+			}
+			else if (img3 != null) {
+				WorkimVO workimVO3 = new WorkimVO();
+				workimVO3.setWorkVO(workVO);
+				workimVO3.setIm_show(img3);
+				workims.add(workimVO3);
+			}
+			
+			workVO.setWorkims(workims);
+			
+			WorkService workSvc = new WorkService();
+			workSvc.insert(workVO);
+			
+		}
+		
+		
+		if ("deleteworkim".equals(action)) {
+			
+			Integer work_id = new Integer(request.getParameter("work_id"));
+			WorkService workSvc = new WorkService();
+			workSvc.delete(work_id);
 			
 		}
 		

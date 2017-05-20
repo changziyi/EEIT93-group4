@@ -201,7 +201,7 @@
 					        <div id='div1'></div>
 									<div><input type="file" id="file" name="file[]" multiple="multiple"></div>
 									<div class="workImgArea">作品名稱　<input type="text" name="workname" required></div>
-									<div class="workImgArea">作品描述　<textarea name="workdes"></textarea></div>
+									<div class="workImgArea">作品描述　<textarea name="workdes" id="workdes"></textarea></div>
 					      </div>
 					      <div class="modal-footer">
 					        <button type="button" class="btn btn-default" data-dismiss="modal">返回</button>
@@ -218,11 +218,14 @@
 				<table class="table">
 				<c:forEach var="aWork" items="${mdataVO.works}">
 						<tr>
-							<td>${aWork.work_name}
-							${aWork.work_des}
-							<c:forEach var="a" items="${aWork.workims}">
-								<img width="304" height="236" class="img-thumbnail workimsize" src='${pageContext.servletContext.contextPath}/master/master.do?type=work&image=${a.im_id}'/>
-							</c:forEach>
+							<td class="aWork"><button type="button" class="btn btn-danger deleteworkim" id="deleteworkim">刪除</button>
+								${aWork.work_name}
+								${aWork.work_des}
+								<c:forEach var="a" items="${aWork.workims}">
+									<img width="304" height="236" class="img-thumbnail workimsize" src='${pageContext.servletContext.contextPath}/master/master.do?type=work&image=${a.im_id}'/>
+								</c:forEach>
+								<input type="hidden" name="action" value="deleteworkim">
+								<input type="hidden" name="work_id" value="${aWork.work_id}">
 							</td>
 						</tr>
 				</c:forEach>
@@ -443,16 +446,12 @@
 				});
 			});
 			
-			workname" required></div>
-			<div class="workImgArea">完工日期　<input type="text" name="worktime" required></div>
-			<div class="workImgArea">作品描述　<textarea name="workdes"
-			
 			
 			var btn = $('#buttonUpload');
 			var upload = $('input[name="file[]"]');
 			var myDiv = $('#div1');
 			var workname = $('input[name="workname"]');
-			var workdes = $('input[name="workdes"]');
+			var workdes = $('#workdes');
 			
 			//上傳圖片限制三張
 			upload.on('change', function(event) {
@@ -533,9 +532,11 @@
 					formData.append('file' + i, photos[i]);
 					console.log(photos[i]);
 				}
-	
+				
+				formData.append('action','uploadwork');
+				
 				$.ajax({
-					url : 'TestFormData',
+					url : 'master.do',
 					data : formData,
 					cache : false,
 					contentType : false,
@@ -552,9 +553,6 @@
 						upload.val(null);
 						workname.val(null);
 						workdes.val(null);
-						
-// 						$('input[name="fileuploader-list-files"]').val('[]');
-// 						$('ul').find('.fileuploader-item').remove();
 		 			},
 		 			beforeSend : function() {
 		 			},
@@ -564,6 +562,19 @@
 		 			
 				});
 			});
+			
+			
+			//刪除作品
+			var deleteworkimbtn = $('.deleteworkim');
+			deleteworkimbtn.click(function() {
+				var tdparent = $(this).parent('.aWork');
+				var workid = tdparent.children('input[name="work_id"]');
+				console.log(workid.val());
+				
+				$.post('master.do', {'work_id':workid.val(),'action':'deleteworkim'}, function(datas) {});
+				
+			});
+			
 			
 			
 			var city = $('input[name="m_city"]');

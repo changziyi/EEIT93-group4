@@ -11,8 +11,10 @@ public class WorkService {
 	public void insert(WorkVO workVO) {
 		dao.insert(workVO);
 	}
+	public void delete(Integer work_id) {
+		dao.delete(work_id);
+	}
 	public WorkVO findByPrimaryKey(Integer work_id) {
 		return dao.findByPrimaryKey(work_id);
 	}
-	
 }
