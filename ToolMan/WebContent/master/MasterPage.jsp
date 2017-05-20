@@ -112,7 +112,7 @@
 											</tr>
 											<tr>
 												<td>首頁圖片</td>
-												<td><div><img id="m_cer" width="350px" class="img-thumbnail" src="${pageContext.servletContext.contextPath}/master/master.do?type=master&image=${mdataVO.m_id}"></div>
+												<td><div><img id="b_image" width="350px" class="img-thumbnail" src="${pageContext.servletContext.contextPath}/master/master.do?type=master&image=${mdataVO.m_id}"></div>
 												<input type="file" name="b_image" ></td>
 											</tr>
 											<tr>
@@ -178,14 +178,41 @@
 		
 		<div id="menu1" class="tab-pane fade">
 			<c:if test="${LoginOK.m_id == mdataVO.m_id}">
-				<div id='div1'></div>
-				<form name="myData" action="TestFormData" enctype="multipart/form-data">
-					<div><input type="file" id="file" name="file[]" multiple="multiple"></div>
-					<div class="workImgArea">作品名稱　<input type="text" name="workname" required></div>
-					<div class="workImgArea">完工日期　<input type="text" name="worktime" required></div>
-					<div class="workImgArea">作品描述　<textarea name="workdes"></textarea></div>
-					<button type="button" id="buttonUpload">上傳</button>
-				</form>
+<!-- 				<div id='div1'></div> -->
+<!-- 				<form name="myData" action="TestFormData" enctype="multipart/form-data"> -->
+<!-- 					<div><input type="file" id="file" name="file[]" multiple="multiple"></div> -->
+<!-- 					<div class="workImgArea">作品名稱　<input type="text" name="workname" required></div> -->
+<!-- 					<div class="workImgArea">完工日期　<input type="text" name="worktime" required></div> -->
+<!-- 					<div class="workImgArea">作品描述　<textarea name="workdes"></textarea></div> -->
+<!-- 					<button type="button" id="buttonUpload">上傳</button> -->
+<!-- 				</form> -->
+				
+				<button type="button" class="btn btn-info btn" data-toggle="modal" data-target="#workpopup">新增作品</button>
+
+				<div id="workpopup" class="modal fade" role="dialog" style="margin-top:10%">
+				  <div class="modal-dialog">
+					<form name="myData" action="TestFormData" enctype="multipart/form-data">
+					    <div class="modal-content">
+					      <div class="modal-header">
+					        <button type="button" class="close" data-dismiss="modal">&times;</button>
+					        <h4 class="modal-title">Modal Header</h4>
+					      </div>
+					      <div class="modal-body">
+					        <div id='div1'></div>
+									<div><input type="file" id="file" name="file[]" multiple="multiple"></div>
+									<div class="workImgArea">作品名稱　<input type="text" name="workname" required></div>
+									<div class="workImgArea">作品描述　<textarea name="workdes"></textarea></div>
+					      </div>
+					      <div class="modal-footer">
+					        <button type="button" class="btn btn-default" data-dismiss="modal">返回</button>
+					        <button type="button" class="btn btn-default" id="buttonUpload">上傳</button>
+					      </div>
+					    </div>
+					</form>
+				  </div>
+				</div>
+				
+				
 			</c:if>
 			<div class="form-group">
 				<table class="table">
@@ -276,8 +303,32 @@
 	 				}
 				});
 			});
-	
-	
+			
+			
+			$('input[name="m_cer"]').on('change', function(event) {
+				if (this.files && this.files[0]) {
+					var reader = new FileReader();
+					reader.onload = function(e) {
+						$('#m_cer').attr({
+							'src' : e.target.result,
+						});
+					}
+					reader.readAsDataURL(this.files[0]);
+				}
+			});
+			
+			$('input[name="b_image"]').on('change', function(event) {
+				if (this.files && this.files[0]) {
+					var reader = new FileReader();
+					reader.onload = function(e) {
+						$('#b_image').attr({
+							'src' : e.target.result,
+						});
+					}
+					reader.readAsDataURL(this.files[0]);
+				}
+			});
+			
 			//點選問與答區塊，load問與答內容
 			var show = $('#show');
 			$('a[href="#menu2"]').one('click', function() {
@@ -389,16 +440,19 @@
 						});
 						show.append(docFragment);
 					});
-					
-					
 				});
-				
 			});
+			
+			workname" required></div>
+			<div class="workImgArea">完工日期　<input type="text" name="worktime" required></div>
+			<div class="workImgArea">作品描述　<textarea name="workdes"
 			
 			
 			var btn = $('#buttonUpload');
 			var upload = $('input[name="file[]"]');
 			var myDiv = $('#div1');
+			var workname = $('input[name="workname"]');
+			var workdes = $('input[name="workdes"]');
 			
 			//上傳圖片限制三張
 			upload.on('change', function(event) {
@@ -417,7 +471,8 @@
 				preview(this);
 	
 			});
-	
+			
+			//預覽圖片
 			function preview(input) {
 	
 				if (input.files && input.files[0]) {
@@ -463,20 +518,20 @@
 			//上傳作品圖片
 			btn.on('click',function() {
 	
-				var others = $('form').serializeArray();
-				var photos = $('input[type="file"]')[0].files;
+				var others = $('form[name="myData"]').serializeArray();
+				var photos = $('input[name="file[]"]')[0].files;
 	
 				var formData = new FormData();
 	
 				$.each(others, function(index, input) {
 					formData.append(input.name, input.value);
-// 					console.log('name: ' + input.name);
-// 					console.log('value: ' + input.value);
+					console.log('name: ' + input.name);
+					console.log('value: ' + input.value);
 				});
 	
 				for (var i = 0; i < photos.length; i++) {
 					formData.append('file' + i, photos[i]);
-// 					console.log(photos[i]);
+					console.log(photos[i]);
 				}
 	
 				$.ajax({
@@ -487,23 +542,25 @@
 					processData : false,
 					type : 'POST',
 		 			success : function(reutrnData) {
-// 		 				alert(reutrnData);
 						$('#img0').removeAttr('src').removeAttr('class');
 						$('#img1').removeAttr('src').removeAttr('class');
 						$('#img2').removeAttr('src').removeAttr('class');
-						var successImg = $('<img />').attr('src','${pageContext.servletContext.contextPath}/image/jake.gif');
-						myDiv.append(successImg);
+						myDiv.find('#loading').remove();
+// 		 				alert(reutrnData);
+// 						var successImg = $('<img />').attr('src','${pageContext.servletContext.contextPath}/image/jake.gif');
+// 						myDiv.append(successImg);
 						upload.val(null);
+						workname.val(null);
+						workdes.val(null);
+						
 // 						$('input[name="fileuploader-list-files"]').val('[]');
 // 						$('ul').find('.fileuploader-item').remove();
 		 			},
 		 			beforeSend : function() {
-		 				
 		 			},
 		 			complete : function() {
 		 				
 		 			}
-		 			
 		 			
 				});
 			});
