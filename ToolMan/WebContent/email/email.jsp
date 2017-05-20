@@ -10,6 +10,7 @@
 	EmailService emailSvc = new EmailService();
 	HttpSession sessions = request.getSession();
 	CdataVO cdataVO = (CdataVO)sessions.getAttribute("LoginOK");
+	//by Benny
 	List<EmailVO> list = emailSvc.getMail(cdataVO.getC_id());
 	Integer m_id = cdataVO.getM_id();
 	List<EmailVO> list2 =  emailSvc.getMailByM(m_id);
