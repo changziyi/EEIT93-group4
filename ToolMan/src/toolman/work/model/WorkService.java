@@ -1,5 +1,7 @@
 package toolman.work.model;
 
+import toolman.workim.model.WorkimDAO;
+import toolman.workim.model.WorkimService;
 
 public class WorkService {
 	
@@ -12,6 +14,8 @@ public class WorkService {
 		dao.insert(workVO);
 	}
 	public void delete(Integer work_id) {
+		WorkimService workimservice = new WorkimService();
+		workimservice.deleteByWork(dao.findByPrimaryKey(work_id));
 		dao.delete(work_id);
 	}
 	public WorkVO findByPrimaryKey(Integer work_id) {
