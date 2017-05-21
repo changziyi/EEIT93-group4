@@ -89,7 +89,7 @@
 			<td>${orderVO.s_name}</td>
 				
 	               <td>
-<a href="#" name="masterres" data-id="${orderVO.getO_id()}"class="btn btn-info ">
+<a href="#" name="masterres" data-id="${orderVO.getO_id()}"class="btn btn-primary ">
           <span class="glyphicon glyphicon-send"></span> 回應 
         </a>
 			         </td>
@@ -105,7 +105,7 @@
   <!-- Trigger the modal with a button -->
   
 
- <button type="button" class="btn btn-info " data-toggle="modal" data-target="#${orderVO.o_id}" onclick="star()">評分</button> 
+ <button type="button" class="btn btn-info " data-toggle="modal" data-target="#${orderVO.o_id}" onclick="star()"><span class="glyphicon glyphicon-star"></span> 評分</button> 
  
  
   <!-- Modal -->
@@ -176,7 +176,7 @@
 <%------------------------------------------詳細訂單-------------------------------------------------------%>
 <td>
   <div>
- <button type="button" class="btn btn-success" data-toggle="modal" data-target="#${orderVO.o_id}kk" >詳細訂單</button> 
+ <button type="button" class="btn btn-success" data-toggle="modal" data-target="#${orderVO.o_id}kk" ><span class="glyphicon glyphicon-zoom-in"></span> 詳細訂單</button> 
    <div class="modal fade" id="${orderVO.o_id}kk" role="dialog"  > 
     <div class="modal-dialog" > 
        <div class="modal-content" style="background-color:#CCE4FF">
