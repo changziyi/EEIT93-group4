@@ -75,7 +75,7 @@
 
   <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/order/OrderController.do" name="form1">
    <div>
- <button type="button" class="btn btn-info" data-toggle="modal" data-target="#${orderVO.o_id}" >評分</button> 
+ <button type="button" class="btn btn-info" data-toggle="modal" data-target="#${orderVO.o_id}" ><span class="glyphicon glyphicon-star"></span> 評分</button> 
    <div class="modal fade" id="${orderVO.o_id}" role="dialog" > 
     <div class="modal-dialog"> 
        <div class="modal-content">
@@ -126,7 +126,7 @@
   <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/order/Rdata.do" name="form2">
   
  <div>
-   <button type="button " class="btn btn-danger  " data-toggle="modal" data-target="#${orderVO.o_id}k" >投訴</button> 
+   <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#${orderVO.o_id}k" ><span class="glyphicon glyphicon-thumbs-down"></span> 投訴</button> 
    <div class="modal fade" id="${orderVO.o_id}k" role="dialog" > 
     <div class="modal-dialog"> 
           <div class="modal-content">
@@ -167,7 +167,7 @@
 <%------------------------------------------詳細訂單-------------------------------------------------------%>
 <td>
   <div>
- <button type="button" class="btn btn-success" data-toggle="modal" data-target="#${orderVO.o_id}kk" >詳細訂單</button> 
+ <button type="button" class="btn btn-success" data-toggle="modal" data-target="#${orderVO.o_id}kk" ><span class="glyphicon glyphicon-zoom-in"></span> 詳細訂單</button> 
    <div class="modal fade" id="${orderVO.o_id}kk" role="dialog"  > 
     <div class="modal-dialog" > 
        <div class="modal-content" style="background-color:#CCE4FF">
