@@ -140,7 +140,7 @@ public class OrderService {
 	    	dao = new OrderDAO();
 			List<OrderVO> orders = dao.getAllOrder();
 			for(OrderVO orderVO2 : orders) {
-			if(orderVO2.getM_rating()!=null && orderVO2.getC_rating()!=null){
+			if((orderVO2.getM_rating()!=null) && (orderVO2.getC_rating()!=null)&&(!"已完成".equals(orderVO2.getS_name()))){
 	        dao = new OrderDAO();  
 	    	dao.updateOrderSnameToFishedById(orderVO2.getO_id());
 	    	
