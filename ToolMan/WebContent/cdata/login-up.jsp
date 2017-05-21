@@ -1,134 +1,93 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
- <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-  <html>
-    <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<link rel="stylesheet" href="//apps.bdimg.com/libs/jqueryui/1.10.4/css/jquery-ui.min.css">
-    <script src="//apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
-    <link rel="stylesheet" href="jqueryui/style.css">
-      <title>login-up</title>
-      <style>
-        body {
-          font-family:Microsoft JhengHei;
-          margin: 0 auto;
-          padding: 0 auto;
-          background-color: #f9f9f9;
-        }
-        .content {
-          width: 450px;
-          margin: 30px auto;
-          padding: 0 auto;
-          text-align: center;
-          /*background-color:gray;*//*sign in box model 測試用 */
-        }
-        .loginbox {
-          width: 400px;
-          border: solid 1px rgba(0, 0, 0, 0.15);
-          margin: 100px auto;
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html >
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>Sign-Up/Login Form</title>
+  <link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,300,600' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+  <link rel="stylesheet" href="${pageContext.servletContext.contextPath}/css/login/style.css">
+   
+</head>
+<body>
+  <div class="form">  
+      <div class="tab-content">
+        <div id="signup">   
+          <h1>註冊</h1>          
+          <form action="<c:url value='/cdata/Cdata.do'/>" method="POST">            
+          <div class="field-wrap">
+            <label>帳號<span class="req">*</span></label>
+            <input type="text" class="input" name="id" autocomplete="off"  autocomplete="off" autofocus>
+          </div>
           
-          color: #a5a5a5;
-          background-color: white;
-          border-radius: 10px;
-        }
-
-        h1 {
-          font-size: 24px;
-          margin: 30px 0 15px 0;
-          color: #ed9b4a;
-          font-weight: 900;
-        }
-        .input {
-          height: 40px;
-          width: 298px;
-          font-size: 20px;
-          margin-bottom: 10px;
-        }
-        .input-city{
-          height: 46px;
-          width: 149px;
-          color:gray;
-          font-size: 20px;  
-          margin-bottom: 10px;
-        }
-        .submit {
-          height: 30px;
-          width: 150px;
-          font-size: 18px;
-          color: white;
-          background-color: #ed9b4a;
-          border: 0 none;
-          curso: pointer;
-          border-radius: 6px;
-          margin: 10px 0px 15px;
-        }
-        .submit:hover {
-          background-color: #cc711f;
-        }
-        .function-code{
-            position: absolute;
-            margin-top:14px;
-            margin-right:20px;
-            font-family: "微軟雅黑";
-            font-size: 20px;
-        }
-        .color{
-        color:red;
-        font-size:14px;
-        }
-      </style>
-      <title>註冊系統</title>
-    </head>
-    <body>
-      <div class="content">
-        <div class="loginbox">
-          <form  action="<c:url value='/cdata/Cdata.do'/>" method="POST">
-            <h1>註冊</h1>
-            <div>
-              <input type="text" class="input" placeholder="帳號" name="id" autofocus>
-              <div class="color" >${errorMsgs.c_id}</div>
-              <input type="password" class="input" placeholder="密碼" name="pswd">
-              <div class="color" >${errorMsgs.c_pwd}</div>
-              <input type="text" class="input" placeholder="姓名" name="name">
-              <div class="color" >${errorMsgs.c_name}</div>
-              <input type="text" class="input" id="datepicker" placeholder="生日" name="birth">
-              <div class="color" >${errorMsgs.bday}</div>
-              <input type="text" class="input" placeholder="手機號碼" name="phone">
-              <div class="color" >${errorMsgs.phone}</div>
-              <input type="text" class="input" placeholder="E-mail" name="mail">
-              <div class="color" >${errorMsgs.c_email}</div>
-              <select class="input-city"  name="city">
-                <option value="台北市">台北市</option>
-                <option value="新北市">新北市</option>
-                <option value="桃園市">桃園市</option>
-              </select>
-              <select class="input-city" name="district">
-                <option value="大安區">大安區</option>
-                <option value="中正區">中正區</option>
-                <option value="萬華區">萬華區</option>
-                <option value="信義區">信義區</option>
-              </select>
-              <input type="text" class="input" placeholder="地址" name="addr">
+          <div class="field-wrap">
+            <label>密碼<span class="req">*</span></label>
+            <input type="password" class="input" name="pswd" autocomplete="off">
+          </div> 
+          <div class="field-wrap">
+            <label>姓名<span class="req">*</span></label>
+            <input type="text" class="input" name="name" autocomplete="off">
+          </div>
+          <div class="field-wrap">
+            <label>生日<span class="req">*</span></label>
+            <input type="text" class="input" id="datepicker" name="birth" autocomplete="off">
+          </div> 
+          <div class="field-wrap">
+            <label>手機號碼<span class="req">*</span></label>
+            <input type="text" class="input" name="phone" autocomplete="off">
+          </div>
+          <div class="field-wrap">
+            <label>E-mail<span class="req">*</span></label>
+            <input type="text" class="input" name="mail" autocomplete="off">
+          </div>                                                    
+<!--地址-->                
+          <div class="top-row">
+            <div class="field-wrap">
+              <label>地區<span class="req">*</span></label>
+              <input type="text" name="city" autocomplete="off" />
               <input type="hidden" name="other">
-              <div class="color" >${errorMsgs.c_addr}</div>
+            </div>      
+            <div class="field-wrap">
+              <label>縣市<span class="req">*</span></label>
+              <input type="text" name="district" autocomplete="off"/>
             </div>
-<!--             style="background-color:gray;" -->
-            <div>
-              <input type="password" class="input" placeholder="驗證碼" name="">        
-              <span class="function-code" id="createCade"></span><!--驗證碼驗證--> 
-            </div>                 
-            <input type="submit" id="register" class="submit" value="註冊">            
-            <input type="hidden" name="action" value="">
+          </div>
+<!--地址-->  
+          <div class="field-wrap">
+            <label>地址<span class="req">*</span></label>
+            <input type="text" class="input"  name="addr" autocomplete="off">
+          </div>
+          <div class="field-wrap">
+            <label>驗證碼<span class="req">*</span></label>          
+            <input type="text" class="input" name="" autocomplete="off">
+            <span class="function-code" id="createCade"></span><!--驗證碼驗證--> 
+          </div>                              
+          <button type="submit" id="register" class="button button-block" >註冊</button>
+          <input type="hidden" name="action" value=""> 
+          <div style="margin-top:10px;">       
+          <button type="submit" id="onkey" class="button button-block" name="" >一鍵輸入</button>
+          </div> 
           </form>
+          <div class="color" >${errorMsgs.c_id}</div>
+           <div class="color" >${errorMsgs.c_pwd}</div>
+           <div class="color" >${errorMsgs.c_name}</div>
+           <div class="color" >${errorMsgs.bday}</div>
+           <div class="color" >${errorMsgs.phone}</div>
+           <div class="color" >${errorMsgs.c_email}</div>
         </div>
-      </div>
+<!--    -->
+        <div id="login"></div>        
+      </div><!-- tab-content -->   
+</div> <!-- /form -->
+
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 	<script>
-    $(function() {//日期選擇器
-        $( "#datepicker" ).datepicker({
-   		dateFormat: "yy-mm-dd"});//指定格式
-    });
+//     $(function() {//日期選擇器
+//         $( "#datepicker" ).datepicker({
+//    		dateFormat: "yy-mm-dd"});//指定格式
+//     });
     
 	var code;
 	$(function(){
@@ -181,6 +140,23 @@
 			})
 		}
 	}
+	$(function(){
+		$("#onkey").click(function(){
+			event.preventDefault();
+			$("input[name = 'id']").val("bobobobobobo");
+			$("input[name = 'pswd']").val("sa123456");
+			$("input[name = 'name']").val("航海王");
+			$("input[name = 'birth']").val("1990-04-19");
+			$("input[name = 'phone']").val("0985220221");
+			$("input[name = 'mail']").val("abcd@gmail.com");
+			$("input[name = 'city']").val("台北市");
+			$("input[name = 'district']").val("大安區");
+			$("input[name = 'addr']").val("建國南路一段126號");
+		});		
+	});
+	
+	
 	</script>
-    </body>
-  </html>
+<script src="${pageContext.servletContext.contextPath}/js/login/index.js"></script> 
+</body>
+</html>

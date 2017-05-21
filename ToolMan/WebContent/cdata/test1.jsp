@@ -159,7 +159,7 @@ tbody td:hover {
     			<label for="email">信箱:</label>  
     			<input type="text" name="email" id="c_email" value="${cdataVO.c_email}" class="text ui-widget-content ui-corner-all" /> 
     			<label for="addr">地址:</label>  
-    			<input type="text" name="addr" id="c_addr" value="${cdataVO.c_addr}" class="text ui-widget-content ui-corner-all" /> 
+    			<input type="text" name="addr" id="c_addr" value="${cdataVO.c_addr}" class="text ui-widget-content ui-corner-all" /><br>
 				<button id="buttonsubmit" class="text ui-widget-content ui-corner-all" />送出</button>
   				</fieldset> 				 
    		  	 </form>  
