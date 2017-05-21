@@ -222,7 +222,7 @@ public class MdataServlet extends HttpServlet {
 			mdataVO.setM_arating(0);
 			mdataVO.setO_current(0);
 			mdataVO.setO_finished(0);
-			mdataVO.setS_name("m_nchecked");
+			mdataVO.setS_name("審核未通過");
 			
 			if (!errorMsgs.isEmpty()) {
 				session.setAttribute("cdata_mdataVO", mdataVO);

@@ -264,6 +264,25 @@ public class CdataDAO implements CdataDAO_interface{
 		return count;
 		
 	}
+	@Override
+	public CdataVO getByM(Integer m_id) {
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		CdataVO cdataVO =null;
+		try {
+			session.beginTransaction();
+			
+			Query query = session.createQuery("from CdataVO where m_id=:m");
+			query.setParameter("m", m_id);
+			cdataVO = (CdataVO) query.list().get(0);
+			session.getTransaction().commit();
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
+		return  cdataVO;
+		
+	}
+
 	@Override   //訂單
 	public Set<OrderVO> getOrderByC(String c_id) {		
 		Set<OrderVO> set = login_in(c_id).getOrders();

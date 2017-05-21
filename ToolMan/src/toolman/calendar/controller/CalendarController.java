@@ -63,9 +63,9 @@ public class CalendarController extends HttpServlet {
 		
 	     String calendarjson = request.getParameter("calendarjson");
 //		 
-//		 MdataVO mdataVO2 = (MdataVO) request.getAttribute("mdataVO");
-//		 Integer m_id = mdataVO2.getM_id();
-		 Integer m_id = 1000;
+		 MdataVO mdataVO2 = (MdataVO) request.getAttribute("mdataVO");
+		 Integer m_id = mdataVO2.getM_id();
+//		 Integer m_id = 1000;
 		 System.out.println(calendarjson);
 		 CalendarService calendarservice = new CalendarService();
 		 List list = new ArrayList();

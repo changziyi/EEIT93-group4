@@ -162,31 +162,25 @@
 				<p>師傅：${mdataVO.m_name}</p>
 				<p>地區：${mdataVO.m_city} ${mdataVO.m_district}</p>
  <%--------------------------------------最愛與黑單--------------------------------------------------- --%>
- 				
- 				
- 				
- 				
-          		<% if (session.getAttribute("LoginOK") == null) {%>
-          		<a href="#" data-toggle="tooltip" data-placement="bottom" title="要登入才能預約師傅">
-          	<button type="button" class="btn btn-primary disabled btn-success" >
-          			<span class="glyphicon glyphicon-earphone"></span>預約師傅
-          		</button></a>
+
+          		<c:if test="${empty LoginOK}">
+	          		<a href="#" data-toggle="tooltip" data-placement="bottom" title="要登入才能預約師傅">
+	          			<button type="button" class="btn btn-primary disabled btn-success" >
+	          				<span class="glyphicon glyphicon-earphone"></span>預約師傅
+	          			</button>
+	          		</a>
+          		</c:if>
           	
-          	
-          	
-          	
-          		<%	} else { %>
-          		<a href="${pageContext.servletContext.contextPath}/toolman.order/NewOrder.jsp" class="btn btn-success ">
-          			<span class="glyphicon glyphicon-earphone"></span> 預約師傅</a>
-				<a href="${pageContext.servletContext.contextPath}/order/Favorite.do?c_id=${LoginOK.c_id}&m_id=${mdataVO.m_id}&action=addFavorite" class="btn btn-info ">
-					<span class="glyphicon glyphicon-heart-empty"></span> 加入最愛
-				</a>
-        		<a href="${pageContext.servletContext.contextPath}/order/Dislike.do?c_id=${LoginOK.c_id}&m_id=${mdataVO.m_id}&action=addDislike" class="btn btn-danger">
-          			<span class="glyphicon glyphicon-remove-sign"></span> 加入黑名單
-        		</a>
-        		<%
-        			}
-        		%>
+          		<c:if test="${not empty LoginOK}">
+	          		<a href="${pageContext.servletContext.contextPath}/toolman.order/NewOrder.jsp" class="btn btn-success ">
+	          			<span class="glyphicon glyphicon-earphone"></span> 預約師傅</a>
+					<a href="${pageContext.servletContext.contextPath}/order/Favorite.do?c_id=${LoginOK.c_id}&m_id=${mdataVO.m_id}&action=addFavorite" class="btn btn-info ">
+						<span class="glyphicon glyphicon-heart-empty"></span> 加入最愛
+					</a>
+	        		<a href="${pageContext.servletContext.contextPath}/order/Dislike.do?c_id=${LoginOK.c_id}&m_id=${mdataVO.m_id}&action=addDislike" class="btn btn-danger">
+	          			<span class="glyphicon glyphicon-remove-sign"></span> 加入黑名單
+	        		</a>
+        		</c:if>
         		<p></p>
         		<div id='calendar' style="float:left;width:400px; height:100px;"></div>
         		
@@ -222,13 +216,12 @@
 <!-- 				</form> -->
 				
 <!-- 				<button type="button" class="btn btn-info btn" data-toggle="modal" data-target="#workpopup">新增作品</button> -->
-				<a href="" class="btn btn-info btn" data-toggle="modal" data-target="#workpopup">
+				<a class="btn btn-info btn" data-toggle="modal" data-target="#workpopup">
           			<span class="glyphicon glyphicon-plus"></span> 新增作品
           		</a>
-				
-				
+          		
 				<div id="workpopup" class="modal fade" role="dialog" style="margin-top:10%">
-				  <div class="modal-dialog">
+				  <div class="modal-dialog" style="width:37%">
 					<form name="myData" action="TestFormData" enctype="multipart/form-data">
 					    <div class="modal-content">
 					      <div class="modal-header">
@@ -268,14 +261,20 @@
 				</div>
 			</c:if>
 			
+			<c:if test="${empty mdataVO.works}">
+	          	<div class="ratediv">
+	          		<h3 style="margin-top:8%; margin-bottom:1%; margin-left:25%">尚無上傳作品</h3>
+	          	</div>
+          	</c:if>
+			
 			<div class="form-group workdiv">
 				<table class="table worktable">
-				<c:forEach var="aWork" items="${mdataVO.works}">
+					<c:forEach var="aWork" items="${mdataVO.works}">
 						<tr>
 							<td class="aWork">
 								<c:if test="${LoginOK.m_id == mdataVO.m_id}">
-									<a href="" class="btn btn-danger deleteworkim" id="deleteworkim"><span class="glyphicon glyphicon-trash"></span> 刪除</a>
-	<!-- 							<button type="button" class="btn btn-danger deleteworkim" id="deleteworkim">刪除</button> -->
+									<a class="btn btn-danger deleteworkim" id="deleteworkim"><span class="glyphicon glyphicon-trash"></span> 刪除</a>
+<!-- 								<button type="button" class="btn btn-danger deleteworkim" id="deleteworkim"> 刪除</button> -->
 								</c:if>
 								${aWork.work_name}
 								${aWork.work_des}
@@ -315,52 +314,61 @@
 				</div>
 				
 				<div class="ratediv">
-					<table class="table table-hover" style="width:70%">
-						<tr>
-							<th class="text-center">會員</th>
-							<th class="text-center">評分</th>
-							<th class="text-center">日期</th>
-							<th class="text-center">評價</th>
-						</tr>
-						<c:forEach var="orderCid" items="${mdataVO.orders}" varStatus="loop">
-							<c:if test="${orderCid.s_name == '已完成'}">
-								<c:if test="${loop.last}">
-									<h3 style="margin-top:1%; margin-bottom:1%; margin-left:25%">共有${loop.index + 1}人評價</h3>
-<%-- 								</c:if> --%>
-<%-- 								<c:if> --%>
+					<c:if test="${not empty mdataVO.orders}">
+						<table class="table table-hover" style="width:70%">
+							<tr>
+								<th class="text-center">會員</th>
+								<th class="text-center">評分</th>
+								<th class="text-center">日期</th>
+								<th class="text-center">評價</th>
+							</tr>
+							<c:forEach var="orderCid" items="${mdataVO.orders}" varStatus="loop">
+								<c:if test="${orderCid.s_name == '已完成'}">
+									<c:if test="${loop.last}">
+										<h3 style="margin-top:1%; margin-bottom:1%; margin-left:25%">共有${loop.count}人評價</h3>
+									</c:if>
+									<tr>
+										<td class="text-center"><a href="${pageContext.servletContext.contextPath}/cdata/CdatadessServlet.do?c_id=${orderCid.c_id.c_id}">${orderCid.c_id.c_id}</a></td>
+										<td class="text-center">${orderCid.c_rating}顆星</td>
+										<td class="text-center">${orderCid.o_edate}</td>
+										<td class="text-center" style="width:50%">${orderCid.ca_des}</td>
+									</tr>
 								</c:if>
-								<tr>
-									<td class="text-center"><a href="${pageContext.servletContext.contextPath}/cdata/CdatadessServlet.do?c_id=${orderCid.c_id.c_id}">${orderCid.c_id.c_id}</a></td>
-									<td class="text-center">${orderCid.c_rating}顆星</td>
-									<td class="text-center">${orderCid.o_edate}</td>
-									<td class="text-center" style="width:50%">${orderCid.ca_des}</td>
-								</tr>
-							</c:if>
-						</c:forEach>
-					</table>
+							</c:forEach>
+						</table>
+					</c:if>
+					<c:if test="${empty mdataVO.orders}">
+						<h3 style="margin-top:1%; margin-bottom:1%; margin-left:25%">目前尚無評價</h3>
+					</c:if>
 				</div>
 		</div>
 		
 		<div id="menu4" class="tab-pane fade">
 			
 			<div class="ratediv">
-				<table class="table table-hover" style="width:70%">
-					<tr>
-						<th class="text-center">會員</th>
-						<th class="text-center">日期</th>
-					</tr>
-					<c:forEach var="orderCid" items="${mdataVO.orders}" varStatus="loop">
-						<c:if test="${orderCid.s_name == '已完成'}">
-							<c:if test="${loop.last}">
-									<h3 style="margin-top:3%; margin-bottom:3%; margin-left:23%">成功媒合人次：${loop.index + 1}人</h3>
+				<c:if test="${not empty mdataVO.orders}">
+					<table class="table table-hover" style="width:70%">
+						<tr>
+							<th class="text-center">會員</th>
+							<th class="text-center">日期</th>
+						</tr>
+						<c:forEach var="orderCid" items="${mdataVO.orders}" varStatus="loop">
+							<c:if test="${orderCid.s_name == '已完成'}">
+								<h3 style="margin-top:3%; margin-bottom:3%; margin-left:23%">
+								<c:if test="${loop.last}">
+									<h3 style="margin-top:3%; margin-bottom:3%; margin-left:23%">成功媒合人次：${loop.count}人</h3>
 								</c:if>
-							<tr>
-								<td class="text-center"><a href="${pageContext.servletContext.contextPath}/cdata/CdatadessServlet.do?c_id=${orderCid.c_id.c_id}">${orderCid.c_id.c_id}</a></td>
-								<td class="text-center">${orderCid.o_edate}</td>
-							</tr>
-						</c:if>
-					</c:forEach>
-				</table>
+								<tr>
+									<td class="text-center"><a href="${pageContext.servletContext.contextPath}/cdata/CdatadessServlet.do?c_id=${orderCid.c_id.c_id}">${orderCid.c_id.c_id}</a></td>
+									<td class="text-center">${orderCid.o_edate}</td>
+								</tr>
+							</c:if>
+						</c:forEach>
+					</table>
+				</c:if>
+				<c:if test="${empty mdataVO.orders}">
+					<h3 style="margin-top:8%; margin-bottom:1%; margin-left:25%">尚無媒合紀錄</h3>
+				</c:if>
 			</div>
 
 		</div>
@@ -579,7 +587,8 @@
 					reader.onload = function(e) {
 						$('#img0').attr({
 							'src' : e.target.result,
-							'class' : 'changeImg'
+							'class' : 'img-thumbnail',
+							'width' : '210px'
 						});
 					}
 					reader.readAsDataURL(input.files[0]);
@@ -592,7 +601,8 @@
 					reader.onload = function(e) {
 						$('#img1').attr({
 							'src' : e.target.result,
-							'class' : 'changeImg'
+							'class' : 'img-thumbnail',
+							'width' : '210px'
 						});
 					}
 					reader.readAsDataURL(input.files[1]);
@@ -605,7 +615,8 @@
 					reader.onload = function(e) {
 						$('#img2').attr({
 							'src' : e.target.result,
-							'class' : 'changeImg'
+							'class' : 'img-thumbnail',
+							'width' : '210px'
 						});
 					}
 					reader.readAsDataURL(input.files[2]);

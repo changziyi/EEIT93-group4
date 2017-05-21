@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>OpenStore Page</title>
+<title>ToolMan</title>
 
 <link rel="stylesheet"
 	href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -278,7 +278,6 @@ form.go-right input:focus+label, form.go-right textarea:focus+label {
 	<script>
 	
 		$('#oneinput').click(function() {
-			
 			$('input[name="m_name"]').attr('value','張如意');
 			$('input[name="m_cel"]').attr('value','0987654321');
 			$('input[name="m_email"]').attr('value','changluyee@gmail.com');
@@ -334,7 +333,7 @@ form.go-right input:focus+label, form.go-right textarea:focus+label {
 			$('#twzipcode').twzipcode({
 				'css' : [ 'form-control zip', 'form-control zip', 'zipcode' ],
 				'countySel' : '臺北市',
-// 				'districtSel' : '大安區',
+				'districtSel' : '大安區',
 				'onCountySelect' : function() {
 					city.attr("value", this.value);
 				},

@@ -277,20 +277,21 @@ public class MdataDAO implements MdataDAO_interface {
 			return list;
 		}
 		//BY BENNY--for manager backstage
-		public List<MdataVO> getMasterByB(String b_name){
-			List<MdataVO> list = null;
+		public MdataVO getMasterByB(String b_name){
+			
+			MdataVO mdataVO = null;
 			Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 			try {
 				session.beginTransaction();
 				Query query = session.createQuery("from MdataVO where b_name=:b ");
 				query.setString("b",b_name);
-				list = query.list();
+				mdataVO = (MdataVO) query.list().get(0);
 				session.getTransaction().commit();
 			} catch (RuntimeException ex) {
 				session.getTransaction().rollback();
 				throw ex;
 			}
-			return list;
+			return mdataVO;
 			
 		}//by Benny
 		
