@@ -79,9 +79,9 @@
 		<tr align='center' valign='middle'>
 			
 			<td>
-			
+			<a href="${pageContext.servletContext.contextPath}/cdata/CdatadessServlet.do?c_id=${LoginOK.c_id}">
 			${orderVO.c_id.c_id}
-			
+			</a>
 			</td>
 		<td>${orderVO.o_tdate}</td>
 			<td>${orderVO.o_edate}</td>
@@ -270,7 +270,6 @@
 
  	<script>
 		 $(function(){
-		 
 		 $('[name="masterres"]').on('click',masterresponse);
 		 $('[name="masterres1"]').on('click',masterresponse1);
 				 })//end ready
