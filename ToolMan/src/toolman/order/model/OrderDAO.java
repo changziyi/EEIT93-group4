@@ -214,6 +214,9 @@ public class OrderDAO implements OrderDAO_Interface {
 		}	
 	}
 	
+		
+		
+	
 	@Override
 	public void updateOrderSnameToFishedById(Integer o_id) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
