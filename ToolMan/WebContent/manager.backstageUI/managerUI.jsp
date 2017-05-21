@@ -538,8 +538,12 @@ $(function(){
 	 	     		 	alert("請勾選項目");
 	 	     	 }//end if
 	 	     	else{
+	 	     		var unbind=false;
 	 	     		 $('#btnsubmitmail').on('click',function(){
 	 	     			var hyperlinkstring = "${pageContext.servletContext.contextPath}/email/Email.do";
+	 	     			if(unbind==true){
+	 	     				$('#btnsubmitmail').unbind('click');
+	 	     			}
 	 	     			clickornot=!clickornot;
 	 					var mssid=$('#receiver').val();
 		 				var mssum=$('#messum').val();
@@ -554,6 +558,7 @@ $(function(){
 				 	     		$('#myModal01').modal('show');
 				 	     		 }, 500);
 				 	     		mailtype="toc"
+				 	     		unbind=true;
 							}	
 						});//end get function
 	
@@ -824,9 +829,9 @@ $(function(){
 			var valueattr =$(this).val();
 			var nameattr=$(this).attr('name');
 	            //get all toggled checkboxes 
-	           var checkboxdatas = [];
+	           var checkboxdatas = null;
 	        	 $(":checkbox:checked").each(function(){            	  
-	            	   checkboxdatas.push($(this).val()); 
+	            	   checkboxdatas=$(this).val(); 
 	            })
 	            checkboxdatas2=checkboxdatas.toString();
 	            if(checkboxdatas2==""){
@@ -835,13 +840,6 @@ $(function(){
 	        	 else{
 	                	var valueattrr=$(this).attr('value');//retrieve the value from functinaction
 	                	var hyperlinkstring = "${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIFunctionServlet.do";
-//	                 	var hyperlinkparameter = "functionaction="+valueattrr+"&+toggledcheckbox="+checkboxdatas2;
-//	                	var hyperlinkstringwithparameter=hyperlinkstring+hyperlinkparameter;
-//	               		var ajaxurl = "${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIFunctionServlet.do?";
-//	      				var ajaxparam = "functionaction="+valueattrr+"&toggledcheckbox="+checkboxdatas2;
-//	      				loadajax(ajaxurl,ajaxparam);
-	     			var a=null;
-	     			var b = null;
 	     			var dfd4 = $.get(hyperlinkstring,{"functionaction":"type","image":checkboxdatas2},function(data){
 	     				$('#m_cer').attr("src","${pageContext.servletContext.contextPath}/master/master.do?type=master&image="+checkboxdatas2);
 	     				
@@ -873,6 +871,7 @@ $(function(){
 			var hyperlinkstring = "${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIFunctionServlet.do";
 			$.post(hyperlinkstring,{"functionaction":"mpass","toggledcheckbox":checkboxdatas2},function(data){
 				alert(data);
+				 $('#mpass').unbind('click');
            });//end get function
 		}//mpass
 		
@@ -880,7 +879,8 @@ $(function(){
 			var hyperlinkstring = "${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIFunctionServlet.do";
 			var notpassword = $('#notpassword').val();
 			$.post(hyperlinkstring,{"functionaction":"mnotpass","toggledcheckbox":checkboxdatas2,"notpassword":notpassword},function(data){
-				alert(data);				
+				alert(data);
+				$('#mnotpass').unbind('click');
            });//end get function
 		}//end mnotpass
 		
