@@ -73,7 +73,7 @@
  		float: left; 
  		width: 100px;
 		padding: 0 10px;
-		border: 1px solid #ccc;
+		
 		background: #eee;
 		text-align: left;
 	}
@@ -123,7 +123,7 @@
 		width:800px;
 		margin:auto;
 		horizontal-align:center;
-/* 		border:1px solid blue; */
+
 	}
 	.stepstyle{
 		text-align:center;
@@ -168,7 +168,7 @@
 	.repeattable tr td{
 		width:100px;
 		margin-left:30px;
-		border:1px solid blue;
+		
 		text-align:center;
 	}
 	.repeattable tr:nth-child(even){
@@ -213,7 +213,7 @@
   <!--------------------------------calendar---------------------------------->  
         <div id='wrap'>
 			<!-- draggable -->
-		<div id='external-events'  style=" border:1px solid blue;width:200px;margin-top:46px;margin-left:13%;">
+		<div id='external-events'  style=" width:200px;margin-top:46px;margin-left:13%;">
 			<h4 style="margin-left:30%;">預約時間</h4>
 			<div id='external-events2' style="margin-left:25%;text-align:center">
 				<div class='fc-event' style="background-color:#C6E8EA" data-color="#C6E8EA" data-id="morning"data-start="01:00" data-end='08:00'>早上</div>

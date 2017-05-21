@@ -168,7 +168,7 @@
 			<div  id="functionrow"  class="nav nav-tabs nav-justified textstyle" style="margin-top:10px;margin-left:40%;width:80%; vertical-align:center;">
 			</div>
 			
-			<div id="subfunctionrow" style="margin-top:10px;margin-left:30%;width:80%; horizontal-align:center;" class="nav nav-tabs nav-justified textstyle">
+			<div id="subfunctionrow" style="margin-top:10px;margin-left:20%;width:80%; horizontal-align:center;" class="nav nav-tabs nav-justified textstyle">
 			</div>
 	</header>
 	
@@ -762,7 +762,7 @@ $(function(){
 				$('#subfunctionrow').empty();
 				var applicationreviewm = '<a href="" id="applymasterlink" name="applicationreviewm"><input type="button"style="width:130px;height:50px;font-size:20px;" class="btn btn-success"value="審核師傅" /></a>';
 				var suspensionm = '<span id="suspensionm" value="suspensionm" name="functionaction" style="padding:0px; margin:0px;" ><input type="button" class="btn btn-danger" style="width:130px;height:50px;font-size:20px;" value="停權" "/></span>';
-				var recoverm = '<span id="recoverm" value="recoverm" name="functionaction" style="padding:0px; margin:0px;" ><input type="button" class="btn btn-danger" style="width:130px;height:50px;font-size:20px;" value="復權" "/></span>';
+				var recoverm = '<span id="recoverm" value="recoverm" name="functionaction" style="padding:0px; margin:0px;" ><input type="button" class="btn btn-warning" style="width:130px;height:50px;font-size:20px;" value="復權" "/></span>';
 				var sendmessagem = '<span id="messagespanm" value="sendmessagem" name="functionaction" style="padding:0px; margin:0px;" ><input type="button" class="btn btn-info"  style="width:130px;height:50px;font-size:20px;" value="傳送訊息" "/></span>';				
 				var b1 = $(applicationreviewm);
 				var b2 = $(suspensionm);
@@ -781,7 +781,7 @@ $(function(){
 			else if(navagatorid== 'c'){
 				$('#subfunctionrow').empty();
 				var suspensionc = '<span id="suspensionc" value="suspensionc" name="functionaction" style=" padding:0px; margin:0px;" ><input type="button" class="btn btn-danger" style="width:130px;height:50px;font-size:20px;" value="停權"/></span>';
-				var recoverc = '<span id="recoverc" value="recoverc" name="functionaction" style=" padding:0px; margin:0px;" ><input type="button" class="btn btn-danger" style="width:130px;height:50px;font-size:20px;" value="復權"/></span>';
+				var recoverc = '<span id="recoverc" value="recoverc" name="functionaction" style=" padding:0px; margin:0px;" ><input type="button" class="btn btn-warning" style="width:130px;height:50px;font-size:20px;" value="復權"/></span>';
 				var sendmessagec = '<span id="messagespanc" value="sendmessagec" name="functionaction" style=" padding:0px; margin:0px;" ><input type="button" class="btn btn-info" style="width:130px;height:50px;font-size:20px;"  value="傳送訊息" /></span>';
 				var b1 = $(suspensionc);
 				var b2 = $(recoverc);
@@ -1019,7 +1019,7 @@ $(function(){
 						   	
 						   	var toggleword = $('<input  type="checkbox" style="width:20px;height:20px"name="otoggle" />').val(data.o_id).attr('data-receiver1',data.o_bname).attr('data-receiver2',data.c_id);
 						   	
-						   	var cell0 = $('<td></td>').addClass('eventlisttbodytrtd').append(toggleword);
+						   	var cell0 = $('<td style="text-align:center;display:table;"></td>').addClass('eventlisttbodytrtd').append(toggleword);
 						  	var cell1 = $('<td></td>').text(data.o_tdate).addClass('eventlisttbodytrtd');
 						  	var mid =  $('<input type="button" class="btn btn-success"/> ').val("m"+data.m_id).addClass('eventlisttbodytrtd');
 							var a =  $('<a></a> ').attr('href',"${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIFunctionServlet.do?"+"functionaction=findmaster&targetid="+data.m_id).append(mid);						  
@@ -1050,7 +1050,7 @@ $(function(){
 					   var mid =  $('<input type="button" class="btn btn-success"/> ').val("m"+data.M_id).addClass('eventlisttbodytrtd');
 					   var a =  $('<a></a> ').attr('href',"${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIFunctionServlet.do?"+"functionaction=findmaster&targetid="+data.M_id).append(mid);						  
 					   var midwordmid =  $('<span style="visibility: hidden;font-size:0px;margin:0pxlpadding:0px;"></span> ').text(data.M_id).addClass('eventlisttbodytrtd');
-					   var cell0 = $('<td ></td>').addClass('eventlisttbodytrtd').append(toggleword);  
+					   var cell0 = $('<td style="text-align:center;display:table;"></td>').addClass('eventlisttbodytrtd').append(toggleword);  
 					   var cell1 = $('<td></td>').html(a).addClass('eventlisttbodytrtd').append(midwordmid);
 					   var cell2 = $('<td></td>').text(data.B_name).addClass('eventlisttbodytrtd');
 					   var cell3 = $('<td></td>').text(data.M_name).addClass('eventlisttbodytrtd');
@@ -1073,7 +1073,7 @@ $(function(){
 					   var mid =  $('<input type="button" class="btn btn-info" style="width:100px;word-break: keep-all"/> ').val(data.c_id).addClass('eventlisttbodytrtd');
 					   var a =  $('<a></a> ').attr('href',"${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIFunctionServlet.do?"+"functionaction=findcustomer&targetid="+data.c_id).append(mid);						  
 					   var midwordmid =  $('<span style="visibility: hidden;font-size:0px;margin:0pxlpadding:0px;"></span> ').text(data.c_id).addClass('eventlisttbodytrtd');
-					   var cell0 = $('<td></td>').addClass('eventlisttbodytrtd').append(toggleword);
+					   var cell0 = $('<td style="text-align:center;display:table;"></td>').addClass('eventlisttbodytrtd').append(toggleword);
 					   var cell1 = $('<td></td>').text(data.c_jdate).addClass('eventlisttbodytrtd');;
 					   var cell2 = $('<td></td>').html(a).addClass('eventlisttbodytrtd').append(midwordmid);
 					   var cell3 = $('<td></td>').text(data.c_name).addClass('eventlisttbodytrtd');;
@@ -1090,9 +1090,9 @@ $(function(){
 						
 					else if(id=="r"){
 						   var toggleword = $('<input type="checkbox" style="width:20px;height:20px" name="ctoggle" />').val(data.r_id).attr('data-receiver1',data.m_id).attr('data-receiver2',data.c_id).attr('data-extract',data.p_summary).attr('data-content',data.p_content);
-						   var mid =  $('<input type="button" class="btn btn-primary" name="reportevent"  />').val(data.r_id).addClass('eventlisttbodytrtd').attr('data-receiver1',data.m_id).attr('data-receiver2',data.c_id).attr('data-extract',data.p_summary).attr('data-content',data.p_content);
+						   var mid =  $('<input type="button" class="btn btn-primary" name="reportevent"  />').val("r"+data.r_id).addClass('eventlisttbodytrtd').attr('data-receiver1',data.m_id).attr('data-receiver2',data.c_id).attr('data-extract',data.p_summary).attr('data-content',data.p_content);
 						   var midwordmid =  $('<span style="visibility: hidden;font-size:0px;margin:0pxlpadding:0px;"></span> ').text(data.r_id).addClass('eventlisttbodytrtd');
-						   var cell0 = $('<td></td>').addClass('eventlisttbodytrtd').append(toggleword);
+						   var cell0 = $('<td style="text-align:center;display:table;"></td>').addClass('eventlisttbodytrtd').append(toggleword);
 						   var cell1 = $('<td name="reportevent"></td>').html(mid).addClass('eventlisttbodytrtd').append(midwordmid);
 						   var cell2 = $('<td></td>').text(data.r_date).addClass('eventlisttbodytrtd');;			   
 						   var mid3 =  $('<input type="button" class="btn btn-info" style="width:100px;word-break: keep-all"/> ').val(data.c_id).addClass('eventlisttbodytrtd');
@@ -1113,11 +1113,11 @@ $(function(){
 					}
 					else if(id=="ad"){
 						
-						   var toggleword = $('<input type="checkbox" style="width:20px;height:20px" name="ctoggle" />').val(data.ad_id).attr('data-receiver',data.m_id);
-						   var mid =  $('<input type="button" class="btn btn-warning"/>').val(data.ad_id).addClass('eventlisttbodytrtd');
+						   var toggleword = $('<input type="checkbox" style="width:20px;height:20px;" name="ctoggle" />').val(data.ad_id).attr('data-receiver',data.m_id);
+						   var mid =  $('<input type="button" class="btn btn-warning"/>').val("ad"+data.ad_id).addClass('eventlisttbodytrtd');
 						   var a =  $('<a></a> ').attr('href',"${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIFunctionServlet.do?"+"functionaction=findcustomer&targetid="+data.ad_id).append(mid);						  
 						   var midwordmid =  $('<span style="visibility: hidden;font-size:0px;margin:0pxlpadding:0px;"></span> ').text(data.ad_id).addClass('eventlisttbodytrtd');
-						   var cell0 = $('<td style="text-align:center;"></td>').addClass('eventlisttbodytrtd').append(toggleword);
+						   var cell0 = $('<td style="text-align:center;display:table;"></td>').addClass('eventlisttbodytrtd').append(toggleword);
 						   var cell1 = $('<td></td>').html(a).addClass('eventlisttbodytrtd').append(midwordmid);
 						   var cell2 = $('<td></td>').text(data.ad_bdate).addClass('eventlisttbodytrtd');;			   
 						   var cell3 = $('<td></td>').text(data.ad_enddate).addClass('eventlisttbodytrtd');
