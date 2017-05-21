@@ -178,9 +178,16 @@ textarea {
 }
 
 .function-code{
-  position: absolute;
-  margin-top:14px;
-  margin-right:20px;
   font-family: "微軟雅黑";
-  font-size: 20px;
+  position: absolute;
+}
+
+.errormg{
+	bottom:15px;
+	font-size: 16px;
+	color:red;
+}
+/* .move{transform: translate(0,0);transition: all 0.5s ease-out;-webkit-transform: translate(0,0);-moz-transform: translate(0,0);opacity: 1;visibility: visible;} */
+.move{
+	visibility: visible;
 }

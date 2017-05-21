@@ -45,17 +45,17 @@ public class CdataServlet extends HttpServlet {
 			// 帳號
 			String c_id = req.getParameter("id");
 			if (c_id == null || c_id.trim().length() == 0) {
-				errorMsgs.put("c_id", "請輸入帳號");
+				errorMsgs.put("c_id", "請輸入帳號！");
 			}
 			//不可含有「-」、「_」以外的符號！
 			// 密碼
 			String c_pwd = req.getParameter("pswd");
 			if (c_pwd == null || c_pwd.trim().length() == 0) {
-				errorMsgs.put("c_pwd", "請輸入密碼");
+				errorMsgs.put("c_pwd", "請輸入密碼！");
 			} else {
 				String s_pwd = "^(?!.*[^a-zA-Z0-9])(?=.*\\d)(?=.*[a-zA-Z]).{6,12}$";
 				if (!c_pwd.trim().matches(s_pwd)) {
-					errorMsgs.put("c_pwd", "請輸入各一位英文及數字共8~12位！");
+					errorMsgs.put("c_pwd01", "請輸入各一位英文及數字共8~12位！");
 				}
 			}
 			
@@ -66,7 +66,7 @@ public class CdataServlet extends HttpServlet {
 			} else {
 				String s_name = "^[(\u4e00-\u9fa5)]{2,5}$";
 				if (!c_name.trim().matches(s_name)) {
-					errorMsgs.put("c_name", "請輸入中文 ,長度必需在2到5之間！");
+					errorMsgs.put("c_name01", "請輸入中文 ,長度必需在2到5之間！");
 				}
 			}
 			// 日期
@@ -75,7 +75,7 @@ public class CdataServlet extends HttpServlet {
 				c_birth = java.sql.Date.valueOf(req.getParameter("birth").trim());
 			} catch (IllegalArgumentException e) {
 				c_birth = new java.sql.Date(System.currentTimeMillis());
-				errorMsgs.put("bday", "請輸入日期！");
+				errorMsgs.put("bday", "請輸入日期！格式：(yyyy-mm-dd)");
 			}
 			// 電話
 			String c_cel = req.getParameter("phone");
@@ -84,7 +84,7 @@ public class CdataServlet extends HttpServlet {
 			} else {
 				String s_cel = "^09[0-9]{8}$";
 				if (!c_cel.trim().matches(s_cel)) {
-					errorMsgs.put("phone", "請輸入正確手機號碼！");
+					errorMsgs.put("phone01", "請輸入正確手機號碼！");
 				}
 			}
 			// e-mail
@@ -95,7 +95,7 @@ public class CdataServlet extends HttpServlet {
 				//^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$
 				String s_email = "^\\w+((-\\w+)|(\\.\\w+))*\\@[A-Za-z0-9]+((\\.|-)[A-Za-z0-9]+)*\\.[A-Za-z]+$";
 				if (!c_email.trim().matches(s_email)) {
-					errorMsgs.put("c_email", "請輸入正確e-mail格式！");
+					errorMsgs.put("c_email01", "請輸入正確e-mail格式！");
 				}
 			}
 			// 縣市
@@ -111,12 +111,12 @@ public class CdataServlet extends HttpServlet {
 			// 地址
 			String c_addr = req.getParameter("addr");
 			if (c_addr == null || c_addr.trim().length() == 0) {
-				errorMsgs.put("c_addr", "請選擇地址！");
+				errorMsgs.put("c_addr", "請輸入地址！");
 			}else{
 				//^(?!.*[^\u4e00-\u9fa5a-zA-Z0-9-])(?=.*[\u4e00-\u9fa5]{2,})(?=.*\d).{8,40}$
 				String s_addr = "^(?!.*[^\\u4e00-\\u9fa5a-zA-Z0-9-])(?=.*[\\u4e00-\\u9fa5]{2,})(?=.*\\d).{8,40}$";
 				if (!c_addr.trim().matches(s_addr)) {
-					errorMsgs.put("c_addr", "請輸入正確地址格式！");
+					errorMsgs.put("c_addr01", "請輸入正確地址格式！");
 				}
 			}
 			// 加入時間
@@ -157,7 +157,7 @@ public class CdataServlet extends HttpServlet {
 			resp.sendRedirect(resp.encodeRedirectURL("InsertCdataSuccess.jsp"));
 			return;
 		} catch (Exception e) {
-			errorMsgs.put("c_id", "帳號重複，請重新輸入帳號");
+			errorMsgs.put("account", "帳號重複，請重新輸入資料");
 			RequestDispatcher failureView = req.getRequestDispatcher("/cdata/login-up.jsp");
 			failureView.forward(req, resp);
 		}
