@@ -35,7 +35,7 @@ left: 40%;
 
 
 
-<title>謝謝你</title>
+<title>Tool Man</title>
 <script>
 window.onload = masterresponse2;
 
