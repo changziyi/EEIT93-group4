@@ -147,6 +147,9 @@ public class OrderService {
 			}
 		 }
     }
+    public void updateOrderSnameToFishedById(Integer o_id){
+    	dao.updateOrderSnameToFishedById(o_id);
+    }
     public void updateOrderSnameToInProgressById(Integer o_id){
     	dao.updateOrderSnameToInProgressById(o_id);	
     }
@@ -160,12 +163,16 @@ public class OrderService {
 					)))){
 		        dao = new OrderDAO();  
 		    	dao.updateOrderSnameToUnfinishedReviewById(orderVO2.getO_id());
-		    					}
+		    	}
 			
 		    		
 						
 	 }
 }
+    public void updateOrderSnameToUnfinishedReviewById(Integer o_id){
+    	dao.updateOrderSnameToUnfinishedReviewById(o_id);
+    }
+
     public int updateOrderSaonote(Integer o_id, String sa_onote){
     	return dao.updateOrderSaonote(o_id,sa_onote);
     }
