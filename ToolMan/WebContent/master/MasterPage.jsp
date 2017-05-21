@@ -12,9 +12,15 @@
 	<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/nav/nav.css">
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="${pageContext.servletContext.contextPath}/css/star-rating.css">
+	<link rel='stylesheet' href='${pageContext.servletContext.contextPath}/js/fullcalendar.min.css' />
+    <link rel="stylesheet" href="${pageContext.servletContext.contextPath}/js/jqueryui/jquery-ui.min.css">
+    <link rel="stylesheet" href="${pageContext.servletContext.contextPath}/calendarformasterpage/cal.css">
 	<script src="${pageContext.servletContext.contextPath}/js/jquery-3.2.1.min.js"></script>
 	<script src="${pageContext.servletContext.contextPath}/js/bootstrap.min.js"></script>
 	<script src="${pageContext.servletContext.contextPath}/js/star-rating.min.js"></script>
+	<script src='${pageContext.servletContext.contextPath}/js/moment.min.js'></script>
+	<script src='${pageContext.servletContext.contextPath}/js/fullcalendar.min.js'></script>
+	<script src='${pageContext.servletContext.contextPath}/js/jqueryui/jquery-ui.min.js'></script>
 	
 	<style>
 		body {font-family:Microsoft JhengHei;}
@@ -22,15 +28,16 @@
 		pre {white-space:pre-wrap;word-wrap:break-word;}
 		span {font-family:Microsoft JhengHei;}
 		td {font-size:15px;}
+		p {font-size:15px}
 		.zipcode {display: none;}
 		.zip {margin:auto; width:100px; display:inline; font-family:Microsoft JhengHei; vertical-align: top}
 		.changeImg {width:200px; padding:10px;}
 		#uploadTemp {line-height:normal;background-color:#fff;width:560px;}
 		.workImgArea {vertical-align:top;padding:5px;}
-		.myDiv {position:relative; top:85px;} 
+		.myDiv {position:relative; top:70px;} 
 		.outtermd8 {width:100%; margin-left:3%; margin-right:0}
-		.innermd8 {padding-right:0; margin-right:0;width:60%}
-		.md4 {padding-top:3%;padding-left:0}
+		.innermd8 {padding-top:3%;padding-right:0; margin-right:0;width:60%}
+		.md4 {padding-left:1%;margin-top:2%}
 		.commentbox {width:60%;height:20%;}
 		.commentarea {margin-top:2%;margin-left:18%;}
 		.onecomment {margin-bottom:2%}
@@ -45,8 +52,10 @@
 		.bimgwidth {width:87%}
 		.popup {width:50%}
 		.ratediv {margin-left:10%}
-		.ratstardiv {margin-top:3%;margin-bottom:3%;margin-left:28%}
+		.ratstardiv {margin-top:1%;margin-left:28%}
+		.tagtext {font-size:16px}
 	</style>
+	<jsp:useBean id="mdataVO" class="toolman.mdata.model.MdataVO" scope="session"/>
 </head>
 <body>
 <jsp:include page="/nav/navigation.jsp" />
@@ -58,10 +67,10 @@
 				<img height="350px" class="img-thumbnail bimgwidth" src='${pageContext.servletContext.contextPath}/master/master.do?type=master&image=${mdataVO.m_id}'/>
 			</div>
 			<div class="col-md-4 md4">
-				<c:if test="${LoginOK.m_id == mdataVO.m_id}">
-  					<!-- 修改店家資料按鈕 -->
-					<a class="btn btn-default" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-pencil"></span> 編輯店家</a>
-				</c:if>
+<%-- 				<c:if test="${LoginOK.m_id == mdataVO.m_id}"> --%>
+<!--   					修改店家資料按鈕 -->
+<!-- 					<a class="btn btn-default" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-pencil"></span> 編輯店家</a> -->
+<%-- 				</c:if> --%>
 				<div class="container">
 					<div class="modal fade" id="myModal" role="dialog">
 						<div class="modal-dialog" style="width:43%">
@@ -144,7 +153,11 @@
 	</div>
 	
 </div>
-				<H2>${mdataVO.b_name}</H2>
+				<H2 style="display:inline;vertical-align:top">${mdataVO.b_name}</H2>
+				<c:if test="${LoginOK.m_id == mdataVO.m_id}">
+					<a class="btn btn-default" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-pencil"></span> 編輯店家</a><a class="btn btn-default"><span class="glyphicon glyphicon-calendar"></span> 編輯日曆</a>
+				</c:if>
+				<p></p>
 				<p>專業：<c:forEach var="aMpro" items="${mdataVO.mpros}">${aMpro.m_pro} </c:forEach></p>
 				<p>師傅：${mdataVO.m_name}</p>
 				<p>地區：${mdataVO.m_city} ${mdataVO.m_district}</p>
@@ -153,7 +166,7 @@
  				
  				
  				
-          		<%	if (session.getAttribute("LoginOK") == null) {%>
+          		<% if (session.getAttribute("LoginOK") == null) {%>
           		<a href="#" data-toggle="tooltip" data-placement="bottom" title="要登入才能預約師傅">
           	<button type="button" class="btn btn-primary disabled btn-success" >
           			<span class="glyphicon glyphicon-earphone"></span>預約師傅
@@ -171,20 +184,25 @@
         		<a href="${pageContext.servletContext.contextPath}/order/Dislike.do?c_id=${LoginOK.c_id}&m_id=${mdataVO.m_id}&action=addDislike" class="btn btn-danger">
           			<span class="glyphicon glyphicon-remove-sign"></span> 加入黑名單
         		</a>
-        		<%}%>
+        		<%
+        			}
+        		%>
+        		<p></p>
+        		<div id='calendar' style="float:left;width:400px; height:100px;"></div>
+        		
   <%--------------------------------------萬里長城--------------------------------------------------- --%>
 			</div>
 		</div>
 	</div>
 </div> <!--container-->
-<div class="container">
+<div class="container" style="margin-top:3%">
 	<br />
 	<ul class="nav nav-tabs">
-		<li class="active"><a data-toggle="tab" href="#home">介紹</a></li>
-		<li><a data-toggle="tab" href="#menu1">作品</a></li>
-		<li><a data-toggle="tab" href="#menu2">問與答</a></li>
-		<li><a data-toggle="tab" href="#menu3">評價</a></li>
-		<li><a data-toggle="tab" href="#menu4">媒合紀錄</a></li>
+		<li class="active"><a data-toggle="tab" href="#home" class="tagtext">介紹</a></li>
+		<li><a data-toggle="tab" href="#menu1" class="tagtext">作品</a></li>
+		<li><a data-toggle="tab" href="#menu2" class="tagtext">問與答</a></li>
+		<li><a data-toggle="tab" href="#menu3" class="tagtext">評價</a></li>
+		<li><a data-toggle="tab" href="#menu4" class="tagtext">媒合紀錄</a></li>
 	</ul>
 
 	<div class="tab-content">
@@ -228,11 +246,11 @@
 									</tr>
 									<tr>
 										<td>作品名稱</td>
-										<td><input type="text" name="workname" required></td>
+										<td><input type="text" class="form-control" name="workname" required></td>
 									</tr>
 									<tr>
 										<td>作品描述</td>
-										<td><textarea name="workdes" id="workdes"></textarea></td>
+										<td><textarea name="workdes" class="form-control" id="workdes"></textarea></td>
 									</tr>
 <!-- 									<div><input type="file" id="file" name="file[]" multiple="multiple"></div> -->
 <!-- 									<div class="workImgArea">作品名稱　<input type="text" name="workname" required></div> -->
@@ -248,7 +266,6 @@
 					</form>
 				  </div>
 				</div>
-				
 			</c:if>
 			
 			<div class="form-group workdiv">
@@ -278,15 +295,17 @@
 			<div>
 				<div>
 					<div id="show"></div>
-					<div class="commentarea">
-						<div class="form-group">
-							<form method="post" action="masterPage.do">
-								<label for="comment" style="font-size:16px">提問：</label>
-								<textarea class="form-control commentbox" rows="5" cols="50" name="d_des" id="d_des"></textarea>
-								<div class="qbtncen"><input type="button" name="question" class="btn btn-info" value="送出">　<input type="reset" class="btn btn-default" value="取消"></div>
-							</form>
+					<c:if test="${not empty LoginOK}">
+						<div class="commentarea">
+							<div class="form-group">
+								<form method="post" action="masterPage.do">
+									<label for="comment" style="font-size:16px">提問：</label>
+									<textarea class="form-control commentbox" rows="5" cols="50" name="d_des" id="d_des"></textarea>
+									<div class="qbtncen"><input type="button" name="question" class="btn btn-info" value="送出">　<input type="reset" class="btn btn-default" value="取消"></div>
+								</form>
+							</div>
 						</div>
-					</div>
+					</c:if>
 				</div>
 			</div>
 		</div>
@@ -294,38 +313,62 @@
 				<div class="ratstardiv">
 					<input id="input-3" name="input-3" value="${mdataVO.m_arating}" class="rating-loading">
 				</div>
+				
 				<div class="ratediv">
 					<table class="table table-hover" style="width:70%">
 						<tr>
-							<th>會員</th>
-							<th>評分</th>
-							<th>日期</th>
-							<th>評價</th>
+							<th class="text-center">會員</th>
+							<th class="text-center">評分</th>
+							<th class="text-center">日期</th>
+							<th class="text-center">評價</th>
 						</tr>
 						<c:forEach var="orderCid" items="${mdataVO.orders}" varStatus="loop">
-							${loop.index + 1}
-							<tr>
-								<td><a href="${pageContext.servletContext.contextPath}/cdata/CdatadessServlet.do?c_id=${orderCid.c_id.c_id}">${orderCid.c_id.c_id}</a></td>
-								<td>${orderCid.c_rating}顆星</td>
-								<td>${orderCid.o_edate}</td>
-								<td style="width:50%">${orderCid.ca_des}</td>
-							</tr>
+							<c:if test="${orderCid.s_name == '已完成'}">
+								<c:if test="${loop.last}">
+									<h3 style="margin-top:1%; margin-bottom:1%; margin-left:25%">共有${loop.index + 1}人評價</h3>
+<%-- 								</c:if> --%>
+<%-- 								<c:if> --%>
+								</c:if>
+								<tr>
+									<td class="text-center"><a href="${pageContext.servletContext.contextPath}/cdata/CdatadessServlet.do?c_id=${orderCid.c_id.c_id}">${orderCid.c_id.c_id}</a></td>
+									<td class="text-center">${orderCid.c_rating}顆星</td>
+									<td class="text-center">${orderCid.o_edate}</td>
+									<td class="text-center" style="width:50%">${orderCid.ca_des}</td>
+								</tr>
+							</c:if>
 						</c:forEach>
 					</table>
 				</div>
 		</div>
 		
 		<div id="menu4" class="tab-pane fade">
-			<h3>成功媒合人次:</h3>
-			<c:forEach var="orderCid" items="${mdataVO.orders}">
-				${orderCid.c_id.c_id} - 
-				${orderCid.o_edate}<br>
-			</c:forEach>
+			
+			<div class="ratediv">
+				<table class="table table-hover" style="width:70%">
+					<tr>
+						<th class="text-center">會員</th>
+						<th class="text-center">日期</th>
+					</tr>
+					<c:forEach var="orderCid" items="${mdataVO.orders}" varStatus="loop">
+						<c:if test="${orderCid.s_name == '已完成'}">
+							<c:if test="${loop.last}">
+									<h3 style="margin-top:3%; margin-bottom:3%; margin-left:23%">成功媒合人次：${loop.index + 1}人</h3>
+								</c:if>
+							<tr>
+								<td class="text-center"><a href="${pageContext.servletContext.contextPath}/cdata/CdatadessServlet.do?c_id=${orderCid.c_id.c_id}">${orderCid.c_id.c_id}</a></td>
+								<td class="text-center">${orderCid.o_edate}</td>
+							</tr>
+						</c:if>
+					</c:forEach>
+				</table>
+			</div>
+
 		</div>
 	</div>
 </div>	
 </div>
 	<script src="${pageContext.servletContext.contextPath}/js/jquery.twzipcode.min.js"></script>
+	<script src="${pageContext.servletContext.contextPath}/calendarformasterpage/cal.js"></script>
 	<script>
 	
 // 		$(function() {
@@ -612,7 +655,7 @@
 						workname.val(null);
 						workdes.val(null);
 						
-						location.reload();
+// 						location.reload();
 						
 // 						$('.workdiv').empty();
 						
@@ -671,7 +714,6 @@
 				var tdparent = $(this).parent('.aWork');
 				var workid = tdparent.children('input[name="work_id"]');
 				console.log(workid.val());
-				alert("確認刪除？");
 				$.ajax({
 					url : 'master.do',
 					data: {'work_id':workid.val(),'action':'deleteworkim'},

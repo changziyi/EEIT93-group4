@@ -394,10 +394,6 @@ public class MdataServlet extends HttpServlet {
 			WorkService workSvc = new WorkService();
 			workSvc.insert(workVO);
 			
-			session.setAttribute("mdataVO", mdataVO);
-			response.sendRedirect("MasterPage.jsp");
-			return;
-			
 		}
 		
 		
