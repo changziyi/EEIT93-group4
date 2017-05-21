@@ -45,7 +45,7 @@
 		.bimgwidth {width:87%}
 		.popup {width:50%}
 		.ratediv {margin-left:10%}
-		.ratstardiv {margin-top:3%;margin-bottom:3%;margin-left:28%}
+		.ratstardiv {margin-top:1%;margin-left:28%}
 	</style>
 </head>
 <body>
@@ -264,15 +264,17 @@
 			<div>
 				<div>
 					<div id="show"></div>
-					<div class="commentarea">
-						<div class="form-group">
-							<form method="post" action="masterPage.do">
-								<label for="comment" style="font-size:16px">提問：</label>
-								<textarea class="form-control commentbox" rows="5" cols="50" name="d_des" id="d_des"></textarea>
-								<div class="qbtncen"><input type="button" name="question" class="btn btn-info" value="送出">　<input type="reset" class="btn btn-default" value="取消"></div>
-							</form>
+					<c:if test="${not empty LoginOK}">
+						<div class="commentarea">
+							<div class="form-group">
+								<form method="post" action="masterPage.do">
+									<label for="comment" style="font-size:16px">提問：</label>
+									<textarea class="form-control commentbox" rows="5" cols="50" name="d_des" id="d_des"></textarea>
+									<div class="qbtncen"><input type="button" name="question" class="btn btn-info" value="送出">　<input type="reset" class="btn btn-default" value="取消"></div>
+								</form>
+							</div>
 						</div>
-					</div>
+					</c:if>
 				</div>
 			</div>
 		</div>
@@ -280,33 +282,54 @@
 				<div class="ratstardiv">
 					<input id="input-3" name="input-3" value="${mdataVO.m_arating}" class="rating-loading">
 				</div>
+				
 				<div class="ratediv">
 					<table class="table table-hover" style="width:70%">
 						<tr>
-							<th>會員</th>
-							<th>評分</th>
-							<th>日期</th>
-							<th>評價</th>
+							<th class="text-center">會員</th>
+							<th class="text-center">評分</th>
+							<th class="text-center">日期</th>
+							<th class="text-center">評價</th>
 						</tr>
 						<c:forEach var="orderCid" items="${mdataVO.orders}" varStatus="loop">
-							${loop.index + 1}
-							<tr>
-								<td><a href="${pageContext.servletContext.contextPath}/cdata/CdatadessServlet.do?c_id=${orderCid.c_id.c_id}">${orderCid.c_id.c_id}</a></td>
-								<td>${orderCid.c_rating}顆星</td>
-								<td>${orderCid.o_edate}</td>
-								<td style="width:50%">${orderCid.ca_des}</td>
-							</tr>
+							<c:if test="${orderCid.s_name == '已完成'}">
+								<c:if test="${loop.last}">
+									<h3 style="margin-top:1%; margin-bottom:1%; margin-left:25%">共有${loop.index + 1}人評價</h3>
+								</c:if>
+								<tr>
+									<td class="text-center"><a href="${pageContext.servletContext.contextPath}/cdata/CdatadessServlet.do?c_id=${orderCid.c_id.c_id}">${orderCid.c_id.c_id}</a></td>
+									<td class="text-center">${orderCid.c_rating}顆星</td>
+									<td class="text-center">${orderCid.o_edate}</td>
+									<td class="text-center" style="width:50%">${orderCid.ca_des}</td>
+								</tr>
+							</c:if>
 						</c:forEach>
 					</table>
 				</div>
 		</div>
 		
 		<div id="menu4" class="tab-pane fade">
-			<h3>成功媒合人次:</h3>
-			<c:forEach var="orderCid" items="${mdataVO.orders}">
-				${orderCid.c_id.c_id} - 
-				${orderCid.o_edate}<br>
-			</c:forEach>
+			
+			<div class="ratediv">
+				<table class="table table-hover" style="width:70%">
+					<tr>
+						<th class="text-center">會員</th>
+						<th class="text-center">日期</th>
+					</tr>
+					<c:forEach var="orderCid" items="${mdataVO.orders}" varStatus="loop">
+						<c:if test="${orderCid.s_name == '已完成'}">
+							<c:if test="${loop.last}">
+									<h3 style="margin-top:3%; margin-bottom:3%; margin-left:23%">成功媒合人次：${loop.index + 1}人</h3>
+								</c:if>
+							<tr>
+								<td class="text-center"><a href="${pageContext.servletContext.contextPath}/cdata/CdatadessServlet.do?c_id=${orderCid.c_id.c_id}">${orderCid.c_id.c_id}</a></td>
+								<td class="text-center">${orderCid.o_edate}</td>
+							</tr>
+						</c:if>
+					</c:forEach>
+				</table>
+			</div>
+
 		</div>
 	</div>
 </div>	
@@ -598,7 +621,7 @@
 						workname.val(null);
 						workdes.val(null);
 						
-						location.reload();
+// 						location.reload();
 						
 // 						$('.workdiv').empty();
 						
@@ -657,7 +680,6 @@
 				var tdparent = $(this).parent('.aWork');
 				var workid = tdparent.children('input[name="work_id"]');
 				console.log(workid.val());
-				alert("確認刪除？");
 				$.ajax({
 					url : 'master.do',
 					data: {'work_id':workid.val(),'action':'deleteworkim'},
