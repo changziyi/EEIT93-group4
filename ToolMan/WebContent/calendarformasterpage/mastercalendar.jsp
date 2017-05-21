@@ -21,15 +21,10 @@
 	<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/js/bootstrap-theme.min.css" >	<!-- Latest compiled and minified JavaScript -->
 	<script src="${pageContext.servletContext.contextPath}/js/bootstrap.min.js" ></script>
 <!-- bootstrap -->
-<!-- smart_wizard -->
-    <link href="${pageContext.servletContext.contextPath}/js/smartform/smart_wizard_theme_circles.min.css" rel="stylesheet" type="text/css" />
-    <link href="${pageContext.servletContext.contextPath}/js/smartform/smart_wizard_theme_dots.min.css" rel="stylesheet" type="text/css" />
-	<link href="${pageContext.servletContext.contextPath}/js/smartform/smart_wizard.min.css" rel="stylesheet" type="text/css" /> 
-	<link href="${pageContext.servletContext.contextPath}/js/smartform/smart_wizard_theme_arrows.min.css" rel="stylesheet" type="text/css" />
-<!-- smart_wizard -->
+
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">	
-<!-- smart_wizard -->
+
 
 
 	<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/nav/nav.css">
@@ -191,21 +186,15 @@
 
         
 
-        <br />
+       
         <div class="container containerstyle textstyle putmiddle">
-        <!-- SmartWizard html -->
      
-        <div id="smartwizard">
-            <ul class="stepstyle textstyle">
-            	<li><a href="#step-1" style="white-space: nowrap">步驟一<br /><small>建立預約日程</small></a></li>
-                <li><a href="#step-2">步驟一<br /><small>填寫申請表</small></a></li>
-                <li><a href="#step-3">步驟三<br /><small>送出審核</small></a></li>
-                
-            </ul>
+     
+       
       
-         <div>
-        	 <!--  step1  -->
-         <div id="step-1" class="">
+         
+        	 
+        
   <!--------------------------------calendar---------------------------------->  
         <div id='wrap'>
 			<!-- draggable -->
@@ -278,58 +267,11 @@
 		<div style='clear:both'></div>
 	</div>
                 <form class="form-inline" style="display:table;margin:auto">
-				             <div class="form-group" >
-				              <label >Choose Theme:</label>
-				              <select id="theme_selector1" class="form-control">
-				                    <option value="default">default</option>
-				                    <option value="arrows">arrows</option>
-				                    <option value="circles">circles</option>
-				                    <option value="dots">dots</option>
-				              </select>
-				            </div>           
-				            
-				            <label>External Buttons:</label>
 				            <div class="btn-group navbar-btn" role="group">
-				                <button class="btn btn-default" id="prev-btn1" type="button" disabled>上一步</button>
-				                <button class="btn btn-default" id="next-btn1" type="button">下一步</button>
 				                <button class="btn btn-primary" id="submitcalendar" type="button">完成日程表</button>
 				            </div>
 				        </form>
-                
-                </div>	
-     		<!--  step1  -->
-     		<!--  step2  -->
-     	
-                <div id="step-2" class="">
 
-						<form class="form-inline">
-				             <div class="form-group" >
-				              <label >Choose Theme:</label>
-				              <select id="theme_selector" class="form-control">
-				                    <option value="default">default</option>
-				                    <option value="arrows">arrows</option>
-				                    <option value="circles">circles</option>
-				                    <option value="dots">dots</option>
-				              </select>
-				            </div>           
-				            
-				            <label>External Buttons:</label>
-				            <div class="btn-group navbar-btn" role="group">
-				                <button class="btn btn-default" id="prev-btn" type="button">上一步</button>
-				                <button class="btn btn-default" id="next-btn" type="button" disabled>下一步</button>
-				                <button class="btn btn-danger" id="reset-btn" type="button">確認送出</button>
-				            </div>
-				        </form>
-                  </div> 
-              <!--  step2  --> 
-               <!--  step3  -->    
-		              
-			<!--  step3  --> 
-			
-          <div id="step-3" class=""></div>
-                    
-      </div>
-  </div>
  </div>    
  
 	<!-- smart wizard head -->
@@ -370,96 +312,7 @@ var eventidglobe =null;
 
 	    $( "#datepicker" ).datepicker();
 	    
-	    //google map
-// 	    googlecoordinate = 'https://maps.googleapis.com/maps/api/geocode/json?'
-	   
-// 	    $('#o_addr').on('blur',getCoordinate);	
-	    
-	      
-	            // Smart Wizard events
-            $("#smartwizard").on("leaveStep", function(e, anchorObject, stepNumber, stepDirection) {
-                
-            });
-            
-            // This event should initialize before initializing smartWizard
-            // Otherwise this event wont load on first page load 
-            $("#smartwizard").on("showStep", function(e, anchorObject, stepNumber, stepDirection, stepPosition) {
-                $("#message-box").append(" > <strong>showStep</strong> called on " + stepNumber + ". Direction: " + stepDirection+ ". Position: " + stepPosition);
-            });
-            
-            $("#smartwizard").on("beginReset", function(e) {
-                $("#message-box").append("<br /> > <strong>beginReset</strong> called");
-            });
-            
-            $("#smartwizard").on("endReset", function(e) {
-                $("#message-box").append(" > <strong>endReset</strong> called");
-            });  
-            
-            $("#smartwizard").on("themeChanged", function(e, theme) {
-                $("#message-box").append("<br /> > <strong>themeChanged</strong> called. New theme: " + theme);
-            });
-            
-            // Toolbar extra buttons
-            
-//               var btnsubmit = $('<button></button>').text('提交')
-// 	            	.addClass('btn btn-danger')
-// 	            	.on('click', function(){ $('#bookform').submit(); });                         
-  
-            // Smart Wizard initialize
-            $('#smartwizard').smartWizard({ 
-                    selected: 0, 
-                    theme: 'circles',
-                    transitionEffect:'fade',
-                    anchorSettings:{
-                    	removeDoneStepOnNavigateBack:true,
-                    },
-                    toolbarSettings: {
-						
-						showPreviousButton:false,
-                    	showNextButton:false,                 
-//                       toolbarExtraButtons: [btnsubmit]
-                                    },
-                 });           
-            
-            // External Button Events
 
-            
-            $("#prev-btn1").on("click", function() {
-                // Navigate previous
-                $('#smartwizard').smartWizard("prev");
-                return true;
-            });
-            
-            $("#next-btn1").on("click", function() {
-                // Navigate next
-                $('#smartwizard').smartWizard("next");
-                return true;
-            });
-            
-            $("#reset-btn").on('click', function(){ $('#bookform').submit(); }); 
-            
-            $("#prev-btn").on("click", function() {
-                // Navigate previous
-                $('#smartwizard').smartWizard("prev");
-                return true;
-            });
-            
-            $("#next-btn").on("click", function() {
-                // Navigate next
-                $('#smartwizard').smartWizard("next");
-                return true;
-            });
-            $("#theme_selector1").on("change", function() {
-                // Change theme
-                $('#smartwizard').smartWizard("theme", $(this).val());
-                return true;
-            })
-            $("#theme_selector").on("change", function() {
-                // Change theme
-                $('#smartwizard').smartWizard("theme", $(this).val());
-                return true;
-            })
- 
 		//calendar
 	});//end ready
 
@@ -826,10 +679,8 @@ var eventidglobe =null;
 				}//end if
 
 		}//end check2 function
-	</script>
-<!-- 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAj-PEjC_YSdYGHEvhIKnyojxufjKYy6OE&callback=initMap"></script> -->
-  
-	<script type="text/javascript" src="../js/smartform/jquery.smartWizard.min.js"></script>	
+	</script>  
+
 	
   
 
