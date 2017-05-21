@@ -12,9 +12,15 @@
 	<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/nav/nav.css">
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="${pageContext.servletContext.contextPath}/css/star-rating.css">
+	<link rel='stylesheet' href='${pageContext.servletContext.contextPath}/js/fullcalendar.min.css' />
+    <link rel="stylesheet" href="${pageContext.servletContext.contextPath}/js/jqueryui/jquery-ui.min.css">
+    <link rel="stylesheet" href="${pageContext.servletContext.contextPath}/calendarformasterpage/cal.css">
 	<script src="${pageContext.servletContext.contextPath}/js/jquery-3.2.1.min.js"></script>
 	<script src="${pageContext.servletContext.contextPath}/js/bootstrap.min.js"></script>
 	<script src="${pageContext.servletContext.contextPath}/js/star-rating.min.js"></script>
+	<script src='${pageContext.servletContext.contextPath}/js/moment.min.js'></script>
+	<script src='${pageContext.servletContext.contextPath}/js/fullcalendar.min.js'></script>
+	<script src='${pageContext.servletContext.contextPath}/js/jqueryui/jquery-ui.min.js'></script>
 	
 	<style>
 		body {font-family:Microsoft JhengHei;}
@@ -22,15 +28,16 @@
 		pre {white-space:pre-wrap;word-wrap:break-word;}
 		span {font-family:Microsoft JhengHei;}
 		td {font-size:15px;}
+		p {font-size:15px}
 		.zipcode {display: none;}
 		.zip {margin:auto; width:100px; display:inline; font-family:Microsoft JhengHei; vertical-align: top}
 		.changeImg {width:200px; padding:10px;}
 		#uploadTemp {line-height:normal;background-color:#fff;width:560px;}
 		.workImgArea {vertical-align:top;padding:5px;}
-		.myDiv {position:relative; top:85px;} 
+		.myDiv {position:relative; top:70px;} 
 		.outtermd8 {width:100%; margin-left:3%; margin-right:0}
-		.innermd8 {padding-right:0; margin-right:0;width:60%}
-		.md4 {padding-top:3%;padding-left:0}
+		.innermd8 {padding-top:3%;padding-right:0; margin-right:0;width:60%}
+		.md4 {padding-left:1%;margin-top:2%}
 		.commentbox {width:60%;height:20%;}
 		.commentarea {margin-top:2%;margin-left:18%;}
 		.onecomment {margin-bottom:2%}
@@ -46,7 +53,9 @@
 		.popup {width:50%}
 		.ratediv {margin-left:10%}
 		.ratstardiv {margin-top:1%;margin-left:28%}
+		.tagtext {font-size:16px}
 	</style>
+	<jsp:useBean id="mdataVO" class="toolman.mdata.model.MdataVO" scope="session"/>
 </head>
 <body>
 <jsp:include page="/nav/navigation.jsp" />
@@ -58,10 +67,10 @@
 				<img height="350px" class="img-thumbnail bimgwidth" src='${pageContext.servletContext.contextPath}/master/master.do?type=master&image=${mdataVO.m_id}'/>
 			</div>
 			<div class="col-md-4 md4">
-				<c:if test="${LoginOK.m_id == mdataVO.m_id}">
-  					<!-- 修改店家資料按鈕 -->
-					<a class="btn btn-default" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-pencil"></span> 編輯店家</a>
-				</c:if>
+<%-- 				<c:if test="${LoginOK.m_id == mdataVO.m_id}"> --%>
+<!--   					修改店家資料按鈕 -->
+<!-- 					<a class="btn btn-default" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-pencil"></span> 編輯店家</a> -->
+<%-- 				</c:if> --%>
 				<div class="container">
 					<div class="modal fade" id="myModal" role="dialog">
 						<div class="modal-dialog" style="width:43%">
@@ -144,7 +153,11 @@
 	</div>
 	
 </div>
-				<H2>${mdataVO.b_name}</H2>
+				<H2 style="display:inline;vertical-align:top">${mdataVO.b_name}</H2>
+				<c:if test="${LoginOK.m_id == mdataVO.m_id}">
+					<a class="btn btn-default" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-pencil"></span> 編輯店家</a><a class="btn btn-default"><span class="glyphicon glyphicon-calendar"></span> 編輯日曆</a>
+				</c:if>
+				<p></p>
 				<p>專業：<c:forEach var="aMpro" items="${mdataVO.mpros}">${aMpro.m_pro} </c:forEach></p>
 				<p>師傅：${mdataVO.m_name}</p>
 				<p>地區：${mdataVO.m_city} ${mdataVO.m_district}</p>
@@ -153,7 +166,7 @@
  				
  				
  				
-          		<%	if (session.getAttribute("LoginOK") == null) {%>
+          		<% if (session.getAttribute("LoginOK") == null) {%>
           		<a href="#" data-toggle="tooltip" data-placement="bottom" title="要登入才能預約師傅">
           	<button type="button" class="btn btn-primary disabled btn-success" >
           			<span class="glyphicon glyphicon-earphone"></span>預約師傅
@@ -171,20 +184,25 @@
         		<a href="${pageContext.servletContext.contextPath}/order/Dislike.do?c_id=${LoginOK.c_id}&m_id=${mdataVO.m_id}&action=addDislike" class="btn btn-danger">
           			<span class="glyphicon glyphicon-remove-sign"></span> 加入黑名單
         		</a>
-        		<%}%>
+        		<%
+        			}
+        		%>
+        		<p></p>
+        		<div id='calendar' style="float:left;width:400px; height:100px;"></div>
+        		
   <%--------------------------------------萬里長城--------------------------------------------------- --%>
 			</div>
 		</div>
 	</div>
 </div> <!--container-->
-<div class="container">
+<div class="container" style="margin-top:3%">
 	<br />
 	<ul class="nav nav-tabs">
-		<li class="active"><a data-toggle="tab" href="#home">介紹</a></li>
-		<li><a data-toggle="tab" href="#menu1">作品</a></li>
-		<li><a data-toggle="tab" href="#menu2">問與答</a></li>
-		<li><a data-toggle="tab" href="#menu3">評價</a></li>
-		<li><a data-toggle="tab" href="#menu4">媒合紀錄</a></li>
+		<li class="active"><a data-toggle="tab" href="#home" class="tagtext">介紹</a></li>
+		<li><a data-toggle="tab" href="#menu1" class="tagtext">作品</a></li>
+		<li><a data-toggle="tab" href="#menu2" class="tagtext">問與答</a></li>
+		<li><a data-toggle="tab" href="#menu3" class="tagtext">評價</a></li>
+		<li><a data-toggle="tab" href="#menu4" class="tagtext">媒合紀錄</a></li>
 	</ul>
 
 	<div class="tab-content">
@@ -309,6 +327,8 @@
 								<c:if test="${loop.last}">
 									<h3 style="margin-top:1%; margin-bottom:1%; margin-left:25%">共有${loop.index + 1}人評價</h3>
 								</c:if>
+								<c:if>
+								</c:if>
 								<tr>
 									<td class="text-center"><a href="${pageContext.servletContext.contextPath}/cdata/CdatadessServlet.do?c_id=${orderCid.c_id.c_id}">${orderCid.c_id.c_id}</a></td>
 									<td class="text-center">${orderCid.c_rating}顆星</td>
@@ -348,6 +368,7 @@
 </div>	
 </div>
 	<script src="${pageContext.servletContext.contextPath}/js/jquery.twzipcode.min.js"></script>
+	<script src="${pageContext.servletContext.contextPath}/calendarformasterpage/cal.js"></script>
 	<script>
 	
 // 		$(function() {
