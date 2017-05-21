@@ -5,7 +5,7 @@
 <jsp:useBean id="listOrder" scope="request" type="java.util.Set" />
 <html>
 <head>
-<title>師傅專頁</title>
+<title>Tool Man</title>
 <script>        
 
 // function star() {
@@ -61,60 +61,40 @@
 <br/>
 <br/>
 <br/>
-
-
-
 <jsp:include page="/nav/navigation.jsp" />
-
-
-
-
-  <table class="table table-bordered">
+ <table class="table table-bordered">
 	<tr>
 	    <th>消費者</th>
 	    <th>預約時間</th>
 	    <th>訂單完成時間</th>
 		<th>維修項目說明</th>
-		<th>施工地址</th>
-		<th>店家名稱</th>
 		<th>訂單狀態</th>
 		<th>回應訂單</th>
-		<th>分數</th>
-		<th>留言</th>
 		<th>評分</th>
+		<th>詳細訂單</th>
 		
 	</tr>
- 	
-<%-- 	 <%@ include file="page1.file" %>   --%>
-<%--  	<c:forEach var="orderVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>"> 	 --%>
-	
-	<c:forEach var="orderVO" items="${listOrder}" > 
+ 		<c:forEach var="orderVO" items="${listOrder}" > 
 	
 		<tr align='center' valign='middle'>
 			
 			<td>
-			
+			<a href="${pageContext.servletContext.contextPath}/cdata/CdatadessServlet.do?c_id=${LoginOK.c_id}">
 			${orderVO.c_id.c_id}
-			
+			</a>
 			</td>
 		<td>${orderVO.o_tdate}</td>
 			<td>${orderVO.o_edate}</td>
 			<td>${orderVO.o_des}</td>
-			<td>${orderVO.o_location}</td>
-				<td>${orderVO.b_name}</td>
 			<td>${orderVO.s_name}</td>
 				
 	               <td>
-<a href="#" name="masterres" data-id="${orderVO.getO_id()}"class="btn btn-info ">
+<a href="#" name="masterres" data-id="${orderVO.getO_id()}"class="btn btn-primary ">
           <span class="glyphicon glyphicon-send"></span> 回應 
         </a>
 			         </td>
-			<td>
-${orderVO.c_rating}
-			</td>
-				<td>
-${orderVO.ma_des}
-			</td>
+			
+				
 			
 			<td>
 			
@@ -125,7 +105,7 @@ ${orderVO.ma_des}
   <!-- Trigger the modal with a button -->
   
 
- <button type="button" class="btn btn-info " data-toggle="modal" data-target="#${orderVO.o_id}" onclick="star()">評分</button> 
+ <button type="button" class="btn btn-info " data-toggle="modal" data-target="#${orderVO.o_id}" onclick="star()"><span class="glyphicon glyphicon-star"></span> 評分</button> 
  
  
   <!-- Modal -->
@@ -176,7 +156,7 @@ ${orderVO.ma_des}
       <textarea class="form-control" rows="2" id="comment" name="ma_des"></textarea>
     </div>
     <div class="modal-footer">
-         	<input type="submit" name="masterres1" value="送出" >
+         	<input type="submit" name="masterres1" data-id="${orderVO.getO_id()}" value="送出" >
 			<input type="hidden" name="action" value="updateByM">
           	      <input type="hidden" name="o_id" value="${orderVO.o_id}">	   
           <input type="hidden" name="action" value="getOne_For_Update">
@@ -193,49 +173,129 @@ ${orderVO.ma_des}
  <%------------------------------------------------萬里長城----------------------------------------------------%>
 			
 			</td>
+<%------------------------------------------詳細訂單-------------------------------------------------------%>
+<td>
+  <div>
+ <button type="button" class="btn btn-success" data-toggle="modal" data-target="#${orderVO.o_id}kk" ><span class="glyphicon glyphicon-zoom-in"></span> 詳細訂單</button> 
+   <div class="modal fade" id="${orderVO.o_id}kk" role="dialog"  > 
+    <div class="modal-dialog" > 
+       <div class="modal-content" style="background-color:#CCE4FF">
+        <div class="modal-header">
+       <h2>詳細訂單</h2>
+       </div>
+             <div class="modal-body" >
+     <form class="form-horizontal " >
+  		<div class="form-group" style="font-size:16px;">
+<label class="control-label col-sm-4">消費者：</label>
+    <div class="col-sm-7">
+      <p class="form-control-static">${orderVO.c_id.c_id}</p>
+    </div>
+    </div>	
+			<div class="form-group" style="font-size:16px;">
+<label class="control-label col-sm-4">預約時間：</label>
+    <div class="col-sm-7">
+      <p class="form-control-static">${orderVO.o_tdate}</p>
+    </div>
+    </div>	
+			<div class="form-group" style="font-size:16px;">
+<label class="control-label col-sm-4">訂單完成時間：</label>
+    <div class="col-sm-7">
+      <p class="form-control-static">${orderVO.o_edate}</p>
+    </div>
+    </div>	
+			<div class="form-group" style="font-size:16px;">
+<label class="control-label col-sm-4">維修項目說明：</label>
+    <div class="col-sm-7">
+      <p class="form-control-static">${orderVO.o_des}</p>
+    </div>
+    </div>	
+			<div class="form-group" style="font-size:16px;">
+<label class="control-label col-sm-4">施工地址：</label>
+    <div class="col-sm-7">
+      <p class="form-control-static">${orderVO.o_location}</p>
+    </div>
+    </div>	
+			
+			<div class="form-group" style="font-size:16px;">
+<label class="control-label col-sm-4">訂單狀況：</label>
+    <div class="col-sm-7">
+      <p class="form-control-static">${orderVO.s_name}</p>
+    </div>
+    </div>	
+			<div class="form-group" style="font-size:16px;">
+<label class="control-label col-sm-4">你給的分數：</label>
+    <div class="col-sm-7">
+      <p class="form-control-static">${orderVO.c_rating}</p>
+    </div>
+    </div>	
+		<div class="form-group" style="font-size:16px;">
+<label class="control-label col-sm-4">你給的留言：</label>
+    <div class="col-sm-7">
+      <p class="form-control-static">${orderVO.ma_des}</p>
+    </div>
+    </div>	
+		
+<div class="form-group" style="font-size:16px;">
+<label class="control-label col-sm-4">消費者給的分數：</label>
+    <div class="col-sm-7">
+      <p class="form-control-static">${orderVO.m_rating}</p>
+    </div>
+    </div>
+    <div class="form-group" style="font-size:16px;">
+    <label class="control-label col-sm-4">消費者給的留言：</label>
+    <div class="col-sm-7">
+      <p class="form-control-static">${orderVO.ca_des}</p>
+    </div>
+  </div>
+</form>
+	<br>
+   </div> 
+           </div>
+        <div class="container-fluid">
+    </div>
+         <div class="modal-footer">
+         </div>
+         </div>
+  </div>
+ </div>
+
+</td>
+ <%------------------------------------------------萬里長城----------------------------------------------------%>
+					
+			
 			</tr>
 		
 	</c:forEach>
 </table>
- </div>
+
  	<script>
 		 $(function(){
-		 
 		 $('[name="masterres"]').on('click',masterresponse);
+		 $('[name="masterres1"]').on('click',masterresponse1);
 				 })//end ready
 		 
 		 function masterresponse(){
 			 var hyperlinkstring = "${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIFunctionServlet.do";
 		 	 var attr = $(this).data('id');
 			 $.post(hyperlinkstring,{"functionaction":"orderresponse","o_id":attr},function(data){
-				 alert("data");
+				 alert("已回應這則訂單");
 				 history.go(0) ;
 			 });
-			 }
-		 
-		 $(function(){
 			 
-			 $('[name="masterres1"]').on('click',masterresponse1);
-					 })//end ready
+		 }
+
 			 
 			 function masterresponse1(){
 				 var hyperlinkstring = "${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIFunctionServlet.do";
 			 	 var attr = $(this).data('id');
 				 $.post(hyperlinkstring,{"functionaction":"orderresponse1","o_id":attr},function(data){
 				 });
-				 }
-
-			 
-// 		 window.onload = masterresponse2;
-				 
-				 
-// 				 function masterresponse2(){
-// 				 var hyperlinkstring = "${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIFunctionServlet.do";
-// 			 	 var attr = $(this).data('id');
-// 				 $.post(hyperlinkstring,{"functionaction":"orderresponse2","o_id":attr},function(data){
-// 				 });
-// 				 }
+			 }
 		 
+		 
+			
+
+				 
  	</script>
 </body>
 </html>
