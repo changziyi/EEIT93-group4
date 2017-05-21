@@ -205,7 +205,7 @@ border: 5px double red;
 			$(function() {
 
 				$('input[name="homePage"]').click(function() {
-					$(location).attr('href', 'searchPage.jsp');
+					$(location).attr('href', '${pageContext.servletContext.contextPath}/index.jsp');
 				});
 
 			});

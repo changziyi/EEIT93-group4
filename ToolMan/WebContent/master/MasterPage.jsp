@@ -228,11 +228,11 @@
 									</tr>
 									<tr>
 										<td>作品名稱</td>
-										<td><input type="text" name="workname" required></td>
+										<td><input type="text" class="form-control" name="workname" required></td>
 									</tr>
 									<tr>
 										<td>作品描述</td>
-										<td><textarea name="workdes" id="workdes"></textarea></td>
+										<td><textarea name="workdes" class="form-control" id="workdes"></textarea></td>
 									</tr>
 <!-- 									<div><input type="file" id="file" name="file[]" multiple="multiple"></div> -->
 <!-- 									<div class="workImgArea">作品名稱　<input type="text" name="workname" required></div> -->
@@ -248,7 +248,6 @@
 					</form>
 				  </div>
 				</div>
-				
 			</c:if>
 			
 			<div class="form-group workdiv">
