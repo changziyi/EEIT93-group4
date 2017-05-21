@@ -315,52 +315,61 @@
 				</div>
 				
 				<div class="ratediv">
-					<table class="table table-hover" style="width:70%">
-						<tr>
-							<th class="text-center">會員</th>
-							<th class="text-center">評分</th>
-							<th class="text-center">日期</th>
-							<th class="text-center">評價</th>
-						</tr>
-						<c:forEach var="orderCid" items="${mdataVO.orders}" varStatus="loop">
-							<c:if test="${orderCid.s_name == '已完成'}">
-								<c:if test="${loop.last}">
-									<h3 style="margin-top:1%; margin-bottom:1%; margin-left:25%">共有${loop.index + 1}人評價</h3>
-<%-- 								</c:if> --%>
-<%-- 								<c:if> --%>
+					<c:if test="${not empty mdataVO.orders}">
+						<table class="table table-hover" style="width:70%">
+							<tr>
+								<th class="text-center">會員</th>
+								<th class="text-center">評分</th>
+								<th class="text-center">日期</th>
+								<th class="text-center">評價</th>
+							</tr>
+							<c:forEach var="orderCid" items="${mdataVO.orders}" varStatus="loop">
+								<c:if test="${orderCid.s_name == '已完成'}">
+									<c:if test="${loop.last}">
+										<h3 style="margin-top:1%; margin-bottom:1%; margin-left:25%">共有${loop.count}人評價</h3>
+									</c:if>
+									<tr>
+										<td class="text-center"><a href="${pageContext.servletContext.contextPath}/cdata/CdatadessServlet.do?c_id=${orderCid.c_id.c_id}">${orderCid.c_id.c_id}</a></td>
+										<td class="text-center">${orderCid.c_rating}顆星</td>
+										<td class="text-center">${orderCid.o_edate}</td>
+										<td class="text-center" style="width:50%">${orderCid.ca_des}</td>
+									</tr>
 								</c:if>
-								<tr>
-									<td class="text-center"><a href="${pageContext.servletContext.contextPath}/cdata/CdatadessServlet.do?c_id=${orderCid.c_id.c_id}">${orderCid.c_id.c_id}</a></td>
-									<td class="text-center">${orderCid.c_rating}顆星</td>
-									<td class="text-center">${orderCid.o_edate}</td>
-									<td class="text-center" style="width:50%">${orderCid.ca_des}</td>
-								</tr>
-							</c:if>
-						</c:forEach>
-					</table>
+							</c:forEach>
+						</table>
+					</c:if>
+					<c:if test="${empty mdataVO.orders}">
+						<h3 style="margin-top:1%; margin-bottom:1%; margin-left:25%">目前尚無評價</h3>
+					</c:if>
 				</div>
 		</div>
 		
 		<div id="menu4" class="tab-pane fade">
 			
 			<div class="ratediv">
-				<table class="table table-hover" style="width:70%">
-					<tr>
-						<th class="text-center">會員</th>
-						<th class="text-center">日期</th>
-					</tr>
-					<c:forEach var="orderCid" items="${mdataVO.orders}" varStatus="loop">
-						<c:if test="${orderCid.s_name == '已完成'}">
-							<c:if test="${loop.last}">
-									<h3 style="margin-top:3%; margin-bottom:3%; margin-left:23%">成功媒合人次：${loop.index + 1}人</h3>
+				<c:if test="${not empty mdataVO.orders}">
+					<table class="table table-hover" style="width:70%">
+						<tr>
+							<th class="text-center">會員</th>
+							<th class="text-center">日期</th>
+						</tr>
+						<c:forEach var="orderCid" items="${mdataVO.orders}" varStatus="loop">
+							<c:if test="${orderCid.s_name == '已完成'}">
+								<h3 style="margin-top:3%; margin-bottom:3%; margin-left:23%">
+								<c:if test="${loop.last}">
+									<h3 style="margin-top:3%; margin-bottom:3%; margin-left:23%">成功媒合人次：${loop.count}人</h3>
 								</c:if>
-							<tr>
-								<td class="text-center"><a href="${pageContext.servletContext.contextPath}/cdata/CdatadessServlet.do?c_id=${orderCid.c_id.c_id}">${orderCid.c_id.c_id}</a></td>
-								<td class="text-center">${orderCid.o_edate}</td>
-							</tr>
-						</c:if>
-					</c:forEach>
-				</table>
+								<tr>
+									<td class="text-center"><a href="${pageContext.servletContext.contextPath}/cdata/CdatadessServlet.do?c_id=${orderCid.c_id.c_id}">${orderCid.c_id.c_id}</a></td>
+									<td class="text-center">${orderCid.o_edate}</td>
+								</tr>
+							</c:if>
+						</c:forEach>
+					</table>
+				</c:if>
+				<c:if test="${empty mdataVO.orders}">
+					<h3 style="margin-top:8%; margin-bottom:1%; margin-left:25%">尚無媒合紀錄</h3>
+				</c:if>
 			</div>
 
 		</div>
