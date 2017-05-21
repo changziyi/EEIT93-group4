@@ -153,13 +153,14 @@ public class OrderService {
     public void updateOrderSnameToInProgressById(Integer o_id){
     	dao.updateOrderSnameToInProgressById(o_id);	
     }
+    
     public void updateOrderSnameToUnfinishedReviewById(){
     	dao = new OrderDAO();
 		List<OrderVO> orders = dao.getAllOrder();
 		for(OrderVO orderVO2 : orders) {
 			
-			if(((orderVO2.getM_rating()==null&orderVO2.getC_rating()!=null)||(orderVO2.getM_rating()!=null&orderVO2.getC_rating()==null
-					))&&(!"一方未評分".equals(orderVO2.getS_name()))){
+			if((((orderVO2.getM_rating()==null&orderVO2.getC_rating()!=null)||(orderVO2.getM_rating()!=null&orderVO2.getC_rating()==null
+					)))){
 		        dao = new OrderDAO();  
 		    	dao.updateOrderSnameToUnfinishedReviewById(orderVO2.getO_id());
 		    	}
