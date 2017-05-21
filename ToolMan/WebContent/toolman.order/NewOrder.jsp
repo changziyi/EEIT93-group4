@@ -7,9 +7,9 @@
 
 <!--full calendar-->
 	<link rel='stylesheet' href='../js/fullcalendar.min.css' />
-	<script src='../js/jquery-3.2.1.min.js'></script>
-	<script src='../js/moment.min.js'></script>
-	<script src='../js/fullcalendar.min.js'></script>
+	<script src='${pageContext.servletContext.contextPath}/js/jquery-3.2.1.min.js'></script>
+	<script src='${pageContext.servletContext.contextPath}/js/moment.min.js'></script>
+	<script src='${pageContext.servletContext.contextPath}/js/fullcalendar.min.js'></script>
 <!--full calendar-->
 <!------------------------------  jquery  -->
 	<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/js/jqueryui/jquery-ui.min.css">
@@ -23,10 +23,10 @@
 	<script src="${pageContext.servletContext.contextPath}/js/bootstrap.min.js" ></script>
 <!---- --------------------bootstrap -->
 <!-- --------------------smart_wizard -->
-    <link href="../js/smartform/smart_wizard_theme_circles.min.css" rel="stylesheet" type="text/css" />
-    <link href="../js/smartform/smart_wizard_theme_dots.min.css" rel="stylesheet" type="text/css" />
-	<link href="../js/smartform/smart_wizard.min.css" rel="stylesheet" type="text/css" /> 
-	<link href="../js/smartform/smart_wizard_theme_arrows.min.css" rel="stylesheet" type="text/css" />
+    <link href="${pageContext.servletContext.contextPath}/js/smartform/smart_wizard_theme_circles.min.css" rel="stylesheet" type="text/css" />
+    <link href="${pageContext.servletContext.contextPath}/js/smartform/smart_wizard_theme_dots.min.css" rel="stylesheet" type="text/css" />
+	<link href="${pageContext.servletContext.contextPath}/js/smartform/smart_wizard.min.css" rel="stylesheet" type="text/css" /> 
+	<link href="${pageContext.servletContext.contextPath}/js/smartform/smart_wizard_theme_arrows.min.css" rel="stylesheet" type="text/css" />
 <!------------------------ smart_wizard -->
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">	
@@ -221,9 +221,9 @@
   <!--------------------------------calendar---------------------------------->  
         <div id='wrap'>
 			<!-- draggable -->
-		<div id='external-events'  style="margin-top:46px;">
+		<div id='external-events'  style="width:200px;height:210px;margin-top:46px;margin-left:13%;">
 			<h4 style="margin-left:20%;">預約時間</h4>
-			<div id='external-events2' style="margin-left:20%;">
+			<div id='external-events2' style="margin-left:20%;text-align:center;margin:auto;display:table">
 				<div class='fc-event' data-id="orderevent"data-start="01:00" data-end='08:00'>早上</div>
 				<div class='fc-event' data-id="orderevent"data-start="12:00" data-end='06:00'>下午</div>
 				<div class='fc-event' data-id="orderevent"data-start="18:00" data-end='06:00'>晚上</div>
@@ -244,18 +244,18 @@
 		<div style='clear:both'></div>
 	</div>
                 <form class="form-inline">
-				             <div class="form-group" >
-				              <label >Choose Theme:</label>
-				              <select id="theme_selector1" class="form-control">
-				                    <option value="default">default</option>
-				                    <option value="arrows">arrows</option>
-				                    <option value="circles">circles</option>
-				                    <option value="dots">dots</option>
-				              </select>
-				            </div>           
+<!-- 				             <div class="form-group" > -->
+<!-- 				              <label >Choose Theme:</label> -->
+<!-- 				              <select id="theme_selector1" class="form-control"> -->
+<!-- 				                    <option value="default">default</option> -->
+<!-- 				                    <option value="arrows">arrows</option> -->
+<!-- 				                    <option value="circles">circles</option> -->
+<!-- 				                    <option value="dots">dots</option> -->
+<!-- 				              </select> -->
+<!-- 				            </div>            -->
 				            
-				            <label>External Buttons:</label>
-				            <div class="btn-group navbar-btn" role="group">
+
+				            <div class="btn-group navbar-btn" role="group" style="text-align:center;margin:auto;display:table">
 				                <button class="btn btn-default" id="prev-btn1" type="button" disabled>上一步</button>
 				                <button class="btn btn-default" id="next-btn1" type="button">下一步</button>
 				                <button class="btn btn-primary" id="submitcalendar" type="button">完成日程表</button>
@@ -295,27 +295,17 @@
 											<label class="labelstyle">服務類別</label>
 											
 										</td>
-										<td style="text-align:left;>
+										<td style="text-align:left;">
 										
-								<!-- 	parameters come directly from servlet , so the Ajax may not be needed-->	
+
 										<c:forEach var="oproset"  varStatus="stat" items="${mdataVO.mpros}">
-										
-								<!-- 	retrieve Collection object  mproset  from session.setAttribute("mproset",mproset)								 -->
 												<div id="pro" name="opro_id" class="checkbox-inline" style="border:1px solid blud;float:left">
 													<label><input type="checkbox"  style=" border:1px solid blue;" value=${oproset.m_pro} checked="checked" name="o_pro">${oproset.m_pro}</label>
 												</div>			
 										</c:forEach>
-		   
-   
-					
-								<!-- 		for test -->
-										
-								<%-- 			<c:forEach var="i" begin="1" end="5"> --%>
-								<!-- 			<input type="checkbox" value="oprotest" name="o_proid"/>oprotest1 -->
-								<%-- 			</c:forEach> --%>
-								<!-- 		</div><span value=${param.erroropro}>${param.erroropro}</span> -->
+
 										<span class="errormsg" value=${errormsg.erroro_pro}>${errormsg.erroro_pro}</span>
-										</div>
+										
 										</td>
 									</tr>
 									<tr>
@@ -417,18 +407,18 @@
 						</div>
 					</form>
 						<form class="form-inline">
-				             <div class="form-group" >
-				              <label >Choose Theme:</label>
-				              <select id="theme_selector" class="form-control">
-				                    <option value="default">default</option>
-				                    <option value="arrows">arrows</option>
-				                    <option value="circles">circles</option>
-				                    <option value="dots">dots</option>
-				              </select>
-				            </div>           
+<!-- 				             <div class="form-group" > -->
+<!-- 				              <label >Choose Theme:</label> -->
+<!-- 				              <select id="theme_selector" class="form-control"> -->
+<!-- 				                    <option value="default">default</option> -->
+<!-- 				                    <option value="arrows">arrows</option> -->
+<!-- 				                    <option value="circles">circles</option> -->
+<!-- 				                    <option value="dots">dots</option> -->
+<!-- 				              </select> -->
+<!-- 				            </div>            -->
 				            
-				            <label>External Buttons:</label>
-				            <div class="btn-group navbar-btn" role="group">
+				            
+				            <div class="btn-group navbar-btn" role="group" style="text-align:center;margin:auto;display:table">
 				                <button class="btn btn-default" id="prev-btn" type="button">上一步</button>
 				                <button class="btn btn-default" id="next-btn" type="button" disabled>下一步</button>
 				                <button class="btn btn-danger" id="reset-btn" type="button">確認送出</button>

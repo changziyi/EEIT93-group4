@@ -111,11 +111,13 @@ public class ManagerUIServlet extends HttpServlet {
 			List list2 = new ArrayList();
 				for(CdataVO cdataVO:list){
 					Map map = new HashMap();
+					String c_id	= cdataVO.getC_id();
+					if(!"sa".equals(c_id)){
 					Timestamp c_jdatestamp =	cdataVO.getC_jdate();
 					SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 					String c_jdate = df.format(c_jdatestamp);
 					String c_name =	cdataVO.getC_name();
-					String c_id	= cdataVO.getC_id();
+					
 					String c_addr = cdataVO.getC_addr();
 					String c_district = cdataVO.getC_district();
 					String c_city = cdataVO.getC_city();
@@ -124,6 +126,7 @@ public class ManagerUIServlet extends HttpServlet {
 					Integer c_averrating = cdataVO.getC_averrating();
 					String sa_cnote	=cdataVO.getSa_cnote();
 					System.out.println(c_id);
+					
 					map.put("c_jdate",c_jdate);
 					map.put("c_name",c_name);
 					map.put("c_id",c_id);
@@ -134,6 +137,7 @@ public class ManagerUIServlet extends HttpServlet {
 					map.put("c_averrating",c_averrating);
 					map.put("sa_cnote",sa_cnote);	
 					list2.add(map);
+					}
 				}//end for loop
 				String cjasonstring = JSONValue.toJSONString(list2);
 				System.out.println(cjasonstring);

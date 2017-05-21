@@ -5,7 +5,7 @@
 <jsp:useBean id="listOrder" scope="request" type="java.util.Set" />
 <html>
 <head>
-<title>師傅專頁</title>
+<title>Tool Man</title>
 <script>        
 
 // function star() {
