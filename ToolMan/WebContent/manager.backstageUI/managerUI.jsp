@@ -368,10 +368,7 @@ input[type='checkbox']:checked:after {
 		"DFKai-sb", DFKai-SB, 
 		sans-serif;
 	}
-</style>
-
-
-<script>
+</style><script>
 	var table ;//datatable variable not in use
 	var navagatorid = $('#navigator>ul>li.active').data('id');//top navigator
 	var dfd = $.Deferred();
@@ -467,8 +464,10 @@ $(function(){
         var checkboxdatas = [];
 		var checkboxdatasmaster = [];
 		var checkboxdatacustomer = [];
+		var mailtype=null;
 		// double mail effect---need to set c_id in mail servlet,or there will be only 1 time mail,because the quest has been forward to other place
-		 if((navagatorid=='o')||(navagatorid=='r')){// mail to both side of the transaction//tested ok
+		var mailtype = $(this).data('mailtype');
+		if((navagatorid=='o')||(navagatorid=='r')){// mail to both side of the transaction//tested ok
 		     	 $(":checkbox:checked").each(function(){            	  
 		     		checkboxdatasmaster.push($(this).attr('data-receiver1'));
 		     		checkboxdatacustomer.push($(this).attr('data-receiver2'));
@@ -483,7 +482,7 @@ $(function(){
 	 					var mssid=$('#receiver').val();
 		 				var mssum=$('#messum').val();
 		 				var mscontent=$('#mescontent').val();
-						$.post(hyperlinkstring,{"mss_id":mssid,"ms_content":mscontent,"ms_summary":mssum},function(){
+						$.post(hyperlinkstring,{"mss_id":mssid,"ms_content":mscontent,"ms_summary":mssum,"mailtype":mailtype},function(){
 							
 								$('#myModal01').modal("hide");
 						   
@@ -492,7 +491,7 @@ $(function(){
 				 	     		$('#receiver').val(checkboxdatacustomer.toString()).text(checkboxdatacustomer.toString());
 				 	     		$('#myModal01').modal('show');
 				 	     		 }, 300);
-				 	     			
+				 	     		mailtype="toc"
 							}	
 						});//end get function
 	
@@ -521,7 +520,7 @@ $(function(){
 	 					var mssid=$('#receiver').val();
 		 				var mssum=$('#messum').val();
 		 				var mscontent=$('#mescontent').val();
-						$.post(hyperlinkstring,{"mss_id":mssid,"ms_content":mscontent,"ms_summary":mssum},function(){
+						$.post(hyperlinkstring,{"mss_id":mssid,"ms_content":mscontent,"ms_summary":mssum,"mailtype":mailtype},function(){
 					    $('#myModal01').modal("hide");
 
 					});	//end post function
@@ -1018,8 +1017,8 @@ $(function(){
 					   if(id=="o"){
 						   
 						   	console.log(data);
-						   	
-						   	var toggleword = $('<input  type="checkbox" style="width:20px;height:20px"name="otoggle" />').val(data.o_id).attr('data-receiver1',data.o_bname).attr('data-receiver2',data.c_id);
+						   	// set mail type tom first, then use mail function to change second mail to toc
+						   	var toggleword = $('<input  type="checkbox" style="width:20px;height:20px"name="otoggle" />').val(data.o_id).attr('data-receiver1',data.o_bname).attr('data-receiver2',data.c_id).attr('data-mailtype','tob');
 						   	
 						   	var cell0 = $('<td style="text-align:center;display:table;"></td>').addClass('eventlisttbodytrtd').append(toggleword);
 						  	var cell1 = $('<td></td>').text(data.o_tdate).addClass('eventlisttbodytrtd');
@@ -1048,7 +1047,7 @@ $(function(){
 				  else if(id=="m"){				
 					  
 					  
-					   var toggleword =$('<input type="checkbox" class="cb" style="width:20px;height:20px"  name="mtoggle"/>').val(data.M_id).attr('data-receiver',data.B_name);;     
+					   var toggleword =$('<input type="checkbox" class="cb" style="width:20px;height:20px"  name="mtoggle"/>').val(data.M_id).attr('data-receiver',data.B_name).attr('data-mailtype','tob');     
 					   var mid =  $('<input type="button" class="btn btn-success"/> ').val("m"+data.M_id).addClass('eventlisttbodytrtd');
 					   var a =  $('<a></a> ').attr('href',"${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIFunctionServlet.do?"+"functionaction=findmaster&targetid="+data.M_id).append(mid);						  
 					   var midwordmid =  $('<span style="visibility: hidden;font-size:0px;margin:0pxlpadding:0px;"></span> ').text(data.M_id).addClass('eventlisttbodytrtd');
@@ -1071,7 +1070,7 @@ $(function(){
 					else if(id=="c"){
 						
 						
-					   var toggleword = $('<input type="checkbox" style="width:20px;height:20px" name="ctoggle" />').val(data.c_id).attr('data-receiver',data.c_id);
+					   var toggleword = $('<input type="checkbox" style="width:20px;height:20px" name="ctoggle" />').val(data.c_id).attr('data-receiver',data.c_id).attr('data-mailtype','toc');
 					   var mid =  $('<input type="button" class="btn btn-info" style="width:100px;word-break: keep-all"/> ').val(data.c_id).addClass('eventlisttbodytrtd');
 					   var a =  $('<a></a> ').attr('href',"${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIFunctionServlet.do?"+"functionaction=findcustomer&targetid="+data.c_id).append(mid);						  
 					   var midwordmid =  $('<span style="visibility: hidden;font-size:0px;margin:0pxlpadding:0px;"></span> ').text(data.c_id).addClass('eventlisttbodytrtd');
@@ -1091,7 +1090,7 @@ $(function(){
 						}// end if
 						
 					else if(id=="r"){
-						   var toggleword = $('<input type="checkbox" style="width:20px;height:20px" name="ctoggle" />').val(data.r_id).attr('data-receiver1',data.m_id).attr('data-receiver2',data.c_id).attr('data-extract',data.p_summary).attr('data-content',data.p_content);
+						   var toggleword = $('<input type="checkbox" style="width:20px;height:20px" name="ctoggle" />').val(data.r_id).attr('data-receiver1',data.m_id).attr('data-receiver2',data.c_id).attr('data-extract',data.p_summary).attr('data-content',data.p_content).attr('data-mailtype','tom');
 						   var mid =  $('<input type="button" class="btn btn-primary" name="reportevent"  />').val("r"+data.r_id).addClass('eventlisttbodytrtd').attr('data-receiver1',data.m_id).attr('data-receiver2',data.c_id).attr('data-extract',data.p_summary).attr('data-content',data.p_content);
 						   var midwordmid =  $('<span style="visibility: hidden;font-size:0px;margin:0pxlpadding:0px;"></span> ').text(data.r_id).addClass('eventlisttbodytrtd');
 						   var cell0 = $('<td style="text-align:center;display:table;"></td>').addClass('eventlisttbodytrtd').append(toggleword);
@@ -1115,7 +1114,7 @@ $(function(){
 					}
 					else if(id=="ad"){
 						
-						   var toggleword = $('<input type="checkbox" style="width:20px;height:20px;" name="ctoggle" />').val(data.ad_id).attr('data-receiver',data.m_id);
+						   var toggleword = $('<input type="checkbox" style="width:20px;height:20px;" name="ctoggle" />').val(data.ad_id).attr('data-receiver',data.m_id).attr('data-mailtype','tom');
 						   var mid =  $('<input type="button" class="btn btn-warning"/>').val("ad"+data.ad_id).addClass('eventlisttbodytrtd');
 						   var a =  $('<a></a> ').attr('href',"${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIFunctionServlet.do?"+"functionaction=findcustomer&targetid="+data.ad_id).append(mid);						  
 						   var midwordmid =  $('<span style="visibility: hidden;font-size:0px;margin:0pxlpadding:0px;"></span> ').text(data.ad_id).addClass('eventlisttbodytrtd');
@@ -1215,6 +1214,9 @@ $(function(){
 				   
 				   
 </script>
+
+
+
 
 
 </body>

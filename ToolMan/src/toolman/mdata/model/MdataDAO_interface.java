@@ -22,7 +22,7 @@ public interface MdataDAO_interface {
 	public Integer updatemasterSname(Integer m_id,String s_name);//by Benny
     public int updatecustomerSamnote(Integer m_id, String sa_mnote);//by Benny
 	public List<MdataVO> getBySname(String s_name);//by Benny
-	public List<MdataVO> getMasterByB(String b_name);//by Benny
+	public MdataVO getMasterByB(String b_name);//by Benny
 	public Set<OrderVO> getOrderByM(Integer m_id);//訂單
 	
 	//預存程序

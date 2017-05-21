@@ -35,6 +35,7 @@ public interface CdataDAO_interface {
     public Set<BlacklistVO> getBlackByC(String c_id);//訂單
 
     public CdataVO getById(String c_id);//benny
+    public CdataVO getByM(Integer m_id);//benny
 	public List<CdataVO> getBySname(String s_name);//benny
 	public int updatecustomerSname(String c_id, String s_name);//benny
 	public int updatecustomerSacnote(String c_id, String sa_cnote);//benny

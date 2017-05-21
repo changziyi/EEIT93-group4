@@ -88,6 +88,9 @@ public class CdataService {
 	public CdataVO getById(String c_id){//benny
 		return dao.getById(c_id);
 	}
+	public CdataVO getByM(Integer m_id){
+		return dao.getByM(m_id);
+	}
 	public Set<OrderVO> getOrderByC(String c_id) {//訂單
 		return dao.getOrderByC(c_id);
 	}
