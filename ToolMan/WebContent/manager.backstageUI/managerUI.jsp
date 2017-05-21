@@ -591,7 +591,7 @@ $(function(){
 		 				var mscontent=$('#mescontent').val();
 						$.post(hyperlinkstring,{"mss_id":mssid,"ms_content":mscontent,"ms_summary":mssum,"mailtype":mailtype},function(){
 					    $('#myModal01').modal("hide");
-
+					    $('#btnsubmitmail').unbind('click');
 					});	//end post function
 				});//end post 
    			 }//end else 
@@ -874,7 +874,9 @@ $(function(){
 			$.post(hyperlinkstring,{"functionaction":"mpass","toggledcheckbox":checkboxdatas2},function(data){
 				alert(data);
 				 $('#mpass1').unbind('click');
+				 $('#mnotpass').unbind('click');
 				 loadProduct(navagatorid,datastatus,datatime);
+				 
            });//end get function
 		}//mpass
 		
@@ -884,6 +886,7 @@ $(function(){
 			$.post(hyperlinkstring,{"functionaction":"mnotpass","toggledcheckbox":checkboxdatas2,"notpassword":notpassword},function(data){
 				alert(data);
 				$('#mnotpass').unbind('click');
+				 $('#mpass1').unbind('click');
 				loadProduct(navagatorid,datastatus,datatime);
            });//end get function
 		}//end mnotpass
