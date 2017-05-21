@@ -253,7 +253,7 @@ public class managerUIFunctionServlet extends HttpServlet {
 		int count=0;
 	
 		OrderService orderservice = new OrderService();
-		orderservice.updateOrderSnameToUnfinishedReviewById();
+		orderservice.updateOrderSnameToUnfinishedReviewById(Integer.parseInt(o_id));
 	out = response.getWriter();
 		System.out.print(count);
 		out.write("您已回應成功");		

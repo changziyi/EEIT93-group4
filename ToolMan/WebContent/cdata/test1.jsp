@@ -20,10 +20,12 @@
 <link href="${pageContext.servletContext.contextPath}/nav/nav.css" rel="stylesheet">
 <link rel="Shortcut Icon" href="${pageContext.servletContext.contextPath}/favicon.ico" />
 <!---- dialog ---->
+
 <link href="${pageContext.servletContext.contextPath}/js/jqueryui/jquery-ui.min.css" rel="stylesheet">
 <!-- <link type="text/css" href="../js/css/jquery-ui-1.8.11.custom.css" rel="Stylesheet"> -->
-<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-<script src="../js/jqueryui/jquery-ui.min.js"></script>
+	<script src='${pageContext.servletContext.contextPath}/js/jquery-3.2.1.min.js'></script>
+<script src="${pageContext.servletContext.contextPath}/js/jqueryui/jquery-ui.min.js"></script>
+
 </head>
 <style>
 .a {
@@ -146,7 +148,7 @@ tbody td:hover {
 		</table>
 		<!--------------------------------------------------------- dialog 修改 ------------------------------------------------------------>
 			<div id="dialog" title="Dialog">
-    		<form id="message_form" method="POST" >  
+<!--     		<form id="message_form" method="POST" >   -->
     			<fieldset>  
     			<label for="name">姓名:</label>  
     			<input type="text" name="name" id="c_name" value="${cdataVO.c_name}" class="text ui-widget-content ui-corner-all" />
@@ -160,9 +162,9 @@ tbody td:hover {
     			<input type="text" name="email" id="c_email" value="${cdataVO.c_email}" class="text ui-widget-content ui-corner-all" /> 
     			<label for="addr">地址:</label>  
     			<input type="text" name="addr" id="c_addr" value="${cdataVO.c_addr}" class="text ui-widget-content ui-corner-all" /> 
-				<button id="buttonsubmit" class="text ui-widget-content ui-corner-all" />送出</button>
+				<button id="buttonsubmit" class="text ui-widget-content ui-corner-all" >送出</button>
   				</fieldset> 				 
-   		  	 </form>  
+<!--    		  	 </form>   -->
 			</div>
 		<!---------------------------------------------------------- dialog 修改 ----------------------------------------------------------->
 		</div>
@@ -362,10 +364,11 @@ tbody td:hover {
 // }); 
 
 $(function(){
+ 
+ 	dialog();
 	$( "#create-user" ) .click(function() {   
 		 $( "#dialog" ).dialog( "open" );   
-	});  
- 	dialog();
+	}); 
  	$('#buttonsubmit').on('click',submitdialog);
 });//end ready
  function submitdialog(){
@@ -377,18 +380,13 @@ $(function(){
 	var c_addr =$( "#c_addr" ).val();
 	var hyperlink ="${pageContext.servletContext.contextPath}/cdata/CdatadessServlet.do";
 		
-	$.post(hyperlink,{"action":"submitdialog",
-						"c_name":c_name, "c_pswd":c_pswd, 		
-						 "c_birth":c_birth,"c_cel":c_cel,
-						 "c_email":c_email,"c_addr":c_addr},function(data){
-							 setTimeout(function () {
-									$('#dialog').dialog( "close" );  
-							  		 }, 300);
-							}
+	$.get(hyperlink,{"action":"submitdialog","c_name":c_name, "c_pswd":c_pswd,  "c_birth":c_birth,"c_cel":c_cel,"c_email":c_email,"c_addr":c_addr},
+			function(data){ 		
+						}
+// 	
 					
        );//end get function
-	
-	
+	$("#dialog" ).dialog( "close" );  
 }
 function dialog(){
 
@@ -401,7 +399,9 @@ function dialog(){
 	        buttons: [{   
  
 	        close: function() {   
-	            allFields.val( "" ).removeClass( "ui-state-error" );   
+	        	
+	            $('#dialog').val("").removeClass("ui-state-error");
+	            
 	       	 }   
 		}]
 	 }); //end dialog
