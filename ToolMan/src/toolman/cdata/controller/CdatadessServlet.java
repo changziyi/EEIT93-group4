@@ -34,6 +34,7 @@ public class CdatadessServlet extends HttpServlet {
 		 System.out.println(c_name);
 		 String c_pwd = request.getParameter("c_pswd");
 		 Date c_birth = java.sql.Date.valueOf(request.getParameter("c_birth").trim());
+		 System.out.println(c_birth);
 		 String c_cel = request.getParameter("c_cel"); 
 		 String c_email = request.getParameter("c_email");
 		 String c_addr = request.getParameter("c_addr");
