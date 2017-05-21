@@ -7,9 +7,9 @@
 
 <!--full calendar-->
 	<link rel='stylesheet' href='../js/fullcalendar.min.css' />
-	<script src='../js/jquery-3.2.1.min.js'></script>
-	<script src='../js/moment.min.js'></script>
-	<script src='../js/fullcalendar.min.js'></script>
+	<script src='${pageContext.servletContext.contextPath}/js/jquery-3.2.1.min.js'></script>
+	<script src='${pageContext.servletContext.contextPath}/js/moment.min.js'></script>
+	<script src='${pageContext.servletContext.contextPath}/js/fullcalendar.min.js'></script>
 <!--full calendar-->
 <!------------------------------  jquery  -->
 	<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/js/jqueryui/jquery-ui.min.css">
@@ -23,10 +23,10 @@
 	<script src="${pageContext.servletContext.contextPath}/js/bootstrap.min.js" ></script>
 <!---- --------------------bootstrap -->
 <!-- --------------------smart_wizard -->
-    <link href="../js/smartform/smart_wizard_theme_circles.min.css" rel="stylesheet" type="text/css" />
-    <link href="../js/smartform/smart_wizard_theme_dots.min.css" rel="stylesheet" type="text/css" />
-	<link href="../js/smartform/smart_wizard.min.css" rel="stylesheet" type="text/css" /> 
-	<link href="../js/smartform/smart_wizard_theme_arrows.min.css" rel="stylesheet" type="text/css" />
+    <link href="${pageContext.servletContext.contextPath}/js/smartform/smart_wizard_theme_circles.min.css" rel="stylesheet" type="text/css" />
+    <link href="${pageContext.servletContext.contextPath}/js/smartform/smart_wizard_theme_dots.min.css" rel="stylesheet" type="text/css" />
+	<link href="${pageContext.servletContext.contextPath}/js/smartform/smart_wizard.min.css" rel="stylesheet" type="text/css" /> 
+	<link href="${pageContext.servletContext.contextPath}/js/smartform/smart_wizard_theme_arrows.min.css" rel="stylesheet" type="text/css" />
 <!------------------------ smart_wizard -->
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">	
