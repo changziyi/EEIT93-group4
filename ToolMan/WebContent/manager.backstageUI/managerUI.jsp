@@ -354,14 +354,15 @@
 									<td ><div ><img id="m_cer2" class="img-thumbnail" height="300px" src=""></div>
 								</tr>
 							</table>
+							<div><textarea id="notpassword"></textarea></div>
 						</div>
 						
 						</div>
 					</div>
 					<div class="modal-footer">
 							<input type="button" name="homePage" class="btn btn-primary" value="審核通過">
-							<button type="button" class="btn btn-secondary" data-dismiss="modal">審核通過</button>
-                     		<button type="button" class="btn btn-secondary" data-dismiss="modal">審核未過</button>
+							<button type="button"　id="mpass" class="btn btn-secondary" data-dismiss="modal">審核通過</button>
+                     		<button type="button" id="mnotpass" class="btn btn-secondary" data-dismiss="modal">審核未過</button>
                       </div>	
                      </div>
 				 </div>
@@ -817,7 +818,7 @@ $(function(){
 			loadProduct(id,datastatus,datatime);
 			
 		}//end table filtering
-		
+		var checkboxdatas2 = null;
 		function verifymaster(){
 			
 			var valueattr =$(this).val();
@@ -827,7 +828,7 @@ $(function(){
 	        	 $(":checkbox:checked").each(function(){            	  
 	            	   checkboxdatas.push($(this).val()); 
 	            })
-	            var checkboxdatas2=checkboxdatas.toString();
+	            checkboxdatas2=checkboxdatas.toString();
 	            if(checkboxdatas2==""){
 	        		 alert("請勾選項目");
 	        	 }//end if
@@ -864,8 +865,24 @@ $(function(){
 //	         			$('#eventlist').empty();
 	     		$.when(dfd3,dfd4,dfd5).done( $('#mmodal').modal());
 	            }//end else 
-	           
-		}
+	            $('#mpass').on('click',mpass);
+	            $('#mnotpass').on('click',mnotpass);
+		}//end verify master
+		
+		function mpass(){
+			var hyperlinkstring = "${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIFunctionServlet.do";
+			$.post(hyperlinkstring,{"functionaction":"mpass","toggledcheckbox":checkboxdatas2},function(data){
+				alert(data);
+           });//end get function
+		}//mpass
+		
+		function mnotpass(){
+			var hyperlinkstring = "${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIFunctionServlet.do";
+			var notpassword = $('#notpassword').val();
+			$.post(hyperlinkstring,{"functionaction":"mnotpass","toggledcheckbox":checkboxdatas2,"notpassword":notpassword},function(data){
+				alert(data);				
+           });//end get function
+		}//end mnotpass
 		
 	   function subfunctionrow(){
 

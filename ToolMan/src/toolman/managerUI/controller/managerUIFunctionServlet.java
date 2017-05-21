@@ -3,6 +3,7 @@ package toolman.managerUI.controller;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -23,6 +24,8 @@ import toolman.ad.model.AdService;
 import toolman.ad.model.AdVO;
 import toolman.cdata.model.CdataService;
 import toolman.cdata.model.CdataVO;
+import toolman.email.model.EmailDAO;
+import toolman.email.model.EmailVO;
 import toolman.mdata.model.MdataService;
 import toolman.mdata.model.MdataVO;
 import toolman.mpro.model.MProVO;
@@ -124,6 +127,56 @@ public class managerUIFunctionServlet extends HttpServlet {
 				
 			}	
 			out.write(jsonstrnig);
+			out.close();
+		}
+		if("mpass".equals(functionaction)){
+			List<MdataVO> list = new ArrayList<MdataVO>();
+			MdataService mdataservice = new MdataService();
+			System.out.println(arraytoggled);
+			
+			
+			mdataservice.updatemasterSname(Integer.parseInt(arraytoggled[0].toString()),"審核通過");
+			CdataService service = new CdataService();
+			CdataVO cdataVO1 = service.getByM(Integer.parseInt(arraytoggled[0].toString()));
+			String mss_id = cdataVO1.getC_id();
+			EmailDAO dao = new EmailDAO();
+			EmailVO emailVO = new EmailVO();
+			
+			emailVO.setMsr_id("sa");
+			emailVO.setMss_id(mss_id);
+			emailVO.setMs_summary("您已通過開店審核");
+			emailVO.setMs_content(request.getParameter("恭喜您通過開店之審核，歡迎您加入師傅的行列"));
+			Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+			emailVO.setMs_date(timestamp);
+			emailVO.setS_name(false);
+			emailVO.setMs_trash(false);
+			dao.insert(emailVO);
+			out.write("已完成審核");
+			out.close();
+		}
+		
+		if("mnotpass".equals(functionaction)){
+			List<MdataVO> list = new ArrayList<MdataVO>();
+			EmailDAO dao = new EmailDAO();
+			EmailVO emailVO = new EmailVO();
+			MdataService mdataservice = new MdataService();
+			System.out.println(arraytoggled);
+			mdataservice.updatemasterSname(Integer.parseInt(arraytoggled[0].toString()),"審核未過");
+			
+			CdataService service = new CdataService();
+			CdataVO cdataVO1 = service.getByM(Integer.parseInt(arraytoggled[0].toString()));
+			String mss_id = cdataVO1.getC_id();
+
+			emailVO.setMsr_id("sa");
+			emailVO.setMss_id(mss_id);
+			emailVO.setMs_summary("您未通過開店審核，請修改後再次申請");
+			emailVO.setMs_content(request.getParameter("notpassword"));
+			Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+			emailVO.setMs_date(timestamp);
+			emailVO.setS_name(false);
+			emailVO.setMs_trash(false);
+			dao.insert(emailVO);
+			out.write("已退回審核申請");
 			out.close();
 		}
 		
