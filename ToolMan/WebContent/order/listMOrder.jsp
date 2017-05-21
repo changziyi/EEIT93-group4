@@ -156,7 +156,7 @@
       <textarea class="form-control" rows="2" id="comment" name="ma_des"></textarea>
     </div>
     <div class="modal-footer">
-         	<input type="submit" name="masterres1" value="送出" >
+         	<input type="submit" name="masterres1" data-id="${orderVO.getO_id()}" value="送出" >
 			<input type="hidden" name="action" value="updateByM">
           	      <input type="hidden" name="o_id" value="${orderVO.o_id}">	   
           <input type="hidden" name="action" value="getOne_For_Update">
@@ -272,30 +272,31 @@
 		 $(function(){
 		 
 		 $('[name="masterres"]').on('click',masterresponse);
+		 $('[name="masterres1"]').on('click',masterresponse1);
 				 })//end ready
 		 
 		 function masterresponse(){
 			 var hyperlinkstring = "${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIFunctionServlet.do";
 		 	 var attr = $(this).data('id');
 			 $.post(hyperlinkstring,{"functionaction":"orderresponse","o_id":attr},function(data){
-				 alert("以回應這則訂單");
+				 alert("已回應這則訂單");
 				 history.go(0) ;
 			 });
-			 }
-		 
-		 $(function(){
 			 
-			 $('[name="masterres1"]').on('click',masterresponse1);
-					 })//end ready
+		 }
+
 			 
 			 function masterresponse1(){
 				 var hyperlinkstring = "${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIFunctionServlet.do";
 			 	 var attr = $(this).data('id');
 				 $.post(hyperlinkstring,{"functionaction":"orderresponse1","o_id":attr},function(data){
 				 });
-				 }
+			 }
+		 
+		 
+			
 
-			 
+				 
  	</script>
 </body>
 </html>
