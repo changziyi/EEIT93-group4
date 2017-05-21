@@ -873,7 +873,7 @@ $(function(){
 			var hyperlinkstring = "${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIFunctionServlet.do";
 			$.post(hyperlinkstring,{"functionaction":"mpass","toggledcheckbox":checkboxdatas2},function(data){
 				alert(data);
-				 $('#mpass').unbind('click');
+				 $('#mpass1').unbind('click');
 				 loadProduct(navagatorid,datastatus,datatime);
            });//end get function
 		}//mpass
