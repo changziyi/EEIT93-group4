@@ -270,7 +270,7 @@
 	</div>
 <!-- ----------------------------------end mail block------------------------------------------------->
 <!-- -----------------------------Report Modal---------------------------------------- -->
-<div class="modal fade" id="ormodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade textstyle" id="ormodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -306,48 +306,48 @@
 </div>	
 <!-- -----------------------------end Report Modal---------------------------------------- -->
 <!-- -----------------------------master Modal---------------------------------------- -->
-<div class="modal fade" id="mmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade textstyle" id="mmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 			<div class="modal-header">
 				<h3 class="text-center">店家資訊</h3>
 			</div>
 			
-			<div class="modal-body">
+			<div class="modal-body" style="display:table;">
 				<div>
 						<div class="form-group">
 							<table class="table table-hover">
 								<tr>
 									<td class="form-control-label">首頁圖片</td>
-									<td><div><img id="m_cer" class="img-thumbnail" width="350px" src=""></div>
+									<td ><div><img id="m_cer" class="img-thumbnail" width="350px" src=""></div>
 								</tr>
-								<tr>
+								<tr style="vertical-align:middle;margin:auto">
 									<td class="form-control-label">店家名稱</td>
-									<td id="bname" class="form-control">${cdata_mdataVO.b_name}</td>
+									<td style="margin-top:10px;width:500px;height:50px;" id="bname"  class="form-control"></td>
 								</tr>
 								<tr>
 									<td class="form-control-label">店家介紹</td>
-									<td><div id="bdes"style="width:500px" class="form-control">${cdata_mdataVO.b_des}</div></td>
+									<td style="margin-top:10px;width:500px;height:50px;" id="bdes" class="form-control"></td>
 								</tr>
 								<tr>
 									<td class="form-control-label">師傅姓名</td>
-									<td id="mname" class="form-control">${cdata_mdataVO.m_name}</td>
+									<td id="mname" style="margin-top:10px;width:500px;height:50px;" class="form-control"></td>
 								</tr>
 								<tr>
 									<td class="form-control-label">電話</td>
-									<td id="mtel" class="form-control">${cdata_mdataVO.m_cel}</td>
+									<td id="mtel" style="margin-top:10px;width:500px;height:50px;" class="form-control"></td>
 								</tr>
 								<tr>
 									<td class="form-control-label">信箱</td>
-									<td id="mmail" class="form-control">${cdata_mdataVO.m_email}</td>
+									<td id="mmail" style="margin-top:10px;width:500px;height:50px;" class="form-control"></td>
 								</tr>
 								<tr>
 									<td class="form-control-label">地址</td>
-									<td id="maddr" class="form-control">${cdata_mdataVO.m_city}${cdata_mdataVO.m_district}${cdata_mdataVO.m_addr}</td>
+									<td id="maddr" style="margin-top:10px;width:500px;height:50px;" class="form-control">$</td>
 								</tr>
 								<tr>
 									<td class="form-control-label">維修類別</td>
-									<td id="mpros" class="form-control"><c:forEach var="aMpro" items="${cdata_mdataVO.mpros}">${aMpro.m_pro}</c:forEach></td>
+									<td id="mpros" style="margin-top:10px;width:500px;height:50px;" class="form-control"><c:forEach var="aMpro" items="${cdata_mdataVO.mpros}"></c:forEach></td>
 								</tr>
 								<tr>
 									<td class="form-control-label">專業證照</td>
@@ -360,7 +360,6 @@
 						</div>
 					</div>
 					<div class="modal-footer">
-							<input type="button" name="homePage" class="btn btn-primary" value="審核通過">
 							<button type="button" id="mpass1" class="btn btn-secondary" data-dismiss="modal">審核通過</button>
                      		<button type="button" id="mnotpass" class="btn btn-secondary" data-dismiss="modal">審核未過</button>
                       </div>	
