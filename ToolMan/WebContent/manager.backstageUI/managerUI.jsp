@@ -361,7 +361,7 @@
 					</div>
 					<div class="modal-footer">
 							<input type="button" name="homePage" class="btn btn-primary" value="審核通過">
-							<button type="button"　id="mpass" class="btn btn-secondary" data-dismiss="modal">審核通過</button>
+							<button type="button" id="mpass1" class="btn btn-secondary" data-dismiss="modal">審核通過</button>
                      		<button type="button" id="mnotpass" class="btn btn-secondary" data-dismiss="modal">審核未過</button>
                       </div>	
                      </div>
@@ -541,6 +541,7 @@ $(function(){
 	 	     		var unbind=false;
 	 	     		 $('#btnsubmitmail').on('click',function(){
 	 	     			var hyperlinkstring = "${pageContext.servletContext.contextPath}/email/Email.do";
+	 	     			// must unbind the event, or it will accumulate forever
 	 	     			if(unbind==true){
 	 	     				$('#btnsubmitmail').unbind('click');
 	 	     			}
@@ -863,8 +864,9 @@ $(function(){
 //	         			$('#eventlist').empty();
 	     		$.when(dfd3,dfd4,dfd5).done( $('#mmodal').modal());
 	            }//end else 
-	            $('#mpass').on('click',mpass);
+	            
 	            $('#mnotpass').on('click',mnotpass);
+	            $('#mpass1').on('click', mpass);
 		}//end verify master
 		
 		function mpass(){
@@ -872,6 +874,7 @@ $(function(){
 			$.post(hyperlinkstring,{"functionaction":"mpass","toggledcheckbox":checkboxdatas2},function(data){
 				alert(data);
 				 $('#mpass').unbind('click');
+				 loadProduct(navagatorid,datastatus,datatime);
            });//end get function
 		}//mpass
 		
@@ -881,6 +884,7 @@ $(function(){
 			$.post(hyperlinkstring,{"functionaction":"mnotpass","toggledcheckbox":checkboxdatas2,"notpassword":notpassword},function(data){
 				alert(data);
 				$('#mnotpass').unbind('click');
+				loadProduct(navagatorid,datastatus,datatime);
            });//end get function
 		}//end mnotpass
 		

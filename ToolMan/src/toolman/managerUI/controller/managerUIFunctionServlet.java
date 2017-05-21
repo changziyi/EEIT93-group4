@@ -106,7 +106,7 @@ public class managerUIFunctionServlet extends HttpServlet {
 				map.put("bname", mdataVO.getB_name());
 				map.put("bdes", mdataVO.getB_des());
 				map.put("mname", mdataVO.getM_name());				
-				map.put("mcel", mdataVO.getM_cel());
+				map.put("mtel", mdataVO.getM_cel());
 				map.put("mmail", mdataVO.getM_email());
 				map.put("maddr", mdataVO.getM_addr());
 				 Set<MProVO> mproset= mdataVO.getMpros();
@@ -130,15 +130,15 @@ public class managerUIFunctionServlet extends HttpServlet {
 			out.close();
 		}
 		if("mpass".equals(functionaction)){
-			List<MdataVO> list = new ArrayList<MdataVO>();
+			
 			MdataService mdataservice = new MdataService();
 			System.out.println(arraytoggled);
-			
-			
 			mdataservice.updatemasterSname(Integer.parseInt(arraytoggled[0].toString()),"審核通過");
+			
 			CdataService service = new CdataService();
 			CdataVO cdataVO1 = service.getByM(Integer.parseInt(arraytoggled[0].toString()));
 			String mss_id = cdataVO1.getC_id();
+			
 			EmailDAO dao = new EmailDAO();
 			EmailVO emailVO = new EmailVO();
 			
@@ -156,9 +156,8 @@ public class managerUIFunctionServlet extends HttpServlet {
 		}
 		
 		if("mnotpass".equals(functionaction)){
-			List<MdataVO> list = new ArrayList<MdataVO>();
-			EmailDAO dao = new EmailDAO();
-			EmailVO emailVO = new EmailVO();
+			
+
 			MdataService mdataservice = new MdataService();
 			System.out.println(arraytoggled);
 			mdataservice.updatemasterSname(Integer.parseInt(arraytoggled[0].toString()),"審核未過");
@@ -166,7 +165,10 @@ public class managerUIFunctionServlet extends HttpServlet {
 			CdataService service = new CdataService();
 			CdataVO cdataVO1 = service.getByM(Integer.parseInt(arraytoggled[0].toString()));
 			String mss_id = cdataVO1.getC_id();
-
+			
+			EmailDAO dao = new EmailDAO();
+			EmailVO emailVO = new EmailVO();
+			
 			emailVO.setMsr_id("sa");
 			emailVO.setMss_id(mss_id);
 			emailVO.setMs_summary("您未通過開店審核，請修改後再次申請");
