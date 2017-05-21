@@ -132,7 +132,7 @@ public class EmailServlet extends HttpServlet {
 
 		// 狀態
 		EmailService emailserv = new EmailService();
-
+		System.out.println("mssid="+mss_id);
 		emailVO.setMsr_id(SendAccount);
 		emailVO.setMss_id(mss_id);
 		emailVO.setMs_summary(ms_summary);

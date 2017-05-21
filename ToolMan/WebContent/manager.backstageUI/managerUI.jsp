@@ -305,9 +305,69 @@
   </div>
 </div>	
 <!-- -----------------------------end Report Modal---------------------------------------- -->
-<!-- -----------------------------Order Modal---------------------------------------- -->
-
-<!-- -----------------------------end Order and Report Modal---------------------------------------- --><style>   
+<!-- -----------------------------master Modal---------------------------------------- -->
+<div class="modal fade" id="mmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+			<div class="modal-header">
+				<h3 class="text-center">店家資訊</h3>
+			</div>
+			
+			<div class="modal-body">
+				<div>
+						<div class="form-group">
+							<table class="table table-hover">
+								<tr>
+									<td class="form-control-label">首頁圖片</td>
+									<td><div><img id="m_cer" class="img-thumbnail" width="350px" src=""></div>
+								</tr>
+								<tr>
+									<td class="form-control-label">店家名稱</td>
+									<td id="bname" class="form-control">${cdata_mdataVO.b_name}</td>
+								</tr>
+								<tr>
+									<td class="form-control-label">店家介紹</td>
+									<td><div id="bdes"style="width:500px" class="form-control">${cdata_mdataVO.b_des}</div></td>
+								</tr>
+								<tr>
+									<td class="form-control-label">師傅姓名</td>
+									<td id="mname" class="form-control">${cdata_mdataVO.m_name}</td>
+								</tr>
+								<tr>
+									<td class="form-control-label">電話</td>
+									<td id="mtel" class="form-control">${cdata_mdataVO.m_cel}</td>
+								</tr>
+								<tr>
+									<td class="form-control-label">信箱</td>
+									<td id="mmail" class="form-control">${cdata_mdataVO.m_email}</td>
+								</tr>
+								<tr>
+									<td class="form-control-label">地址</td>
+									<td id="maddr" class="form-control">${cdata_mdataVO.m_city}${cdata_mdataVO.m_district}${cdata_mdataVO.m_addr}</td>
+								</tr>
+								<tr>
+									<td class="form-control-label">維修類別</td>
+									<td id="mpros" class="form-control"><c:forEach var="aMpro" items="${cdata_mdataVO.mpros}">${aMpro.m_pro}</c:forEach></td>
+								</tr>
+								<tr>
+									<td class="form-control-label">專業證照</td>
+									<td ><div ><img id="m_cer2" class="img-thumbnail" height="300px" src=""></div>
+								</tr>
+							</table>
+						</div>
+						
+						</div>
+					</div>
+					<div class="modal-footer">
+							<input type="button" name="homePage" class="btn btn-primary" value="審核通過">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">審核通過</button>
+                     		<button type="button" class="btn btn-secondary" data-dismiss="modal">審核未過</button>
+                      </div>	
+                     </div>
+				 </div>
+				
+			</div>
+<!-- -----------------------------end master Modal---------------------------------------- --><style>   
 input[type='checkbox'] {
 margin: 0 auto;
 display: block;
@@ -466,11 +526,12 @@ $(function(){
 		var checkboxdatacustomer = [];
 		var mailtype=null;
 		// double mail effect---need to set c_id in mail servlet,or there will be only 1 time mail,because the quest has been forward to other place
-		var mailtype = $(this).data('mailtype');
+		
 		if((navagatorid=='o')||(navagatorid=='r')){// mail to both side of the transaction//tested ok
 		     	 $(":checkbox:checked").each(function(){            	  
 		     		checkboxdatasmaster.push($(this).attr('data-receiver1'));
 		     		checkboxdatacustomer.push($(this).attr('data-receiver2'));
+		     		mailtype = $(this).data('mailtype');
 		         }) 
 		         if((checkboxdatasmaster.toString()=="")||(checkboxdatacustomer.toString()=="")){
 	 	     		 	alert("請勾選項目");
@@ -490,7 +551,7 @@ $(function(){
 				 	     		setTimeout(function () {
 				 	     		$('#receiver').val(checkboxdatacustomer.toString()).text(checkboxdatacustomer.toString());
 				 	     		$('#myModal01').modal('show');
-				 	     		 }, 300);
+				 	     		 }, 500);
 				 	     		mailtype="toc"
 							}	
 						});//end get function
@@ -506,7 +567,8 @@ $(function(){
  		 else{//mail to only one side//tested ok
  			$('#btnsubmitmail').unbind("click");
      	 		$(":checkbox:checked").each(function(){            	  
-         	   		checkboxdatas.push($(this).attr('data-receiver'));  		
+         	   		checkboxdatas.push($(this).attr('data-receiver')); 
+         	   	mailtype = $(this).data('mailtype');
          	});//end each        
      	 	if(checkboxdatas.toString()==""){
      	     		 alert("請勾選項目");
@@ -755,13 +817,62 @@ $(function(){
 			loadProduct(id,datastatus,datatime);
 			
 		}//end table filtering
-	
+		
+		function verifymaster(){
+			
+			var valueattr =$(this).val();
+			var nameattr=$(this).attr('name');
+	            //get all toggled checkboxes 
+	           var checkboxdatas = [];
+	        	 $(":checkbox:checked").each(function(){            	  
+	            	   checkboxdatas.push($(this).val()); 
+	            })
+	            var checkboxdatas2=checkboxdatas.toString();
+	            if(checkboxdatas2==""){
+	        		 alert("請勾選項目");
+	        	 }//end if
+	        	 else{
+	                	var valueattrr=$(this).attr('value');//retrieve the value from functinaction
+	                	var hyperlinkstring = "${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIFunctionServlet.do";
+//	                 	var hyperlinkparameter = "functionaction="+valueattrr+"&+toggledcheckbox="+checkboxdatas2;
+//	                	var hyperlinkstringwithparameter=hyperlinkstring+hyperlinkparameter;
+//	               		var ajaxurl = "${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIFunctionServlet.do?";
+//	      				var ajaxparam = "functionaction="+valueattrr+"&toggledcheckbox="+checkboxdatas2;
+//	      				loadajax(ajaxurl,ajaxparam);
+	     			var a=null;
+	     			var b = null;
+	     			var dfd4 = $.get(hyperlinkstring,{"functionaction":"type","image":checkboxdatas2},function(data){
+	     				$('#m_cer').attr("src","${pageContext.servletContext.contextPath}/master/master.do?type=master&image="+checkboxdatas2);
+	     				
+	                });//end get function
+	                var dfd5 = $.get(hyperlinkstring,{"functionaction":"type","image":checkboxdatas2},function(data){
+	     				$('#m_cer2').attr("src","${pageContext.servletContext.contextPath}/master/master.do?type=cer&image="+checkboxdatas2);
+	     				
+	                });//end get function
+	     			var dfd3 = $.getJSON(hyperlinkstring,{"functionaction":"applicationreviewm","toggledcheckbox":checkboxdatas2},function(data){
+	     				
+	     				$('#bname').html(data.bname);
+	     				$('#bdes').html(data.bdes);
+	     				$('#mname').html(data.mname);
+	     				$('#mtel').html(data.mtel);
+	     				$('#mmail').html(data.mmail);
+	     				$('#maddr').html(data.maddr);
+	     				$('#mpros').html(data.mpros);
+	     				
+	                });//end get function
+//	      		 	$('#eventlist').dataTable().fnDestroy();
+//	         			$('#eventlist').empty();
+	     		$.when(dfd3,dfd4,dfd5).done( $('#mmodal').modal());
+	            }//end else 
+	           
+		}
+		
 	   function subfunctionrow(){
 
 			var docFragsubfunction = $(document.createDocumentFragment());
 		   if( navagatorid== 'm'){
 				$('#subfunctionrow').empty();
-				var applicationreviewm = '<a href="" id="applymasterlink" name="applicationreviewm"><input type="button"style="width:130px;height:50px;font-size:20px;" class="btn btn-success"value="審核師傅" /></a>';
+				var applicationreviewm = '<sapn id="applymasterlink" name="applicationreviewm"><input type="button"style="width:130px;height:50px;font-size:20px;" class="btn btn-success"value="審核師傅" /></span>';
 				var suspensionm = '<span id="suspensionm" value="suspensionm" name="functionaction" style="padding:0px; margin:0px;" ><input type="button" class="btn btn-danger" style="width:130px;height:50px;font-size:20px;" value="停權" "/></span>';
 				var recoverm = '<span id="recoverm" value="recoverm" name="functionaction" style="padding:0px; margin:0px;" ><input type="button" class="btn btn-warning" style="width:130px;height:50px;font-size:20px;" value="復權" "/></span>';
 				var sendmessagem = '<span id="messagespanm" value="sendmessagem" name="functionaction" style="padding:0px; margin:0px;" ><input type="button" class="btn btn-info"  style="width:130px;height:50px;font-size:20px;" value="傳送訊息" "/></span>';				
@@ -776,7 +887,7 @@ $(function(){
 			 	$('#subfunctionrow>a').on('click',togglehyper);//direct to other pages
 			 	$('#subfunctionrow>span:not(#messagespanm,#messagespanc,#messagespano,#messagespanr)').on('click',togglegetmethod);//will return something when clicked, maill has it's own form action
 			 	$('#messagespanm,#messagespanc,#messagespano,#messagespanr,#messagespanr,#messagespanad').on('click',mail);//will return something when clicked, maill has it's own form action
-
+			 	$('#applymasterlink').on('click',verifymaster);
 		   }//end else if
 			
 			else if(navagatorid== 'c'){
