@@ -326,8 +326,8 @@
 							<c:if test="${orderCid.s_name == '已完成'}">
 								<c:if test="${loop.last}">
 									<h3 style="margin-top:1%; margin-bottom:1%; margin-left:25%">共有${loop.index + 1}人評價</h3>
-								</c:if>
-								<c:if>
+<%-- 								</c:if> --%>
+<%-- 								<c:if> --%>
 								</c:if>
 								<tr>
 									<td class="text-center"><a href="${pageContext.servletContext.contextPath}/cdata/CdatadessServlet.do?c_id=${orderCid.c_id.c_id}">${orderCid.c_id.c_id}</a></td>
