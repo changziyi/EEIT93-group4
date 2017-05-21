@@ -32,6 +32,7 @@ public class RdataDAO implements RdataDAO_interface {
 	private static final String GETALL = "SELECT r_id, r_date, c_id, m_id, p_summary, p_content, s_name, sa_rnote, d_id, o_id FROM rdata ORDER BY r_id";
 	private static final String GETBYSNAME = "SELECT r_id, r_date, c_id, m_id, p_summary, p_content, s_name, sa_rnote, d_id FROM rdata where s_name=?";
 	private static final String UPDATE_NOTE = "UPDATE rdata set sa_rnote=? WHERE r_id = ?";
+	private static final String Update_Sname = "UPDATE rdata set s_name=? WHERE r_id = ?";
 
 	
 	@Override
@@ -338,7 +339,8 @@ public class RdataDAO implements RdataDAO_interface {
 		}
 		return list;
 	}
-	public int updateReportSarnote(Integer r_id, String sa_rname){//by Benny
+	//by Benny
+	public int updateReportSarnote(Integer r_id, String sa_rname){
 		// TODO Auto-generated method stub
 				Connection con = null;
 				PreparedStatement pstmt = null;
@@ -374,6 +376,43 @@ public class RdataDAO implements RdataDAO_interface {
 				}
 				return num;
 	
+	}
+	//By Benny
+	public void updateSname(Integer r_id, String s_name){
+		Connection con = null;
+		PreparedStatement pstmt = null;
+
+		try {
+
+				con = ds.getConnection();
+				pstmt = con.prepareStatement(Update_Sname);				
+				pstmt.setString(1, s_name);
+				pstmt.setInt(2, r_id);			
+				pstmt.executeUpdate();
+			
+			// Handle any driver errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+
+	}
+		
 	}
 //	public static void main(String args[]) throws IOException {
 //
@@ -452,4 +491,4 @@ public class RdataDAO implements RdataDAO_interface {
 //		 }
 //
 //	}
-}
+//}

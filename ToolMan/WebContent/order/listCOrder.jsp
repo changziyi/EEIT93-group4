@@ -19,7 +19,7 @@
 <html>
 
 <head>
-<title>${LoginOK.c_id}的訂單</title>
+<title>Tool Man</title>
 
 </head>
 

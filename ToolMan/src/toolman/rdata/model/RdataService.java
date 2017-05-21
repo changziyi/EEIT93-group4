@@ -64,4 +64,7 @@ public class RdataService {
 	public int updateReportSarnote(Integer r_id, String sa_rname){//by benny
 		return dao.updateReportSarnote(r_id,sa_rname);
 	}
+	public void updateSname(Integer r_id, String s_name){
+		dao.updateSname(r_id, s_name);
+	}
 }
