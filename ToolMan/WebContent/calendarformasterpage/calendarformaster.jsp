@@ -6,37 +6,17 @@
 	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!--full calendar-->
-	<link rel='stylesheet' href='../js/fullcalendar.min.css' />
-	<script src='../js/jquery-3.2.1.min.js'></script>
-	<script src='../js/moment.min.js'></script>
-	<script src='../js/fullcalendar.min.js'></script>
+	<link rel='stylesheet' href='${pageContext.servletContext.contextPath}/js/fullcalendar.min.css' />
+	<script src='${pageContext.servletContext.contextPath}/js/jquery-3.2.1.min.js'></script>
+	<script src='${pageContext.servletContext.contextPath}/js/moment.min.js'></script>
+	<script src='${pageContext.servletContext.contextPath}/js/fullcalendar.min.js'></script>
 <!--full calendar-->
 
-<!------------------------------  jquery  -->
-<!-- 	already exists in full calendar<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>	 -->
-	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
-<!-- 	already at the end of the body<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script> -->
-<!-- ----------------------------- jquery -->
-<!-- ----------------------bootstrap -->
-	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-	<!-- Optional theme -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-	<!-- Latest compiled and minified JavaScript -->
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>	
-<!---- --------------------bootstrap -->
-<!-- --------------------smart_wizard -->
-    <link href="../js/smartform/smart_wizard_theme_circles.min.css" rel="stylesheet" type="text/css" />
-    <link href="../js/smartform/smart_wizard_theme_dots.min.css" rel="stylesheet" type="text/css" />
-	<link href="../js/smartform/smart_wizard.min.css" rel="stylesheet" type="text/css" /> 
-	<link href="../js/smartform/smart_wizard_theme_arrows.min.css" rel="stylesheet" type="text/css" />
-<!------------------------ smart_wizard -->
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">	
-<!-------------------------- smart_wizard -->
-<!--------------------- twzipcode -->
-<script src="${pageContext.servletContext.contextPath}/js/jquery.twzipcode.min.js"></script>
-<!---------------------end twzipcode -->
+<!------------------------------  jquery ui -->
+<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/js/jqueryui/jquery-ui.min.css">
+<script src='${pageContext.servletContext.contextPath}/js/jqueryui/jquery-ui.min.js'></script>
+<!-- ----------------------------- jquery ui-->
+
 
 <%--open while login service is combined --%>
 <%-- 	<c:if test="${empty LoginOK}"> --%>
@@ -50,12 +30,6 @@
 
 	
 /* calendar */
-		body {
-		margin-top: 40px;
-		text-align: center;
-		font-size: 14px;
-		font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
-	}
 		
 	#wrap {
 		width: 1500px;
@@ -71,14 +45,7 @@
 		background: #eee;
 		text-align: left;
 	}
-	.repeatingevent {
- 		float: left; 
- 		width: 100px;
-		padding: 0 10px;
-		border: 1px solid #ccc;
-		background: #eee;
-		text-align: left;
-	}
+	
 		
 	#external-events h4 {
 		font-size: 16px;
@@ -107,14 +74,7 @@
 		float: right;
 		width: 900px;
 	}
-	.trashcan {
-	
-		margin:100px;
-		width:900px
-		border: 1px solid #ccc;
 
-	}
-/*------------end navigation bar--------------------------------*/	
 
 #calendar {
     width: 200px;
@@ -146,9 +106,6 @@
 
 	</style>
 
-	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-	
-	
 	<jsp:useBean id="mdataVO" class="toolman.mdata.model.MdataVO" scope="session"/>
 	<!-- retrieve MdataVO object from session-->
 
@@ -166,11 +123,8 @@
 
 
 
-<!-- 	<script -->
-<!-- 	  src="https://code.jquery.com/jquery-3.2.1.min.js" -->
-<!-- 	  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" -->
-<!-- 	  crossorigin="anonymous"></script> -->
-	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+	
 	
 <script>
 var data =null;
@@ -198,74 +152,6 @@ var eventidglobe =null;
 		buildcalendar();
 		/*end  calendar
 		-----------------------------------------------------------------*/
-		
-		
-	      
-	            // Smart Wizard events
-            $("#smartwizard").on("leaveStep", function(e, anchorObject, stepNumber, stepDirection) {
-                
-            });
-            
-            // This event should initialize before initializing smartWizard
-            // Otherwise this event wont load on first page load 
-            $("#smartwizard").on("showStep", function(e, anchorObject, stepNumber, stepDirection, stepPosition) {
-                $("#message-box").append(" > <strong>showStep</strong> called on " + stepNumber + ". Direction: " + stepDirection+ ". Position: " + stepPosition);
-            });
-            
-            $("#smartwizard").on("beginReset", function(e) {
-                $("#message-box").append("<br /> > <strong>beginReset</strong> called");
-            });
-            
-            $("#smartwizard").on("endReset", function(e) {
-                $("#message-box").append(" > <strong>endReset</strong> called");
-            });  
-            
-            $("#smartwizard").on("themeChanged", function(e, theme) {
-                $("#message-box").append("<br /> > <strong>themeChanged</strong> called. New theme: " + theme);
-            });
-            
-        
-            // External Button Events
-
-            
-            $("#prev-btn1").on("click", function() {
-                // Navigate previous
-                $('#smartwizard').smartWizard("prev");
-                return true;
-            });
-            
-            $("#next-btn1").on("click", function() {
-                // Navigate next
-                $('#smartwizard').smartWizard("next");
-                
-                
-                return true;
-            });
-            
-            $("#reset-btn").on('click', function(){ $('#bookform').submit(); }); 
-            
-            $("#prev-btn").on("click", function() {
-                // Navigate previous
-                $('#smartwizard').smartWizard("prev");
-                return true;
-            });
-            
-            $("#next-btn").on("click", function() {
-                // Navigate next
-                $('#smartwizard').smartWizard("next");
-                return true;
-            });
-            $("#theme_selector1").on("change", function() {
-                // Change theme
-                $('#smartwizard').smartWizard("theme", $(this).val());
-                return true;
-            })
-            $("#theme_selector").on("change", function() {
-                // Change theme
-                $('#smartwizard').smartWizard("theme", $(this).val());
-                return true;
-            })
- 
 		//calendar
 	});//end ready
 
@@ -538,12 +424,7 @@ function calendarsubmit(){
 			}
 			//for checkbox
 	
-	</script>
-<!-- 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAj-PEjC_YSdYGHEvhIKnyojxufjKYy6OE&callback=initMap"></script> -->
-  
-	<script type="text/javascript" src="../js/smartform/jquery.smartWizard.min.js"></script>	
-	
-  
+	</script> 
 
 </body>
 </html>
