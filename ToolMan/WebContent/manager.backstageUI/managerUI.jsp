@@ -472,7 +472,7 @@ $(function(){
 		     		checkboxdatacustomer.push($(this).attr('data-receiver2'));
 		         }) 
 		         if((checkboxdatasmaster.toString()=="")||(checkboxdatacustomer.toString()=="")){
-	 	     		 	alert("u forget to toggle the checkbox u dumb XD");
+	 	     		 	alert("請勾選項目");
 	 	     	 }//end if
 	 	     	else{
 	 	     		 $('#btnsubmitmail').on('click',function(){
@@ -508,7 +508,7 @@ $(function(){
          	   		checkboxdatas.push($(this).attr('data-receiver'));  		
          	});//end each        
      	 	if(checkboxdatas.toString()==""){
-     	     		 alert("u forget to toggle the checkbox u dumb XD");
+     	     		 alert("請勾選項目");
      	     	 }//end if
      	 else{
 					$('#receiver').val(checkboxdatas.toString()).text(checkboxdatas.toString());
@@ -856,7 +856,7 @@ $(function(){
 	            })
 	            var checkboxdatas2=checkboxdatas.toString();
 	            if(checkboxdatas2==""){
-	        		 alert("u forget to toggle the checkbox u dumb XD");
+	        		 alert("請勾選項目");
 	        	 }//end if
 	        	 else{
 	        	   var hyperlinkstring = "${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIFunctionServlet.do?";
@@ -882,7 +882,7 @@ $(function(){
             
             var checkboxdatas2=checkboxdatas.toString();
         	 if(checkboxdatas2==""){
-        		 alert("u forget to toggle the checkbox u dumb XD");
+        		 alert("請勾選項目");
         	 }//end if
         	 else{
            	var valueattrr=$(this).attr('value');//retrieve the value from functinaction

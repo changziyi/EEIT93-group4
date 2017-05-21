@@ -36,7 +36,7 @@
 <!-- smart_wizard -->
 
 
-
+	<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/nav/nav.css">
 
 <%--open while login service is combined --%>
 <%-- 	<c:if test="${empty LoginOK}"> --%>
@@ -467,60 +467,11 @@ var eventidglobe =null;
 		//calendar
 	});//end ready
 
-// 	function getCoordinate(){
-// 		var a1 = $('#o_city').val();
-// 		var a2 = $('#o_district').val();
-// 		var a3 = $('#o_addr').val();
-// 		o_location =a1+a2+a3;
-// 		$.getJSON(googlecoordinate,{'address':o_location},function(data){
-// 			for(var i=0;i<data.results.length;i++) {
-// 		        var location = data.results[i].geometry.location;
-// 		        alert(location);
-// 		        }
-// 		//data 就是server端回傳的結果
-// 		coordinate = location;
-// 		initMap();
-// 			});
-// // 		
-				
-// 	}
-// 	 function initMap() {
-// 		 var uluru =null;
-// 	        if(coordinate==null){ 
-// 	        	uluru={ "lat" : 25.0339639, "lng" : 121.5644722}
-// 	        }
-// 	        else{
-// 	        	uluru = coordinate;
-// 	        }           
-	            
-// 	        var map = new google.maps.Map(document.getElementById('map'), {
-// 	          zoom: 15,
-// 	          center: uluru
-// 	        });
-// 	        var marker = new google.maps.Marker({
-// 	          position: uluru,
-// 	          map: map
-// 	        });
-// 	 	}
+
 	 
 	 /*-----------calendar---------*/
 	 	function calendarsubmit(){
-// 	 		var cache = [];
-// 	 		var calendarobj=$('#calendar').fullCalendar('clientEvents')
-// 	 		var calendarjson = JSON.stringify(calendarobj, function(key, value) {
-// 	 		    if (typeof value === 'calendarobj' && value !== null) {
-// 	 		        if (cache.indexOf(value) !== -1) {
-// 	 		            // Circular reference found, discard key
-// 	 		            return;
-// 	 		        }
-// 	 		        // Store value in our collection
-// 	 		        cache.push(value);
-// 	 		    }
-// 	 		    return value;
-// 	 		});
-	 		// Enable garbage collection
-// 		var calendarjson = JSON.stringify($('#calendar').fullCalendar('clientEvents'));
-	
+// 	 			
 	var calendarjson = JSON.stringify($("#calendar").fullCalendar("clientEvents").map(function(e) {
 	    var rv = {};
 	    Object.keys(e)
@@ -551,51 +502,7 @@ var eventidglobe =null;
 			}
 			function draggableevent(){
 				//not being used
-// 				$('#alldayevent').each(function() {
-					
-					
-// 					// 		var dragevent = {
 									
-// 					// 				id: $(this).text(),	
-// 					// 				title: $(this).text(), // use the element's text as the event title
-// 					// 				start: $(this).data('start'), // a start time (10am in this example)
-// 					// 				time: $(this).data('endd'), // an end time (2pm in this example)
-// 					// 			    stick: true
-// 					// 		}
-// 							// store data so the calendar knows to render an event upon drop
-					
-// 							$(this).data('events', [{
-								
-// 								id: 'morning',
-// 								title: '早上', // use the element's text as the event title
-// 								duration: '09:00', // an end time (2pm in this example)
-// 								start:'01:00', // a start time (10am in this example)
-// 							    stick: true // maintain when user navigates (see docs on the renderEvent method)
-// 							},
-// {
-								
-// 								id: 'noon',
-// 								title: '下午', // use the element's text as the event title
-// 								duration: '06:00', // an end time (2pm in this example)
-// 								start: '12:00', // a start time (10am in this example)
-// 							    stick: true // maintain when user navigates (see docs on the renderEvent method)
-// 							},{
-// 								id: 'night',
-// 								title: '晚上', // use the element's text as the event title
-// 								duration: '06:00', // an end time (2pm in this example)
-// 								start: '18:00', // a start time (10am in this example)
-// 							    stick: true // maintain when user navigates (see docs on the renderEvent method)
-// 							}]);
-					
-// 							// make the event draggable using jQuery UI
-// 							$(this).draggable({		
-// 								zIndex: 999,
-// 								revert: true,      // will cause the event to go back to its
-// 								revertDuration: 0  //  original position after the drag
-// 							});
-							
-// 						});
-				
 				$('#external-events .fc-event').each(function() {
 
 			
@@ -618,47 +525,6 @@ var eventidglobe =null;
 					
 				});// end each
 			}//end draggable event
-			// i don't want to add another judgment for allday event
-// 			function repeatingevent(){
-// 				$('#calendar').fullCalendar( 'removeEvents', 'repeateventeveryallday');
-				
-// 				selectmenu = [];
-// 				var checkedbox = $('input[name="repeatingbox"]:checked');
-// 				checkedbox.each(function () {
-// 					selectmenu.push($(this).val());
-// 				});//end each
-// // 		 		console.log(checkedbox);
-// //		 		console.log(selectmenu);
-// 				var repeateventallday = [{
-// 					//means delete all repeating items and rebuild new ones
-// 					id:"repeateventeveryallday",
-// 				    title:"早上",
-// 				    start: '01:00', // a start time (10am in this example)				
-// 				    overlap: false,
-// 					end: '12:00', // an end time (2pm in this example)
-// 				    dow: selectmenu // Repeat monday and thursday
-// 				},{
-// 					//means delete all repeating items and rebuild new ones
-// 					id:"repeateventeveryallday",
-// 				    title:"下午",
-// 				    start: '12:00', // a start time (10am in this example)				
-// 				    overlap: false,
-// 					end: '18:00', // an end time (2pm in this example)
-// 				    dow: selectmenu // Repeat monday and thursday
-// 				},{
-// 					//means delete all repeating items and rebuild new ones
-// 					id:"repeateventeveryallday",
-// 				    title:"晚上",
-// 				    start: '18:00', // a start time (10am in this example)				
-// 				    overlap: false,
-// 					end: '24:00', // an end time (2pm in this example)
-// 				    dow: selectmenu // Repeat monday and thursday
-// 				}]
-// 				$('#calendar').fullCalendar( 'renderEvents', repeateventallday);
-				
-// 				//	 $('#calendar').fullCalendar( 'destroy' );
-// 				//	 buildcalendar();
-// 			}//end repeating event
 			
 			function repeatingeventmorning(){
 				$('#calendar').fullCalendar( 'removeEvents', 'repeateventmorning');
@@ -920,9 +786,10 @@ var eventidglobe =null;
 				for(i=0;i<events.length-1;i++){
 				// start-time in between any of the events
 					
-					var eventid1 = event.id;					
+					var eventid1 = event.id;	
+					var eventsub = eventid1.substring(0,5)
 					var eventid2 = event._id;
-					var eventid3 = events[i].id;
+					var eventid3 = events[i]._id;
 					var eventitle = event.title;
 					var eventitle2 = events[i].title;
 					var end1 = event.end._d;
@@ -949,10 +816,11 @@ var eventidglobe =null;
 					else if(((splitstring1[0]+splitstring1[1]+splitstring1[2]+splitstring1[3]+splitstring1[4])==
 						(splitstring2[0]+splitstring2[1]+splitstring2[2]+splitstring2[3]+splitstring2[4]))&&(eventid1!=eventid3)){							
 						console.log("notall"+eventid1+eventid3);
-							if((eventid1.substring(5)=="repeat")){
-								$('#calendar').fullCalendar('removeEvents', eventid1);//beware, drag after repeating will remove entire repeating events
+						// beware, subString begin from 0, if only 1 index is specified, it will start from the index to the end.
+							if((eventid1.substring(0,5)=="repea")){
+								$('#calendar').fullCalendar('removeEvents', events[i]._id);//beware, drag after repeating will remove entire repeating events
 							}else if((eventid3.substring(5)=="repeat")){
-								$('#calendar').fullCalendar('removeEvents', eventid3);
+								$('#calendar').fullCalendar('removeEvents', eventid2);
 							}
 								// 							$('#calendar').fullCalendar('removeEvents', eventid1);
 // 							$('#calendar').fullCalendar('renderEvents', eventid1);
