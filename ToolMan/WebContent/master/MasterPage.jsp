@@ -154,7 +154,7 @@
  				
  				
           		<%	if (session.getAttribute("LoginOK") == null) {%>
-          		<a href="#" data-toggle="tooltip" data-placement="bottom" title="邀登入才能預約師傅">
+          		<a href="#" data-toggle="tooltip" data-placement="bottom" title="要登入才能預約師傅">
           	<button type="button" class="btn btn-primary disabled btn-success" >
           			<span class="glyphicon glyphicon-earphone"></span>預約師傅
           		</button></a>
