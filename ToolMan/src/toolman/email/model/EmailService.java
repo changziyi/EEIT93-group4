@@ -32,9 +32,9 @@ public class EmailService {
 		
 	}
 	
-	public List<EmailVO> getMail(String mss_id) {
+	public List<EmailVO> getMail(String msr_id) {
 		
-		return dao.getMail(mss_id);
+		return dao.getMail(msr_id);
 	}
 	
 	public EmailVO getOneMail(Integer ms_id) {

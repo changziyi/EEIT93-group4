@@ -466,7 +466,7 @@ public class EmailDAO implements EmailDAO_interface {
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ONE_STMT);
-			pstmt.setInt(1, m_id);
+			pstmt.setString(1, m_id.toString());
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
