@@ -144,9 +144,11 @@
 <jsp:include page="/nav/navigation.jsp" />
 <!-- navigator -->
 	<header >
-		<nav style="margin-top:50px;" >
+		<nav  >
 			<div id="navigator" class="textstyle" >
-			
+		
+<br/>
+<br/>
 				<ul style="margin: auto;width:100%; horizontal-align:center;" class="nav nav-tabs nav-justified "  >
 				
 					<li  data-toggle="tab" role="presentation"  id="masterlist" data-id="m" class="active"><a href="#"><div >師傅列表</div></a></li>
