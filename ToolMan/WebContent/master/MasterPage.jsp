@@ -162,31 +162,25 @@
 				<p>師傅：${mdataVO.m_name}</p>
 				<p>地區：${mdataVO.m_city} ${mdataVO.m_district}</p>
  <%--------------------------------------最愛與黑單--------------------------------------------------- --%>
- 				
- 				
- 				
- 				
-          		<% if (session.getAttribute("LoginOK") == null) {%>
-          		<a href="#" data-toggle="tooltip" data-placement="bottom" title="要登入才能預約師傅">
-          	<button type="button" class="btn btn-primary disabled btn-success" >
-          			<span class="glyphicon glyphicon-earphone"></span>預約師傅
-          		</button></a>
+
+          		<c:if test="${empty LoginOK}">
+	          		<a href="#" data-toggle="tooltip" data-placement="bottom" title="要登入才能預約師傅">
+	          			<button type="button" class="btn btn-primary disabled btn-success" >
+	          				<span class="glyphicon glyphicon-earphone"></span>預約師傅
+	          			</button>
+	          		</a>
+          		</c:if>
           	
-          	
-          	
-          	
-          		<%	} else { %>
-          		<a href="${pageContext.servletContext.contextPath}/toolman.order/NewOrder.jsp" class="btn btn-success ">
-          			<span class="glyphicon glyphicon-earphone"></span> 預約師傅</a>
-				<a href="${pageContext.servletContext.contextPath}/order/Favorite.do?c_id=${LoginOK.c_id}&m_id=${mdataVO.m_id}&action=addFavorite" class="btn btn-info ">
-					<span class="glyphicon glyphicon-heart-empty"></span> 加入最愛
-				</a>
-        		<a href="${pageContext.servletContext.contextPath}/order/Dislike.do?c_id=${LoginOK.c_id}&m_id=${mdataVO.m_id}&action=addDislike" class="btn btn-danger">
-          			<span class="glyphicon glyphicon-remove-sign"></span> 加入黑名單
-        		</a>
-        		<%
-        			}
-        		%>
+          		<c:if test="${not empty LoginOK}">
+	          		<a href="${pageContext.servletContext.contextPath}/toolman.order/NewOrder.jsp" class="btn btn-success ">
+	          			<span class="glyphicon glyphicon-earphone"></span> 預約師傅</a>
+					<a href="${pageContext.servletContext.contextPath}/order/Favorite.do?c_id=${LoginOK.c_id}&m_id=${mdataVO.m_id}&action=addFavorite" class="btn btn-info ">
+						<span class="glyphicon glyphicon-heart-empty"></span> 加入最愛
+					</a>
+	        		<a href="${pageContext.servletContext.contextPath}/order/Dislike.do?c_id=${LoginOK.c_id}&m_id=${mdataVO.m_id}&action=addDislike" class="btn btn-danger">
+	          			<span class="glyphicon glyphicon-remove-sign"></span> 加入黑名單
+	        		</a>
+        		</c:if>
         		<p></p>
         		<div id='calendar' style="float:left;width:400px; height:100px;"></div>
         		
@@ -222,13 +216,12 @@
 <!-- 				</form> -->
 				
 <!-- 				<button type="button" class="btn btn-info btn" data-toggle="modal" data-target="#workpopup">新增作品</button> -->
-				<a href="" class="btn btn-info btn" data-toggle="modal" data-target="#workpopup">
+				<a class="btn btn-info btn" data-toggle="modal" data-target="#workpopup">
           			<span class="glyphicon glyphicon-plus"></span> 新增作品
           		</a>
-				
-				
+          		
 				<div id="workpopup" class="modal fade" role="dialog" style="margin-top:10%">
-				  <div class="modal-dialog">
+				  <div class="modal-dialog" style="width:37%">
 					<form name="myData" action="TestFormData" enctype="multipart/form-data">
 					    <div class="modal-content">
 					      <div class="modal-header">
@@ -268,14 +261,20 @@
 				</div>
 			</c:if>
 			
+			<c:if test="${empty mdataVO.works}">
+	          	<div class="ratediv">
+	          		<h3 style="margin-top:8%; margin-bottom:1%; margin-left:25%">尚無上傳作品</h3>
+	          	</div>
+          	</c:if>
+			
 			<div class="form-group workdiv">
 				<table class="table worktable">
-				<c:forEach var="aWork" items="${mdataVO.works}">
+					<c:forEach var="aWork" items="${mdataVO.works}">
 						<tr>
 							<td class="aWork">
 								<c:if test="${LoginOK.m_id == mdataVO.m_id}">
-									<a href="" class="btn btn-danger deleteworkim" id="deleteworkim"><span class="glyphicon glyphicon-trash"></span> 刪除</a>
-	<!-- 							<button type="button" class="btn btn-danger deleteworkim" id="deleteworkim">刪除</button> -->
+									<a class="btn btn-danger deleteworkim" id="deleteworkim"><span class="glyphicon glyphicon-trash"></span> 刪除</a>
+<!-- 								<button type="button" class="btn btn-danger deleteworkim" id="deleteworkim"> 刪除</button> -->
 								</c:if>
 								${aWork.work_name}
 								${aWork.work_des}
@@ -588,7 +587,8 @@
 					reader.onload = function(e) {
 						$('#img0').attr({
 							'src' : e.target.result,
-							'class' : 'changeImg'
+							'class' : 'img-thumbnail',
+							'width' : '210px'
 						});
 					}
 					reader.readAsDataURL(input.files[0]);
@@ -601,7 +601,8 @@
 					reader.onload = function(e) {
 						$('#img1').attr({
 							'src' : e.target.result,
-							'class' : 'changeImg'
+							'class' : 'img-thumbnail',
+							'width' : '210px'
 						});
 					}
 					reader.readAsDataURL(input.files[1]);
@@ -614,7 +615,8 @@
 					reader.onload = function(e) {
 						$('#img2').attr({
 							'src' : e.target.result,
-							'class' : 'changeImg'
+							'class' : 'img-thumbnail',
+							'width' : '210px'
 						});
 					}
 					reader.readAsDataURL(input.files[2]);

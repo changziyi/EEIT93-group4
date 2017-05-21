@@ -32,7 +32,9 @@
 							
 							
 							<c:if test="${not empty LoginOK }">
+							<c:if test="${empty LoginOK.m_id}">
 						<li><a class="alist" href="${pageContext.servletContext.contextPath}/master/OpenStoreInfo.jsp">我要開店 </a></li>
+							</c:if>
 						</c:if>
 						<li><a class="alist"
 							href="${pageContext.servletContext.contextPath}/wishpool/Wishing+waterfall.jsp">許願池
