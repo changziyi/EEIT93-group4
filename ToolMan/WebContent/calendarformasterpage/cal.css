@@ -1,0 +1,73 @@
+#wrap {
+	width: 1500px;
+	margin: 0 auto;
+}
+
+#external-events {
+	float: left;
+	width: 300px;
+	height: 500px;
+	padding: 0 10px;
+	border: 1px solid #ccc;
+	background: #eee;
+	text-align: left;
+}
+
+#external-events h4 {
+	font-size: 16px;
+	margin-top: 0;
+	padding-top: 1em;
+}
+
+#external-events .fc-event {
+	margin: 10px 0;
+	cursor: pointer;
+}
+
+#external-events p {
+	margin: 1.5em 0;
+	font-size: 11px;
+	color: #666;
+}
+
+#external-events p input {
+	margin: 0;
+	vertical-align: middle;
+}
+
+#calendar {
+	float: right;
+	width: 900px;
+}
+
+#calendar {
+	width: 200px;
+	margin: 0 auto;
+	font-size: 10px;
+}
+
+.fc-header-title h2 {
+	font-size: .9em;
+	white-space: normal !important;
+}
+
+.fc-view-month .fc-event, .fc-view-agendaWeek .fc-event {
+	font-size: 0;
+	overflow: hidden;
+	height: 2px;
+}
+
+.fc-view-agendaWeek .fc-event-vert {
+	font-size: 0;
+	overflow: hidden;
+	width: 2px !important;
+}
+
+.fc-agenda-axis {
+	width: 20px !important;
+	font-size: .7em;
+}
+
+.fc-button-content {
+	padding: 0;
+}
