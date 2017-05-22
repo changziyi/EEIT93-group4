@@ -138,7 +138,7 @@
 							<div class="modal-footer">
 								<button type="button" class="btn btn-danger"
 									data-dismiss="modal">取消</button>
-								<button type="submit" class="btn btn-primary">送出</button>
+								<button type="button" id="btnsubmit" class="btn btn-primary">送出</button>
 
 							</div>
 						</form>
@@ -154,5 +154,13 @@
     $( "#datepicker" ).datepicker();
     $( "#datepicker2" ).datepicker();
   } );
+  $('#btnsubmit').click(function(){
+	  $.post('AdServlet',{
+		  'start':$('#datepicker').val(),
+		  'end':$('#datepicker2').val()
+	  },function(){
+		  location.href='<%=request.getContextPath()%>/index.jsp';
+	  })
+  })
   </script>
 </html>
