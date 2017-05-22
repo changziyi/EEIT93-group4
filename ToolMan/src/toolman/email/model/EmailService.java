@@ -62,7 +62,9 @@ public class EmailService {
 		return dao.findByPrimaryKey(ms_id);
 	}
 
- 
+    public void updateisRead(Integer ms_id){
+    	dao.updateisRead(ms_id);
+    }
 
 public String getOneMailJson(Integer ms_id) {
 	List<EmailVO> OneEmailData = dao.getOneMail(ms_id);

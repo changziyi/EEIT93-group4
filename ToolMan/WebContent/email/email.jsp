@@ -113,7 +113,7 @@ margin : 0px auto ;
 								<br> 
 								時間：${emailVO.ms_date}
 								<br> 
-								狀態：${emailVO.s_name}
+								<span>狀態：<span>${emailVO.s_name == 'true' ? '已讀':'未讀'}</span></span>
 
 								
 							<form action="Email.do" method="post">
@@ -229,14 +229,12 @@ margin : 0px auto ;
 		</div>
 	</div>
 	<script type="text/javascript">
-	$('#selectbtn').click(function(){
+	$('button.btn-primary').click(function(){
 		var dataid = $(this).attr('data-id');
 		$.get('Email.do',{
-			'action':'findbypk',
+			'action':'updateisRead',
 			'msid':dataid
 		});
-	})
-	$('button.btn-primary').click(function(){
 		var divparent =  $(this).parent('div');
 		var receiveid = divparent.children('span:first').text();
 		var receiveid2 = divparent.children('span:eq(1)').text();
@@ -246,7 +244,7 @@ margin : 0px auto ;
 		$('td:eq(1)').text(receiveid2);
 		$('td:eq(2)').text("主旨: "+receiveid3);
 		$('td:eq(3)').text(receiveid4);
-		
+		divparent.children('span:eq(3)').children().text('已讀');
 	})
 	
 	
