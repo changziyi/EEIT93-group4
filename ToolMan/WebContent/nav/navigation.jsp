@@ -50,10 +50,13 @@
 								<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 							</button>
 							<c:if test="${not empty LoginOK}">
-								<button type="button" class="btn btn-default btn-sm">
+							<a href="<%=request.getContextPath() %>/email/email.jsp">
+								<button type="button" class="btn btn-default btn-sm" data-target="#myModal01">
 									<span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
 								</button>
 							</c:if>
+							
+							
 						</form>
 					</ul>
 					<!----------- 搜尋列----- -->
@@ -127,7 +130,4 @@
 
 			</div>
 	</nav>
-	</div>
-	
 </div>
-
