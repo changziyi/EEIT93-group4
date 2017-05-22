@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -181,6 +182,9 @@
 	        		</a>
 	        	</c:if>	
         		</c:if>
+<%--              	<c:if test="${myHate.m_id == mdataVO.m_id}"> --%>
+<!--         		<h2>BLACK</h2> -->
+<%--         		</c:if> --%>
         			<p></p>
         		<div id='calendar' style="float:left;width:400px; height:100px;"></div>
  <%--------------------------------------萬里長城--------------------------------------------------- --%>
