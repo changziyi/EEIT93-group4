@@ -285,7 +285,7 @@
 			<div class="form-group workdiv">
 				<table class="table worktable">
 					<c:forEach var="aWork" items="${mdataVO.works}">
-						<tr class="aWork bg-info">
+						<tr class="bg-info aWork">
 							<td>
 								<c:if test="${LoginOK.m_id == mdataVO.m_id}">
 									<a class="btn btn-danger deleteworkim" id="deleteworkim"><span class="glyphicon glyphicon-trash"></span> 刪除</a>
@@ -297,7 +297,7 @@
 								<input type="hidden" name="work_id" value="${aWork.work_id}">
 							</td>
 						</tr>
-						<tr>
+						<tr class="aWork">
 							<td>
 								<c:forEach var="a" items="${aWork.workims}">
 									<img width="304" height="236" class="img-thumbnail workimsize" src='${pageContext.servletContext.contextPath}/master/master.do?type=work&image=${a.im_id}'/>
@@ -741,8 +741,7 @@
 			//刪除作品
 			var deleteworkimbtn = $('.deleteworkim');
 			deleteworkimbtn.click(function() {
-				var trparent = $(this).parents('.aWork');
-				var trfind = trparent.find('');
+				var tdparent = $(this).parents('.aWork');
 				var workid = tdparent.find('input[name="work_id"]');
 				console.log(workid.val());
 				$.ajax({
@@ -750,7 +749,7 @@
 					data: {'work_id':workid.val(),'action':'deleteworkim'},
 					type : 'POST',
 					success : function(returnData) {
-						trparent.remove();
+						tdparent.remove();
 					}
 				});
 			});
