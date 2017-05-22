@@ -376,7 +376,7 @@ $(function(){
 	var c_pswd = $( "#c_pswd" ).val();
 	var c_birth = $( "#c_birth" ).val();
 	var c_cel = $( "#c_cel" ).val();
-	var c_email = $( "#email" ).val();
+	var c_email = $( "#c_email" ).val();
 	var c_addr =$( "#c_addr" ).val();
 	var hyperlink ="${pageContext.servletContext.contextPath}/cdata/CdatadessServlet.do";
 		

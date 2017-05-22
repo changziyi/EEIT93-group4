@@ -50,11 +50,18 @@
 							<button type="button" class="btn btn-default btn-sm">
 								<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 							</button>
+							
+							
 							<c:if test="${not empty LoginOK}">
-								<button type="button" class="btn btn-default btn-sm">
+							<a href="<%=request.getContextPath() %>/email/email.jsp">
+								<button type="button" class="btn btn-default btn-sm" data-target="#myModal01">
 									<span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
 								</button>
 							</c:if>
+							
+							
+		
+							
 						</form>
 					</ul>
 					<!----------- 搜尋列----- -->
@@ -108,7 +115,10 @@
 								<li><a
 									href="${pageContext.servletContext.contextPath}/cdata/CdataOrderServlet.do?c_id=${LoginOK.c_id}&action=myHate">黑名單</a>
 								</li>
-								<li><a href="#">刊登廣告</a></li>
+								<li><a href="<%=request.getContextPath() %>/ad/ad.jsp">刊登廣告</a></li>
+								
+						
+								
 								<li><a
 									href="${pageContext.servletContext.contextPath}/loginoutServlet">登出</a></li>
 

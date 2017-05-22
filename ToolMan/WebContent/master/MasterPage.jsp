@@ -1,6 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="java.util.*"%>
+<%@ page import="toolman.blacklist.model.*"%>
+<%
+	BlacklistService empSvc = new BlacklistService();
+    List<BlacklistVO> list = empSvc.getAllBlacklist();
+    pageContext.setAttribute("myHate",list);
+%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -75,6 +83,7 @@
 					<div class="modal fade" id="myModal" role="dialog">
 						<div class="modal-dialog" style="width:43%">
 						      <!-- Modal content-->
+						      
 							<form method="post" action="master.do" enctype="multipart/form-data" name="updateform">
 							<div class="modal-content">
 								<div class="modal-header">
@@ -181,6 +190,13 @@
 	        		</a>
 	        	</c:if>	
         		</c:if>
+        		        			<c:forEach var="empVO" items="${myHate}">
+        			<c:if test="${empVO.mdataVO.m_id == mdataVO.m_id && empVO.cdataVO.c_id == LoginOK.c_id}">
+        			<div class="alert alert-danger" style="font-size:24px">
+    <strong>警告!</strong> 此人是黑名單人物
+  </div>
+        			</c:if>
+        			</c:forEach>
         			<p></p>
         		<div id='calendar' style="float:left;width:400px; height:100px;"></div>
  <%--------------------------------------萬里長城--------------------------------------------------- --%>
