@@ -33,7 +33,7 @@
 		.form-control {margin:auto; width:120px; display:inline; font-family:Microsoft JhengHei; vertical-align: top}
 		.proc {padding:5px;margin-left: 0;margin-right: 5px;text-align: center;border-radius: 3px;color: #FFF5EE;font-weight: bold;}
 		.divpro {margin-left: 0;margin-bottom: 10px;}
-		.myDiv {position:relative; top:90px; height:100%; width: 85%; margin-left:8%}
+		.myDiv {position:relative; top:100px; height:100%; width: 85%; margin-left:8%}
 		.pad {padding-left: 3%;}
 		.result {font-size:20px;}
 		.resultcount {padding:5%;}

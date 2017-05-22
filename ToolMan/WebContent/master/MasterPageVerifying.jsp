@@ -15,15 +15,15 @@
 </head>
 	<style>
 		body {font-family:Microsoft JhengHei;}
-		.myDiv {position:relative; top:70px;}
-		.cen {}
+		.myDiv {position:relative; top:300px;}
+		.h3n {margin:1%;}
 	</style>
 <body>
 <jsp:include page="/nav/navigation.jsp" />
 	<div class="myDiv">
-		<div class="text-center　cen">
-		<h3>店家審核中，敬請等待</h3>
-		<button class="btn btn-info">回首頁</button>
+		<div class="text-center">
+		<h3 class="h3n">店家審核中，敬請等待</h3>
+		<a href="${pageContext.servletContext.contextPath}/index.jsp" class="btn btn-info">回首頁</a>
 		</div>
 	</div>
 </body>

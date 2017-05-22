@@ -34,8 +34,8 @@
 		.changeImg {width:200px; padding:10px;}
 		#uploadTemp {line-height:normal;background-color:#fff;width:560px;}
 		.workImgArea {vertical-align:top;padding:5px;}
-		.myDiv {position:relative; top:70px;} 
-		.outtermd8 {width:100%; margin-left:3%; margin-right:0}
+		.myDiv {position:relative; top:80px;} 
+		.outtermd8 {width:100%; margin-left:2%; margin-right:0}
 		.innermd8 {padding-top:3%;padding-right:0; margin-right:0;width:60%}
 		.md4 {padding-left:1%;margin-top:2%}
 		.commentbox {width:60%;height:20%;}
@@ -229,7 +229,6 @@
 					      </div>
 					      <div class="modal-body">
 					        <div id='div1'></div>
-					        
 					        <div class="form-group">
 								<table class="table">
 									<tr>
@@ -265,8 +264,6 @@
 	          		<h3 style="margin-top:8%; margin-bottom:1%; margin-left:25%">尚無上傳作品</h3>
 	          	</div>
           	</c:if>
-			
-			<div class="form-group workdiv">
 				<table class="table worktable">
 					<c:forEach var="aWork" items="${mdataVO.works}">
 						<tr class="aWork bg-info">
@@ -668,9 +665,9 @@
 						upload.val(null);
 						workname.val(null);
 						workdes.val(null);
-// 						location.reload();
 						myDiv.html('<div class="alert alert-success" role="alert" id="alertupload"><strong>新增作品成功!</strong></div>');
-// 						
+// 						myDiv.append();
+// 						location.reload();
 // 						$('.workdiv').empty();
 						
 // 						var works = [<c:forEach var="aWork" items="${mdataVO.works}">{"work_name":"${aWork.work_name}","work_des":"${aWork.work_des}","im_id":[<c:forEach var="a" items="${aWork.workims}">${a.im_id},</c:forEach>]},</c:forEach>];
@@ -725,8 +722,7 @@
 			//刪除作品
 			var deleteworkimbtn = $('.deleteworkim');
 			deleteworkimbtn.click(function() {
-				var trparent = $(this).parents('.aWork');
-				var trfind = trparent.find('');
+				var tdparent = $(this).parents('.aWork');
 				var workid = tdparent.find('input[name="work_id"]');
 				console.log(workid.val());
 				$.ajax({
@@ -734,7 +730,7 @@
 					data: {'work_id':workid.val(),'action':'deleteworkim'},
 					type : 'POST',
 					success : function(returnData) {
-						trparent.remove();
+						tdparent.remove();
 					}
 				});
 			});
@@ -765,6 +761,7 @@
 				console.log(apro);
 				$("input[name=m_pro][value=" + apro + "]").prop('checked', true);
 			})
+			
 			
 // 		}); //outter function
 	</script>

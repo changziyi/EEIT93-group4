@@ -107,7 +107,7 @@ tbody td:hover {
 </style>
 <body>
 <jsp:include page="/nav/navigation.jsp" />
-<div style="margin-top: 10px;">
+<div style="margin-top: 90px;">
 	<div class="container">	
 		<div class="page-header">
 			<div class="row"></div>
