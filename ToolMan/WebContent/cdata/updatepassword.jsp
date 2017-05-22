@@ -19,7 +19,7 @@
 			<form action="${pageContext.request.contextPath}/updatePwdServlet" method="post">          
           <div class="field-wrap">
 
-            <input type="text" placeholder="使用者信箱" name="userName" style="color:gray;" value="${c_email}" autocomplete="off" readonly />
+            <input type="text" placeholder="使用者信箱*" name="userName" style="color:gray;" value="${c_email}" autocomplete="off" readonly />
           </div>
           <div class="field-wrap">
             <label>新密碼<span class="req">*</span></label>
