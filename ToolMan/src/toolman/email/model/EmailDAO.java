@@ -34,6 +34,7 @@ public class EmailDAO implements EmailDAO_interface {
 	private static final String GET_ONE_STMT_BY_KEY = "SELECT ms_id,mss_id,msr_id,ms_date,ms_summary,ms_content,s_name FROM mes  where ms_id = ?";
 	private static final String DELETE = "DELETE FROM mes where ms_id = ?";
 	private static final String UPDATE = "UPDATE mes set mss_id=?, msr_id=?, ms_date=?, ms_summary=?, ms_content=?, s_name=?  where ms_id = ?";
+	private static final String UPDATEISRead = "UPDATE mes set s_name=?  where ms_id = ?";
 	
 	//by Benny
 	private static final String GET_ONE_MSRID = "SELECT * FROM mes  where msr_id = ?";
@@ -81,6 +82,37 @@ public class EmailDAO implements EmailDAO_interface {
 
 	}
 
+	public void updateisRead(Integer ms_id){
+		Connection con = null;
+		PreparedStatement pstmt = null;
+
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(UPDATEISRead);
+			pstmt.setBoolean(1, true);
+			pstmt.setInt(2, ms_id);
+			pstmt.executeUpdate();
+		}
+		catch (Exception e) {
+			// TODO: handle exception
+		}finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+	}
+	
 	@Override
 	public void update(EmailVO emailVO) {
 

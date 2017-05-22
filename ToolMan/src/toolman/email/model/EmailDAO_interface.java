@@ -15,6 +15,7 @@ public interface EmailDAO_interface {
           public EmailVO findByPrimaryKey(Integer Ms_id);
           public EmailVO findByPrimaryKey1(Integer Ms_id);
           public List<EmailVO> getAll();
+          public void updateisRead(Integer ms_id);
 		
 
 }
