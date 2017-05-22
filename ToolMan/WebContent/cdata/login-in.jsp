@@ -180,8 +180,8 @@ body {
 $(function(){
 	$("#onkey").click(function(){
 		event.preventDefault();
-		$("input[name = 'id']").val("oneprice");
-		$("input[name = 'pswd']").val("sa123456");
+		$("input[name = 'id']").val("PolarBear");
+		$("input[name = 'pswd']").val("c123456");
 	});		
 });
 
