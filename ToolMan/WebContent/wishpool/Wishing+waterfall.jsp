@@ -271,7 +271,7 @@ body {font-family:Microsoft JhengHei;}
 	
 	<c:forEach var="wishpoolVO" items="${new_date}">
 		<!-------------------------- 接下許願 ------------------------------>
-		<div class="modal fade" id="wishDetailModal${wishpoolVO.w_id}" tabindex="-1" role="dialog"
+		<div class="modal fade" id="wishDetailModal${wishpoolVO.w_id}" name="wishpoolmodal"tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
@@ -284,16 +284,16 @@ body {font-family:Microsoft JhengHei;}
 						</h3>
 					</div>
 					<div class="modal-body">
-								<p>會員帳號：${wishpoolVO.c_id} </p>
-								<p>位在地區：${wishpoolVO.w_city}${wishpoolVO.w_district} </p>
+								<p >會員帳號：${wishpoolVO.c_id} </p>
+								<p >位在地區：${wishpoolVO.w_city}${wishpoolVO.w_district} </p>
 								<p>維修項目：${wishpoolVO.w_pro} </p>
-								<p>維修內容：${wishpoolVO.w_content} </p>
-								<p>發送時間：${wishpoolVO.w_date} </p>
+								<p >維修內容：${wishpoolVO.w_content} </p>
+								<p >發送時間：${wishpoolVO.w_date} </p>
 								</div>
 								
 						<div class="modal-footer">
 							<button type="button" class="btn btn-danger" data-dismiss="modal">取消</button>
-							<button type="submit" class="btn btn-primary">確定接單</button>
+							<button name="btnsubmit" class="btn btn-primary" data-dismiss="modal" data-id="${wishpoolVO.c_id}" data-dis="${wishpoolVO.w_city}${wishpoolVO.w_district}" data-type="${wishpoolVO.w_pro}" data-content="${wishpoolVO.w_content}" data-time="${wishpoolVO.w_date}">確定接單</button>
 							<input type="hidden" name="w_city"> <input type="hidden"
 								name="w_district">
 						</div>
@@ -310,8 +310,29 @@ body {font-family:Microsoft JhengHei;}
 				columnWidth : 282,
 				animate : true
 			});
-		})
-		
+		});
+		 $('[name="btnsubmit"]').on('click',mail);
+	  })
+	  function mail(){
+				 	   	 	var hyperlinkstring = "${pageContext.servletContext.contextPath}/email/Email.do";
+		 	     			// must unbind the event, or it will accumulate forever
+		 	     			
+		 					var mssid=$(this).data('id').substring(5);
+			 				var mssum="我要修"+$(this).data('type');
+			 				var mscontent=$(this).data('content');
+			 				var mstime=$(this).data('time');
+			 				
+							$.post(hyperlinkstring,{"mss_id":mssid,"ms_content":mscontent,"ms_summary":mssum},function(){
+
+// 								    $('[name="wishpoolmodal"]').modal("hide");
+								    $('[name="btnsubmit"]').unbind('click');
+								}	
+							);//end get function
+
+		 	   		
+	 		 
+	 		 
+	 	}// end mail
 		</script>
 </body>
 </html>

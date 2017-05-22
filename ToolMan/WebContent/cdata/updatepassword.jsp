@@ -5,30 +5,31 @@
 <html >
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>Sign-Up/Login Form</title>
+  <title>重新設置密碼</title>
   <link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,300,600' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
   <link rel="stylesheet" href="${pageContext.servletContext.contextPath}/css/login/style-forgetpassword.css">
+  <link rel="Shortcut Icon" href="${pageContext.servletContext.contextPath}/favicon.ico" />
    
 </head>
 <body>
   <div class="form" >  
       <div class="tab-content">
         <div id="signup">   
-          <h1>重新設置密碼</h1>          
+          <h1 style="color:#357EBD; font-size: 33px; ">重新設置密碼</h1>          
 			<form action="${pageContext.request.contextPath}/updatePwdServlet" method="post">          
           <div class="field-wrap">
 
-            <input type="text" placeholder="使用者信箱*" name="userName" style="color:gray;" value="${c_email}" autocomplete="off" readonly />
+            <input type="text"  placeholder="使用者信箱*" name="userName" style="color:gray; background-color:#ffffff; " value="${c_email}" autocomplete="off" readonly />
           </div>
           <div class="field-wrap">
             <label>新密碼<span class="req">*</span></label>
-            <input type="password" class="input" name="newPassword" autocomplete="off">
+            <input style="background-color:#ffffff;"  type="password" class="input" name="newPassword" autocomplete="off">
             <span class="error">${errors.newPassword }</span>
           </div> 
           <div class="field-wrap">
             <label>確認新密碼<span class="req">*</span></label>
-            <input type="password"  name="newPassword2" autocomplete="off"/>
+            <input style="background-color:#ffffff;" type="password"  name="newPassword2" autocomplete="off"/>
             <span class="error">${errors.newPassword2 }</span>
           </div>                      
           <button type="submit" class="button button-block" >修改</button>                                                  
