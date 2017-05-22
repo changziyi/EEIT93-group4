@@ -190,10 +190,10 @@
 		<div id='external-events'  style=" width:200px;margin-top:46px;margin-left:13%;">
 			<h4 style="margin-left:30%;">不可預約的時間</h4>
 			<div id='external-events2' style="margin-left:25%;text-align:center">
-				<div class='fc-event' style="background-color:#76CFF5" data-color="#76CFF5" data-id="morning"data-start="01:00" data-end='08:00'>早上</div>
-				<div class='fc-event' style="background-color:#EBBA35" data-color="#EBBA35" data-id="noon"data-start="12:00" data-end='06:00'>下午</div>
-				<div class='fc-event' style="background-color:#354EEB" data-color="#354EEB" data-id="night"data-start="18:00" data-end='06:00'>晚上</div>
-				<div class='fc-event' style="background-color:#DB4F7E" data-color="#DB4F7E" id="alldayevent" data-id="allday"data-start="00:00" data-end='24:00'>整天</div>
+				<div class='fc-event' style="background-color:#C6E8EA" data-color="#C6E8EA" data-id="morning"data-start="01:00" data-end='08:00'>早上</div>
+				<div class='fc-event' style="background-color:#48AE59" data-color="#48AE59" data-id="noon"data-start="12:00" data-end='06:00'>下午</div>
+				<div class='fc-event' style="background-color:#7BAFF8" data-color="#7BAFF8" data-id="night"data-start="18:00" data-end='06:00'>晚上</div>
+				<div class='fc-event' style="background-color:#A5B4B5" data-color="#A5B4B5" id="alldayevent" data-id="allday"data-start="00:00" data-end='24:00'>整天</div>
 				
 			</div>
 		<!-- 			<p> -->
@@ -292,7 +292,6 @@ var eventidglobe =null;
 		$('#submitcalendar').on('click',calendarsubmit);
 		$('#external-events2>div').on('click',assignrandom);
 		draggableevent();
-		showjsonevent();
 		$('input[name="repeatingboxmorning"]').on('change',repeatingeventmorning);// end select change
 		$('input[name="repeatingboxnoon"]').on('change',repeatingeventnoon);// end select change
 		$('input[name="repeatingboxnight"]').on('change',repeatingeventnight);// end select change
@@ -331,7 +330,6 @@ var eventidglobe =null;
 		 });//end post
 		
 	}//end calendarsubmit
-	
 	 function assignrandom(event){
 			
 			randomnumber = Math.random().toString();//not working after drop, because the real id is still the original
@@ -382,7 +380,7 @@ var eventidglobe =null;
 				    title:"早上",
 				    start: '01:00', // a start time (10am in this example)				
 				    overlap: true,
-				    color:'#76CFF5',
+				    color:'#C6E8EA',
 					end: '09:00', // an end time (2pm in this example)
 				    dow: selectmenu // Repeat monday and thursday
 				}
@@ -409,7 +407,7 @@ var eventidglobe =null;
 				    title:"下午",
 				    start: '12:00', // a start time (10am in this example)				
 				    overlap: true,
-				    color:'#EBBA35',
+				    color:'#48AE59',
 					end: '18:00', // an end time (2pm in this example)
 				    dow: selectmenu, // Repeat monday and thursday
 				    
@@ -436,7 +434,7 @@ var eventidglobe =null;
 				    title:"晚上",
 				    start: '18:00', // a start time (10am in this example)				
 				    overlap: true,
-				    color:'#354EEB',
+				    color:'#7BAFF8',
 					end: '24:00', // an end time (2pm in this example)
 				    dow: selectmenu // Repeat monday and thursday
 				}
@@ -446,11 +444,6 @@ var eventidglobe =null;
 				//	 $('#calendar').fullCalendar( 'destroy' );
 				//	 buildcalendar();
 			}//end repeating event
-			
-			function showjsonevent(){
-				 data = $.getJSON('${pageContext.servletContext.contextPath}/toolman.calendar/CalendarControllergetformaster.do');
-					
-				}
 			
 			function buildcalendar(){
 				
@@ -533,13 +526,6 @@ var eventidglobe =null;
 						checkoverlapping(event); 
 						
 						},
-				eventSources: [
-		                    {
-		                    	url:'${pageContext.servletContext.contextPath}/toolman.calendar/CalendarControllergetformaster.do',		                        
-									
-
-		                    }                    
-		                ],
 					events: [{
 						
 						id:999,

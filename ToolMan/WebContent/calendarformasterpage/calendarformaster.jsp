@@ -6,6 +6,7 @@
 	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!--full calendar-->
+	<link rel="Shortcut Icon" href="${pageContext.servletContext.contextPath}/favicon.ico" />
 	<link rel='stylesheet' href='${pageContext.servletContext.contextPath}/js/fullcalendar.min.css' />
 	<script src='${pageContext.servletContext.contextPath}/js/jquery-3.2.1.min.js'></script>
 	<script src='${pageContext.servletContext.contextPath}/js/moment.min.js'></script>

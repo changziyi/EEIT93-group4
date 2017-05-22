@@ -9,17 +9,18 @@
   <link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,300,600' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
   <link rel="stylesheet" href="${pageContext.servletContext.contextPath}/css/login/style-forgetpassword.css">
-   
+   <link rel="Shortcut Icon" href="${pageContext.servletContext.contextPath}/favicon.ico" />
 </head>
 <body>
   <div class="form" >  
       <div class="tab-content">
         <div id="signup">   
-          <h1>忘記密碼</h1>          
+          <h1 style="color:#357EBD; font-size: 33px;">忘記密碼</h1>          
           <form action="${pageContext.request.contextPath}/ForgotPwdServlet" method="POST">           
           <div class="field-wrap">
             <label>E-mail<span></span></label>
-            <input type="text" class="input" name="Email" autocomplete="off">
+            <input style="background-color:#ffffff;" type="text" class="input" name="Email" autocomplete="off">
+            <label style="left:441px; bottom:15px; font-size:16px;color:red">${errorMsgs.erroremail}</label>
           </div> 
           <button type="submit" id="register" class="button button-block" >送出</button>                                                   
           </form>

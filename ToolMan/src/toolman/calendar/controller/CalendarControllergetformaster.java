@@ -38,14 +38,14 @@ import toolman.mdata.model.MdataVO;
 /**
  * Servlet implementation class CalendarController
  */
-@WebServlet("/toolman.calendar/CalendarControllerget.do")
-public class CalendarControllerget extends HttpServlet {
+@WebServlet("/toolman.calendar/CalendarControllergetformaster.do")
+public class CalendarControllergetformaster extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CalendarControllerget() {
+    public CalendarControllergetformaster() {
         super();
 
     }
@@ -66,7 +66,6 @@ public class CalendarControllerget extends HttpServlet {
 	     String calendarjson = request.getParameter("calendarjson");
 	     HttpSession session = request.getSession();
 		 MdataVO mdataVO2 = (MdataVO) session.getAttribute("mdataVO");
-		 System.out.println("mtest:"+mdataVO2.getM_id());
 		 Integer m_id = mdataVO2.getM_id();
 //		 Integer m_id = 1000;
 		 System.out.println(calendarjson);
@@ -101,7 +100,7 @@ public class CalendarControllerget extends HttpServlet {
 			jsonobj.put("end", calendarVO1.getEvent_end().toString());
 			jsonobj.put("allDay", false);
 			jsonobj.put("overlap", false);
-			jsonobj.put("editable",false);
+			jsonobj.put("editable",true);
 			jsonobj.put("color",color);
 //			map.put("className", calendarVO1.getEvent_className());
 			jsonarray.put(jsonobj);

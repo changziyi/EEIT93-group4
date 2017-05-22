@@ -78,9 +78,9 @@ public class EmailServlet extends HttpServlet {
 		//取得登入的寄件人帳號
 		HttpSession session = req.getSession();
 		CdataVO cdataVO = (CdataVO)session.getAttribute("LoginOK");
-//		String SendAccount = cdataVO.getC_id();
+		String SendAccount = cdataVO.getC_id();
 		//by benny
-		String SendAccount = "sa";//benny test
+//		String SendAccount = "sa";//benny test
 		// 收件者帳號
 		String mss_id = req.getParameter("mss_id");
 		//by benny tested ok

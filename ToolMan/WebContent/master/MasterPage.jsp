@@ -155,7 +155,7 @@
 </div>
 				<H2 style="display:inline;vertical-align:top">${mdataVO.b_name}</H2>
 				<c:if test="${LoginOK.m_id == mdataVO.m_id}">
-					<a class="btn btn-default" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-pencil"></span> 編輯店家</a><a class="btn btn-default"><span class="glyphicon glyphicon-calendar"></span> 編輯日曆</a>
+					<a class="btn btn-default" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-pencil"></span> 編輯店家</a><a href="${pageContext.servletContext.contextPath}/calendarformasterpage/mastercalendar.jsp" class="btn btn-default"><span class="glyphicon glyphicon-calendar"></span> 編輯日曆</a>
 				</c:if>
 				<p></p>
 				<p>專業：<c:forEach var="aMpro" items="${mdataVO.mpros}">${aMpro.m_pro} </c:forEach></p>
@@ -270,19 +270,23 @@
 			<div class="form-group workdiv">
 				<table class="table worktable">
 					<c:forEach var="aWork" items="${mdataVO.works}">
-						<tr>
-							<td class="aWork">
+						<tr class="aWork bg-info">
+							<td>
 								<c:if test="${LoginOK.m_id == mdataVO.m_id}">
 									<a class="btn btn-danger deleteworkim" id="deleteworkim"><span class="glyphicon glyphicon-trash"></span> 刪除</a>
-<!-- 								<button type="button" class="btn btn-danger deleteworkim" id="deleteworkim"> 刪除</button> -->
+	<!-- 							<button type="button" class="btn btn-danger deleteworkim" id="deleteworkim"> 刪除</button> -->
 								</c:if>
 								${aWork.work_name}
 								${aWork.work_des}
+								<input type="hidden" name="action" value="deleteworkim">
+								<input type="hidden" name="work_id" value="${aWork.work_id}">
+							</td>
+						</tr>
+						<tr>
+							<td>
 								<c:forEach var="a" items="${aWork.workims}">
 									<img width="304" height="236" class="img-thumbnail workimsize" src='${pageContext.servletContext.contextPath}/master/master.do?type=work&image=${a.im_id}'/>
 								</c:forEach>
-								<input type="hidden" name="action" value="deleteworkim">
-								<input type="hidden" name="work_id" value="${aWork.work_id}">
 							</td>
 						</tr>
 				</c:forEach>
@@ -665,7 +669,6 @@
 						upload.val(null);
 						workname.val(null);
 						workdes.val(null);
-						
 // 						location.reload();
 						
 // 						$('.workdiv').empty();
@@ -722,8 +725,8 @@
 			//刪除作品
 			var deleteworkimbtn = $('.deleteworkim');
 			deleteworkimbtn.click(function() {
-				var tdparent = $(this).parent('.aWork');
-				var workid = tdparent.children('input[name="work_id"]');
+				var tdparent = $(this).parents('.aWork');
+				var workid = tdparent.find('input[name="work_id"]');
 				console.log(workid.val());
 				$.ajax({
 					url : 'master.do',
