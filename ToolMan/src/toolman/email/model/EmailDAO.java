@@ -304,7 +304,7 @@ public class EmailDAO implements EmailDAO_interface {
 				emailVO.setMs_summary(rs.getString("ms_summary"));
 				emailVO.setMs_content(rs.getString("ms_content"));
 				emailVO.setS_name(rs.getBoolean("s_name"));
-				emailVO.setMs_trash(rs.getBoolean("ms_trash"));
+				
 				list.add(emailVO);
 			}
 		} catch (SQLException se) {

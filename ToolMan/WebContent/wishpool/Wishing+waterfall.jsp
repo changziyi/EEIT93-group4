@@ -315,7 +315,7 @@ body {font-family:Microsoft JhengHei;}
 		 	     			
 		 					var mssid=$(this).data('id').substring(5);
 			 				var mssum="我要修"+$(this).data('type');
-			 				var mscontent=$(this).data('content');
+			 				var mscontent="";
 			 				var mstime=$(this).data('time');
 			 				
 							$.post(hyperlinkstring,{"mss_id":mssid,"ms_content":mscontent,"ms_summary":mssum},function(){

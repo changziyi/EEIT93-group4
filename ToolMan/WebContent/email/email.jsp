@@ -53,9 +53,13 @@
 	
 }
 
-.zipcode {
-	display: none;
+colcenter {
+margin : 0px auto ;
+
 }
+
+
+
 </style>
 
 <script>
@@ -80,12 +84,12 @@
 		</div>
 		<br>
 
-		<div class="row">
-			<div class="col-md-3" style="background-color: #99ceff">
+		<div class="row colcenter">
+			<div class="col-md-5" style="background-color: #99ceff">
 
 				<div align="center">
 					<button class="btn btn-primary btn-lg" data-toggle="modal"
-						data-target="#myModal01">Send Email</button>
+						data-target="#myModal01">發送 Email</button>
 				</div>
 
 			</div>
