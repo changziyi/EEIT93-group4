@@ -244,21 +244,9 @@
 		<div style='clear:both'></div>
 	</div>
                 <form class="form-inline">
-<!-- 				             <div class="form-group" > -->
-<!-- 				              <label >Choose Theme:</label> -->
-<!-- 				              <select id="theme_selector1" class="form-control"> -->
-<!-- 				                    <option value="default">default</option> -->
-<!-- 				                    <option value="arrows">arrows</option> -->
-<!-- 				                    <option value="circles">circles</option> -->
-<!-- 				                    <option value="dots">dots</option> -->
-<!-- 				              </select> -->
-<!-- 				            </div>            -->
-				            
-
 				            <div class="btn-group navbar-btn" role="group" style="text-align:center;margin:auto;display:table">
 				                <button class="btn btn-default" id="prev-btn1" type="button" disabled>上一步</button>
 				                <button class="btn btn-default" id="next-btn1" type="button">下一步</button>
-				                <button class="btn btn-primary" id="submitcalendar" type="button">完成日程表</button>
 				            </div>
 				        </form>
                 
@@ -357,11 +345,11 @@
 										<td>	
 											<div>
 											    <select class="inputstyle" name="h_type" value=${orderVO.h_type}>
-												    <option value="1" selected="selected">公寓</option>
-												    <option value="2">三合院</option>
-												    <option value="3">透天屋</option>
-												    <option value="4">冰屋</option>
-												    <option value="5">狗屋</option>
+												    <option value="公寓" selected="selected">公寓</option>
+												    <option value="大廈">大廈</option>
+												    <option value="透天">透天</option>
+												    <option value="一樓">一樓</option>
+												    <option value="平房">平房</option>
 											    </select>
 											</div>
 										</td>
@@ -407,17 +395,6 @@
 						</div>
 					</form>
 						<form class="form-inline">
-<!-- 				             <div class="form-group" > -->
-<!-- 				              <label >Choose Theme:</label> -->
-<!-- 				              <select id="theme_selector" class="form-control"> -->
-<!-- 				                    <option value="default">default</option> -->
-<!-- 				                    <option value="arrows">arrows</option> -->
-<!-- 				                    <option value="circles">circles</option> -->
-<!-- 				                    <option value="dots">dots</option> -->
-<!-- 				              </select> -->
-<!-- 				            </div>            -->
-				            
-				            
 				            <div class="btn-group navbar-btn" role="group" style="text-align:center;margin:auto;display:table">
 				                <button class="btn btn-default" id="prev-btn" type="button">上一步</button>
 				                <button class="btn btn-default" id="next-btn" type="button" disabled>下一步</button>
@@ -704,7 +681,7 @@ function calendarsubmit(){
 							var datepick2 = moment(s).format('YYYY-MM-DD');
 							$('#datepicker').val(datepick2+event.title);		
 							$('#datepickersend').val(datepick);
-							
+							console.log("datepick="+datepick);
 						checkoverlapping(event);
 				        alert(event.title + " was dropped on " + event.start.format());
 			
