@@ -61,7 +61,12 @@ public class updatePwdServlet extends HttpServlet {
 	            rd.forward(req, resp);
 	            return;  
 	        }  
-	        resp.sendRedirect(getServletContext().getContextPath()+"/cdata/success.jsp");
+	        try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+	        resp.sendRedirect(getServletContext().getContextPath()+"/index.jsp");
 	}
 
 }

@@ -15,8 +15,10 @@
 	rel="stylesheet">
 <link rel="Shortcut Icon"
 	href="${pageContext.servletContext.contextPath}/favicon.ico" />
-	
+<!-- 	recaptcha    -->
+
 <script src='https://www.google.com/recaptcha/api.js'></script>	
+
 
 <style>
 
@@ -35,12 +37,13 @@ body {
 	box-shadow: 0 0 3px 3px #888;
 	border-radius: 20px;
 	border: 5px double #3399ff;
-	margin:120px auto ;
+	margin:160px auto ;
 	
 }
 
 .main {
-	padding: 38px;
+	padding:0px 38px;
+	margin-bottom:20px;
 }
 
 .social-box {
@@ -109,8 +112,15 @@ body {
 	font-weight: bold;
 	color: #8a8a8a;
 	line-height: 19px;
-	font-size: 15px;
-	
+	font-size: 15px;	
+}
+#onkey{
+	width:100px;
+}
+#one{
+	position: absolute; 
+	left:130px;
+	top:16px;
 }
 
 </style>
@@ -126,57 +136,56 @@ body {
 				<h3 class="heading-desc" style="text-align:center">
 					會員登入
 				</h3>
-				<div class="social-box">
+				<div class="social-box" style="bottom:30px;">
 					<div class="row mg-btm">
 
 						<input type="text" name="id" required="true" class="form-control" placeholder="請輸入帳號"
 							autofocus > 
 							
-						<input type="password" name="pswd"  required="true" class="form-control"
+						<input type="password" name="pswd"  required="true" class="form-control" id="show"
 							placeholder="請輸入密碼">
         
 					<div style="position: absolute; right:110px;bottom:10px;font-size:16px;color:red;" class="error">${errorMsgs.LoginError}</div>
+					<div style="position: absolute; right:125px;bottom:10px;font-size:16px;color:red;">${errorMsgs.gRecaptchaResponse}</div>
 					</div>
-
+					<!-- recaptcha -->
+					<div style="display:none" id="show2">
+						<div class="g-recaptcha" id="recaptcha"
+						data-sitekey="6LfxUyAUAAAAAE-AozM5vAPmEzh5fM33D0B4u69c"></div>
+					</div>
+					<!--錯誤訊息 -->
                     <div class="error">${errorMsgs.c_id}</div>
 					<div class="error">${errorMsgs.c_pwd}</div>
-
 				</div>
-				<div class="main">
-					<div class="row">
+				<div class="main" >
+					<div class="row" >
 						<div class="col-md-12">
 							<button type="submit" class="btn btn-info btn-block"> ToolMan帳號 登入</button>
 							<input type="hidden" name="login_mumber" value="login_on_mumber">
 						</div>
-						<div class="row"></div>
-					</div>
-					<div class="row">
-				<!----------------------------------------- FB登入 -------------------------------------------->
-				<div class="fb">
-					<div class="fb-login-button" onlogin="checkLoginState()" id="login"
-						data-max-rows="1" data-size="large" data-button-type="login_with"
-						scope="public_profile,email"></div>				
-				   </div>
-				<!----------------------------------------- FB登入 -------------------------------------------->
-<!-- 						<div class="col-md-12"> -->
-<!-- 							<a href="#" class="btn btn-primary btn-block"> <i -->
-<!-- 								class="icon-facebook"></i> Facebook帳號 登入 -->
-<!-- 							</a> -->
-<!-- 						</div> -->
-					</div>
-					<div class="row">
-						<div class="col-md-12">
-							<button type="submit" id="onkey" class="btn btn-info btn-block">一鍵輸入</button>
-						</div>
 					</div>
 				</div>
 				<div class="login-footer">
-					<div class="row">
-						<div class="col-xs-6 col-md-6 pull-right"
-							style="text-align: right">
-							<a href="${pageContext.servletContext.contextPath}/cdata/forgetpassword.jsp">忘記密碼?</a><br /> <a href="${pageContext.servletContext.contextPath}/cdata/login-up.jsp">還不是會員嗎?</a>
+									<!----------------------------------------- FB登入 -------------------------------------------->
+						<div class="row" id="one">
+							<div class="col-md-12">
+							<button type="submit" id="onkey" class="btn btn-info btn-block">一鍵輸入</button>
 						</div>
-					</div>
+					</div>				
+					<div style="position: absolute; left:40px;  ">				
+						<div class="fb">
+							<div class="fb-login-button" onlogin="checkLoginState()" id="login"
+							data-max-rows="1" data-size="large" scope="public_profile,email"></div>				
+				   		</div>
+				   </div>
+				   	<div class="row">
+						<div class="col-xs-6 col-md-6 pull-right"
+							style="text-align: right; bottom:5px;">
+							<a href="${pageContext.servletContext.contextPath}/cdata/forgetpassword.jsp">忘記密碼?</a><br />
+							<a href="${pageContext.servletContext.contextPath}/cdata/login-up.jsp">還不是會員嗎?</a>
+						</div>
+					</div>				   
+				<!----------------------------------------- FB登入 -------------------------------------------->
 				</div>
 			</form>
 		</div>
@@ -192,6 +201,17 @@ $(function(){
 		$("input[name = 'pswd']").val("c123456");
 	});		
 });
+
+
+/******************************************************/
+ 	$(function(){
+ 		$("#show").click(function(){
+ 			$("#show2").slideDown("slow");
+ 			
+ 		});		
+ 	});
+ 
+ 
 
 /********************** fb登入 ************************/
 
