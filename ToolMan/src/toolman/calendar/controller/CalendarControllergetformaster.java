@@ -37,14 +37,14 @@ import toolman.mdata.model.MdataVO;
 /**
  * Servlet implementation class CalendarController
  */
-@WebServlet("/toolman.calendar/CalendarControllerget.do")
-public class CalendarControllerget extends HttpServlet {
+@WebServlet("/toolman.calendar/CalendarControllergetformaster.do")
+public class CalendarControllergetformaster extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CalendarControllerget() {
+    public CalendarControllergetformaster() {
         super();
 
     }
