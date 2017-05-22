@@ -129,11 +129,11 @@ body {
 				<div class="social-box">
 					<div class="row mg-btm">
 
-						<input type="text" name="id" required="true" class="form-control" placeholder="Email"
+						<input type="text" name="id" required="true" class="form-control" placeholder="請輸入帳號"
 							autofocus > 
 							
 						<input type="password" name="pswd"  required="true" class="form-control"
-							placeholder="Password">
+							placeholder="請輸入密碼">
         
 					</div>
 
