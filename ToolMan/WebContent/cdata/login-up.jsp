@@ -5,79 +5,70 @@
 <html >
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>Sign-Up/Login Form</title>
+  <title>註冊</title>
   <link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,300,600' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
   <link rel="stylesheet" href="${pageContext.servletContext.contextPath}/css/login/style.css">
+  <link rel="Shortcut Icon" href="${pageContext.servletContext.contextPath}/favicon.ico" />
    
 </head>
 <body>
   <div class="form">  
       <div class="tab-content">
         <div id="signup">   
-          <h1>註冊</h1>          
+          <h1 style="color:#357EBD; font-size: 33px;">註冊</h1>          
           <form action="<c:url value='/cdata/Cdata.do'/>" method="POST">            
           <div class="field-wrap" >
-            <label>帳號<span class="req">*</span></label>
-            <input type="text" class="input" name="id" autocomplete="off"  autocomplete="off" autofocus>
+            <input type="text" style="background-color:#ffffff;"  name="id" autocomplete="off" placeholder="帳號*"  autocomplete="off" autofocus>
             <label style="left:410px;" class="errormg">${errorMsgs.c_id}</label>
           </div>
           
-          <div class="field-wrap">
-            <label>密碼<span class="req">*</span></label>
-            <input type="password" name="pswd" axlength="12" autocomplete="off">
+          <div class="field-wrap">         
+            <input type="password" style="background-color:#ffffff;" name="pswd" axlength="12" placeholder="密碼*"  autocomplete="off">
             <label style="left:410px;" class="errormg">${errorMsgs.c_pwd}</label>
             <label style="left:246px;" class="errormg">${errorMsgs.c_pwd01}</label>
           </div> 
           <div class="field-wrap">
-            <label>姓名<span class="req">*</span></label>
-            <input type="text" name="name" autocomplete="off">
+            <input type="text" style="background-color:#ffffff;" name="name" placeholder="姓名*" autocomplete="off">
             <label style="left:410px;" class="errormg">${errorMsgs.c_name}</label>
             <label style="left:257px;" class="errormg">${errorMsgs.c_name01}</label>
           </div>
           <div class="field-wrap">
-            <label>生日<span class="req">*</span></label>
-            <input type="text" id="datepicker" name="birth" autocomplete="off">
+            <input type="text" style="background-color:#ffffff;" id="datepicker" name="birth" placeholder="生日*" autocomplete="off">
             <label style="left:259px;" class="errormg">${errorMsgs.bday}</label>
           </div> 
           <div class="field-wrap">
-            <label>手機號碼<span class="req">*</span></label>
-            <input type="text" name="phone" autocomplete="off">
+            <input type="text" style="background-color:#ffffff;" name="phone" placeholder="手機號碼*" autocomplete="off">
             <label style="left:378px;" class="errormg">${errorMsgs.phone}</label>
             <label style="left:346px;" class="errormg">${errorMsgs.phone01}</label>
           </div>
           <div class="field-wrap">
-            <label>E-mail<span class="req">*</span></label>
-            <input type="text" name="mail" autocomplete="off">
+            <input type="text" style="background-color:#ffffff;" name="mail" placeholder="E-mail*" autocomplete="off">
             <label style="left:396px;" class="errormg">${errorMsgs.c_email}</label>
             <label style="left:333px;" class="errormg">${errorMsgs.c_email01}</label>
           </div>                                                    
 <!--地址-->                
           <div class="top-row">
             <div class="field-wrap">
-              <label>縣市<span class="req">*</span></label>
-              <input type="text" name="city" autocomplete="off" />
-              <input type="hidden" name="other">
+              <input type="text" style="background-color:#ffffff;" name="city" placeholder="縣市*" autocomplete="off" />
+              <input type="hidden" style="background-color:#ffffff;" name="other">
               <label style="left:138px;" class="errormg">${errorMsgs.c_city}</label>
             </div>      
             <div class="field-wrap">
-              <label>地區<span class="req">*</span></label>
-              <input type="text" name="district" autocomplete="off"/>
+              <input type="text" style="background-color:#ffffff;" name="district" placeholder="地區*" autocomplete="off"/>
               <label style="left:138px;" class="errormg">${errorMsgs.c_district}</label>
             </div>
           </div>
 <!--地址-->  
           <div class="field-wrap">
-            <label>地址<span class="req">*</span></label>
-            <input type="text"  name="addr" autocomplete="off">
+            <input type="text" style="background-color:#ffffff;" name="addr" placeholder="地址*" autocomplete="off">
             <label style="left:410px;" class="errormg">${errorMsgs.c_addr}</label>
             <label style="left:347px;" class="errormg">${errorMsgs.c_addr01}</label>
           </div>
-          <div class="field-wrap">
-            <label>驗證碼<span class="req">*</span></label>          
-            <input type="text" id="code" name="" axlength="4" autocomplete="off">
+          <div class="field-wrap">        
+            <input type="text" id="code" style="background-color:#ffffff;" name="" placeholder="驗證碼*" axlength="4" autocomplete="off">
             <span  style="right:20px;bottom:6px;font-size: 20px;color:#a0b3b0"class="function-code" id="createCade"></span><!--驗證碼驗證-->
-            <label  id="code01" style="left:300px;bottom:12px;">請輸入驗證碼</label> 
+<!--             <label  id="code01" style="left:300px;bottom:12px; color:#000000">請輸入驗證碼</label>  -->
                        
             <label style="left:120px; color:red;">${errorMsgs.account}</label>            
           </div>
@@ -109,7 +100,7 @@
 		jcPublic.clickCode();
 		
 
-		
+//這行刪除驗證碼數字會消失		
 		$(".other>span").on("click",function(){
 			$(this).parent().children("div").toggleClass("hidden");
 		})		
@@ -152,7 +143,7 @@
 	$(function(){
 		$("#onkey").click(function(){
 			event.preventDefault();
-			$("input[name = 'id']").val("bobobobobobo");
+			$("input[name = 'id']").val("oneprice");
 			$("input[name = 'pswd']").val("sa123456");
 			$("input[name = 'name']").val("航海王");
 			$("input[name = 'birth']").val("1990-04-19");
