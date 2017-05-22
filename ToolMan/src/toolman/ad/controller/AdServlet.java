@@ -5,9 +5,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Timestamp;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -71,24 +73,34 @@ public class AdServlet extends HttpServlet {
 		
 		HttpSession session = req.getSession();
 		CdataVO cdataVO = (CdataVO)session.getAttribute("LoginOK");
-//		System.out.println("cdataVO = " + cdataVO.getC_id());
-//		String SendAccount = cdataVO.getC_id();
 		String start = req.getParameter("start");
+		System.out.println(start);
 		String end = req.getParameter("end");
 		
+		String[] str = start.split("/");
+		start = str[2]+"-"+str[0]+"-"+str[1];
+		str = end.split("/");
+		end = str[2]+"-"+str[0]+"-"+str[1];
 		
 		Map<String, String> errorMsgs = new HashMap<String, String>();
 		req.setAttribute("errorMsgs", errorMsgs);
 		AdVO AdVO = new AdVO();
 		// 宣告錯誤訊息的變數
-		
-		DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		Calendar calobj = Calendar.getInstance();
-		Timestamp ad_bdate = new Timestamp(calobj.getTimeInMillis());
-		Timestamp ad_enddate = new Timestamp(calobj.getTimeInMillis());
+		Date StartDate = new Date(System.currentTimeMillis());
+		Date EndDate = new Date(System.currentTimeMillis());
 		// 當下時間
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		
+		try {
+			StartDate = sdf.parse(start);
+			EndDate = sdf.parse(end);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
+		Timestamp ad_bdate = new Timestamp(StartDate.getTime());
+		Timestamp ad_enddate = new Timestamp(EndDate.getTime());
 		AdVO addform = new AdVO();
 		AdService adsrv = new AdService();
 		addform.setM_id(cdataVO.getM_id());
