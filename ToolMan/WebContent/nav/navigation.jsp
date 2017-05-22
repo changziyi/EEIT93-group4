@@ -50,8 +50,11 @@
 							<button type="button" class="btn btn-default btn-sm">
 								<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 							</button>
-							<button type="button" class="btn btn-default btn-sm">
+								</button>
+							<a href="<%=request.getContextPath() %>/email/email.jsp">
+							<button type="button" class="btn btn-default btn-sm" data-target="#myModal01" >
 								<span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
+								
 							</button>
 
 						</form>

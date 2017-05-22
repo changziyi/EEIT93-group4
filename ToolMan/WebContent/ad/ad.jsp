@@ -24,24 +24,24 @@
 <link rel="stylesheet"
 	href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
 <link href="${pageContext.servletContext.contextPath}/nav/nav.css" rel="stylesheet">
+  <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
 <link href="${pageContext.servletContext.contextPath}/wishpool/wish.css" rel="stylesheet">
 
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <script
-	src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
-<script
 	src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"
-	type="text/javascript"></script>
+<!-- <script -->
+<!-- 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" -->
+<!-- 	type="text/javascript"></script> -->
 <script type="text/javascript"
 	src="http://masonry.desandro.com/jquery.masonry.min.js"></script>
 
 <script
 	src="${pageContext.servletContext.contextPath}/js/jquery.twzipcode.min.js"></script>
 
-		
 </head>
 <body>
 <jsp:include page="/nav/navigation.jsp" />
@@ -52,30 +52,22 @@
 		<div class="row">
 				<div class="pull-right search-condition">
 			
-					<form name="searchForm" id="searchForm" action="Wishing+waterfall.jsp" method="get">
 					<b>新舊排序：</b> 
 					<span>
 					<select name="order" onchange="searchForm.submit();">
 						<option value="desc" <%="desc".equals(request.getParameter("order")) ? "selected" : "" %>>從新到舊</option>
 						<option value="asc" <%="asc".equals(request.getParameter("order")) ? "selected" : "" %>>從舊到新</option>
 					</select> 
-					</span>
-				
+					</span>				
 					</form>
 				</div>
+				
 		</div>
 		<div class="row">
 			<div class="col-md-3">
 				<div class="well text-center bgcolor">
-					<div>
-						<button class="btn btn-primary btn-lg" data-toggle="modal"
-							data-target="#myModal01">
-							刊登廣告
-						</button>
-					</div>
-					<br>
-					
-				</div>				
+				
+				</div>	
 				<div class="well bgcolor">
 					<h2 class="text-center">隨機廣告</h2>
 					<br>
@@ -91,20 +83,14 @@
 				</div>
 			</div>
 			
-			<div class="col-md-9" id="wishblock">
-				
-				
-					<c:forEach var="wishpoolVO" items="${new_date}">
+			<div class="col-md-9" >
+			
+					<c:forEach var="adVO" items="${new_date}">
 							<div class="content-box">
 								<div><label class="user-name">師傅帳號：</label><span>${ADVO.m_id}</span></div>
-							
-								<div align="center">
-								<button class="btn btn-primary btn-sm" data-toggle="modal"
-									data-target="#wishDetailModal${wishpoolVO.w_id}">
-									刊登廣告</button>
 								<br>
-								<div class="pull-right">起始時間：${wishpoolVO.w_date}</div>	<br>
-								<div class="pull-right">結束時間：${wishpoolVO.w_date}</div>
+								<div class="pull-right" >起始時間：${adVO.ad_bdate}</div>	<br>
+								<div class="pull-right">結束時間：${adVO.ad_enddate}</div>
 								</div>
 							</div>	
 					</c:forEach>
@@ -115,13 +101,12 @@
 	</div>
 
 	<!-----------------------------我要許願表單 ----------------------------------------->
-	<div class="modal fade" id="myModal01" tabindex="-1" role="dialog"
+	<div  id="myModal01" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 		
 		
-			<div class="modal-content">
-				<div class="modal-header">
+		
 					<h3>
 						刊登廣告
 						<button type="button" class="close" data-dismiss="modal"
@@ -132,7 +117,7 @@
 					</h3>
 				</div>
 
-				<div class="modal-body">
+			
 					<div class="container">
 						
 							<form role="form" class="col-md-5 go-right" method="POST" 
@@ -140,36 +125,34 @@
 								<p>起始日期</p>
 								<div class="form-group">
 									<input type="text" name="start" class="form-control"
-										required="true"> <label for="name">起始日期</label>
+										id="datepicker">
 								</div>
 								<p>結束日期</p>
 								<div class="form-group">
 									<input type="text" name="end" class="form-control"
-										required="true"> <label for="name">結束日期</label>
+									 id="datepicker2">
 								</div>
-								
+							
 								<div id="twzipcode"></div>
-					
-							
-							
-						
-				</div>
+
+							<div class="modal-footer">
+								<button type="button" class="btn btn-danger"
+									data-dismiss="modal">取消</button>
+								<button type="submit" class="btn btn-primary">送出</button>
+
+							</div>
+						</form>
 				
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-danger" data-dismiss="modal">取消</button>
-					<button type="submit" class="btn btn-primary">送出</button>
-					<input type="hidden" name="w_city"> <input type="hidden"
-						name="w_district">
-				</div>
-				</form>
-				</div>
-			
-			
-			
-		</div>
+		
+	</div>
 	</div>
 
-	
+
 </body>
+	<script>
+  $( function() {
+    $( "#datepicker" ).datepicker();
+    $( "#datepicker2" ).datepicker();
+  } );
+  </script>
 </html>
