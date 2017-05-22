@@ -30,14 +30,14 @@ public class MdataPageServlet extends HttpServlet {
 		MdataVO mdataVO = mdataSvc.findByPrimaryKey(m_id);
 		HttpSession session = request.getSession();
 		
-		if ("審核通過".equals(mdataVO.getS_name())) {
+//		if ("審核通過".equals(mdataVO.getS_name())) {
 			session.setAttribute("mdataVO", mdataVO);
 			response.sendRedirect("MasterPage.jsp");
 			return;
-		} else {
-			response.sendRedirect("MasterPageVerifying.jsp");
-			return;
-		}
+//		} else {
+//			response.sendRedirect("MasterPageVerifying.jsp");
+//			return;
+//		}
 		
 	}
 
