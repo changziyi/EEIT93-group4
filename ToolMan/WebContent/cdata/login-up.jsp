@@ -70,8 +70,8 @@
 	          	     
 	            <input type="text" id="code2" style="background-color:#ffffff;" name="verification1" placeholder="驗證碼*" axlength="4" autocomplete="off">
 	            
-	            <span  style="border:1px solid blue;right:20px;bottom:6px;font-size: 20px;color:#a0b3b0"class="function-code" id="createCade" name="verification2"></span><!--驗證碼驗證-->
-				<input  type = "hidden" style="border:1px solid blue;right:20px;bottom:6px;font-size: 20px;color:#a0b3b0"class="function-code" id="createCade" name="verification2" />
+	            <span  style="border:1px solid blue;right:20px;bottom:6px;font-size: 20px;color:#a0b3b0"class="function-code" id="createCade" ></span><!--驗證碼驗證-->
+				<input  type = "hidden" style="border:1px solid blue;right:20px;bottom:6px;font-size: 20px;color:#a0b3b0"class="function-code" id="verification2" name="verification2" />
 	
 	<!--             <label  id="code01" style="left:300px;bottom:12px; color:#000000">請輸入驗證碼</label>  -->               
 	            <label id="v" style="left:120px; color:red;">${errorMsgs.errorverify}</label>            
@@ -106,7 +106,7 @@ $(function(){
 
 		
 		$("#onkey").click(function(){
-// 			event.preventDefault();
+			event.preventDefault();
 			$("input[name = 'id']").val("oneprice");
 			$("input[name = 'pswd']").val("sa123456");
 			$("input[name = 'name']").val("航海王");
