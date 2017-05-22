@@ -151,13 +151,7 @@ body {
 						<div class="row"></div>
 					</div>
 					<div class="row">
-				<!----------------------------------------- FB登入 -------------------------------------------->
-				<div class="fb">
-					<div class="fb-login-button" onlogin="checkLoginState()" id="login"
-						data-max-rows="1" data-size="large" data-button-type="login_with"
-						scope="public_profile,email"></div>				
-				   </div>
-				<!----------------------------------------- FB登入 -------------------------------------------->
+		
 <!-- 						<div class="col-md-12"> -->
 <!-- 							<a href="#" class="btn btn-primary btn-block"> <i -->
 <!-- 								class="icon-facebook"></i> Facebook帳號 登入 -->
@@ -173,9 +167,19 @@ body {
 				<div class="login-footer">
 					<div class="row">
 						<div class="col-xs-6 col-md-6 pull-right"
-							style="text-align: right">
-							<a href="${pageContext.servletContext.contextPath}/cdata/forgetpassword.jsp">忘記密碼?</a><br /> <a href="${pageContext.servletContext.contextPath}/cdata/login-up.jsp">還不是會員嗎?</a>
+							style="text-align: right">						
+							
+							<a href="${pageContext.servletContext.contextPath}/cdata/forgetpassword.jsp">忘記密碼?</a>
+							<br /> <a href="${pageContext.servletContext.contextPath}/cdata/login-up.jsp">還不是會員嗎?</a>
 						</div>
+		<!----------------------------------------- FB登入 -------------------------------------------->
+								<div style="position: relative; left:35px;">
+									<div class="fb">
+										<div class="fb-login-button" onlogin="checkLoginState()" id="login"
+										data-max-rows="1" data-size="large" scope="public_profile,email"></div>				
+				   					</div>
+				 				</div>
+		<!----------------------------------------- FB登入 -------------------------------------------->						
 					</div>
 				</div>
 			</form>
