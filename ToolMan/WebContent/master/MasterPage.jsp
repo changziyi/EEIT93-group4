@@ -155,24 +155,23 @@
 </div>
 				<H2 style="display:inline;vertical-align:top">${mdataVO.b_name}</H2>
 				<c:if test="${LoginOK.m_id == mdataVO.m_id}">
-					<a class="btn btn-default" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-pencil"></span> 編輯店家</a><a href="${pageContext.servletContext.contextPath}/calendarformasterpage/mastercalendar.jsp" class="btn btn-default"><span class="glyphicon glyphicon-calendar"></span> 編輯日曆</a>
+					<a href="${pageContext.servletContext.contextPath}/calendarformasterpage/mastercalendar.jsp" class="btn btn-default"><span class="glyphicon glyphicon-calendar"></span> 編輯日曆</a><a class="btn btn-default" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-pencil"></span> 編輯店家</a>
 				</c:if>
 				<p></p>
 				<p>專業：<c:forEach var="aMpro" items="${mdataVO.mpros}">${aMpro.m_pro} </c:forEach></p>
 				<p>師傅：${mdataVO.m_name}</p>
 				<p>地區：${mdataVO.m_city} ${mdataVO.m_district}</p>
  <%--------------------------------------最愛與黑單--------------------------------------------------- --%>
-
-          		<c:if test="${empty LoginOK}">
+     	<c:if test="${empty LoginOK}">
 	          		<a href="#" data-toggle="tooltip" data-placement="bottom" title="要登入才能預約師傅">
 	          			<button type="button" class="btn btn-primary disabled btn-success" >
 	          				<span class="glyphicon glyphicon-earphone"></span>預約師傅
 	          			</button>
 	          		</a>
           		</c:if>
-          	
           		<c:if test="${not empty LoginOK}">
-	          		<a href="${pageContext.servletContext.contextPath}/toolman.order/NewOrder.jsp" class="btn btn-success ">
+          			<c:if test="${LoginOK.m_id != mdataVO.m_id}">
+          			<a href="${pageContext.servletContext.contextPath}/toolman.order/NewOrder.jsp" class="btn btn-success ">
 	          			<span class="glyphicon glyphicon-earphone"></span> 預約師傅</a>
 					<a href="${pageContext.servletContext.contextPath}/order/Favorite.do?c_id=${LoginOK.c_id}&m_id=${mdataVO.m_id}&action=addFavorite" class="btn btn-info ">
 						<span class="glyphicon glyphicon-heart-empty"></span> 加入最愛
@@ -180,11 +179,11 @@
 	        		<a href="${pageContext.servletContext.contextPath}/order/Dislike.do?c_id=${LoginOK.c_id}&m_id=${mdataVO.m_id}&action=addDislike" class="btn btn-danger">
 	          			<span class="glyphicon glyphicon-remove-sign"></span> 加入黑名單
 	        		</a>
+	        	</c:if>	
         		</c:if>
-        		<p></p>
+        			<p></p>
         		<div id='calendar' style="float:left;width:400px; height:100px;"></div>
-        		
-  <%--------------------------------------萬里長城--------------------------------------------------- --%>
+ <%--------------------------------------萬里長城--------------------------------------------------- --%>
 			</div>
 		</div>
 	</div>
