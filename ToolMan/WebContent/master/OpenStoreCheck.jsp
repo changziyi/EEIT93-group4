@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>ToolMan</title>
 <link rel="stylesheet"
 	href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
 <link href="${pageContext.servletContext.contextPath}/nav/nav.css"
@@ -30,6 +30,7 @@
 </head>
 
 <style>
+body {font-family:Microsoft JhengHei;}
 .changeImg {
 	width: 200px;
 }
@@ -38,8 +39,9 @@
 	display: none;
 }
 
-.changeImg {
-	width: 200px;
+.wid {
+	width:35%;
+	font-size:15px;
 }
 
 .search-condition {
@@ -50,10 +52,9 @@
 	font-size: 20px;
 }
 
-.modal-content {
-	background-color: #b3d9ff;
-	border-radius: 25px;
-	border: 5px double #3399ff;
+.modal-content-1 {
+	border-radius: 10px;
+	border: 1px solid #D3D3D3;
 }
 
 .form-control {
@@ -108,7 +109,7 @@ form textarea {
 }
 
 
-.modal-content {
+.modal-content-1 {
 	width: 120%;
 }
 
@@ -126,75 +127,61 @@ border: 5px double red;
 		<div class="row"></div>
 	</div>
 	
-	<div class="modal-dialog">
-		<div class="modal-content">
+	<div class="modal-dialog wid">
+		<div class="modal-content-1">
 		
 			<div class="modal-header">
-				<h3 class="text-center">我要開店</h3>
+				<h3 class="text-center">店家資訊</h3>
 			</div>
 			
 			<div class="modal-body">
-				<div class="container">
-					<form role="form" method="post" action="master.do" class="col-md-7"
-						enctype="multipart/form-data">
+				<div>
+						<div class="form-group">
+							<table class="table table-hover">
+								<tr>
+									<td>首頁圖片</td>
+									<td><div><img id="m_cer" class="img-thumbnail" width="350px" src="${pageContext.servletContext.contextPath}/master/master.do?type=master&image=${cdata_mdataVO.m_id}"></div>
+								</tr>
+								<tr>
+									<td>店家名稱</td>
+									<td>${cdata_mdataVO.b_name}</td>
+								</tr>
+								<tr>
+									<td>店家介紹</td>
+									<td><div style="width:500px">${cdata_mdataVO.b_des}</div></td>
+								</tr>
+								<tr>
+									<td>師傅姓名</td>
+									<td>${cdata_mdataVO.m_name}</td>
+								</tr>
+								<tr>
+									<td>電話</td>
+									<td>${cdata_mdataVO.m_cel}</td>
+								</tr>
+								<tr>
+									<td>信箱</td>
+									<td>${cdata_mdataVO.m_email}</td>
+								</tr>
+								<tr>
+									<td>地址</td>
+									<td>${cdata_mdataVO.m_city}${cdata_mdataVO.m_district}${cdata_mdataVO.m_addr}</td>
+								</tr>
+								<tr>
+									<td>維修類別</td>
+									<td><c:forEach var="aMpro" items="${cdata_mdataVO.mpros}">${aMpro.m_pro}</c:forEach></td>
+								</tr>
+								<tr>
+									<td>專業證照</td>
+									<td><div><img id="m_cer" class="img-thumbnail" height="300px" src="${pageContext.servletContext.contextPath}/master/master.do?type=cer&image=${cdata_mdataVO.m_id}"></div>
+								</tr>
+							</table>
+						</div>
 						
-						
-							<div class="row">
-							<p>首頁照片： </p>
-							     <div class="indexphoto">
-								<img height="180px"
-									src="${pageContext.servletContext.contextPath}/master/master.do?type=master&image=${cdata_mdataVO.m_id}">
-							</div>
-							</div>
-						
-							<div class="row">
-								<p>店家名稱： ${cdata_mdataVO.b_name}</p>
-							</div>
-							
-							<div class="row">
-								<p>店家介紹： ${cdata_mdataVO.b_des}</p>
-							</div>
-							
-							<div class="row">
-								<p>姓名： ${cdata_mdataVO.m_name}</p>
-							</div>
-							
-							<div class="row">
-								<p>電話： ${cdata_mdataVO.m_cel}</p>
-							</div>
-							
-							<div class="row">
-								<p>信箱： ${cdata_mdataVO.m_email}</p>
-							</div>
-							
-							<div class="row">
-								<p>地址： ${cdata_mdataVO.m_city}${cdata_mdataVO.m_district}${cdata_mdataVO.m_addr}</p>	
-							</div>
-							
-							<div class="row">
-							   <div>
-								<p>維修類別： 
-								<c:forEach var="aMpro"
-										items="${cdata_mdataVO.mpros}">${aMpro.m_pro}
-			                    </c:forEach>
-			                    </p>
-							</div>
-							</div>
-							
-							<div class="row">
-								<p>專業證照：</p>
-									<div>
-										<img height="180px"
-											src="${pageContext.servletContext.contextPath}/master/master.do?type=cer&image=${cdata_mdataVO.m_id}">
-									</div>
-							</div>
-				            </form>
-							</div>
-					        </div>
-							<div class="modal-footer">
-
-								<input type="button" name="homePage" class="btn btn-primary" value="回首頁">
-                            </div>	
+						</div>
+					</div>
+					<div class="modal-footer">
+							<input type="button" name="homePage" class="btn btn-primary" value="回首頁">
+                      </div>	
 				  </div>
 				
 			</div>
@@ -205,7 +192,7 @@ border: 5px double red;
 			$(function() {
 
 				$('input[name="homePage"]').click(function() {
-					$(location).attr('href', 'searchPage.jsp');
+					$(location).attr('href', '${pageContext.servletContext.contextPath}/index.jsp');
 				});
 
 			});

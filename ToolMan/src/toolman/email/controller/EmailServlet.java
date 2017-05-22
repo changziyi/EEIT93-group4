@@ -24,10 +24,13 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 import javax.transaction.SystemException;
 
+import toolman.cdata.model.CdataService;
 import toolman.cdata.model.CdataVO;
 import toolman.email.model.EmailDAO;
 import toolman.email.model.EmailService;
 import toolman.email.model.EmailVO;
+import toolman.mdata.model.MdataDAO;
+import toolman.mdata.model.MdataVO;
 import toolman.email.model.EmailVO;
 
 @WebServlet("/email/Email.do")
@@ -75,10 +78,26 @@ public class EmailServlet extends HttpServlet {
 		//取得登入的寄件人帳號
 		HttpSession session = req.getSession();
 		CdataVO cdataVO = (CdataVO)session.getAttribute("LoginOK");
-		String SendAccount = cdataVO.getC_id();
+//		String SendAccount = cdataVO.getC_id();
+		//by benny
+		String SendAccount = "sa";//benny test
+		// 收件者帳號
+		String mss_id = req.getParameter("mss_id");
+		//by benny tested ok
+		if("tom".equals(req.getParameter("mailtype"))){
+			MdataDAO mdatadao = new MdataDAO();
+			CdataService service = new CdataService();
+			CdataVO cdataVO1 = service.getByM(Integer.parseInt(mss_id));
+			mss_id = cdataVO1.getC_id();
+		}	
+		else if("tob".equals(req.getParameter("mailtype"))){
+			MdataDAO mdatadao2 = new MdataDAO();	
+			CdataService service = new CdataService();
+			MdataVO mdataVO2 = mdatadao2.getMasterByB(mss_id);		
+			CdataVO cdataVO2 = service.getByM(mdataVO2.getM_id());
+			mss_id = cdataVO2.getC_id();
+		}
 		
-		
-//		String SendAccount = "sa";//benny test
 		
 		
 		// 宣告錯誤訊息的變數
@@ -86,8 +105,7 @@ public class EmailServlet extends HttpServlet {
 		req.setAttribute("errorMsgs", errorMsgs);
 		EmailVO emailVO = new EmailVO();
 		
-		// 收件者帳號
-		String mss_id = req.getParameter("mss_id");
+
 		if (mss_id == null || mss_id.trim().length() == 0) {
 			errorMsgs.put("mss_id1", "請輸入收件者帳號");
 		}
@@ -114,7 +132,7 @@ public class EmailServlet extends HttpServlet {
 
 		// 狀態
 		EmailService emailserv = new EmailService();
-
+		System.out.println("mssid="+mss_id);
 		emailVO.setMsr_id(SendAccount);
 		emailVO.setMss_id(mss_id);
 		emailVO.setMs_summary(ms_summary);

@@ -222,7 +222,7 @@ public class MdataServlet extends HttpServlet {
 			mdataVO.setM_arating(0);
 			mdataVO.setO_current(0);
 			mdataVO.setO_finished(0);
-			mdataVO.setS_name("m_nchecked");
+			mdataVO.setS_name("審核未通過");
 			
 			if (!errorMsgs.isEmpty()) {
 				session.setAttribute("cdata_mdataVO", mdataVO);
@@ -368,7 +368,8 @@ public class MdataServlet extends HttpServlet {
 			workVO.setImg3(img3);
 			
 			WorkimVO workimVO1 = new WorkimVO();
-
+			WorkimVO workimVO2 = new WorkimVO();
+			WorkimVO workimVO3 = new WorkimVO();
 			
 			Set<WorkimVO> workims = new HashSet<WorkimVO>();
 			
@@ -377,14 +378,12 @@ public class MdataServlet extends HttpServlet {
 				workimVO1.setIm_show(img1);
 				workims.add(workimVO1);
 			}
-			else if (img2 != null) {
-				WorkimVO workimVO2 = new WorkimVO();
+			if (img2 != null) {
 				workimVO2.setWorkVO(workVO);
 				workimVO2.setIm_show(img2);
 				workims.add(workimVO2);
 			}
-			else if (img3 != null) {
-				WorkimVO workimVO3 = new WorkimVO();
+			if (img3 != null) {
 				workimVO3.setWorkVO(workVO);
 				workimVO3.setIm_show(img3);
 				workims.add(workimVO3);

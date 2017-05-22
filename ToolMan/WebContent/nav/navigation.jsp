@@ -32,7 +32,9 @@
 							
 							
 							<c:if test="${not empty LoginOK }">
+							<c:if test="${empty LoginOK.m_id}">
 						<li><a class="alist" href="${pageContext.servletContext.contextPath}/master/OpenStoreInfo.jsp">我要開店 </a></li>
+							</c:if>
 						</c:if>
 						<li><a class="alist"
 							href="${pageContext.servletContext.contextPath}/wishpool/Wishing+waterfall.jsp">許願池
@@ -84,7 +86,7 @@
 						<li class=" dropdown"><a class="alist" href="#"
 							class="dropdown-toggle " data-toggle="dropdown" role="button"
 							aria-haspopup="true" aria-expanded="false"><span
-								class="glyphicon">&#xe008;</span> <span class="caret"></span></a>
+								class="glyphicon">&#xe008;</span> ${LoginOK.c_id}<span class="caret"></span></a>
 							<ul class="dropdown-menu">
 								<li><a
 									href="${pageContext.servletContext.contextPath}/cdata/CdatadessServlet.do?c_id=${LoginOK.c_id}">我的資料</a>
@@ -95,8 +97,10 @@
 								<li><a
 									href="${pageContext.servletContext.contextPath}/cdata/CdataOrderServlet.do?c_id=${LoginOK.c_id}&action=listOrder">我的訂單</a>
 								</li>
+							<c:if test="${LoginOK.m_id != null}">
 								<li><a
 									href="${pageContext.servletContext.contextPath}/mdata/MdataOrderServlet.do?m_id=${LoginOK.m_id}&action=listOrder">我的工作</a></li>
+								</c:if>
 								<li><a
 									href="${pageContext.servletContext.contextPath}/cdata/CdataOrderServlet.do?c_id=${LoginOK.c_id}&action=myLike">我的最愛</a>
 								</li>

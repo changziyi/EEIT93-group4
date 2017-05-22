@@ -33,8 +33,8 @@
 		.form-control {margin:auto; width:120px; display:inline; font-family:Microsoft JhengHei; vertical-align: top}
 		.proc {padding:5px;margin-left: 0;margin-right: 5px;text-align: center;border-radius: 3px;color: #FFF5EE;font-weight: bold;}
 		.divpro {margin-left: 0;margin-bottom: 10px;}
-		.container {width: 80%;}
-		.myDiv {position:relative; top:90px;}
+		.container {width: 85%;}
+		.myDiv {position:relative; top:90px; height:100%}
 		.pad {padding-left: 3%;}
 		.result {font-size:20px;}
 		.resultcount {padding:5%;}
@@ -44,7 +44,7 @@
 		.searchinput {font-weight:bold;color:#00AFEA;}
 		.btn-master {color: White; background-color: #00BFFF; font-size:14px}
 		.btn-master:hover {background-color: #87CEFA;color: white}
-		.thumbnailformaster {height:410px}
+		.thumbnailformaster {height:405px;}
 		.bar {width:30%;}
 		.boxtext {font-size:15px; margin-bottom:10px; margin-bottom:10px}
 		.bartext {font-size:20px; margin-bottom:8px}
@@ -53,6 +53,9 @@
 		.adrow {margin-top:3% ;margin-bottom:3%; margin-left:0.5%; margin-right:0.5%; padding:5% 4% 4% 2%}
 		.md7 {padding-left:0.5%}
 		.md5 {padding-left:0.2%;padding-top:10%;padding-right:0.2%}
+		.procc {padding:1.3%;margin-right:0.8%;font-size:15px}
+		.procc:hover {color:white}
+		.bname {margin-top:1%}
 	</style>
 </head>
 
@@ -161,7 +164,7 @@
 					score = '尚無評價';
 				}
 // 				var rating = $('<span></span>').attr('style','font-size:12px').text(score);
-				var bname = $('<h3></h3>').text(master.bname);
+				var bname = $('<h3></h3>').addClass('bname').text(master.bname);
 				var city = $('<p></p>').addClass('boxtext').text('地點：' + master.city + ' ' + master.district);
 				var finish = $('<p></p>').addClass('boxtext').text('完成案件數：' + master.finish);
 				var divPro = $('<div></div>').addClass('divpro');
@@ -169,43 +172,45 @@
 				var caption = divSpan.addClass('caption').append([bname,city,divPro]);
 				var prodes = $('<span></span>').addClass('boxtext').text('專業：');
 				divPro.append(prodes);
+				if (master.pro.length != 'undefined' || master.pro.length != null) {
 				for (var i = 0; i < master.pro.length; i++) {
 					var pro = master.pro[i];
 					var pa = $('<a href=""></a>');
 					switch(pro) {
 						case '地板地磚':
-							pa.addClass('proc').css({'background':'#FFA500'});
+							pa.addClass('btn btn-md procc').css({'background':'#FFA500'});
 							break;
 						case '水電工程':
-							pa.addClass('proc').css({'background':'#00BBFA'});
+							pa.addClass('btn btn-md procc').css({'background':'#00BBFA'});
 							break;
 						case '油漆工程':
-							pa.addClass('proc').css({'background':'#5F9EA0'});
+							pa.addClass('btn btn-md procc').css({'background':'#5F9EA0'});
 							break;
 						case '木作工程':
-							pa.addClass('proc').css({'background':'#CD853F','border':'none','padding':'7px','color':'white'});
+							pa.addClass('btn btn-md procc').css({'background':'#CD853F'});
 							break;
 						case '防水抓漏':
-							pa.addClass('proc').css({'background':'#4682B4'});
+							pa.addClass('btn btn-md procc').css({'background':'#4682B4'});
 							break;
 						case '室內裝潢':
-							pa.addClass('proc').css({'background':'#F08080'});
+							pa.addClass('btn btn-md procc').css({'background':'#F08080'});
 							break;
 						case '照明工程':
-							pa.addClass('proc').css({'background':'#FFBB33'});
+							pa.addClass('btn btn-md procc').css({'background':'#FFBB33'});
 							break;
 						case '冷氣空調':
-							pa.addClass('proc').css({'background':'#48D1CC'});
+							pa.addClass('btn btn-md procc').css({'background':'#48D1CC'});
 							break;
 						case '門窗工程':
-							pa.addClass('proc').css({'background':'#FA8072'});
+							pa.addClass('btn btn-md procc').css({'background':'#FA8072'});
 							break;
 						case '泥作工程':
-							pa.addClass('proc').css({'background':'#708090'});
+							pa.addClass('btn btn-md procc').css({'background':'#708090'});
 							break;
 					}
 					divPro.append(pa.text(master.pro[i]));
 					divSpan.append(divPro);
+				}
 				}
 				divSpan.append([finish]);
 				var thumbnail = $('<div></div>').addClass('thumbnail').addClass('thumbnailformaster').append([a,divSpan]);
@@ -216,7 +221,7 @@
 		});
 		
 		//專業LINK
-		$('#show').on('click', '.proc', function() {
+		$('#show').on('click', '.procc', function() {
 			var disval = district.val();
 			if (disval == '鄉鎮市區') {
 				disval = '';

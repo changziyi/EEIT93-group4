@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>ToolMan</title>
 
 <link rel="stylesheet"
 	href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -28,6 +28,7 @@
 	src="${pageContext.servletContext.contextPath}/js/jquery-3.2.1.min.js"></script>
 </head>
 <style>
+body {font-family:Microsoft JhengHei;}
 .changeImg {
 	width: 200px;
 }
@@ -190,17 +191,19 @@ cbox {
 						<p>店家名稱:</p>
 						<div class="form-group">
 							<input class="form-control" type="text" name="b_name"
-								value="${cdata_mdataVO.m_name}" /><label for="name">輸入店家名稱</label>
+								value="${cdata_mdataVO.b_name}" /><label for="name">輸入店家名稱</label>
 						</div>
 
 						<p>店家介紹：</p>
 						<div class="form-group">
-							<textarea name="b_des" class="form-control"></textarea>
+							<textarea name="b_des" id="b_des" class="form-control" rows="8"></textarea>
 							<label for="message">介紹您的店家</label>
 						</div>
 				</div>
 				
 				<div class="modal-footer">
+					<input type="button" id="oneinput" value="一鍵輸入"
+						class="btn btn-success">
 					<input type="button" name="frontPage" value="上一頁"
 						class="btn btn-danger"> <input type="submit" value="送出審核"
 						class="btn btn-primary"> <input type="hidden"
@@ -212,6 +215,13 @@ cbox {
 	</div>
 	
 	<script>
+	
+	
+	$('#oneinput').click(function() {
+		$('input[name="b_name"]').attr('value','如意棒裝潢');
+		$('#b_des').val('test');
+	});
+	
 		$(function() {
 
 			$('input[name="b_image"]').on('change', function(event) {
@@ -225,7 +235,8 @@ cbox {
 					reader.onload = function(e) {
 						$('#b_image').attr({
 							'src' : e.target.result,
-							'class' : 'changeImg'
+							'class' : 'img-thumbnail',
+							'width' : "300px"
 						});
 					}
 					reader.readAsDataURL(input.files[0]);

@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>OpenStore Page</title>
+<title>ToolMan</title>
 
 <link rel="stylesheet"
 	href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -26,10 +26,12 @@
 <script
 	src="${pageContext.servletContext.contextPath}/js/jquery-3.2.1.min.js"></script>
 <script
-	src="${pageContext.servletContext.contextPath}/js/jquery.twzipcode.min.js"></script>
+	src="${pageContext.servletContext.contextPath}/js/jquery.search.twzipcode.min.js"></script>
 
 
 <style type="text/css">
+body {font-family:Microsoft JhengHei;}
+.zip {margin:auto; width:110px; display:inline; font-family:Microsoft JhengHei; vertical-align: top}
 .zipcode {
 	display: none;
 }
@@ -184,7 +186,7 @@ form.go-right input:focus+label, form.go-right textarea:focus+label {
 							<input class="form-control" type="text" name="m_name"
 								value="${cdata_mdataVO.m_name}" /><label for="name">輸入性名</label>
 						</div>
-						${errorMsgs.name1}${errorMsgs.name2}
+<%-- 						${errorMsgs.name1}${errorMsgs.name2} --%>
 						<p>電話:</p>
 						<div class="form-group">
 							<input class="form-control" type="text" name="m_cel"
@@ -202,7 +204,7 @@ form.go-right input:focus+label, form.go-right textarea:focus+label {
 							<input class="form-control" type="text" name="m_addr"
 								value="${cdata_mdataVO.m_addr}" /><label for="addres">輸入地址</label>
 						</div>
-						${errorMsgs.city}${errorMsgs.addr}
+<%-- 						${errorMsgs.city}${errorMsgs.addr} --%>
 						<p>維修類別:</p>
 						<div class="row">
 							<div class="col-md-2 cbox">
@@ -226,6 +228,7 @@ form.go-right input:focus+label, form.go-right textarea:focus+label {
 									style="width: 20px; height: 20px" value="水電工程">
 							</div>
 						</div>
+						<br>
 						<div class="row">
 							<div class="col-md-2 cbox">
 								門窗工程 <input type="checkbox" name="m_pro"
@@ -248,7 +251,7 @@ form.go-right input:focus+label, form.go-right textarea:focus+label {
 									style="width: 20px; height: 20px" value="照明工程">
 							</div>
 						</div>
-						${errorMsgs.m_pro}
+<%-- 						${errorMsgs.m_pro} --%>
 
 						<p>專業證照:</p>
 						<div>
@@ -258,6 +261,8 @@ form.go-right input:focus+label, form.go-right textarea:focus+label {
 				</div>
 			</div>
 			<div class="modal-footer">
+					<input type="button" id="oneinput" value="一鍵輸入"
+						class="btn btn-success">
 					<input type="submit" name="nextPage" value="下一步"
 						class="btn btn-primary">
 					<input type="hidden" name="action" value="OpenStoreStep">
@@ -271,6 +276,19 @@ form.go-right input:focus+label, form.go-right textarea:focus+label {
 	</div>
 
 	<script>
+	
+		$('#oneinput').click(function() {
+			$('input[name="m_name"]').attr('value','張如意');
+			$('input[name="m_cel"]').attr('value','0987654321');
+			$('input[name="m_email"]').attr('value','changluyee@gmail.com');
+			$('input[name="m_addr"]').attr('value','復興南路一段390號');
+			$('select[name=district]').val('大安區');
+			$('input[name="m_pro"][value="水電工程"]').prop('checked', true);
+			$('input[name="m_pro"][value="室內裝潢"]').prop('checked', true);
+			$('input[name="m_pro"][value="照明工程"]').prop('checked', true);
+		});
+	
+		
 		$(function() {
 
 			//使用者選取圖片時觸發
@@ -286,7 +304,8 @@ form.go-right input:focus+label, form.go-right textarea:focus+label {
 					reader.onload = function(e) {
 						$('#m_cer').attr({
 							'src' : e.target.result,
-							'class' : 'changeImg'
+							'class' : 'img-thumbnail',
+							'width' : "300px"
 						});
 					}
 					reader.readAsDataURL(input.files[0]);
@@ -306,23 +325,23 @@ form.go-right input:focus+label, form.go-right textarea:focus+label {
 
 			// 			});
 			//         });
-
+			
 			//縣市選單，透過hidden欄位取值ˋ
 			var city = $('input[name="m_city"]');
 			var district = $('input[name="m_district"]');
 
 			$('#twzipcode').twzipcode({
-				'css' : [ 'county', 'district', 'zipcode' ],
-				'countySel' : '${cdata_mdataVO.m_city}',
-				'districtSel' : '${cdata_mdataVO.m_district}',
+				'css' : [ 'form-control zip', 'form-control zip', 'zipcode' ],
+				'countySel' : '臺北市',
+				'districtSel' : '大安區',
 				'onCountySelect' : function() {
 					city.attr("value", this.value);
 				},
 				'onDistrictSelect' : function() {
 					district.attr("value", this.value);
-				}
-			// 		    'countySel'   : city.attr("value"),
-			// 		    'districtSel' : district.attr("value")
+				},
+// 				'countySel': city.attr("value"),
+// 				'districtSel': district.attr("value")
 			});
 
 		});

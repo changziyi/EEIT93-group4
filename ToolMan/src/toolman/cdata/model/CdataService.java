@@ -70,22 +70,12 @@ public class CdataService {
 	}
 	
 	//update member
-	public int updateMember(String c_name, String c_birth, String c_cel, 
+
+	public int updateMember(String c_name,String c_pwd, Date c_birth, String c_cel, 
 			String c_email, String c_addr, String c_id){
-		return dao.updateMember(c_name, c_birth, c_cel, c_email, c_addr, c_id);
+		return dao.updateMember(c_name, c_pwd, c_birth, c_cel, c_email, c_addr, c_id);
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+		
 	public List<CdataVO> getAll() {//benny	
 		return dao.getAll();
 	}
@@ -97,6 +87,9 @@ public class CdataService {
 	}
 	public CdataVO getById(String c_id){//benny
 		return dao.getById(c_id);
+	}
+	public CdataVO getByM(Integer m_id){
+		return dao.getByM(m_id);
 	}
 	public Set<OrderVO> getOrderByC(String c_id) {//訂單
 		return dao.getOrderByC(c_id);

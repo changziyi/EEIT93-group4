@@ -140,6 +140,7 @@ body {
                     <div class="error">${errorMsgs.c_id}</div>
 					<div class="error">${errorMsgs.c_pwd}</div>
 					<div class="error">${errorMsgs.LoginError}</div>
+
 				</div>
 				<div class="main">
 					<div class="row">

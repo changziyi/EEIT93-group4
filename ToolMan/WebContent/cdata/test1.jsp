@@ -20,10 +20,12 @@
 <link href="${pageContext.servletContext.contextPath}/nav/nav.css" rel="stylesheet">
 <link rel="Shortcut Icon" href="${pageContext.servletContext.contextPath}/favicon.ico" />
 <!---- dialog ---->
-<link href="http://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet">
-<link type="text/css" href="css/jquery-ui-1.8.11.custom.css" rel="Stylesheet">
-<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-<script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+
+<link href="${pageContext.servletContext.contextPath}/js/jqueryui/jquery-ui.min.css" rel="stylesheet">
+<!-- <link type="text/css" href="../js/css/jquery-ui-1.8.11.custom.css" rel="Stylesheet"> -->
+	<script src='${pageContext.servletContext.contextPath}/js/jquery-3.2.1.min.js'></script>
+<script src="${pageContext.servletContext.contextPath}/js/jqueryui/jquery-ui.min.js"></script>
+
 </head>
 <style>
 .a {
@@ -146,7 +148,7 @@ tbody td:hover {
 		</table>
 		<!--------------------------------------------------------- dialog 修改 ------------------------------------------------------------>
 			<div id="dialog" title="Dialog">
-    		<form id="message_form" method="POST" >  
+<!--     		<form id="message_form" method="POST" >   -->
     			<fieldset>  
     			<label for="name">姓名:</label>  
     			<input type="text" name="name" id="c_name" value="${cdataVO.c_name}" class="text ui-widget-content ui-corner-all" />
@@ -159,9 +161,10 @@ tbody td:hover {
     			<label for="email">信箱:</label>  
     			<input type="text" name="email" id="c_email" value="${cdataVO.c_email}" class="text ui-widget-content ui-corner-all" /> 
     			<label for="addr">地址:</label>  
-    			<input type="text" name="addr" id="c_addr" value="${cdataVO.c_addr}" class="text ui-widget-content ui-corner-all" />  
-  				</fieldset>  
-   		  	 </form>  
+    			<input type="text" name="addr" id="c_addr" value="${cdataVO.c_addr}" class="text ui-widget-content ui-corner-all" /> 
+				<button id="buttonsubmit" class="text ui-widget-content ui-corner-all" >送出</button>
+  				</fieldset> 				 
+<!--    		  	 </form>   -->
 			</div>
 		<!---------------------------------------------------------- dialog 修改 ----------------------------------------------------------->
 		</div>
@@ -334,59 +337,79 @@ tbody td:hover {
 </div>	
 <script>
 
-var name = $( "#name" ),   
-email = $( "#email" );   
-$( "#dialog" ).dialog({   
-    autoOpen: false,   
-    height: 300,   
-    width: 350,   
-    modal: true,   
-    buttons: {   
-        "Ok": function() {   
-            alert("name: "+name.val()+", email: "+email.val());   
-        },   
-        Cancel: function() {   
-            $( this ).dialog( "close" );   
-        }   
-    },   
-    close: function() {   
-        allFields.val( "" ).removeClass( "ui-state-error" );   
-    }   
-});  
-
-$( "#create-user" )   
-.button()   
-.click(function() {   
-$( "#dialog" ).dialog( "open" );   
-});  
-
-
-// 	var name = $( "#name" ),   
-//     email = $( "#email" );   
-//  $( "#dialog" ).dialog({   
-//         autoOpen: false,     
-//         width: 300,   
-//         modal: true, 
-//         resizable: false,//無法更改視窗大小
-//         draggable: false,//無法拖曳
-//         buttons: {   
-//             "送出": function() {   
-//             	$( this ).dialog( "close" );  
-//             },     
-//             Cancel: function() {   
-//                 $( this ).dialog( "close" );   
-//             }   
+// var name = $( "#name" ),   
+// email = $( "#email" );   
+// $( "#dialog" ).dialog({   
+//     autoOpen: false,   
+//     height: 300,   
+//     width: 350,   
+//     modal: true,   
+//     buttons: {   
+//         "Ok": function() {   
+//             alert("name: "+name.val()+", email: "+email.val());   
 //         },   
-//         close: function() {   
-//             allFields.val( "" ).removeClass( "ui-state-error" );   
+//         Cancel: function() {   
+//             $( this ).dialog( "close" );   
 //         }   
-// }); 
- 
-//  $( "#create-user" )   
-//  .button()   
-//  .click(function() {   
-//  $( "#dialog" ).dialog( "open" );   
+//     },   
+//     close: function() {   
+//         allFields.val( "" ).removeClass( "ui-state-error" );   
+//     }   
 // });  
+
+// $( "#create-user" )   
+// .button()   
+// .click(function() {   
+// $( "#dialog" ).dialog( "open" );   
+// }); 
+
+$(function(){
+ 
+ 	dialog();
+	$( "#create-user" ) .click(function() {   
+		 $( "#dialog" ).dialog( "open" );   
+	}); 
+ 	$('#buttonsubmit').on('click',submitdialog);
+});//end ready
+ function submitdialog(){
+	var c_name = $( "#c_name" ).val(); 
+	var c_pswd = $( "#c_pswd" ).val();
+	var c_birth = $( "#c_birth" ).val();
+	var c_cel = $( "#c_cel" ).val();
+	var c_email = $( "#email" ).val();
+	var c_addr =$( "#c_addr" ).val();
+	var hyperlink ="${pageContext.servletContext.contextPath}/cdata/CdatadessServlet.do";
+		
+	$.get(hyperlink,{"action":"submitdialog","c_name":c_name, "c_pswd":c_pswd,  "c_birth":c_birth,"c_cel":c_cel,"c_email":c_email,"c_addr":c_addr},
+			function(data){ 	
+		
+						}
+					
+       );//end get function
+	$("#dialog" ).dialog( "close" );  
+}
+function dialog(){
+
+	 $( "#dialog" ).dialog({   
+	        autoOpen: false,     
+	        width: 300,   
+	        modal: true, 
+	        resizable: false,//無法更改視窗大小
+	        draggable: false,//無法拖曳
+	        buttons: [{   
+ 
+	        close: function() {   
+	        	
+	            $('#dialog').val("").removeClass("ui-state-error");
+	            
+	       	 }   
+		}]
+	 }); //end dialog
+}	
+	 	
+
+ 
+ 
 	
 </script>
 </body>

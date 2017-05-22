@@ -7,9 +7,9 @@
 
 <!--full calendar-->
 	<link rel='stylesheet' href='../js/fullcalendar.min.css' />
-	<script src='../js/jquery-3.2.1.min.js'></script>
-	<script src='../js/moment.min.js'></script>
-	<script src='../js/fullcalendar.min.js'></script>
+	<script src='${pageContext.servletContext.contextPath}/js/jquery-3.2.1.min.js'></script>
+	<script src='${pageContext.servletContext.contextPath}/js/moment.min.js'></script>
+	<script src='${pageContext.servletContext.contextPath}/js/fullcalendar.min.js'></script>
 <!--full calendar-->
 <!------------------------------  jquery  -->
 	<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/js/jqueryui/jquery-ui.min.css">
@@ -23,10 +23,10 @@
 	<script src="${pageContext.servletContext.contextPath}/js/bootstrap.min.js" ></script>
 <!---- --------------------bootstrap -->
 <!-- --------------------smart_wizard -->
-    <link href="../js/smartform/smart_wizard_theme_circles.min.css" rel="stylesheet" type="text/css" />
-    <link href="../js/smartform/smart_wizard_theme_dots.min.css" rel="stylesheet" type="text/css" />
-	<link href="../js/smartform/smart_wizard.min.css" rel="stylesheet" type="text/css" /> 
-	<link href="../js/smartform/smart_wizard_theme_arrows.min.css" rel="stylesheet" type="text/css" />
+    <link href="${pageContext.servletContext.contextPath}/js/smartform/smart_wizard_theme_circles.min.css" rel="stylesheet" type="text/css" />
+    <link href="${pageContext.servletContext.contextPath}/js/smartform/smart_wizard_theme_dots.min.css" rel="stylesheet" type="text/css" />
+	<link href="${pageContext.servletContext.contextPath}/js/smartform/smart_wizard.min.css" rel="stylesheet" type="text/css" /> 
+	<link href="${pageContext.servletContext.contextPath}/js/smartform/smart_wizard_theme_arrows.min.css" rel="stylesheet" type="text/css" />
 <!------------------------ smart_wizard -->
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">	
@@ -41,7 +41,9 @@
 <%-- 	</c:if> --%>
 
 <!-- login please -->
-	
+<!---------------------nav----------------------------------- -->
+	<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/nav/nav.css">
+<!---------------------end nav----------------------------------- -->
 	<style>
 /*------------twzipcode hide zipcode--------------------------------*/	
 .zipcode {
@@ -58,78 +60,7 @@
     height:25px;
 }
 /*------------end twzipcode hide zipcode--------------------------------*/		
-/*------------navigation bar--------------------------------*/
-/* 	body { */
-/* 	background: #b3ffff; */
-/* } */
 
-.navbar, .dropdown-menu {
-	background: #00BFFF;
-	border: none;
-}
-
-.nav>li>a, .dropdown-menu>li>a:focus, .dropdown-menu>li>a:hover,
-	.dropdown-menu>li>a, .dropdown-menu>li {
-	border-bottom: 3px solid transparent;
-}
-
-.nav>li>a:focus, .nav>li>a:hover, .nav .open>a, .nav .open>a:focus, .nav .open>a:hover,
-	.dropdown-menu>li>a:focus, .dropdown-menu>li>a:hover {
-	border-bottom: 3px solid transparent;
-	background: none;
-}
-
-.navbar a, .dropdown-menu>li>a, .dropdown-menu>li>a:focus,
-	.dropdown-menu>li>a:hover, .navbar-toggle {
-	color: #fff;
-}
-
-.dropdown-menu {
-	-webkit-box-shadow: none;
-	box-shadow: none;
-}
-
-.nav li:hover:nth-child(8n+1), .nav li.active:nth-child(8n+1) {
-	border-bottom: #C4E17F 3px solid;
-}
-
-.nav li:hover:nth-child(8n+2), .nav li.active:nth-child(8n+2) {
-	border-bottom: #F7FDCA 3px solid;
-}
-
-.nav li:hover:nth-child(8n+3), .nav li.active:nth-child(8n+3) {
-	border-bottom: #FECF71 3px solid;
-}
-
-.nav li:hover:nth-child(8n+4), .nav li.active:nth-child(8n+4) {
-	border-bottom: #F0776C 3px solid;
-}
-
-.nav li:hover:nth-child(8n+5), .nav li.active:nth-child(8n+5) {
-	border-bottom: #DB9DBE 3px solid;
-}
-
-.nav li:hover:nth-child(8n+6), .nav li.active:nth-child(8n+6) {
-	border-bottom: #C49CDE 3px solid;
-}
-
-.nav li:hover:nth-child(8n+7), .nav li.active:nth-child(8n+7) {
-	border-bottom: #669AE1 3px solid;
-}
-
-.nav li:hover:nth-child(8n+8), .nav li.active:nth-child(8n+8) {
-	border-bottom: #62C2E4 3px solid;
-}
-
-.navbar-toggle .icon-bar {
-	color: #fff;
-	background: #fff;
-}
-
-.navbar-brand {
-	font-size: 40px
-}
-/*------------navigation bar--------------------------------*/
 	
 /* calendar */
 		body {
@@ -196,7 +127,7 @@
 		border: 1px solid #ccc;
 
 	}
-/*------------end navigation bar--------------------------------*/	
+	
 
 		#map{
 		height:100px;
@@ -263,70 +194,14 @@
 	
 	<jsp:useBean id="mdataVO" class="toolman.mdata.model.MdataVO" scope="session"/>
 	<!-- retrieve MdataVO object from session-->
-<!-------------------------------- navigation bar---------------------------------->
-<div class="navbar-wrapper">
-    <div class="container-fluid">
-        <nav class="navbar navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="#">ToolMan</a>
-                </div>
-                <div id="navbar" class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li class="active"><a href="#" class="">首頁</a></li>
-                        <li class=" dropdown">
-                            <a href="#" class="dropdown-toggle " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">我要找師傅  <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li class=" dropdown">
-                                    <a href="#" class="dropdown-toggle " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">New01</a>
-                                </li>
-                                <li><a href="#">New02</a></li>
-                            </ul>
-                        </li>                   
-                        <li class=" dropdown"><a href="#" class="dropdown-toggle " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">我要開店  <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">New01</a></li>
-                                <li><a href="#">New02</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="${pageContext.servletContext.contextPath}/wishpool/Wishing+waterfall.jsp">許願池  </a></li>
-                       </ul>
-                     <!----------- 搜尋列----- -->
-                       <ul class="navbar-right">
-					    <form class="navbar-form">
-					        <div class="form-group">
-					          <input type="text" class="form-control" placeholder="Search">
-					        </div>
-					        <button type="submit" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
-					      </form>
-					</ul>
-                     <!----------- 搜尋列----- -->
-                    <ul class="nav navbar-nav pull-right">
-                        <li class=" dropdown"><a href="#" class="dropdown-toggle active" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">登入  <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="${pageContext.servletContext.contextPath}/wishpool/login-in.jsp">ToolMan 帳號</a></li>
-                                <li><a href="#">Facebook 帳號</a></li>
-                            </ul>
-                        </li>
-                        <li class=""><a href="#">登出</a></li>
-                    </ul>
-                </div>
-           
-                </div>
-            
-            </div>
-        </nav>
-    </div>
-<!--------------------------------end navigation bar---------------------------------->
+
 </head>
 <body>
-	
+
+<!-------------------------nav------------------------------------->
+<jsp:include page="/nav/navigation.jsp" />
+<!---------------------end nav------------------------------------->
+
 <!----------------------------------- smart wizard head----------------------------- -->
         <br />
         <div class="container containerstyle textstyle putmiddle">
@@ -346,9 +221,9 @@
   <!--------------------------------calendar---------------------------------->  
         <div id='wrap'>
 			<!-- draggable -->
-		<div id='external-events'  style="margin-top:46px;">
+		<div id='external-events'  style="width:200px;height:210px;margin-top:46px;margin-left:13%;">
 			<h4 style="margin-left:20%;">預約時間</h4>
-			<div id='external-events2' style="margin-left:20%;">
+			<div id='external-events2' style="margin-left:20%;text-align:center;margin:auto;display:table">
 				<div class='fc-event' data-id="orderevent"data-start="01:00" data-end='08:00'>早上</div>
 				<div class='fc-event' data-id="orderevent"data-start="12:00" data-end='06:00'>下午</div>
 				<div class='fc-event' data-id="orderevent"data-start="18:00" data-end='06:00'>晚上</div>
@@ -369,18 +244,18 @@
 		<div style='clear:both'></div>
 	</div>
                 <form class="form-inline">
-				             <div class="form-group" >
-				              <label >Choose Theme:</label>
-				              <select id="theme_selector1" class="form-control">
-				                    <option value="default">default</option>
-				                    <option value="arrows">arrows</option>
-				                    <option value="circles">circles</option>
-				                    <option value="dots">dots</option>
-				              </select>
-				            </div>           
+<!-- 				             <div class="form-group" > -->
+<!-- 				              <label >Choose Theme:</label> -->
+<!-- 				              <select id="theme_selector1" class="form-control"> -->
+<!-- 				                    <option value="default">default</option> -->
+<!-- 				                    <option value="arrows">arrows</option> -->
+<!-- 				                    <option value="circles">circles</option> -->
+<!-- 				                    <option value="dots">dots</option> -->
+<!-- 				              </select> -->
+<!-- 				            </div>            -->
 				            
-				            <label>External Buttons:</label>
-				            <div class="btn-group navbar-btn" role="group">
+
+				            <div class="btn-group navbar-btn" role="group" style="text-align:center;margin:auto;display:table">
 				                <button class="btn btn-default" id="prev-btn1" type="button" disabled>上一步</button>
 				                <button class="btn btn-default" id="next-btn1" type="button">下一步</button>
 				                <button class="btn btn-primary" id="submitcalendar" type="button">完成日程表</button>
@@ -420,27 +295,17 @@
 											<label class="labelstyle">服務類別</label>
 											
 										</td>
-										<td style="text-align:left;>
+										<td style="text-align:left;">
 										
-								<!-- 	parameters come directly from servlet , so the Ajax may not be needed-->	
+
 										<c:forEach var="oproset"  varStatus="stat" items="${mdataVO.mpros}">
-										
-								<!-- 	retrieve Collection object  mproset  from session.setAttribute("mproset",mproset)								 -->
 												<div id="pro" name="opro_id" class="checkbox-inline" style="border:1px solid blud;float:left">
 													<label><input type="checkbox"  style=" border:1px solid blue;" value=${oproset.m_pro} checked="checked" name="o_pro">${oproset.m_pro}</label>
 												</div>			
 										</c:forEach>
-		   
-   
-					
-								<!-- 		for test -->
-										
-								<%-- 			<c:forEach var="i" begin="1" end="5"> --%>
-								<!-- 			<input type="checkbox" value="oprotest" name="o_proid"/>oprotest1 -->
-								<%-- 			</c:forEach> --%>
-								<!-- 		</div><span value=${param.erroropro}>${param.erroropro}</span> -->
+
 										<span class="errormsg" value=${errormsg.erroro_pro}>${errormsg.erroro_pro}</span>
-										</div>
+										
 										</td>
 									</tr>
 									<tr>
@@ -542,18 +407,18 @@
 						</div>
 					</form>
 						<form class="form-inline">
-				             <div class="form-group" >
-				              <label >Choose Theme:</label>
-				              <select id="theme_selector" class="form-control">
-				                    <option value="default">default</option>
-				                    <option value="arrows">arrows</option>
-				                    <option value="circles">circles</option>
-				                    <option value="dots">dots</option>
-				              </select>
-				            </div>           
+<!-- 				             <div class="form-group" > -->
+<!-- 				              <label >Choose Theme:</label> -->
+<!-- 				              <select id="theme_selector" class="form-control"> -->
+<!-- 				                    <option value="default">default</option> -->
+<!-- 				                    <option value="arrows">arrows</option> -->
+<!-- 				                    <option value="circles">circles</option> -->
+<!-- 				                    <option value="dots">dots</option> -->
+<!-- 				              </select> -->
+<!-- 				            </div>            -->
 				            
-				            <label>External Buttons:</label>
-				            <div class="btn-group navbar-btn" role="group">
+				            
+				            <div class="btn-group navbar-btn" role="group" style="text-align:center;margin:auto;display:table">
 				                <button class="btn btn-default" id="prev-btn" type="button">上一步</button>
 				                <button class="btn btn-default" id="next-btn" type="button" disabled>下一步</button>
 				                <button class="btn btn-danger" id="reset-btn" type="button">確認送出</button>

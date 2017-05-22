@@ -144,9 +144,11 @@
 <jsp:include page="/nav/navigation.jsp" />
 <!-- navigator -->
 	<header >
-		<nav style="margin-top:50px;" >
+		<nav  >
 			<div id="navigator" class="textstyle" >
-			
+		
+<br/>
+<br/>
 				<ul style="margin: auto;width:100%; horizontal-align:center;" class="nav nav-tabs nav-justified "  >
 				
 					<li  data-toggle="tab" role="presentation"  id="masterlist" data-id="m" class="active"><a href="#"><div >師傅列表</div></a></li>
@@ -168,7 +170,7 @@
 			<div  id="functionrow"  class="nav nav-tabs nav-justified textstyle" style="margin-top:10px;margin-left:40%;width:80%; vertical-align:center;">
 			</div>
 			
-			<div id="subfunctionrow" style="margin-top:10px;margin-left:30%;width:80%; horizontal-align:center;" class="nav nav-tabs nav-justified textstyle">
+			<div id="subfunctionrow" style="margin-top:10px;margin-left:20%;width:80%; horizontal-align:center;" class="nav nav-tabs nav-justified textstyle">
 			</div>
 	</header>
 	
@@ -268,7 +270,7 @@
 	</div>
 <!-- ----------------------------------end mail block------------------------------------------------->
 <!-- -----------------------------Report Modal---------------------------------------- -->
-<div class="modal fade" id="ormodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade textstyle" id="ormodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -303,12 +305,130 @@
   </div>
 </div>	
 <!-- -----------------------------end Report Modal---------------------------------------- -->
-<!-- -----------------------------Order Modal---------------------------------------- -->
+<!-- -----------------------------master Modal---------------------------------------- -->
+<div class="modal fade textstyle" id="mmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+			<div class="modal-header">
+				<h3 class="text-center">店家資訊</h3>
+			</div>
+			
+			<div class="modal-body" style="display:table;">
+				<div>
+						<div class="form-group">
+							<table class="table table-hover">
+								<tr>
+									<td class="form-control-label">首頁圖片</td>
+									<td ><div><img id="m_cer" class="img-thumbnail" width="350px" src=""></div>
+								</tr>
+								<tr style="vertical-align:middle;margin:auto">
+									<td class="form-control-label">店家名稱</td>
+									<td style="margin-top:10px;width:500px;height:50px;" id="bname"  class="form-control"></td>
+								</tr>
+								<tr>
+									<td class="form-control-label">店家介紹</td>
+									<td style="margin-top:10px;width:500px;height:50px;" id="bdes" class="form-control"></td>
+								</tr>
+								<tr>
+									<td class="form-control-label">師傅姓名</td>
+									<td id="mname" style="margin-top:10px;width:500px;height:50px;" class="form-control"></td>
+								</tr>
+								<tr>
+									<td class="form-control-label">電話</td>
+									<td id="mtel" style="margin-top:10px;width:500px;height:50px;" class="form-control"></td>
+								</tr>
+								<tr>
+									<td class="form-control-label">信箱</td>
+									<td id="mmail" style="margin-top:10px;width:500px;height:50px;" class="form-control"></td>
+								</tr>
+								<tr>
+									<td class="form-control-label">地址</td>
+									<td id="maddr" style="margin-top:10px;width:500px;height:50px;" class="form-control">$</td>
+								</tr>
+								<tr>
+									<td class="form-control-label">維修類別</td>
+									<td id="mpros" style="margin-top:10px;width:500px;height:50px;" class="form-control"><c:forEach var="aMpro" items="${cdata_mdataVO.mpros}"></c:forEach></td>
+								</tr>
+								<tr>
+									<td class="form-control-label">專業證照</td>
+									<td ><div ><img id="m_cer2" class="img-thumbnail" height="300px" src=""></div>
+								</tr>
+							</table>
+							<div><textarea id="notpassword"></textarea></div>
+						</div>
+						
+						</div>
+					</div>
+					<div class="modal-footer">
+							<button type="button" id="mpass1" class="btn btn-secondary" data-dismiss="modal">審核通過</button>
+                     		<button type="button" id="mnotpass" class="btn btn-secondary" data-dismiss="modal">審核未過</button>
+                      </div>	
+                     </div>
+				 </div>
+				
+			</div>
+<!-- -----------------------------end master Modal---------------------------------------- --><style>   
+input[type='checkbox'] {
+margin: 0 auto;
+display: block;
+	width:20px;height:20px;
+}
 
-<!-- -----------------------------end Order and Report Modal---------------------------------------- -->
+input[type='checkbox'] {
+	-webkit-font-smoothing: antialiased;
+	text-rendering: optimizeSpeed;
+	
+	
+	display: block;
+	float: left;
+	position: relative;
+	cursor: pointer;
+	width:20px;
+	height:20px;
+	horizontal-align:middle;
+	vertical-align:middle;
+}
 
+input[type='checkbox']:after {
+	content: "";
+	vertical-align: middle;
+	text-align: center;
+	line-height: 13px;
+	position: absolute;
+	cursor: pointer;
+	height: 13px;
+	width: 13px;
+	left: 0;
+	top: 0;
+	font-size: 10px;
+	-webkit-box-shadow: inset 0 1px 1px #5F95FC, 0 1px 0 #5F95FC;
+	-moz-box-shadow: inset 0 1px 1px #5F95FC, 0 1px 0 #5F95FC;
+	box-shadow: inset 0 1px 1px #5F95FC, 0 1px 0 #5F95FC;
+	background: #5F95FC;
+	width:20px;height:20px
+}
 
-<script>
+input[type='checkbox']:hover:after, input[type='checkbox']:checked:hover:after {
+	background: #5F95FC;
+	content: '\2714';
+	color: #fff;
+	width:20px;height:20px
+}
+
+input[type='checkbox']:checked:after {
+	background: #5F95FC;
+	content: '\2714';
+	color: #fff;
+	width:20px;height:20px
+}
+.textstyle{
+		font-family: Arial, "Microsoft Jhenghei",  
+		"WenQuanYi Zen Hei", "儷黑 Pro", 
+		"LiHei Pro","文泉驛正黑", 
+		"DFKai-sb", DFKai-SB, 
+		sans-serif;
+	}
+</style><script>
 	var table ;//datatable variable not in use
 	var navagatorid = $('#navigator>ul>li.active').data('id');//top navigator
 	var dfd = $.Deferred();
@@ -329,7 +449,6 @@ $(function(){
 		
 		$('input[name="samnote"],[name="saonote"],[name="sacnote"]').on('change',updatenote);// input note
  	  	$('#subfunctionrow>a').on('click',togglehyper);//verify the master direct to other pages
- 	  	$('#subfunctionrow>span:not(#messagespanm,#messagespanc,#messagespano,#messagespanr,#messagespanad)').on('click',togglegetmethod);//change m c o s_name//will return something when clicked, maill has it's own form action
  	  	$('#messagespanm,#messagespanc,#messagespano,#messagespanr,#messagespanad').on('click',mail);//mail
 		
  	  	loadProduct('m','allmaster','alldate');//build dynamic table
@@ -405,23 +524,31 @@ $(function(){
         var checkboxdatas = [];
 		var checkboxdatasmaster = [];
 		var checkboxdatacustomer = [];
+		var mailtype=null;
 		// double mail effect---need to set c_id in mail servlet,or there will be only 1 time mail,because the quest has been forward to other place
-		 if((navagatorid=='o')||(navagatorid=='r')){// mail to both side of the transaction//tested ok
+		
+		if((navagatorid=='o')||(navagatorid=='r')){// mail to both side of the transaction//tested ok
 		     	 $(":checkbox:checked").each(function(){            	  
 		     		checkboxdatasmaster.push($(this).attr('data-receiver1'));
 		     		checkboxdatacustomer.push($(this).attr('data-receiver2'));
+		     		mailtype = $(this).data('mailtype');
 		         }) 
 		         if((checkboxdatasmaster.toString()=="")||(checkboxdatacustomer.toString()=="")){
-	 	     		 	alert("u forget to toggle the checkbox u dumb XD");
+	 	     		 	alert("請勾選項目");
 	 	     	 }//end if
 	 	     	else{
+	 	     		var unbind=false;
 	 	     		 $('#btnsubmitmail').on('click',function(){
 	 	     			var hyperlinkstring = "${pageContext.servletContext.contextPath}/email/Email.do";
+	 	     			// must unbind the event, or it will accumulate forever
+	 	     			if(unbind==true){
+	 	     				$('#btnsubmitmail').unbind('click');
+	 	     			}
 	 	     			clickornot=!clickornot;
 	 					var mssid=$('#receiver').val();
 		 				var mssum=$('#messum').val();
 		 				var mscontent=$('#mescontent').val();
-						$.post(hyperlinkstring,{"mss_id":mssid,"ms_content":mscontent,"ms_summary":mssum},function(){
+						$.post(hyperlinkstring,{"mss_id":mssid,"ms_content":mscontent,"ms_summary":mssum,"mailtype":mailtype},function(){
 							
 								$('#myModal01').modal("hide");
 						   
@@ -429,8 +556,9 @@ $(function(){
 				 	     		setTimeout(function () {
 				 	     		$('#receiver').val(checkboxdatacustomer.toString()).text(checkboxdatacustomer.toString());
 				 	     		$('#myModal01').modal('show');
-				 	     		 }, 300);
-				 	     			
+				 	     		 }, 500);
+				 	     		mailtype="toc"
+				 	     		unbind=true;
 							}	
 						});//end get function
 	
@@ -445,10 +573,11 @@ $(function(){
  		 else{//mail to only one side//tested ok
  			$('#btnsubmitmail').unbind("click");
      	 		$(":checkbox:checked").each(function(){            	  
-         	   		checkboxdatas.push($(this).attr('data-receiver'));  		
+         	   		checkboxdatas.push($(this).attr('data-receiver')); 
+         	   	mailtype = $(this).data('mailtype');
          	});//end each        
      	 	if(checkboxdatas.toString()==""){
-     	     		 alert("u forget to toggle the checkbox u dumb XD");
+     	     		 alert("請勾選項目");
      	     	 }//end if
      	 else{
 					$('#receiver').val(checkboxdatas.toString()).text(checkboxdatas.toString());
@@ -459,9 +588,9 @@ $(function(){
 	 					var mssid=$('#receiver').val();
 		 				var mssum=$('#messum').val();
 		 				var mscontent=$('#mescontent').val();
-						$.post(hyperlinkstring,{"mss_id":mssid,"ms_content":mscontent,"ms_summary":mssum},function(){
+						$.post(hyperlinkstring,{"mss_id":mssid,"ms_content":mscontent,"ms_summary":mssum,"mailtype":mailtype},function(){
 					    $('#myModal01').modal("hide");
-
+					    $('#btnsubmitmail').unbind('click');
 					});	//end post function
 				});//end post 
    			 }//end else 
@@ -694,35 +823,105 @@ $(function(){
 			loadProduct(id,datastatus,datatime);
 			
 		}//end table filtering
-	
+		var checkboxdatas2 = null;
+		function verifymaster(){
+			
+			var valueattr =$(this).val();
+			var nameattr=$(this).attr('name');
+	            //get all toggled checkboxes 
+	           var checkboxdatas = null;
+	        	 $(":checkbox:checked").each(function(){            	  
+	            	   checkboxdatas=$(this).val(); 
+	            })
+	            checkboxdatas2=checkboxdatas.toString();
+	            if(checkboxdatas2==""){
+	        		 alert("請勾選項目");
+	        	 }//end if
+	        	 else{
+	                	var valueattrr=$(this).attr('value');//retrieve the value from functinaction
+	                	var hyperlinkstring = "${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIFunctionServlet.do";
+	     			var dfd4 = $.get(hyperlinkstring,{"functionaction":"type","image":checkboxdatas2},function(data){
+	     				$('#m_cer').attr("src","${pageContext.servletContext.contextPath}/master/master.do?type=master&image="+checkboxdatas2);
+	     				
+	                });//end get function
+	                var dfd5 = $.get(hyperlinkstring,{"functionaction":"type","image":checkboxdatas2},function(data){
+	     				$('#m_cer2').attr("src","${pageContext.servletContext.contextPath}/master/master.do?type=cer&image="+checkboxdatas2);
+	     				
+	                });//end get function
+	     			var dfd3 = $.getJSON(hyperlinkstring,{"functionaction":"applicationreviewm","toggledcheckbox":checkboxdatas2},function(data){
+	     				
+	     				$('#bname').html(data.bname);
+	     				$('#bdes').html(data.bdes);
+	     				$('#mname').html(data.mname);
+	     				$('#mtel').html(data.mtel);
+	     				$('#mmail').html(data.mmail);
+	     				$('#maddr').html(data.maddr);
+	     				$('#mpros').html(data.mpros);
+	     				
+	                });//end get function
+//	      		 	$('#eventlist').dataTable().fnDestroy();
+//	         			$('#eventlist').empty();
+	     		$.when(dfd3,dfd4,dfd5).done( $('#mmodal').modal());
+	            }//end else 
+	            
+	            $('#mnotpass').on('click',mnotpass);
+	            $('#mpass1').on('click', mpass);
+		}//end verify master
+		
+		function mpass(){
+			var hyperlinkstring = "${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIFunctionServlet.do";
+			$.post(hyperlinkstring,{"functionaction":"mpass","toggledcheckbox":checkboxdatas2},function(data){
+				alert(data);
+				 $('#mpass1').unbind('click');
+				 $('#mnotpass').unbind('click');
+				 loadProduct(navagatorid,datastatus,datatime);
+				 
+           });//end get function
+		}//mpass
+		
+		function mnotpass(){
+			var hyperlinkstring = "${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIFunctionServlet.do";
+			var notpassword = $('#notpassword').val();
+			$.post(hyperlinkstring,{"functionaction":"mnotpass","toggledcheckbox":checkboxdatas2,"notpassword":notpassword},function(data){
+				alert(data);
+				$('#mnotpass').unbind('click');
+				 $('#mpass1').unbind('click');
+				loadProduct(navagatorid,datastatus,datatime);
+           });//end get function
+		}//end mnotpass
+		
 	   function subfunctionrow(){
 
 			var docFragsubfunction = $(document.createDocumentFragment());
 		   if( navagatorid== 'm'){
 				$('#subfunctionrow').empty();
-				var applicationreviewm = '<a href="" id="applymasterlink" name="applicationreviewm"><input type="button"style="width:130px;height:50px;font-size:20px;" class="btn btn-success"value="審核師傅" /></a>';
+				var applicationreviewm = '<sapn id="applymasterlink" name="applicationreviewm"><input type="button"style="width:130px;height:50px;font-size:20px;" class="btn btn-success"value="審核師傅" /></span>';
 				var suspensionm = '<span id="suspensionm" value="suspensionm" name="functionaction" style="padding:0px; margin:0px;" ><input type="button" class="btn btn-danger" style="width:130px;height:50px;font-size:20px;" value="停權" "/></span>';
-				var sendmessagem = '<span id="messagespanm" value="sendmessagem" name="functionaction" style="padding:0px; margin:0px;" ><input type="button" class="btn btn-info"  style="width:130px;height:50px;font-size:20px;" value="傳送訊息" "/></span>';
+				var recoverm = '<span id="recoverm" value="recoverm" name="functionaction" style="padding:0px; margin:0px;" ><input type="button" class="btn btn-warning" style="width:130px;height:50px;font-size:20px;" value="復權" "/></span>';
+				var sendmessagem = '<span id="messagespanm" value="sendmessagem" name="functionaction" style="padding:0px; margin:0px;" ><input type="button" class="btn btn-info"  style="width:130px;height:50px;font-size:20px;" value="傳送訊息" "/></span>';				
 				var b1 = $(applicationreviewm);
 				var b2 = $(suspensionm);
-				var b3 = $(sendmessagem);
-				docFragsubfunction.append([b1,b2,b3]);
+				var b3 = $(recoverm);
+				var b4 = $(sendmessagem);			
+				docFragsubfunction.append([b1,b2,b3,b4]);
 				
 				$('#tabletoo3').append($('#subfunctionrow').append(docFragsubfunction));
 				//rebinding
 			 	$('#subfunctionrow>a').on('click',togglehyper);//direct to other pages
 			 	$('#subfunctionrow>span:not(#messagespanm,#messagespanc,#messagespano,#messagespanr)').on('click',togglegetmethod);//will return something when clicked, maill has it's own form action
 			 	$('#messagespanm,#messagespanc,#messagespano,#messagespanr,#messagespanr,#messagespanad').on('click',mail);//will return something when clicked, maill has it's own form action
-
+			 	$('#applymasterlink').on('click',verifymaster);
 		   }//end else if
 			
 			else if(navagatorid== 'c'){
 				$('#subfunctionrow').empty();
 				var suspensionc = '<span id="suspensionc" value="suspensionc" name="functionaction" style=" padding:0px; margin:0px;" ><input type="button" class="btn btn-danger" style="width:130px;height:50px;font-size:20px;" value="停權"/></span>';
+				var recoverc = '<span id="recoverc" value="recoverc" name="functionaction" style=" padding:0px; margin:0px;" ><input type="button" class="btn btn-warning" style="width:130px;height:50px;font-size:20px;" value="復權"/></span>';
 				var sendmessagec = '<span id="messagespanc" value="sendmessagec" name="functionaction" style=" padding:0px; margin:0px;" ><input type="button" class="btn btn-info" style="width:130px;height:50px;font-size:20px;"  value="傳送訊息" /></span>';
 				var b1 = $(suspensionc);
-				var b2 = $(sendmessagec);
-				docFragsubfunction.append([b1,b2]);
+				var b2 = $(recoverc);
+				var b3 = $(sendmessagec);
+				docFragsubfunction.append([b1,b2,b3]);
 				
 				$('#tabletoo3').append($('#subfunctionrow').append(docFragsubfunction));
 					//rebinding
@@ -747,14 +946,18 @@ $(function(){
 			}// end else if 
 			else if(navagatorid== 'r'){
 				$('#subfunctionrow').empty();
+				var endr = '<span id="endr" value="endr" name="functionaction" style=" padding:0px; margin:0px;" ><input type="button" class="btn btn-danger" style="width:130px;height:50px;font-size:20px;" value="結案"/></span>';
 				var sendmessager = '<span id="messagespanr" value="sendmessager" name="functionaction" style="padding:0px; margin:0px;" ><input type="button" class="btn btn-info" style="width:130px;height:50px;font-size:20px;" value="訊息" /></span>';
-				var b1 = $(sendmessager);
-				docFragsubfunction.append([b1]);
+
+				var b1 = $(endr);
+				var b2 = $(sendmessager);
+				docFragsubfunction.append([b1,b2]);
 				
 				$('#tabletoo3').append($('#subfunctionrow').append(docFragsubfunction));
 					//rebinding
 			 	$('#subfunctionrow>a').on('click',togglehyper);//direct to other pages
  			 	$('#messagespanm,#messagespanc,#messagespano,#messagespanr,#messagespanad').on('click',mail);//will return something when clicked, maill has it's own form action
+ 			 	$('#subfunctionrow>span:not(#messagespanm,#messagespanc,#messagespano,#messagespanr,#messagespanad)').on('click',togglegetmethod);//will return something when clicked, maill has it's own form action
 
 				
 			}
@@ -788,7 +991,7 @@ $(function(){
 	            })
 	            var checkboxdatas2=checkboxdatas.toString();
 	            if(checkboxdatas2==""){
-	        		 alert("u forget to toggle the checkbox u dumb XD");
+	        		 alert("請勾選項目");
 	        	 }//end if
 	        	 else{
 	        	   var hyperlinkstring = "${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIFunctionServlet.do?";
@@ -805,7 +1008,7 @@ $(function(){
 		}//end togglerow
 		
 		function togglegetmethod(){
-	          
+			var dfd3 = $.Deferred();
             //get all toggled checkboxes 
            var checkboxdatas = [];
         	 $(":checkbox:checked").each(function(){            	  
@@ -814,7 +1017,7 @@ $(function(){
             
             var checkboxdatas2=checkboxdatas.toString();
         	 if(checkboxdatas2==""){
-        		 alert("u forget to toggle the checkbox u dumb XD");
+        		 alert("請勾選項目");
         	 }//end if
         	 else{
            	var valueattrr=$(this).attr('value');//retrieve the value from functinaction
@@ -824,14 +1027,14 @@ $(function(){
 //          		var ajaxurl = "${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIFunctionServlet.do?";
 // 				var ajaxparam = "functionaction="+valueattrr+"&toggledcheckbox="+checkboxdatas2;
 // 				loadajax(ajaxurl,ajaxparam);
-
+			var a=null;
 			$.post(hyperlinkstring,{"functionaction":valueattrr,"toggledcheckbox":checkboxdatas2},function(data){
-				alert(data);
+				a=data;
+				
            });//end get function
 // 		 	$('#eventlist').dataTable().fnDestroy();
 //    			$('#eventlist').empty();
-
-           loadProduct(navagatorid,datastatus,datatime);
+		$.when(dfd3).done(loadProduct(navagatorid,datastatus,datatime)).done( loadProduct(navagatorid,datastatus,datatime));
        }//end else 
 	}//end togglerow
 	
@@ -948,10 +1151,10 @@ $(function(){
 					   if(id=="o"){
 						   
 						   	console.log(data);
+						   	// set mail type tom first, then use mail function to change second mail to toc
+						   	var toggleword = $('<input  type="checkbox" style="width:20px;height:20px"name="otoggle" />').val(data.o_id).attr('data-receiver1',data.o_bname).attr('data-receiver2',data.c_id).attr('data-mailtype','tob');
 						   	
-						   	var toggleword = $('<input  type="checkbox" style="width:20px;height:20px"name="otoggle" />').val(data.o_id).attr('data-receiver1',data.o_bname).attr('data-receiver2',data.c_id);
-						   	
-						   	var cell0 = $('<td></td>').addClass('eventlisttbodytrtd').append(toggleword);
+						   	var cell0 = $('<td style="text-align:center;display:table;"></td>').addClass('eventlisttbodytrtd').append(toggleword);
 						  	var cell1 = $('<td></td>').text(data.o_tdate).addClass('eventlisttbodytrtd');
 						  	var mid =  $('<input type="button" class="btn btn-success"/> ').val("m"+data.m_id).addClass('eventlisttbodytrtd');
 							var a =  $('<a></a> ').attr('href',"${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIFunctionServlet.do?"+"functionaction=findmaster&targetid="+data.m_id).append(mid);						  
@@ -978,11 +1181,11 @@ $(function(){
 				  else if(id=="m"){				
 					  
 					  
-					   var toggleword =$('<input type="checkbox" class="cb" style="width:20px;height:20px"  name="mtoggle"/>').val(data.M_id).attr('data-receiver',data.B_name);;     
+					   var toggleword =$('<input type="checkbox" class="cb" style="width:20px;height:20px"  name="mtoggle"/>').val(data.M_id).attr('data-receiver',data.B_name).attr('data-mailtype','tob');     
 					   var mid =  $('<input type="button" class="btn btn-success"/> ').val("m"+data.M_id).addClass('eventlisttbodytrtd');
 					   var a =  $('<a></a> ').attr('href',"${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIFunctionServlet.do?"+"functionaction=findmaster&targetid="+data.M_id).append(mid);						  
 					   var midwordmid =  $('<span style="visibility: hidden;font-size:0px;margin:0pxlpadding:0px;"></span> ').text(data.M_id).addClass('eventlisttbodytrtd');
-					   var cell0 = $('<td ></td>').addClass('eventlisttbodytrtd').append(toggleword);  
+					   var cell0 = $('<td style="text-align:center;display:table;"></td>').addClass('eventlisttbodytrtd').append(toggleword);  
 					   var cell1 = $('<td></td>').html(a).addClass('eventlisttbodytrtd').append(midwordmid);
 					   var cell2 = $('<td></td>').text(data.B_name).addClass('eventlisttbodytrtd');
 					   var cell3 = $('<td></td>').text(data.M_name).addClass('eventlisttbodytrtd');
@@ -1001,11 +1204,11 @@ $(function(){
 					else if(id=="c"){
 						
 						
-					   var toggleword = $('<input type="checkbox" style="width:20px;height:20px" name="ctoggle" />').val(data.c_id).attr('data-receiver',data.c_id);
+					   var toggleword = $('<input type="checkbox" style="width:20px;height:20px" name="ctoggle" />').val(data.c_id).attr('data-receiver',data.c_id).attr('data-mailtype','toc');
 					   var mid =  $('<input type="button" class="btn btn-info" style="width:100px;word-break: keep-all"/> ').val(data.c_id).addClass('eventlisttbodytrtd');
 					   var a =  $('<a></a> ').attr('href',"${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIFunctionServlet.do?"+"functionaction=findcustomer&targetid="+data.c_id).append(mid);						  
 					   var midwordmid =  $('<span style="visibility: hidden;font-size:0px;margin:0pxlpadding:0px;"></span> ').text(data.c_id).addClass('eventlisttbodytrtd');
-					   var cell0 = $('<td></td>').addClass('eventlisttbodytrtd').append(toggleword);
+					   var cell0 = $('<td style="text-align:center;display:table;"></td>').addClass('eventlisttbodytrtd').append(toggleword);
 					   var cell1 = $('<td></td>').text(data.c_jdate).addClass('eventlisttbodytrtd');;
 					   var cell2 = $('<td></td>').html(a).addClass('eventlisttbodytrtd').append(midwordmid);
 					   var cell3 = $('<td></td>').text(data.c_name).addClass('eventlisttbodytrtd');;
@@ -1021,10 +1224,10 @@ $(function(){
 						}// end if
 						
 					else if(id=="r"){
-						   var toggleword = $('<input type="checkbox" style="width:20px;height:20px" name="ctoggle" />').val(data.r_id).attr('data-receiver1',data.m_id).attr('data-receiver2',data.c_id).attr('data-extract',data.p_summary).attr('data-content',data.p_content);
-						   var mid =  $('<input type="button" class="btn btn-primary" name="reportevent"  />').val(data.r_id).addClass('eventlisttbodytrtd').attr('data-receiver1',data.m_id).attr('data-receiver2',data.c_id).attr('data-extract',data.p_summary).attr('data-content',data.p_content);
+						   var toggleword = $('<input type="checkbox" style="width:20px;height:20px" name="ctoggle" />').val(data.r_id).attr('data-receiver1',data.m_id).attr('data-receiver2',data.c_id).attr('data-extract',data.p_summary).attr('data-content',data.p_content).attr('data-mailtype','tom');
+						   var mid =  $('<input type="button" class="btn btn-primary" name="reportevent"  />').val("r"+data.r_id).addClass('eventlisttbodytrtd').attr('data-receiver1',data.m_id).attr('data-receiver2',data.c_id).attr('data-extract',data.p_summary).attr('data-content',data.p_content);
 						   var midwordmid =  $('<span style="visibility: hidden;font-size:0px;margin:0pxlpadding:0px;"></span> ').text(data.r_id).addClass('eventlisttbodytrtd');
-						   var cell0 = $('<td></td>').addClass('eventlisttbodytrtd').append(toggleword);
+						   var cell0 = $('<td style="text-align:center;display:table;"></td>').addClass('eventlisttbodytrtd').append(toggleword);
 						   var cell1 = $('<td name="reportevent"></td>').html(mid).addClass('eventlisttbodytrtd').append(midwordmid);
 						   var cell2 = $('<td></td>').text(data.r_date).addClass('eventlisttbodytrtd');;			   
 						   var mid3 =  $('<input type="button" class="btn btn-info" style="width:100px;word-break: keep-all"/> ').val(data.c_id).addClass('eventlisttbodytrtd');
@@ -1045,11 +1248,11 @@ $(function(){
 					}
 					else if(id=="ad"){
 						
-						   var toggleword = $('<input type="checkbox" style="width:20px;height:20px" name="ctoggle" />').val(data.ad_id).attr('data-receiver',data.m_id);
-						   var mid =  $('<input type="button" class="btn btn-warning"/>').val(data.ad_id).addClass('eventlisttbodytrtd');
+						   var toggleword = $('<input type="checkbox" style="width:20px;height:20px;" name="ctoggle" />').val(data.ad_id).attr('data-receiver',data.m_id).attr('data-mailtype','tom');
+						   var mid =  $('<input type="button" class="btn btn-warning"/>').val("ad"+data.ad_id).addClass('eventlisttbodytrtd');
 						   var a =  $('<a></a> ').attr('href',"${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIFunctionServlet.do?"+"functionaction=findcustomer&targetid="+data.ad_id).append(mid);						  
 						   var midwordmid =  $('<span style="visibility: hidden;font-size:0px;margin:0pxlpadding:0px;"></span> ').text(data.ad_id).addClass('eventlisttbodytrtd');
-						   var cell0 = $('<td style="text-align:center;"></td>').addClass('eventlisttbodytrtd').append(toggleword);
+						   var cell0 = $('<td style="text-align:center;display:table;"></td>').addClass('eventlisttbodytrtd').append(toggleword);
 						   var cell1 = $('<td></td>').html(a).addClass('eventlisttbodytrtd').append(midwordmid);
 						   var cell2 = $('<td></td>').text(data.ad_bdate).addClass('eventlisttbodytrtd');;			   
 						   var cell3 = $('<td></td>').text(data.ad_enddate).addClass('eventlisttbodytrtd');
@@ -1061,13 +1264,13 @@ $(function(){
 						   var row = $('<tr></tr>').append([cell0,cell1,cell2,cell3,cell4,cell5]);
 						   docFragtb.append(row);	
 					}  
-					else if(id=="a"){
-						 var chardiv = $('<div id="managerchart"></div>');
-						 docFragtb3.append(chardiv);
-						 $('#charts').append(docFragtb3);
-						 chart();
+// 					else if(id=="a"){
+// 						 var chardiv = $('<div id="managerchart"></div>');
+// 						 docFragtb3.append(chardiv);
+// 						 $('#charts').append(docFragtb3);
+// 						 chart();
 					 
-					}
+// 					}
 				}// end each function
 // 			 }//end for loop
 		 );//each
@@ -1145,68 +1348,10 @@ $(function(){
 				   
 				   
 </script>
-<style>   
-input[type='checkbox'] {
-margin: 0 auto;
-display: block;
-	width:20px;height:20px;
-}
 
-input[type='checkbox'] {
-	-webkit-font-smoothing: antialiased;
-	text-rendering: optimizeSpeed;
-	
-	
-	display: block;
-	float: left;
-	position: relative;
-	cursor: pointer;
-	width:20px;
-	height:20px;
-	horizontal-align:middle;
-	vertical-align:middle;
-}
 
-input[type='checkbox']:after {
-	content: "";
-	vertical-align: middle;
-	text-align: center;
-	line-height: 13px;
-	position: absolute;
-	cursor: pointer;
-	height: 13px;
-	width: 13px;
-	left: 0;
-	top: 0;
-	font-size: 10px;
-	-webkit-box-shadow: inset 0 1px 1px #5F95FC, 0 1px 0 #5F95FC;
-	-moz-box-shadow: inset 0 1px 1px #5F95FC, 0 1px 0 #5F95FC;
-	box-shadow: inset 0 1px 1px #5F95FC, 0 1px 0 #5F95FC;
-	background: #5F95FC;
-	width:20px;height:20px
-}
 
-input[type='checkbox']:hover:after, input[type='checkbox']:checked:hover:after {
-	background: #5F95FC;
-	content: '\2714';
-	color: #fff;
-	width:20px;height:20px
-}
 
-input[type='checkbox']:checked:after {
-	background: #5F95FC;
-	content: '\2714';
-	color: #fff;
-	width:20px;height:20px
-}
-.textstyle{
-		font-family: Arial, "Microsoft Jhenghei",  
-		"WenQuanYi Zen Hei", "儷黑 Pro", 
-		"LiHei Pro","文泉驛正黑", 
-		"DFKai-sb", DFKai-SB, 
-		sans-serif;
-	}
-</style>
 
 </body>
 </html>
