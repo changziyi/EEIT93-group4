@@ -28,10 +28,11 @@ public class updatePwdServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) 
-			throws ServletException, IOException {
+			throws ServletException, IOException {	
 		HttpSession session = req.getSession();
 		String c_email = (String)session.getAttribute("c_email");
 		System.out.println("c_email = " + c_email);
+		
 //		CdataService cs = new CdataService();
 //		List<CdataVO> i = cs.getAll();
 		 

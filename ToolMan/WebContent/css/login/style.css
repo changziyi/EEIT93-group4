@@ -7,8 +7,9 @@ html {
 }
 
 body {
-  background: #c1bdba;
-  font-family: 'Titillium Web', sans-serif;
+  background: #ffffff;
+  font-family: Microsoft JhengHei;
+  
 }
 
 a {
@@ -22,7 +23,8 @@ a:hover {
 }
 
 .form {
-  background: rgba(19, 35, 47, 0.9);
+/*   background: rgba(19, 35, 47, 0.9); */
+  background-color: #ccffff;
   padding: 40px;
   max-width: 600px;
   margin: 40px auto; /*box model*/
@@ -99,10 +101,12 @@ label.active {
 }
 label.active .req {
   opacity: 0;
+  
 }
 
 label.highlight {
-  color: #ffffff;
+  color: #000000;
+  
 }
 
 input, textarea {
@@ -114,14 +118,14 @@ input, textarea {
   background: none;
   background-image: none;
   border: 1px solid #a0b3b0;
-  color: #ffffff;
+  color: #000000;
   border-radius: 0;
   -webkit-transition: border-color .25s ease, box-shadow .25s ease;
   transition: border-color .25s ease, box-shadow .25s ease;
 }
 input:focus, textarea:focus {
   outline: 0;
-  border-color: #1ab188;
+  border-color: #357EBD;
 }
 
 textarea {
@@ -157,14 +161,15 @@ textarea {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: .1em;
-  background: #1ab188;
+  background: #5aa1dd;
   color: #ffffff;
   -webkit-transition: all 0.5s ease;
   transition: all 0.5s ease;
   -webkit-appearance: none;
+  border-radius: 5px;
 }
 .button:hover, .button:focus {
-  background: #179b77;
+  background: #357EBD;
 }
 
 .button-block {
@@ -178,7 +183,7 @@ textarea {
 }
 
 .function-code{
-  font-family: "微軟雅黑";
+  font-family: Microsoft JhengHei;
   position: absolute;
 }
 
@@ -191,3 +196,4 @@ textarea {
 .move{
 	visibility: visible;
 }
+

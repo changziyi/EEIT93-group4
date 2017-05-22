@@ -135,11 +135,11 @@ body {
 						<input type="password" name="pswd"  required="true" class="form-control"
 							placeholder="請輸入密碼">
         
+					<div style="position: absolute; right:110px;bottom:10px;font-size:16px;color:red;" class="error">${errorMsgs.LoginError}</div>
 					</div>
 
                     <div class="error">${errorMsgs.c_id}</div>
 					<div class="error">${errorMsgs.c_pwd}</div>
-					<div class="error">${errorMsgs.LoginError}</div>
 
 				</div>
 				<div class="main">
@@ -157,13 +157,17 @@ body {
 							</a>
 						</div>
 					</div>
-
+					<div class="row">
+						<div class="col-md-12">
+							<button type="submit" id="onkey" class="btn btn-info btn-block">一鍵輸入</button>
+						</div>
+					</div>
 				</div>
 				<div class="login-footer">
 					<div class="row">
 						<div class="col-xs-6 col-md-6 pull-right"
 							style="text-align: right">
-							<a href="forgetpassword.jsp">忘記密碼?</a><br /> <a href="login-up.jsp">還不是會員嗎?</a>
+							<a href="${pageContext.servletContext.contextPath}/cdata/forgetpassword.jsp">忘記密碼?</a><br /> <a href="${pageContext.servletContext.contextPath}/cdata/login-up.jsp">還不是會員嗎?</a>
 						</div>
 					</div>
 				</div>
@@ -171,4 +175,16 @@ body {
 		</div>
 	</div>
 </body>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script>
+$(function(){
+	$("#onkey").click(function(){
+		event.preventDefault();
+		$("input[name = 'id']").val("PolarBear");
+		$("input[name = 'pswd']").val("c123456");
+	});		
+});
+
+</script>
+
 </html>
