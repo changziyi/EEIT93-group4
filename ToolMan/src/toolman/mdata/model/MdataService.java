@@ -163,9 +163,14 @@ public class MdataService {
 			jContent.put("sta",aMata[8]);
 			List<String> pList = new LinkedList<String>();
 			mpros = mproSvc.getByMidSp(new Integer((int) aMata[0]));
-			for (Object aMpro : mpros) {
-				pList.add(aMpro.toString());
+			if (mpros.isEmpty()) {
+				pList.add("");
 				jContent.put("pro", pList);
+			} else {
+				for (Object aMpro : mpros) {
+					pList.add(aMpro.toString());
+					jContent.put("pro", pList);
+				}
 			}
 			jList.add(jContent);
 		}
@@ -189,9 +194,14 @@ public class MdataService {
 			jContent.put("finish",aMata[8]);
 			List<String> pList = new LinkedList<String>();
 			mpros = mproSvc.getByMidSp(new Integer((int) aMata[1]));
-			for (Object aMpro : mpros) {
-				pList.add(aMpro.toString());
+			if (mpros.isEmpty()) {
+				pList.add("");
 				jContent.put("pro", pList);
+			} else {
+				for (Object aMpro : mpros) {
+					pList.add(aMpro.toString());
+					jContent.put("pro", pList);
+				}
 			}
 			jList.add(jContent);
 		}
@@ -229,9 +239,14 @@ public class MdataService {
 			jContent.put("finish",aMata[7]);
 			List<String> pList = new LinkedList<String>();
 			mpros = mproSvc.getByMidSp(new Integer((int) aMata[0]));
-			for (Object aMpro : mpros) {
-				pList.add(aMpro.toString());
+			if (mpros.isEmpty()) {
+				pList.add("");
 				jContent.put("pro", pList);
+			} else {
+				for (Object aMpro : mpros) {
+					pList.add(aMpro.toString());
+					jContent.put("pro", pList);
+				}
 			}
 			jList.add(jContent);
 		}

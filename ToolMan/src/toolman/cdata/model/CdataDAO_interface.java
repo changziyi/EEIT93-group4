@@ -28,7 +28,7 @@ public interface CdataDAO_interface {
 	public void delete(String c_id);
 	public List<CdataVO> getAll();
 	public CdataVO cdata_des(String c_id);
-	
+	public void updateMid(Integer m_id, String c_id);
 	
     public Set<OrderVO> getOrderByC(String c_id);//訂單
     public Set<FavoriteVO> getFavoriteByC(String c_id);//訂單

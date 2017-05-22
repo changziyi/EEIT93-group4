@@ -184,25 +184,25 @@ form.go-right input:focus+label, form.go-right textarea:focus+label {
 						<p>師傅姓名:</p>
 						<div class="form-group">
 							<input class="form-control" type="text" name="m_name"
-								value="${cdata_mdataVO.m_name}" /><label for="name">輸入性名</label>
+								value="${not empty cdata_mdataVO.m_name? cdata_mdataVO.m_name:LoginOK.c_name}" /><label for="name">輸入性名</label>
 						</div>
 <%-- 						${errorMsgs.name1}${errorMsgs.name2} --%>
 						<p>電話:</p>
 						<div class="form-group">
 							<input class="form-control" type="text" name="m_cel"
-								value="${cdata_mdataVO.m_cel}" /><label for="phone">輸入電話</label>
+								value="${not empty cdata_mdataVO.m_cel? cdata_mdataVO.m_cel:LoginOK.c_cel}" /><label for="phone">輸入電話</label>
 						</div>
 
 						<p>信箱:</p>
 						<div class="form-group">
 							<input class="form-control" type="text" name="m_email"
-								value="${cdata_mdataVO.m_email}" /><label for="email">輸入信箱</label>
+								value="${not empty cdata_mdataVO.c_email? cdata_mdataVO.m_email:LoginOK.c_email}" /><label for="email">輸入信箱</label>
 						</div>
 						<p>地址:</p>
 						<span id="twzipcode"></span>
 						<div class="form-group">
 							<input class="form-control" type="text" name="m_addr"
-								value="${cdata_mdataVO.m_addr}" /><label for="addres">輸入地址</label>
+								value="${not empty cdata_mdataVO.m_addr? cdata_mdataVO.m_addr:LoginOK.c_addr}" /><label for="addres">輸入地址</label>
 						</div>
 <%-- 						${errorMsgs.city}${errorMsgs.addr} --%>
 						<p>維修類別:</p>
@@ -278,11 +278,11 @@ form.go-right input:focus+label, form.go-right textarea:focus+label {
 	<script>
 	
 		$('#oneinput').click(function() {
-			$('input[name="m_name"]').attr('value','張如意');
-			$('input[name="m_cel"]').attr('value','0987654321');
-			$('input[name="m_email"]').attr('value','changluyee@gmail.com');
-			$('input[name="m_addr"]').attr('value','復興南路一段390號');
-			$('select[name=district]').val('大安區');
+// 			$('input[name="m_name"]').attr('value','張如意');
+// 			$('input[name="m_cel"]').attr('value','0987654321');
+// 			$('input[name="m_email"]').attr('value','changluyee@gmail.com');
+// 			$('input[name="m_addr"]').attr('value','復興南路一段390號');
+// 			$('select[name=district]').val('大安區');
 			$('input[name="m_pro"][value="水電工程"]').prop('checked', true);
 			$('input[name="m_pro"][value="室內裝潢"]').prop('checked', true);
 			$('input[name="m_pro"][value="照明工程"]').prop('checked', true);

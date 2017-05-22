@@ -299,10 +299,27 @@ public class CdataDAO implements CdataDAO_interface{
 		Set<BlacklistVO> set = login_in(c_id).getBlacklists();
 		return set;
 	}
-
+	
+	@Override
+	public void updateMid(Integer m_id, String c_id) {
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try {
+			session.beginTransaction();
+			Query query = session.createQuery("update CdataVO set m_id=:m where c_id=:c");
+			query.setParameter("m",m_id);
+			query.setParameter("c",c_id);
+			query.executeUpdate();
+			session.getTransaction().commit();
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
+	}
 	
 	public static void main(String args[]){		
 		CdataDAO  dao = new CdataDAO();
+		
+//		dao.updateMid(1027, "bobobobobobo");
 		
 //		List<CdataVO> list= dao.getAll();
 //		for(CdataVO cdataVO:list){
