@@ -20,6 +20,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
+import toolman.cdata.model.CdataService;
+import toolman.cdata.model.CdataVO;
 import toolman.mdata.model.MdataService;
 import toolman.mdata.model.MdataVO;
 import toolman.mpro.model.MProService;
@@ -198,6 +200,8 @@ public class MdataServlet extends HttpServlet {
 			Map<String, String> errorMsgs = new HashMap<String, String>();
 			HttpSession session = request.getSession();
 			session.setAttribute("errorMsgs", errorMsgs);
+			
+			CdataVO cdataVO = (CdataVO)session.getAttribute("LoginOK");
 
 			String b_name = request.getParameter("b_name");
 			String b_des = request.getParameter("b_des");
@@ -233,7 +237,13 @@ public class MdataServlet extends HttpServlet {
 			MdataService mdataSvc = new MdataService();
 			mdataSvc.insert(mdataVO);
 			
+			CdataService cdataSvc = new CdataService();
+			cdataSvc.updateMid(mdataVO.getM_id(), cdataVO.getC_id());
+			System.out.println("m_id:" + mdataVO.getM_id());
+			System.out.println("c_id:" + cdataVO.getC_id());
+			
 			session.setAttribute("cdata_mdataVO", mdataVO);
+			session.setAttribute("LoginOK", cdataSvc.getById(cdataVO.getC_id()));
 			response.sendRedirect("OpenStoreCheck.jsp");
 			return;
 
@@ -491,6 +501,15 @@ public class MdataServlet extends HttpServlet {
 			out.close();
 		}
 		
+		if ("open".equals(action)) {
+			
+			HttpSession session = request.getSession();
+			CdataVO cdataVO = (CdataVO)session.getAttribute("LoginOK");
+			
+			response.sendRedirect("OpenStoreInfo.jsp");
+			return;
+			
+		}
 		
 	} // doGet
 

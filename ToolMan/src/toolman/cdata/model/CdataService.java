@@ -34,6 +34,9 @@ public class CdataService {
 		return dao.updateMemberfwd(c_email, c_pwd);
 	}
 					
+	public void updateMid(Integer m_id, String c_id) {
+		dao.updateMid(m_id, c_id);
+	}
 	
 	//註冊
 	public CdataVO addCdata(String c_id,String c_pwd,String c_name,
