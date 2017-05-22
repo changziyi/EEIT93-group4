@@ -101,7 +101,7 @@
 				
 					<div class="list-group addiv">
 						<div class="list-group-item">
-							<div class="result text-center">廣告</div>
+							<div class="result text-center">推薦</div>
 						</div>
 						<div class="list-group-item">
 							<c:forEach var="aMaster" end="3" items="${allMid}">
