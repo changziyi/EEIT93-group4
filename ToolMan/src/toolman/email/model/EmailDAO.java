@@ -28,12 +28,12 @@ public class EmailDAO implements EmailDAO_interface {
 		}
 	}
 
-	private static final String INSERT_STMT = "INSERT INTO mes (mss_id,msr_id,ms_date,ms_summary,ms_content,s_name,ms_trash) VALUES (?, ?, ?, ?, ?, ?,?)";
-	private static final String GET_ALL_STMT = "SELECT ms_id,mss_id,msr_id,ms_date,ms_summary,ms_content,s_name,ms_trash FROM mes order by ms_date desc";
-	private static final String GET_ONE_STMT = "SELECT ms_id,mss_id,msr_id,ms_date,ms_summary,ms_content,s_name,ms_trash FROM mes  where mss_id = ?";
-	private static final String GET_ONE_STMT_BY_KEY = "SELECT ms_id,mss_id,msr_id,ms_date,ms_summary,ms_content,s_name,ms_trash FROM mes  where ms_id = ?";
+	private static final String INSERT_STMT = "INSERT INTO mes (mss_id,msr_id,ms_date,ms_summary,ms_content,s_name) VALUES (?, ?, ?, ?, ?, ?)";
+	private static final String GET_ALL_STMT = "SELECT ms_id,mss_id,msr_id,ms_date,ms_summary,ms_content,s_name FROM mes order by ms_date desc";
+	private static final String GET_ONE_STMT = "SELECT ms_id,mss_id,msr_id,ms_date,ms_summary,ms_content,s_name FROM mes  where mss_id = ?";
+	private static final String GET_ONE_STMT_BY_KEY = "SELECT ms_id,mss_id,msr_id,ms_date,ms_summary,ms_content,s_name FROM mes  where ms_id = ?";
 	private static final String DELETE = "DELETE FROM mes where ms_id = ?";
-	private static final String UPDATE = "UPDATE mes set mss_id=?, msr_id=?, ms_date=?, ms_summary=?, ms_content=?, s_name=? ms_trash=? where ms_id = ?";
+	private static final String UPDATE = "UPDATE mes set mss_id=?, msr_id=?, ms_date=?, ms_summary=?, ms_content=?, s_name=?  where ms_id = ?";
 	
 	//by Benny
 	private static final String GET_ONE_MSRID = "SELECT * FROM mes  where msr_id = ?";
@@ -48,14 +48,14 @@ public class EmailDAO implements EmailDAO_interface {
 
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(INSERT_STMT);
-			pstmt.setString(1, emailVO.getMss_id());
+			
 			pstmt.setString(1, emailVO.getMss_id());
 			pstmt.setString(2, emailVO.getMsr_id());
 			pstmt.setTimestamp(3, emailVO.getMs_date());
 			pstmt.setString(4, emailVO.getMs_summary());
 			pstmt.setString(5, emailVO.getMs_content());
 			pstmt.setBoolean(6, emailVO.getS_name());
-			pstmt.setBoolean(7, emailVO.getMs_trash());
+			
 			pstmt.executeUpdate();
 
 			// Handle any driver errors 捕捉資料庫錯誤
@@ -420,7 +420,7 @@ public class EmailDAO implements EmailDAO_interface {
 				emailVO.setMs_summary(rs.getString("ms_summary"));
 				emailVO.setMs_content(rs.getString("ms_content"));
 				emailVO.setS_name(rs.getBoolean("s_name"));
-				emailVO.setMs_trash(rs.getBoolean("ms_trash"));
+				
 				
 
 				list.add(emailVO); 
@@ -478,7 +478,7 @@ public class EmailDAO implements EmailDAO_interface {
 				emailVO.setMs_summary(rs.getString("ms_summary"));
 				emailVO.setMs_content(rs.getString("ms_content"));
 				emailVO.setS_name(rs.getBoolean("s_name"));
-				emailVO.setMs_trash(rs.getBoolean("ms_trash"));
+				
 				Onelist.add(emailVO);
 			}
 		} catch (SQLException se) {
