@@ -105,7 +105,8 @@ body {font-family:Microsoft JhengHei;}
 			<div class="row"></div>
 		</div>
 		<div class="row">
-				<div class="pull-right search-condition">
+		    <div class="col-md-2 pull-right">
+				<div class="search-condition">
 			
 					<form name="searchForm" id="searchForm" action="Wishing+waterfall.jsp" method="get">
 					<b>新舊排序：</b> 
@@ -115,9 +116,8 @@ body {font-family:Microsoft JhengHei;}
 						<option value="asc" <%="asc".equals(request.getParameter("order")) ? "selected" : "" %>>從舊到新</option>
 					</select> 
 					</span>
-					<b>選擇縣市：</b> 
-					<span id="bycity"></span>
 					</form>
+				</div>
 				</div>
 		</div>
 		<div class="row">
@@ -218,10 +218,9 @@ body {font-family:Microsoft JhengHei;}
 								<div class="form-group">
 									<textarea name="w_content" class="form-control" required="true"></textarea>
 									<label for="message">描述您的問題</label>
-								</div>
-							
+								</div>		
 						
-				</div>
+				      </div>
 				
 				</div>
 				<div class="modal-footer">
@@ -232,12 +231,9 @@ body {font-family:Microsoft JhengHei;}
 				</div>
 				</form>
 				</div>
-			
-			
-			
+		
 		</div>
 	</div>
-
 
 	<!--------------------------- 許願能做什麼?  ---------------------------------------------->
 	<div class="modal fade" id="myModal02" tabindex="-1" role="dialog"
@@ -319,7 +315,7 @@ body {font-family:Microsoft JhengHei;}
 		 	     			
 		 					var mssid=$(this).data('id').substring(5);
 			 				var mssum="我要修"+$(this).data('type');
-			 				var mscontent=$(this).data('content');
+			 				var mscontent="";
 			 				var mstime=$(this).data('time');
 			 				
 							$.post(hyperlinkstring,{"mss_id":mssid,"ms_content":mscontent,"ms_summary":mssum},function(){
@@ -329,9 +325,6 @@ body {font-family:Microsoft JhengHei;}
 								}	
 							);//end get function
 
-		 	   		
-	 		 
-	 		 
 	 	}// end mail
 		</script>
 </body>

@@ -33,7 +33,7 @@
 							
 							<c:if test="${not empty LoginOK }">
 							<c:if test="${empty LoginOK.m_id}">
-						<li><a class="alist" href="${pageContext.servletContext.contextPath}/master/OpenStoreInfo.jsp">我要開店 </a></li>
+								<li><a class="alist" href="${pageContext.servletContext.contextPath}/master/OpenStoreInfo.jsp">我要開店 </a></li>
 							</c:if>
 						</c:if>
 						<li><a class="alist"
@@ -50,10 +50,11 @@
 							<button type="button" class="btn btn-default btn-sm">
 								<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 							</button>
-							<button type="button" class="btn btn-default btn-sm">
-								<span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
-							</button>
-
+							<c:if test="${not empty LoginOK}">
+								<button type="button" class="btn btn-default btn-sm">
+									<span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
+								</button>
+							</c:if>
 						</form>
 					</ul>
 					<!----------- 搜尋列----- -->

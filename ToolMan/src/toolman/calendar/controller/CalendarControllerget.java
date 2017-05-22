@@ -22,6 +22,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -63,8 +64,9 @@ public class CalendarControllerget extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("application/json");
 	     String calendarjson = request.getParameter("calendarjson");
-		 
-		 MdataVO mdataVO2 = (MdataVO) request.getAttribute("mdataVO");
+	     HttpSession session = request.getSession();
+		 MdataVO mdataVO2 = (MdataVO) session.getAttribute("mdataVO");
+		 System.out.println("mtest:"+mdataVO2.getM_id());
 		 Integer m_id = mdataVO2.getM_id();
 //		 Integer m_id = 1000;
 		 System.out.println(calendarjson);
@@ -76,7 +78,7 @@ public class CalendarControllerget extends HttpServlet {
 		
 		//---------------------------------get calendar---------------------------------------------
 		
-		List<CalendarVO> getlist = calendarservice.getByM(1000);
+		List<CalendarVO> getlist = calendarservice.getByM(m_id);
 		System.out.print(getlist);
 		JSONArray jsonarray = new JSONArray();
 		
