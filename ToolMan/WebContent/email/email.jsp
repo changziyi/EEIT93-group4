@@ -110,8 +110,7 @@
 								時間：${emailVO.ms_date}
 								<br> 
 								狀態：${emailVO.s_name}
-								<br> 
-								垃圾桶：${emailVO.ms_trash}
+
 								
 							<form action="Email.do" method="post">
 							<input type="submit" class="btn btn-default"  value="刪除" ><span aria-hidden="true"></span>
