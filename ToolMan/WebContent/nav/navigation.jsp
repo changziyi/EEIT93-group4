@@ -4,7 +4,6 @@
 <%@ page import="toolman.cdata.model.*"%>
 <%@ page import="toolman.order.model.*"%>
 <%@ page import=" java.util.*"%>
-
 <div class="navbar-wrapper">
 	<div class="container-fluid">
 		<nav class="navbar navbar-fixed-top">
@@ -127,8 +126,9 @@
 				</div>
 
 			</div>
-	</div>
 	</nav>
+	</div>
+	
 </div>
 
 <!------------------------------------- facebook 登入 ----------------------------------------->
