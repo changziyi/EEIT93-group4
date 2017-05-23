@@ -476,7 +476,7 @@ var eventidglobe =null;
 					droppable: true, // this allows things to be dropped onto the calendar
 					eventDrop: function(event, delta, revertFunc) {
 						checkoverlapping(event);
-				        alert(event.title + " was dropped on " + event.start.format());
+// 				        alert(event.title + " was dropped on " + event.start.format());
 			
 				        if (!confirm("Are you sure about this change?")) {
 				            revertFunc();
@@ -485,10 +485,10 @@ var eventidglobe =null;
 				    },
 					eventDragStop: function(event,jsEvent) {
 						 
-					    alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
+// 					    alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
 // 					    if( ( 130<= jsEvent.pageX)  && (jsEvent.pageX <= 230) &&(700 <= jsEvent.pageY)&& (jsEvent.pageY <=840))
 					if( ( 1300<= jsEvent.pageX)  || (jsEvent.pageX <= 370) ||(780 <= jsEvent.pageY)|| (jsEvent.pageY <=130)){
-					      alert('delete: '+ event.id);
+// 					      alert('delete: '+ event.id);
 					      $('#calendar').fullCalendar('removeEvents', event.id);
 					    }
 					},
