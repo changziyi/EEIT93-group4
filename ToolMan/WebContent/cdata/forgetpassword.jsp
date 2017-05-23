@@ -38,6 +38,13 @@
 			swal("成功!", "已將重新設定密碼的連結寄出請至E-mail信箱收取信件。", "success")
 		});				
 	})
+	
+// 		$.post(hyperlinkstring,{
+// 			"name":c_email},function(){
+// 		}
+			
+// 		}
+	
 	</script>
 <script src="${pageContext.servletContext.contextPath}/js/login/index.js"></script> 
 </body>
