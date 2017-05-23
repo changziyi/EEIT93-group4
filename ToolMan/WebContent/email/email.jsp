@@ -117,7 +117,7 @@
 								<br> 
 								<span name="time1${emailVO.ms_id}">時間：<span >${emailVO.ms_date}</span></span>
 								<br> 
-								<span name="readornot${emailVO.ms_id}" >狀態：<span >${emailVO.s_name == 'true' ? '已讀':'未讀'}</span></span>
+								<span >狀態：<span name="readornot${emailVO.ms_id}" >${emailVO.s_name == 'true' ? '已讀':'未讀'}</span></span>
 	                 			
 							<form action="Email.do" method="post">
 							<input type="submit" class="btn btn-danger pull-right"  value="刪除" ><span aria-hidden="true"></span>
