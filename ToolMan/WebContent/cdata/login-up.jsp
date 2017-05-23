@@ -12,6 +12,9 @@
   <link rel="Shortcut Icon" href="${pageContext.servletContext.contextPath}/favicon.ico" />
   <link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,300,600' rel='stylesheet' type='text/css'>
  <script src="../js/jquery.min.js"></script>
+ <script src="${pageContext.servletContext.contextPath}/sweetalart/sweetalert.min.js"></script>
+<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/sweetalart/sweetalert.css">
+
 </head>
 <body>
   <div class="form">  
@@ -70,11 +73,11 @@
 	          	     
 	            <input type="text" id="code2" style="background-color:#ffffff;" name="verification1" placeholder="驗證碼*" axlength="4" autocomplete="off">
 	            
-	            <span  style="border:1px solid blue;right:20px;bottom:6px;font-size: 20px;color:#a0b3b0"class="function-code" id="createCade" name="verification2"></span><!--驗證碼驗證-->
-				<input  type = "hidden" style="border:1px solid blue;right:20px;bottom:6px;font-size: 20px;color:#a0b3b0"class="function-code" id="createCade" name="verification2" />
-	
-	<!--             <label  id="code01" style="left:300px;bottom:12px; color:#000000">請輸入驗證碼</label>  -->               
-	            <label id="v" style="left:120px; color:red;">${errorMsgs.errorverify}</label>            
+	            <span  style="border:1px solid blue;right:20px;bottom:6px;font-size: 20px;color:#a0b3b0"class="function-code" id="createCade" ></span><!--驗證碼驗證-->
+				<input  type = "hidden" style="border:1px solid blue;right:20px;bottom:6px;font-size: 20px;color:#a0b3b0"class="function-code" id="verification2" name="verification2" />
+
+	            <label id="v" style="left:330px;" class="errormg">${errorMsgs.errorverify}</label>
+	             <label id="v" style="left:160px; color:red; font-size: 16px; margin-top:3px;" >${errorMsgs.account}</label>           
           </div>
           <div style="margin-top:40px;">                              
           	<button type="submit" id="register" class="button button-block" >註冊</button>
@@ -106,7 +109,7 @@ $(function(){
 
 		
 		$("#onkey").click(function(){
-// 			event.preventDefault();
+			event.preventDefault();
 			$("input[name = 'id']").val("oneprice");
 			$("input[name = 'pswd']").val("sa123456");
 			$("input[name = 'name']").val("航海王");
@@ -123,7 +126,7 @@ $(function(){
 	
 	function register(){
 		var Code = $("#code2").val();		
-		$('#v').text("請重新輸入驗證碼");
+// 		$('#v').text("請重新輸入驗證碼");
 	}
 		
 
@@ -143,10 +146,30 @@ $(function(){
 				
 		}
 
-		
+		$(function(){
+			$("#register").click(function(){
+				swal("恭喜您！", "註冊成功！","success")
+			});				
+		})
 
+		
 	
 	
+
+//		function myFunction(){
+//			var id = ${errorMsgs.c_id};
+//			var pswd = 
+//			var name =
+//			var birth =
+//			var phone = 
+//			var mail =
+//			var city =
+//			var district =
+//			var addr =
+			
+			
+			
+//		}
 
 	
 	</script>

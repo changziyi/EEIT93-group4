@@ -8,8 +8,11 @@
   <title>重新設置密碼</title>
   <link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,300,600' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-  <link rel="stylesheet" href="${pageContext.servletContext.contextPath}/css/login/style-forgetpassword.css">
+  <link rel="stylesheet" href="${pageContext.servletContext.contextPath}/css/login/style-updatepassword.css">
   <link rel="Shortcut Icon" href="${pageContext.servletContext.contextPath}/favicon.ico" />
+  
+  <script src="${pageContext.servletContext.contextPath}/sweetalart/sweetalert.min.js"></script>
+  <link rel="stylesheet" href="${pageContext.servletContext.contextPath}/sweetalart/sweetalert.css">
    
 </head>
 <body>
@@ -32,7 +35,7 @@
             <input style="background-color:#ffffff;" type="password"  name="newPassword2" autocomplete="off"/>
             <span class="error">${errors.newPassword2 }</span>
           </div>                      
-          <button type="submit" class="button button-block" >修改</button>                                                  
+          <button type="submit" id="sweetalart" class="button button-block" >修改</button>                                                  
           </form>
         </div>
         <div id="login"></div>        
@@ -41,6 +44,11 @@
 
 <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 	<script>
+	$(function(){
+		$("#sweetalart").click(function(){
+			swal("密碼修改成功！", "下次登入時請記得使用新的密碼喔！！","success")
+		});				
+	})
 	</script>
 <script src="${pageContext.servletContext.contextPath}/js/login/index.js"></script> 
 </body>

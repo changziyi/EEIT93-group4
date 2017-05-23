@@ -114,7 +114,6 @@ tbody td:hover {
 		<div class="cdata_box"> <!--member big model -->
 		<!----------------------- 會員資料 ---------------------->
 		<div>
-		<img height="30px" src='${pageContext.servletContext.contextPath}/image/btn_member.jpg'/>
 		<label>  會員資料</label>
 		<table class="manber-table">
 			<thead>			

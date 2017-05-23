@@ -160,7 +160,8 @@ public class CdataServlet extends HttpServlet {
 					
 
 			session.setAttribute("cdataVO", cdataVO);
-			resp.sendRedirect(resp.encodeRedirectURL("InsertCdataSuccess.jsp"));
+			Thread.sleep(1000);
+			resp.sendRedirect(resp.encodeRedirectURL(getServletContext().getContextPath()+"/index.jsp"));
 			return;
 		} catch (Exception e) {
 			errorMsgs.put("account", "帳號重複，請重新輸入資料");

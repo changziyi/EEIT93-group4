@@ -73,8 +73,8 @@ public class LoginServlet extends HttpServlet {
 			RequestDispatcher rd = req.getRequestDispatcher("/cdata/login-in.jsp");
 			rd.forward(req, resp);
 			return;//中斷
-		}			//true
-        if(verify == false){ 
+		}
+        if(verify == true){ 
         	 resp.sendRedirect(resp.encodeRedirectURL(req.getContextPath()+"/index.jsp"));	 
         }else{
         	errorMsgs.put("gRecaptchaResponse", "請驗證我不是機器人");
