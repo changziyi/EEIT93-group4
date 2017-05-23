@@ -124,12 +124,14 @@ h3 {
 	            <label id="v" style="left:330px;" class="errormg">${errorMsgs.errorverify}</label>
 	             <label id="v" style="left:160px; color:red; font-size: 16px; margin-top:3px;" >${errorMsgs.account}</label>           
           </div>
-          <div style="margin-top:40px;">
-                                
+          <div style="margin-top:40px">
+            <div>
           	<button type="submit" id="register" class="button button-block" >註冊</button>
           	<input type="hidden" name="action" value=""> 
-          </div>
-          <div style="margin-top:10px;">       
+          	</div> 
+         
+     
+          <div style="margin-top:10px">       
           <button type="submit" id="onkey" class="button button-block" name="" >一鍵輸入</button>
           </div> 
           </form>
@@ -139,9 +141,6 @@ h3 {
         <div id="login"></div>        
       </div><!-- tab-content -->   
  <!-- /form -->
-
-
-
 	<script>
 //     $(function() {//日期選擇器
 //         $( "#datepicker" ).datepicker({

@@ -7,14 +7,17 @@
 
 <%
 	WishpoolService wishpoolSvc = new WishpoolService();
+	
 
 	List<WishpoolVO> new_date = wishpoolSvc.getAll(request.getParameter("order"),
 			request.getParameter("searchCity"));
 	pageContext.setAttribute("new_date", new_date);
-
-	AdService adSvc = new AdService();
+	
+    AdService adSvc = new AdService();
 	List<AdVO> gabs = adSvc.getAllBySname("廣告進行中");
 	pageContext.setAttribute("get_sname", gabs);
+	
+	
 %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -25,12 +28,9 @@
 
 <link rel="stylesheet"
 	href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
-<link href="${pageContext.servletContext.contextPath}/nav/nav.css"
-	rel="stylesheet">
-<link href="${pageContext.servletContext.contextPath}/wishpool/wish.css"
-	rel="stylesheet">
-<link rel="Shortcut Icon"
-	href="${pageContext.servletContext.contextPath}/favicon.ico" />
+<link href="${pageContext.servletContext.contextPath}/nav/nav.css" rel="stylesheet">
+<link href="${pageContext.servletContext.contextPath}/wishpool/wish.css" rel="stylesheet">
+<link rel="Shortcut Icon" href="${pageContext.servletContext.contextPath}/favicon.ico" />
 <script
 	src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
 <script
@@ -45,9 +45,10 @@
 	src="${pageContext.servletContext.contextPath}/js/jquery.twzipcode.min.js"></script>
 
 <style>
-body {
-	font-family: Microsoft JhengHei;
-}
+
+body {font-family:Microsoft JhengHei;}
+
+
 </style>
 
 <script>
@@ -88,103 +89,103 @@ body {
 		});
 		
 		//get parameter from parameter
-		var countryDefault = '<%=""%>
-	';
-
+		var countryDefault = '<%=""%>';
+		
 		if (countryDefault != '') {
-			$("select[name=searchCountry]").val(countryDefault);
+			$("select[name=searchCountry]").val(countryDefault);	
 		}
 	});
 </script>
 
 </head>
 <body>
-	<jsp:include page="/nav/navigation.jsp" />
+<jsp:include page="/nav/navigation.jsp" />
 	<div class="container">
 		<div class="page-header">
 			<div class="row"></div>
 		</div>
 		<div class="row">
-			<div class="col-md-2 pull-right">
+		    <div class="col-md-2 pull-right">
 				<div class="search-condition">
-
-					<form name="searchForm" id="searchForm"
-						action="Wishing+waterfall.jsp" method="get">
-						<b>新舊排序：</b> <span> <select name="order"
-							onchange="searchForm.submit();">
-								<option value="desc"
-									<%="desc".equals(request.getParameter("order")) ? "selected" : ""%>>從新到舊</option>
-								<option value="asc"
-									<%="asc".equals(request.getParameter("order")) ? "selected" : ""%>>從舊到新</option>
-						</select>
-						</span>
+			
+					<form name="searchForm" id="searchForm" action="Wishing+waterfall.jsp" method="get">
+					<b>新舊排序：</b> 
+					<span>
+					<select name="order" onchange="searchForm.submit();">
+						<option value="desc" <%="desc".equals(request.getParameter("order")) ? "selected" : "" %>>從新到舊</option>
+						<option value="asc" <%="asc".equals(request.getParameter("order")) ? "selected" : "" %>>從舊到新</option>
+					</select> 
+					</span>
 					</form>
 				</div>
-			</div>
+				</div>
 		</div>
 		<div class="row">
 			<div class="col-md-3">
 				<div class="well text-center bgcolor">
 					<div>
 						<button class="btn btn-primary btn-lg" data-toggle="modal"
-							data-target="#myModal01">我要許願</button>
+							data-target="#myModal01">
+							我要許願
+						</button>
 					</div>
 					<br>
 					<div>
-						<button class="btn btn-primary btn-sm wish-btn"
-							data-toggle="modal" data-target="#myModal02">什麼是許願池</button>
+						<button class="btn btn-primary btn-sm wish-btn" data-toggle="modal"
+							data-target="#myModal02">
+							什麼是許願池
+						</button>
 					</div>
-				</div>
+				</div>				
 				<div class="well bgcolor">
 					<h2 class="text-center">隨機廣告</h2>
 					<br>
-					<c:forEach var="sname" end="3" items="${get_sname}">
-						<div>
-							${sname.mdataVO.m_city}${sname.mdataVO.b_name} <a
-								href='${pageContext.servletContext.contextPath}/master/masterPage.do?m_id=${sname.m_id}'>
-								<img height="200px" class="img-responsive"
-								src='${pageContext.servletContext.contextPath}/master/master.do?type=master&image=${sname.m_id}' />
-							</a>
-						</div>
-						<br>
-					</c:forEach>
+					 <c:forEach var="sname" end="3" items="${get_sname}">
+						 	<div>
+						 	 ${sname.mdataVO.m_city}${sname.mdataVO.b_name}
+						 	<a href='${pageContext.servletContext.contextPath}/master/masterPage.do?m_id=${sname.m_id}'>
+						 		<img height="200px" class="img-responsive" src='${pageContext.servletContext.contextPath}/master/master.do?type=master&image=${sname.m_id}'/>
+						 	</a>
+						 	</div>
+						 	<br>
+					 </c:forEach>
 				</div>
 			</div>
-
+			
 			<div class="col-md-9" id="wishblock">
 
-				<c:forEach var="wishpoolVO" items="${new_date}">
-					<div class="content-box">
-						<div>
-							<label class="user-name">會員帳號：</label><span>${wishpoolVO.c_id}</span>
-						</div>
-						<div>位在地區：${wishpoolVO.w_city}${wishpoolVO.w_district}</div>
-						<div>維修項目：${wishpoolVO.w_pro}</div>
-						<div>維修內容：${wishpoolVO.w_content}</div>
-						<div>
-							維修項目照片： <img
-								src="${pageContext.servletContext.contextPath}/wishpool/wishpool.do?type=wishpool&image=${wishpoolVO.w_id}"
-								alt="示意圖" class="img-responsive">
-						</div>
-						<br>
-						<div align="center">
-							<button class="btn btn-primary btn-sm" data-toggle="modal"
-								data-target="#wishDetailModal${wishpoolVO.w_id}">我會修理</button>
-							<br>
-							<div class="pull-right">發送時間：${wishpoolVO.w_date}</div>
-						</div>
-					</div>
-				</c:forEach>
+					<c:forEach var="wishpoolVO" items="${new_date}">
+							<div class="content-box">
+								<div><label class="user-name">會員帳號：</label><span>${wishpoolVO.c_id}</span></div>
+								<div>位在地區：${wishpoolVO.w_city}${wishpoolVO.w_district}</div>
+								<div>維修項目：${wishpoolVO.w_pro}</div>
+								<div>維修內容：${wishpoolVO.w_content}</div>
+								<div>維修項目照片： 
+									<img src="${pageContext.servletContext.contextPath}/wishpool/wishpool.do?type=wishpool&image=${wishpoolVO.w_id}"
+									alt="示意圖" class="img-responsive">
+								</div>
+								<br>
+								<div align="center">
+								<button class="btn btn-primary btn-sm" data-toggle="modal"
+									data-target="#wishDetailModal${wishpoolVO.w_id}">
+									我會修理</button>
+								<br>
+								<div class="pull-right">發送時間：${wishpoolVO.w_date}</div>
+								</div>
+							</div>	
+					</c:forEach>
+				
 			</div>
 		</div>
+		
 	</div>
 
 	<!-----------------------------我要許願表單 ----------------------------------------->
 	<div class="modal fade" id="myModal01" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
-
-
+		
+		
 			<div class="modal-content">
 				<div class="modal-header">
 					<h3>
@@ -192,31 +193,35 @@ body {
 						<button type="button" class="close" data-dismiss="modal"
 							aria-label="Close">
 							<span aria-hidden="true">&times;</span>
+
 						</button>
 					</h3>
 				</div>
+
 				<div class="modal-body">
 					<div class="container">
-						<form role="form" class="col-md-5 go-right" method="POST"
+						
+							<form role="form" class="col-md-5 go-right" method="POST" 
 							action="wishpool.do" enctype="multipart/form-data">
-							<p>我想修：</p>
-							<div class="form-group">
-								<input type="text" name="w_pro" class="form-control"
-									required="true"> <label for="name">想修什麼呢?</label>
-							</div>
-							<p>位在地址：</p>
-							<div id="twzipcode"></div>
-
-							<p>維修項目的照片：</p>
-							<input type="file" name="w_image" class="form-control">
-
-							<p>問題描述：</p>
-							<div class="form-group">
-								<textarea name="w_content" class="form-control" required="true"></textarea>
-								<label for="message">描述您的問題</label>
-							</div>
-					</div>
-
+								<p>我想修：</p>
+								<div class="form-group">
+									<input type="text" name="w_pro" class="form-control"
+										required="true"> <label for="name">想修什麼呢?</label>
+								</div>
+								<p>位在地址：</p>
+								<div id="twzipcode"></div>
+								
+								<p>維修項目的照片：</p>
+								<input type="file" name="w_image" class="form-control">
+								
+								<p>問題描述：</p>
+								<div class="form-group">
+									<textarea name="w_content" class="form-control" required="true"></textarea>
+									<label for="message">描述您的問題</label>
+								</div>		
+						
+				      </div>
+				
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-danger" data-dismiss="modal">取消</button>
@@ -225,8 +230,8 @@ body {
 						name="w_district">
 				</div>
 				</form>
-			</div>
-
+				</div>
+		
 		</div>
 	</div>
 
@@ -259,11 +264,10 @@ body {
 			</div>
 		</div>
 	</div>
-
+	
 	<c:forEach var="wishpoolVO" items="${new_date}">
 		<!-------------------------- 接下許願 ------------------------------>
-		<div class="modal fade" id="wishDetailModal${wishpoolVO.w_id}"
-			name="wishpoolmodal" tabindex="-1" role="dialog"
+		<div class="modal fade" id="wishDetailModal${wishpoolVO.w_id}" name="wishpoolmodal"tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
@@ -272,64 +276,56 @@ body {
 							確定要接下這個願望?
 							<button type="button" class="close" data-dismiss="modal"
 								aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
+								<span aria-hidden="true">&times;</span></button>
 						</h3>
 					</div>
 					<div class="modal-body">
-						<p>會員帳號：${wishpoolVO.c_id}</p>
-						<p>位在地區：${wishpoolVO.w_city}${wishpoolVO.w_district}</p>
-						<p>維修項目：${wishpoolVO.w_pro}</p>
-						<p>維修內容：${wishpoolVO.w_content}</p>
-						<p>發送時間：${wishpoolVO.w_date}</p>
-					</div>
-
-					<div class="modal-footer">
-						<button type="button" class="btn btn-danger" data-dismiss="modal">取消</button>
-						<button name="btnsubmit" class="btn btn-primary"
-							data-dismiss="modal" data-id="${wishpoolVO.c_id}"
-							data-dis="${wishpoolVO.w_city}${wishpoolVO.w_district}"
-							data-type="${wishpoolVO.w_pro}"
-							data-content="${wishpoolVO.w_content}"
-							data-time="${wishpoolVO.w_date}">確定接單</button>
-						<input type="hidden" name="w_city"> <input type="hidden"
-							name="w_district">
-					</div>
+								<p >會員帳號：${wishpoolVO.c_id} </p>
+								<p >位在地區：${wishpoolVO.w_city}${wishpoolVO.w_district} </p>
+								<p>維修項目：${wishpoolVO.w_pro} </p>
+								<p >維修內容：${wishpoolVO.w_content} </p>
+								<p >發送時間：${wishpoolVO.w_date} </p>
+								</div>
+								
+						<div class="modal-footer">
+							<button type="button" class="btn btn-danger" data-dismiss="modal">取消</button>
+							<button name="btnsubmit" class="btn btn-primary" data-dismiss="modal" data-id="${wishpoolVO.c_id}" data-dis="${wishpoolVO.w_city}${wishpoolVO.w_district}" data-type="${wishpoolVO.w_pro}" data-content="${wishpoolVO.w_content}" data-time="${wishpoolVO.w_date}">確定接單</button>
+							<input type="hidden" name="w_city"> <input type="hidden"
+								name="w_district">
+						</div>
 				</div>
 			</div>
 		</div>
 	</c:forEach>
 	<script>
-		$(function() {
-			$('#wishblock').imagesLoaded(function() {
-				$('#wishblock').masonry({
-					itemSelector : '.content-box',
-					columnWidth : 282,
-					animate : true
-				});
+	
+	  $(function() {
+		$('#wishblock').imagesLoaded(function() {
+			$('#wishblock').masonry({
+				itemSelector : '.content-box',
+				columnWidth : 282,
+				animate : true
 			});
-			$('[name="btnsubmit"]').on('click', mail);
-		})
-		function mail() {
-			var hyperlinkstring = "${pageContext.servletContext.contextPath}/email/Email.do";
-			// must unbind the event, or it will accumulate forever
+		});
+		 $('[name="btnsubmit"]').on('click',mail);
+	  })
+	  function mail(){
+				 	   	 	var hyperlinkstring = "${pageContext.servletContext.contextPath}/email/Email.do";
+		 	     			// must unbind the event, or it will accumulate forever
+		 	     			
+		 					var mssid=$(this).data('id').substring(5);
+			 				var mssum="我要修"+$(this).data('type');
+			 				var mscontent="您好，我在許願池上看到了您的問題，或許我能夠為您解決，如果需要，請主動聯繫我。";
+			 				var mstime=$(this).data('time');
+			 				
+							$.post(hyperlinkstring,{"mss_id":mssid,"ms_content":mscontent,"ms_summary":mssum},function(){
 
-			var mssid = $(this).data('id').substring(5);
-			var mssum = "我要修" + $(this).data('type');
-			var mscontent = "您好，我在許願池上看到了您的問題，或許我能夠為您解決，如果需要，請主動聯繫我。";
-			var mstime = $(this).data('time');
+// 								    $('[name="wishpoolmodal"]').modal("hide");
+								    $('[name="btnsubmit"]').unbind('click');
+								}	
+							);//end get function
 
-			$.post(hyperlinkstring, {
-				"mss_id" : mssid,
-				"ms_content" : mscontent,
-				"ms_summary" : mssum
-			}, function() {
-
-				// 								    $('[name="wishpoolmodal"]').modal("hide");
-				$('[name="btnsubmit"]').unbind('click');
-			});//end get function
-
-		}// end mail
-	</script>
+	 	}// end mail
+		</script>
 </body>
 </html>

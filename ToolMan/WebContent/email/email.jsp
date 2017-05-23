@@ -53,6 +53,12 @@
 	
 }
 
+.bgcolor {
+	background-color: #4dd2ff;
+	border: 5px double #3399ff;
+	border-radius: 25px;
+}
+
 
 
 </style>
@@ -79,20 +85,21 @@
 				<div class="row"></div>
 		</div>
 		
+		
 		<div class="row">
-			<div class="col-md-3" style=";background-color: #99ceff">
-				<div class="text-center">
-					<button class="btn btn-primary btn-lg" data-toggle="modal"
-						data-target="#myModal01">發送 Email</button>
+			<div class="col-md-3">
+				<div class="well text-center bgcolor">
+					<div>
+						<button class="btn btn-primary btn-lg" data-toggle="modal"
+							data-target="#myModal01">
+							 發送 e-mail
+						</button>
+					</div>			
 				</div>
-
 			</div>
-			</div>
-			<br/>
-			<div class="row">
-			<div class="col-md-4"></div>
+			
 			<div class="col-md-8" id="emailblock" 
-				style="overflow: hidden; margin: 0 auto; background-color: #99ceff"">
+				style="overflow: hidden; margin: 0 auto">
 				
 			
 						<c:forEach var="emailVO" items="${list}">
@@ -109,7 +116,7 @@
 								時間：${emailVO.ms_date}
 								<br> 
 								<span>狀態：<span>${emailVO.s_name == 'true' ? '已讀':'未讀'}</span></span>
-	                        <div class="modal-footer">
+	                 
 							<form action="Email.do" method="post">
 							<input type="submit" class="btn btn-danger pull-right"  value="刪除" ><span aria-hidden="true"></span>
 							<input type="hidden" name="ms_id" value="${emailVO.ms_id}"></input>
@@ -121,7 +128,7 @@
 					</div>
 				</div>
 			</div>
-		
+	
 	
 <!-------------------- 詳細內容的彈出視窗 --------------------------------------------->
 	<div class="modal fade" id="clickSummary" tabindex="-1" role="dialog"
@@ -178,11 +185,9 @@
 							<button type="button" class="close" data-dismiss="modal"
 								aria-label="Close">
 								<span aria-hidden="true">&times;</span>
-
 							</button>
 						</H4>
 					</div>
-					
 					<div class="modal-body">
 						<table>
 							<tr>
