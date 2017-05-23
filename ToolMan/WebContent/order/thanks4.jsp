@@ -6,6 +6,8 @@
 <html>
 
 <head>
+<meta http-equiv="refresh" content="1;url=${pageContext.servletContext.contextPath}/cdata/CdatadessServlet.do?c_id=${LoginOK.c_id}">
+
 <title>Tool Man</title>
 
 </head>

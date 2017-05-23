@@ -62,7 +62,7 @@
 <br/>
 <br/>
 <jsp:include page="/nav/navigation.jsp" />
- <table class="table table-bordered">
+ <table class="table table-bordered" style="background-color:#EEEEEE;">
 	<tr>
 	    <th>消費者</th>
 	    <th>預約時間</th>
