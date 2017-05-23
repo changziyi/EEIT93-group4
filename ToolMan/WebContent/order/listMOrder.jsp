@@ -101,12 +101,12 @@
 			<td>
 			
  <%------------------------------------------bootstrap評分-------------------------------------------------------%>
-<c:if test="${orderVO.m_rating != null }">
+<c:if test="${orderVO.c_rating != null }">
 <a class="btn btn-info ">
           <span class="glyphicon glyphicon-ok"></span> 評分完畢 
         </a>
 </c:if>
-<c:if test="${orderVO.m_rating == null }">
+<c:if test="${orderVO.c_rating == null }">
 
   <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/order/OrderController.do" name="form1">
    <div>

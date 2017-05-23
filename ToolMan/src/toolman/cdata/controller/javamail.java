@@ -48,9 +48,9 @@ public class javamail{
 			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("Eeit93401@gmail.com"));
 			message.setSubject("ToolMan找師傅   忘記密碼!! ","UTF-8");
 			str.append("<br>要使用新的密碼, 請點選下列網址密碼<br>");
-			str.append("<br>http://tool.southeastasia.cloudapp.azure.com:8081/ToolMan/cdata/updatepassword <br>");
+//			str.append("<br>http://tool.southeastasia.cloudapp.azure.com:8081/ToolMan/cdata/updatepassword.jsp?email=Eeit93401@gmail.com <br>");
 //			message.setText("Dear Levin, \n\n 測試 測試 測試 測試 測試 測試 email !","UTF-8");
-//			str.append("<br>http://localhost:8081/ToolMan/cdata/updatepassword.jsp<br>"); //test
+			str.append("<br>http://localhost:8081/ToolMan/cdata/updatepassword.jsp?email=Eeit93401@gmail.com<br>"); //test
 			message.setContent(str.toString(),"text/html;charset=UTF-8");
 			Transport transport = session.getTransport("smtp");
 			transport.connect(host, port, username, password);

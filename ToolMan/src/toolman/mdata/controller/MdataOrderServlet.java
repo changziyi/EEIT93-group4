@@ -35,7 +35,7 @@ public class MdataOrderServlet extends HttpServlet {
 			
 			try {
 				/*************************** 1.接收請求參數 ****************************************/
-				Integer m_id = new Integer(request.getParameter("m_id"));
+				Integer m_id = Integer.parseInt(request.getParameter("m_id"));
 				/*************************** 2.開始查詢資料 ****************************************/
 				MdataService orderSvc = new MdataService();
 				Set<OrderVO> set = orderSvc.getOrderByM(m_id);
