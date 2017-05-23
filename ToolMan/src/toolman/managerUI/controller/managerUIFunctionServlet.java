@@ -149,7 +149,7 @@ public class managerUIFunctionServlet extends HttpServlet {
 			Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 			emailVO.setMs_date(timestamp);
 			emailVO.setS_name(false);
-			emailVO.setMs_trash(false);
+			
 			dao.insert(emailVO);
 			out.write("已完成審核");
 			out.close();
@@ -176,7 +176,7 @@ public class managerUIFunctionServlet extends HttpServlet {
 			Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 			emailVO.setMs_date(timestamp);
 			emailVO.setS_name(false);
-			emailVO.setMs_trash(false);
+			
 			dao.insert(emailVO);
 			out.write("已退回審核申請");
 			out.close();
@@ -302,12 +302,8 @@ public class managerUIFunctionServlet extends HttpServlet {
 			int count=0;
 				MdataService mdataservice = new MdataService();
 			int	returnedcount = mdataservice.updatecustomerSamnote(Integer.parseInt(noteid),notevalue);
-			count= returnedcount+count;
-			
 			out = response.getWriter();
-			System.out.print(count);
-			out.write("done");	
-			out.close();
+
 		}
 		//tested ok
 		if("sacnote".equals(functionaction)){
@@ -315,39 +311,29 @@ public class managerUIFunctionServlet extends HttpServlet {
 			int count=0;
 			
 			CdataService cdataservice = new CdataService();
-			int	returnedcount = cdataservice.updatecustomerSacnote(noteid,notevalue);
-			count= returnedcount+count;
+			cdataservice.updatecustomerSacnote(noteid,notevalue);
 			System.out.print(notevalue);
 			out = response.getWriter();
-			System.out.print(count);
-			out.write(count);	
-			out.close();
+
 		}
 		if("saonote".equals(functionaction)){
 		
 			Integer count=0;
 			
 			OrderService odataservice = new OrderService();
-			int	returnedcount = odataservice.updateOrderSaonote(Integer.parseInt(noteid),notevalue);
-			count= returnedcount;
-			
+			odataservice.updateOrderSaonote(Integer.parseInt(noteid),notevalue);
 			out = response.getWriter();
-			System.out.print(count);
-			out.write(count);
-			out.close();
+
 		}
 		if("sarnote".equals(functionaction)){
 			
 			Integer count=0;
 			
 			RdataService rdataservice = new RdataService();
-			int	returnedcount = rdataservice.updateReportSarnote(Integer.parseInt(noteid),notevalue);
-			count= returnedcount;
+			rdataservice.updateReportSarnote(Integer.parseInt(noteid),notevalue);
 			System.out.println(noteid);
 			out = response.getWriter();
-			System.out.print(count);
-			out.write(count);
-			out.close();
+
 		}
 	//for 致衡訂單回應
 	if("orderresponse".equals(functionaction)){	
