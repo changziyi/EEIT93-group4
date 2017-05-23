@@ -103,22 +103,22 @@
 				
 			
 						<c:forEach var="emailVO" items="${list}">
-							<div class="content_box">
+							<div class="content_box" name="mainblock " >
 					            <div class="modal-header" >			
-								<span>收件人：${emailVO.mss_id}</span>
+								<span name="receiver1${emailVO.ms_id}">收件人：${emailVO.mss_id}</span>
 								<br>
-								<span>寄件人：${emailVO.msr_id}</span>
+								<span name="sender1${emailVO.ms_id}">寄件人：${emailVO.msr_id}</span>
 								<br>
 								主旨： 
-								<button class="btn btn-primary" data-toggle="modal" id="selectbtn"
-						     data-target="#clickSummary" data-id="${emailVO.ms_id}">${emailVO.ms_summary}</button>
+								<button class="btn btn-primary" data-toggle="modal" id="selectbtn" name="btndetail" data-name="btndetail${emailVO.ms_id}"
+						   		 data-target="#clickSummary" data-id="${emailVO.ms_id}">${emailVO.ms_summary}</button>
+								<br class="content1"> 
+								<span name="content1${emailVO.ms_id}">內容：<span >${emailVO.ms_content}</span></span>
 								<br> 
-								內容：${emailVO.ms_content}
+								<span name="time1${emailVO.ms_id}">時間：<span >${emailVO.ms_date}</span></span>
 								<br> 
-								時間：${emailVO.ms_date}
-								<br> 
-								<span>狀態：<span>${emailVO.s_name == 'true' ? '已讀':'未讀'}</span></span>
-	                 
+								<span >狀態：<span name="readornot${emailVO.ms_id}" >${emailVO.s_name == 'true' ? '已讀':'未讀'}</span></span>
+	                 			
 							<form action="Email.do" method="post">
 							<input type="submit" class="btn btn-danger pull-right"  value="刪除" ><span aria-hidden="true"></span>
 							<input type="hidden" name="ms_id" value="${emailVO.ms_id}"></input>
@@ -151,16 +151,16 @@
 					<div class="modal-body">
 						<table>
 							<tr>
-								<td>收件人：${Onelist.mss_id}</td>
+								<td name="receiver2">收件人：${Onelist.mss_id}</td>
 							</tr>
 							<tr>
-								<td>寄件人：${Onelist.msr_id}</td>
+								<td name="sender2">寄件人：${Onelist.msr_id}</td>
 							</tr>
 							<tr>
-								<td>主旨：${Onelist.ms_summary}</td>
+								<td name="btndetail2">主旨：${Onelist.ms_summary}</td>
 							</tr>
 							<tr>								
-								<td>內容：${Onelist.ms_content}</td>
+								<td name="content2">內容：${Onelist.ms_content}</td>
 							</tr>
 						</table>
 					</div>
@@ -203,7 +203,7 @@
 									value="${param.ms_summary}" />${errorMsgs.email1}${errorMsgs.email2}
 								</td>
 							</tr>
-						
+
 							<tr>
 								<td><label style="vertical-align: top">內容：</label>
 								
@@ -232,22 +232,19 @@
 	
 	<!------------------------------------ js ---------------------------------------------------->
 	<script type="text/javascript">
-	$('button.btn-primary').click(function(){
+	$('[name="btndetail"]').click(function(){
 		var dataid = $(this).attr('data-id');
 		$.get('Email.do',{
 			'action':'updateisRead',
 			'msid':dataid
 		});
-		var divparent =  $(this).parent('div');
-		var receiveid = divparent.children('span:first').text();
-		var receiveid2 = divparent.children('span:eq(1)').text();
-		var receiveid3 = $(this).text();
-		var receiveid4 = divparent.children('span:eq(2)').text();
-		$('td:first').text(receiveid);
-		$('td:eq(1)').text(receiveid2);
-		$('td:eq(2)').text("主旨: "+receiveid3);
-		$('td:eq(3)').text(receiveid4);
-		divparent.children('span:eq(3)').children().text('已讀');
+
+		$('[name="receiver2"]').text($('[name="receiver1'+dataid+'"]').text());
+		$('[name="sender2"]').text($('[name="sender1'+dataid+'"]').text());
+		$('[name="btndetail2"]').text("主旨: "+$('[data-name="btndetail'+dataid+'"]').text());
+		$('[name="content2"]').text($('[name="content1'+dataid+'"]').text());
+		$('[name="readornot'+dataid+'"]').text('已讀');
+// 		divparent.children('span:eq(4)').children().text('已讀');
 	})
 	
 	
