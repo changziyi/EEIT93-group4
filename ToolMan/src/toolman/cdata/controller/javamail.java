@@ -1,5 +1,6 @@
 package toolman.cdata.controller;
 
+import java.io.UnsupportedEncodingException;
 import java.util.Properties;
 
 import javax.mail.Authenticator;
@@ -35,18 +36,26 @@ public class javamail{
 				return new PasswordAuthentication(username, password);
 			}
 		});
-
+		 StringBuilder str = new StringBuilder();
+		 System.out.println();
 		try {
-			Message message = new MimeMessage(session);
-			message.setFrom(new InternetAddress(username));
+			MimeMessage message = new MimeMessage(session);
+			try {
+				message.setFrom(new InternetAddress(username,"Toolman"));
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			}
 			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("Eeit93401@gmail.com"));
-			message.setSubject("ToolMan 找師傅 忘記密碼!! ");
-			message.setText("Dear Levin, \n\n 測試 測試 測試 測試 測試 測試 email !");
-
+			message.setSubject("ToolMan找師傅   忘記密碼!! ","UTF-8");
+			str.append("<br>要使用新的密碼, 請點選下列網址密碼<br>");
+			str.append("<br>http://tool.southeastasia.cloudapp.azure.com:8081/ToolMan/cdata/updatepassword <br>");
+//			message.setText("Dear Levin, \n\n 測試 測試 測試 測試 測試 測試 email !","UTF-8");
+//			str.append("<br>http://localhost:8081/ToolMan/cdata/updatepassword.jsp<br>"); //test
+			message.setContent(str.toString(),"text/html;charset=UTF-8");
 			Transport transport = session.getTransport("smtp");
 			transport.connect(host, port, username, password);
 
-			Transport.send(message);
+			Transport.send(message);//送信
 			System.out.println("寄送email結束....");
 
 		} catch (MessagingException e) {

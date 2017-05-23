@@ -123,6 +123,7 @@ body {
 	top:16px;
 }
 
+
 </style>
 
 </head>
@@ -133,7 +134,7 @@ body {
 	<div class="container">
 		<div class="row ">
 			<form class="form-signin mg-btm"action="<c:url value='/LoginServlet' />" method="POST">
-				<h3 class="heading-desc" style="text-align:center">
+				<h3 class="heading-desc mar" style="text-align:center">
 					會員登入
 				</h3>
 				<div class="social-box" style="bottom:30px;">

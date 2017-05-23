@@ -15,12 +15,57 @@
  <script src="${pageContext.servletContext.contextPath}/sweetalart/sweetalert.min.js"></script>
 <link rel="stylesheet" href="${pageContext.servletContext.contextPath}/sweetalart/sweetalert.css">
 
+<style>
+.form-signin {
+	max-width: 400px;
+	display: block;
+	background-color: #ccffff;
+	-moz-box-shadow: 0 0 3px 3px #888;
+	-webkit-box-shadow: 0 0 3px 3px #888;
+	box-shadow: 0 0 3px 3px #888;
+	border-radius: 20px;
+	border: 5px double #3399ff;
+	margin:160px auto ;
+	
+}
+
+h3 {
+	font-family: Microsoft JhengHei;
+	font-weight: bold;
+	font-size: 35px;
+	color: #357EBD;
+}
+
+.heading-desc {
+	font-size: 33px;
+	font-weight: bold;
+	padding: -50px;
+}
+
+.button-block {
+	width: 50%;
+}
+
+.button {
+	font-size: 20px;
+	width: 100px;
+	height: 50px;
+}
+
+.cen {
+	margin: 10px auto;
+	text-align: center;
+}
+</style>
+
+
+
 </head>
 <body>
-  <div class="form">  
+  <div class="form form-signin">  
       <div class="tab-content">
         <div id="signup">   
-          <h1 style="color:#357EBD; font-size: 33px;">註冊</h1>          
+          <h3 class="heading-desc" style="text-align: center">註冊</h3>          
     <form action="<c:url value='/cdata/Cdata.do'/>" method="POST">            
           <div class="field-wrap" >
             <input type="text" style="background-color:#ffffff;"  name="id" autocomplete="off" placeholder="帳號*"  autocomplete="off" autofocus>
@@ -79,7 +124,8 @@
 	            <label id="v" style="left:330px;" class="errormg">${errorMsgs.errorverify}</label>
 	             <label id="v" style="left:160px; color:red; font-size: 16px; margin-top:3px;" >${errorMsgs.account}</label>           
           </div>
-          <div style="margin-top:40px;">                              
+          <div style="margin-top:40px;">
+                                
           	<button type="submit" id="register" class="button button-block" >註冊</button>
           	<input type="hidden" name="action" value=""> 
           </div>
@@ -88,10 +134,11 @@
           </div> 
           </form>
         </div>
+      
 <!--    -->
         <div id="login"></div>        
       </div><!-- tab-content -->   
-</div> <!-- /form -->
+ <!-- /form -->
 
 
 
