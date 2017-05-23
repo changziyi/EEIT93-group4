@@ -93,7 +93,7 @@ h3 {
 	<script
 		src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 	<script>
-<<<<<<< HEAD
+	
 	$(function(){
 		$("#sweetalart").click(function(){
 			swal("成功!", "已將重新設定密碼的連結寄出請至E-mail信箱收取信件。", "success")
@@ -106,13 +106,6 @@ h3 {
 			
 // 		}
 	
-=======
-		$(function() {
-			$("#sweetalart").click(function() {
-				swal("成功!", "已將重新設定密碼的連結寄出請至E-mail信箱收取信件。", "success")
-			});
-		})
->>>>>>> branch 'master' of https://github.com/changziyi/EEIT93-group4.git
 	</script>
 	<script
 		src="${pageContext.servletContext.contextPath}/js/login/index.js"></script>
