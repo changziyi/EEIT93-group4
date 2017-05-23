@@ -52,7 +52,7 @@
 		.desarea {}
 		.disdes {width:70%;padding:1.3%;margin-bottom:0.5%;font-size:15px;font-family:Microsoft JhengHei;}
 		.replyarea {}
-		.disreply {width:62%;padding:1.3%;margin-left:8%;border-width:1.5px;border-color:#00BFFF;font-size:15px;font-family:Microsoft JhengHei;background-color:#E0FFFF}
+		.disreply {width:64%;padding:1.3%;margin-left:6%;border-width:1.5px;border-color:#00BFFF;font-size:15px;font-family:Microsoft JhengHei;}
 		.cid {width:25%;height:30px;padding-left:2%;padding-top:0.5%;background-color:#00BFFF;font-weight:bold;color:white;border-top-left-radius:10px;border-top-right-radius:10px}
 		.commentdiv {margin-top:2.5%;margin-left:12%;}
 		.masterreply {width:50%;height:10%}
@@ -193,7 +193,7 @@
         		        			<c:forEach var="empVO" items="${myHate}">
         			<c:if test="${empVO.mdataVO.m_id == mdataVO.m_id && empVO.cdataVO.c_id == LoginOK.c_id}">
         			<div class="alert alert-danger" style="font-size:24px">
-    <strong>注意!</strong> 此人是黑名單人物
+    <strong>警告!</strong> 此人是黑名單人物
   </div>
         			</c:if>
         			</c:forEach>
@@ -231,7 +231,7 @@
 <!-- 				</form> -->
 				
 <!-- 				<button type="button" class="btn btn-info btn" data-toggle="modal" data-target="#workpopup">新增作品</button> -->
-				<a class="btn btn-info btn" data-toggle="modal" data-target="#workpopup" style="margin-top:2%">
+				<a class="btn btn-info btn" data-toggle="modal" data-target="#workpopup">
           			<span class="glyphicon glyphicon-plus"></span> 新增作品
           		</a>
           		
@@ -256,10 +256,10 @@
 										<td>作品名稱</td>
 										<td><input type="text" class="form-control" name="workname" required></td>
 									</tr>
-<!-- 									<tr> -->
-<!-- 										<td>作品描述</td> -->
-<!-- 										<td><textarea name="workdes" class="form-control" id="workdes"></textarea></td> -->
-<!-- 									</tr> -->
+									<tr>
+										<td>作品描述</td>
+										<td><textarea name="workdes" class="form-control" id="workdes"></textarea></td>
+									</tr>
 <!-- 									<div><input type="file" id="file" name="file[]" multiple="multiple"></div> -->
 <!-- 									<div class="workImgArea">作品名稱　<input type="text" name="workname" required></div> -->
 <!-- 									<div class="workImgArea">作品描述　<textarea name="workdes" id="workdes"></textarea></div> -->
@@ -282,26 +282,31 @@
 	          	</div>
           	</c:if>
 			
-			<div class="modal-dialog">
-				<c:forEach var="aWork" items="${mdataVO.works}">
-					<div class="modal-content aWork" style="box-shadow:0px 0px 0px; width:160%; margin-left:-30%; margin-top:2%">
-						<div class="modal-header">
-							<c:if test="${LoginOK.m_id == mdataVO.m_id}">
-								<a class="btn btn-danger deleteworkim" id="deleteworkim"><span class="glyphicon glyphicon-trash"></span> 刪除</a>
-							</c:if>
-							${aWork.work_name}
-							<input type="hidden" name="action" value="deleteworkim">
-							<input type="hidden" name="work_id" value="${aWork.work_id}">
-						</div>
-						<div class="modal-body">
-							<c:forEach var="a" items="${aWork.workims}">
-								<img width="304" height="236" class="img-thumbnail workimsize" src='${pageContext.servletContext.contextPath}/master/master.do?type=work&image=${a.im_id}'/>
-							</c:forEach>
-						</div>
-					</div>
+			<div class="form-group workdiv">
+				<table class="table worktable">
+					<c:forEach var="aWork" items="${mdataVO.works}">
+						<tr class="bg-info aWork">
+							<td>
+								<c:if test="${LoginOK.m_id == mdataVO.m_id}">
+									<a class="btn btn-danger deleteworkim" id="deleteworkim"><span class="glyphicon glyphicon-trash"></span> 刪除</a>
+	<!-- 							<button type="button" class="btn btn-danger deleteworkim" id="deleteworkim"> 刪除</button> -->
+								</c:if>
+								${aWork.work_name}
+								${aWork.work_des}
+								<input type="hidden" name="action" value="deleteworkim">
+								<input type="hidden" name="work_id" value="${aWork.work_id}">
+							</td>
+						</tr>
+						<tr class="aWork">
+							<td>
+								<c:forEach var="a" items="${aWork.workims}">
+									<img width="304" height="236" class="img-thumbnail workimsize" src='${pageContext.servletContext.contextPath}/master/master.do?type=work&image=${a.im_id}'/>
+								</c:forEach>
+							</td>
+						</tr>
 				</c:forEach>
+				</table>
 			</div>
-
 		</div>
 		
 		<div id="menu2" class="tab-pane fade">
@@ -680,7 +685,7 @@
 						workname.val(null);
 						workdes.val(null);
 // 						location.reload();
-						myDiv.html('<div class="alert alert-success" role="alert" id="alertupload"><strong>新增作品成功！請重新回到我的店家</strong></div>');
+						myDiv.html('<div class="alert alert-success" role="alert" id="alertupload"><strong>新增作品成功!</strong></div>');
 // 						
 // 						$('.workdiv').empty();
 						

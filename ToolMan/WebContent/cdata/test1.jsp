@@ -107,14 +107,13 @@ tbody td:hover {
 </style>
 <body>
 <jsp:include page="/nav/navigation.jsp" />
-<div style="margin-top: 10px;">
+<div style="margin-top: 90px;">
 	<div class="container">	
 		<div class="page-header">
 			<div class="row"></div>
 		<div class="cdata_box"> <!--member big model -->
 		<!----------------------- 會員資料 ---------------------->
 		<div>
-		<img height="30px" src='${pageContext.servletContext.contextPath}/image/btn_member.jpg'/>
 		<label>  會員資料</label>
 		<table class="manber-table">
 			<thead>			

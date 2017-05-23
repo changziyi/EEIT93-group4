@@ -760,9 +760,9 @@ $(function(){
 						'<button type="button" class="btn btn-primary dropdown-toggle" style="width:130px;height:50px;font-size:20px;" data-toggle="dropdown"aria-haspopup="true" aria-expanded="false">狀態<span class="caret"></span></button>';
 			var dropdownmenucontentstate=
 						'<li data-statusvalue="allreport" data-buttonstate="selected" name="datastatus"><a href="#">所有檢舉</a></li><li role="separator" class="divider"></li>'
-						+'<li data-statusvalue="進行中" name="datastatus"><a href="#">未解決</a></li><li role="separator" class="divider"></li>'
-						+'<li data-statusvalue="已刪除" name="datastatus"><a href="#">已解決</a></li><li role="separator" class="divider"></li>'
-						+'<li data-statusvalue="一方未評分" name="datastatus"><a href="#">已刪除</a></li><li role="separator" class="divider"></li>';						
+						+'<li data-statusvalue="未解決" name="datastatus"><a href="#">未解決</a></li><li role="separator" class="divider"></li>'
+						+'<li data-statusvalue="已解決" name="datastatus"><a href="#">已解決</a></li><li role="separator" class="divider"></li>'
+						+'<li data-statusvalue="已刪除" name="datastatus"><a href="#">已刪除</a></li><li role="separator" class="divider"></li>';						
 			var dropdownmenustate = '<ul class="dropdown-menu">'+dropdownmenucontentstate +'</ul>';
 			var buttongroupdivend ='</div>';
 			var reportstatus = buttongroupdiv+dropdowntitlestate+dropdownmenustate+buttongroupdivend;		
@@ -778,9 +778,9 @@ $(function(){
 						'<button type="button" class="btn btn-primary dropdown-toggle" style="width:130px;height:50px;font-size:20px;" data-toggle="dropdown"aria-haspopup="true" aria-expanded="false">狀態<span class="caret"></span></button>';
 			var dropdownmenucontentstate=
 						'<li data-statusvalue="allad" data-buttonstate="selected"  name="datastatus"><a href="#">所有廣告</a></li><li role="separator" class="divider"></li>'
-						+'<li data-statusvalue="已結束" name="datastatus"><a href="#">尚未進行</a></li><li role="separator" class="divider"></li>'
+						+'<li data-statusvalue="尚未進行" name="datastatus"><a href="#">尚未進行</a></li><li role="separator" class="divider"></li>'
 						+'<li data-statusvalue="進行中" name="datastatus"><a href="#">進行中</a></li><li role="separator" class="divider"></li>'
-						+'<li data-statusvalue="已結束" name="datastatus"><a href="#">已中止</a></li><li role="separator" class="divider"></li>';
+						+'<li data-statusvalue="已中止" name="datastatus"><a href="#">已中止</a></li><li role="separator" class="divider"></li>';
 												
 			var dropdownmenustate = '<ul class="dropdown-menu">'+dropdownmenucontentstate +'</ul>';
 			var buttongroupdivend ='</div>';
