@@ -55,7 +55,12 @@ public class LoginServlet extends HttpServlet {
 				+ "::Captcha Verify"+verify);		
 
 		CdataService cs = new CdataService();
-		CdataVO  cdataVO = cs.login_in(c_id, c_pwd);		
+		CdataVO  cdataVO = cs.login_in(c_id, c_pwd);
+		//停權中
+		if("停權中".equals(cdataVO.getS_name())){
+			errorMsgs.put("suspended", "您的帳戶已遭停權");
+		}
+		
 		//cross-database
         if (cdataVO != null && c_id.equals(cdataVO.getC_id()) 
         		&& c_pwd.equals(cdataVO.getC_pwd())){
