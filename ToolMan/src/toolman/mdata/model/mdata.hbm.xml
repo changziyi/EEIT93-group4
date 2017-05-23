@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="toolman.mdata.model.MdataVO" table="mdata">
+
+		<id name="m_id" column="m_id">
+			<generator class="identity"/>
+		</id>
+
+		<property name="m_name" column="m_name" />
+		<property name="b_name" column="b_name" />
+		<property name="m_cel" column="m_cel" />
+		<property name="m_email" column="m_email" />
+		<property name="m_city" column="m_city" />
+		<property name="m_district" column="m_district" />
+		<property name="m_addr" column="m_addr" />
+		<property name="m_jdate" column="m_jdate" />
+		<property name="m_arating" column="m_arating" />
+		<property name="o_finished" column="o_finished" />
+		<property name="o_current" column="o_current" />
+		<property name="s_name" column="s_name" />
+		<property name="b_image" column="b_image" />
+		<property name="b_des" column="b_des" />
+		<property name="sa_mnote" column="sa_mnote" />
+		<property name="m_cer" column="m_cer" />
+		
+<!-- 		//by benny master status -->
+<!-- 		<many-to-one name="s_name" class="toolman.sname.model.SnameVO" lazy="false"> -->
+<!--             <column name="s_name" /> -->
+<!--         </many-to-one> -->
+		
+		<!--師父1-專業*-->
+		<set name="mpros" table="mpro" lazy="false" cascade="all" inverse="true" order-by="m_proid asc">			
+			<key>
+				<column name="m_id" />
+			</key>
+			<one-to-many class="toolman.mpro.model.MProVO" />
+		</set>
+		
+		<!--師父1-作品*-->
+		<set name="works" table="work" lazy="false" cascade="all" inverse="true" order-by="work_id asc">			
+			<key>
+				<column name="m_id" />
+			</key>
+			<one-to-many class="toolman.work.model.WorkVO" />
+		</set>
+		
+		<!--師父1-問與答*-->
+		<set name="discussions" table="discussion" lazy="false" cascade="all" inverse="true" order-by="d_id asc">			
+			<key>
+				<column name="m_id" />
+			</key>
+			<one-to-many class="toolman.discussion.model.DiscussionVO" />
+		</set>
+		
+		<!-- added by benny -->
+		<set name="orders" table="ord" lazy="false" cascade="all" inverse="true" order-by="o_id asc">			
+			<key>
+				<column name="m_id" />
+			</key>
+			<one-to-many class="toolman.order.model.OrderVO" />
+		</set>
+		
+		
+
+<set name="favorites" table="favorite" lazy="false" cascade="all"  inverse="true"  order-by="f_id asc">																						
+			<key>
+				<column name="m_id" />
+			</key>
+			<one-to-many class="toolman.favorite.model.FavoriteVO" />
+		</set>		
+
+<set name="blacklists" table="blacklist" lazy="false" cascade="all"  inverse="true"  order-by="bk_id asc">																						
+			<key>
+				<column name="m_id" />
+			</key>
+			<one-to-many class="toolman.blacklist.model.BlacklistVO" />
+			</set>	
+ 
+
+	</class>
+</hibernate-mapping>
+
