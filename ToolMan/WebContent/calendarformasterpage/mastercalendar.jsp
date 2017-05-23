@@ -35,6 +35,10 @@
 <%-- 	</c:if> --%>
 
 <!-- login please -->
+<!-------------------- sweetalert---------- -->
+<script src="${pageContext.servletContext.contextPath}/js/sweetalert/sweetalert.min.js"></script>
+<link rel="stylesheet" type="text/css" href="${pageContext.servletContext.contextPath}/js/sweetalert/sweetalert.css">
+<!--------------------end sweetalert---------- -->
 	
 	<style>
 	
@@ -328,7 +332,8 @@ var eventidglobe =null;
 		console.log($('#calendar').fullCalendar('clientEvents').toString());
 // 		console.log(calendarjson);
 		$.post('${pageContext.servletContext.contextPath}/toolman.calendar/CalendarController.do',{'calendarjson':calendarjson}, function(data){
-			alert("ok");
+			
+			swal("ok");
 		 });//end post
 		
 	}//end calendarsubmit
@@ -482,7 +487,7 @@ var eventidglobe =null;
 						 
 					    alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
 // 					    if( ( 130<= jsEvent.pageX)  && (jsEvent.pageX <= 230) &&(700 <= jsEvent.pageY)&& (jsEvent.pageY <=840))
-					if( ( 1270<= jsEvent.pageX)  || (jsEvent.pageX <= 170) ||(928 <= jsEvent.pageY)|| (jsEvent.pageY <=160)){
+					if( ( 1300<= jsEvent.pageX)  || (jsEvent.pageX <= 370) ||(780 <= jsEvent.pageY)|| (jsEvent.pageY <=130)){
 					      alert('delete: '+ event.id);
 					      $('#calendar').fullCalendar('removeEvents', event.id);
 					    }

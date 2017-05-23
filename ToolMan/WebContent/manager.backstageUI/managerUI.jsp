@@ -21,39 +21,40 @@
 	
 <!-- bootstrap -->
 <!-- datatable-->
-	<script src="../js/datatable/datatable/jquery.dataTables.min.js"></script>
-	<script src="../js/datatable/jszip/jszip.min.js"></script>
-	<script src="../js/datatable/pdf/pdfmake.min.js"></script>
-<!-- 	<script src="../js/datatable/button/buttons.html5.min.js"></script> -->
-<!-- 	<script src="../js/datatable/button/dataTables.buttons.min.js"></script> -->
-<!-- 	<script src="../js/datatable/datatable/buttons.bootstrap.min.js"></script> -->
-	<script src="../js/datatable/datatable/jquery.dataTables.min.js"></script>
-	<script src="../js/datatable/datatable/dataTables.bootstrap.min.js"></script>
-<!-- 	<script src="../js/datatable/fixedheader/dataTables.fixedHeader.min.js"></script> -->
-	<script src="../js/datatable/responsive/dataTables.responsive.min.js"></script>
-	<script src="../js/datatable/responsive/responsive.bootstrap.min.js"></script>
-	<script src="../js/datatable/select/dataTables.select.min.js"></script>
-	<link rel="stylesheet" href="../js/datatable/button/buttons.dataTables.min.css">
-	<link rel="stylesheet" href="../js/datatable/button/buttons.bootstrap.min.css">
-<!-- 	<link rel="stylesheet" href="../js/datatable/datatable/jquery.dataTables.min.css">	 -->
-	<link rel="stylesheet" href="../js/datatable/datatable/dataTables.bootstrap.min.css">
-<!-- 	<link rel="stylesheet" href="../js/datatable/fixedheader/fixedHeader.bootstrap.min.css"> -->
-<!-- 	<link rel="stylesheet" href="../js/datatable/key/keyTable.bootstrap.min.css"> -->
-<!-- 	<link rel="stylesheet" href="../js/datatable/responsive/responsive.dataTables.min.css"> -->
-	<link rel="stylesheet" href="../js/datatable/responsive/responsive.bootstrap.min.css">
-	<link rel="stylesheet" href="../js/datatable/select/select.foundation.min.css">
+	<script src="${pageContext.servletContext.contextPath}/js/datatable/datatable/jquery.dataTables.min.js"></script>
+	<script src="${pageContext.servletContext.contextPath}/js/datatable/jszip/jszip.min.js"></script>
+	<script src="${pageContext.servletContext.contextPath}/js/datatable/pdf/pdfmake.min.js"></script>
+<!-- 	<script src="${pageContext.servletContext.contextPath}/js/datatable/button/buttons.html5.min.js"></script> -->
+<!-- 	<script src="${pageContext.servletContext.contextPath}/js/datatable/button/dataTables.buttons.min.js"></script> -->
+<!-- 	<script src="${pageContext.servletContext.contextPath}/js/datatable/datatable/buttons.bootstrap.min.js"></script> -->
+	<script src="${pageContext.servletContext.contextPath}/js/datatable/datatable/jquery.dataTables.min.js"></script>
+	<script src="${pageContext.servletContext.contextPath}/js/datatable/datatable/dataTables.bootstrap.min.js"></script>
+<!-- 	<script src="${pageContext.servletContext.contextPath}/js/datatable/fixedheader/dataTables.fixedHeader.min.js"></script> -->
+	<script src="${pageContext.servletContext.contextPath}/js/datatable/responsive/dataTables.responsive.min.js"></script>
+	<script src="${pageContext.servletContext.contextPath}/js/datatable/responsive/responsive.bootstrap.min.js"></script>
+	<script src="${pageContext.servletContext.contextPath}/js/datatable/select/dataTables.select.min.js"></script>
+	<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/js/datatable/button/buttons.dataTables.min.css">
+	<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/js/datatable/button/buttons.bootstrap.min.css">
+<!-- 	<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/js/datatable/datatable/jquery.dataTables.min.css">	 -->
+	<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/js/datatable/datatable/dataTables.bootstrap.min.css">
+<!-- 	<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/js/datatable/fixedheader/fixedHeader.bootstrap.min.css"> -->
+<!-- 	<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/js/datatable/key/keyTable.bootstrap.min.css"> -->
+<!-- 	<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/js/datatable/responsive/responsive.dataTables.min.css"> -->
+	<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/js/datatable/responsive/responsive.bootstrap.min.css">
+	<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/js/datatable/select/select.foundation.min.css">
 <!------------------------ flatui ------------------------------>	
-	<link rel="stylesheet" href="../js/flatui/dist/css/flat-ui.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/js/flatui/dist/css/flat-ui.min.css" rel="stylesheet">
 <!-- --------when open js, the filtering won't work ----------------->
 <%-- 	<script src="${pageContext.servletContext.contextPath}/js/flatui/dist/js/flat-ui.min.js"></script> --%>
 
 <!-------------------- navigation for this application---------- -->
 <link rel="stylesheet" href="${pageContext.servletContext.contextPath}/nav/nav.css">
 
-<!-------------------------------- chart----------------- -->
-<script src="https://code.highcharts.com/highcharts.js"></script>
-<script src="https://code.highcharts.com/modules/exporting.js"></script>
-<!--------------------------------end chart----------------- -->	
+<!-------------------- sweetalert---------- -->
+<script src="${pageContext.servletContext.contextPath}/js/sweetalert/sweetalert.min.js"></script>
+<link rel="stylesheet" type="text/css" href="${pageContext.servletContext.contextPath}/js/sweetalert/sweetalert.css">
+<!--------------------end sweetalert---------- -->
+	
 <style>
 /* ---------------------charts------------------------ */
 #charts {
@@ -318,42 +319,43 @@
 						<div class="form-group">
 							<table class="table table-hover">
 								<tr>
-									<td class="form-control-label">首頁圖片</td>
+									<td class="form-control-label" style="width:100px;">首頁圖片</td>
 									<td ><div><img id="m_cer" class="img-thumbnail" width="350px" src=""></div>
 								</tr>
 								<tr style="vertical-align:middle;margin:auto">
-									<td class="form-control-label">店家名稱</td>
-									<td style="margin-top:10px;width:500px;height:50px;" id="bname"  class="form-control"></td>
+									<td class="form-control-label" style="padding-top:16px;width:100px;">店家名稱</td>
+									<td style="margin-top:10px;width:300px;height:50px;" id="bname"  class="form-control"></td>
 								</tr>
 								<tr>
-									<td class="form-control-label">店家介紹</td>
-									<td style="margin-top:10px;width:500px;height:50px;" id="bdes" class="form-control"></td>
+									<td class="form-control-label" style="padding-top:16px;width:100px;">店家介紹</td>
+									<td style="margin-top:10px;width:300px;height:50px;" id="bdes" class="form-control"></td>
 								</tr>
 								<tr>
-									<td class="form-control-label">師傅姓名</td>
-									<td id="mname" style="margin-top:10px;width:500px;height:50px;" class="form-control"></td>
+									<td class="form-control-label" style="padding-top:16px;width:100px;">師傅姓名</td>
+									<td id="mname" style="margin-top:10px;width:300px;height:50px;" class="form-control"></td>
 								</tr>
 								<tr>
-									<td class="form-control-label">電話</td>
-									<td id="mtel" style="margin-top:10px;width:500px;height:50px;" class="form-control"></td>
+									<td class="form-control-label" style="padding-top:16px;width:100px;">電話</td>
+									<td id="mtel" style="margin-top:10px;width:300px;height:50px;" class="form-control"></td>
 								</tr>
 								<tr>
-									<td class="form-control-label">信箱</td>
-									<td id="mmail" style="margin-top:10px;width:500px;height:50px;" class="form-control"></td>
+									<td class="form-control-label" style="padding-top:16px;width:100px;">信箱</td>
+									<td id="mmail" style="margin-top:10px;width:300px;height:50px;" class="form-control"></td>
 								</tr>
 								<tr>
-									<td class="form-control-label">地址</td>
-									<td id="maddr" style="margin-top:10px;width:500px;height:50px;" class="form-control">$</td>
+									<td class="form-control-label" style="padding-top:16px;width:100px;">地址</td>
+									<td id="maddr" style="margin-top:10px;width:300px;height:50px;" class="form-control">$</td>
 								</tr>
 								<tr>
-									<td class="form-control-label">維修類別</td>
-									<td id="mpros" style="margin-top:10px;width:500px;height:50px;" class="form-control"><c:forEach var="aMpro" items="${cdata_mdataVO.mpros}"></c:forEach></td>
+									<td class="form-control-label" style="padding-top:16px;width:100px;">維修類別</td>
+									<td id="mpros" style="margin-top:10px;width:300px;height:50px;" class="form-control"><c:forEach var="aMpro" items="${cdata_mdataVO.mpros}"></c:forEach></td>
 								</tr>
 								<tr>
-									<td class="form-control-label">專業證照</td>
+									<td class="form-control-label" style="padding-top:16px;width:100px;">專業證照</td>
 									<td ><div ><img id="m_cer2" class="img-thumbnail" height="300px" src=""></div>
 								</tr>
 							</table>
+							<label>審核未過之訊息</label>
 							<div><textarea id="notpassword"></textarea></div>
 						</div>
 						
@@ -534,7 +536,7 @@ $(function(){
 		     		mailtype = $(this).data('mailtype');
 		         }) 
 		         if((checkboxdatasmaster.toString()=="")||(checkboxdatacustomer.toString()=="")){
-	 	     		 	alert("請勾選項目");
+		        	 swal("請勾選項目");
 	 	     	 }//end if
 	 	     	else{
 	 	     		var unbind=false;
@@ -577,7 +579,7 @@ $(function(){
          	   	mailtype = $(this).data('mailtype');
          	});//end each        
      	 	if(checkboxdatas.toString()==""){
-     	     		 alert("請勾選項目");
+     	 		swal("請勾選項目");
      	     	 }//end if
      	 else{
 					$('#receiver').val(checkboxdatas.toString()).text(checkboxdatas.toString());
@@ -610,10 +612,10 @@ $(function(){
 // 				var ajaxparam = "functionaction="+nameattr+"&notevalue="+valueattrr+"&noteid="+noteid;
         		//         		var hyperlinkparameter = "functionaction="+valueattrr+"&+toggledcheckbox="+checkboxdatas2;
 //        	 	var hyperlinkstringwithparameter=hyperlinkstring+hyperlinkparameter;
-      	$.post(hyperlinkstring,{"functionaction":nameattr,"notevalue":valueattrr,"noteid":noteid},function(data,status){alert(data)} )//end get function
+      	 $.post(hyperlinkstring,{"functionaction":nameattr,"notevalue":valueattrr,"noteid":noteid},function(data,status){} )//end get function
 // 		 	$('#eventlist').dataTable().fnDestroy();//in datatable initialization  use destory= true is better
 // 			$('#eventlist').empty();//in datatable initialization use destory= true is better
-		loadProduct(navagatorid,datastatus,datatime)
+		$.when(updatenote).done(loadProduct(navagatorid,datastatus,datatime)).done(loadProduct(navagatorid,datastatus,datatime));
 //       			loadajax(ajaxurl,ajaxparam);
 //       			//assign the parameter to loadproduct or the code return nothing
 //       			loadProduct(navagatorid,datastatus,datatime);
@@ -627,19 +629,19 @@ $(function(){
  	            xhr.open('GET',ajaxurl+ajaxparam);
  				xhr.send();	
  			}else{
- 				alert("您的瀏覽器不支援Ajax功能!!");
+ 				swal("您的瀏覽器不支援Ajax功能!!");
  			}	
  		}
  		function callbackajax(){
  			if(xhr.readyState == 4){
  				if(xhr.status == 200){			
  	                var data = xhr.responseText;
- 					alert(data);
+ 					
  					console.log(data);
  					loadProduct(navagatorid,datastatus,datatime);
  					
  				}else{
- 					alert(xhr.status + ":" + xhr.statusText);
+ 					swal(xhr.status + ":" + xhr.statusText);
  				}
  			}					
  			
@@ -835,7 +837,7 @@ $(function(){
 	            })
 	            checkboxdatas2=checkboxdatas.toString();
 	            if(checkboxdatas2==""){
-	        		 alert("請勾選項目");
+	            	swal("請勾選項目");
 	        	 }//end if
 	        	 else{
 	                	var valueattrr=$(this).attr('value');//retrieve the value from functinaction
@@ -871,7 +873,7 @@ $(function(){
 		function mpass(){
 			var hyperlinkstring = "${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIFunctionServlet.do";
 			$.post(hyperlinkstring,{"functionaction":"mpass","toggledcheckbox":checkboxdatas2},function(data){
-				alert(data);
+				swal("審核完成");
 				 $('#mpass1').unbind('click');
 				 $('#mnotpass').unbind('click');
 				 loadProduct(navagatorid,datastatus,datatime);
@@ -883,7 +885,7 @@ $(function(){
 			var hyperlinkstring = "${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIFunctionServlet.do";
 			var notpassword = $('#notpassword').val();
 			$.post(hyperlinkstring,{"functionaction":"mnotpass","toggledcheckbox":checkboxdatas2,"notpassword":notpassword},function(data){
-				alert(data);
+				swal("已退回申請");
 				$('#mnotpass').unbind('click');
 				 $('#mpass1').unbind('click');
 				loadProduct(navagatorid,datastatus,datatime);
@@ -991,7 +993,7 @@ $(function(){
 	            })
 	            var checkboxdatas2=checkboxdatas.toString();
 	            if(checkboxdatas2==""){
-	        		 alert("請勾選項目");
+	            	swal("請勾選項目");
 	        	 }//end if
 	        	 else{
 	        	   var hyperlinkstring = "${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIFunctionServlet.do?";
@@ -1017,7 +1019,7 @@ $(function(){
             
             var checkboxdatas2=checkboxdatas.toString();
         	 if(checkboxdatas2==""){
-        		 alert("請勾選項目");
+        		 swal("請勾選項目");
         	 }//end if
         	 else{
            	var valueattrr=$(this).attr('value');//retrieve the value from functinaction
