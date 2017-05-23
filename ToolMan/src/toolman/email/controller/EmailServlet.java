@@ -174,7 +174,7 @@ public class EmailServlet extends HttpServlet {
 			 req.setAttribute("emailVO", emailVO);
 			RequestDispatcher failureView = req.getRequestDispatcher("/email/Email.jsp");
 			failureView.forward(req, res);
-			return;		
+
 		}
 		
 		//之前因為如果有輸入null會讓管理者後端無法出現兩次，所以判斷來源為管理者後端就不處理。

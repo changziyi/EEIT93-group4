@@ -337,9 +337,9 @@
 			</div>
 		</div>
 		<div id="menu3" class="tab-pane fade">
-				<div class="ratstardiv">
-					<input id="input-3" name="input-3" value="${mdataVO.m_arating}" class="rating-loading">
-				</div>
+<!-- 				<div class="ratstardiv"> -->
+<%-- 					<input id="input-3" name="input-3" value="${mdataVO.m_arating}" class="rating-loading"> --%>
+<!-- 				</div> -->
 				
 				<div class="ratediv">
 					<c:if test="${not empty mdataVO.orders}">
@@ -366,7 +366,7 @@
 						</table>
 					</c:if>
 					<c:if test="${empty mdataVO.orders}">
-						<h3 style="margin-top:1%; margin-bottom:8%; margin-left:25%">目前尚無評價</h3>
+						<h3 style="margin-top:8%; margin-bottom:8%; margin-left:25%">目前尚無評價</h3>
 					</c:if>
 				</div>
 		</div>

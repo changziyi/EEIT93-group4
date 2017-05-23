@@ -142,11 +142,35 @@
 				processData : false,
 				type : 'POST',
 					success : function(reutrnData) {
-						$(location).attr('href','MasterPage.jsp');
+						$(location).attr('href','MasterPageVerifying.jsp');
 					}
 			});
 		});
-	
+		
+		$('input[name="m_cer"]').on('change', function(event) {
+			if (this.files && this.files[0]) {
+				var reader = new FileReader();
+				reader.onload = function(e) {
+					$('#m_cer').attr({
+						'src' : e.target.result,
+					});
+				}
+				reader.readAsDataURL(this.files[0]);
+			}
+		});
+		
+		$('input[name="b_image"]').on('change', function(event) {
+			if (this.files && this.files[0]) {
+				var reader = new FileReader();
+				reader.onload = function(e) {
+					$('#b_image').attr({
+						'src' : e.target.result,
+					});
+				}
+				reader.readAsDataURL(this.files[0]);
+			}
+		});
+		
 		var hpros = $('input[name="hidpro"]');
 	
 		$.each(hpros, function() {
