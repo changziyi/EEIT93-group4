@@ -109,8 +109,6 @@ margin : 0px auto ;
 							<button class="btn btn-primary" data-toggle="modal" id="selectbtn"
 						data-target="#clickSummary" data-id="${emailVO.ms_id}">${emailVO.ms_summary}</button>
 								<br> 
-								<span>內容：${emailVO.ms_content}</span>
-								<br> 
 								時間：${emailVO.ms_date}
 								<br> 
 								<span>狀態：<span>${emailVO.s_name == 'true' ? '已讀':'未讀'}</span></span>
