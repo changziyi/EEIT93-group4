@@ -1,9 +1,13 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="toolman.cdata.model.*"%>
+
 
 <html>
 
 <head>
+<meta http-equiv="refresh" content="1;url=${pageContext.servletContext.contextPath}/cdata/CdataOrderServlet.do?c_id=${LoginOK.c_id}&action=myLike">
+
 <title>Tool Man</title>
 
 </head>
