@@ -130,7 +130,7 @@ public class EmailDAO implements EmailDAO_interface {
 			pstmt.setString(4, emailVO.getMs_summary());
 			pstmt.setString(5, emailVO.getMs_content());
 			pstmt.setBoolean(6, emailVO.getS_name());
-			pstmt.setBoolean(7, emailVO.getMs_trash());
+			
 			pstmt.executeUpdate();
 
 			// Handle any driver errors
@@ -218,7 +218,7 @@ public class EmailDAO implements EmailDAO_interface {
 				emailVO.setMs_summary(rs.getString("ms_summary"));
 				emailVO.setMs_content(rs.getString("ms_content"));
 				emailVO.setS_name(rs.getBoolean("s_name"));
-				emailVO.setMs_trash(rs.getBoolean("ms_trash"));
+				
 				
 			}
 
@@ -280,7 +280,7 @@ public class EmailDAO implements EmailDAO_interface {
 				emailVO.setMs_summary(rs.getString("ms_summary"));
 				emailVO.setMs_content(rs.getString("ms_content"));
 				emailVO.setS_name(rs.getBoolean("s_name"));
-				emailVO.setMs_trash(rs.getBoolean("ms_trash"));
+				
 
 			}
 
@@ -369,7 +369,7 @@ public class EmailDAO implements EmailDAO_interface {
 				emailVO.setMs_summary(rs.getString("ms_summary"));
 				emailVO.setMs_content(rs.getString("ms_content"));
 				emailVO.setS_name(rs.getBoolean("s_name"));
-				emailVO.setMs_trash(rs.getBoolean("ms_trash"));
+				
 				Onelist.add(emailVO);
 			}
 		} catch (SQLException se) {
@@ -402,7 +402,7 @@ public class EmailDAO implements EmailDAO_interface {
 				emailVO.setMs_summary(rs.getString("ms_summary"));
 				emailVO.setMs_content(rs.getString("ms_content"));
 				emailVO.setS_name(rs.getBoolean("s_name"));
-				emailVO.setMs_trash(rs.getBoolean("ms_trash"));
+				
 				DeleteList.add(emailVO);
 			}
 		} catch (SQLException se) {

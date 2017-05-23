@@ -1,26 +1,25 @@
-<%@page import="org.hibernate.SessionFactory"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="java.util.*"%>
-<%@ page import="toolman.email.model.*"%>
-<%@ page import="toolman.cdata.model.*"%>
 
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+ 	pageEncoding="UTF-8"%> 
+ <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
+ <%@ page import="java.util.*"%> 
+<%@ page import="toolman.email.model.*"%> 
+<%@ page import="toolman.cdata.model.*"%> 
 <%	
 	EmailService emailSvc = new EmailService();
 	HttpSession sessions = request.getSession();
 	CdataVO cdataVO = (CdataVO)sessions.getAttribute("LoginOK");
 	System.out.println(cdataVO.getC_id());
-	//by Benny
 	List<EmailVO> list = emailSvc.getMail(cdataVO.getC_id());
-
-		pageContext.setAttribute("list", list);
+	pageContext.setAttribute("list", list);
 	
 %>
 
 
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+ 
 <head>
 <link rel="Shortcut Icon" href="${pageContext.servletContext.contextPath}/favicon.ico" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -32,14 +31,14 @@
 	src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
 <script
 	src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"
-	type="text/javascript"></script>
-<script type="text/javascript"
-	src="http://masonry.desandro.com/jquery.masonry.min.js"></script>
+<!-- <script -->
+<!-- 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" -->
+<!-- 	type="text/javascript"></script> -->
+<!-- <script type="text/javascript" -->
+<!-- 	src="http://masonry.desandro.com/jquery.masonry.min.js"></script> -->
 
-<script
-	src="${pageContext.servletContext.contextPath}/js/jquery.twzipcode.min.js"></script>
+<!-- <script -->
+<%-- 	src="${pageContext.servletContext.contextPath}/js/jquery.twzipcode.min.js"></script> --%>
 
 <style>
 .content_box {
@@ -62,19 +61,6 @@
 
 
 </style>
-
-<script>
-	$(function() {
-		$('#emailblock').imagesLoaded(function() {
-			$('#emailblock').masonry({
-				itemSelector : '.content_box',
-				columnWidth : 275,
-				animate : true
-			});
-		});
-	});
-</script>
-
 
 </head>
 <body>
@@ -231,21 +217,31 @@
 	</div>
 	
 	<!------------------------------------ js ---------------------------------------------------->
-	<script type="text/javascript">
-	$('[name="btndetail"]').click(function(){
-		var dataid = $(this).attr('data-id');
-		$.get('Email.do',{
-			'action':'updateisRead',
-			'msid':dataid
-		});
+	<script>
+	$(function() {
+// 		$('#emailblock').imagesLoaded(function() {
+// 			$('#emailblock').masonry({
+// 				itemSelector : '.content_box',
+// 				columnWidth : 275,
+// 				animate : true
+// 			});
+// 		});
+		$('[name="btndetail"]').click(function(){
+			var dataid = $(this).attr('data-id');
+			$.get('Email.do',{
+				'action':'updateisRead',
+				'msid':dataid
+			});
 
-		$('[name="receiver2"]').text($('[name="receiver1'+dataid+'"]').text());
-		$('[name="sender2"]').text($('[name="sender1'+dataid+'"]').text());
-		$('[name="btndetail2"]').text("主旨: "+$('[data-name="btndetail'+dataid+'"]').text());
-		$('[name="content2"]').text($('[name="content1'+dataid+'"]').text());
-		$('[name="readornot'+dataid+'"]').text('已讀');
-// 		divparent.children('span:eq(4)').children().text('已讀');
-	})
+			$('[name="receiver2"]').text($('[name="receiver1'+dataid+'"]').text());
+			$('[name="sender2"]').text($('[name="sender1'+dataid+'"]').text());
+			$('[name="btndetail2"]').text("主旨: "+$('[data-name="btndetail'+dataid+'"]').text());
+			$('[name="content2"]').text($('[name="content1'+dataid+'"]').text());
+			$('[name="readornot'+dataid+'"]').text('已讀');
+//	 		divparent.children('span:eq(4)').children().text('已讀');
+		})
+	});
+	
 	
 	
 	</script>
