@@ -101,7 +101,7 @@ public class managerUIFunctionServlet extends HttpServlet {
 			for(String m_id:arraytoggled){
 				MdataService mdataservice = new MdataService();
 				System.out.println(m_id);
-				MdataVO	mdataVO = mdataservice.findByPrimaryKey(Integer.parseInt("1000"));
+				MdataVO	mdataVO = mdataservice.findByPrimaryKey(Integer.parseInt(m_id));
 				Map map = new HashMap();
 				map.put("bname", mdataVO.getB_name());
 				map.put("bdes", mdataVO.getB_des());
