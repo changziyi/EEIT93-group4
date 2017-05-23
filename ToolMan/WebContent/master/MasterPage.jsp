@@ -193,7 +193,7 @@
         		        			<c:forEach var="empVO" items="${myHate}">
         			<c:if test="${empVO.mdataVO.m_id == mdataVO.m_id && empVO.cdataVO.c_id == LoginOK.c_id}">
         			<div class="alert alert-danger" style="font-size:24px">
-    <strong>警告!</strong> 此人是黑名單人物
+    <strong>注意!</strong> 此人是黑名單人物
   </div>
         			</c:if>
         			</c:forEach>
