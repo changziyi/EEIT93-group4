@@ -303,6 +303,11 @@ $(function(){
 	    };
 	    xhr.send("token="+token);
 	}
+// 	function fblogin(){
+		
+// // 		$.getJSON('https://graph.facebook.com/SOME_ID?fields=statuses.limit(10).fields(message)&access_token=SOME_ACCESS_TOKEN', function(data) {});
+				
+// 	}
 	
 	function Logout() {
 		FB.logout(function(response) {
