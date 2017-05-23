@@ -29,7 +29,7 @@
 </head>
 <style>
 .a {
-	border: 2px solid #66b5ff;
+/* 	border: 2px solid #66b5ff; */
 	margin: 5px 10px ;
 	overflow: hidden;
 	background-color: #cce6ff;
@@ -44,16 +44,15 @@ hr {
 	float: right;
 }
 .cdata_box{
-	width:530px;
+/*  	width:530px;  */
 /* 	height:450px; */
-	border: 1px solid red;
-	background-color:gary;
+/* 	border: 1px solid red; */
+/* 	background-color:gary; */
 	overflow: hidden;
-	float: right;
 	margin:15px 10px 0px 0px;
 }
 .manber-table {
-	width:600px;
+ 	width:1400px; 
 	border-collapse:collapse;
 }
 td,th {
@@ -85,7 +84,7 @@ tbody td:hover {
 	color:	#000000;
 }
 .size{
-	width:120px;
+/* 	width:120px; */
 	height:35px;
 }
 #table1{
@@ -114,8 +113,7 @@ tbody td:hover {
 		<div class="cdata_box"> <!--member big model -->
 		<!----------------------- 會員資料 ---------------------->
 		<div>
-		<img height="30px" src='${pageContext.servletContext.contextPath}/image/btn_member.jpg'/>
-		<label>  會員資料</label>
+		<label> 會員資料</label>
 		<table class="manber-table">
 			<thead>			
 			<tr class="size"><th colspan="2" >會員基本資料</th></tr>
@@ -142,7 +140,7 @@ tbody td:hover {
 			</tbody>
 					<tr class="size">
 						<th colspan="2" >
-							<div style="margin-left:420px;"><button id="create-user">修改</button></div>
+							<div style="margin-left:1050px;"><button id="create-user">修改</button></div>
 						</th>
 					</tr>			
 		</table>
@@ -186,12 +184,7 @@ tbody td:hover {
 <!-- 		</table>				 -->
 		</div><!--member big model -->
 		
-		<div style="border: 2px solid gray;">
-		
-		<div style="margin:15px 0px 25px 10px;">
-			<img height="300px" wight="250px" src='${pageContext.servletContext.contextPath}/images/Plankton.jpg'/>
-			<a type="hidden" name="action" value="change_img"></a>
-		</div>
+		<div >
 		
 <!------------------- 換頁標頭 ----------------------->
 		<div>
@@ -388,6 +381,8 @@ $(function(){
        );//end get function
 	$("#dialog" ).dialog( "close" );  
 }
+
+
 function dialog(){
 
 	 $( "#dialog" ).dialog({   

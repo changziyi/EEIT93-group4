@@ -32,8 +32,8 @@ public class ForgotPwdServlet extends HttpServlet {
 		Map<String, String> errorMsgs = new HashMap<>();
 		HttpSession session = req.getSession();
 		req.setAttribute("errorMsgs", errorMsgs);		
-		CdataService cs = new CdataService();
-		String c_email = req.getParameter("Email");
+		CdataService cs = new CdataService();		
+		String c_email = req.getParameter("Email");		
 		System.out.println("c_email = " + c_email);
 		 List<CdataVO> list = cs.geteMailAll(c_email);
 		 Boolean checked = false;
@@ -45,6 +45,8 @@ public class ForgotPwdServlet extends HttpServlet {
 			if((c_email != null) && (c_email.equals(email.getC_email()))){//成功
 					checked = true;
 					session.setAttribute("c_email", c_email);
+					String c_name = null;
+					System.out.println("c_name"+c_name);
 					javamail.getSession();
 //					javamail.sendmail(c_email);//test
 				}
@@ -55,7 +57,7 @@ public class ForgotPwdServlet extends HttpServlet {
 				RequestDispatcher rd = req.getRequestDispatcher("/cdata/forgetpassword.jsp");
 				rd.forward(req, resp);		
 			}else{
-				resp.sendRedirect(getServletContext().getContextPath()+"/cdata/updatepassword.jsp");
+//				resp.sendRedirect(getServletContext().getContextPath()+"/cdata/updatepassword.jsp");
 			}									
 	}
 	

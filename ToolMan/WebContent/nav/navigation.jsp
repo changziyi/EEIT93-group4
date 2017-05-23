@@ -51,9 +51,10 @@
 								<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 							</button>
 							<c:if test="${not empty LoginOK}">
-								<button type="button" class="btn btn-default btn-sm">
+								<a
+									href="${pageContext.servletContext.contextPath}/email/email.jsp"><button type="button" class="btn btn-default btn-sm">
 									<span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
-								</button>
+								</button></a>
 							</c:if>
 						</form>
 					</ul>
@@ -108,7 +109,7 @@
 								<li><a
 									href="${pageContext.servletContext.contextPath}/cdata/CdataOrderServlet.do?c_id=${LoginOK.c_id}&action=myHate">黑名單</a>
 								</li>
-								<li><a href="#">刊登廣告</a></li>
+								<li><a href="${pageContext.servletContext.contextPath}/ad/ad.jsp">刊登廣告</a></li>
 								<li><a
 									href="${pageContext.servletContext.contextPath}/loginoutServlet">登出</a></li>
 

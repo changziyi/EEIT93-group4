@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -79,20 +80,22 @@ public class OrderController extends HttpServlet {
 			
 			//open while merge with mdata servlet			
 			String b_name = mdataVO.getB_name();//automatically filled in			
-//			String c_id = cdataVO.getC_id(); //automatically filled in, but I don't need c_id, I just need cdataVO		
-			//test data
-//			String b_name ="如意棒裝潢";
-//			Integer m_id = 1001;
-//			String c_id = "Micky";		
-//				Integer mproid = mproVO.getM_proid();
-//				oproVO.setM_proid(mproVO);//hibernate will find it's m_proid specified in the mapping for me
-	
 			//time to deal with main content
 			Calendar calobj = Calendar.getInstance();
-			Timestamp o_bdate = new Timestamp(calobj.getTimeInMillis());//automatically filled in
 			
-				String o_des = request.getParameter("o_des");
+			String o_bdate1 = request.getParameter("o_bdate");//automatically filled in
+			System.out.println("obdate="+o_bdate1);
+			DateFormat df3 = new SimpleDateFormat("yyyy-MM-dd-HH:mm:ss");
 
+			Calendar calobj1 = Calendar.getInstance();
+					try {
+						calobj1.setTime(df3.parse(o_bdate1));
+					} catch (ParseException e) {
+						e.printStackTrace();
+					}
+				String o_des = request.getParameter("o_des");
+				Timestamp o_bdate = new Timestamp(calobj1.getTimeInMillis()); 
+				
 				if(o_des==null||o_des.trim().length() == 0){
 					errormsg.put("erroro_des", "必須輸入項目描述");			
 				}
@@ -105,7 +108,7 @@ public class OrderController extends HttpServlet {
 					errormsg.put("errorreq_exp", "必須選擇請求失效時間");
 				}
 				
-				Integer h_type = new Integer(request.getParameter("h_type"));
+				String h_type = request.getParameter("h_type");
 				if(request.getParameter("h_type")==null){
 					errormsg.put("erroroh_type", "必須選擇建築物型態");		
 				}
@@ -161,6 +164,54 @@ public class OrderController extends HttpServlet {
 					System.out.println(o_pro[i]);
 
 			}
+				
+
+				// for confirmorder.jsp
+				Map map = new HashMap();
+
+				DateFormat df = new SimpleDateFormat(("yyyy-MM-dd"));
+				DateFormat df2 = new SimpleDateFormat(("HH:mm:ss"));
+				String obstring = df.format(o_bdate);
+				String obstring2 = df2.format(o_bdate);
+				System.out.println(obstring2);
+				if(obstring2.equals("01:00:00")){
+					obstring = obstring+"早上";
+				}
+				else if(obstring2.equals("12:00:00")){
+					obstring = obstring+"下午";
+				}
+				else if(obstring2.equals("18:00:00")){
+					obstring = obstring+"晚上";
+				}
+				else{
+					System.out.println(obstring);
+				}
+				map.put("b_name", b_name);// sent from the top
+				map.put("c_id",cdataVO.getC_id());// sent from the top
+				map.put("o_des",o_des);
+				map.put("o_bdate",obstring);
+				map.put("o_location",o_location);
+				String reqString = null;
+				if(req_exp==2400000){
+					reqString="2小時";
+				}
+				else if(req_exp==2400000){
+					reqString="2小時";
+				}
+				else if(req_exp==86400000){
+					reqString="1天";
+				}
+				else if(req_exp==172800000){
+					reqString="2天";
+				}
+				else if(req_exp==604800000){
+					reqString="一週";
+				}
+				map.put("req_exp",reqString);
+				map.put("b_name","未回應");
+				request.setAttribute("ordermap",map);
+				// for confirmorder.jsp
+				
 				List addrlist = new ArrayList();
 				addrlist.add(o_city);
 				addrlist.add(o_district);

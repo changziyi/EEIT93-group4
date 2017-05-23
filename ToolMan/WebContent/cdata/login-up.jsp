@@ -12,12 +12,60 @@
   <link rel="Shortcut Icon" href="${pageContext.servletContext.contextPath}/favicon.ico" />
   <link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,300,600' rel='stylesheet' type='text/css'>
  <script src="../js/jquery.min.js"></script>
+ <script src="${pageContext.servletContext.contextPath}/sweetalart/sweetalert.min.js"></script>
+<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/sweetalart/sweetalert.css">
+
+<style>
+.form-signin {
+	max-width: 400px;
+	display: block;
+	background-color: #ccffff;
+	-moz-box-shadow: 0 0 3px 3px #888;
+	-webkit-box-shadow: 0 0 3px 3px #888;
+	box-shadow: 0 0 3px 3px #888;
+	border-radius: 20px;
+	border: 5px double #3399ff;
+	margin:160px auto ;
+	
+}
+
+h3 {
+	font-family: Microsoft JhengHei;
+	font-weight: bold;
+	font-size: 35px;
+	color: #357EBD;
+}
+
+.heading-desc {
+	font-size: 33px;
+	font-weight: bold;
+	padding: -50px;
+}
+
+.button-block {
+	width: 50%;
+}
+
+.button {
+	font-size: 20px;
+	width: 100px;
+	height: 50px;
+}
+
+.cen {
+	margin: 10px auto;
+	text-align: center;
+}
+</style>
+
+
+
 </head>
 <body>
-  <div class="form">  
+  <div class="form form-signin">  
       <div class="tab-content">
         <div id="signup">   
-          <h1 style="color:#357EBD; font-size: 33px;">註冊</h1>          
+          <h3 class="heading-desc" style="text-align: center">註冊</h3>          
     <form action="<c:url value='/cdata/Cdata.do'/>" method="POST">            
           <div class="field-wrap" >
             <input type="text" style="background-color:#ffffff;"  name="id" autocomplete="off" placeholder="帳號*"  autocomplete="off" autofocus>
@@ -70,13 +118,14 @@
 	          	     
 	            <input type="text" id="code2" style="background-color:#ffffff;" name="verification1" placeholder="驗證碼*" axlength="4" autocomplete="off">
 	            
-	            <span  style="border:1px solid blue;right:20px;bottom:6px;font-size: 20px;color:#a0b3b0"class="function-code" id="createCade" name="verification2"></span><!--驗證碼驗證-->
-				<input  type = "hidden" style="border:1px solid blue;right:20px;bottom:6px;font-size: 20px;color:#a0b3b0"class="function-code" id="createCade" name="verification2" />
-	
-	<!--             <label  id="code01" style="left:300px;bottom:12px; color:#000000">請輸入驗證碼</label>  -->               
-	            <label id="v" style="left:120px; color:red;">${errorMsgs.errorverify}</label>            
+	            <span  style="border:1px solid blue;right:20px;bottom:6px;font-size: 20px;color:#a0b3b0"class="function-code" id="createCade" ></span><!--驗證碼驗證-->
+				<input  type = "hidden" style="border:1px solid blue;right:20px;bottom:6px;font-size: 20px;color:#a0b3b0"class="function-code" id="verification2" name="verification2" />
+
+	            <label id="v" style="left:330px;" class="errormg">${errorMsgs.errorverify}</label>
+	             <label id="v" style="left:160px; color:red; font-size: 16px; margin-top:3px;" >${errorMsgs.account}</label>           
           </div>
-          <div style="margin-top:40px;">                              
+          <div style="margin-top:40px;">
+                                
           	<button type="submit" id="register" class="button button-block" >註冊</button>
           	<input type="hidden" name="action" value=""> 
           </div>
@@ -85,10 +134,11 @@
           </div> 
           </form>
         </div>
+      
 <!--    -->
         <div id="login"></div>        
       </div><!-- tab-content -->   
-</div> <!-- /form -->
+ <!-- /form -->
 
 
 
@@ -106,7 +156,7 @@ $(function(){
 
 		
 		$("#onkey").click(function(){
-// 			event.preventDefault();
+			event.preventDefault();
 			$("input[name = 'id']").val("oneprice");
 			$("input[name = 'pswd']").val("sa123456");
 			$("input[name = 'name']").val("航海王");
@@ -123,7 +173,7 @@ $(function(){
 	
 	function register(){
 		var Code = $("#code2").val();		
-		$('#v').text("請重新輸入驗證碼");
+// 		$('#v').text("請重新輸入驗證碼");
 	}
 		
 
@@ -143,10 +193,30 @@ $(function(){
 				
 		}
 
-		
+		$(function(){
+			$("#register").click(function(){
+				swal("恭喜您！", "註冊成功！","success")
+			});				
+		})
 
+		
 	
 	
+
+//		function myFunction(){
+//			var id = ${errorMsgs.c_id};
+//			var pswd = 
+//			var name =
+//			var birth =
+//			var phone = 
+//			var mail =
+//			var city =
+//			var district =
+//			var addr =
+			
+			
+			
+//		}
 
 	
 	</script>

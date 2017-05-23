@@ -17,7 +17,7 @@ public class OrderVO {
 	private Timestamp o_edate;
 	private String o_des;
 	private Long req_exp;
-	private Integer h_type;
+	private String h_type;
 	private String o_location;
 	private String s_name;
 	private String m_onote;
@@ -108,10 +108,10 @@ public class OrderVO {
 	public void setReq_exp(Long req_exp) {
 		this.req_exp = req_exp;
 	}
-	public Integer getH_type() {
+	public String getH_type() {
 		return h_type;
 	}
-	public void setH_type(Integer h_type) {
+	public void setH_type(String h_type) {
 		this.h_type = h_type;
 	}
 	public String getO_location() {
