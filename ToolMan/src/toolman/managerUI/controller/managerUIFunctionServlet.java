@@ -268,7 +268,7 @@ public class managerUIFunctionServlet extends HttpServlet {
 		if("findcustomer".equals(functionaction)){
 			CdataService cdataservice = new CdataService();
 			request.setAttribute("cdataVO", cdataservice.getById(targetid));
-			RequestDispatcher rd = request.getRequestDispatcher("/cdata/ShowCdata.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/cdata/test1.jsp");
 			rd.forward(request, response);	
 		}
 		//tested ok no purpose to use it

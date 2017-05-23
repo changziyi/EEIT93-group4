@@ -93,11 +93,19 @@ h3 {
 	<script
 		src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 	<script>
-		$(function() {
-			$("#sweetalart").click(function() {
-				swal("成功!", "已將重新設定密碼的連結寄出請至E-mail信箱收取信件。", "success")
-			});
-		})
+	
+	$(function(){
+		$("#sweetalart").click(function(){
+			swal("成功!", "已將重新設定密碼的連結寄出請至E-mail信箱收取信件。", "success")
+		});				
+	})
+	
+// 		$.post(hyperlinkstring,{
+// 			"name":c_email},function(){
+// 		}
+			
+// 		}
+	
 	</script>
 	<script
 		src="${pageContext.servletContext.contextPath}/js/login/index.js"></script>

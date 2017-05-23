@@ -131,8 +131,8 @@ public class CdataServlet extends HttpServlet {
 			Integer c_finished = 0;// 已完成消費數
 			
 			//benny
-			System.out.println(req.getParameter("verification1"));
-			System.out.println(req.getParameter("verification2"));	
+			System.out.println("V1"+req.getParameter("verification1"));
+			System.out.println("V2"+req.getParameter("verification2"));	
 			if((req.getParameter("verification1"))==null||(!(req.getParameter("verification1")).equals(req.getParameter("verification2")))){
 				errorMsgs.put("errorverify", "請輸入驗證碼！");
 			}
