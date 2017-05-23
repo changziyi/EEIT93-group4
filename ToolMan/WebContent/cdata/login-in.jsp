@@ -15,8 +15,10 @@
 	rel="stylesheet">
 <link rel="Shortcut Icon"
 	href="${pageContext.servletContext.contextPath}/favicon.ico" />
-	
+<!-- 	recaptcha    -->
+
 <script src='https://www.google.com/recaptcha/api.js'></script>	
+
 
 <style>
 
@@ -35,12 +37,13 @@ body {
 	box-shadow: 0 0 3px 3px #888;
 	border-radius: 20px;
 	border: 5px double #3399ff;
-	margin:120px auto ;
+	margin:160px auto ;
 	
 }
 
 .main {
-	padding: 38px;
+	padding:0px 38px;
+	margin-bottom:20px;
 }
 
 .social-box {
@@ -109,8 +112,15 @@ body {
 	font-weight: bold;
 	color: #8a8a8a;
 	line-height: 19px;
-	font-size: 15px;
-	
+	font-size: 15px;	
+}
+#onkey{
+	width:100px;
+}
+#one{
+	position: absolute; 
+	left:130px;
+	top:16px;
 }
 
 </style>
@@ -126,54 +136,61 @@ body {
 				<h3 class="heading-desc" style="text-align:center">
 					會員登入
 				</h3>
-				<div class="social-box">
+				<div class="social-box" style="bottom:30px;">
 					<div class="row mg-btm">
 
 						<input type="text" name="id" required="true" class="form-control" placeholder="請輸入帳號"
 							autofocus > 
 							
-						<input type="password" name="pswd"  required="true" class="form-control"
+						<input type="password" name="pswd"  required="true" class="form-control" id="show"
 							placeholder="請輸入密碼">
         
 					<div style="position: absolute; right:110px;bottom:10px;font-size:16px;color:red;" class="error">${errorMsgs.LoginError}</div>
+					<div style="position: absolute; right:125px;bottom:10px;font-size:16px;color:red;">${errorMsgs.gRecaptchaResponse}</div>
 					</div>
-
+					<!-- recaptcha -->
+					<div style="display:none" id="show2">
+						<div class="g-recaptcha" id="recaptcha"
+						data-sitekey="6LfxUyAUAAAAAE-AozM5vAPmEzh5fM33D0B4u69c"></div>
+					</div>
+					<!--錯誤訊息 -->
                     <div class="error">${errorMsgs.c_id}</div>
 					<div class="error">${errorMsgs.c_pwd}</div>
-
 				</div>
-				<div class="main">
-					<div class="row">
+				<div class="main" >
+					<div class="row" >
 						<div class="col-md-12">
 							<button type="submit" class="btn btn-info btn-block"> ToolMan帳號 登入</button>
 							<input type="hidden" name="login_mumber" value="login_on_mumber">
 						</div>
-						<div class="row"></div>
-					</div>
-					<div class="row">
-						<div class="col-md-12">
-							<a href="#" class="btn btn-primary btn-block"> <i
-								class="icon-facebook"></i> Facebook帳號 登入
-							</a>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12">
-							<button type="submit" id="onkey" class="btn btn-info btn-block">一鍵輸入</button>
-						</div>
 					</div>
 				</div>
 				<div class="login-footer">
-					<div class="row">
-						<div class="col-xs-6 col-md-6 pull-right"
-							style="text-align: right">
-							<a href="${pageContext.servletContext.contextPath}/cdata/forgetpassword.jsp">忘記密碼?</a><br /> <a href="${pageContext.servletContext.contextPath}/cdata/login-up.jsp">還不是會員嗎?</a>
+									<!----------------------------------------- FB登入 -------------------------------------------->
+						<div class="row" id="one">
+							<div class="col-md-12">
+							<button type="submit" id="onkey" class="btn btn-info btn-block">一鍵輸入</button>
 						</div>
-					</div>
+					</div>				
+					<div style="position: absolute; left:40px;  ">				
+						<div class="fb">
+							<div class="fb-login-button" onlogin="checkLoginState()" id="login"
+							data-max-rows="1" data-size="large" scope="public_profile,email"></div>				
+				   		</div>
+				   </div>
+				   	<div class="row">
+						<div class="col-xs-6 col-md-6 pull-right"
+							style="text-align: right; bottom:5px;">
+							<a href="${pageContext.servletContext.contextPath}/cdata/forgetpassword.jsp">忘記密碼?</a><br />
+							<a href="${pageContext.servletContext.contextPath}/cdata/login-up.jsp">還不是會員嗎?</a>
+						</div>
+					</div>				   
+				<!----------------------------------------- FB登入 -------------------------------------------->
 				</div>
 			</form>
 		</div>
 	</div>
+	<div style="visibility:hidden" id="status"></div>
 </body>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script>
@@ -184,6 +201,136 @@ $(function(){
 		$("input[name = 'pswd']").val("c123456");
 	});		
 });
+
+
+/******************************************************/
+ 	$(function(){
+ 		$("#show").click(function(){
+ 			$("#show2").slideDown("slow");
+ 			
+ 		});		
+ 	});
+ 
+ 
+
+/********************** fb登入 ************************/
+
+//fb
+	function statusChangeCallback(response) {
+		console.log('statusChangeCallback');
+		console.log(response);
+		if (response.status === 'connected') {
+			// Logged into your app and Facebook.
+//	    		document.getElementById('status').innerHTML = 'We are connected.';
+  		var v = document.getElementById('status');
+  		v.innerHTML = 'We are connected.';
+  		if(v.innerHTML === 'We are connected.'){
+  			testAPI();
+  			console.log(v.innerHTML);
+//   			test
+//   			window.location.reload();
+<%--     			location.href="<%=request.getContextPath()%>/master/List.jsp"; --%>
+  		}			
+			
+		} else if (response.status === 'not_authorized') {
+			document.getElementById('status').innerHTML = 'Please log '
+					+ 'into this app.';
+		} 
+	}
+
+
+	function checkLoginState() {
+		FB.getLoginStatus(function(response) {
+			console.log("Token : " + response.authResponse.accessToken);
+			statusChangeCallback(response);
+		});
+	}
+
+	window.fbAsyncInit = function() {
+		FB.init({
+			appId : '1893060910719956',
+			cookie : true, // enable cookies to allow the server to access 
+			// the session
+			xfbml : true, // parse social plugins on this page
+			version : 'v2.9',
+		});
+		
+		 FB.getLoginStatus(function(response) {
+				console.log('statusChangeCallback');
+				console.log(response);
+		    	if (response.status === 'connected') {	    		
+		    		document.getElementById('login').style.visibility = 'hidden';
+		    	} else if (response.status === 'not_authorized') {
+		    		document.getElementById('status').innerHTML = 'We are not logged in.'
+		    	} else {
+		    		document.getElementById('status').innerHTML = 'You are not logged into Facebook.';
+		    	}
+		    });
+		};
+		
+	// Load the Facebook JavaScript SDK
+	(function(d, s, id) {
+		var js, fjs = d.getElementsByTagName(s)[0];
+		if (d.getElementById(id))
+			return;
+		js = d.createElement(s);
+		js.id = id;
+		js.src = "//connect.facebook.net/zh_TW/sdk.js";
+		fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));
+	
+	
+	function testAPI() {
+		console.log('Welcome!  Fetching your information.... ');
+		
+		FB.api('/me','GET', 
+				
+				
+				
+				{fields: 'first_name,last_name,name,id,email,picture.width(200).height(200)'}, 
+				function(response) {
+				console.log('Successful login!! '+ ' id:' + response.id + ', name:' + response.name + 
+							', email:' + response.email);
+// 				document.getElementById('fb_photo').innerHTML = "<img src='" + response.picture.data.url +"'>";				
+			
+			}
+		);
+	}
+	
+	//picture
+//	function getInfo() {
+//		FB.api('/me', 'GET', {fields: 'first_name,last_name,name,id,picture.width(50).height(50)'}, function(response) {
+//				document.getElementById('status').innerHTML = response.id;
+//			document.getElementById('status').innerHTML = "<img src='" + response.picture.data.url +"'>";
+//		});
+//	}	
+	
+	function loginNEMI(token) {
+	    // 把 access_token 傳至後端再做資料拿取
+	    console.log("Welcome!  Fetching your information.... ");
+	    var xhr=new XMLHttpRequest();
+	    xhr.open("POST", "/login", true);
+	    xhr.setRequestHeader("Content-type", "");
+	    xhr.onreadystatechange=function()
+	    {
+	      if(xhr.readyState === 4 && xhr.status === 200)
+	      {
+	          if(JSON.parse(xhr.responseText).status === "ok")
+	            location.href="/index";
+	          else
+	            alert("something wrong!");
+	      }  
+	    };
+	    xhr.send("token="+token);
+	}
+	
+	function Logout() {
+		FB.logout(function(response) {
+			// user is now logged out
+			alert('已成功登出!');
+			window.location.reload();
+		});
+	}
 
 </script>
 

@@ -53,6 +53,12 @@ public class EmailServlet extends HttpServlet {
 			req.setAttribute("Onelist", emailVO);
 			
 		}
+		
+		else if("updateisRead".equals(action)){
+			EmailService emailSvc1 = new EmailService();
+			emailSvc1.updateisRead(new Integer(msid));
+			
+		}
 	}
 
 

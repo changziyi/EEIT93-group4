@@ -119,6 +119,7 @@ public class CdataServlet extends HttpServlet {
 					errorMsgs.put("c_addr01", "請輸入正確地址格式！");
 				}
 			}
+			
 			// 加入時間
 			Timestamp c_jdate = null; 
 			try {
@@ -128,8 +129,13 @@ public class CdataServlet extends HttpServlet {
 			}
 			Integer c_rating = 0;// 消費者評分
 			Integer c_finished = 0;// 已完成消費數
-
 			
+			//benny
+			System.out.println(req.getParameter("verification1"));
+			System.out.println(req.getParameter("verification2"));	
+			if((req.getParameter("verification1"))==null||(!(req.getParameter("verification1")).equals(req.getParameter("verification2")))){
+				errorMsgs.put("errorverify", "請輸入驗證碼！");
+			}
 			// CdataVO cdataVO = new CdataVO();
 			// cdataVO.setC_id(c_id);
 			// cdataVO.setC_pwd(c_pwd);
@@ -154,7 +160,8 @@ public class CdataServlet extends HttpServlet {
 					
 
 			session.setAttribute("cdataVO", cdataVO);
-			resp.sendRedirect(resp.encodeRedirectURL("InsertCdataSuccess.jsp"));
+			Thread.sleep(1000);
+			resp.sendRedirect(resp.encodeRedirectURL(getServletContext().getContextPath()+"/index.jsp"));
 			return;
 		} catch (Exception e) {
 			errorMsgs.put("account", "帳號重複，請重新輸入資料");

@@ -53,8 +53,8 @@ public class CalendarDAO implements CalendarDAO_Interface {
 		
 		try {
 			session.beginTransaction();
-			Query query = session.createQuery("delete from CalendarVO where m_id = ?");
-			query.setParameter(0, m_id);
+			Query query = session.createQuery("delete from CalendarVO where m_id = :m");
+			query.setParameter("m", m_id);
 			count = query.executeUpdate();		
 			session.getTransaction().commit();
 		} catch (RuntimeException ex) {
@@ -63,14 +63,14 @@ public class CalendarDAO implements CalendarDAO_Interface {
 		}
 	
 	}
-	public static void main(String[] args) { 
-		CalendarDAO dao = new CalendarDAO();
-		List<CalendarVO> getlist=dao.getByM(1000);
-		for(CalendarVO calendarVo:getlist){
-			System.out.print(calendarVo.getEvent_id());
-			System.out.print(calendarVo.getEvent_title());
-		}
-		
-		}
-	
+//	public static void main(String[] args) { 
+//		CalendarDAO dao = new CalendarDAO();
+//		List<CalendarVO> getlist=dao.getByM(1000);
+//		for(CalendarVO calendarVo:getlist){
+//			System.out.print(calendarVo.getEvent_id());
+//			System.out.print(calendarVo.getEvent_title());
+//		}
+//		
+//		}
+//	
 }

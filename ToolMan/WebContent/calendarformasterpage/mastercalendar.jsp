@@ -40,7 +40,7 @@
 	
 /* calendar */
 		body {
-		margin-top: 40px;
+		margin-top: 110px;
 		text-align: center;
 		font-size: 14px;
 		font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
@@ -257,6 +257,7 @@
 	</div>
                 <form class="form-inline" style="display:table;margin:auto">
 				            <div class="btn-group navbar-btn" role="group">
+				                <a href="${pageContext.servletContext.contextPath}/master/masterPage.do?m_id=${LoginOK.m_id}" class="btn btn-info">回我的店家</a>
 				                <button class="btn btn-primary" id="submitcalendar" type="button">完成日程表</button>
 				            </div>
 				        </form>

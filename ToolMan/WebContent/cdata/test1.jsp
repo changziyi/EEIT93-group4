@@ -107,14 +107,13 @@ tbody td:hover {
 </style>
 <body>
 <jsp:include page="/nav/navigation.jsp" />
-<div style="margin-top: 10px;">
+<div style="margin-top: 90px;">
 	<div class="container">	
 		<div class="page-header">
 			<div class="row"></div>
 		<div class="cdata_box"> <!--member big model -->
 		<!----------------------- 會員資料 ---------------------->
 		<div>
-		<img height="30px" src='${pageContext.servletContext.contextPath}/image/btn_member.jpg'/>
 		<label>  會員資料</label>
 		<table class="manber-table">
 			<thead>			
@@ -376,7 +375,7 @@ $(function(){
 	var c_pswd = $( "#c_pswd" ).val();
 	var c_birth = $( "#c_birth" ).val();
 	var c_cel = $( "#c_cel" ).val();
-	var c_email = $( "#email" ).val();
+	var c_email = $( "#c_email" ).val();
 	var c_addr =$( "#c_addr" ).val();
 	var hyperlink ="${pageContext.servletContext.contextPath}/cdata/CdatadessServlet.do";
 		

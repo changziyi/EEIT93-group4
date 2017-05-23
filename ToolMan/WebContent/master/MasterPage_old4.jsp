@@ -1,14 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="java.util.*"%>
-<%@ page import="toolman.blacklist.model.*"%>
-<%
-	BlacklistService empSvc = new BlacklistService();
-    List<BlacklistVO> list = empSvc.getAllBlacklist();
-    pageContext.setAttribute("myHate",list);
-%>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -42,8 +34,8 @@
 		.changeImg {width:200px; padding:10px;}
 		#uploadTemp {line-height:normal;background-color:#fff;width:560px;}
 		.workImgArea {vertical-align:top;padding:5px;}
-		.myDiv {position:relative; top:70px;} 
-		.outtermd8 {width:100%; margin-left:3%; margin-right:0}
+		.myDiv {position:relative; top:80px;} 
+		.outtermd8 {width:100%; margin-left:2%; margin-right:0}
 		.innermd8 {padding-top:3%;padding-right:0; margin-right:0;width:60%}
 		.md4 {padding-left:1%;margin-top:2%}
 		.commentbox {width:60%;height:20%;}
@@ -83,7 +75,6 @@
 					<div class="modal fade" id="myModal" role="dialog">
 						<div class="modal-dialog" style="width:43%">
 						      <!-- Modal content-->
-						      
 							<form method="post" action="master.do" enctype="multipart/form-data" name="updateform">
 							<div class="modal-content">
 								<div class="modal-header">
@@ -190,13 +181,6 @@
 	        		</a>
 	        	</c:if>	
         		</c:if>
-        		        			<c:forEach var="empVO" items="${myHate}">
-        			<c:if test="${empVO.mdataVO.m_id == mdataVO.m_id && empVO.cdataVO.c_id == LoginOK.c_id}">
-        			<div class="alert alert-danger" style="font-size:24px">
-    <strong>警告!</strong> 此人是黑名單人物
-  </div>
-        			</c:if>
-        			</c:forEach>
         			<p></p>
         		<div id='calendar' style="float:left;width:400px; height:100px;"></div>
  <%--------------------------------------萬里長城--------------------------------------------------- --%>
@@ -245,7 +229,6 @@
 					      </div>
 					      <div class="modal-body">
 					        <div id='div1'></div>
-					        
 					        <div class="form-group">
 								<table class="table">
 									<tr>
@@ -281,11 +264,9 @@
 	          		<h3 style="margin-top:8%; margin-bottom:1%; margin-left:25%">尚無上傳作品</h3>
 	          	</div>
           	</c:if>
-			
-			<div class="form-group workdiv">
 				<table class="table worktable">
 					<c:forEach var="aWork" items="${mdataVO.works}">
-						<tr class="bg-info aWork">
+						<tr class="aWork bg-info">
 							<td>
 								<c:if test="${LoginOK.m_id == mdataVO.m_id}">
 									<a class="btn btn-danger deleteworkim" id="deleteworkim"><span class="glyphicon glyphicon-trash"></span> 刪除</a>
@@ -297,7 +278,7 @@
 								<input type="hidden" name="work_id" value="${aWork.work_id}">
 							</td>
 						</tr>
-						<tr class="aWork">
+						<tr>
 							<td>
 								<c:forEach var="a" items="${aWork.workims}">
 									<img width="304" height="236" class="img-thumbnail workimsize" src='${pageContext.servletContext.contextPath}/master/master.do?type=work&image=${a.im_id}'/>
@@ -684,9 +665,9 @@
 						upload.val(null);
 						workname.val(null);
 						workdes.val(null);
-// 						location.reload();
 						myDiv.html('<div class="alert alert-success" role="alert" id="alertupload"><strong>新增作品成功!</strong></div>');
-// 						
+// 						myDiv.append();
+// 						location.reload();
 // 						$('.workdiv').empty();
 						
 // 						var works = [<c:forEach var="aWork" items="${mdataVO.works}">{"work_name":"${aWork.work_name}","work_des":"${aWork.work_des}","im_id":[<c:forEach var="a" items="${aWork.workims}">${a.im_id},</c:forEach>]},</c:forEach>];
@@ -780,6 +761,7 @@
 				console.log(apro);
 				$("input[name=m_pro][value=" + apro + "]").prop('checked', true);
 			})
+			
 			
 // 		}); //outter function
 	</script>

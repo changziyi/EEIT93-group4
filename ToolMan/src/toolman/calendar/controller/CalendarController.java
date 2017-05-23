@@ -22,6 +22,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -63,7 +64,8 @@ public class CalendarController extends HttpServlet {
 		
 	     String calendarjson = request.getParameter("calendarjson");
 //		 
-		 MdataVO mdataVO2 = (MdataVO) request.getAttribute("mdataVO");
+	     HttpSession session = request.getSession();
+		 MdataVO mdataVO2 = (MdataVO) session.getAttribute("mdataVO");
 		 Integer m_id = mdataVO2.getM_id();
 //		 Integer m_id = 1000;
 		 System.out.println(calendarjson);
@@ -129,6 +131,7 @@ public class CalendarController extends HttpServlet {
 		if(calendarservice.getByM(m_id)!=null){
 			calendarservice.deleteByM(m_id);
 		}
+		
 		calendarservice.InsertByM(list);
 //---------------------------------end insert---------------------------------------------		
 		

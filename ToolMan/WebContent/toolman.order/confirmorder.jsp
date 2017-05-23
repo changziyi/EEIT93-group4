@@ -6,22 +6,21 @@
 	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!-- jquery -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>	
-	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-<!-- jquery -->
-<!-- bootstrap -->
+	<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/js/jqueryui/jquery-ui.min.css">
+
+<!-- ----------------------bootstrap -->
 	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/js/bootstrap.min.css" >
 	<!-- Optional theme -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+	<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/js/bootstrap-theme.min.css" >
 	<!-- Latest compiled and minified JavaScript -->
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>	
-<!-- bootstrap -->
+	<script src="${pageContext.servletContext.contextPath}/js/bootstrap.min.js" ></script>
+<!---- --------------------bootstrap -->
 <!-- smart_wizard -->
-    <link href="../js/smartform/smart_wizard_theme_circles.min.css" rel="stylesheet" type="text/css" />
-    <link href="../js/smartform/smart_wizard_theme_dots.min.css" rel="stylesheet" type="text/css" />
-	<link href="../js/smartform/smart_wizard.min.css" rel="stylesheet" type="text/css" /> 
-	<link href="../js/smartform/smart_wizard_theme_arrows.min.css" rel="stylesheet" type="text/css" />
+    <link href="${pageContext.servletContext.contextPath}/js/smartform/smart_wizard_theme_circles.min.css" rel="stylesheet" type="text/css" />
+    <link href="${pageContext.servletContext.contextPath}/js/smartform/smart_wizard_theme_dots.min.css" rel="stylesheet" type="text/css" />
+	<link href="${pageContext.servletContext.contextPath}/js/smartform/smart_wizard.min.css" rel="stylesheet" type="text/css" /> 
+	<link href="${pageContext.servletContext.contextPath}/js/smartform/smart_wizard_theme_arrows.min.css" rel="stylesheet" type="text/css" />
 <!-- smart_wizard -->
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">	
@@ -95,14 +94,14 @@
         <br />
      <div class="container containerstyle textstyle putmiddle" style="margin-top:5%">
         <!-- SmartWizard html -->
-        <div id="smartwizard">
-            <ul class="textstyle">
-            	<li><a href="#step-1">步驟一<br /><small>預約時間</small></a></li>
-                <li><a href="#step-2">步驟一<br /><small>填寫預約表</small></a></li>
-                <li><a href="#step-3">步驟三<br /><small>預約完成</small></a></li>
-                <li><a href="#step-1">步驟四<br /><small>結案與評分</small></a></li>
+         <div id="smartwizard">
+            <ul class="stepstyle textstyle">
+            	<li><a href="#step-1" style="white-space: nowrap">步驟一<br /><small>建立預約日程</small></a></li>
+                <li><a href="#step-2">步驟一<br /><small>填寫申請表</small></a></li>
+                <li><a href="#step-3">步驟三<br /><small>送出審核</small></a></li>
+                
             </ul>
-            
+      
          <div>
         	 <!--  step1  -->
                 <div id="step-1" class=""></div>	
@@ -120,47 +119,23 @@
 						<table class="table textstyle" >
 						<tr><td>店家名稱</td><td>${orderVO.getB_name()}</td></tr>
 							<tr><td>消費者名稱</td><td>${orderVO.getC_id().getC_id()}</td></tr>	
-							<tr><td>預約時間</td><td>${orderVO.getO_bdate()}</td></tr>	
+							<tr><td>預約時間</td><td>${ordermap.o_bdate}</td></tr>	
 							<tr><td>工程類別</td><td id="oprolist"></tr>	
 							<tr><td>工程描述</td><td>${orderVO.getO_des()}</tr>
-							<tr><td>訂單失效時間</td><td>${orderVO.getReq_exp()}</td></tr>
+							<tr><td>訂單失效時間</td><td>${ordermap.req_exp}</td></tr>
 							<tr><td>建築物型態</td><td>${orderVO.getH_type()}</td></tr>
 							<tr><td>裝修地點</td><td>${orderVO.getO_location()}</td></tr>
 							<tr><td>訂單狀態</td><td>${orderVO.getS_name()}</td></tr>	
 						</table>
-	<%-- 						<tr><td>${orderVO.getB_name()}</td> --%>
-	<%-- 							<td>${orderVO.getM_id()}</td> --%>
-	<%-- 							<td>${orderVO.getC_id()}</td></tr> --%>
-							
-	<%-- 						<tr><td>${orderVO.getO_bdate()}</td></tr> --%>
-	<%-- 							<td>${orderVO.getO_des()}</td> --%>
-	<%-- 							<td>${orderVO.getReq_exp()}</td> --%>
-							
-	<%-- 						<tr><td>${orderVO.getH_type()}</td> --%>
-	<%-- 							<td>${orderVO.getO_location()}</td> --%>
-	<%-- 							<td>${orderVO.getS_name()}</td></tr> --%>
-	<!-- 					</table> -->
-					</div>
 
-						<form class="form-inline">
-				             <div  >
-				              <label >Choose Theme:</label>
-				              <select id="theme_selector" class="form-control">
-				                    <option value="default">default</option>
-				                    <option value="arrows">arrows</option>
-				                    <option value="circles">circles</option>
-				                    <option value="dots">dots</option>
-				              </select>
-				            </div>           
-				              
-				        </form>
+					</div>
 				        <span>
 <!-- -------------------------------------// hyper links need to be put outside the steps------------------------>
 				           <a href="${pageContext.servletContext.contextPath}/cdata/CdataOrderServlet.do?c_id=${orderVO.getC_id().getC_id()}&action=listOrder"><button  class="btn btn-primary putmiddle" >進行訂單管理</button></a>;
 <!-- -------------------------------------// need to be put outside ------------------------>					    	
 					   </span>
 		    	</div>     
-			<!--  endstep3  --> 
+			
  
           </div>
       </div>
@@ -170,11 +145,8 @@
 
 
 
-	<script
-	  src="https://code.jquery.com/jquery-3.2.1.min.js"
-	  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-	  crossorigin="anonymous"></script>
-	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script src="${pageContext.servletContext.contextPath}/js/jquery-3.2.1.min.js"></script>
+	<script src="${pageContext.servletContext.contextPath}/js/jquery-ui.js"></script>
 <script>
 	var coordinate=null;
 	var googlecoordinate=null;
@@ -227,7 +199,7 @@
                     	removeDoneStepOnNavigateBack:false,
                     },
                     toolbarSettings: {
-                    	toolbarPosition: 'buttom',
+                    	toolbarPosition: 'none',
                     	showNextButton:false,
                     	showPreviousButton:false,
                        

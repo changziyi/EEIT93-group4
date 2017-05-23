@@ -22,7 +22,7 @@
 	<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/css/theme.min.css">
 	<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/nav/nav.css">
 	<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/css/index/expandsearch.css">
-	<%-- <link rel="stylesheet" href="${pageContext.servletContext.contextPath}/css/creative.css"> --%>
+<%-- 	<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/css/creative.css"> --%>
 	<script src="${pageContext.servletContext.contextPath}/js/jquery-3.2.1.min.js"></script>
 	<script src="${pageContext.servletContext.contextPath}/js/bootstrap.min.js"></script>
 	<style>
@@ -33,8 +33,7 @@
 		.form-control {margin:auto; width:120px; display:inline; font-family:Microsoft JhengHei; vertical-align: top}
 		.proc {padding:5px;margin-left: 0;margin-right: 5px;text-align: center;border-radius: 3px;color: #FFF5EE;font-weight: bold;}
 		.divpro {margin-left: 0;margin-bottom: 10px;}
-		.container {width: 85%;}
-		.myDiv {position:relative; top:90px; height:100%}
+		.myDiv {position:relative; top:100px; height:100%; width: 85%; margin-left:8%}
 		.pad {padding-left: 3%;}
 		.result {font-size:20px;}
 		.resultcount {padding:5%;}
@@ -45,10 +44,10 @@
 		.btn-master {color: White; background-color: #00BFFF; font-size:14px}
 		.btn-master:hover {background-color: #87CEFA;color: white}
 		.thumbnailformaster {height:405px;}
-		.bar {width:30%;}
+		.bar {width:27%; margin-left:1%}
 		.boxtext {font-size:15px; margin-bottom:10px; margin-bottom:10px}
 		.bartext {font-size:20px; margin-bottom:8px}
-		.bardiv {margin-left:5%}
+		.bardiv {margin-left:7%}
 		.addiv {margin-top:15%}
 		.adrow {margin-top:3% ;margin-bottom:3%; margin-left:0.5%; margin-right:0.5%; padding:5% 4% 4% 2%}
 		.md7 {padding-left:0.5%}
@@ -101,7 +100,7 @@
 				
 					<div class="list-group addiv">
 						<div class="list-group-item">
-							<div class="result text-center">廣告</div>
+							<div class="result text-center">推薦</div>
 						</div>
 						<div class="list-group-item">
 							<c:forEach var="aMaster" end="3" items="${allMid}">

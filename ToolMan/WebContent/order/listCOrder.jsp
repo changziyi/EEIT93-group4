@@ -148,7 +148,7 @@
              
 		<input type="hidden" name="action" value="addRdata">
 		
-       	<input type="hidden" name="s_name" value="m_pass">	
+       	<input type="hidden" name="s_name" value="未解決">	
            <input type="hidden" name="c_id" value="${orderVO.c_id.c_id}"/>
            <input type="hidden" name="m_id" value="${orderVO.m_id.m_id}"/>
           <input type="hidden" name="o_id" value="${orderVO.o_id}">	   
