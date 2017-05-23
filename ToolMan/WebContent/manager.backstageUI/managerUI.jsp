@@ -103,6 +103,11 @@
 /* 		background-color:#e4eff1; */
 /* 		color:white; */
 /* 	} */
+	.articles{
+    width:90%; /*Takes 90% width from WebContainer*/
+    height: auto;
+    margin: auto;
+} 
 	.buttonstyle{
 		width:130px;
 		height:60px;
