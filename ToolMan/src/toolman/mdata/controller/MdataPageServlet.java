@@ -39,6 +39,8 @@ public class MdataPageServlet extends HttpServlet {
 			return;
 		}
 		
+//		response.sendRedirect("/ToolMan/asjf.jsp");
+		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

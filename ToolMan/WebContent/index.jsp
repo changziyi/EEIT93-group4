@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" isErrorPage="true"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
@@ -56,6 +56,7 @@
 					</form>
 				</div>
 				<button type="button" id="btn" class="btn btn-master btn-xl">找師傅</button>
+				<a href="${pageContext.servletContext.contextPath}/master/masterPage.do?mmm=111">XXX</a>
             </div>
         </div>
     </header>
