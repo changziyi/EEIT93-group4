@@ -56,7 +56,6 @@
 					</form>
 				</div>
 				<button type="button" id="btn" class="btn btn-master btn-xl">找師傅</button>
-				<a href="${pageContext.servletContext.contextPath}/master/masterPage.do?mmm=111">XXX</a>
             </div>
         </div>
     </header>

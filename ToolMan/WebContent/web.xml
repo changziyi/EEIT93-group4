@@ -35,5 +35,4 @@
 		<servlet-name>OrderController</servlet-name>
 		<url-pattern>/toolman/order/controller/OrderController.do</url-pattern>
 	</servlet-mapping>
-
 </web-app>

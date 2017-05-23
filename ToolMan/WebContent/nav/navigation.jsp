@@ -5,13 +5,6 @@
 <%@ page import="toolman.order.model.*"%>
 <%@ page import=" java.util.*"%>
 
-<head>
-<style>
-body {
-	background-color:#d9d9d9;	
-}
-</style>
-</head>
 <div class="navbar-wrapper">
 	<div class="container-fluid">
 		<nav class="navbar navbar-fixed-top">

@@ -39,7 +39,6 @@ public class MdataPageServlet extends HttpServlet {
 			return;
 		}
 		
-//		response.sendRedirect("/ToolMan/asjf.jsp");
 		
 	}
 
