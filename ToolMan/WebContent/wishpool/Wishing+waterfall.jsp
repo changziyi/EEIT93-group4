@@ -166,9 +166,11 @@ body {font-family:Microsoft JhengHei;}
 								</div>
 								<br>
 								<div align="center">
-								<button class="btn btn-primary btn-sm" data-toggle="modal"
-									data-target="#wishDetailModal${wishpoolVO.w_id}">
-									我會修理</button>
+								<c:if test="${not empty LoginOK.m_id}">
+									<button class="btn btn-primary btn-sm" data-toggle="modal"
+										data-target="#wishDetailModal${wishpoolVO.w_id}">
+										我會修理</button>
+								</c:if>
 								<br>
 								<div class="pull-right">發送時間：${wishpoolVO.w_date}</div>
 								</div>
