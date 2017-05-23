@@ -48,14 +48,9 @@
 	padding: 10px;
 	margin: 10px 10px 10px 0;
 	overflow: hidden;
-	width: 240px;
+	width: 750px;
 	background-color: #cce6ff;
 	
-}
-
-colcenter {
-margin : 0px auto ;
-
 }
 
 
@@ -79,55 +74,56 @@ margin : 0px auto ;
 <body>
 <jsp:include page="/nav/navigation.jsp" />
 	<div class="container">
+	
 		<div class="row page-header">		
 				<div class="row"></div>
 		</div>
-		<br>
-
-		<div class="row colcenter">
-			<div class="col-md-5" style="background-color: #99ceff">
-
-				<div align="center">
+		
+		<div class="row">
+			<div class="col-md-3" style=";background-color: #99ceff">
+				<div class="text-center">
 					<button class="btn btn-primary btn-lg" data-toggle="modal"
 						data-target="#myModal01">發送 Email</button>
 				</div>
 
 			</div>
-			<div class="col-md-9" id="emailblock" 
+			</div>
+			<br/>
+			<div class="row">
+			<div class="col-md-4"></div>
+			<div class="col-md-8" id="emailblock" 
 				style="overflow: hidden; margin: 0 auto; background-color: #99ceff"">
 				
 			
-					<div>
 						<c:forEach var="emailVO" items="${list}">
 							<div class="content_box">
-														
+					            <div class="modal-header" >			
 								<span>收件人：${emailVO.mss_id}</span>
 								<br>
 								<span>寄件人：${emailVO.msr_id}</span>
 								<br>
 								主旨： 
 							<button class="btn btn-primary" data-toggle="modal" id="selectbtn"
-						data-target="#clickSummary" data-id="${emailVO.ms_id}">${emailVO.ms_summary}</button>
+						     data-target="#clickSummary" data-id="${emailVO.ms_id}">${emailVO.ms_summary}</button>
 								<br> 
 								時間：${emailVO.ms_date}
 								<br> 
 								<span>狀態：<span>${emailVO.s_name == 'true' ? '已讀':'未讀'}</span></span>
-
-								
+	                        <div class="modal-footer">
 							<form action="Email.do" method="post">
-							<input type="submit" class="btn btn-default"  value="刪除" ><span aria-hidden="true"></span>
+							<input type="submit" class="btn btn-danger pull-right"  value="刪除" ><span aria-hidden="true"></span>
 							<input type="hidden" name="ms_id" value="${emailVO.ms_id}"></input>
 							<input type="hidden" name="action" value="del1"></input>
 							</form>
-							
+							</div>
 							</div>
 						</c:forEach>
 					</div>
 				</div>
 			</div>
-		</div>
+		
 	
-
+<!-------------------- 詳細內容的彈出視窗 --------------------------------------------->
 	<div class="modal fade" id="clickSummary" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
@@ -169,7 +165,7 @@ margin : 0px auto ;
 	</div>
 	
 	
-	
+	<!------------------------ 發送信件的彈出視窗 -------------------------------------------------->
 	
 		<div class="modal fade" id="myModal01" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel" aria-hidden="true">
@@ -226,6 +222,8 @@ margin : 0px auto ;
 			</form>
 		</div>
 	</div>
+	
+	<!------------------------------------ js ---------------------------------------------------->
 	<script type="text/javascript">
 	$('button.btn-primary').click(function(){
 		var dataid = $(this).attr('data-id');
