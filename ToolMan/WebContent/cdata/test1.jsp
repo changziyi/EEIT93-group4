@@ -375,11 +375,12 @@ $(function(){
 		
 	$.get(hyperlink,{"action":"submitdialog","c_name":c_name, "c_pswd":c_pswd,  "c_birth":c_birth,"c_cel":c_cel,"c_email":c_email,"c_addr":c_addr},
 			function(data){ 	
-		
+		 
 						}
 					
        );//end get function
-	$("#dialog" ).dialog( "close" );  
+	$("#dialog" ).dialog( "close" ); 
+	window.location.reload();
 }
 
 

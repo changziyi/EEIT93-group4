@@ -57,6 +57,9 @@ public class ForgotPwdServlet extends HttpServlet {
 				RequestDispatcher rd = req.getRequestDispatcher("/cdata/forgetpassword.jsp");
 				rd.forward(req, resp);		
 			}else{
+				req.setAttribute("email",c_email);
+				RequestDispatcher rd = req.getRequestDispatcher("/cdata/forgetpassword.jsp");
+				rd.forward(req, resp);		
 //				resp.sendRedirect(getServletContext().getContextPath()+"/cdata/updatepassword.jsp");
 			}									
 	}
