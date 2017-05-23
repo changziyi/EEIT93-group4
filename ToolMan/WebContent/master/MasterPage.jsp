@@ -173,7 +173,7 @@
 				<p>地區：${mdataVO.m_city} ${mdataVO.m_district}</p>
  <%--------------------------------------最愛與黑單--------------------------------------------------- --%>
      	<c:if test="${empty LoginOK}">
-	          		<a href="#" data-toggle="tooltip" data-placement="bottom" title="要登入才能預約師傅">
+     	        		<a href="#" data-toggle="tooltip" data-placement="bottom" title="要登入才能預約師傅">
 	          			<button type="button" class="btn btn-primary disabled btn-success" >
 	          				<span class="glyphicon glyphicon-earphone"></span>預約師傅
 	          			</button>
@@ -183,6 +183,7 @@
           			<c:if test="${LoginOK.m_id != mdataVO.m_id}">
           			<a href="${pageContext.servletContext.contextPath}/toolman.order/NewOrder.jsp" class="btn btn-success ">
 	          			<span class="glyphicon glyphicon-earphone"></span> 預約師傅</a>
+	          			
 					<a href="${pageContext.servletContext.contextPath}/order/Favorite.do?c_id=${LoginOK.c_id}&m_id=${mdataVO.m_id}&action=addFavorite" class="btn btn-info ">
 						<span class="glyphicon glyphicon-heart-empty"></span> 加入最愛
 					</a>
@@ -191,7 +192,9 @@
 	        		</a>
 	        	</c:if>	
         		</c:if>
-        		        			<c:forEach var="empVO" items="${myHate}">
+        		     	<c:forEach var="empVO" items="${myHate}">
+        		
+        		
         			<c:if test="${empVO.mdataVO.m_id == mdataVO.m_id && empVO.cdataVO.c_id == LoginOK.c_id}">
         			<div class="alert alert-danger" style="font-size:24px">
     <strong>注意!</strong> 此人是黑名單人物

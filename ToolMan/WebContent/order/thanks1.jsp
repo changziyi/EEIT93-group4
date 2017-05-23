@@ -1,24 +1,9 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
-<%@ page import="toolman.wishpool.model.*"%>
-<%@ page import="toolman.ad.model.*"%>
 <link href="${pageContext.servletContext.contextPath}/wishpool/wish.css" rel="stylesheet">
 
-<%
-	WishpoolService wishpoolSvc = new WishpoolService();
-	
 
-	List<WishpoolVO> new_date = wishpoolSvc.getAll(request.getParameter("order"),
-			request.getParameter("searchCity"));
-	pageContext.setAttribute("new_date", new_date);
-	
-    AdService adSvc = new AdService();
-	List<AdVO> gabs = adSvc.getAllBySname("廣告進行中");
-	pageContext.setAttribute("get_sname", gabs);
-	
-	
-%>
 <html>
 <head>
 
@@ -31,7 +16,7 @@ top: 30%;
 left: 40%;      
 }
 </style>
-<meta http-equiv="refresh" content="3;url=${pageContext.servletContext.contextPath}/mdata/MdataOrderServlet.do?m_id=${LoginOK.m_id}&action=listOrder">
+<meta http-equiv="refresh" content="1;url=${pageContext.servletContext.contextPath}/mdata/MdataOrderServlet.do?m_id=${LoginOK.m_id}&action=listOrder">
 
 
 

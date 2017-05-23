@@ -841,11 +841,11 @@ $(function(){
 	                	var valueattrr=$(this).attr('value');//retrieve the value from functinaction
 	                	var hyperlinkstring = "${pageContext.servletContext.contextPath}/toolman.managerUI.controller/ManagerUIFunctionServlet.do";
 	     			var dfd4 = $.get(hyperlinkstring,{"functionaction":"type","image":checkboxdatas2},function(data){
-	     				$('#m_cer').attr("src","${pageContext.servletContext.contextPath}/master/master.do?type=master&image="+checkboxdatas2);
+	     				$('#m_cer2').attr("src","${pageContext.servletContext.contextPath}/master/master.do?type=master&image="+checkboxdatas2);
 	     				
 	                });//end get function
 	                var dfd5 = $.get(hyperlinkstring,{"functionaction":"type","image":checkboxdatas2},function(data){
-	     				$('#m_cer2').attr("src","${pageContext.servletContext.contextPath}/master/master.do?type=cer&image="+checkboxdatas2);
+	     				$('#m_cer').attr("src","${pageContext.servletContext.contextPath}/master/master.do?type=cer&image="+checkboxdatas2);
 	     				
 	                });//end get function
 	     			var dfd3 = $.getJSON(hyperlinkstring,{"functionaction":"applicationreviewm","toggledcheckbox":checkboxdatas2},function(data){

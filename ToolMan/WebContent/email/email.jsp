@@ -110,8 +110,10 @@
 								<span>寄件人：${emailVO.msr_id}</span>
 								<br>
 								主旨： 
-							<button class="btn btn-primary" data-toggle="modal" id="selectbtn"
+								<button class="btn btn-primary" data-toggle="modal" id="selectbtn"
 						     data-target="#clickSummary" data-id="${emailVO.ms_id}">${emailVO.ms_summary}</button>
+								<br> 
+								內容：${emailVO.ms_content}
 								<br> 
 								時間：${emailVO.ms_date}
 								<br> 
