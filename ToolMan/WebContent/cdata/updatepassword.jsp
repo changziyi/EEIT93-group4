@@ -13,17 +13,20 @@
   
   <script src="${pageContext.servletContext.contextPath}/sweetalart/sweetalert.min.js"></script>
   <link rel="stylesheet" href="${pageContext.servletContext.contextPath}/sweetalart/sweetalert.css">
-   
+   <%
+   	String email = request.getParameter("email");
+   	request.setAttribute("email",email);
+   %>
 </head>
 <body>
   <div class="form" >  
       <div class="tab-content">
         <div id="signup">   
           <h1 style="color:#357EBD; font-size: 33px; ">重新設置密碼</h1>          
-			<form action="${pageContext.request.contextPath}/updatePwdServlet" method="post">          
+			<form action="${pageContext.request.contextPath}/updatePwdServlet" method="post" >          
           <div class="field-wrap">
 
-            <input type="text"  placeholder="使用者信箱*" name="userName" style="color:gray; background-color:#ffffff; " value="${c_email}" autocomplete="off" readonly />
+            <input type="text"  placeholder="使用者信箱*" name="userName" style="color:gray; background-color:#ffffff; " value="${email}" autocomplete="off" readonly />
           </div>
           <div class="field-wrap">
             <label>新密碼<span class="req">*</span></label>

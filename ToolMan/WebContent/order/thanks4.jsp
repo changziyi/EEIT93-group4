@@ -6,6 +6,9 @@
 <html>
 
 <head>
+<meta http-equiv="refresh" content="1;url=${pageContext.servletContext.contextPath}/cdata/CdatadessServlet.do?c_id=${LoginOK.c_id}">
+	<link rel="shortcut icon" href="${pageContext.servletContext.contextPath}/favicon.ico" />
+
 <title>Tool Man</title>
 
 </head>

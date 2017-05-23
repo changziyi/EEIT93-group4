@@ -20,6 +20,7 @@
 
 <head>
 <title>Tool Man</title>
+	<link rel="shortcut icon" href="${pageContext.servletContext.contextPath}/favicon.ico" />
 
 </head>
 
@@ -41,7 +42,7 @@
 <br/>
 <br/>
 <br/>
-  <table class="table table-bordered table-hover" >
+  <table class="table table-bordered table-hover" style="background-color:#EEEEEE;" >
 	<tr>
 		<th>店家名稱</th>
 		   <th>預約時間</th>

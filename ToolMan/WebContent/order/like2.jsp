@@ -12,6 +12,7 @@
 
 <head>
 <title>Tool Man</title>
+	<link rel="shortcut icon" href="${pageContext.servletContext.contextPath}/favicon.ico" />
 
 </head>
 
@@ -40,7 +41,7 @@
 
 
 
-  <table class="table table-bordered">
+  <table class="table table-bordered" style="background-color:#EEEEEE;">
 	<tr>
 		<th>店家編號</th>
 		<th>消費者帳號</th>

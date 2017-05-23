@@ -166,9 +166,11 @@ body {font-family:Microsoft JhengHei;}
 								</div>
 								<br>
 								<div align="center">
-								<button class="btn btn-primary btn-sm" data-toggle="modal"
-									data-target="#wishDetailModal${wishpoolVO.w_id}">
-									我會修理</button>
+								<c:if test="${not empty LoginOK.m_id}">
+									<button class="btn btn-primary btn-sm" data-toggle="modal"
+										data-target="#wishDetailModal${wishpoolVO.w_id}">
+										我會修理</button>
+								</c:if>
 								<br>
 								<div class="pull-right">發送時間：${wishpoolVO.w_date}</div>
 								</div>
@@ -313,7 +315,7 @@ body {font-family:Microsoft JhengHei;}
 				 	   	 	var hyperlinkstring = "${pageContext.servletContext.contextPath}/email/Email.do";
 		 	     			// must unbind the event, or it will accumulate forever
 		 	     			
-		 					var mssid=$(this).data('id').substring(5);
+		 					var mssid=$(this).data('id');
 			 				var mssum="我要修"+$(this).data('type');
 			 				var mscontent="您好，我在許願池上看到了您的問題，或許我能夠為您解決，如果需要，請主動聯繫我。";
 			 				var mstime=$(this).data('time');
@@ -321,7 +323,7 @@ body {font-family:Microsoft JhengHei;}
 							$.post(hyperlinkstring,{"mss_id":mssid,"ms_content":mscontent,"ms_summary":mssum},function(){
 
 // 								    $('[name="wishpoolmodal"]').modal("hide");
-								    $('[name="btnsubmit"]').unbind('click');
+// 								    $('[name="btnsubmit"]').unbind('click');
 								}	
 							);//end get function
 

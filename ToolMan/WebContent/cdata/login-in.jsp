@@ -148,6 +148,7 @@ body {
         
 					<div style="position: absolute; right:110px;bottom:10px;font-size:16px;color:red;" class="error">${errorMsgs.LoginError}</div>
 					<div style="position: absolute; right:125px;bottom:10px;font-size:16px;color:red;">${errorMsgs.gRecaptchaResponse}</div>
+					<div style="position: absolute; right:135px;bottom:10px;font-size:16px;color:red;">${errorMsgs.suspended}</div>
 					</div>
 					<!-- recaptcha -->
 					<div style="display:none" id="show2">
@@ -157,6 +158,7 @@ body {
 					<!--錯誤訊息 -->
                     <div class="error">${errorMsgs.c_id}</div>
 					<div class="error">${errorMsgs.c_pwd}</div>
+					
 				</div>
 				<div class="main" >
 					<div class="row" >

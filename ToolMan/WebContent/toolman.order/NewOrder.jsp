@@ -304,7 +304,7 @@
 										<td>
 											<div id="datecalendar" >																							
 												<input type="text" class="inputstyle" id="datepicker"  value="${orderVO.o_bdate}">
-												<input type="text" class="inputstyle" id="datepickersend" name="o_bdate" value="${orderVO.o_bdate}">
+<%-- 												<input type="text" class="inputstyle" id="datepickersend" name="o_bdate" value="${orderVO.o_bdate}"> --%>
 												
 												<!-- 放jQuery的calendar -->
 											</div>
@@ -692,13 +692,13 @@ function calendarsubmit(){
 				    },
 					eventDragStop: function(event,jsEvent) {
 						
-					    alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
+// 					    alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
 // 					    if( ( 130<= jsEvent.pageX)  && (jsEvent.pageX <= 230) &&(700 <= jsEvent.pageY)&& (jsEvent.pageY <=840))
-					if( ( 1270<= jsEvent.pageX)  || (jsEvent.pageX <= 170) ||(928 <= jsEvent.pageY)|| (jsEvent.pageY <=160)){
-					      alert('delete: '+ event.id);
-					      $('#calendar').fullCalendar('removeEvents', event.id);
-					    }
-					},
+					    if( ( 1300<= jsEvent.pageX)  || (jsEvent.pageX <= 370) ||(780 <= jsEvent.pageY)|| (jsEvent.pageY <=130)){
+						      alert('delete: '+ event.id);
+						      $('#calendar').fullCalendar('removeEvents', event.id);
+						    
+						},
 					drop: function(date,event) {
 						
 //		 				console.log(event);
