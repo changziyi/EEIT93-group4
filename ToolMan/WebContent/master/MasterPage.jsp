@@ -62,6 +62,7 @@
 		.ratediv {margin-left:10%}
 		.ratstardiv {margin-top:1%;margin-left:28%}
 		.tagtext {font-size:16px}
+		.bdes {font-family:Microsoft JhengHei;width:70%;padding:3%;font-size:20px;margin-top:3%;margin-left:9%}
 	</style>
 	<jsp:useBean id="mdataVO" class="toolman.mdata.model.MdataVO" scope="session"/>
 </head>
@@ -162,7 +163,7 @@
 	</div>
 	
 </div>
-				<H2 style="display:inline;vertical-align:top">${mdataVO.b_name}</H2>
+				<H3 style="display:inline;vertical-align:top">${mdataVO.b_name}</H3>
 				<c:if test="${LoginOK.m_id == mdataVO.m_id}">
 					<a href="${pageContext.servletContext.contextPath}/calendarformasterpage/mastercalendar.jsp" class="btn btn-default"><span class="glyphicon glyphicon-calendar"></span> 編輯日曆</a><a class="btn btn-default" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-pencil"></span> 編輯店家</a>
 				</c:if>
@@ -216,7 +217,7 @@
 
 	<div class="tab-content">
 		<div id="home" class="tab-pane fade in active">
-			<p>${mdataVO.b_des}</p>
+			<pre class="bdes">${mdataVO.b_des}</pre>
 		</div>
 		
 		<div id="menu1" class="tab-pane fade">
@@ -278,7 +279,7 @@
 			
 			<c:if test="${empty mdataVO.works}">
 	          	<div class="ratediv">
-	          		<h3 style="margin-top:8%; margin-bottom:1%; margin-left:25%">尚無上傳作品</h3>
+	          		<h3 style="margin-top:8%; margin-bottom:8%; margin-left:25%">尚無上傳作品</h3>
 	          	</div>
           	</c:if>
 			
@@ -289,7 +290,7 @@
 							<c:if test="${LoginOK.m_id == mdataVO.m_id}">
 								<a class="btn btn-danger deleteworkim" id="deleteworkim"><span class="glyphicon glyphicon-trash"></span> 刪除</a>
 							</c:if>
-							${aWork.work_name}
+							<h4 style="display:inline">${aWork.work_name}</h4>
 							<input type="hidden" name="action" value="deleteworkim">
 							<input type="hidden" name="work_id" value="${aWork.work_id}">
 						</div>
@@ -308,6 +309,11 @@
 			<div>
 				<div>
 					<div id="show"></div>
+					<c:if test="${empty mdataVO.discussions}">
+						<div class="ratediv">
+		          			<h3 style="margin-top:8%; margin-bottom:1%; margin-left:25%">尚無問答記錄</h3>
+		          		</div>
+					</c:if>
 					<c:if test="${not empty LoginOK}">
 						<div class="commentarea">
 							<div class="form-group">
@@ -352,7 +358,7 @@
 						</table>
 					</c:if>
 					<c:if test="${empty mdataVO.orders}">
-						<h3 style="margin-top:1%; margin-bottom:1%; margin-left:25%">目前尚無評價</h3>
+						<h3 style="margin-top:1%; margin-bottom:8%; margin-left:25%">目前尚無評價</h3>
 					</c:if>
 				</div>
 		</div>
@@ -381,7 +387,7 @@
 					</table>
 				</c:if>
 				<c:if test="${empty mdataVO.orders}">
-					<h3 style="margin-top:8%; margin-bottom:1%; margin-left:25%">尚無媒合紀錄</h3>
+					<h3 style="margin-top:8%; margin-bottom:8%; margin-left:25%">尚無媒合紀錄</h3>
 				</c:if>
 			</div>
 
@@ -471,7 +477,7 @@
 							var replyform = $('<form></form>').attr({'action':'masterPage.do','method':'post'})
 							if ("${LoginOK.m_id}" == "${mdataVO.m_id}") {
 								var replybtn = $('<input />').addClass('btn btn-success').attr({'type':'button','name':'replybtn','value':'回覆'});
-								var reply = $('<textarea></textarea>').addClass('form-control masterreply').attr({'name':'reply','id':'reply','rows':'2'});
+								var reply = $('<textarea></textarea>').addClass('form-control masterreply').attr({'name':'reply','id':'reply','rows':'4'});
 								var hidid = $('<input />').attr({'type':'hidden','name':'did','value':dis.did});
 								var hidaction = $('<input />').attr({'type':'hidden','name':'action','value':'MasterPage_A'});
 								var replyarea = $('<div></div>').addClass('replyarea').append([reply,hidaction,hidid,replybtn]);
@@ -507,7 +513,7 @@
 								var replyform = $('<form></form>').attr({'action':'masterPage.do','method':'post'})
 								if ("${LoginOK.m_id}" == "${mdataVO.m_id}") {
 									var replybtn = $('<input />').addClass('btn btn-success').attr({'type':'button','name':'replybtn','value':'回覆'});
-									var reply = $('<textarea></textarea>').addClass('form-control masterreply').attr({'name':'reply','id':'reply','rows':'2'});
+									var reply = $('<textarea></textarea>').addClass('form-control masterreply').attr({'name':'reply','id':'reply','rows':'4'});
 									var hidid = $('<input />').attr({'type':'hidden','name':'did','value':dis.did});
 									var hidaction = $('<input />').attr({'type':'hidden','name':'action','value':'MasterPage_A'});
 									var replyarea = $('<div></div>').addClass('replyarea').append([reply,hidaction,hidid,replybtn]);
@@ -550,7 +556,7 @@
 								var replyform = $('<form></form>').attr({'action':'masterPage.do','method':'post'})
 								if ("${LoginOK.m_id}" == "${mdataVO.m_id}") {
 									var replybtn = $('<input />').addClass('btn btn-success').attr({'type':'button','name':'replybtn','value':'回覆'});
-									var reply = $('<textarea></textarea>').addClass('form-control masterreply').attr({'name':'reply','id':'reply','rows':'2'});
+									var reply = $('<textarea></textarea>').addClass('form-control masterreply').attr({'name':'reply','id':'reply','rows':'4'});
 									var hidid = $('<input />').attr({'type':'hidden','name':'did','value':dis.did});
 									var hidaction = $('<input />').attr({'type':'hidden','name':'action','value':'MasterPage_A'});
 									var replyarea = $('<div></div>').addClass('replyarea').append([reply,hidaction,hidid,replybtn]);
@@ -680,7 +686,7 @@
 						workname.val(null);
 						workdes.val(null);
 // 						location.reload();
-						myDiv.html('<div class="alert alert-success" role="alert" id="alertupload"><strong>新增作品成功！請重新回到我的店家</strong></div>');
+						myDiv.html('<div class="alert alert-success" role="alert" id="alertupload"><strong>新增作品成功！請重新回到<a href="${pageContext.servletContext.contextPath}/master/masterPage.do?m_id=${LoginOK.m_id}" class="alert-link" style="color:#00BFFF;">我的店家</a></strong></div>');
 // 						
 // 						$('.workdiv').empty();
 						
