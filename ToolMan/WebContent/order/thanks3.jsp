@@ -6,6 +6,7 @@
 
 <head>
 <meta http-equiv="refresh" content="1;url=${pageContext.servletContext.contextPath}/cdata/CdataOrderServlet.do?c_id=${LoginOK.c_id}&action=myHate">
+	<link rel="shortcut icon" href="${pageContext.servletContext.contextPath}/favicon.ico" />
 
 <title>Tool Man</title>
 

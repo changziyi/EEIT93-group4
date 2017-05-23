@@ -7,6 +7,7 @@
 <html>
 <head>
 
+	<link rel="shortcut icon" href="${pageContext.servletContext.contextPath}/favicon.ico" />
 
 <style >
 .kk {

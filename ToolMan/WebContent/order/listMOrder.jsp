@@ -6,37 +6,7 @@
 <html>
 <head>
 <title>Tool Man</title>
-<script>        
-
-// function star() {
-//     var areas = document.getElementsByTagName("area");　
-//         //alert(areas.length);
-//         for (var i = 0; i < areas.length; i++) {
-//             areas[i].onmouseover = function () { mouseOver(this.id); };
-//             areas[i].onmouseout = mouseOut;
-//            areas[i].onclick = function () { Click(this.id); }
-        	 
-//         }
-        
-//     }     
-
-
-//         function mouseOver(areaid) {            
-//             //document.images[0].src = "images/MapTaipei.gif";
-<%--             document.images[0].src = "<%=request.getContextPath()%>/order/images/5star-"+areaid.substr(2)+".png"; --%>
-//         }
-
-
-//         function mouseOut() {            
-<%--             document.images[0].src = "<%=request.getContextPath()%>/order/images/5star.png"; --%>
-//              }
-
-
-//          function Click(areaid) {            
-//              document.getElementById("mapdiv1").innerHTML ="你給了"+areaid.substr(2)+"分";
-//              document.getElementById("mapdiv").innerHTML = '<input type="hidden" name="c_rating" value="'+areaid.substr(2)+'">'
-//          }
-    </script>
+	<link rel="shortcut icon" href="${pageContext.servletContext.contextPath}/favicon.ico" />
 
 </head>
 

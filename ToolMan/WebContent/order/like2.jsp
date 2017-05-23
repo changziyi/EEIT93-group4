@@ -12,6 +12,7 @@
 
 <head>
 <title>Tool Man</title>
+	<link rel="shortcut icon" href="${pageContext.servletContext.contextPath}/favicon.ico" />
 
 </head>
 
