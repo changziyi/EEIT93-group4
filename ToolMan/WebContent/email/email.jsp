@@ -15,8 +15,6 @@
 	
 %>
 
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
  
@@ -99,11 +97,11 @@
 								</div>
 								<div class="modal-body">
 								主旨： 
-								<button class="btn btn-primary" data-toggle="modal" id="selectbtn" name="btndetail" data-name="btndetail${emailVO.ms_id}"
+								<button class="btn btn-default" data-toggle="modal" id="selectbtn" name="btndetail" data-name="btndetail${emailVO.ms_id}"
 						   		 data-target="#clickSummary" data-id="${emailVO.ms_id}">${emailVO.ms_summary}</button>
 								<br class="content1"> 
-								<span name="content1${emailVO.ms_id}">內容：<span >${emailVO.ms_content}</span></span>
-								<br> 
+								
+							
 								<span name="time1${emailVO.ms_id}">時間：<span >${emailVO.ms_date}</span></span>
 								<br> 
 								<span >狀態：<span name="readornot${emailVO.ms_id}" >${emailVO.s_name == 'true' ? '已讀':'未讀'}</span></span>
@@ -205,7 +203,7 @@
 					
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-						<button type="submit" class="btn btn-primary">送出</button>			
+						<button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#myModal04">送出</button>			
 					</div>
 					
 <!-- 					<form action="Email.do" method="post"> -->
@@ -219,6 +217,36 @@
 			</form>
 		</div>
 	</div>
+	<!------------------ 發信確認 ------------>
+	
+
+	<div class="modal fade" id="myModal04" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h3 class="modal-title" id="myModalLabel">
+						寄信成功!
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+					</h3>
+					</button>
+				</div>
+				<div class="modal-body">
+					<p>123456</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-danger" data-dismiss="modal">離開</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+	
+	
+	
 	
 	<!------------------------------------ js ---------------------------------------------------->
 	<script>

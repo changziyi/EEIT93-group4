@@ -301,7 +301,7 @@ body {font-family:Microsoft JhengHei;}
 		</div>
 	</c:forEach>
 	
-	<!-- 213212122122121222 -->
+	<!-------------------------------------- 接下許願後的確認通知 -------------------------------->
 	
 	<div class="modal fade" id="myModal04" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel" aria-hidden="true">
