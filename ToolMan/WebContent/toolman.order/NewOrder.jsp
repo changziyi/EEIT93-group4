@@ -698,7 +698,8 @@ function calendarsubmit(){
 						      alert('delete: '+ event.id);
 						      $('#calendar').fullCalendar('removeEvents', event.id);
 						    
-						},
+						}
+					},
 					drop: function(date,event) {
 						
 //		 				console.log(event);
