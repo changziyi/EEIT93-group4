@@ -31,12 +31,12 @@
           <div class="field-wrap">
             <label>新密碼<span class="req">*</span></label>
             <input style="background-color:#ffffff;"  type="password" class="input" name="newPassword" autocomplete="off">
-            <span class="error">${errors.newPassword }</span>
+            <span class="error" style="color:red">${errors.newPassword }</span>
           </div> 
           <div class="field-wrap">
             <label>確認新密碼<span class="req">*</span></label>
             <input style="background-color:#ffffff;" type="password"  name="newPassword2" autocomplete="off"/>
-            <span class="error">${errors.newPassword2 }</span>
+            <span class="error" style="color:red">${errors.newPassword2 }</span>
           </div>                      
           <button type="submit" id="sweetalart" class="button button-block" >修改</button>                                                  
           </form>
