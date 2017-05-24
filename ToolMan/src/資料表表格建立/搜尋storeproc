@@ -1,0 +1,42 @@
+USE ToolMan
+GO
+
+CREATE PROCEDURE masterQuery(@city nvarchar(20),
+							 @district nvarchar(20),
+							 @bname nvarchar(30))
+AS
+BEGIN
+	SET NOCOUNT ON;--不要回傳所影響資料列筆數訊息
+	SELECT m_id, b_name, m_name, m_city, m_district, b_des, m_arating, o_finished, s_name
+	FROM mdata
+	WHERE m_city = @city and m_district like '%' + @district + '%' and b_name like '%' + @bname + '%' and s_name = '審核通過'
+END;
+GO
+
+------------------------------------------------------------------------------
+
+CREATE PROCEDURE mproQuery(@pro nvarchar(20),
+				           @city nvarchar(20),
+                           @district nvarchar(20),
+						   @bname nvarchar(30))
+AS
+BEGIN
+	SET NOCOUNT ON;--不要回傳所影響資料列筆數訊息
+	SELECT p.m_pro, m.m_id, m.b_name, m.m_name, m.m_city, m.m_district, m.b_des, m.m_arating, m.o_finished, m.s_name
+	FROM mpro p JOIN mdata m
+	ON p.m_id = m.m_id
+	WHERE m.m_city = @city and m.m_district like '%' + @district + '%' and p.m_pro like '%' + @pro + '%' and m.b_name like '%' + @bname + '%' and s_name = '審核通過'
+END;
+GO
+
+------------------------------------------------------------------------------
+
+CREATE PROCEDURE mpoQueryByMid(@m_id int)
+AS
+BEGIN
+	SET NOCOUNT ON;--不要回傳所影響資料列筆數訊息
+	SELECT m_pro
+	FROM mpro
+	WHERE m_id = @m_id
+END;
+GO
