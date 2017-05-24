@@ -42,7 +42,7 @@ public class OrderService {
     	List<OrderVO> orderlist = dao.getOrderByDate(o_bdate1, o_bdate2);
     	return orderlist;
     }
-    public String getOrderBySnameAndDateJson(String s_name,Timestamp o_tdate1,Timestamp o_tdate2){
+    public String getOrderBySnameAndDateJson(String s_name,String o_tdate1,String o_tdate2){
     	
     	List<OrderVO> orderlist = dao.getOrderBySnameAndDate(s_name,o_tdate1, o_tdate2);
     	List list = new ArrayList();
@@ -77,6 +77,7 @@ public class OrderService {
 			
 		}		
 		String ojasonstring = JSONValue.toJSONString(list);
+		
 //		out.write(ojasonstring);
 		System.out.println(ojasonstring);
 	

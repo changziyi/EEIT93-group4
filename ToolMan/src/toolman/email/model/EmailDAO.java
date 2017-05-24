@@ -519,11 +519,6 @@ public class EmailDAO implements EmailDAO_interface {
 		return Onelist;	
 	}	
 	//By Benny
-	
-	public static void main(String[] args) {
 
-	
-		
-	}
 
 }

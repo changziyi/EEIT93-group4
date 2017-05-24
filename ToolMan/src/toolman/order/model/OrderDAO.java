@@ -107,7 +107,7 @@ public class OrderDAO implements OrderDAO_Interface {
 		
 		try {
 			session.beginTransaction();
-			Query query = session.createQuery("FROM OrderVO WHERE m_id.m_id = ?");
+			Query query = session.createQuery("FROM OrderVO WHERE m_id = ?");
 			query.setParameter(0, m_id);
 			querylist = query.list();			
 			session.getTransaction().commit();
@@ -363,10 +363,10 @@ public class OrderDAO implements OrderDAO_Interface {
 		try {
 			session.beginTransaction();
 			Query query = session.createQuery("FROM OrderVO WHERE c_id = ? AND o_tdate BETWEEN ? AND ? AND s_name = ?");
-			query.setParameter(1, c_id);
-			query.setParameter(2, o_tdate1);
-			query.setParameter(3, o_tdate2);
-			query.setParameter(4, s_name);
+			query.setParameter(0, c_id);
+			query.setParameter(1, o_tdate1);
+			query.setParameter(2, o_tdate2);
+			query.setParameter(3, s_name);
 			querylist = query.list();			
 			session.getTransaction().commit();
 		} catch (RuntimeException ex) {
@@ -403,17 +403,19 @@ public class OrderDAO implements OrderDAO_Interface {
 		}
 		return list;
 	}
-    public List<OrderVO> getOrderBySnameAndDate(String s_name,Timestamp o_tdate1,Timestamp o_tdate2){
+    public List<OrderVO> getOrderBySnameAndDate(String s_name,String o_tdate1,String o_tdate2){
     	List<OrderVO> querylist = null;
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Integer count = 0;
 		
 		try {
 			session.beginTransaction();
-			Query query = session.createQuery("FROM OrderVO WHERE s_name=? o_tdate BETWEEN ? AND ?");
-			query.setParameter(1, s_name);
-			query.setParameter(2, o_tdate2);
-			query.setParameter(3, o_tdate2);
+			Query query = session.createQuery("FROM OrderVO WHERE s_name=? AND o_tdate BETWEEN ? AND ?");
+			System.out.println(o_tdate1);
+			System.out.println(o_tdate2);
+			query.setParameter(0, s_name);
+			query.setParameter(1, o_tdate2);
+			query.setParameter(2, o_tdate1);
 			querylist = query.list();			
 			session.getTransaction().commit();
 		} catch (RuntimeException ex) {

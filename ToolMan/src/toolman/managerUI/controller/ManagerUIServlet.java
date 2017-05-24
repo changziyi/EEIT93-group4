@@ -4,8 +4,11 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -57,7 +60,9 @@ public class ManagerUIServlet extends HttpServlet {
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
-
+//		topnavigatorid="o";
+//		datastatus = "已完成";
+//		datatime = "oneyear";
 //		topnavigatorid="o";
 //		datastatus="一方未評分";
 //		datatime="alldate";
@@ -151,37 +156,60 @@ public class ManagerUIServlet extends HttpServlet {
 		if("o".equals(topnavigatorid)){
 			OrderService orderservice = new OrderService();
 			
-			if("allorder".equals(datastatus)){	
+			if("allorder".equals(datastatus)&&("alldate".equals(datatime))){	
 				
 				out.write(orderservice.getAllOrderJson());
 				
-			}else if(!"allorder".equals(datastatus)&&"alldate".equals(datatime)){
+			}else if(!"allorder".equals(datastatus)&&("alldate".equals(datatime))){
 				out.write(orderservice.getBySnameJson(datastatus));
 			}//end if		
-			else if(!"allorder".equals(datastatus)&&!"alldate".equals(datatime)){
+			else if((!"alldate".equals(datatime))&&("allorder".equals(datastatus))){
 				if ("oneyear".equals(datatime)){
-					
-					Timestamp o_tdate1 = new Timestamp(System.currentTimeMillis());
-					Timestamp o_tdate2 = new Timestamp(System.currentTimeMillis()-31536000000L);//365*24*60*60*1000
+					System.out.println("oneyear");
+					String o_tdate3 = new Timestamp(System.currentTimeMillis()).toString();
+					String o_tdate4 = new Timestamp(System.currentTimeMillis()-31536000000L).toString();//365*24*60*60*1000
+					DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+					Date o_tdate5 = null;
+					try {
+						o_tdate5 = df.parse(o_tdate3);
+					} catch (ParseException e) {
+						
+						e.printStackTrace();
+					}
+					Date o_tdate6 = null;
+					try {
+						o_tdate6 = df.parse(o_tdate4);
+					} catch (ParseException e) {
+						
+						e.printStackTrace();
+					}
+					String o_tdate1 = df.format(o_tdate5);
+					String o_tdate2 =  df.format(o_tdate6);
 					out.write(orderservice.getOrderBySnameAndDateJson(datastatus,o_tdate1,o_tdate2));
 					
 				}//end else	
 				else if ("halfyear".equals(datatime)){
-					
-					Timestamp o_tdate1 = new Timestamp(System.currentTimeMillis());
-					Timestamp o_tdate2 = new Timestamp(System.currentTimeMillis()-15768000000L);//365/2*24*60*60*1000
+					System.out.println("halfyear");
+					String o_tdate3 = new Timestamp(System.currentTimeMillis()).toString();;
+					String o_tdate4 = new Timestamp(System.currentTimeMillis()-15768000000L).toString();;//365/2*24*60*60*1000
+					DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+					String o_tdate1 = df.format(o_tdate3);
+					String o_tdate2 = df.format(o_tdate4);
 					out.write(orderservice.getOrderBySnameAndDateJson(datastatus,o_tdate1,o_tdate2));
 	
 				}//end else	
 				else if ("onemonth".equals(datatime)){
-					
-					Timestamp o_tdate1 = new Timestamp(System.currentTimeMillis());
-					Timestamp o_tdate2 = new Timestamp(System.currentTimeMillis()-2592000000L);//365/2*24*60*60*1000
+					System.out.println("onemonth");
+					String o_tdate3 = new Timestamp(System.currentTimeMillis()).toString();;
+					String o_tdate4 = new Timestamp(System.currentTimeMillis()-2592000000L).toString();;//365/2*24*60*60*1000
+					DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+					String o_tdate1 = df.format(o_tdate3);
+					String o_tdate2 = df.format(o_tdate4);
 					out.write(orderservice.getOrderBySnameAndDateJson(datastatus,o_tdate1,o_tdate2));
 	
 					}//end else	
 			}//else if datetime is not empty
-			
+		
 			
 //			System.out.println(ojasonstring);
 			//tested ok
