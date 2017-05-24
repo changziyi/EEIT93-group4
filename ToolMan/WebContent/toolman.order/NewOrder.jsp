@@ -304,7 +304,7 @@
 										<td>
 											<div id="datecalendar" >																							
 												<input type="text" class="inputstyle" id="datepicker"  value="${orderVO.o_bdate}">
-												<input type="text" class="inputstyle" id="datepickersend" name="o_bdate" value="${orderVO.o_bdate}">
+												<input type="hidden" class="inputstyle" id="datepickersend" name="o_bdate" value="${orderVO.o_bdate}">
 												
 												<!-- 放jQuery的calendar -->
 											</div>
@@ -327,9 +327,9 @@
 										</td>
 										<td style="">
 											<div style="width: 500px;"  >
-												<label class="radio-inline"style="float:left"><input type="radio"  name="req_exp" value="5000" checked="checked">5秒測試用</label>
-												<label class="radio-inline" style="float:left"><input type="radio" name="req_exp" value="15000" >15秒測試用</label>
-												<label class="radio-inline" style="float:left"><input type="radio" name="req_exp" value="2400000" >2小時</label>
+												<label class="radio-inline"style="float:left"><input type="radio"  name="req_exp" value="180000" checked="checked">3分鐘</label>
+												<label class="radio-inline" style="float:left"><input type="radio" name="req_exp" value="3600000" >1小時</label>
+												<label class="radio-inline" style="float:left"><input type="radio" name="req_exp" value="7200000" >2小時</label>
 												<label class="radio-inline" style="float:left"><input type="radio" name="req_exp" value="86400000">1天</label>
 												<label class="radio-inline" style="float:left"><input type="radio" name="req_exp" value="172800000">2天</label>
 												<label class="radio-inline" style="float:left"><input type="radio" name="req_exp" value="604800000">一週</label>
@@ -702,12 +702,13 @@ function calendarsubmit(){
 				    },
 					eventDragStop: function(event,jsEvent) {
 						
-					    alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
+// 					    alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
 // 					    if( ( 130<= jsEvent.pageX)  && (jsEvent.pageX <= 230) &&(700 <= jsEvent.pageY)&& (jsEvent.pageY <=840))
-					if( ( 1270<= jsEvent.pageX)  || (jsEvent.pageX <= 170) ||(928 <= jsEvent.pageY)|| (jsEvent.pageY <=160)){
-					      alert('delete: '+ event.id);
-					      $('#calendar').fullCalendar('removeEvents', event.id);
-					    }
+					    if( ( 1300<= jsEvent.pageX)  || (jsEvent.pageX <= 370) ||(780 <= jsEvent.pageY)|| (jsEvent.pageY <=130)){
+						      alert('delete: '+ event.id);
+						      $('#calendar').fullCalendar('removeEvents', event.id);
+						    
+						}
 					},
 					drop: function(date,event) {
 						

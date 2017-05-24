@@ -172,8 +172,9 @@
 				<p>師傅：${mdataVO.m_name}</p>
 				<p>地區：${mdataVO.m_city} ${mdataVO.m_district}</p>
  <%--------------------------------------最愛與黑單--------------------------------------------------- --%>
+     	     	
      	<c:if test="${empty LoginOK}">
-	          		<a href="#" data-toggle="tooltip" data-placement="bottom" title="要登入才能預約師傅">
+     	        		<a href="#" data-toggle="tooltip" data-placement="bottom" title="要登入才能預約師傅">
 	          			<button type="button" class="btn btn-primary disabled btn-success" >
 	          				<span class="glyphicon glyphicon-earphone"></span>預約師傅
 	          			</button>
@@ -183,16 +184,23 @@
           			<c:if test="${LoginOK.m_id != mdataVO.m_id}">
           			<a href="${pageContext.servletContext.contextPath}/toolman.order/NewOrder.jsp" class="btn btn-success ">
 	          			<span class="glyphicon glyphicon-earphone"></span> 預約師傅</a>
+	          			
 					<a href="${pageContext.servletContext.contextPath}/order/Favorite.do?c_id=${LoginOK.c_id}&m_id=${mdataVO.m_id}&action=addFavorite" class="btn btn-info ">
 						<span class="glyphicon glyphicon-heart-empty"></span> 加入最愛
 					</a>
 	        		<a href="${pageContext.servletContext.contextPath}/order/Dislike.do?c_id=${LoginOK.c_id}&m_id=${mdataVO.m_id}&action=addDislike" class="btn btn-danger">
 	          			<span class="glyphicon glyphicon-remove-sign"></span> 加入黑名單
 	        		</a>
+	        		</c:if>		
 	        	</c:if>	
-        		</c:if>
-        		        			<c:forEach var="empVO" items="${myHate}">
+        		
+        		     	
+        		     	<c:forEach var="empVO" items="${myHate}">
+        		
+        		
         			<c:if test="${empVO.mdataVO.m_id == mdataVO.m_id && empVO.cdataVO.c_id == LoginOK.c_id}">
+        			
+        			
         			<div class="alert alert-danger" style="font-size:24px">
     <strong>注意!</strong> 此人是黑名單人物
   </div>
@@ -329,9 +337,9 @@
 			</div>
 		</div>
 		<div id="menu3" class="tab-pane fade">
-				<div class="ratstardiv">
-					<input id="input-3" name="input-3" value="${mdataVO.m_arating}" class="rating-loading">
-				</div>
+<!-- 				<div class="ratstardiv"> -->
+<%-- 					<input id="input-3" name="input-3" value="${mdataVO.m_arating}" class="rating-loading"> --%>
+<!-- 				</div> -->
 				
 				<div class="ratediv">
 					<c:if test="${not empty mdataVO.orders}">
@@ -358,7 +366,7 @@
 						</table>
 					</c:if>
 					<c:if test="${empty mdataVO.orders}">
-						<h3 style="margin-top:1%; margin-bottom:8%; margin-left:25%">目前尚無評價</h3>
+						<h3 style="margin-top:8%; margin-bottom:8%; margin-left:25%">目前尚無評價</h3>
 					</c:if>
 				</div>
 		</div>

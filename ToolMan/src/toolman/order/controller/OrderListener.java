@@ -43,8 +43,9 @@ public class OrderListener implements ServletContextListener{
     	if(timer!=null) timer.cancel();      
 	       event.getServletContext().log("定时器销毁");
 	       System.out.println("destoryed");
-    	}
-   
+
+	            }
+
   }
 	
 //

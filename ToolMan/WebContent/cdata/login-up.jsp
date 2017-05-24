@@ -53,8 +53,8 @@ h3 {
 }
 
 .cen {
-	margin: 10px auto;
-	text-align: center;
+	margin: 30px auto;
+
 }
 </style>
 
@@ -69,50 +69,50 @@ h3 {
     <form action="<c:url value='/cdata/Cdata.do'/>" method="POST">            
           <div class="field-wrap" >
             <input type="text" style="background-color:#ffffff;"  name="id" autocomplete="off" placeholder="帳號*"  autocomplete="off" autofocus>
-            <label style="left:410px;" class="errormg">${errorMsgs.c_id}</label>
+            <div style="left:410px;" class="errormg">${errorMsgs.c_id}</div>
           </div>
           
           <div class="field-wrap">         
             <input type="password" style="background-color:#ffffff;" name="pswd" axlength="12" placeholder="密碼*"  autocomplete="off">
-            <label style="left:410px;" class="errormg">${errorMsgs.c_pwd}</label>
-            <label style="left:246px;" class="errormg">${errorMsgs.c_pwd01}</label>
+            <div style="left:410px;" class="errormg">${errorMsgs.c_pwd}</div>
+            <div style="left:246px;" class="errormg">${errorMsgs.c_pwd01}</div>
           </div> 
           <div class="field-wrap">
             <input type="text" style="background-color:#ffffff;" name="name" placeholder="姓名*" autocomplete="off">
-            <label style="left:410px;" class="errormg">${errorMsgs.c_name}</label>
-            <label style="left:257px;" class="errormg">${errorMsgs.c_name01}</label>
+            <div style="left:410px;" class="errormg">${errorMsgs.c_name}</div>
+            <div style="left:257px;" class="errormg">${errorMsgs.c_name01}</div>
           </div>
           <div class="field-wrap">
             <input type="text" style="background-color:#ffffff;" id="datepicker" name="birth" placeholder="生日*" autocomplete="off">
-            <label style="left:259px;" class="errormg">${errorMsgs.bday}</label>
+            <div style="left:259px;" class="errormg">${errorMsgs.bday}</div>
           </div> 
           <div class="field-wrap">
             <input type="text" style="background-color:#ffffff;" name="phone" placeholder="手機號碼*" autocomplete="off">
-            <label style="left:378px;" class="errormg">${errorMsgs.phone}</label>
-            <label style="left:346px;" class="errormg">${errorMsgs.phone01}</label>
+            <div style="left:378px;" class="errormg">${errorMsgs.phone}</div>
+            <div style="left:346px;" class="errormg">${errorMsgs.phone01}</div>
           </div>
           <div class="field-wrap">
             <input type="text" style="background-color:#ffffff;" name="mail" placeholder="E-mail*" autocomplete="off">
-            <label style="left:396px;" class="errormg">${errorMsgs.c_email}</label>
-            <label style="left:333px;" class="errormg">${errorMsgs.c_email01}</label>
+            <div style="left:396px;" class="errormg">${errorMsgs.c_email}</div>
+            <div style="left:333px;" class="errormg">${errorMsgs.c_email01}</div>
           </div>                                                    
 <!--地址-->                
           <div class="top-row">
             <div class="field-wrap">
               <input type="text" style="background-color:#ffffff;" name="city" placeholder="縣市*" autocomplete="off" />
               <input type="hidden" style="background-color:#ffffff;" name="other">
-              <label style="left:138px;" class="errormg">${errorMsgs.c_city}</label>
+              <div style="left:138px;" class="errormg">${errorMsgs.c_city}</div>
             </div>      
             <div class="field-wrap">
               <input type="text" style="background-color:#ffffff;" name="district" placeholder="地區*" autocomplete="off"/>
-              <label style="left:138px;" class="errormg">${errorMsgs.c_district}</label>
+              <div style="left:138px;" class="errormg">${errorMsgs.c_district}</div>
             </div>
           </div>
 <!--地址-->  
           <div class="field-wrap">
 	            <input type="text" style="background-color:#ffffff;" name="addr" placeholder="地址*" autocomplete="off">
-	            <label style="left:410px;" class="errormg">${errorMsgs.c_addr}</label>
-	            <label style="left:347px;" class="errormg">${errorMsgs.c_addr01}</label>
+	            <div style="left:410px;" class="errormg">${errorMsgs.c_addr}</div>
+	            <div style="left:347px;" class="errormg">${errorMsgs.c_addr01}</div>
           </div>
           <div class="field-wrap"> 
 	          	     
@@ -121,17 +121,22 @@ h3 {
 	            <span  style="border:1px solid blue;right:20px;bottom:6px;font-size: 20px;color:#a0b3b0"class="function-code" id="createCade" ></span><!--驗證碼驗證-->
 				<input  type = "hidden" style="border:1px solid blue;right:20px;bottom:6px;font-size: 20px;color:#a0b3b0"class="function-code" id="verification2" name="verification2" />
 
-	            <label id="v" style="left:330px;" class="errormg">${errorMsgs.errorverify}</label>
-	             <label id="v" style="left:160px; color:red; font-size: 16px; margin-top:3px;" >${errorMsgs.account}</label>           
+	            <div id="v" style="left:330px;" class="errormg">${errorMsgs.errorverify}</div>
+	             <div id="v" style="left:160px; color:red; font-size: 16px; margin-top:3px;" >${errorMsgs.account}</div>           
           </div>
-          <div style="margin-top:40px;">
-                                
-          	<button type="submit" id="register" class="button button-block" >註冊</button>
+          <div>
+          <div style="margin-top:40px">
+            <div>
+          	<button type="submit" id="register" class="button button-block cen" >註冊</button>
           	<input type="hidden" name="action" value=""> 
-          </div>
-          <div style="margin-top:10px;">       
-          <button type="submit" id="onkey" class="button button-block" name="" >一鍵輸入</button>
+          	</div> 
+         
+     
+          <div style="margin-top:10px">       
+          <button type="submit" id="onkey" class="button button-block cen" name="" >一鍵輸入</button>
           </div> 
+          </div>
+          </div>
           </form>
         </div>
       
@@ -139,9 +144,6 @@ h3 {
         <div id="login"></div>        
       </div><!-- tab-content -->   
  <!-- /form -->
-
-
-
 	<script>
 //     $(function() {//日期選擇器
 //         $( "#datepicker" ).datepicker({
@@ -162,7 +164,7 @@ $(function(){
 			$("input[name = 'name']").val("航海王");
 			$("input[name = 'birth']").val("1990-04-19");
 			$("input[name = 'phone']").val("0985220221");
-			$("input[name = 'mail']").val("abcd@gmail.com");
+			$("input[name = 'mail']").val("Eeit93401@gmail.com");
 			$("input[name = 'city']").val("台北市");
 			$("input[name = 'district']").val("大安區");
 			$("input[name = 'addr']").val("建國南路一段126號");

@@ -261,11 +261,11 @@ function calendarsubmit(){
 						
 					    alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
 // 					    if( ( 130<= jsEvent.pageX)  && (jsEvent.pageX <= 230) &&(700 <= jsEvent.pageY)&& (jsEvent.pageY <=840))
-					if( ( 1270<= jsEvent.pageX)  || (jsEvent.pageX <= 170) ||(928 <= jsEvent.pageY)|| (jsEvent.pageY <=160)){
-					      alert('delete: '+ event.id);
-					      $('#calendar').fullCalendar('removeEvents', event.id);
-					    }
-					},
+// 					if( ( 1270<= jsEvent.pageX)  || (jsEvent.pageX <= 170) ||(928 <= jsEvent.pageY)|| (jsEvent.pageY <=160)){
+// 					      alert('delete: '+ event.id);
+// 					      $('#calendar').fullCalendar('removeEvents', event.id);
+// 					    }
+// 					},
 					drop: function(date,event) {
 						
 //		 				console.log(event);

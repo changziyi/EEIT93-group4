@@ -204,7 +204,7 @@ public class OrderDAO implements OrderDAO_Interface {
 		
 		try {
 			session.beginTransaction();				
-			Query query = session.createQuery("Update OrderVO set s_name='一方未評分' where o_id=?");
+			Query query = session.createQuery("Update OrderVO set s_name='一方未評' where o_id=?");
 			query.setParameter(0,o_id);
 			query.executeUpdate();
 			session.getTransaction().commit();
@@ -250,6 +250,7 @@ public class OrderDAO implements OrderDAO_Interface {
 			Query query = session.createQuery("Update OrderVO set s_name='已刪除' where o_id=:o");
 			query.setParameter("o",o_id);
 			query.executeUpdate();
+			System.out.println("oid="+o_id);
 			session.getTransaction().commit();
 		} catch (RuntimeException ex) {
 			session.getTransaction().rollback();

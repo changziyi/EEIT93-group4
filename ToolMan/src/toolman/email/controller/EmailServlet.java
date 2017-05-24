@@ -89,12 +89,14 @@ public class EmailServlet extends HttpServlet {
 //		String SendAccount = "sa";//benny test
 		// 收件者帳號
 		String mss_id = req.getParameter("mss_id");
+		System.out.println("mss_id1="+ mss_id);
 		//by benny tested ok
 		if("tom".equals(req.getParameter("mailtype"))){
 			MdataDAO mdatadao = new MdataDAO();
 			CdataService service = new CdataService();
 			CdataVO cdataVO1 = service.getByM(Integer.parseInt(mss_id));
 			mss_id = cdataVO1.getC_id();
+			System.out.println("mss_id2="+ mss_id);
 		}	
 		else if("tob".equals(req.getParameter("mailtype"))){
 			MdataDAO mdatadao2 = new MdataDAO();	
@@ -102,6 +104,7 @@ public class EmailServlet extends HttpServlet {
 			MdataVO mdataVO2 = mdatadao2.getMasterByB(mss_id);		
 			CdataVO cdataVO2 = service.getByM(mdataVO2.getM_id());
 			mss_id = cdataVO2.getC_id();
+			System.out.println("mss_id3="+ mss_id);
 		}
 
 		
@@ -171,7 +174,7 @@ public class EmailServlet extends HttpServlet {
 			 req.setAttribute("emailVO", emailVO);
 			RequestDispatcher failureView = req.getRequestDispatcher("/email/Email.jsp");
 			failureView.forward(req, res);
-			return;		
+
 		}
 		
 		//之前因為如果有輸入null會讓管理者後端無法出現兩次，所以判斷來源為管理者後端就不處理。

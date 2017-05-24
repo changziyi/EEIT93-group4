@@ -1,26 +1,25 @@
-<%@page import="org.hibernate.SessionFactory"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="java.util.*"%>
-<%@ page import="toolman.email.model.*"%>
-<%@ page import="toolman.cdata.model.*"%>
 
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+ 	pageEncoding="UTF-8"%> 
+ <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
+ <%@ page import="java.util.*"%> 
+<%@ page import="toolman.email.model.*"%> 
+<%@ page import="toolman.cdata.model.*"%> 
 <%	
 	EmailService emailSvc = new EmailService();
 	HttpSession sessions = request.getSession();
 	CdataVO cdataVO = (CdataVO)sessions.getAttribute("LoginOK");
 	System.out.println(cdataVO.getC_id());
-	//by Benny
 	List<EmailVO> list = emailSvc.getMail(cdataVO.getC_id());
-
-		pageContext.setAttribute("list", list);
+	pageContext.setAttribute("list", list);
 	
 %>
 
 
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+ 
 <head>
 <link rel="Shortcut Icon" href="${pageContext.servletContext.contextPath}/favicon.ico" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -32,14 +31,14 @@
 	src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
 <script
 	src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"
-	type="text/javascript"></script>
-<script type="text/javascript"
-	src="http://masonry.desandro.com/jquery.masonry.min.js"></script>
+<!-- <script -->
+<!-- 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" -->
+<!-- 	type="text/javascript"></script> -->
+<!-- <script type="text/javascript" -->
+<!-- 	src="http://masonry.desandro.com/jquery.masonry.min.js"></script> -->
 
-<script
-	src="${pageContext.servletContext.contextPath}/js/jquery.twzipcode.min.js"></script>
+<!-- <script -->
+<%-- 	src="${pageContext.servletContext.contextPath}/js/jquery.twzipcode.min.js"></script> --%>
 
 <style>
 .content_box {
@@ -53,22 +52,15 @@
 	
 }
 
+.bgcolor {
+	background-color: #4dd2ff;
+	border: 5px double #3399ff;
+	border-radius: 25px;
+}
+
 
 
 </style>
-
-<script>
-	$(function() {
-		$('#emailblock').imagesLoaded(function() {
-			$('#emailblock').masonry({
-				itemSelector : '.content_box',
-				columnWidth : 275,
-				animate : true
-			});
-		});
-	});
-</script>
-
 
 </head>
 <body>
@@ -79,37 +71,40 @@
 				<div class="row"></div>
 		</div>
 		
+		
 		<div class="row">
-			<div class="col-md-3" style=";background-color: #99ceff">
-				<div class="text-center">
-					<button class="btn btn-primary btn-lg" data-toggle="modal"
-						data-target="#myModal01">發送 Email</button>
+			<div class="col-md-3">
+				<div class="well text-center bgcolor">
+					<div>
+						<button class="btn btn-primary btn-lg" data-toggle="modal"
+							data-target="#myModal01">
+							 發送 e-mail
+						</button>
+					</div>			
 				</div>
-
 			</div>
-			</div>
-			<br/>
-			<div class="row">
-			<div class="col-md-4"></div>
+			
 			<div class="col-md-8" id="emailblock" 
-				style="overflow: hidden; margin: 0 auto; background-color: #99ceff"">
+				style="overflow: hidden; margin: 0 auto">
 				
 			
 						<c:forEach var="emailVO" items="${list}">
-							<div class="content_box">
+							<div class="content_box" name="mainblock " >
 					            <div class="modal-header" >			
-								<span>收件人：${emailVO.mss_id}</span>
+								<span name="receiver1${emailVO.ms_id}">收件人：${emailVO.mss_id}</span>
 								<br>
-								<span>寄件人：${emailVO.msr_id}</span>
+								<span name="sender1${emailVO.ms_id}">寄件人：${emailVO.msr_id}</span>
 								<br>
 								主旨： 
-							<button class="btn btn-primary" data-toggle="modal" id="selectbtn"
-						     data-target="#clickSummary" data-id="${emailVO.ms_id}">${emailVO.ms_summary}</button>
+								<button class="btn btn-primary" data-toggle="modal" id="selectbtn" name="btndetail" data-name="btndetail${emailVO.ms_id}"
+						   		 data-target="#clickSummary" data-id="${emailVO.ms_id}">${emailVO.ms_summary}</button>
+								<br class="content1"> 
+								<span name="content1${emailVO.ms_id}">內容：<span >${emailVO.ms_content}</span></span>
 								<br> 
-								時間：${emailVO.ms_date}
+								<span name="time1${emailVO.ms_id}">時間：<span >${emailVO.ms_date}</span></span>
 								<br> 
-								<span>狀態：<span>${emailVO.s_name == 'true' ? '已讀':'未讀'}</span></span>
-	                        <div class="modal-footer">
+								<span >狀態：<span name="readornot${emailVO.ms_id}" >${emailVO.s_name == 'true' ? '已讀':'未讀'}</span></span>
+	                 			
 							<form action="Email.do" method="post">
 							<input type="submit" class="btn btn-danger pull-right"  value="刪除" ><span aria-hidden="true"></span>
 							<input type="hidden" name="ms_id" value="${emailVO.ms_id}"></input>
@@ -121,7 +116,7 @@
 					</div>
 				</div>
 			</div>
-		
+	
 	
 <!-------------------- 詳細內容的彈出視窗 --------------------------------------------->
 	<div class="modal fade" id="clickSummary" tabindex="-1" role="dialog"
@@ -142,16 +137,16 @@
 					<div class="modal-body">
 						<table>
 							<tr>
-								<td>收件人：${Onelist.mss_id}</td>
+								<td name="receiver2">收件人：${Onelist.mss_id}</td>
 							</tr>
 							<tr>
-								<td>寄件人：${Onelist.msr_id}</td>
+								<td name="sender2">寄件人：${Onelist.msr_id}</td>
 							</tr>
 							<tr>
-								<td>主旨：${Onelist.ms_summary}</td>
+								<td name="btndetail2">主旨：${Onelist.ms_summary}</td>
 							</tr>
 							<tr>								
-								<td>內容：${Onelist.ms_content}</td>
+								<td name="content2">內容：${Onelist.ms_content}</td>
 							</tr>
 						</table>
 					</div>
@@ -178,11 +173,9 @@
 							<button type="button" class="close" data-dismiss="modal"
 								aria-label="Close">
 								<span aria-hidden="true">&times;</span>
-
 							</button>
 						</H4>
 					</div>
-					
 					<div class="modal-body">
 						<table>
 							<tr>
@@ -196,7 +189,7 @@
 									value="${param.ms_summary}" />${errorMsgs.email1}${errorMsgs.email2}
 								</td>
 							</tr>
-						
+
 							<tr>
 								<td><label style="vertical-align: top">內容：</label>
 								
@@ -224,24 +217,31 @@
 	</div>
 	
 	<!------------------------------------ js ---------------------------------------------------->
-	<script type="text/javascript">
-	$('button.btn-primary').click(function(){
-		var dataid = $(this).attr('data-id');
-		$.get('Email.do',{
-			'action':'updateisRead',
-			'msid':dataid
-		});
-		var divparent =  $(this).parent('div');
-		var receiveid = divparent.children('span:first').text();
-		var receiveid2 = divparent.children('span:eq(1)').text();
-		var receiveid3 = $(this).text();
-		var receiveid4 = divparent.children('span:eq(2)').text();
-		$('td:first').text(receiveid);
-		$('td:eq(1)').text(receiveid2);
-		$('td:eq(2)').text("主旨: "+receiveid3);
-		$('td:eq(3)').text(receiveid4);
-		divparent.children('span:eq(3)').children().text('已讀');
-	})
+	<script>
+	$(function() {
+// 		$('#emailblock').imagesLoaded(function() {
+// 			$('#emailblock').masonry({
+// 				itemSelector : '.content_box',
+// 				columnWidth : 275,
+// 				animate : true
+// 			});
+// 		});
+		$('[name="btndetail"]').click(function(){
+			var dataid = $(this).attr('data-id');
+			$.get('Email.do',{
+				'action':'updateisRead',
+				'msid':dataid
+			});
+
+			$('[name="receiver2"]').text($('[name="receiver1'+dataid+'"]').text());
+			$('[name="sender2"]').text($('[name="sender1'+dataid+'"]').text());
+			$('[name="btndetail2"]').text("主旨: "+$('[data-name="btndetail'+dataid+'"]').text());
+			$('[name="content2"]').text($('[name="content1'+dataid+'"]').text());
+			$('[name="readornot'+dataid+'"]').text('已讀');
+//	 		divparent.children('span:eq(4)').children().text('已讀');
+		})
+	});
+	
 	
 	
 	</script>

@@ -189,6 +189,7 @@ public class OrderService {
             	System.out.print("now="+currenttime);
             	System.out.print("now-order="+(currenttime-orderdate));
             	Long exptime = orderVO2.getReq_exp();
+            	System.out.print("exp"+(exptime));
                 if(orderdate-currenttime  >= exptime ) {
                 	dao.updateSnameAsDeletedById(orderVO2.getO_id());
                 }
