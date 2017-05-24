@@ -109,7 +109,7 @@
 								<li><a
 									href="${pageContext.servletContext.contextPath}/cdata/CdataOrderServlet.do?c_id=${LoginOK.c_id}&action=myHate">黑名單</a>
 								</li>
-								<li><a href="${pageContext.servletContext.contextPath}/ad/ad.jsp">刊登廣告</a></li>
+						
 								<li><a
 									href="${pageContext.servletContext.contextPath}/loginoutServlet">登出</a></li>
 
