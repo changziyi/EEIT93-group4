@@ -4,7 +4,9 @@
 <html>
 <head>
 	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
+<!-- --------------icon-------------------- -->
+<link rel="Shortcut Icon" href="${pageContext.servletContext.contextPath}/favicon.ico" />
+<!-- --------------end icon-------------------- -->
 <!--full calendar-->
 	<link rel="Shortcut Icon" href="${pageContext.servletContext.contextPath}/favicon.ico" />
 	<link rel='stylesheet' href='${pageContext.servletContext.contextPath}/js/fullcalendar.min.css' />
@@ -25,7 +27,7 @@
 <%-- 	</c:if> --%>
 
 <!-- login please -->
-	
+	<title>ToolMan</title>
 	<style>
 	
 

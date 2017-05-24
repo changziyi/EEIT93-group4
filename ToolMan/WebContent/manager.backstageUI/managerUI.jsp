@@ -5,7 +5,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=0.9">
-<title>Insert title here</title>
+<title>ToolMan</title>
+<!-- --------------icon-------------------- -->
+<link rel="Shortcut Icon" href="${pageContext.servletContext.contextPath}/favicon.ico" />
+<!-- --------------end icon-------------------- -->
 <!-- jquery -->
 	<script src="${pageContext.servletContext.contextPath}/js/jquery-3.2.1.min.js"></script>
 	<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/js/jqueryui/jquery-ui.min.css">
