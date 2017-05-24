@@ -167,7 +167,7 @@
 	
 <!-- 					<li  data-toggle="tab" role="presentation" id="managerchart" data-id="a"><a href="#"><div>統計圖表</div></a></li> -->
 										
-					<li  data-toggle="tab" role="presentation" id="adlist" data-id="ad"><a href="#"><div>廣告</div></a></li>
+<!-- 					<li  data-toggle="tab" role="presentation" id="adlist" data-id="ad"><a href="#"><div>廣告</div></a></li> -->
 							
 				</ul>
 			</div>
