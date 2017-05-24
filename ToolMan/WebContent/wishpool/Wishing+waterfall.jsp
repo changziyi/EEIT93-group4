@@ -48,7 +48,6 @@
 
 body {font-family:Microsoft JhengHei;}
 
-
 </style>
 
 <script>
@@ -138,7 +137,9 @@ body {font-family:Microsoft JhengHei;}
 					</div>
 				</div>				
 				<div class="well bgcolor">
+				<div>
 					<h2 class="text-center">隨機廣告</h2>
+					</div>
 					<br>
 					 <c:forEach var="sname" end="3" items="${get_sname}">
 						 	<div>
@@ -266,9 +267,8 @@ body {font-family:Microsoft JhengHei;}
 			</div>
 		</div>
 	</div>
-	
-	<c:forEach var="wishpoolVO" items="${new_date}">
-		<!-------------------------- 接下許願 ------------------------------>
+	<!-------------------------- 接下許願 ------------------------------>
+	<c:forEach var="wishpoolVO" items="${new_date}">		
 		<div class="modal fade" id="wishDetailModal${wishpoolVO.w_id}" name="wishpoolmodal"tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
@@ -291,7 +291,8 @@ body {font-family:Microsoft JhengHei;}
 								
 						<div class="modal-footer">
 							<button type="button" class="btn btn-danger" data-dismiss="modal">取消</button>
-							<button name="btnsubmit" class="btn btn-primary" data-dismiss="modal" data-id="${wishpoolVO.c_id}" data-dis="${wishpoolVO.w_city}${wishpoolVO.w_district}" data-type="${wishpoolVO.w_pro}" data-content="${wishpoolVO.w_content}" data-time="${wishpoolVO.w_date}">確定接單</button>
+							<button name="btnsubmit" class="btn btn-primary" data-dismiss="modal" data-id="${wishpoolVO.c_id}" data-dis="${wishpoolVO.w_city}${wishpoolVO.w_district}" data-type="${wishpoolVO.w_pro}" data-content="${wishpoolVO.w_content}" data-time="${wishpoolVO.w_date}" data-toggle="modal"
+							data-target="#myModal04">確定接單</button>
 							<input type="hidden" name="w_city"> <input type="hidden"
 								name="w_district">
 						</div>
@@ -299,6 +300,34 @@ body {font-family:Microsoft JhengHei;}
 			</div>
 		</div>
 	</c:forEach>
+	
+	<!-- 213212122122121222 -->
+	
+	<div class="modal fade" id="myModal04" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h3 class="modal-title" id="myModalLabel">
+						成功接單!
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+					</h3>
+					</button>
+				</div>
+				<div class="modal-body">
+					<p>系統將自動發信通知該使用者，敬請等待對方回覆，謝謝。</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-danger" data-dismiss="modal">離開</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+	
 	<script>
 	
 	  $(function() {

@@ -24,31 +24,33 @@
 <link rel="Shortcut Icon" href="${pageContext.servletContext.contextPath}/favicon.ico" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>email Page</title>
-<link href="${pageContext.servletContext.contextPath}/nav/nav.css" rel="stylesheet">
 <link rel="stylesheet"
 	href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+<link href="${pageContext.servletContext.contextPath}/nav/nav.css" rel="stylesheet">
+<link rel="Shortcut Icon" href="${pageContext.servletContext.contextPath}/favicon.ico" />
 <script
 	src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
 <script
 	src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<!-- <script -->
-<!-- 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" -->
-<!-- 	type="text/javascript"></script> -->
-<!-- <script type="text/javascript" -->
-<!-- 	src="http://masonry.desandro.com/jquery.masonry.min.js"></script> -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"
+	type="text/javascript"></script>
+<script type="text/javascript"
+	src="http://masonry.desandro.com/jquery.masonry.min.js"></script>
 
-<!-- <script -->
+
 <%-- 	src="${pageContext.servletContext.contextPath}/js/jquery.twzipcode.min.js"></script> --%>
 
 <style>
 .content_box {
 	display: inline-block;
-	border: 1px solid blue;
+	border: 5px dashed #ffb3b3;
 	padding: 10px;
 	margin: 10px 10px 10px 0;
 	overflow: hidden;
-	width: 750px;
-	background-color: #cce6ff;
+	width: 630px;
+	background-color: #ffffcc;
+	height:270px ;
 	
 }
 
@@ -57,7 +59,6 @@
 	border: 5px double #3399ff;
 	border-radius: 25px;
 }
-
 
 
 </style>
@@ -95,6 +96,8 @@
 								<br>
 								<span name="sender1${emailVO.ms_id}">寄件人：${emailVO.msr_id}</span>
 								<br>
+								</div>
+								<div class="modal-body">
 								主旨： 
 								<button class="btn btn-primary" data-toggle="modal" id="selectbtn" name="btndetail" data-name="btndetail${emailVO.ms_id}"
 						   		 data-target="#clickSummary" data-id="${emailVO.ms_id}">${emailVO.ms_summary}</button>
@@ -104,7 +107,8 @@
 								<span name="time1${emailVO.ms_id}">時間：<span >${emailVO.ms_date}</span></span>
 								<br> 
 								<span >狀態：<span name="readornot${emailVO.ms_id}" >${emailVO.s_name == 'true' ? '已讀':'未讀'}</span></span>
-	                 			
+	                 			</div>
+	                 			<div class="modal-footer">
 							<form action="Email.do" method="post">
 							<input type="submit" class="btn btn-danger pull-right"  value="刪除" ><span aria-hidden="true"></span>
 							<input type="hidden" name="ms_id" value="${emailVO.ms_id}"></input>
