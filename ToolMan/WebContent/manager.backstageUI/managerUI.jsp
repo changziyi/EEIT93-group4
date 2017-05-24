@@ -329,31 +329,31 @@
 								</tr>
 								<tr style="vertical-align:middle;margin:auto">
 									<td class="form-control-label" style="padding-top:16px;width:100px;">店家名稱</td>
-									<td style="margin-top:10px;width:300px;height:50px;" id="bname"  class="form-control"></td>
+									<td style="margin-top:10px;width:400px;height:50px;" id="bname"  class="form-control"></td>
 								</tr>
 								<tr>
-									<td class="form-control-label" style="padding-top:16px;width:100px;">店家介紹</td>
-									<td style="margin-top:10px;width:300px;height:50px;" id="bdes" class="form-control"></td>
+									<td  class="form-control-label" style="padding-top:16px;width:100px;">店家介紹</td>
+									<td><textarea readonly style="background-color:white;color:black;margin-top:10px;width:400px;" id="bdes" class="form-control"></textarea></td>
 								</tr>
 								<tr>
 									<td class="form-control-label" style="padding-top:16px;width:100px;">師傅姓名</td>
-									<td id="mname" style="margin-top:10px;width:300px;height:50px;" class="form-control"></td>
+									<td id="mname" style="margin-top:10px;width:400px;height:50px;" class="form-control"></td>
 								</tr>
 								<tr>
 									<td class="form-control-label" style="padding-top:16px;width:100px;">電話</td>
-									<td id="mtel" style="margin-top:10px;width:300px;height:50px;" class="form-control"></td>
+									<td id="mtel" style="margin-top:10px;width:400px;height:50px;" class="form-control"></td>
 								</tr>
 								<tr>
 									<td class="form-control-label" style="padding-top:16px;width:100px;">信箱</td>
-									<td id="mmail" style="margin-top:10px;width:300px;height:50px;" class="form-control"></td>
+									<td id="mmail" style="margin-top:10px;width:400px;height:50px;" class="form-control"></td>
 								</tr>
 								<tr>
 									<td class="form-control-label" style="padding-top:16px;width:100px;">地址</td>
-									<td id="maddr" style="margin-top:10px;width:300px;height:50px;" class="form-control">$</td>
+									<td id="maddr" style="margin-top:10px;width:400px;height:50px;" class="form-control">$</td>
 								</tr>
 								<tr>
 									<td class="form-control-label" style="padding-top:16px;width:100px;">維修類別</td>
-									<td id="mpros" style="margin-top:10px;width:300px;height:50px;" class="form-control"><c:forEach var="aMpro" items="${cdata_mdataVO.mpros}"></c:forEach></td>
+									<td id="mpros" style="margin-top:10px;width:400px;height:50px;" class="form-control"><c:forEach var="aMpro" items="${cdata_mdataVO.mpros}"></c:forEach></td>
 								</tr>
 								<tr>
 									<td class="form-control-label" style="padding-top:16px;width:100px;">專業證照</td>
@@ -858,7 +858,7 @@ $(function(){
 	     			var dfd3 = $.getJSON(hyperlinkstring,{"functionaction":"applicationreviewm","toggledcheckbox":checkboxdatas2},function(data){
 	     				
 	     				$('#bname').html(data.bname);
-	     				$('#bdes').html(data.bdes);
+	     				$('#bdes').html(data.bdes+"asssssssssssssssssssssssssssssssssssssssssssssssssssssssddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd");
 	     				$('#mname').html(data.mname);
 	     				$('#mtel').html(data.mtel);
 	     				$('#mmail').html(data.mmail);

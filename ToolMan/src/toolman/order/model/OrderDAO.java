@@ -171,8 +171,8 @@ public class OrderDAO implements OrderDAO_Interface {
 		
 		try {
 			session.beginTransaction();
-			Query query = session.createQuery("delete from OrderVO where o_id = ?");
-			query.setParameter(1, o_id);
+			Query query = session.createQuery("delete from OrderVO where o_id =:o");
+			query.setParameter("o", o_id);
 			count = query.executeUpdate();		
 			session.getTransaction().commit();
 		} catch (RuntimeException ex) {
