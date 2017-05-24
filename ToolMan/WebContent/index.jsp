@@ -32,7 +32,7 @@
 	    .search-text {width: 300px;}
 	    .proselect {width: 120px;}
 	    .title2 {color:White;}
-	    .bigtitle {font-size:50px;}
+	    .bigtitle {font-size:50px; font-weight: bold;text-shadow: -1px 0 #A9A9A9, 0 1px #A9A9A9, 1px 0 #A9A9A9, 0 -1px #A9A9A9;}
 	    .searchbar {margin-top:45px;margin-bottom:30px}
 	    #btn {font-family:Microsoft JhengHei;box-shadow:4px 4px 12px -2px rgba(20%,20%,40%,0.5);}
     </style>
