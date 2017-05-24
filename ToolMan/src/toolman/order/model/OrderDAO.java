@@ -204,7 +204,7 @@ public class OrderDAO implements OrderDAO_Interface {
 		
 		try {
 			session.beginTransaction();				
-			Query query = session.createQuery("Update OrderVO set s_name='一方未評分' where o_id=?");
+			Query query = session.createQuery("Update OrderVO set s_name='一方未評' where o_id=?");
 			query.setParameter(0,o_id);
 			query.executeUpdate();
 			session.getTransaction().commit();
