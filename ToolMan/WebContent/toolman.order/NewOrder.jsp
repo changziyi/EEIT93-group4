@@ -304,7 +304,7 @@
 										<td>
 											<div id="datecalendar" >																							
 												<input type="text" class="inputstyle" id="datepicker"  value="${orderVO.o_bdate}">
-<%-- 												<input type="text" class="inputstyle" id="datepickersend" name="o_bdate" value="${orderVO.o_bdate}"> --%>
+												<input type="hidden" class="inputstyle" id="datepickersend" name="o_bdate" value="${orderVO.o_bdate}">
 												
 												<!-- 放jQuery的calendar -->
 											</div>
@@ -327,9 +327,9 @@
 										</td>
 										<td style="">
 											<div style="width: 500px;"  >
-												<label class="radio-inline"style="float:left"><input type="radio"  name="req_exp" value="300000" checked="checked">3分鐘</label>
+												<label class="radio-inline"style="float:left"><input type="radio"  name="req_exp" value="20000" checked="checked">1分鐘</label>
 												<label class="radio-inline" style="float:left"><input type="radio" name="req_exp" value="3600000" >1小時</label>
-												<label class="radio-inline" style="float:left"><input type="radio" name="req_exp" value="2400000" >2小時</label>
+												<label class="radio-inline" style="float:left"><input type="radio" name="req_exp" value="7200000" >2小時</label>
 												<label class="radio-inline" style="float:left"><input type="radio" name="req_exp" value="86400000">1天</label>
 												<label class="radio-inline" style="float:left"><input type="radio" name="req_exp" value="172800000">2天</label>
 												<label class="radio-inline" style="float:left"><input type="radio" name="req_exp" value="604800000">一週</label>
@@ -659,7 +659,17 @@ function calendarsubmit(){
 			function buildcalendar(){
 				
 				$('#calendar').fullCalendar({
-					
+					 buttonText: {
+					        today: '今天',
+					        month: '月',
+					    },
+
+
+					    allDayText: "全天",
+					    weekMode: "variable",
+					    monthNames: ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"],
+					    dayNamesShort: ["星期天", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"],
+	
 				
 					header: {
 						left: 'prev,next today',

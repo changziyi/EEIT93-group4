@@ -15,8 +15,6 @@
 	
 %>
 
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
  
@@ -24,31 +22,33 @@
 <link rel="Shortcut Icon" href="${pageContext.servletContext.contextPath}/favicon.ico" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>email Page</title>
-<link href="${pageContext.servletContext.contextPath}/nav/nav.css" rel="stylesheet">
 <link rel="stylesheet"
 	href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+<link href="${pageContext.servletContext.contextPath}/nav/nav.css" rel="stylesheet">
+<link rel="Shortcut Icon" href="${pageContext.servletContext.contextPath}/favicon.ico" />
 <script
 	src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
 <script
 	src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<!-- <script -->
-<!-- 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" -->
-<!-- 	type="text/javascript"></script> -->
-<!-- <script type="text/javascript" -->
-<!-- 	src="http://masonry.desandro.com/jquery.masonry.min.js"></script> -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"
+	type="text/javascript"></script>
+<script type="text/javascript"
+	src="http://masonry.desandro.com/jquery.masonry.min.js"></script>
 
-<!-- <script -->
+
 <%-- 	src="${pageContext.servletContext.contextPath}/js/jquery.twzipcode.min.js"></script> --%>
 
 <style>
 .content_box {
 	display: inline-block;
-	border: 1px solid blue;
+	border: 5px dashed #ccb3ff;
 	padding: 10px;
 	margin: 10px 10px 10px 0;
 	overflow: hidden;
-	width: 750px;
+	width: 630px;
 	background-color: #cce6ff;
+	height:300px ;
 	
 }
 
@@ -58,7 +58,16 @@
 	border-radius: 25px;
 }
 
+.modal-content {
+	background-color: #ccffff;
+	border-radius: 23px;
+}
 
+p {
+	font-family: Microsoft JhengHei;
+	font-weight: bold;
+	font-size: 17px;
+}
 
 </style>
 
@@ -95,8 +104,10 @@
 								<br>
 								<span name="sender1${emailVO.ms_id}">寄件人：${emailVO.msr_id}</span>
 								<br>
+								</div>
+								<div class="modal-body">
 								主旨： 
-								<button class="btn btn-primary" data-toggle="modal" id="selectbtn" name="btndetail" data-name="btndetail${emailVO.ms_id}"
+								<button class="btn btn-default" data-toggle="modal" id="selectbtn" name="btndetail" data-name="btndetail${emailVO.ms_id}"
 						   		 data-target="#clickSummary" data-id="${emailVO.ms_id}">${emailVO.ms_summary}</button>
 								<br class="content1"> 
 								<span name="content1${emailVO.ms_id}">內容：<span >${emailVO.ms_content}</span></span>
@@ -104,7 +115,8 @@
 								<span name="time1${emailVO.ms_id}">時間：<span >${emailVO.ms_date}</span></span>
 								<br> 
 								<span >狀態：<span name="readornot${emailVO.ms_id}" >${emailVO.s_name == 'true' ? '已讀':'未讀'}</span></span>
-	                 			
+	                 			</div>
+	                 			<div class="modal-footer">
 							<form action="Email.do" method="post">
 							<input type="submit" class="btn btn-danger pull-right"  value="刪除" ><span aria-hidden="true"></span>
 							<input type="hidden" name="ms_id" value="${emailVO.ms_id}"></input>
@@ -177,31 +189,24 @@
 						</H4>
 					</div>
 					<div class="modal-body">
-						<table>
-							<tr>
-								<td>收件人 ： <input type="text" name="mss_id" required="true"
+														
+								<p>收件人 ： </p>								
+								 <input type="text" name="mss_id" required="true"
 									value="${param.mss_id}" />${errorMsgs.email1}${errorMsgs.email2}
-								</td>
-							</tr>
-						
-							<tr>
-								<td>主旨 ： <input type="text" name="ms_summary" required="true"
+																											
+								<p>主旨 ： </p> 
+								<input type="text" name="ms_summary" required="true"
 									value="${param.ms_summary}" />${errorMsgs.email1}${errorMsgs.email2}
-								</td>
-							</tr>
-
-							<tr>
-								<td><label style="vertical-align: top">內容：</label>
-								
+												
+								<p>內容：</p>								
 								<textarea name="ms_content" style="width: 400px; height: 120px"
-								placeholder="請輸入內容"></textarea></td>
-							</tr>
-						</table>
+								placeholder="請輸入內容"></textarea>
+																
 					</div>
 					
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-						<button type="submit" class="btn btn-primary">送出</button>			
+						<button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#myModal04">送出</button>			
 					</div>
 					
 <!-- 					<form action="Email.do" method="post"> -->
@@ -215,6 +220,36 @@
 			</form>
 		</div>
 	</div>
+	<!------------------ 發信確認 ------------>
+	
+
+	<div class="modal fade" id="myModal04" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h3 class="modal-title" id="myModalLabel">
+						寄信成功!
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+					</h3>
+					</button>
+				</div>
+				<div class="modal-body">
+					<p>123456</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-danger" data-dismiss="modal">離開</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+	
+	
+	
 	
 	<!------------------------------------ js ---------------------------------------------------->
 	<script>

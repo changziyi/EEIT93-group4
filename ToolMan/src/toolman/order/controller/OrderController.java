@@ -61,7 +61,7 @@ public class OrderController extends HttpServlet {
 		MdataVO mdataVO = (MdataVO) session.getAttribute("mdataVO");
 		Collection<MProVO> mproVOset = (Collection<MProVO>) session.getAttribute("mproVOset");
 		CdataVO cdataVO = (CdataVO) session.getAttribute("LoginOK");
-		
+		System.out.println(cdataVO.getC_id());
 		//test
 //		String action = request.getParameter("action");
 //		String o_des = request.getParameter("o_des");
@@ -81,8 +81,7 @@ public class OrderController extends HttpServlet {
 			//open while merge with mdata servlet			
 			String b_name = mdataVO.getB_name();//automatically filled in			
 			//time to deal with main content
-			Calendar calobj = Calendar.getInstance();
-			
+
 			String o_bdate1 = request.getParameter("o_bdate");//automatically filled in
 			System.out.println("obdate="+o_bdate1);
 			DateFormat df3 = new SimpleDateFormat("yyyy-MM-dd-HH:mm:ss");

@@ -150,8 +150,8 @@
 <jsp:include page="/nav/navigation.jsp" />
 <!-- navigator -->
 	<header >
-		<nav  >
-			<div id="navigator" class="textstyle" >
+		<nav >
+			<div id="navigator" class="textstyle" style="margin:1%;" >
 		
 <br/>
 <br/>
@@ -167,7 +167,7 @@
 	
 <!-- 					<li  data-toggle="tab" role="presentation" id="managerchart" data-id="a"><a href="#"><div>統計圖表</div></a></li> -->
 										
-					<li  data-toggle="tab" role="presentation" id="adlist" data-id="ad"><a href="#"><div>廣告</div></a></li>
+<!-- 					<li  data-toggle="tab" role="presentation" id="adlist" data-id="ad"><a href="#"><div>廣告</div></a></li> -->
 							
 				</ul>
 			</div>
@@ -329,31 +329,31 @@
 								</tr>
 								<tr style="vertical-align:middle;margin:auto">
 									<td class="form-control-label" style="padding-top:16px;width:100px;">店家名稱</td>
-									<td style="margin-top:10px;width:300px;height:50px;" id="bname"  class="form-control"></td>
+									<td style="margin-top:10px;width:400px;height:50px;" id="bname"  class="form-control"></td>
 								</tr>
 								<tr>
-									<td class="form-control-label" style="padding-top:16px;width:100px;">店家介紹</td>
-									<td style="margin-top:10px;width:300px;height:50px;" id="bdes" class="form-control"></td>
+									<td  class="form-control-label" style="padding-top:16px;width:100px;">店家介紹</td>
+									<td><textarea readonly style="background-color:white;color:black;margin-top:10px;width:400px;" id="bdes" class="form-control"></textarea></td>
 								</tr>
 								<tr>
 									<td class="form-control-label" style="padding-top:16px;width:100px;">師傅姓名</td>
-									<td id="mname" style="margin-top:10px;width:300px;height:50px;" class="form-control"></td>
+									<td id="mname" style="margin-top:10px;width:400px;height:50px;" class="form-control"></td>
 								</tr>
 								<tr>
 									<td class="form-control-label" style="padding-top:16px;width:100px;">電話</td>
-									<td id="mtel" style="margin-top:10px;width:300px;height:50px;" class="form-control"></td>
+									<td id="mtel" style="margin-top:10px;width:400px;height:50px;" class="form-control"></td>
 								</tr>
 								<tr>
 									<td class="form-control-label" style="padding-top:16px;width:100px;">信箱</td>
-									<td id="mmail" style="margin-top:10px;width:300px;height:50px;" class="form-control"></td>
+									<td id="mmail" style="margin-top:10px;width:400px;height:50px;" class="form-control"></td>
 								</tr>
 								<tr>
 									<td class="form-control-label" style="padding-top:16px;width:100px;">地址</td>
-									<td id="maddr" style="margin-top:10px;width:300px;height:50px;" class="form-control">$</td>
+									<td id="maddr" style="margin-top:10px;width:400px;height:50px;" class="form-control">$</td>
 								</tr>
 								<tr>
 									<td class="form-control-label" style="padding-top:16px;width:100px;">維修類別</td>
-									<td id="mpros" style="margin-top:10px;width:300px;height:50px;" class="form-control"><c:forEach var="aMpro" items="${cdata_mdataVO.mpros}"></c:forEach></td>
+									<td id="mpros" style="margin-top:10px;width:400px;height:50px;" class="form-control"><c:forEach var="aMpro" items="${cdata_mdataVO.mpros}"></c:forEach></td>
 								</tr>
 								<tr>
 									<td class="form-control-label" style="padding-top:16px;width:100px;">專業證照</td>
@@ -858,7 +858,7 @@ $(function(){
 	     			var dfd3 = $.getJSON(hyperlinkstring,{"functionaction":"applicationreviewm","toggledcheckbox":checkboxdatas2},function(data){
 	     				
 	     				$('#bname').html(data.bname);
-	     				$('#bdes').html(data.bdes);
+	     				$('#bdes').html(data.bdes+"asssssssssssssssssssssssssssssssssssssssssssssssssssssssddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd");
 	     				$('#mname').html(data.mname);
 	     				$('#mtel').html(data.mtel);
 	     				$('#mmail').html(data.mmail);
@@ -1076,76 +1076,76 @@ $(function(){
 		   
 			   if(id=="o"){   					  
 					   	var thc0 = $('<th></th>').addClass('eventlistthreadtrth');
-					   	var thc1 = $('<th></th>').text('師傅編號').addClass('eventlistthreadtrth');
-					   	var thc2 = $('<th></th>').text('店家名稱').addClass('eventlistthreadtrth');
-					   	var thc3 = $('<th></th>').text('師傅名稱').addClass('eventlistthreadtrth');
-					   	var thc4 = $('<th></th>').text('店家地址').addClass('eventlistthreadtrth');
-					   	var thc5 = $('<th></th>').text('師傅專業').addClass('eventlistthreadtrth');
-					   	var thc6 = $('<th></th>').text('店家狀態').addClass('eventlistthreadtrth');
-					   	var thc7 = $('<th></th>').text('平均分數').addClass('eventlistthreadtrth');
-					   	var thc8 = $('<th></th>').text('管理者註記').addClass('eventlistthreadtrth');
-					   	var thc9 = $('<th></th>').text('管理者註記').addClass('eventlistthreadtrth');
-					   	var thc10 = $('<th></th>').text('管理者註記').addClass('eventlistthreadtrth');
-					   	var thc1 = $('<th></th>').text('下單日期').addClass('eventlistthreadtrth');
-						var thc2 = $('<th></th>').text('店家名稱').addClass('eventlistthreadtrth');
-						var thc3 = $('<th></th>').text('消費者帳戶').addClass('eventlistthreadtrth');
-						var thc4 = $('<th></th>').text('訂單編號').addClass('eventlistthreadtrth');
-						var thc5 = $('<th></th>').text('服務類別').addClass('eventlistthreadtrth');
-						var thc6 = $('<th></th>').text('服務地址').addClass('eventlistthreadtrth');
-						var thc7 = $('<th></th>').text('訂單狀態').addClass('eventlistthreadtrth');
-						var thc8 = $('<th></th>').text('師傅評分').addClass('eventlistthreadtrth');
-						var thc9 = $('<th></th>').text('消費者評分').addClass('eventlistthreadtrth');
-						var thc10 = $('<th></th>').text('管理者註記').addClass('eventlistthreadtrth');
-						var rowth = $('<tr></tr>').append([thc0,thc1,thc2,thc3,thc4,thc5,thc6,thc7,thc8,thc9,thc10]);						
+					   	var thc1 = $('<th style="text-align:center"></th>').text('師傅編號').addClass('eventlistthreadtrth');
+					   	var thc2 = $('<th style="text-align:center"></th>').text('店家名稱').addClass('eventlistthreadtrth');
+					   	var thc3 = $('<th style="text-align:center"></th>').text('師傅名稱').addClass('eventlistthreadtrth');
+					   	var thc4 = $('<th style="text-align:center"></th>').text('店家地址').addClass('eventlistthreadtrth');
+					   	var thc5 = $('<th style="text-align:center"></th>').text('師傅專業').addClass('eventlistthreadtrth');
+					   	var thc6 = $('<th style="text-align:center"></th>').text('店家狀態').addClass('eventlistthreadtrth');
+					   	var thc7 = $('<th style="text-align:center"></th>').text('平均分數').addClass('eventlistthreadtrth');
+					   	var thc8 = $('<th style="text-align:center"></th>').text('管理者註記').addClass('eventlistthreadtrth');
+					   	var thc9 = $('<th style="text-align:center"></th>').text('管理者註記').addClass('eventlistthreadtrth');
+					   	var thc10 = $('<th style="text-align:center"></th>').text('管理者註記').addClass('eventlistthreadtrth');
+					   	var thc1 = $('<th style="text-align:center"></th>').text('下單日期').addClass('eventlistthreadtrth');
+						var thc2 = $('<th style="text-align:center"></th>').text('店家名稱').addClass('eventlistthreadtrth');
+						var thc3 = $('<th style="text-align:center"></th>').text('消費者帳戶').addClass('eventlistthreadtrth');
+						var thc4 = $('<th style="text-align:center"></th>').text('訂單編號').addClass('eventlistthreadtrth');
+						var thc5 = $('<th style="text-align:center"></th>').text('服務類別').addClass('eventlistthreadtrth');
+						var thc6 = $('<th style="text-align:center"></th>').text('服務地址').addClass('eventlistthreadtrth');
+						var thc7 = $('<th style="text-align:center"></th>').text('訂單狀態').addClass('eventlistthreadtrth');
+						var thc8 = $('<th style="text-align:center"></th>').text('師傅評分').addClass('eventlistthreadtrth');
+						var thc9 = $('<th style="text-align:center"></th>').text('消費者評分').addClass('eventlistthreadtrth');
+						var thc10 = $('<th style="text-align:center"></th>').text('管理者註記').addClass('eventlistthreadtrth');
+						var rowth = $('<tr style="text-align:center"></tr>').append([thc0,thc1,thc2,thc3,thc4,thc5,thc6,thc7,thc8,thc9,thc10]);						
 						docFragth.append(rowth);
 				   }
 				   else if(id=="m"){
 					   
 					   
 					  	var thc0 = $('<th></th>').addClass('eventlistthreadtrth');
-						var thc1 = $('<th></th>').text('師傅編號').addClass('eventlistthreadtrth');
-						var thc2 = $('<th></th>').text('店家名稱').addClass('eventlistthreadtrth');
-						var thc3 = $('<th></th>').text('師傅名稱').addClass('eventlistthreadtrth');
-						var thc4 = $('<th></th>').text('店家地址').addClass('eventlistthreadtrth');
-						var thc5 = $('<th></th>').text('師傅專業').addClass('eventlistthreadtrth');
-						var thc6 = $('<th></th>').text('店家狀態').addClass('eventlistthreadtrth');
-						var thc7 = $('<th></th>').text('平均分數').addClass('eventlistthreadtrth');
-						var thc8 = $('<th></th>').text('管理者註記').addClass('eventlistthreadtrth');
-						var rowth = $('<tr></tr>').append([thc0,thc1,thc2,thc3,thc4,thc5,thc6,thc7,thc8]);
+						var thc1 = $('<th style="text-align:center"></th>').text('師傅編號').addClass('eventlistthreadtrth');
+						var thc2 = $('<th style="text-align:center"></th>').text('店家名稱').addClass('eventlistthreadtrth');
+						var thc3 = $('<th style="text-align:center"></th>').text('師傅名稱').addClass('eventlistthreadtrth');
+						var thc4 = $('<th style="text-align:center"></th>').text('店家地址').addClass('eventlistthreadtrth');
+						var thc5 = $('<th style="text-align:center"></th>').text('師傅專業').addClass('eventlistthreadtrth');
+						var thc6 = $('<th style="text-align:center"></th>').text('店家狀態').addClass('eventlistthreadtrth');
+						var thc7 = $('<th style="text-align:center"></th>').text('平均分數').addClass('eventlistthreadtrth');
+						var thc8 = $('<th style="text-align:center"></th>').text('管理者註記').addClass('eventlistthreadtrth');
+						var rowth = $('<tr style="text-align:center"></tr>').append([thc0,thc1,thc2,thc3,thc4,thc5,thc6,thc7,thc8]);
 						docFragth.append(rowth);
 				   }
 				   else if(id=="c"){					   					  
-					    var thc0 = $('<th></th>').addClass('eventlistthreadtrth');
-					    var thc1 = $('<th></th>').text('下單日期').addClass('eventlistthreadtrth');
-						var thc2 = $('<th></th>').text('消費者名稱').addClass('eventlistthreadtrth');
-						var thc3 = $('<th></th>').text('消費者帳戶').addClass('eventlistthreadtrth');
-						var thc4 = $('<th></th>').text('消費者地址').addClass('eventlistthreadtrth');
-						var thc5 = $('<th></th>').text('消費者狀態').addClass('eventlistthreadtrth');
-						var thc6 = $('<th></th>').text('平均分數').addClass('eventlistthreadtrth');
-						var thc7 = $('<th></th>').text('管理者註記').addClass('eventlistthreadtrth');
+					    var thc0 = $('<th style="text-align:center"></th>').addClass('eventlistthreadtrth');
+					    var thc1 = $('<th style="text-align:center"></th>').text('下單日期').addClass('eventlistthreadtrth');
+						var thc2 = $('<th style="text-align:center"></th>').text('消費者名稱').addClass('eventlistthreadtrth');
+						var thc3 = $('<th style="text-align:center"></th>').text('消費者帳戶').addClass('eventlistthreadtrth');
+						var thc4 = $('<th style="text-align:center"></th>').text('消費者地址').addClass('eventlistthreadtrth');
+						var thc5 = $('<th style="text-align:center"></th>').text('消費者狀態').addClass('eventlistthreadtrth');
+						var thc6 = $('<th style="text-align:center"></th>').text('平均分數').addClass('eventlistthreadtrth');
+						var thc7 = $('<th style="text-align:center"></th>').text('管理者註記').addClass('eventlistthreadtrth');
 						var rowth = $('<tr></tr>').append([thc0,thc1,thc2,thc3,thc4,thc5,thc6,thc7]);
 						docFragth.append(rowth);
 					   
 				   }
 				   else if(id=="r"){
 					  	var thc0 = $('<th></th>').addClass('eventlistthreadtrth');
-					  	var thc1 = $('<th></th>').text('檢舉編號').addClass('eventlistthreadtrth');
-					  	var thc2 = $('<th></th>').text('檢舉日期').addClass('eventlistthreadtrth');
-						var thc3 = $('<th></th>').text('消費者').addClass('eventlistthreadtrth');
-						var thc4 = $('<th></th>').text('師傅').addClass('eventlistthreadtrth');
-						var thc5 = $('<th></th>').text('檢舉主旨').addClass('eventlistthreadtrth');
-						var thc6 = $('<th></th>').text('檢舉案件狀態').addClass('eventlistthreadtrth');
-						var thc9 = $('<th></th>').text('管理者註記').addClass('eventlistthreadtrth');
+					  	var thc1 = $('<th style="text-align:center"></th>').text('檢舉編號').addClass('eventlistthreadtrth');
+					  	var thc2 = $('<th style="text-align:center"></th>').text('檢舉日期').addClass('eventlistthreadtrth');
+						var thc3 = $('<th style="text-align:center" ></th>').text('消費者').addClass('eventlistthreadtrth');
+						var thc4 = $('<th style="text-align:center"></th>').text('師傅').addClass('eventlistthreadtrth');
+						var thc5 = $('<th style="text-align:center"></th>').text('檢舉主旨').addClass('eventlistthreadtrth');
+						var thc6 = $('<th style="text-align:center"></th>').text('檢舉案件狀態').addClass('eventlistthreadtrth');
+						var thc9 = $('<th style="text-align:center"></th>').text('管理者註記').addClass('eventlistthreadtrth');
 						var rowth = $('<tr></tr>').append([thc0,thc1,thc2,thc3,thc4,thc5,thc6,thc7,thc8,,thc9]);
 						docFragth.append(rowth);					   
 				   }
 				   else if(id=="ad"){
 					  	var thc0 = $('<th></th>').addClass('eventlistthreadtrth');
-					  	var thc1 = $('<th></th>').text('廣告編號').addClass('eventlistthreadtrth');
-					  	var thc2 = $('<th></th>').text('預約日期').addClass('eventlistthreadtrth');
-						var thc3 = $('<th></th>').text('結束日期').addClass('eventlistthreadtrth');
-						var thc4 = $('<th></th>').text('師傅編號').addClass('eventlistthreadtrth');
-						var thc5 = $('<th></th>').text('廣告狀態').addClass('eventlistthreadtrth');
+					  	var thc1 = $('<th style="text-align:center"></th>').text('廣告編號').addClass('eventlistthreadtrth');
+					  	var thc2 = $('<th style="text-align:center"></th>').text('預約日期').addClass('eventlistthreadtrth');
+						var thc3 = $('<th style="text-align:center"></th>').text('結束日期').addClass('eventlistthreadtrth');
+						var thc4 = $('<th style="text-align:center"></th>').text('師傅編號').addClass('eventlistthreadtrth');
+						var thc5 = $('<th style="text-align:center"></th>').text('廣告狀態').addClass('eventlistthreadtrth');
 						var rowth = $('<tr></tr>').append([thc0,thc1,thc2,thc3,thc4,thc5]);
 						docFragth.append(rowth);					   
 				   }
@@ -1333,7 +1333,7 @@ $(function(){
 						destroy: true,
 // 						"pageLength": 1,
 // 						"dom": '<lf<t>ip>',
-						 "lengthMenu": [ [5, 10, 50, -1], [5, 10, 50, "全部"] ]
+						 "lengthMenu": [ [ 10, 20, -1], [ 10, 20, "全部"] ]
 			// 			"iDisplayLength": 10
 			//			  	destroy: true,
 						 	   

@@ -32,9 +32,9 @@
 							
 							
 							<c:if test="${not empty LoginOK }">
-							<c:if test="${empty LoginOK.m_id}">
-								<li><a class="alist" href="${pageContext.servletContext.contextPath}/master/OpenStoreInfo.jsp">我要開店 </a></li>
-							</c:if>
+								<c:if test="${empty LoginOK.m_id && LoginOK.c_id != 'sa'}">
+									<li><a class="alist" href="${pageContext.servletContext.contextPath}/master/OpenStoreInfo.jsp">我要開店 </a></li>
+								</c:if>
 						</c:if>
 						<li><a class="alist"
 							href="${pageContext.servletContext.contextPath}/wishpool/Wishing+waterfall.jsp">許願池
@@ -109,7 +109,7 @@
 								<li><a
 									href="${pageContext.servletContext.contextPath}/cdata/CdataOrderServlet.do?c_id=${LoginOK.c_id}&action=myHate">黑名單</a>
 								</li>
-								<li><a href="${pageContext.servletContext.contextPath}/ad/ad.jsp">刊登廣告</a></li>
+						
 								<li><a
 									href="${pageContext.servletContext.contextPath}/loginoutServlet">登出</a></li>
 
