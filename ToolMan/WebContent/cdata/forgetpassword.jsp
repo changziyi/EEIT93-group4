@@ -68,17 +68,13 @@ h3 {
 	<div class="form form-signin" style="align: center">
 		<div class="tab-content">
 			<div id="signup">
-				<h3 class="heading-desc" style="text-align: center">忘記密碼</h3>
-				<form action="${pageContext.request.contextPath}/ForgotPwdServlet" method="POST">
+				<h3 class="heading-desc" style="text-align: center">查詢密碼</h3>
+				<span style="font-size:22px;">Email:</span><form action="${pageContext.request.contextPath}/ForgotPwdServlet" method="POST">
 					<div class="field-wrap">
 					 <input id="email2" style="background-color: #ffffff;" type="text" class="input"
-							name="Email" placeholder="請輸入e-mail"  autocomplete="off" value="${email}"> 
-							<br/>
+							name="Email"  autocomplete="off" value="${email}"> 
 							<div style="font-size: 16px; color: red">${errorMsgs.erroremail}</div>
 					</div>
-					
-					
-
 					<div class="cen">
 						<button type="submit" id="sweetalart" class="button button-block">送出</button>
 					</div>

@@ -66,18 +66,16 @@ h3 {
           <h3 class="heading-desc" style="text-align: center">重新設置密碼</h3>          
 			<form action="${pageContext.request.contextPath}/updatePwdServlet" method="post" >          
           <div class="field-wrap">
-
-            <input type="text"  placeholder="使用者信箱*" name="userName" style="color:gray; background-color:#ffffff; " value="${email}" autocomplete="off" readonly />
+			<span style="font-size:22px;">信箱:</span>
+            <input type="text"  placeholder="使用者信箱" name="userName" style="color:gray; background-color:#ffffff; " value="${email}" autocomplete="off" readonly />
           </div>
           <div class="field-wrap">
-            <label>新密碼<span class="req">*</span></label>
-            <input style="background-color:#ffffff;"  type="password" class="input" name="newPassword" autocomplete="off">
-            <span class="error">${errors.newPassword }</span>
+           <span style="font-size:22px;">新密碼:</span> <input style="background-color:#ffffff;"  type="password" class="input" name="newPassword" autocomplete="off" placeholder="請輸入密碼">
+            <span style="font-size:16px;color:red;">${errors.newPassword }</span>
           </div> 
           <div class="field-wrap">
-            <label>確認新密碼<span class="req">*</span></label>
-            <input style="background-color:#ffffff;" type="password"  name="newPassword2" autocomplete="off"/>
-            <span class="error">${errors.newPassword2 }</span>
+            <span style="font-size:22px;">確認新密碼:</span><input style="background-color:#ffffff;" type="password"  name="newPassword2" autocomplete="off" placeholder="請輸入密碼"/>
+            <span style="font-size:16px;color:red;">${errors.newPassword2 }</span>
           </div>  
           <div class="cen">
 						<button type="submit" id="sweetalart" class="button button-block cen">修改</button>
