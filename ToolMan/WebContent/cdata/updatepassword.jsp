@@ -17,12 +17,53 @@
    	String email = request.getParameter("email");
    	request.setAttribute("email",email);
    %>
+   
+<style>
+
+.form-signin {
+	max-width: 400px;
+	display: block;
+	background-color: #ccffff;
+	-moz-box-shadow: 0 0 3px 3px #888;
+	-webkit-box-shadow: 0 0 3px 3px #888;
+	box-shadow: 0 0 3px 3px #888;
+	border-radius: 20px;
+	border: 5px double #3399ff;
+	margin:160px auto ;
+	
+}
+
+h3 {
+	font-family: Microsoft JhengHei;
+	font-weight: bold;
+	font-size: 35px;
+	color: #357EBD;
+}
+
+.heading-desc {
+	font-size: 33px;
+	font-weight: bold;
+	padding: -50px;
+}
+.button {
+	font-size: 20px;
+	width: 100px;
+	height: 50px;
+}
+
+.cen {
+	margin: 10px auto;
+	text-align: center;
+}
+
+</style>
 </head>
+
 <body>
-  <div class="form" >  
+  <div class="form form-signin">   
       <div class="tab-content">
         <div id="signup">   
-          <h1 style="color:#357EBD; font-size: 33px; ">重新設置密碼</h1>          
+          <h3 class="heading-desc" style="text-align: center">重新設置密碼</h3>          
 			<form action="${pageContext.request.contextPath}/updatePwdServlet" method="post" >          
           <div class="field-wrap">
 
@@ -37,8 +78,11 @@
             <label>確認新密碼<span class="req">*</span></label>
             <input style="background-color:#ffffff;" type="password"  name="newPassword2" autocomplete="off"/>
             <span class="error">${errors.newPassword2 }</span>
-          </div>                      
-          <button type="submit" id="sweetalart" class="button button-block" >修改</button>                                                  
+          </div>  
+          <div class="cen">
+						<button type="submit" id="sweetalart" class="button button-block cen">修改</button>
+		</div>
+                                                                          
           </form>
         </div>
         <div id="login"></div>        
