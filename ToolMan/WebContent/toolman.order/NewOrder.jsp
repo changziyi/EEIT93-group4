@@ -4,7 +4,9 @@
 <html>
 <head>
 	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
+<!-- --------------icon-------------------- -->
+<link rel="Shortcut Icon" href="${pageContext.servletContext.contextPath}/favicon.ico" />
+<!-- --------------end icon-------------------- -->
 <!--full calendar-->
 	<link rel='stylesheet' href='../js/fullcalendar.min.css' />
 	<script src='${pageContext.servletContext.contextPath}/js/jquery-3.2.1.min.js'></script>
@@ -190,7 +192,7 @@
 	</style>
 
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-	<title>預約師傅</title>
+	<title>ToolMan</title>
 	
 	<jsp:useBean id="mdataVO" class="toolman.mdata.model.MdataVO" scope="session"/>
 	<!-- retrieve MdataVO object from session-->

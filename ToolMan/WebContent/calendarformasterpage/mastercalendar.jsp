@@ -4,7 +4,9 @@
 <html>
 <head>
 	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
+<!-- --------------icon-------------------- -->
+<link rel="Shortcut Icon" href="${pageContext.servletContext.contextPath}/favicon.ico" />
+<!-- --------------end icon-------------------- -->
 <!--full calendar-->
 	<link rel='stylesheet' href='../js/fullcalendar.min.css' />
 	<script src='${pageContext.servletContext.contextPath}/js/jquery-3.2.1.min.js'></script>
@@ -40,7 +42,7 @@
 <script src="${pageContext.servletContext.contextPath}/js/sweetalert/sweetalert.min.js"></script>
 <link rel="stylesheet" type="text/css" href="${pageContext.servletContext.contextPath}/js/sweetalert/sweetalert.css">
 <!--------------------end sweetalert---------- -->
-	
+	<title>ToolMan</title>
 	<style>
 	
 /* calendar */

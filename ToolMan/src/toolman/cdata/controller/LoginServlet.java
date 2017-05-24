@@ -39,6 +39,7 @@ public class LoginServlet extends HttpServlet {
 		if("login_on_mumber".equals(login_mumber)){
 		
 		String c_id = req.getParameter("id");
+		System.out.println(c_id);
 		if (c_id == null || c_id.trim().length() == 0) {
 			errorMsgs.put("c_id", "請輸入帳號");
 		}
@@ -55,8 +56,9 @@ public class LoginServlet extends HttpServlet {
 				+ "::Captcha Verify"+verify);		
 
 		CdataService cs = new CdataService();
-		CdataVO  cdataVO = cs.login_in(c_id, c_pwd);
-		//停權中
+	if(cs.login_in(c_id, c_pwd)!=null){
+		CdataVO cdataVO = cs.login_in(c_id, c_pwd);
+		//停權中		
 		if("停權中".equals(cdataVO.getS_name())){
 			errorMsgs.put("suspended", "您的帳戶已遭停權");
 		}
@@ -74,6 +76,10 @@ public class LoginServlet extends HttpServlet {
 			RequestDispatcher rd = req.getRequestDispatcher
 					(req.getContextPath()+"/cdata/login-in.jsp");
 		}
+	}else{
+		errorMsgs.put("wronginfo", "帳號不存在");
+	}
+	
 		if (!errorMsgs.isEmpty()) {
 			RequestDispatcher rd = req.getRequestDispatcher("/cdata/login-in.jsp");
 			rd.forward(req, resp);
