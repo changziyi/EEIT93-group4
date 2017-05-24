@@ -33,16 +33,19 @@ public class OrderListener implements ServletContextListener{
 	            	orderService.deleteExpiredOrder();
 	            	orderService.updateOrderSnameToUnfinishedReviewById();
 	            	orderService.updateOrderSnameToFishedById();
+	            	System.out.println("");
 	            }
-	        }, 0, 1000l*120); // execute the task every 120 seconds for test
+	        }, 0, 1000l*15); // execute the task every 120 seconds for test
     }// execute the task every 2 hours
          
    
     public void contextDestroyed(ServletContextEvent event)  { 
     	if(timer!=null) timer.cancel();      
-	       event.getServletContext().log("定时器销毁");     
-    	}
-   
+	       event.getServletContext().log("定时器销毁");
+	       System.out.println("destoryed");
+
+	            }
+
   }
 	
 //
