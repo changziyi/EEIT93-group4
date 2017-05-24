@@ -49,25 +49,9 @@
 		<div class="page-header">
 			<div class="row"></div>
 		</div>
-		<div class="row">
-				<div class="pull-right search-condition">
-			
-					<b>新舊排序：</b> 
-					<span>
-					<select name="order" onchange="searchForm.submit();">
-						<option value="desc" <%="desc".equals(request.getParameter("order")) ? "selected" : "" %>>從新到舊</option>
-						<option value="asc" <%="asc".equals(request.getParameter("order")) ? "selected" : "" %>>從舊到新</option>
-					</select> 
-					</span>				
-					</form>
-				</div>
-				
-		</div>
+		
 		<div class="row">
 			<div class="col-md-3">
-				<div class="well text-center bgcolor">
-				
-				</div>	
 				<div class="well bgcolor">
 					<h2 class="text-center">隨機廣告</h2>
 					<br>
@@ -82,31 +66,13 @@
 					 </c:forEach>
 				</div>
 			</div>
+					
 			
-			<div class="col-md-9" >
-			
-					<c:forEach var="adVO" items="${new_date}">
-							<div class="content-box">
-								<div><label class="user-name">師傅帳號：</label><span>${ADVO.m_id}</span></div>
-								<br>
-								<div class="pull-right" >起始時間：${adVO.ad_bdate}</div>	<br>
-								<div class="pull-right">結束時間：${adVO.ad_enddate}</div>
-								</div>
-							</div>	
-					</c:forEach>
-				
-			</div>
-		</div>
 		
-	</div>
-
-	<!-----------------------------我要許願表單 ----------------------------------------->
+<div class="col-md-8">
 	<div  id="myModal01" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
-		
-		
-		
 					<h3>
 						刊登廣告
 						<button type="button" class="close" data-dismiss="modal"
@@ -116,10 +82,7 @@
 						</button>
 					</h3>
 				</div>
-
-			
-					<div class="container">
-						
+					<div class="container">			
 							<form role="form" class="col-md-5 go-right" method="POST" 
 							action="AdServlet" enctype="multipart/form-data">
 								<p>起始日期</p>
@@ -139,15 +102,12 @@
 								<button type="button" class="btn btn-danger"
 									data-dismiss="modal">取消</button>
 								<button type="button" id="btnsubmit" class="btn btn-primary">送出</button>
-
 							</div>
-						</form>
-				
-		
+						</form>	
 	</div>
 	</div>
-
-
+	</div>
+</div>
 </body>
 	<script>
   $( function() {

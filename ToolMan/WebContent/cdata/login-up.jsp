@@ -164,7 +164,7 @@ $(function(){
 			$("input[name = 'name']").val("航海王");
 			$("input[name = 'birth']").val("1990-04-19");
 			$("input[name = 'phone']").val("0985220221");
-			$("input[name = 'mail']").val("abcd@gmail.com");
+			$("input[name = 'mail']").val("Eeit93401@gmail.com");
 			$("input[name = 'city']").val("台北市");
 			$("input[name = 'district']").val("大安區");
 			$("input[name = 'addr']").val("建國南路一段126號");

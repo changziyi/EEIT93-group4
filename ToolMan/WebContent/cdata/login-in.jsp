@@ -170,17 +170,17 @@ body {
 				</div>
 				<div class="login-footer">
 									<!----------------------------------------- FB登入 -------------------------------------------->
-						<div class="row" id="one">
-							<div class="col-md-12">
-							<button type="submit" id="onkey" class="btn btn-info btn-block">一鍵輸入</button>
-						</div>
-					</div>				
-					<div style="position: absolute; left:40px;  ">				
-						<div class="fb">
-							<div class="fb-login-button" onlogin="checkLoginState()" id="login"
-							data-max-rows="1" data-size="large" scope="public_profile,email"></div>				
-				   		</div>
-				   </div>
+<!-- 						<div class="row" id="one"> -->
+<!-- 							<div class="col-md-12"> -->
+<!-- 							<button type="submit" id="onkey" class="btn btn-info btn-block">一鍵輸入</button> -->
+<!-- 						</div> -->
+<!-- 					</div>				 -->
+<!-- 					<div style="position: absolute; left:40px;  ">				 -->
+<!-- 						<div class="fb"> -->
+<!-- 							<div class="fb-login-button" onlogin="checkLoginState()" id="login" -->
+<!-- 							data-max-rows="1" data-size="large" scope="public_profile,email"></div>				 -->
+<!-- 				   		</div> -->
+<!-- 				   </div> -->
 				   	<div class="row">
 						<div class="col-xs-6 col-md-6 pull-right"
 							style="text-align: right; bottom:5px;">
@@ -193,7 +193,7 @@ body {
 			</form>
 		</div>
 	</div>
-	<div style="visibility:hidden" id="status"></div>
+<!-- 	<div style="visibility:hidden" id="status"></div> -->
 </body>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script>
