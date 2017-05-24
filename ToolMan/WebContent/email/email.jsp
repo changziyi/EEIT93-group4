@@ -40,6 +40,7 @@
 <%-- 	src="${pageContext.servletContext.contextPath}/js/jquery.twzipcode.min.js"></script> --%>
 
 <style>
+body {font-family:Microsoft JhengHei;}
 .content_box {
 	display: inline-block;
 	border: 5px dashed #ccb3ff;

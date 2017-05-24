@@ -319,6 +319,76 @@ public class MdataServlet extends HttpServlet {
 			
 		}
 		
+		
+		if("updateMasterVeri".equals(action)) {
+			Map<String, String> errorMsgs = new HashMap<String, String>();
+			HttpSession session = request.getSession();
+			session.setAttribute("errorMsgs", errorMsgs);
+			
+			String m_name = request.getParameter("m_name");
+			String m_cel = request.getParameter("m_cel");
+			String m_email = request.getParameter("m_email");
+			String m_city = request.getParameter("m_city");
+			String m_district = request.getParameter("m_district");
+			String m_addr = request.getParameter("m_addr");
+			Part partcer = request.getPart("m_cer");
+			String[] m_pro = request.getParameterValues("m_pro");
+			String b_name = request.getParameter("b_name");
+			String b_des = request.getParameter("b_des");
+			Part partbim = request.getPart("b_image");
+			
+			InputStream incer = partcer.getInputStream();
+			byte[] m_cer = new byte[incer.available()];
+			incer.read(m_cer);
+			incer.close();
+			
+			InputStream inbimg = partbim.getInputStream();
+			byte[] b_image = new byte[inbimg.available()];
+			inbimg.read(b_image);
+			inbimg.close();
+			
+			MdataVO mdataVOVeri = (MdataVO)session.getAttribute("mdataVOVeri");
+			Integer m_id = mdataVOVeri.getM_id();
+			
+			mdataVOVeri.setM_name(m_name);
+			mdataVOVeri.setM_cel(m_cel);
+			mdataVOVeri.setM_email(m_email);
+			mdataVOVeri.setM_city(m_city);
+			mdataVOVeri.setM_district(m_district);
+			mdataVOVeri.setM_addr(m_addr);
+			mdataVOVeri.setM_cer(m_cer);
+			mdataVOVeri.setB_name(b_name);
+			mdataVOVeri.setB_des(b_des);
+			mdataVOVeri.setB_image(b_image);
+			
+			MdataService mdataSvc = new MdataService();
+			mdataSvc.updateSql(mdataVOVeri);
+			
+			MProService mproSvc = new MProService();
+			mproSvc.deleteSql(m_id);
+			
+			if (m_pro != null) {
+				for (int i = 0; i < m_pro.length; i++) {
+					mproSvc.insertSql(m_id, m_pro[i]);
+				}
+			}
+			
+			Set<MProVO> set = null;
+			if (m_pro != null) {
+				set = new HashSet<MProVO>();
+				for (int i = 0; i < m_pro.length; i++) {
+					MProVO m_proVO = new MProVO();
+					m_proVO.setMdataVO(mdataVOVeri);
+					m_proVO.setM_pro(m_pro[i]);
+					set.add(m_proVO);
+				}
+			}
+			
+			mdataVOVeri.setMpros(set);
+			session.setAttribute("mdataVOVeri", mdataVOVeri);
+		}
+		
+		
 		if ("uploadwork".equals(action)) {
 			
 			HttpSession session = request.getSession();

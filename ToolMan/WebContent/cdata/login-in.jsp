@@ -151,7 +151,8 @@ body {
 					<div style="position: absolute; right:135px;bottom:10px;font-size:16px;color:red;">${errorMsgs.suspended}</div>
 					</div>
 					<!-- recaptcha -->
-					<div style="display:none" id="show2">
+<!-- 					<div style="display:none" id="show2"> -->
+					<div  id="show2">
 						<div class="g-recaptcha" id="recaptcha"
 						data-sitekey="6LfxUyAUAAAAAE-AozM5vAPmEzh5fM33D0B4u69c"></div>
 					</div>
