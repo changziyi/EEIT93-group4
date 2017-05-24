@@ -14,7 +14,11 @@
 <head>
 <title>Bootstrap Example</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<link rel="stylesheet"
+	href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link href="${pageContext.servletContext.contextPath}/wishpool/wish.css" rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <link href="${pageContext.servletContext.contextPath}/nav/nav.css" rel="stylesheet">
@@ -26,6 +30,11 @@
 	<script src='${pageContext.servletContext.contextPath}/js/jquery-3.2.1.min.js'></script>
 <script src="${pageContext.servletContext.contextPath}/js/jqueryui/jquery-ui.min.js"></script>
 
+
+<script
+	src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+<script
+	src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <style>
 .a {
@@ -140,29 +149,58 @@ tbody td:hover {
 			</tbody>
 					<tr class="size">
 						<th colspan="2" >
-							<div style="margin-left:1050px;"><button id="create-user">修改</button></div>
+							<div style="margin-left:1050px;">
+							<button id="create-user" class="btn btn-primary btn-sm wish-btn" data-toggle="modal"
+							data-target="#dialog">修改</button>
+							</div>
+												
 						</th>
 					</tr>			
 		</table>
 		<!--------------------------------------------------------- dialog 修改 ------------------------------------------------------------>
-			<div id="dialog" title="Dialog">
+			<div class="modal fade" id="dialog" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true" title="Dialog">
+		<div class="modal-dialog">
+		<div class="modal-content">
+			
 <!--     		<form id="message_form" method="POST" >   -->
-    			<fieldset>  
-    			<label for="name">姓名:</label>  
+    		
+    			
+    			<div class="modal-header">
+					<h3>
+						修改資料確認
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+
+						</button>
+					</h3>
+				</div>
+    			
+    			<div class="modal-body">
+			    <div class="container">
+    			
+    			<div for="name"><p>姓名: </p></div>  
     			<input type="text" name="name" id="c_name" value="${cdataVO.c_name}" class="text ui-widget-content ui-corner-all" />
-     			<label for="password">密碼:</label>  
+     			<div for="password"><p>密碼: </p></div>  
     			<input type="password" name="addr" id="c_pswd" value="${cdataVO.c_pwd}" class="text ui-widget-content ui-corner-all" />
-    			<label for="birth">生日:</label>  
+    			<div for="birth"><p>生日: </p></div>  
     			<input type="text" name="birth" id="c_birth" value="${cdataVO.c_birth}" class="text ui-widget-content ui-corner-all" /> 
-   				<label for="cel">手機:</label>  
+   				<div for="cel"><p>手機: </p></div>  
     			<input type="text" name="cel" id="c_cel" value="${cdataVO.c_cel}" class="text ui-widget-content ui-corner-all" />       			       			
-    			<label for="email">信箱:</label>  
+    			<div for="email"><p>信箱: </p></div>  
     			<input type="text" name="email" id="c_email" value="${cdataVO.c_email}" class="text ui-widget-content ui-corner-all" /> 
-    			<label for="addr">地址:</label>  
+    			<div for="addr"><p>地址: </p></div>  
     			<input type="text" name="addr" id="c_addr" value="${cdataVO.c_addr}" class="text ui-widget-content ui-corner-all" /> 
-				<button id="buttonsubmit" class="text ui-widget-content ui-corner-all" >送出</button>
-  				</fieldset> 				 
+    			</div>
+    			</div>
+    			<div class="modal-footer">	
+				<button type="submit" id="buttonsubmit" class="btn btn-primary">送出</button>
+				</div>
+  								 
 <!--    		  	 </form>   -->
+			</div>
+			</div>
 			</div>
 		<!---------------------------------------------------------- dialog 修改 ----------------------------------------------------------->
 		</div>
@@ -373,14 +411,13 @@ $(function(){
 	var c_addr =$( "#c_addr" ).val();
 	var hyperlink ="${pageContext.servletContext.contextPath}/cdata/CdatadessServlet.do";
 		
-	$.get(hyperlink,{"action":"submitdialog","c_name":c_name, "c_pswd":c_pswd,  "c_birth":c_birth,"c_cel":c_cel,"c_email":c_email,"c_addr":c_addr},
+	$.get(hyperlink,{"action":"buttonsubmit","c_name":c_name, "c_pswd":c_pswd,  "c_birth":c_birth,"c_cel":c_cel,"c_email":c_email,"c_addr":c_addr},
 			function(data){ 	
-		 
+		window.location.reload;
 						}
 					
        );//end get function
-	$("#dialog" ).dialog( "close" ); 
-	window.location.reload();
+	$("#dialog" ).dialog( "close" );  
 }
 
 
