@@ -181,17 +181,19 @@ public class OrderService {
             //examine all orders and delete expired orders
     		dao = new OrderDAO();
     		List<OrderVO> orders = dao.getAllOrder();
-            for(OrderVO orderVO2 : orders) {
-            	dao = new OrderDAO();           	
-             	Long currenttime = System.currentTimeMillis();
-            	Long orderdate = orderVO2.getO_tdate().getTime();
+    		OrderDAO dao2 = new OrderDAO();  
+    		for(OrderVO orderVO2 : orders) {
+            	         	
+             	long currenttime = System.currentTimeMillis();
+             	long orderdate = orderVO2.getO_tdate().getTime();
             	System.out.print("orderdate="+orderdate);
             	System.out.print("now="+currenttime);
             	System.out.print("now-order="+(currenttime-orderdate));
             	Long exptime = orderVO2.getReq_exp();
             	System.out.print("exp"+(exptime));
-                if(orderdate-currenttime  >= exptime ) {
-                	dao.updateSnameAsDeletedById(orderVO2.getO_id());
+                if(((currenttime-orderdate )>= exptime)&&("未回應".equals(orderVO2.getS_name()))) {
+                	dao2.updateSnameAsDeletedById(orderVO2.getO_id());
+                	System.out.println("delete="+orderVO2.getO_id());
                 }
             }
         }

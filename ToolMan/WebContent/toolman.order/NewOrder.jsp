@@ -327,7 +327,7 @@
 										</td>
 										<td style="">
 											<div style="width: 500px;"  >
-												<label class="radio-inline"style="float:left"><input type="radio"  name="req_exp" value="180000" checked="checked">3分鐘</label>
+												<label class="radio-inline"style="float:left"><input type="radio"  name="req_exp" value="20000" checked="checked">1分鐘</label>
 												<label class="radio-inline" style="float:left"><input type="radio" name="req_exp" value="3600000" >1小時</label>
 												<label class="radio-inline" style="float:left"><input type="radio" name="req_exp" value="7200000" >2小時</label>
 												<label class="radio-inline" style="float:left"><input type="radio" name="req_exp" value="86400000">1天</label>
