@@ -62,7 +62,7 @@
 		.ratediv {margin-left:10%}
 		.ratstardiv {margin-top:1%;margin-left:28%}
 		.tagtext {font-size:16px}
-		.bdes {font-family:Microsoft JhengHei;width:70%;padding:3%;font-size:20px;margin-top:3%;margin-left:9%}
+		.bdes {font-family:Microsoft JhengHei;width:70%;padding:3%;font-size:17px;margin-top:3%;margin-left:9%}
 	</style>
 	<jsp:useBean id="mdataVO" class="toolman.mdata.model.MdataVO" scope="session"/>
 </head>
@@ -417,8 +417,8 @@
 			$('#updatebtn').click(function(){
 				
 				var updatedata = $('form[name="updateform"]').serializeArray();
-				var cerpho = $('input[name="m_cer"]')[0].files[0];
-				var bpho = $('input[name="b_image"]')[0].files[0];
+				var cerpho = $('input[name="m_cer"]')[0].files;
+				var bpho = $('input[name="b_image"]')[0].files;
 				var formData = new FormData();
 				
 				$.each(updatedata, function(index, input) {
@@ -427,8 +427,8 @@
 					console.log('value: ' + input.value);
 				});
 				
-				formData.append('m_cer', cerpho);
-				formData.append('b_image', bpho);
+				formData.append('m_cer', cerpho[0]);
+				formData.append('b_image', bpho[0]);
 				
 				$.ajax({
 					url : 'master.do',

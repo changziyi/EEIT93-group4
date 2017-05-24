@@ -218,8 +218,8 @@ cbox {
 	
 	
 	$('#oneinput').click(function() {
-		$('input[name="b_name"]').attr('value','如意棒裝潢');
-		$('#b_des').val('test');
+		$('input[name="b_name"]').attr('value','航海王水電王');
+		$('#b_des').val('我們的使命就是讓客戶有一個滿意的工程品質,履約保證,實實在在,專業的技術,專業的施工團隊,永續的發展,給客戶不再有漏水的煩惱');
 	});
 	
 		$(function() {
