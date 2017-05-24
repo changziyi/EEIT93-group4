@@ -42,13 +42,13 @@
 <style>
 .content_box {
 	display: inline-block;
-	border: 5px dashed #ffb3b3;
+	border: 5px dashed #ccb3ff;
 	padding: 10px;
 	margin: 10px 10px 10px 0;
 	overflow: hidden;
 	width: 630px;
-	background-color: #ffffcc;
-	height:270px ;
+	background-color: #cce6ff;
+	height:300px ;
 	
 }
 
@@ -58,6 +58,16 @@
 	border-radius: 25px;
 }
 
+.modal-content {
+	background-color: #ccffff;
+	border-radius: 23px;
+}
+
+p {
+	font-family: Microsoft JhengHei;
+	font-weight: bold;
+	font-size: 17px;
+}
 
 </style>
 
@@ -100,8 +110,8 @@
 								<button class="btn btn-default" data-toggle="modal" id="selectbtn" name="btndetail" data-name="btndetail${emailVO.ms_id}"
 						   		 data-target="#clickSummary" data-id="${emailVO.ms_id}">${emailVO.ms_summary}</button>
 								<br class="content1"> 
-								
-							
+								<span name="content1${emailVO.ms_id}">內容：<span >${emailVO.ms_content}</span></span>
+								<br> 
 								<span name="time1${emailVO.ms_id}">時間：<span >${emailVO.ms_date}</span></span>
 								<br> 
 								<span >狀態：<span name="readornot${emailVO.ms_id}" >${emailVO.s_name == 'true' ? '已讀':'未讀'}</span></span>
@@ -179,26 +189,19 @@
 						</H4>
 					</div>
 					<div class="modal-body">
-						<table>
-							<tr>
-								<td>收件人 ： <input type="text" name="mss_id" required="true"
+														
+								<p>收件人 ： </p>								
+								 <input type="text" name="mss_id" required="true"
 									value="${param.mss_id}" />${errorMsgs.email1}${errorMsgs.email2}
-								</td>
-							</tr>
-						
-							<tr>
-								<td>主旨 ： <input type="text" name="ms_summary" required="true"
+																											
+								<p>主旨 ： </p> 
+								<input type="text" name="ms_summary" required="true"
 									value="${param.ms_summary}" />${errorMsgs.email1}${errorMsgs.email2}
-								</td>
-							</tr>
-
-							<tr>
-								<td><label style="vertical-align: top">內容：</label>
-								
+												
+								<p>內容：</p>								
 								<textarea name="ms_content" style="width: 400px; height: 120px"
-								placeholder="請輸入內容"></textarea></td>
-							</tr>
-						</table>
+								placeholder="請輸入內容"></textarea>
+																
 					</div>
 					
 					<div class="modal-footer">

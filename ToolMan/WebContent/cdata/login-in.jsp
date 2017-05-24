@@ -140,10 +140,10 @@ body {
 				<div class="social-box" style="bottom:30px;">
 					<div class="row mg-btm">
 
-						<input type="text" name="id" required="true" class="form-control" placeholder="請輸入帳號"
+						<span style="font-size:22px;">帳號:</span><input type="text" name="id" required="true" class="form-control" placeholder="請輸入帳號"
 							autofocus > 
 							
-						<input type="password" name="pswd"  required="true" class="form-control" id="show"
+						<span style="font-size:22px;">密碼:</span><input type="password" name="pswd"  required="true" class="form-control" id="show"
 							placeholder="請輸入密碼">
         
 					<div style="position: absolute; right:110px;bottom:10px;font-size:16px;color:red;" class="error">${errorMsgs.LoginError}</div>
@@ -218,87 +218,87 @@ $(function(){
 
 /********************** fb登入 ************************/
 
-//fb
-	function statusChangeCallback(response) {
-		console.log('statusChangeCallback');
-		console.log(response);
-		if (response.status === 'connected') {
-			// Logged into your app and Facebook.
-//	    		document.getElementById('status').innerHTML = 'We are connected.';
-  		var v = document.getElementById('status');
-  		v.innerHTML = 'We are connected.';
-  		if(v.innerHTML === 'We are connected.'){
-  			testAPI();
-  			console.log(v.innerHTML);
-//   			test
-//   			window.location.reload();
-<%--     			location.href="<%=request.getContextPath()%>/master/List.jsp"; --%>
-  		}			
+// //fb
+// 	function statusChangeCallback(response) {
+// 		console.log('statusChangeCallback');
+// 		console.log(response);
+// 		if (response.status === 'connected') {
+// 			// Logged into your app and Facebook.
+// //	    		document.getElementById('status').innerHTML = 'We are connected.';
+//   		var v = document.getElementById('status');
+//   		v.innerHTML = 'We are connected.';
+//   		if(v.innerHTML === 'We are connected.'){
+//   			testAPI();
+//   			console.log(v.innerHTML);
+// //   			test
+// //   			window.location.reload();
+<%-- <%--     			location.href="<%=request.getContextPath()%>/master/List.jsp"; --%> --%>
+//   		}			
 			
-		} else if (response.status === 'not_authorized') {
-			document.getElementById('status').innerHTML = 'Please log '
-					+ 'into this app.';
-		} 
-	}
+// 		} else if (response.status === 'not_authorized') {
+// 			document.getElementById('status').innerHTML = 'Please log '
+// 					+ 'into this app.';
+// 		} 
+// 	}
 
 
-	function checkLoginState() {
-		FB.getLoginStatus(function(response) {
-			console.log("Token : " + response.authResponse.accessToken);
-			statusChangeCallback(response);
-		});
-	}
+// 	function checkLoginState() {
+// 		FB.getLoginStatus(function(response) {
+// 			console.log("Token : " + response.authResponse.accessToken);
+// 			statusChangeCallback(response);
+// 		});
+// 	}
 
-	window.fbAsyncInit = function() {
-		FB.init({
-			appId : '1893060910719956',
-			cookie : true, // enable cookies to allow the server to access 
-			// the session
-			xfbml : true, // parse social plugins on this page
-			version : 'v2.9',
-		});
+// 	window.fbAsyncInit = function() {
+// 		FB.init({
+// 			appId : '1893060910719956',
+// 			cookie : true, // enable cookies to allow the server to access 
+// 			// the session
+// 			xfbml : true, // parse social plugins on this page
+// 			version : 'v2.9',
+// 		});
 		
-		 FB.getLoginStatus(function(response) {
-				console.log('statusChangeCallback');
-				console.log(response);
-		    	if (response.status === 'connected') {	    		
-		    		document.getElementById('login').style.visibility = 'hidden';
-		    	} else if (response.status === 'not_authorized') {
-		    		document.getElementById('status').innerHTML = 'We are not logged in.'
-		    	} else {
-		    		document.getElementById('status').innerHTML = 'You are not logged into Facebook.';
-		    	}
-		    });
-		};
+// 		 FB.getLoginStatus(function(response) {
+// 				console.log('statusChangeCallback');
+// 				console.log(response);
+// 		    	if (response.status === 'connected') {	    		
+// 		    		document.getElementById('login').style.visibility = 'hidden';
+// 		    	} else if (response.status === 'not_authorized') {
+// 		    		document.getElementById('status').innerHTML = 'We are not logged in.'
+// 		    	} else {
+// 		    		document.getElementById('status').innerHTML = 'You are not logged into Facebook.';
+// 		    	}
+// 		    });
+// 		};
 		
-	// Load the Facebook JavaScript SDK
-	(function(d, s, id) {
-		var js, fjs = d.getElementsByTagName(s)[0];
-		if (d.getElementById(id))
-			return;
-		js = d.createElement(s);
-		js.id = id;
-		js.src = "//connect.facebook.net/zh_TW/sdk.js";
-		fjs.parentNode.insertBefore(js, fjs);
-	}(document, 'script', 'facebook-jssdk'));
+// 	// Load the Facebook JavaScript SDK
+// 	(function(d, s, id) {
+// 		var js, fjs = d.getElementsByTagName(s)[0];
+// 		if (d.getElementById(id))
+// 			return;
+// 		js = d.createElement(s);
+// 		js.id = id;
+// 		js.src = "//connect.facebook.net/zh_TW/sdk.js";
+// 		fjs.parentNode.insertBefore(js, fjs);
+// 	}(document, 'script', 'facebook-jssdk'));
 	
 	
-	function testAPI() {
-		console.log('Welcome!  Fetching your information.... ');
+// 	function testAPI() {
+// 		console.log('Welcome!  Fetching your information.... ');
 		
-		FB.api('/me','GET', 
+// 		FB.api('/me','GET', 
 				
 				
 				
-				{fields: 'first_name,last_name,name,id,email,picture.width(200).height(200)'}, 
-				function(response) {
-				console.log('Successful login!! '+ ' id:' + response.id + ', name:' + response.name + 
-							', email:' + response.email);
-// 				document.getElementById('fb_photo').innerHTML = "<img src='" + response.picture.data.url +"'>";				
+// 				{fields: 'first_name,last_name,name,id,email,picture.width(200).height(200)'}, 
+// 				function(response) {
+// 				console.log('Successful login!! '+ ' id:' + response.id + ', name:' + response.name + 
+// 							', email:' + response.email);
+// // 				document.getElementById('fb_photo').innerHTML = "<img src='" + response.picture.data.url +"'>";				
 			
-			}
-		);
-	}
+// 			}
+// 		);
+// 	}
 	
 	//picture
 //	function getInfo() {
@@ -308,24 +308,24 @@ $(function(){
 //		});
 //	}	
 	
-	function loginNEMI(token) {
-	    // 把 access_token 傳至後端再做資料拿取
-	    console.log("Welcome!  Fetching your information.... ");
-	    var xhr=new XMLHttpRequest();
-	    xhr.open("POST", "/login", true);
-	    xhr.setRequestHeader("Content-type", "");
-	    xhr.onreadystatechange=function()
-	    {
-	      if(xhr.readyState === 4 && xhr.status === 200)
-	      {
-	          if(JSON.parse(xhr.responseText).status === "ok")
-	            location.href="/index";
-	          else
-	            alert("something wrong!");
-	      }  
-	    };
-	    xhr.send("token="+token);
-	}
+// 	function loginNEMI(token) {
+// 	    // 把 access_token 傳至後端再做資料拿取
+// 	    console.log("Welcome!  Fetching your information.... ");
+// 	    var xhr=new XMLHttpRequest();
+// 	    xhr.open("POST", "/login", true);
+// 	    xhr.setRequestHeader("Content-type", "");
+// 	    xhr.onreadystatechange=function()
+// 	    {
+// 	      if(xhr.readyState === 4 && xhr.status === 200)
+// 	      {
+// 	          if(JSON.parse(xhr.responseText).status === "ok")
+// 	            location.href="/index";
+// 	          else
+// 	            alert("something wrong!");
+// 	      }  
+// 	    };
+// 	    xhr.send("token="+token);
+// 	}
 // 	function fblogin(){
 		
 // // 		$.getJSON('https://graph.facebook.com/SOME_ID?fields=statuses.limit(10).fields(message)&access_token=SOME_ACCESS_TOKEN', function(data) {});

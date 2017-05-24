@@ -138,7 +138,7 @@ body {font-family:Microsoft JhengHei;}
 				</div>				
 				<div class="well bgcolor">
 				<div>
-					<h2 class="text-center">隨機廣告</h2>
+					<h2 class="text-center">推薦師傅</h2>
 					</div>
 					<br>
 					 <c:forEach var="sname" end="3" items="${get_sname}">
