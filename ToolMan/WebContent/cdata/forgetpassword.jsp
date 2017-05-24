@@ -72,9 +72,12 @@ h3 {
 				<form action="${pageContext.request.contextPath}/ForgotPwdServlet" method="POST">
 					<div class="field-wrap">
 					 <input id="email2" style="background-color: #ffffff;" type="text" class="input"
-							name="Email" placeholder="請輸入e-mail"  autocomplete="off" value="${email}"> <label
-							style="left: 441px; bottom: 15px; font-size: 16px; color: red">${errorMsgs.erroremail}</label>
+							name="Email" placeholder="請輸入e-mail"  autocomplete="off" value="${email}"> 
+							<br/>
+							<div style="font-size: 16px; color: red">${errorMsgs.erroremail}</div>
 					</div>
+					
+					
 
 					<div class="cen">
 						<button type="submit" id="sweetalart" class="button button-block">送出</button>
