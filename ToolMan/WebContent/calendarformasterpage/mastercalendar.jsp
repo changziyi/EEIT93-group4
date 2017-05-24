@@ -10,6 +10,7 @@
 	<script src='${pageContext.servletContext.contextPath}/js/jquery-3.2.1.min.js'></script>
 	<script src='${pageContext.servletContext.contextPath}/js/moment.min.js'></script>
 	<script src='${pageContext.servletContext.contextPath}/js/fullcalendar.min.js'></script>
+	<script src="../lang/zh-tw.js"></script>
 <!--full calendar-->
 
 <!--  jquery ui -->
@@ -188,7 +189,7 @@
         <div id='wrap'>
 			<!-- draggable -->
 		<div id='external-events'  style=" width:200px;margin-top:46px;margin-left:13%;">
-			<h4 style="margin-left:30%;">不可預約的時間</h4>
+			<h4 style="margin-left:20%;">不可預約的時間</h4>
 			<div id='external-events2' style="margin-left:25%;text-align:center">
 				<div class='fc-event' style="background-color:#76CFF5" data-color="#76CFF5" data-id="morning"data-start="01:00" data-end='08:00'>早上</div>
 				<div class='fc-event' style="background-color:#EBBA35" data-color="#EBBA35" data-id="noon"data-start="12:00" data-end='06:00'>下午</div>
@@ -449,6 +450,7 @@ var eventidglobe =null;
 			}//end repeating event
 			
 			function showjsonevent(){
+				
 				 data = $.getJSON('${pageContext.servletContext.contextPath}/toolman.calendar/CalendarControllergetformaster.do');
 					
 				}
@@ -456,8 +458,18 @@ var eventidglobe =null;
 			function buildcalendar(){
 				
 				$('#calendar').fullCalendar({
-					
-				
+
+					 buttonText: {
+					        today: '今天',
+					        month: '月',
+					    },
+
+
+					    allDayText: "全天",
+					    weekMode: "variable",
+					    monthNames: ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"],
+					    dayNamesShort: ["星期天", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"],
+
 					header: {
 						left: 'prev,next today',
 						center: 'title',
