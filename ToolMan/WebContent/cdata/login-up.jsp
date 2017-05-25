@@ -56,72 +56,72 @@ h3{
 		<form action="<c:url value='/cdata/Cdata.do'/>" method="POST">
 				<tr>
 					<td style="width:20px;">帳號：</td>
-					<td><input type="text" style="background-color: #ffffff;" name="id"
+					<td colspan="2"><input type="text" style="background-color: #ffffff;" name="id"
 							autocomplete="off" placeholder="輸入帳號" autocomplete="off"
 							autofocus>
 							<div class="errormg">${errorMsgs.c_id}</div></td>
 					</tr>
 				<tr>
 					<td>密碼:</td>
-					<td><input type="password" style="background-color: #ffffff;"
+					<td colspan="2"><input type="password" style="background-color: #ffffff;"
 							name="pswd" axlength="12" placeholder="輸入密碼" autocomplete="off">
 						<div class="errormg">${errorMsgs.c_pwd}</div>
 						<div class="errormg">${errorMsgs.c_pwd01}</div></td>
 				<tr>
 					<td>姓名:</td>
-					<td><input type="text" style="background-color: #ffffff;" name="name"
+					<td colspan="2"><input type="text" style="background-color: #ffffff;" name="name"
 							placeholder="輸入姓名" autocomplete="off">
 						<div class="errormg">${errorMsgs.c_name}</div>
 						<div class="errormg">${errorMsgs.c_name01}</div></td>
 				</tr>
 				<tr>
 					<td>生日:</td>
-					<td><input type="text" style="background-color: #ffffff;"
+					<td colspan="2"><input type="text" style="background-color: #ffffff;"
 							id="datepicker" name="birth" placeholder="輸入生日"
 							autocomplete="off">
 						<div class="errormg">${errorMsgs.bday}</div></td>
 				</tr>
 				<tr>
 					<td>手機號碼:</td>
-					<td><input type="text" style="background-color: #ffffff;" name="phone"
+					<td colspan="2"><input type="text" style="background-color: #ffffff;" name="phone"
 							placeholder="輸入手機號碼" autocomplete="off">
 						<div class="errormg">${errorMsgs.phone}</div>
 						<div class="errormg">${errorMsgs.phone01}</div></td>
 				</tr>
 				<tr>
 					<td>email:</td>
-					<td><input type="text" style="background-color: #ffffff;" name="mail"
+					<td colspan="2"><input type="text" style="background-color: #ffffff;" name="mail"
 							placeholder="輸入E-mail" autocomplete="off">
 						<div class="errormg">${errorMsgs.c_email}</div>
 						<div class="errormg">${errorMsgs.c_email01}</div></td>
 				</tr>
 				<tr>
 					<td>縣市:</td>
-					<td><input type="text" style="background-color: #ffffff;" name="city"
+					<td colspan="2"><input type="text" style="background-color: #ffffff;" name="city"
 								placeholder="縣市*" autocomplete="off" /> <input type="hidden"
 								style="background-color: #ffffff;" name="other">
 							<div style="left: 138px;" class="errormg">${errorMsgs.c_city}</div></td>
 				</tr>
 				<tr>
 					<td>地區:</td>
-					<td><input type="text" style="background-color: #ffffff;"
+					<td colspan="2"><input type="text" style="background-color: #ffffff;"
 								name="district" placeholder="地區*" autocomplete="off" />
 							<div class="errormg">${errorMsgs.c_district}</div></td>
 				</tr>
 				<tr>
 					<td>地址:</td>
-					<td><input type="text" style="background-color: #ffffff;" name="addr"
+					<td colspan="2"><input type="text" style="background-color: #ffffff;" name="addr"
 							placeholder="輸入地址*" autocomplete="off">
 						<div class="errormg">${errorMsgs.c_addr}</div>
 						<div class="errormg">${errorMsgs.c_addr01}</div></td>
 				</tr>
 				<tr>
 					<td>驗證碼:</td>
-					<td><input type="text" id="code2" style="background-color: #ffffff;"
+					<td style="width:290px;"><div style="" width:280px;"><input type="text" id="code2" style="width:270px;background-color: #ffffff;"
 							name="verification1" placeholder="驗證碼*" axlength="4"
-							autocomplete="off"> <span
-							style="position: absolute; right: 23px; top:459px; font-size: 20px; color: #a0b3b0"
-							class="function-code" id="createCade"></span>
+							autocomplete="off"></div></td><td style=""><span
+							style=" float:left;  font-size: 20px; color: #a0b3b0"
+							class="function-code" id="createCade"></span></td>
 						<!--驗證碼驗證-->
 						<input type="hidden"
 							style="right: 20px; bottom: 6px; font-size: 20px; color: #a0b3b0"

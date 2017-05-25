@@ -64,7 +64,8 @@
 	
 		<tr align='center' valign='middle'>
 		
-			<td>${blacklistVO.mdataVO.b_name}</td>
+			<td><a href='${pageContext.servletContext.contextPath}/master/masterPage.do?m_id=${blacklistVO.mdataVO.m_id}'>${blacklistVO.mdataVO.b_name}</a></td>
+			
 			<td>${blacklistVO.cdataVO.c_id}</td>
 			
 			

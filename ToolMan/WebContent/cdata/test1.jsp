@@ -152,15 +152,15 @@ tbody td:hover {
 						<td class="size">地址:</td><td>${cdataVO.c_addr}</td>
 					</tr>			
 			</tbody>
-					<tr class="size">
-						<th colspan="2" >
-							<div style="margin-left:1050px;">
-							<button id="create-user" class="btn btn-primary btn-sm wish-btn" data-toggle="modal"
-							data-target="#dialog">修改</button>
-							</div>
+<!-- 					<tr class="size"> -->
+<!-- 						<th colspan="2" > -->
+<!-- 							<div style="margin-left:1050px;"> -->
+<!-- 							<button id="create-user" class="btn btn-primary btn-sm wish-btn" data-toggle="modal" -->
+<!-- 							data-target="#dialog">修改</button> -->
+<!-- 							</div> -->
 												
-						</th>
-					</tr>			
+<!-- 						</th> -->
+<!-- 					</tr>			 -->
 		</table>
 		<!--------------------------------------------------------- dialog 修改 ------------------------------------------------------------>
 			<div class="modal fade" id="dialog" tabindex="-1" role="dialog"
