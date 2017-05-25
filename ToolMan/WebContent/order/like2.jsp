@@ -58,6 +58,7 @@
 	
 		<tr align='center' valign='middle'>
 			<td><a href='${pageContext.servletContext.contextPath}/master/masterPage.do?m_id=${favoriteVO.mdataVO.m_id}'>${favoriteVO.mdataVO.b_name}</a></td>
+			
 			<td>${favoriteVO.cdataVO.c_id}</td>
 			
 			
