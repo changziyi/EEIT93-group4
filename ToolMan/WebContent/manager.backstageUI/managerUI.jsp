@@ -1313,8 +1313,13 @@ $(function(){
                         "zeroRecords": "查無資料 ",             //Customizing zero record text - filtered
                         "info": "Showing page _PAGE_ of _PAGES_",           //Customizing showing record no
                         "infoEmpty": "查無資料",                //Customizing zero record message - base
-                        "infoFiltered": "(filtered from _MAX_ total records)"   //Customizing filtered message
-                    },
+                        "infoFiltered": "(filtered from _MAX_ total records)" ,  //Customizing filtered message
+                        "search": "搜尋:",
+                        "paginate": {
+                        	"previous": "前一頁",
+                            "next": "下一頁",
+                        }
+				    },
 // 			        responsive: {
 // 			            details: {
 // 			                display: $.fn.dataTable.Responsive.display.modal( {
