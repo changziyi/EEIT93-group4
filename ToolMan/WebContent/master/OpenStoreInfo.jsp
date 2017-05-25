@@ -196,7 +196,7 @@ form.go-right input:focus+label, form.go-right textarea:focus+label {
 						<p>信箱:</p>
 						<div class="form-group">
 							<input class="form-control" type="text" name="m_email"
-								value="${not empty cdata_mdataVO.c_email? cdata_mdataVO.m_email:LoginOK.c_email}" /><label for="email">輸入信箱</label>
+								value="${not empty cdata_mdataVO.m_email? cdata_mdataVO.m_email:LoginOK.c_email}" /><label for="email">輸入信箱</label>
 						</div>
 						<p>地址:</p>
 						<span id="twzipcode"></span>

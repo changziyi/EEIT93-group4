@@ -8,9 +8,13 @@
 	<link rel="shortcut icon" href="${pageContext.servletContext.contextPath}/favicon.ico" />
     <link rel="stylesheet" href="${pageContext.servletContext.contextPath}/css/bootstrap.min.css">
     <link href="${pageContext.servletContext.contextPath}/css/index/magnific-popup.css" rel="stylesheet">
-    <link href="${pageContext.servletContext.contextPath}/css/creative.css" rel="stylesheet">
-    <link href="${pageContext.servletContext.contextPath}/css/index/expandsearch.css" rel="stylesheet">
-	<link href="${pageContext.servletContext.contextPath}/nav/nav.css" rel="stylesheet">
+    <link rel="stylesheet" href="${pageContext.servletContext.contextPath}/css/bootstrap.min.css">
+	<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/nav/nav.css">
+	<script src="${pageContext.servletContext.contextPath}/js/jquery-3.2.1.min.js"></script>
+	<script src="${pageContext.servletContext.contextPath}/js/bootstrap.min.js"></script>
+	<style>
+		body {font-family:Microsoft JhengHei;}
+	</style>
 </head>
 <body>
 <jsp:include page="/nav/navigation.jsp" />
