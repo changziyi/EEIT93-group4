@@ -123,14 +123,13 @@ body {
 	top:16px;
 }
 
-
 </style>
 
 </head>
 <body>
 
 <jsp:include page="/nav/navigation.jsp" />
-
+	<article>
 	<div class="container">
 		<div class="row ">
 			<form class="form-signin mg-btm"action="<c:url value='/LoginServlet' />" method="POST">
@@ -194,6 +193,7 @@ body {
 			</form>
 		</div>
 	</div>
+</article>
 <!-- 	<div style="visibility:hidden" id="status"></div> -->
 </body>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>

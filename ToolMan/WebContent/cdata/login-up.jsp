@@ -34,10 +34,16 @@ h3{
 	font-weight: bold;
 	color:#357EBD;
 }
+.articles{
+    width:90%; /*Takes 90% width from WebContainer*/
+    height: auto;
+    margin: auto;
+} 
 </style>
 </head>
 <body>
 <jsp:include page="/nav/navigation.jsp" />
+<article>
 <div class="row"></div>
 <div class="modal-dialog" >
 <div class="modal-content"style="width:80%; border:5px double #3399ff; border-radius:20px;background-color:#ccffff;">
@@ -114,11 +120,11 @@ h3{
 					<td><input type="text" id="code2" style="background-color: #ffffff;"
 							name="verification1" placeholder="驗證碼*" axlength="4"
 							autocomplete="off"> <span
-							style="position: absolute; border: 3px solid blue; right: 20px; top:452px; font-size: 20px; color: #a0b3b0"
+							style="position: absolute; right: 23px; top:459px; font-size: 20px; color: #a0b3b0"
 							class="function-code" id="createCade"></span>
 						<!--驗證碼驗證-->
 						<input type="hidden"
-							style="border: 1px solid blue; right: 20px; bottom: 6px; font-size: 20px; color: #a0b3b0"
+							style="right: 20px; bottom: 6px; font-size: 20px; color: #a0b3b0"
 							class="function-code" id="verification2" name="verification2" />
 
 						<div id="v" style="left: 330px;" class="errormg">${errorMsgs.errorverify}</div>
@@ -143,6 +149,7 @@ h3{
 		</div>
 	</div>
 </div>	
+</article>
 		<script>
 			//     $(function() {//日期選擇器
 			//         $( "#datepicker" ).datepicker({
