@@ -183,8 +183,12 @@ public class ManagerUIServlet extends HttpServlet {
 						
 						e.printStackTrace();
 					}
-					String o_tdate1 = df.format(o_tdate5);
-					String o_tdate2 =  df.format(o_tdate6);
+					Timestamp o_tdate1 = Timestamp.valueOf(df.format(o_tdate5));
+					Timestamp o_tdate2 =  Timestamp.valueOf(df.format(o_tdate6));
+					System.out.println("5"+o_tdate5);
+					System.out.println("6"+o_tdate6);
+					System.out.println("1"+o_tdate1);
+					System.out.println("2"+o_tdate2);
 					out.write(orderservice.getOrderBySnameAndDateJson(datastatus,o_tdate1,o_tdate2));
 					
 				}//end else	
@@ -193,8 +197,26 @@ public class ManagerUIServlet extends HttpServlet {
 					String o_tdate3 = new Timestamp(System.currentTimeMillis()).toString();;
 					String o_tdate4 = new Timestamp(System.currentTimeMillis()-15768000000L).toString();;//365/2*24*60*60*1000
 					DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-					String o_tdate1 = df.format(o_tdate3);
-					String o_tdate2 = df.format(o_tdate4);
+					Date o_tdate5 = null;
+					try {
+						o_tdate5 = df.parse(o_tdate3);
+					} catch (ParseException e) {
+						
+						e.printStackTrace();
+					}
+					Date o_tdate6 = null;
+					try {
+						o_tdate6 = df.parse(o_tdate4);
+					} catch (ParseException e) {
+						
+						e.printStackTrace();
+					}
+					Timestamp o_tdate1 = Timestamp.valueOf(df.format(o_tdate5));
+					Timestamp o_tdate2 =  Timestamp.valueOf(df.format(o_tdate6));
+					System.out.println("5"+o_tdate5);
+					System.out.println("6"+o_tdate6);
+					System.out.println("1"+o_tdate1);
+					System.out.println("2"+o_tdate2);
 					out.write(orderservice.getOrderBySnameAndDateJson(datastatus,o_tdate1,o_tdate2));
 	
 				}//end else	
@@ -203,8 +225,26 @@ public class ManagerUIServlet extends HttpServlet {
 					String o_tdate3 = new Timestamp(System.currentTimeMillis()).toString();;
 					String o_tdate4 = new Timestamp(System.currentTimeMillis()-2592000000L).toString();;//365/2*24*60*60*1000
 					DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-					String o_tdate1 = df.format(o_tdate3);
-					String o_tdate2 = df.format(o_tdate4);
+					Date o_tdate5 = null;
+					try {
+						o_tdate5 = df.parse(o_tdate3);
+					} catch (ParseException e) {
+						
+						e.printStackTrace();
+					}
+					Date o_tdate6 = null;
+					try {
+						o_tdate6 = df.parse(o_tdate4);
+					} catch (ParseException e) {
+						
+						e.printStackTrace();
+					}
+					Timestamp o_tdate1 = Timestamp.valueOf(df.format(o_tdate5));
+					Timestamp o_tdate2 =  Timestamp.valueOf(df.format(o_tdate6));
+					System.out.println("5"+o_tdate5);
+					System.out.println("6"+o_tdate6);
+					System.out.println("1"+o_tdate1);
+					System.out.println("2"+o_tdate2);
 					out.write(orderservice.getOrderBySnameAndDateJson(datastatus,o_tdate1,o_tdate2));
 	
 					}//end else	

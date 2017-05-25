@@ -16,9 +16,10 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
+import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
-
+import org.hibernate.criterion.Restrictions;
 
 import hibernate.util.HibernateUtil;
 import toolman.cdata.model.CdataVO;
@@ -403,19 +404,27 @@ public class OrderDAO implements OrderDAO_Interface {
 		}
 		return list;
 	}
-    public List<OrderVO> getOrderBySnameAndDate(String s_name,String o_tdate1,String o_tdate2){
+    public List<OrderVO> getOrderBySnameAndDate(String s_name,Timestamp o_tdate1,Timestamp o_tdate2){
     	List<OrderVO> querylist = null;
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Integer count = 0;
 		
 		try {
 			session.beginTransaction();
-			Query query = session.createQuery("FROM OrderVO WHERE s_name=? AND o_tdate BETWEEN ? AND ?");
-			System.out.println(o_tdate1);
-			System.out.println(o_tdate2);
-			query.setParameter(0, s_name);
-			query.setParameter(1, o_tdate2);
-			query.setParameter(2, o_tdate1);
+//			Criteria cr = session.createCriteria(OrderVO.class);
+//			Query query = session.createSQLQuery("select*from ord where  o_tdate between '2016-05-25 05:49:32.000' and '2017-05-25 05:49:32.000'");
+			Query query = session.createSQLQuery("from OrderVO where  s_name = :s and (o_tdate between :date2 and :date1)");
+//			System.out.println(o_tdate1);
+//			System.out.println(o_tdate2);
+//			cr.add(Restrictions.eq("s_name", s_name));
+//			cr.add(Restrictions.between("o_tdate", o_tdate2, o_tdate1));
+//			
+			query.setParameter("s", s_name);
+			query.setParameter("date2", o_tdate2);
+			query.setParameter("date1", o_tdate1);
+			
+			System.out.println("dao2"+o_tdate2);
+			System.out.println("dao1"+o_tdate1);
 			querylist = query.list();			
 			session.getTransaction().commit();
 		} catch (RuntimeException ex) {
