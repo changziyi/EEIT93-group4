@@ -44,7 +44,7 @@
 		.workImgArea {vertical-align:top;padding:5px;}
 		.myDiv {position:relative; top:70px;} 
 		.outtermd8 {width:100%; margin-left:3%; margin-right:0}
-		.innermd8 {padding-top:3%;padding-right:0; margin-right:0;width:60%}
+		.innermd8 {padding-top:8%;padding-right:0; margin-right:0;width:60%}
 		.md4 {padding-left:1%;margin-top:2%}
 		.commentbox {width:60%;height:20%;}
 		.commentarea {margin-top:2%;margin-left:18%;}
@@ -201,19 +201,19 @@
         			<c:if test="${empVO.mdataVO.m_id == mdataVO.m_id && empVO.cdataVO.c_id == LoginOK.c_id}">
         			
         			
-        			<div class="alert alert-danger" style="font-size:24px">
+        			<div class="alert alert-danger" style="font-size:20px">
     <strong>注意!</strong> 此人是黑名單人物
   </div>
         			</c:if>
         			</c:forEach>
-        			<p></p>
+        			<p class="text-center">師傅不可被預約時間</p>
         		<div id='calendar' style="float:left;width:400px; height:100px;"></div>
  <%--------------------------------------萬里長城--------------------------------------------------- --%>
 			</div>
 		</div>
 	</div>
 </div> <!--container-->
-<div class="container" style="margin-top:3%">
+<div class="container" style="margin-top:7%">
 	<br />
 	<ul class="nav nav-tabs">
 		<li class="active"><a data-toggle="tab" href="#home" class="tagtext">介紹</a></li>

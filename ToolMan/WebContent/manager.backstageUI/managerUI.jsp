@@ -602,6 +602,10 @@ $(function(){
 		 				var mscontent=$('#mescontent').val();
 						$.post(hyperlinkstring,{"mss_id":mssid,"ms_content":mscontent,"ms_summary":mssum,"mailtype":mailtype},function(){
 					    $('#myModal01').modal("hide");
+					   
+						$('#receiver').val(" ");
+		 				$('#messum').val(" ");
+		 				$('#mescontent').val(" ");
 					    $('#btnsubmitmail').unbind('click');
 					});	//end post function
 				});//end post 
