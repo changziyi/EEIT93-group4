@@ -336,7 +336,7 @@ var eventidglobe =null;
 // 		console.log(calendarjson);
 		$.post('${pageContext.servletContext.contextPath}/toolman.calendar/CalendarController.do',{'calendarjson':calendarjson}, function(data){
 			
-			swal("ok");
+			swal("已更新日程表");
 		 });//end post
 		
 	}//end calendarsubmit
