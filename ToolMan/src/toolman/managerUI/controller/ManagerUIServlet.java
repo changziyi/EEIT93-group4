@@ -90,9 +90,13 @@ public class ManagerUIServlet extends HttpServlet {
 						jContent.put("S_name", aMdata.getS_name());
 						jContent.put("Sa_mnote", aMdata.getSa_mnote());
 						Set<MProVO> mpros = aMdata.getMpros();
+						List jList2 = new LinkedList();
+						Map map2 = null;
 						for(MProVO getmpros:mpros){
-						jContent.put("Mpros", getmpros.getM_pro());
+							
+							jList2.add(getmpros.getM_pro());
 						}// end for loop
+						jContent.put("Mpros",jList2.toString().replaceAll("\\[", " ").replaceAll("\\]", " "));
 						jList.add(jContent);
 					}//end for loop
 					String mjasonstring = JSONValue.toJSONString(jList);

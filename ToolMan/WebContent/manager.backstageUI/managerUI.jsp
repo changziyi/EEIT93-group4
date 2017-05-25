@@ -561,7 +561,9 @@ $(function(){
 						$.post(hyperlinkstring,{"mss_id":mssid,"ms_content":mscontent,"ms_summary":mssum,"mailtype":mailtype},function(){
 							
 								$('#myModal01').modal("hide");
-						   
+								$('#receiver').val(" ");
+				 				$('#messum').val(" ");
+				 				$('#mescontent').val(" ");
 							if (clickornot==true){
 				 	     		setTimeout(function () {
 				 	     		$('#receiver').val(checkboxdatacustomer.toString()).text(checkboxdatacustomer.toString());
@@ -861,7 +863,7 @@ $(function(){
 	     			var dfd3 = $.getJSON(hyperlinkstring,{"functionaction":"applicationreviewm","toggledcheckbox":checkboxdatas2},function(data){
 	     				
 	     				$('#bname').html(data.bname);
-	     				$('#bdes').html(data.bdes+"asssssssssssssssssssssssssssssssssssssssssssssssssssssssddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd");
+	     				$('#bdes').html(data.bdes);
 	     				$('#mname').html(data.mname);
 	     				$('#mtel').html(data.mtel);
 	     				$('#mmail').html(data.mmail);
@@ -1079,18 +1081,8 @@ $(function(){
 		   
 			   if(id=="o"){   					  
 					   	var thc0 = $('<th></th>').addClass('eventlistthreadtrth');
-					   	var thc1 = $('<th style="text-align:center"></th>').text('師傅編號').addClass('eventlistthreadtrth');
-					   	var thc2 = $('<th style="text-align:center"></th>').text('店家名稱').addClass('eventlistthreadtrth');
-					   	var thc3 = $('<th style="text-align:center"></th>').text('師傅名稱').addClass('eventlistthreadtrth');
-					   	var thc4 = $('<th style="text-align:center"></th>').text('店家地址').addClass('eventlistthreadtrth');
-					   	var thc5 = $('<th style="text-align:center"></th>').text('師傅專業').addClass('eventlistthreadtrth');
-					   	var thc6 = $('<th style="text-align:center"></th>').text('店家狀態').addClass('eventlistthreadtrth');
-					   	var thc7 = $('<th style="text-align:center"></th>').text('平均分數').addClass('eventlistthreadtrth');
-					   	var thc8 = $('<th style="text-align:center"></th>').text('管理者註記').addClass('eventlistthreadtrth');
-					   	var thc9 = $('<th style="text-align:center"></th>').text('管理者註記').addClass('eventlistthreadtrth');
-					   	var thc10 = $('<th style="text-align:center"></th>').text('管理者註記').addClass('eventlistthreadtrth');
 					   	var thc1 = $('<th style="text-align:center"></th>').text('下單日期').addClass('eventlistthreadtrth');
-						var thc2 = $('<th style="text-align:center"></th>').text('店家名稱').addClass('eventlistthreadtrth');
+						var thc2 = $('<th style="text-align:center"></th>').text('師傅編號').addClass('eventlistthreadtrth');
 						var thc3 = $('<th style="text-align:center"></th>').text('消費者帳戶').addClass('eventlistthreadtrth');
 						var thc4 = $('<th style="text-align:center"></th>').text('訂單編號').addClass('eventlistthreadtrth');
 						var thc5 = $('<th style="text-align:center"></th>').text('服務類別').addClass('eventlistthreadtrth');
@@ -1200,7 +1192,7 @@ $(function(){
 					   var cell2 = $('<td></td>').text(data.B_name).addClass('eventlisttbodytrtd');
 					   var cell3 = $('<td></td>').text(data.M_name).addClass('eventlisttbodytrtd');
 					   var cell4 = $('<td></td>').text(data.M_city+data.M_district).addClass('eventlisttbodytrtd');
-					   var cell5 = $('<td></td>').text(data.Mpros).addClass('eventlisttbodytrtd');
+					   var cell5 = $('<td style="text-overflow : ellipsis;"></td>').text(data.Mpros).addClass('eventlisttbodytrtd');
 					   var cell6 = $('<td></td>').text(data.S_name).addClass('eventlisttbodytrtd');
 					   var cell7 = $('<td></td>').text(data.M_arating).addClass('eventlisttbodytrtd');
 					   var wordsanote =  $('<span style="visibility: hidden;font-size:0px;margin:0pxlpadding:3px;"></span> ').text(data.Sa_mnote).addClass('eventlisttbodytrtd');
