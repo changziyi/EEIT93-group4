@@ -412,8 +412,8 @@ public class OrderDAO implements OrderDAO_Interface {
 		try {
 			session.beginTransaction();
 //			Criteria cr = session.createCriteria(OrderVO.class);
-//			Query query = session.createSQLQuery("select*from ord where  o_tdate between '2016-05-25 05:49:32.000' and '2017-05-25 05:49:32.000'");
-			Query query = session.createSQLQuery("from OrderVO where  s_name = :s and (o_tdate between :date2 and :date1)");
+//			Query query = session.createSQLQuery("select*from ord where  o_tdate >= '2016-05-25 05:49:32.0' and o_tdate <='2017-05-25 05:49:32.0'");
+			Query query = session.createQuery("from OrderVO where  s_name = :s and (o_tdate between :date2 and :date1)");
 //			System.out.println(o_tdate1);
 //			System.out.println(o_tdate2);
 //			cr.add(Restrictions.eq("s_name", s_name));
@@ -653,7 +653,7 @@ public class OrderDAO implements OrderDAO_Interface {
 //		System.out.print(orderVO2.getCa_des() + ",");
 //		System.out.print(orderVO2.getMa_des() + ",");
 		
-
+		
 		
 		}
 		
