@@ -55,11 +55,13 @@ h3{
 		<table class="table">
 		<form action="<c:url value='/cdata/Cdata.do'/>" method="POST">
 				<tr>
-					<td style="width:20px;">帳號：</td>
+					<td style="width:25px;">帳號:</td>
 					<td colspan="2"><input type="text" style="background-color: #ffffff;" name="id"
 							autocomplete="off" placeholder="輸入帳號" autocomplete="off"
 							autofocus>
-							<div class="errormg">${errorMsgs.c_id}</div></td>
+							<div class="errormg">${errorMsgs.c_id}</div>
+							</td>
+							
 					</tr>
 				<tr>
 					<td>密碼:</td>
