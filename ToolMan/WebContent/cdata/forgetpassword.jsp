@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>忘記密碼</title>
+<title>查詢密碼</title>
 <link
 	href='http://fonts.googleapis.com/css?family=Titillium+Web:400,300,600'
 	rel='stylesheet' type='text/css'>
@@ -19,7 +19,9 @@
 	src="${pageContext.servletContext.contextPath}/sweetalart/sweetalert.min.js"></script>
 <link rel="stylesheet"
 	href="${pageContext.servletContext.contextPath}/sweetalart/sweetalert.css">
-
+	
+	<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/css/bootstrap.min.css">
+	<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/nav/nav.css">
 <style>
 .form-signin {
 	max-width: 400px;
@@ -65,19 +67,25 @@ h3 {
 
 </head>
 <body>
+<jsp:include page="/nav/navigation.jsp" />
+<div class="row"></div>
 	<div class="form form-signin" style="align: center">
 		<div class="tab-content">
 			<div id="signup">
 				<h3 class="heading-desc" style="text-align: center">查詢密碼</h3>
 				<span style="font-size:22px;">Email:</span><form action="${pageContext.request.contextPath}/ForgotPwdServlet" method="POST">
 					<div class="field-wrap">
-					 <input id="email2" style="background-color: #ffffff;" type="text" class="input"
-							name="Email"  autocomplete="off" value="${email}"> 
-							<div style="font-size: 16px; color: red">${errorMsgs.erroremail}</div>
+					 <input  style="background-color: #ffffff;" type="text" class="input"
+							name="Email" id="Email" autocomplete="off" value="${email}"> 
+<%-- 							<div style="font-size: 16px; color: red">${errorMsgs.erroremail}</div> --%>
 					</div>
 					<div class="cen">
-						<button type="submit" id="sweetalart" class="button button-block">送出</button>
+						<button type="submit" onclick="check();" class="button button-block">送出</button>
+						<button type="button" class="button button-block" 
+						onclick="window.location.href ='${pageContext.servletContext.contextPath}/index.jsp'">
+						上一頁</button>
 					</div>
+<!-- id="sweetalart" -->
 				</form>
 			</div>
 			<div id="login"></div>
@@ -90,11 +98,16 @@ h3 {
 		src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 	<script>
 	
-	$(function(){
-		$("#sweetalart").click(function(){
-			swal("成功!", "已將重新設定密碼的連結寄出請至E-mail信箱收取信件。", "success")
-		});				
-	})
+	function check(){
+		var email = $('#Email').val();
+		if(email == ""){
+		    swal("錯誤!", "請輸入正確信箱", "error");
+		}else{
+			swal("成功!", "已將重新設定密碼的連結寄出請至E-mail信箱收取信件。",  "success")
+						
+		}
+	}
+	
 	
 // 		$.post(hyperlinkstring,{
 // 			"name":c_email},function(){

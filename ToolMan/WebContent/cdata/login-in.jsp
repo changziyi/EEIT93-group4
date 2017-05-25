@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>log in test</title>
+<title>註冊</title>
 
 <link rel="stylesheet"
 	href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -233,7 +233,7 @@ $(function(){
 //   			console.log(v.innerHTML);
 // //   			test
 // //   			window.location.reload();
-<%-- <%--     			location.href="<%=request.getContextPath()%>/master/List.jsp"; --%> --%>
+<%--    			location.href="<%=request.getContextPath()%>/master/List.jsp";   --%>
 //   		}			
 			
 // 		} else if (response.status === 'not_authorized') {

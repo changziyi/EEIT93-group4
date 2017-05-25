@@ -7,7 +7,7 @@
 <%	
  	Set<OrderVO> orders = (Set<OrderVO>) request.getAttribute("orders");
 	pageContext.setAttribute("orders2", orders);
-	
+	   
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
@@ -20,26 +20,25 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link href="${pageContext.servletContext.contextPath}/wishpool/wish.css" rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<link href="${pageContext.servletContext.contextPath}/nav/nav.css" rel="stylesheet">
+<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
+<%-- <link href="${pageContext.servletContext.contextPath}/nav/nav.css" rel="stylesheet"> --%>
 <link rel="Shortcut Icon" href="${pageContext.servletContext.contextPath}/favicon.ico" />
 <!---- dialog ---->
 
 	<script src='${pageContext.servletContext.contextPath}/js/jquery-3.2.1.min.js'></script>
+	<script src="${pageContext.servletContext.contextPath}/js/bootstrap.min.js"></script>
 <link href="${pageContext.servletContext.contextPath}/js/jqueryui/jquery-ui.min.css" rel="stylesheet">
 <!-- <link type="text/css" href="../js/css/jquery-ui-1.8.11.custom.css" rel="Stylesheet"> -->
-<script src="${pageContext.servletContext.contextPath}/js/jqueryui/jquery-ui.min.js"></script>
+<%-- <script src="${pageContext.servletContext.contextPath}/js/jqueryui/jquery-ui.min.js"></script> --%>
 
 	<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/css/bootstrap.min.css">
 	<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/nav/nav.css">
-	<script src="${pageContext.servletContext.contextPath}/js/jquery-3.2.1.min.js"></script>
-	<script src="${pageContext.servletContext.contextPath}/js/bootstrap.min.js"></script>
 
 
-<script
-	src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
-<script
-	src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!-- <script -->
+<!-- 	src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script> -->
+<!-- <script -->
+<!-- 	src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
 </head>
 <style>
 body {font-family:Microsoft JhengHei;}
