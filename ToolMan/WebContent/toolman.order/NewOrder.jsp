@@ -12,6 +12,7 @@
 	<script src='${pageContext.servletContext.contextPath}/js/jquery-3.2.1.min.js'></script>
 	<script src='${pageContext.servletContext.contextPath}/js/moment.min.js'></script>
 	<script src='${pageContext.servletContext.contextPath}/js/fullcalendar.min.js'></script>
+	<script src="../lang/zh-tw.js"></script>
 <!--full calendar-->
 <!------------------------------  jquery  -->
 	<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/js/jqueryui/jquery-ui.min.css">
@@ -46,6 +47,9 @@
 <!---------------------nav----------------------------------- -->
 	<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/nav/nav.css">
 <!---------------------end nav----------------------------------- -->
+	<script src='${pageContext.servletContext.contextPath}/js/jqueryui/jquery-ui.min.js'></script>
+	
+
 	<style>
 /*------------twzipcode hide zipcode--------------------------------*/	
 .zipcode {
@@ -329,7 +333,7 @@
 										</td>
 										<td style="">
 											<div style="width: 500px;"  >
-												<label class="radio-inline"style="float:left"><input type="radio"  name="req_exp" value="20000" checked="checked">1分鐘</label>
+												<label class="radio-inline"style="float:left"><input type="radio"  name="req_exp" value="50000" checked="checked">1分鐘</label>
 												<label class="radio-inline" style="float:left"><input type="radio" name="req_exp" value="3600000" >1小時</label>
 												<label class="radio-inline" style="float:left"><input type="radio" name="req_exp" value="7200000" >2小時</label>
 												<label class="radio-inline" style="float:left"><input type="radio" name="req_exp" value="86400000">1天</label>
@@ -423,7 +427,7 @@
 <!-- 	  src="https://code.jquery.com/jquery-3.2.1.min.js" -->
 <!-- 	  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" -->
 <!-- 	  crossorigin="anonymous"></script> -->
-	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	
 	
 <script>
 var data =null;

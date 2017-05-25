@@ -5,7 +5,7 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>${mdataVO.b_name}</title>
+	<title>ToolMan</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="Shortcut Icon" href="${pageContext.servletContext.contextPath}/favicon.ico" />
 	<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/css/bootstrap.min.css">
@@ -17,15 +17,17 @@
 		body {font-family:Microsoft JhengHei;}
 		.myDiv {position:relative; top:300px;}
 		.h3n {margin:1%;}
+		.zipcode {display: none;}
+		.zip {margin:auto; width:100px; display:inline; font-family:Microsoft JhengHei; vertical-align: top}
 	</style>
 <body>
 <jsp:include page="/nav/navigation.jsp" />
 	<div class="myDiv">
 		<div class="text-center">
-		<h3 class="h3n">店家審核中，敬請等待</h3>
-		<a href="${pageContext.servletContext.contextPath}/index.jsp" class="btn btn-info">回首頁</a>
-		
-		<a class="btn btn-default" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-pencil"></span> 編輯店家</a>
+			<h3 class="h3n">店家審核中，敬請等待</h3>
+			<a href="${pageContext.servletContext.contextPath}/index.jsp" class="btn btn-info">回首頁</a>
+			<a class="btn btn-default" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-pencil"></span> 編輯店家</a>
+		</div>
 		
 		
 						<div class="container">
@@ -44,24 +46,24 @@
 										<table class="table">
 											<tr>
 												<td>專業證照</td>
-												<td><div><img id="m_cer" class="img-thumbnail" width="350px" src="${pageContext.servletContext.contextPath}/master/master.do?type=cer&image=${mdataVO.m_id}"></div>
+												<td><div><img id="m_cer" class="img-thumbnail" width="350px" src="${pageContext.servletContext.contextPath}/master/master.do?type=cer&image=${LoginOK.m_id}"></div>
 												<input type="file" name="m_cer" ></td>
 											</tr>
 											<tr>
 												<td>師傅姓名</td>
-												<td><input type="text" name="m_name" class="form-control" value="${mdataVO.m_name}"/></td>
+												<td><input type="text" name="m_name" class="form-control" value="${mdataVOVeri.m_name}"/></td>
 											</tr>
 											<tr>
 												<td>電話</td>
-												<td><input type="text" name="m_cel" class="form-control" value="${mdataVO.m_cel}"/></td>
+												<td><input type="text" name="m_cel" class="form-control" value="${mdataVOVeri.m_cel}"/></td>
 											<tr>
 												<td>信箱</td>
-												<td><input type="text" name="m_email" class="form-control" value="${mdataVO.m_email}"/></td>
+												<td><input type="text" name="m_email" class="form-control" value="${mdataVOVeri.m_email}"/></td>
 											</tr>
 											<tr>
 												<td>地址</td>
 												<td><span id="twzipcode"></span>
-												<input type="text" name="m_addr" class="form-control" value="${mdataVO.m_addr}"/>
+												<input type="text" name="m_addr" class="form-control" value="${mdataVOVeri.m_addr}"/>
 												</td>
 											</tr>
 											<tr>
@@ -81,16 +83,16 @@
 											</tr>
 											<tr>
 												<td>首頁圖片</td>
-												<td><div><img id="b_image" width="350px" class="img-thumbnail" src="${pageContext.servletContext.contextPath}/master/master.do?type=master&image=${mdataVO.m_id}"></div>
+												<td><div><img id="b_image" width="350px" class="img-thumbnail" src="${pageContext.servletContext.contextPath}/master/master.do?type=master&image=${LoginOK.m_id}"></div>
 												<input type="file" name="b_image" ></td>
 											</tr>
 											<tr>
 												<td>店家名稱</td>
-												<td><input type="text" name="b_name" class="form-control" value="${mdataVO.b_name}" /></td>
+												<td><input type="text" name="b_name" class="form-control" value="${mdataVOVeri.b_name}" /></td>
 											</tr>
 											<tr>
 												<td>店家介紹</td>
-												<td><textarea name="b_des" class="form-control" rows="8">${mdataVO.b_des}</textarea></td>
+												<td><textarea name="b_des" class="form-control" rows="8">${mdataVOVeri.b_des}</textarea></td>
 											</tr>
 										</table>
 									</div>
@@ -99,10 +101,10 @@
 						        	<button type="button" class="btn btn-default" data-dismiss="modal">返回</button>
 						        	<button type="button" class="btn btn-default" id="updatebtn">送出</button>
 						        </div>
-									<input type="hidden" name="action" value="updateMaster" >
-									<input type="hidden" name="m_city" value="${mdataVO.m_city}" >
-									<input type="hidden" name="m_district" value="${mdataVO.m_district}">
-									<c:forEach var="aMpro" varStatus="count1" items="${mdataVO.mpros}">
+									<input type="hidden" name="action" value="updateMasterVeri" >
+									<input type="hidden" name="m_city" value="${mdataVOVeri.m_city}" >
+									<input type="hidden" name="m_district" value="${mdataVOVeri.m_district}">
+									<c:forEach var="aMpro" varStatus="count1" items="${mdataVOVeri.mpros}">
 									<div class="prc"><input type="hidden" name="hidpro" value="${aMpro.m_pro}"></div>
 								</c:forEach>
 						      </div>
@@ -111,11 +113,28 @@
 	</div>
 	
 </div>
-		
-		</div>
+
 	</div>
+	
+	<script src="${pageContext.servletContext.contextPath}/js/jquery.twzipcode.min.js"></script>
 	<script>
 		
+	
+		var city = $('input[name="m_city"]');
+		var district = $('input[name="m_district"]');
+	
+		$('#twzipcode').twzipcode({
+			'css': ['form-control zip', 'form-control zip', 'zipcode'],
+		    'countySel'   : '${mdataVOVeri.m_city}',
+		    'districtSel' : '${mdataVOVeri.m_district}',
+		    'onCountySelect': function () {
+		    	city.attr("value", this.value);
+		    },
+			'onDistrictSelect': function () {
+				district.attr("value", this.value);
+		    }
+		});
+	
 		var pro = $('input[name="m_pro"]');
 		
 		$('#updatebtn').click(function(){

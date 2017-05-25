@@ -16,9 +16,10 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
+import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
-
+import org.hibernate.criterion.Restrictions;
 
 import hibernate.util.HibernateUtil;
 import toolman.cdata.model.CdataVO;
@@ -107,7 +108,7 @@ public class OrderDAO implements OrderDAO_Interface {
 		
 		try {
 			session.beginTransaction();
-			Query query = session.createQuery("FROM OrderVO WHERE m_id.m_id = ?");
+			Query query = session.createQuery("FROM OrderVO WHERE m_id = ?");
 			query.setParameter(0, m_id);
 			querylist = query.list();			
 			session.getTransaction().commit();
@@ -363,10 +364,10 @@ public class OrderDAO implements OrderDAO_Interface {
 		try {
 			session.beginTransaction();
 			Query query = session.createQuery("FROM OrderVO WHERE c_id = ? AND o_tdate BETWEEN ? AND ? AND s_name = ?");
-			query.setParameter(1, c_id);
-			query.setParameter(2, o_tdate1);
-			query.setParameter(3, o_tdate2);
-			query.setParameter(4, s_name);
+			query.setParameter(0, c_id);
+			query.setParameter(1, o_tdate1);
+			query.setParameter(2, o_tdate2);
+			query.setParameter(3, s_name);
 			querylist = query.list();			
 			session.getTransaction().commit();
 		} catch (RuntimeException ex) {
@@ -410,10 +411,20 @@ public class OrderDAO implements OrderDAO_Interface {
 		
 		try {
 			session.beginTransaction();
-			Query query = session.createQuery("FROM OrderVO WHERE s_name=? o_tdate BETWEEN ? AND ?");
-			query.setParameter(1, s_name);
-			query.setParameter(2, o_tdate2);
-			query.setParameter(3, o_tdate2);
+//			Criteria cr = session.createCriteria(OrderVO.class);
+//			Query query = session.createSQLQuery("select*from ord where  o_tdate between '2016-05-25 05:49:32.000' and '2017-05-25 05:49:32.000'");
+			Query query = session.createSQLQuery("from OrderVO where  s_name = :s and (o_tdate between :date2 and :date1)");
+//			System.out.println(o_tdate1);
+//			System.out.println(o_tdate2);
+//			cr.add(Restrictions.eq("s_name", s_name));
+//			cr.add(Restrictions.between("o_tdate", o_tdate2, o_tdate1));
+//			
+			query.setParameter("s", s_name);
+			query.setParameter("date2", o_tdate2);
+			query.setParameter("date1", o_tdate1);
+			
+			System.out.println("dao2"+o_tdate2);
+			System.out.println("dao1"+o_tdate1);
 			querylist = query.list();			
 			session.getTransaction().commit();
 		} catch (RuntimeException ex) {

@@ -209,6 +209,19 @@
       <p class="form-control-static">${orderVO.o_des}</p>
     </div>
     </div>	
+    
+    
+    		
+    		<div class="form-group" style="font-size:16px;">
+<label class="control-label col-sm-4">師傅聯絡方式：</label>
+    <div class="col-sm-7">
+      <p class="form-control-static"><a href="${pageContext.servletContext.contextPath}/cdata/CdatadessServlet.do?c_id=${LoginOK.c_id}">我的資料</a>
+</p>
+    </div>
+    </div>	
+    
+    
+    
 			<div class="form-group" style="font-size:16px;">
 <label class="control-label col-sm-4">施工地址：</label>
     <div class="col-sm-7">

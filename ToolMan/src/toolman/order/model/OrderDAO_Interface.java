@@ -30,7 +30,7 @@ public interface OrderDAO_Interface {
     public void updateOrder(OrderVO orderVO);
     public int updateOrderSaonote(Integer o_id, String sa_onote);
     public List<OrderVO> getBySname(String s_name);
-    public List<OrderVO> getOrderBySnameAndDate(String s_name,Timestamp o_tdate1,Timestamp o_tdate2);
+    public List<OrderVO> getOrderBySnameAndDate(String s_name,Timestamp o_tdate5, Timestamp o_tdate6);
     public OrderVO getById(Integer o_id);
     //----------------------------ratting 
     

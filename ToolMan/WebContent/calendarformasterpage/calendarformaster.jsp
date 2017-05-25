@@ -13,6 +13,7 @@
 	<script src='${pageContext.servletContext.contextPath}/js/jquery-3.2.1.min.js'></script>
 	<script src='${pageContext.servletContext.contextPath}/js/moment.min.js'></script>
 	<script src='${pageContext.servletContext.contextPath}/js/fullcalendar.min.js'></script>
+	<script src="../lang/zh-tw.js"></script>
 <!--full calendar-->
 
 <!------------------------------  jquery ui -->
@@ -267,7 +268,7 @@ function calendarsubmit(){
 // 					      alert('delete: '+ event.id);
 // 					      $('#calendar').fullCalendar('removeEvents', event.id);
 // 					    }
-// 					},
+					},
 					drop: function(date,event) {
 						
 //		 				console.log(event);

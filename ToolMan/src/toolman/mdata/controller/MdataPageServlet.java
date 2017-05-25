@@ -35,6 +35,7 @@ public class MdataPageServlet extends HttpServlet {
 			response.sendRedirect("MasterPage.jsp");
 			return;
 		} else {
+			session.setAttribute("mdataVOVeri", mdataVO);
 			response.sendRedirect("MasterPageVerifying.jsp");
 			return;
 		}

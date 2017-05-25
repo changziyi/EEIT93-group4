@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>ToolMan</title>
 	<link rel="shortcut icon" href="${pageContext.servletContext.contextPath}/favicon.ico" />
     <link rel="stylesheet" href="${pageContext.servletContext.contextPath}/css/bootstrap.min.css">
     <link href="${pageContext.servletContext.contextPath}/css/index/magnific-popup.css" rel="stylesheet">

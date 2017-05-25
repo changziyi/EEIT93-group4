@@ -191,10 +191,13 @@ public class OrderController extends HttpServlet {
 				map.put("o_bdate",obstring);
 				map.put("o_location",o_location);
 				String reqString = null;
-				if(req_exp==2400000){
-					reqString="2小時";
+				if(req_exp==60000){
+					reqString="1分鐘";
 				}
-				else if(req_exp==2400000){
+				else if(req_exp==3600000){
+					reqString="1小時";
+				}
+				else if(req_exp==7200000){
 					reqString="2小時";
 				}
 				else if(req_exp==86400000){

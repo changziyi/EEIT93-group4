@@ -38,10 +38,10 @@ import toolman.email.model.EmailVO;
 public class EmailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	EmailService emailservice = new EmailService();
+//	EmailService emailservice = new EmailService();
 
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		
+		EmailService emailservice = new EmailService();
 		//取得登入的收件人帳號
 		HttpSession session = req.getSession();
 		String action = req.getParameter("action");
@@ -64,7 +64,7 @@ public class EmailServlet extends HttpServlet {
 
 
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-
+		EmailService emailservice = new EmailService();
 		req.setCharacterEncoding("UTF-8");
 		
 		//刪除Email
