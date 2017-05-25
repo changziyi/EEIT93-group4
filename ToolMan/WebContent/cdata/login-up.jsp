@@ -100,27 +100,27 @@ h3{
 				<tr>
 					<td>縣市:</td>
 					<td colspan="2"><input type="text" style="background-color: #ffffff;" name="city"
-								placeholder="縣市*" autocomplete="off" /> <input type="hidden"
+								placeholder="縣市" autocomplete="off" /> <input type="hidden"
 								style="background-color: #ffffff;" name="other">
 							<div style="left: 138px;" class="errormg">${errorMsgs.c_city}</div></td>
 				</tr>
 				<tr>
 					<td>地區:</td>
 					<td colspan="2"><input type="text" style="background-color: #ffffff;"
-								name="district" placeholder="地區*" autocomplete="off" />
+								name="district" placeholder="地區" autocomplete="off" />
 							<div class="errormg">${errorMsgs.c_district}</div></td>
 				</tr>
 				<tr>
 					<td>地址:</td>
 					<td colspan="2"><input type="text" style="background-color: #ffffff;" name="addr"
-							placeholder="輸入地址*" autocomplete="off">
+							placeholder="輸入地址" autocomplete="off">
 						<div class="errormg">${errorMsgs.c_addr}</div>
 						<div class="errormg">${errorMsgs.c_addr01}</div></td>
 				</tr>
 				<tr>
 					<td>驗證碼:</td>
 					<td style="width:290px;"><div style="" width:280px;"><input type="text" id="code2" style="width:270px;background-color: #ffffff;"
-							name="verification1" placeholder="驗證碼*" axlength="4"
+							name="verification1" placeholder="驗證碼" axlength="4"
 							autocomplete="off"></div></td><td style=""><span
 							style=" float:left;  font-size: 20px; color: #a0b3b0"
 							class="function-code" id="createCade"></span></td>
