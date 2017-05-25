@@ -19,7 +19,9 @@
 	src="${pageContext.servletContext.contextPath}/sweetalart/sweetalert.min.js"></script>
 <link rel="stylesheet"
 	href="${pageContext.servletContext.contextPath}/sweetalart/sweetalert.css">
-
+	
+	<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/css/bootstrap.min.css">
+	<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/nav/nav.css">
 <style>
 .form-signin {
 	max-width: 400px;
@@ -65,6 +67,8 @@ h3 {
 
 </head>
 <body>
+<jsp:include page="/nav/navigation.jsp" />
+<div class="row"></div>
 	<div class="form form-signin" style="align: center">
 		<div class="tab-content">
 			<div id="signup">
