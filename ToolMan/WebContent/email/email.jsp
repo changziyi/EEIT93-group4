@@ -181,8 +181,8 @@ p {
 		<form method="POST" action="Email.do">
 				<div class="modal-content">
 					<div class="modal-header">
-						<H4 style="color: blue">
-							email
+						<H2 style="color: blue">
+							發送e-mail
 							<button type="button" class="close" data-dismiss="modal"
 								aria-label="Close">
 								<span aria-hidden="true">&times;</span>

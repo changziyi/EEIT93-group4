@@ -54,11 +54,6 @@ public class ForgotPwdServlet extends HttpServlet {
 			if(checked == false){
 				System.out.println("錯誤");
 				errorMsgs.put("erroremail", "信箱錯誤");
-				try {
-					Thread.sleep(200);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
 				RequestDispatcher rd = req.getRequestDispatcher("/cdata/forgetpassword.jsp");
 				rd.forward(req, resp);		
 			}else{
