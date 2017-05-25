@@ -46,7 +46,7 @@ public class OrderService {
     	
     	List<OrderVO> orderlist = dao.getOrderBySnameAndDate(s_name,o_tdate1, o_tdate2);
     	List list = new ArrayList();
-		orderlist = dao.getBySname(s_name);
+//		orderlist = dao.getBySname(s_name);
 		
 		for(int i=0; i<orderlist.size();i++){
 			
@@ -59,6 +59,7 @@ public class OrderService {
 			Map map = new HashMap();
 			map.put("o_tdate", o_tdate);
 			map.put("o_bname", orderVO.getB_name());
+			System.out.println(orderVO.getB_name());
 			map.put("m_id", orderVO.getM_id().getM_id());
 			map.put("c_id", orderVO.getC_id().getC_id());
 			map.put("o_id", orderVO.getO_id());
